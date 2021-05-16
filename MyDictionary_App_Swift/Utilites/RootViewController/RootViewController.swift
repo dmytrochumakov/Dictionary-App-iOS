@@ -10,7 +10,7 @@ import UIKit
 struct RootViewController {
     
     static var viewController: UIViewController {        
-        return UINavigationController.init(rootViewController: WordListModule.init(sender: nil).module) 
+        return MainTabBarController.init()
     }
     
 }

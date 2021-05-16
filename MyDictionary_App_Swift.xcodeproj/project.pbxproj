@@ -29,6 +29,8 @@
 		22CA08892651603A0052D169 /* WordListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA08882651603A0052D169 /* WordListDataProvider.swift */; };
 		22CA088C265165460052D169 /* AppStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088B265165460052D169 /* AppStyling.swift */; };
 		22CA088E265167620052D169 /* ReloadDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088D265167620052D169 /* ReloadDataProtocol.swift */; };
+		22CA089126516C810052D169 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA089026516C810052D169 /* MainTabBarController.swift */; };
+		22CA0894265170200052D169 /* MainTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA0893265170200052D169 /* MainTabBarItem.swift */; };
 		22EDBBB726515707009B8DA7 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDBBB626515707009B8DA7 /* RootViewController.swift */; };
 		22EDBBBA26515A12009B8DA7 /* RootWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDBBB926515A12009B8DA7 /* RootWindow.swift */; };
 /* End PBXBuildFile section */
@@ -79,6 +81,8 @@
 		22CA08882651603A0052D169 /* WordListDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListDataProvider.swift; sourceTree = "<group>"; };
 		22CA088B265165460052D169 /* AppStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyling.swift; sourceTree = "<group>"; };
 		22CA088D265167620052D169 /* ReloadDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadDataProtocol.swift; sourceTree = "<group>"; };
+		22CA089026516C810052D169 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		22CA0893265170200052D169 /* MainTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarItem.swift; sourceTree = "<group>"; };
 		22EDBBB626515707009B8DA7 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		22EDBBB926515A12009B8DA7 /* RootWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWindow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -210,6 +214,7 @@
 		228BC436264979FD0030FB30 /* MyDictionary_App_Swift */ = {
 			isa = PBXGroup;
 			children = (
+				22CA088F26516C740052D169 /* MainTabBar */,
 				22CA086F26515D240052D169 /* Modules */,
 				2223F8B826512F71004F2FE9 /* Services */,
 				2223F8A926512C48004F2FE9 /* Extensions */,
@@ -376,6 +381,23 @@
 			path = AppStyling;
 			sourceTree = "<group>";
 		};
+		22CA088F26516C740052D169 /* MainTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				22CA08922651701B0052D169 /* Enum */,
+				22CA089026516C810052D169 /* MainTabBarController.swift */,
+			);
+			path = MainTabBar;
+			sourceTree = "<group>";
+		};
+		22CA08922651701B0052D169 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				22CA0893265170200052D169 /* MainTabBarItem.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		22EDBBB5265156FB009B8DA7 /* RootViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -527,9 +549,11 @@
 				22CA088526515F170052D169 /* WordListModule.swift in Sources */,
 				2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */,
 				2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */,
+				22CA0894265170200052D169 /* MainTabBarItem.swift in Sources */,
 				22EDBBB726515707009B8DA7 /* RootViewController.swift in Sources */,
 				22CA088326515F020052D169 /* WordListRouter.swift in Sources */,
 				22EDBBBA26515A12009B8DA7 /* RootWindow.swift in Sources */,
+				22CA089126516C810052D169 /* MainTabBarController.swift in Sources */,
 				22CA088C265165460052D169 /* AppStyling.swift in Sources */,
 				2223F8B426512F01004F2FE9 /* KeysForTranslate.swift in Sources */,
 				2223F8AE26512DEB004F2FE9 /* Constants.swift in Sources */,

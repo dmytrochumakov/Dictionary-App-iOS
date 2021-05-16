@@ -49,6 +49,7 @@ fileprivate extension WordListViewController {
     
     func configureView() {
         self.view.backgroundColor = AppStyling.Color.systemWhite.color()
+        self.title = "Words"
     }
     
 }
