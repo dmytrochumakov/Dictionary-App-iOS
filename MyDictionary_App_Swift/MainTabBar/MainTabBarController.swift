@@ -73,7 +73,7 @@ fileprivate extension MainTabBarController {
     }
     
     func postDoubleTapNotification() {
-        debugPrint(#function, Self.self)
+        NotificationCenter.default.post(name: .mainTabBarItemDoubleTap, object: nil)        
     }
     
 }

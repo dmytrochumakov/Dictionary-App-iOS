@@ -32,6 +32,7 @@
 		22CA089126516C810052D169 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA089026516C810052D169 /* MainTabBarController.swift */; };
 		22CA0894265170200052D169 /* MainTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA0893265170200052D169 /* MainTabBarItem.swift */; };
 		22CA0896265178DE0052D169 /* ScrollToTopProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA0895265178DE0052D169 /* ScrollToTopProtocol.swift */; };
+		22CA089826517A3B0052D169 /* NotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA089726517A3B0052D169 /* NotificationName+Extension.swift */; };
 		22EDBBB726515707009B8DA7 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDBBB626515707009B8DA7 /* RootViewController.swift */; };
 		22EDBBBA26515A12009B8DA7 /* RootWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDBBB926515A12009B8DA7 /* RootWindow.swift */; };
 /* End PBXBuildFile section */
@@ -85,6 +86,7 @@
 		22CA089026516C810052D169 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		22CA0893265170200052D169 /* MainTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarItem.swift; sourceTree = "<group>"; };
 		22CA0895265178DE0052D169 /* ScrollToTopProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollToTopProtocol.swift; sourceTree = "<group>"; };
+		22CA089726517A3B0052D169 /* NotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extension.swift"; sourceTree = "<group>"; };
 		22EDBBB626515707009B8DA7 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		22EDBBB926515A12009B8DA7 /* RootWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWindow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				2223F8AA26512C5A004F2FE9 /* String+Extension.swift */,
+				22CA089726517A3B0052D169 /* NotificationName+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				22CA088726515F6A0052D169 /* WordListDataManager.swift in Sources */,
 				22CA088526515F170052D169 /* WordListModule.swift in Sources */,
 				22CA0896265178DE0052D169 /* ScrollToTopProtocol.swift in Sources */,
+				22CA089826517A3B0052D169 /* NotificationName+Extension.swift in Sources */,
 				2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */,
 				2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */,
 				22CA0894265170200052D169 /* MainTabBarItem.swift in Sources */,
