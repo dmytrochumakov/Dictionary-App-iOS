@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2223F8A826512C1A004F2FE9 /* LocalizableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8A726512C1A004F2FE9 /* LocalizableProtocol.swift */; };
+		2223F8AB26512C5A004F2FE9 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8AA26512C5A004F2FE9 /* String+Extension.swift */; };
+		2223F8AE26512DEB004F2FE9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8AD26512DEB004F2FE9 /* Constants.swift */; };
+		2223F8B426512F01004F2FE9 /* KeysForTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8B326512F01004F2FE9 /* KeysForTranslate.swift */; };
+		2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8B626512F5B004F2FE9 /* AppLanguageType.swift */; };
+		2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */; };
+		2223F8BC26512FFD004F2FE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2223F8BE26512FFD004F2FE9 /* Localizable.strings */; };
 		228BC438264979FD0030FB30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BC437264979FD0030FB30 /* AppDelegate.swift */; };
 		228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 228BC440264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld */; };
 		228BC444264979FE0030FB30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228BC443264979FE0030FB30 /* Assets.xcassets */; };
@@ -33,6 +40,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2223F8A726512C1A004F2FE9 /* LocalizableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableProtocol.swift; sourceTree = "<group>"; };
+		2223F8AA26512C5A004F2FE9 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		2223F8AD26512DEB004F2FE9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		2223F8B326512F01004F2FE9 /* KeysForTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysForTranslate.swift; sourceTree = "<group>"; };
+		2223F8B626512F5B004F2FE9 /* AppLanguageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageType.swift; sourceTree = "<group>"; };
+		2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageService.swift; sourceTree = "<group>"; };
+		2223F8BD26512FFD004F2FE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		228BC434264979FD0030FB30 /* MyDictionary_App_Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyDictionary_App_Swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		228BC437264979FD0030FB30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		228BC441264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyDictionary_App_Swift.xcdatamodel; sourceTree = "<group>"; };
@@ -72,6 +86,82 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2223F8A526512BE8004F2FE9 /* Utilites */ = {
+			isa = PBXGroup;
+			children = (
+				2223F8B526512F54004F2FE9 /* Enums */,
+				2223F8B226512EF2004F2FE9 /* KeysForTranslate */,
+				2223F8AF26512E7A004F2FE9 /* LocalizableStrings */,
+				2223F8AC26512DE6004F2FE9 /* Constants */,
+				2223F8A626512C0A004F2FE9 /* Protocols */,
+			);
+			path = Utilites;
+			sourceTree = "<group>";
+		};
+		2223F8A626512C0A004F2FE9 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				2223F8A726512C1A004F2FE9 /* LocalizableProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		2223F8A926512C48004F2FE9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2223F8AA26512C5A004F2FE9 /* String+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2223F8AC26512DE6004F2FE9 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				2223F8AD26512DEB004F2FE9 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		2223F8AF26512E7A004F2FE9 /* LocalizableStrings */ = {
+			isa = PBXGroup;
+			children = (
+				2223F8BE26512FFD004F2FE9 /* Localizable.strings */,
+			);
+			path = LocalizableStrings;
+			sourceTree = "<group>";
+		};
+		2223F8B226512EF2004F2FE9 /* KeysForTranslate */ = {
+			isa = PBXGroup;
+			children = (
+				2223F8B326512F01004F2FE9 /* KeysForTranslate.swift */,
+			);
+			path = KeysForTranslate;
+			sourceTree = "<group>";
+		};
+		2223F8B526512F54004F2FE9 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				2223F8B626512F5B004F2FE9 /* AppLanguageType.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		2223F8B826512F71004F2FE9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2223F8B926512F87004F2FE9 /* AppLanguageService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		2223F8B926512F87004F2FE9 /* AppLanguageService */ = {
+			isa = PBXGroup;
+			children = (
+				2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */,
+			);
+			path = AppLanguageService;
+			sourceTree = "<group>";
+		};
 		228BC42B264979FD0030FB30 = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +185,9 @@
 		228BC436264979FD0030FB30 /* MyDictionary_App_Swift */ = {
 			isa = PBXGroup;
 			children = (
+				2223F8B826512F71004F2FE9 /* Services */,
+				2223F8A926512C48004F2FE9 /* Extensions */,
+				2223F8A526512BE8004F2FE9 /* Utilites */,
 				228BC46F26497B270030FB30 /* CoreData */,
 				228BC46A26497AEC0030FB30 /* Resources */,
 			);
@@ -281,6 +374,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2223F8BC26512FFD004F2FE9 /* Localizable.strings in Resources */,
 				228BC447264979FE0030FB30 /* LaunchScreen.storyboard in Resources */,
 				228BC444264979FE0030FB30 /* Assets.xcassets in Resources */,
 			);
@@ -307,8 +401,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */,
+				2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */,
+				2223F8B426512F01004F2FE9 /* KeysForTranslate.swift in Sources */,
+				2223F8AE26512DEB004F2FE9 /* Constants.swift in Sources */,
+				2223F8AB26512C5A004F2FE9 /* String+Extension.swift in Sources */,
 				228BC438264979FD0030FB30 /* AppDelegate.swift in Sources */,
 				228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */,
+				2223F8A826512C1A004F2FE9 /* LocalizableProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +444,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		2223F8BE26512FFD004F2FE9 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2223F8BD26512FFD004F2FE9 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		228BC445264979FE0030FB30 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
