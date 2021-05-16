@@ -38,6 +38,10 @@ extension WordListViewController: WordListPresenterOutputProtocol {
         
     }
     
+    func scrollToTop() {
+        
+    }
+    
 }
 
 // MARK: - Configure UI
