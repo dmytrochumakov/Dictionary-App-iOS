@@ -28,6 +28,8 @@ platform :ios do
   	get_provisioning_profile   # invokes sigh
   	build_app
 	upload_to_testflight
+	increment_build_number
+	commit_version_bump
   end
 
 end
