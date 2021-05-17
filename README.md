@@ -1,1 +1,2 @@
-# Dictionary_App_Swift
+# MyDictionary
+# Architecture -> Viper 
