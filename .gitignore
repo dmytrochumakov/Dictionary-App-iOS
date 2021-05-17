@@ -56,7 +56,7 @@ playground.xcworkspace
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
 Pods/
-Podfile
+Podfile.lock
 #
 # Add this line if you want to avoid checking in source code from the Xcode workspace
 *.xcworkspace
@@ -83,6 +83,7 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+Gemfile.lock
 
 # Code Injection
 #
