@@ -7,10 +7,23 @@
 
 import Foundation
 
-protocol WordListDataProviderProcotol {
+protocol WordListDataProviderProcotol: NumberOfSectionsProtocol,
+                                       NumberOfRowsInSectionProtocol {
     
 }
 
 final class WordListDataProvider: WordListDataProviderProcotol {
+    
+}
+
+extension WordListDataProvider {
+    
+    var numberOfSections: Int {
+        return 1
+    }
+    
+    func numberOfRowsInSection(_ section: Int) -> Int {
+        return 0
+    }
     
 }
