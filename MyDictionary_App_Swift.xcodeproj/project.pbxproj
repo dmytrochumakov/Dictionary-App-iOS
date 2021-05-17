@@ -152,6 +152,7 @@
 		2223F8A626512C0A004F2FE9 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				22CA088D265167620052D169 /* ReloadDataProtocol.swift */,
 				227D5E652652585C00B54524 /* CollectionViewDelegatePropertyProtocol.swift */,
 				227D5E662652585C00B54524 /* CollectionViewDelegateProtocol.swift */,
 				2223F8A726512C1A004F2FE9 /* LocalizableProtocol.swift */,
@@ -409,7 +410,6 @@
 		22CA087926515D9A0052D169 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				22CA088D265167620052D169 /* ReloadDataProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
