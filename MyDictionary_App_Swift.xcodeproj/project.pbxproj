@@ -28,6 +28,7 @@
 		229E08BE2652C8E600DA56C4 /* SectionTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BD2652C8E600DA56C4 /* SectionTypeProtocol.swift */; };
 		229E08C02652C9E700DA56C4 /* RowTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BF2652C9E700DA56C4 /* RowTypeProtocol.swift */; };
 		229E08C22652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C12652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift */; };
+		229E08C42652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C32652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift */; };
 		22CA087D26515E810052D169 /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA087C26515E810052D169 /* WordListViewController.swift */; };
 		22CA087F26515ED90052D169 /* WordListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA087E26515ED90052D169 /* WordListInteractor.swift */; };
 		22CA088126515EEB0052D169 /* WordListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088026515EEB0052D169 /* WordListPresenter.swift */; };
@@ -90,6 +91,7 @@
 		229E08BD2652C8E600DA56C4 /* SectionTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTypeProtocol.swift; sourceTree = "<group>"; };
 		229E08BF2652C9E700DA56C4 /* RowTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowTypeProtocol.swift; sourceTree = "<group>"; };
 		229E08C12652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfSectionsProtocol.swift; sourceTree = "<group>"; };
+		229E08C32652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfRowsInSectionProtocol.swift; sourceTree = "<group>"; };
 		22CA087C26515E810052D169 /* WordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListViewController.swift; sourceTree = "<group>"; };
 		22CA087E26515ED90052D169 /* WordListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListInteractor.swift; sourceTree = "<group>"; };
 		22CA088026515EEB0052D169 /* WordListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListPresenter.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				229E08BD2652C8E600DA56C4 /* SectionTypeProtocol.swift */,
 				229E08BF2652C9E700DA56C4 /* RowTypeProtocol.swift */,
 				229E08C12652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift */,
+				229E08C32652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 				22CA0894265170200052D169 /* MainTabBarItem.swift in Sources */,
 				22EDBBB726515707009B8DA7 /* RootViewController.swift in Sources */,
 				22CA088326515F020052D169 /* WordListRouter.swift in Sources */,
+				229E08C42652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift in Sources */,
 				229E08C02652C9E700DA56C4 /* RowTypeProtocol.swift in Sources */,
 				229E08BE2652C8E600DA56C4 /* SectionTypeProtocol.swift in Sources */,
 				22EDBBBA26515A12009B8DA7 /* RootWindow.swift in Sources */,
