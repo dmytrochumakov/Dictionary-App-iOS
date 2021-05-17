@@ -10,6 +10,12 @@ import UIKit
 final class WordListViewController: UIViewController {
     
     fileprivate let presenter: WordListPresenterInputProtocol
+    fileprivate let collectionView: UICollectionView = {
+        let flowLayout: UICollectionViewFlowLayout = .init()
+        let collectionView = UICollectionView.init(frame: .zero,
+                                                   collectionViewLayout: flowLayout)
+        return collectionView
+    }()
     
     init(presenter: WordListPresenterInputProtocol) {
         self.presenter = presenter
@@ -24,9 +30,19 @@ final class WordListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func loadView() {
+        super.loadView()
+        addViews()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        addConstraints()
     }
     
 }
@@ -44,16 +60,48 @@ extension WordListViewController: WordListPresenterOutputProtocol {
     
 }
 
+// MARK: - Add Views
+fileprivate extension WordListViewController {
+    
+    func addViews() {
+        addCollectionView()
+    }
+    
+    func addCollectionView() {
+        view.addSubview(collectionView)
+    }
+    
+}
+
+// MARK: - Add Constraints
+fileprivate extension WordListViewController {
+    
+    func addConstraints() {
+        addCollectionConstraints()
+    }
+    
+    func addCollectionConstraints() {
+        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.collectionView,
+                                                         toItem: self.view)
+    }
+    
+}
+
 // MARK: - Configure UI
 fileprivate extension WordListViewController {
-
+    
     func configureUI() {
         configureView()
+        configureCollectionView()
     }
     
     func configureView() {
         self.view.backgroundColor = AppStyling.Color.systemWhite.color()
         self.title = KeysForTranslate.words.localized
+    }
+    
+    func configureCollectionView() {
+        self.collectionView.backgroundColor = AppStyling.Color.systemWhite.color()
     }
     
 }
