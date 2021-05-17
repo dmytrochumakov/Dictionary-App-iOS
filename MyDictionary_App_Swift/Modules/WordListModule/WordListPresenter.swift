@@ -7,7 +7,8 @@
 
 import Foundation
 
-protocol WordListPresenterInputProtocol: CollectionViewDelegatePropertyProtocol {
+protocol WordListPresenterInputProtocol: CollectionViewDelegatePropertyProtocol,
+                                         CollectionViewDataSourcePropertyProtocol {
     
 }
 
@@ -30,6 +31,9 @@ final class WordListPresenter: NSObject, WordListPresenterProtocol {
     internal weak var presenterOutput: WordListPresenterOutputProtocol?
     internal var collectionViewDelegate: CollectionViewDelegateProtocol {
         return self.interactor.collectionViewDelegate
+    }
+    internal var collectionViewDataSource: CollectionViewDataSourceProtocol {
+        return self.interactor.collectionViewDataSource
     }
     
     init(interactor: WordListInteractorInputProtocol,
