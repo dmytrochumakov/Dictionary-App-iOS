@@ -101,6 +101,7 @@ fileprivate extension WordListViewController {
     }
     
     func configureCollectionView() {
+        self.collectionView.delegate = self.presenter.collectionViewDelegate
         self.collectionView.backgroundColor = AppStyling.Color.systemWhite.color()
     }
     

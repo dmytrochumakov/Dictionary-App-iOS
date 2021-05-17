@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol WordListPresenterInputProtocol {
+protocol WordListPresenterInputProtocol: CollectionViewDelegatePropertyProtocol {
     
 }
 
@@ -18,8 +18,7 @@ protocol WordListPresenterOutputProtocol: AnyObject,
 }
 
 protocol WordListPresenterProtocol: WordListPresenterInputProtocol,
-                                    WordListInteractorOutputProtocol,
-                                    CollectionViewDelegatePropertyProtocol {
+                                    WordListInteractorOutputProtocol {
     var presenterOutput: WordListPresenterOutputProtocol? { get set }
 }
 
