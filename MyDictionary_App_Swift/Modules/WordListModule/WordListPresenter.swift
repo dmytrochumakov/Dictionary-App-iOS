@@ -18,7 +18,8 @@ protocol WordListPresenterOutputProtocol: AnyObject,
 }
 
 protocol WordListPresenterProtocol: WordListPresenterInputProtocol,
-                                    WordListInteractorOutputProtocol {
+                                    WordListInteractorOutputProtocol,
+                                    CollectionViewDelegatePropertyProtocol {
     var presenterOutput: WordListPresenterOutputProtocol? { get set }
 }
 
@@ -27,7 +28,10 @@ final class WordListPresenter: NSObject, WordListPresenterProtocol {
     fileprivate let interactor: WordListInteractorInputProtocol
     fileprivate let router: WordListRouterProtocol
     
-    weak var presenterOutput: WordListPresenterOutputProtocol?
+    internal weak var presenterOutput: WordListPresenterOutputProtocol?
+    internal var collectionViewDelegate: CollectionViewDelegateProtocol {
+        return self.interactor.collectionViewDelegate
+    }
     
     init(interactor: WordListInteractorInputProtocol,
          router: WordListRouterProtocol) {

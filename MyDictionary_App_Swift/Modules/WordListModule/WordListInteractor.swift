@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol WordListInteractorInputProtocol {
+protocol WordListInteractorInputProtocol: CollectionViewDelegatePropertyProtocol {
     
 }
 
@@ -23,10 +23,14 @@ protocol WordListInteractorProtocol: WordListInteractorInputProtocol,
 final class WordListInteractor: WordListInteractorProtocol {
     
     fileprivate let dataManager: WordListDataManagerInputProtocol
+    
+    internal var collectionViewDelegate: CollectionViewDelegateProtocol
     internal weak var interactorOutput: WordListInteractorOutputProtocol?
     
-    init(dataManager: WordListDataManagerInputProtocol) {
+    init(dataManager: WordListDataManagerInputProtocol,
+         collectionViewDelegate: WordListCollectionViewDelegateProtocol) {
         self.dataManager = dataManager
+        self.collectionViewDelegate = collectionViewDelegate
     }
     
     deinit {

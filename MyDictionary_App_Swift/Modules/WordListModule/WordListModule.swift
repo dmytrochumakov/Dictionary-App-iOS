@@ -26,7 +26,10 @@ extension WordListModule {
     var module: UIViewController {
         let dataProvider: WordListDataProviderProcotol = WordListDataProvider.init()
         var dataManager: WordListDataManagerProtocol = WordListDataManager.init(dataProvider: dataProvider)
-        let interactor: WordListInteractorProtocol = WordListInteractor.init(dataManager: dataManager)
+        let collectionViewDelegate: WordListCollectionViewDelegateProtocol = WordListCollectionViewDelegate.init(dataProvider: dataProvider)
+        
+        let interactor: WordListInteractorProtocol = WordListInteractor.init(dataManager: dataManager,
+                                                                             collectionViewDelegate: collectionViewDelegate)
         var router: WordListRouterProtocol = WordListRouter.init()
         let presenter: WordListPresenterProtocol = WordListPresenter.init(interactor: interactor, router: router)
         let vc = WordListViewController.init(presenter: presenter)

@@ -16,6 +16,7 @@ protocol WordListDataManagerOutputProtocol: AnyObject {
 }
 
 protocol WordListDataManagerProtocol: WordListDataManagerInputProtocol {
+    var dataProvider: WordListDataProviderProcotol { get }
     var dataManagerOutput: WordListDataManagerOutputProtocol? { get set }
 }
 
