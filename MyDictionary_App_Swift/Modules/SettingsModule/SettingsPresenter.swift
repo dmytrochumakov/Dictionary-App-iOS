@@ -4,9 +4,10 @@
 //
 //  Created Dmytro Chumakov on 31.05.2021.
 
-import UIKit
+import Foundation
 
-protocol SettingsPresenterInputProtocol {
+protocol SettingsPresenterInputProtocol: CollectionViewDelegateFlowLayoutPropertyProtocol,
+                                         CollectionViewDataSourcePropertyProtocol {
     
 }
 
@@ -20,12 +21,20 @@ protocol SettingsPresenterProtocol: SettingsPresenterInputProtocol,
     var presenterOutput: SettingsPresenterOutputProtocol? { get set }
 }
 
-final class SettingsPresenter: NSObject, SettingsPresenterProtocol {
+final class SettingsPresenter: NSObject,
+                               SettingsPresenterProtocol {
     
     fileprivate let interactor: SettingsInteractorInputProtocol
     fileprivate let router: SettingsRouterProtocol
     
     internal weak var presenterOutput: SettingsPresenterOutputProtocol?
+    
+    internal var collectionViewDelegate: CollectionViewDelegateFlowLayout {
+        return self.interactor.collectionViewDelegate
+    }
+    internal var collectionViewDataSource: CollectionViewDataSource {
+        return self.interactor.collectionViewDataSource
+    }
     
     init(interactor: SettingsInteractorInputProtocol,
          router: SettingsRouterProtocol) {
@@ -42,5 +51,9 @@ final class SettingsPresenter: NSObject, SettingsPresenterProtocol {
 
 // MARK: - SettingsInteractorOutputProtocol
 extension SettingsPresenter {
+    
+    func didSelectAppearanceRow() {
+        debugPrint(Self.self, #function)
+    }
     
 }

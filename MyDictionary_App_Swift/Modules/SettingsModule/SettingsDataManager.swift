@@ -7,7 +7,7 @@
 import Foundation
 
 protocol SettingsDataManagerInputProtocol {
-    
+    var dataProvider: SettingsDataProviderProtocol { get }
 }
 
 protocol SettingsDataManagerOutputProtocol: AnyObject {
@@ -15,7 +15,6 @@ protocol SettingsDataManagerOutputProtocol: AnyObject {
 }
 
 protocol SettingsDataManagerProtocol: SettingsDataManagerInputProtocol {
-    var dataProvider: SettingsDataProviderProtocol { get }
     var dataManagerOutput: SettingsDataManagerOutputProtocol? { get set }
 }
 

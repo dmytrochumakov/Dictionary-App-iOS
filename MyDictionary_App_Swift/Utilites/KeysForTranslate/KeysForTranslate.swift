@@ -14,6 +14,7 @@ enum KeysForTranslate: String {
     case error
     case words
     case settings
+    case appearance
 }
 
 // MARK: - LocalizableProtocol

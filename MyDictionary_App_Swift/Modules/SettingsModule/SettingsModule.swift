@@ -23,10 +23,18 @@ final class SettingsModule {
 extension SettingsModule {
     
     var module: UIViewController {
-        let dataProvider: SettingsDataProviderProtocol = SettingsDataProvider.init()
+        let settingsDataProviderModel: SettingsDataProviderModel = .init(sections: [.init(sectionType: .list,
+                                                                                          rows: [.init(rowType: .appearance,
+                                                                                                       titleText: KeysForTranslate.appearance.localized)])])
+        let dataProvider: SettingsDataProviderProtocol = SettingsDataProvider.init(model: settingsDataProviderModel)
         var dataManager: SettingsDataManagerProtocol = SettingsDataManager.init(dataProvider: dataProvider)
         
-        let interactor: SettingsInteractorProtocol = SettingsInteractor.init(dataManager: dataManager)
+        let collectionViewDelegate: SettingsCollectionViewDelegateProtocol = SettingsCollectionViewDelegate.init(dataProvider: dataProvider)
+        let collectionViewDataSource: SettingsCollectionViewDataSourceProtocol = SettingsCollectionViewDataSource.init(dataProvider: dataProvider)
+        
+        let interactor: SettingsInteractorProtocol = SettingsInteractor.init(dataManager: dataManager,
+                                                                             collectionViewDelegate: collectionViewDelegate,
+                                                                             collectionViewDataSource: collectionViewDataSource)
         var router: SettingsRouterProtocol = SettingsRouter.init()
         let presenter: SettingsPresenterProtocol = SettingsPresenter.init(interactor: interactor, router: router)
         let vc = SettingsViewController.init(presenter: presenter)
