@@ -55,8 +55,9 @@ fileprivate extension MainTabBarController {
     }
     
     func setupControllers() {
-        let wordListModule = UINavigationController.init(rootViewController: WordListModule.init(sender: nil).module)        
-        self.viewControllers = [wordListModule]
+        let wordListModule = UINavigationController.init(rootViewController: WordListModule.init(sender: nil).module)
+        let settingsModule = UINavigationController.init(rootViewController: SettingsModule.init(sender: nil).module)
+        self.viewControllers = [wordListModule, settingsModule]
     }
     
 }

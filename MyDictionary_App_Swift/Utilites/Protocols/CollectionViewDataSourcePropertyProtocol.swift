@@ -5,8 +5,8 @@
 //  Created by Dmytro Chumakov on 17.05.2021.
 //
 
-import Foundation
+import UIKit
 
-protocol CollectionViewDataSourcePropertyProtocol {
-    var collectionViewDataSource: CollectionViewDataSourceProtocol { get }
+protocol CollectionViewDataSourcePropertyProtocol {    
+    var collectionViewDataSource: UICollectionViewDataSource { get }
 }

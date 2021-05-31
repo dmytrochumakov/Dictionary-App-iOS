@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol WordListCollectionViewDataSourceProtocol: CollectionViewDataSourceProtocol {
+protocol WordListCollectionViewDataSourceProtocol: CollectionViewDataSource {
     
 }
 
