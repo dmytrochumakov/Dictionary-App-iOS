@@ -30,7 +30,7 @@ final class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureUI()
     }
     
     override func viewDidLayoutSubviews() {
@@ -43,4 +43,18 @@ final class SettingsViewController: UIViewController {
 // MARK: - SettingsPresenterOutputProtocol
 extension SettingsViewController: SettingsPresenterOutputProtocol {
        
+}
+
+// MARK: - Configure UI
+fileprivate extension SettingsViewController {
+    
+    func configureUI() {
+        configureView()
+    }
+    
+    func configureView() {
+        self.view.backgroundColor = AppStyling.Color.systemWhite.color()
+        self.title = KeysForTranslate.settings.localized
+    }
+
 }
