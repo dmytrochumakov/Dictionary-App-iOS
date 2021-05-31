@@ -10,12 +10,13 @@ protocol SettingsPresenterInputProtocol {
     
 }
 
-protocol SettingsPresenterOutputProtocol: AnyObject {
+protocol SettingsPresenterOutputProtocol: AnyObject,
+                                          ScrollToTopProtocol {
     
 }
 
 protocol SettingsPresenterProtocol: SettingsPresenterInputProtocol,
-SettingsInteractorOutputProtocol {
+                                    SettingsInteractorOutputProtocol {
     var presenterOutput: SettingsPresenterOutputProtocol? { get set }
 }
 

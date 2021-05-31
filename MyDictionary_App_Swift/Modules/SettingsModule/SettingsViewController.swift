@@ -43,6 +43,10 @@ final class SettingsViewController: UIViewController {
 // MARK: - SettingsPresenterOutputProtocol
 extension SettingsViewController: SettingsPresenterOutputProtocol {
        
+    func scrollToTop() {
+        
+    }
+    
 }
 
 // MARK: - Configure UI
