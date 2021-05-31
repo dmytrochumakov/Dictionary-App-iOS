@@ -13,6 +13,7 @@ enum KeysForTranslate: String {
     case done
     case error
     case words
+    case settings
 }
 
 // MARK: - LocalizableProtocol
