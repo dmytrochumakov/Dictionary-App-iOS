@@ -30,7 +30,7 @@ final class AppearanceViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureUI()
     }
     
     override func viewDidLayoutSubviews() {
@@ -43,4 +43,18 @@ final class AppearanceViewController: UIViewController {
 // MARK: - AppearancePresenterOutputProtocol
 extension AppearanceViewController: AppearancePresenterOutputProtocol {
        
+}
+
+// MARK: - Configure UI
+fileprivate extension AppearanceViewController {
+    
+    func configureUI() {
+        configureView()
+    }
+    
+    func configureView() {
+        self.view.backgroundColor = AppStyling.Color.systemWhite.color()
+        self.title = KeysForTranslate.appearance.localized
+    }
+
 }

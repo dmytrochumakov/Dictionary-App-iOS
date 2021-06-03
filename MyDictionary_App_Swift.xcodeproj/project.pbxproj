@@ -401,12 +401,12 @@
 		2299015F2668EC2900D8C74E /* AppearanceModule */ = {
 			isa = PBXGroup;
 			children = (
-				229901612668EC3400D8C74E /* AppearancePresenter.swift */,
-				229901622668EC3400D8C74E /* AppearanceRouter.swift */,
-				229901632668EC3400D8C74E /* AppearanceViewController.swift */,
-				229901642668EC3400D8C74E /* AppearanceInteractor.swift */,
-				229901652668EC3400D8C74E /* AppearanceDataProvider.swift */,
 				229901662668EC3400D8C74E /* AppearanceDataManager.swift */,
+				229901652668EC3400D8C74E /* AppearanceDataProvider.swift */,
+				229901622668EC3400D8C74E /* AppearanceRouter.swift */,
+				229901642668EC3400D8C74E /* AppearanceInteractor.swift */,
+				229901612668EC3400D8C74E /* AppearancePresenter.swift */,
+				229901632668EC3400D8C74E /* AppearanceViewController.swift */,
 			);
 			path = AppearanceModule;
 			sourceTree = "<group>";

@@ -53,7 +53,7 @@ final class SettingsPresenter: NSObject,
 extension SettingsPresenter {
     
     func didSelectAppearanceRow() {
-        debugPrint(Self.self, #function)
+        router.showAppearanceList()        
     }
     
 }

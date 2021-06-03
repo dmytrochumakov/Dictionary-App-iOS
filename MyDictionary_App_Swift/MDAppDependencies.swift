@@ -98,7 +98,7 @@ fileprivate extension MDAppDependencies {
         // Appearance Module
         appearancePresenter.presenterOutput = appearanceVC
         appearanceInteractor.interactorOutput = appearancePresenter
-        appearanceDataManager.dataManagerOutput = appearanceInteractor        
+        appearanceDataManager.dataManagerOutput = appearanceInteractor
         appearanceRouter.appearanceViewController = appearanceVC
         // --------------------------------------------------------------------------------------------------------------------------------------- //
         
@@ -125,6 +125,9 @@ fileprivate extension MDAppDependencies {
         
         self.mainTabBarRouter = mainTabBarRouter
         // --------------------------------------------------------------------------------------------------------------------------------------- //
+        // Set Router
+        settingsRouter.appearanceRouter = appearanceRouter as? AppearanceRouter
+        //
     }
     
 }
