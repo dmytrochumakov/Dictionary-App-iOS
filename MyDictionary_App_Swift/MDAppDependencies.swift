@@ -60,7 +60,6 @@ fileprivate extension MDAppDependencies {
         wordListPresenter.presenterOutput = wordListVC
         wordListInteractor.interactorOutput = wordListPresenter
         wordListDataManager.dataManagerOutput = wordListInteractor
-        wordListRouter.rootRouter = rootRouter
         wordListRouter.wordListViewController = wordListVC
         // --------------------------------------------------------------------------------------------------------------------------------------- //
         
@@ -84,7 +83,6 @@ fileprivate extension MDAppDependencies {
         settingsPresenter.presenterOutput = settingsVC
         settingsInteractor.interactorOutput = settingsPresenter
         settingsDataManager.dataManagerOutput = settingsInteractor
-        settingsRouter.rootRouter = rootRouter
         settingsRouter.settingsViewController = settingsVC
         // --------------------------------------------------------------------------------------------------------------------------------------- //
         
@@ -100,8 +98,7 @@ fileprivate extension MDAppDependencies {
         // Appearance Module
         appearancePresenter.presenterOutput = appearanceVC
         appearanceInteractor.interactorOutput = appearancePresenter
-        appearanceDataManager.dataManagerOutput = appearanceInteractor
-        appearanceRouter.rootRouter = rootRouter
+        appearanceDataManager.dataManagerOutput = appearanceInteractor        
         appearanceRouter.appearanceViewController = appearanceVC
         // --------------------------------------------------------------------------------------------------------------------------------------- //
         

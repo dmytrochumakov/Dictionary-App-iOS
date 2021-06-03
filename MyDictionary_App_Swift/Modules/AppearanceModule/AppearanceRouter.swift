@@ -8,13 +8,11 @@ import UIKit
 
 protocol AppearanceRouterProtocol {
     var appearanceViewController: UIViewController! { get set }
-    var rootRouter: MDRootRouter! { get set }
 }
 
 final class AppearanceRouter: AppearanceRouterProtocol {
     
-    internal weak var appearanceViewController: UIViewController!
-    internal weak var rootRouter: MDRootRouter!
+    internal weak var appearanceViewController: UIViewController!    
     
     deinit {
         debugPrint(#function, Self.self)
