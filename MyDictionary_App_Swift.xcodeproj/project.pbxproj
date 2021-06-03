@@ -17,12 +17,23 @@
 		227D5E642652584700B54524 /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E632652584700B54524 /* NSLayoutConstraint+Extension.swift */; };
 		227D5E672652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E652652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift */; };
 		227D5E6A2652586F00B54524 /* WordListCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E692652586F00B54524 /* WordListCollectionViewDelegate.swift */; };
-		228BC438264979FD0030FB30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BC437264979FD0030FB30 /* AppDelegate.swift */; };
 		228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 228BC440264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld */; };
 		228BC444264979FE0030FB30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228BC443264979FE0030FB30 /* Assets.xcassets */; };
 		228BC447264979FE0030FB30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228BC445264979FE0030FB30 /* LaunchScreen.storyboard */; };
 		228BC452264979FF0030FB30 /* MyDictionary_App_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BC451264979FF0030FB30 /* MyDictionary_App_SwiftTests.swift */; };
 		228BC45D264979FF0030FB30 /* MyDictionary_App_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BC45C264979FF0030FB30 /* MyDictionary_App_SwiftUITests.swift */; };
+		229901682668EC3400D8C74E /* AppearancePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901612668EC3400D8C74E /* AppearancePresenter.swift */; };
+		229901692668EC3400D8C74E /* AppearanceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901622668EC3400D8C74E /* AppearanceRouter.swift */; };
+		2299016A2668EC3400D8C74E /* AppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901632668EC3400D8C74E /* AppearanceViewController.swift */; };
+		2299016B2668EC3400D8C74E /* AppearanceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901642668EC3400D8C74E /* AppearanceInteractor.swift */; };
+		2299016C2668EC3400D8C74E /* AppearanceDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901652668EC3400D8C74E /* AppearanceDataProvider.swift */; };
+		2299016D2668EC3400D8C74E /* AppearanceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901662668EC3400D8C74E /* AppearanceDataManager.swift */; };
+		2299016F2668EC9F00D8C74E /* MDAppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299016E2668EC9F00D8C74E /* MDAppDependencies.swift */; };
+		229901712668EE5300D8C74E /* MDAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901702668EE5300D8C74E /* MDAppDelegate.swift */; };
+		2299017A2668FBEA00D8C74E /* MainTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901732668FBEA00D8C74E /* MainTabBarPresenter.swift */; };
+		2299017B2668FBEA00D8C74E /* MainTabBarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901742668FBEA00D8C74E /* MainTabBarRouter.swift */; };
+		2299017D2668FBEA00D8C74E /* MainTabBarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901762668FBEA00D8C74E /* MainTabBarInteractor.swift */; };
+		229901822669041D00D8C74E /* MDRootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901812669041D00D8C74E /* MDRootRouter.swift */; };
 		229E08BC2652C41400DA56C4 /* ReuseIdentifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BB2652C41400DA56C4 /* ReuseIdentifierProtocol.swift */; };
 		229E08BE2652C8E600DA56C4 /* SectionTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BD2652C8E600DA56C4 /* SectionTypeProtocol.swift */; };
 		229E08C02652C9E700DA56C4 /* RowTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BF2652C9E700DA56C4 /* RowTypeProtocol.swift */; };
@@ -34,7 +45,6 @@
 		22CA087F26515ED90052D169 /* WordListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA087E26515ED90052D169 /* WordListInteractor.swift */; };
 		22CA088126515EEB0052D169 /* WordListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088026515EEB0052D169 /* WordListPresenter.swift */; };
 		22CA088326515F020052D169 /* WordListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088226515F020052D169 /* WordListRouter.swift */; };
-		22CA088526515F170052D169 /* WordListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088426515F170052D169 /* WordListModule.swift */; };
 		22CA088726515F6A0052D169 /* WordListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088626515F6A0052D169 /* WordListDataManager.swift */; };
 		22CA08892651603A0052D169 /* WordListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA08882651603A0052D169 /* WordListDataProvider.swift */; };
 		22CA088C265165460052D169 /* AppStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088B265165460052D169 /* AppStyling.swift */; };
@@ -42,8 +52,6 @@
 		22CA089126516C810052D169 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA089026516C810052D169 /* MainTabBarController.swift */; };
 		22CA0894265170200052D169 /* MainTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA0893265170200052D169 /* MainTabBarItem.swift */; };
 		22CA0896265178DE0052D169 /* ScrollToTopProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA0895265178DE0052D169 /* ScrollToTopProtocol.swift */; };
-		22CA089826517A3B0052D169 /* NotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA089726517A3B0052D169 /* NotificationName+Extension.swift */; };
-		22E2B4DC2664E43B00978E62 /* SettingsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4D52664E43B00978E62 /* SettingsModule.swift */; };
 		22E2B4DD2664E43B00978E62 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4D62664E43B00978E62 /* SettingsPresenter.swift */; };
 		22E2B4DE2664E43B00978E62 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4D72664E43B00978E62 /* SettingsRouter.swift */; };
 		22E2B4DF2664E43B00978E62 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4D82664E43B00978E62 /* SettingsViewController.swift */; };
@@ -62,8 +70,6 @@
 		22E2B4FB266509DC00978E62 /* SettingsDataProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4FA266509DC00978E62 /* SettingsDataProviderModel.swift */; };
 		22E2B4FE266515D400978E62 /* CollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4FD266515D400978E62 /* CollectionViewDelegateFlowLayout.swift */; };
 		22E2B500266515E700978E62 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */; };
-		22EDBBB726515707009B8DA7 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDBBB626515707009B8DA7 /* RootViewController.swift */; };
-		22EDBBBA26515A12009B8DA7 /* RootWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDBBB926515A12009B8DA7 /* RootWindow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,7 +101,6 @@
 		227D5E652652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegateFlowLayoutPropertyProtocol.swift; sourceTree = "<group>"; };
 		227D5E692652586F00B54524 /* WordListCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordListCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		228BC434264979FD0030FB30 /* MyDictionary_App_Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyDictionary_App_Swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		228BC437264979FD0030FB30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		228BC441264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyDictionary_App_Swift.xcdatamodel; sourceTree = "<group>"; };
 		228BC443264979FE0030FB30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		228BC446264979FE0030FB30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -106,6 +111,18 @@
 		228BC458264979FF0030FB30 /* MyDictionary_App_SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyDictionary_App_SwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		228BC45C264979FF0030FB30 /* MyDictionary_App_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDictionary_App_SwiftUITests.swift; sourceTree = "<group>"; };
 		228BC45E264979FF0030FB30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		229901612668EC3400D8C74E /* AppearancePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePresenter.swift; sourceTree = "<group>"; };
+		229901622668EC3400D8C74E /* AppearanceRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceRouter.swift; sourceTree = "<group>"; };
+		229901632668EC3400D8C74E /* AppearanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceViewController.swift; sourceTree = "<group>"; };
+		229901642668EC3400D8C74E /* AppearanceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceInteractor.swift; sourceTree = "<group>"; };
+		229901652668EC3400D8C74E /* AppearanceDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceDataProvider.swift; sourceTree = "<group>"; };
+		229901662668EC3400D8C74E /* AppearanceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceDataManager.swift; sourceTree = "<group>"; };
+		2299016E2668EC9F00D8C74E /* MDAppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppDependencies.swift; sourceTree = "<group>"; };
+		229901702668EE5300D8C74E /* MDAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppDelegate.swift; sourceTree = "<group>"; };
+		229901732668FBEA00D8C74E /* MainTabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarPresenter.swift; sourceTree = "<group>"; };
+		229901742668FBEA00D8C74E /* MainTabBarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarRouter.swift; sourceTree = "<group>"; };
+		229901762668FBEA00D8C74E /* MainTabBarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarInteractor.swift; sourceTree = "<group>"; };
+		229901812669041D00D8C74E /* MDRootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDRootRouter.swift; sourceTree = "<group>"; };
 		229E08BB2652C41400DA56C4 /* ReuseIdentifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifierProtocol.swift; sourceTree = "<group>"; };
 		229E08BD2652C8E600DA56C4 /* SectionTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTypeProtocol.swift; sourceTree = "<group>"; };
 		229E08BF2652C9E700DA56C4 /* RowTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowTypeProtocol.swift; sourceTree = "<group>"; };
@@ -117,7 +134,6 @@
 		22CA087E26515ED90052D169 /* WordListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListInteractor.swift; sourceTree = "<group>"; };
 		22CA088026515EEB0052D169 /* WordListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListPresenter.swift; sourceTree = "<group>"; };
 		22CA088226515F020052D169 /* WordListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListRouter.swift; sourceTree = "<group>"; };
-		22CA088426515F170052D169 /* WordListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListModule.swift; sourceTree = "<group>"; };
 		22CA088626515F6A0052D169 /* WordListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListDataManager.swift; sourceTree = "<group>"; };
 		22CA08882651603A0052D169 /* WordListDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListDataProvider.swift; sourceTree = "<group>"; };
 		22CA088B265165460052D169 /* AppStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyling.swift; sourceTree = "<group>"; };
@@ -125,8 +141,6 @@
 		22CA089026516C810052D169 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		22CA0893265170200052D169 /* MainTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarItem.swift; sourceTree = "<group>"; };
 		22CA0895265178DE0052D169 /* ScrollToTopProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollToTopProtocol.swift; sourceTree = "<group>"; };
-		22CA089726517A3B0052D169 /* NotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extension.swift"; sourceTree = "<group>"; };
-		22E2B4D52664E43B00978E62 /* SettingsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModule.swift; sourceTree = "<group>"; };
 		22E2B4D62664E43B00978E62 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		22E2B4D72664E43B00978E62 /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
 		22E2B4D82664E43B00978E62 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -145,8 +159,6 @@
 		22E2B4FA266509DC00978E62 /* SettingsDataProviderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataProviderModel.swift; sourceTree = "<group>"; };
 		22E2B4FD266515D400978E62 /* CollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegateFlowLayout.swift; sourceTree = "<group>"; };
 		22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
-		22EDBBB626515707009B8DA7 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		22EDBBB926515A12009B8DA7 /* RootWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWindow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,8 +190,6 @@
 			isa = PBXGroup;
 			children = (
 				22CA088A265165370052D169 /* AppStyling */,
-				22EDBBB826515A0D009B8DA7 /* RootWindow */,
-				22EDBBB5265156FB009B8DA7 /* RootViewController */,
 				2223F8B526512F54004F2FE9 /* Enums */,
 				2223F8B226512EF2004F2FE9 /* KeysForTranslate */,
 				2223F8AF26512E7A004F2FE9 /* LocalizableStrings */,
@@ -212,7 +222,6 @@
 			children = (
 				227D5E632652584700B54524 /* NSLayoutConstraint+Extension.swift */,
 				2223F8AA26512C5A004F2FE9 /* String+Extension.swift */,
-				22CA089726517A3B0052D169 /* NotificationName+Extension.swift */,
 				22E2B4EF2664EF3200978E62 /* UICollectionView+Extension.swift */,
 			);
 			path = Extensions;
@@ -276,7 +285,6 @@
 				22E2B4E52664EB8000978E62 /* SettingsCollectionViewDelegate.swift */,
 				22E2B4DB2664E43B00978E62 /* SettingsDataManager.swift */,
 				22E2B4DA2664E43B00978E62 /* SettingsDataProvider.swift */,
-				22E2B4D52664E43B00978E62 /* SettingsModule.swift */,
 				22E2B4D72664E43B00978E62 /* SettingsRouter.swift */,
 				22E2B4D92664E43B00978E62 /* SettingsInteractor.swift */,
 				22E2B4D62664E43B00978E62 /* SettingsPresenter.swift */,
@@ -309,13 +317,15 @@
 			isa = PBXGroup;
 			children = (
 				22E2B4FC266515C600978E62 /* Typealias */,
-				22CA088F26516C740052D169 /* MainTabBar */,
+				229901832669043400D8C74E /* Common */,
 				22CA086F26515D240052D169 /* Modules */,
 				2223F8B826512F71004F2FE9 /* Services */,
 				2223F8A926512C48004F2FE9 /* Extensions */,
 				2223F8A526512BE8004F2FE9 /* Utilites */,
 				228BC46F26497B270030FB30 /* CoreData */,
 				228BC46A26497AEC0030FB30 /* Resources */,
+				2299016E2668EC9F00D8C74E /* MDAppDependencies.swift */,
+				229901702668EE5300D8C74E /* MDAppDelegate.swift */,
 			);
 			path = MyDictionary_App_Swift;
 			sourceTree = "<group>";
@@ -344,17 +354,8 @@
 				228BC46E26497B120030FB30 /* InfoPlist */,
 				228BC46D26497B080030FB30 /* LaunchScreen */,
 				228BC46C26497AFE0030FB30 /* Assets */,
-				228BC46B26497AF40030FB30 /* AppDelegate */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		228BC46B26497AF40030FB30 /* AppDelegate */ = {
-			isa = PBXGroup;
-			children = (
-				228BC437264979FD0030FB30 /* AppDelegate.swift */,
-			);
-			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 		228BC46C26497AFE0030FB30 /* Assets */ = {
@@ -397,6 +398,35 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		2299015F2668EC2900D8C74E /* AppearanceModule */ = {
+			isa = PBXGroup;
+			children = (
+				229901612668EC3400D8C74E /* AppearancePresenter.swift */,
+				229901622668EC3400D8C74E /* AppearanceRouter.swift */,
+				229901632668EC3400D8C74E /* AppearanceViewController.swift */,
+				229901642668EC3400D8C74E /* AppearanceInteractor.swift */,
+				229901652668EC3400D8C74E /* AppearanceDataProvider.swift */,
+				229901662668EC3400D8C74E /* AppearanceDataManager.swift */,
+			);
+			path = AppearanceModule;
+			sourceTree = "<group>";
+		};
+		229901802669041800D8C74E /* MDRootRouter */ = {
+			isa = PBXGroup;
+			children = (
+				229901812669041D00D8C74E /* MDRootRouter.swift */,
+			);
+			path = MDRootRouter;
+			sourceTree = "<group>";
+		};
+		229901832669043400D8C74E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				229901802669041800D8C74E /* MDRootRouter */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		229C2B092652512700B270C1 /* CollectionViewDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,6 +446,8 @@
 		22CA086F26515D240052D169 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				22CA088F26516C740052D169 /* MainTabBarModule */,
+				2299015F2668EC2900D8C74E /* AppearanceModule */,
 				227864EE2663740100921778 /* SettingsModule */,
 				22CA087026515D280052D169 /* WordListModule */,
 			);
@@ -433,7 +465,6 @@
 				22CA087626515D800052D169 /* WordListRules */,
 				22CA087526515D650052D169 /* WordListDataManager */,
 				22CA087426515D590052D169 /* WordListDataProvider */,
-				22CA088426515F170052D169 /* WordListModule.swift */,
 				22CA088226515F020052D169 /* WordListRouter.swift */,
 				22CA087E26515ED90052D169 /* WordListInteractor.swift */,
 				22CA088026515EEB0052D169 /* WordListPresenter.swift */,
@@ -494,13 +525,16 @@
 			path = AppStyling;
 			sourceTree = "<group>";
 		};
-		22CA088F26516C740052D169 /* MainTabBar */ = {
+		22CA088F26516C740052D169 /* MainTabBarModule */ = {
 			isa = PBXGroup;
 			children = (
 				22CA08922651701B0052D169 /* Enum */,
+				229901742668FBEA00D8C74E /* MainTabBarRouter.swift */,
+				229901762668FBEA00D8C74E /* MainTabBarInteractor.swift */,
+				229901732668FBEA00D8C74E /* MainTabBarPresenter.swift */,
 				22CA089026516C810052D169 /* MainTabBarController.swift */,
 			);
-			path = MainTabBar;
+			path = MainTabBarModule;
 			sourceTree = "<group>";
 		};
 		22CA08922651701B0052D169 /* Enum */ = {
@@ -545,22 +579,6 @@
 				22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */,
 			);
 			path = Typealias;
-			sourceTree = "<group>";
-		};
-		22EDBBB5265156FB009B8DA7 /* RootViewController */ = {
-			isa = PBXGroup;
-			children = (
-				22EDBBB626515707009B8DA7 /* RootViewController.swift */,
-			);
-			path = RootViewController;
-			sourceTree = "<group>";
-		};
-		22EDBBB826515A0D009B8DA7 /* RootWindow */ = {
-			isa = PBXGroup;
-			children = (
-				22EDBBB926515A12009B8DA7 /* RootWindow.swift */,
-			);
-			path = RootWindow;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -694,35 +712,41 @@
 			buildActionMask = 2147483647;
 			files = (
 				22E2B4F02664EF3200978E62 /* UICollectionView+Extension.swift in Sources */,
+				2299017D2668FBEA00D8C74E /* MainTabBarInteractor.swift in Sources */,
 				229E08C22652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift in Sources */,
 				22CA087D26515E810052D169 /* WordListViewController.swift in Sources */,
+				229901712668EE5300D8C74E /* MDAppDelegate.swift in Sources */,
 				22E2B4F9266509CA00978E62 /* SettingsRowModel.swift in Sources */,
+				229901682668EC3400D8C74E /* AppearancePresenter.swift in Sources */,
 				227D5E672652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift in Sources */,
 				22CA088726515F6A0052D169 /* WordListDataManager.swift in Sources */,
 				22E2B4E12664E43B00978E62 /* SettingsDataProvider.swift in Sources */,
-				22CA088526515F170052D169 /* WordListModule.swift in Sources */,
 				22E2B4F32665085E00978E62 /* SettingsRowType.swift in Sources */,
+				2299017B2668FBEA00D8C74E /* MainTabBarRouter.swift in Sources */,
 				22CA0896265178DE0052D169 /* ScrollToTopProtocol.swift in Sources */,
-				22CA089826517A3B0052D169 /* NotificationName+Extension.swift in Sources */,
+				2299016F2668EC9F00D8C74E /* MDAppDependencies.swift in Sources */,
+				229901822669041D00D8C74E /* MDRootRouter.swift in Sources */,
+				229901692668EC3400D8C74E /* AppearanceRouter.swift in Sources */,
 				22E2B4F7266509B900978E62 /* SettingsSectionModel.swift in Sources */,
 				2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */,
 				2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */,
 				227D5E6A2652586F00B54524 /* WordListCollectionViewDelegate.swift in Sources */,
 				22CA0894265170200052D169 /* MainTabBarItem.swift in Sources */,
 				229E08CB2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift in Sources */,
-				22EDBBB726515707009B8DA7 /* RootViewController.swift in Sources */,
 				22CA088326515F020052D169 /* WordListRouter.swift in Sources */,
 				229E08C42652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift in Sources */,
 				229E08C02652C9E700DA56C4 /* RowTypeProtocol.swift in Sources */,
 				22E2B4DD2664E43B00978E62 /* SettingsPresenter.swift in Sources */,
 				229E08BE2652C8E600DA56C4 /* SectionTypeProtocol.swift in Sources */,
-				22EDBBBA26515A12009B8DA7 /* RootWindow.swift in Sources */,
-				22E2B4DC2664E43B00978E62 /* SettingsModule.swift in Sources */,
+				2299017A2668FBEA00D8C74E /* MainTabBarPresenter.swift in Sources */,
 				22CA089126516C810052D169 /* MainTabBarController.swift in Sources */,
 				22E2B4E42664EB6900978E62 /* SettingsCollectionViewDataSource.swift in Sources */,
 				22E2B4DE2664E43B00978E62 /* SettingsRouter.swift in Sources */,
+				2299016C2668EC3400D8C74E /* AppearanceDataProvider.swift in Sources */,
 				22E2B4E02664E43B00978E62 /* SettingsInteractor.swift in Sources */,
 				22E2B4EC2664EE1400978E62 /* FillWithModelProtocol.swift in Sources */,
+				2299016A2668EC3400D8C74E /* AppearanceViewController.swift in Sources */,
+				2299016D2668EC3400D8C74E /* AppearanceDataManager.swift in Sources */,
 				22E2B4DF2664E43B00978E62 /* SettingsViewController.swift in Sources */,
 				22E2B4FB266509DC00978E62 /* SettingsDataProviderModel.swift in Sources */,
 				22E2B4E22664E43B00978E62 /* SettingsDataManager.swift in Sources */,
@@ -732,9 +756,9 @@
 				229E08C72652CB9000DA56C4 /* WordListCollectionViewDataSource.swift in Sources */,
 				2223F8B426512F01004F2FE9 /* KeysForTranslate.swift in Sources */,
 				2223F8AE26512DEB004F2FE9 /* Constants.swift in Sources */,
+				2299016B2668EC3400D8C74E /* AppearanceInteractor.swift in Sources */,
 				22CA088126515EEB0052D169 /* WordListPresenter.swift in Sources */,
 				2223F8AB26512C5A004F2FE9 /* String+Extension.swift in Sources */,
-				228BC438264979FD0030FB30 /* AppDelegate.swift in Sources */,
 				22CA088E265167620052D169 /* ReloadDataProtocol.swift in Sources */,
 				228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */,
 				22CA08892651603A0052D169 /* WordListDataProvider.swift in Sources */,

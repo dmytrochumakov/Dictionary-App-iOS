@@ -9,4 +9,5 @@ import Foundation
 
 enum MainTabBarItem: Int {
     case wordList
+    case settings
 }

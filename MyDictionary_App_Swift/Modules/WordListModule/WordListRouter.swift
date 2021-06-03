@@ -8,12 +8,14 @@
 import UIKit
 
 protocol WordListRouterProtocol {
-    var presenter: UIViewController? { get set }
+    var wordListViewController: UIViewController! { get set }
+    var rootRouter: MDRootRouter! { get set }
 }
 
 final class WordListRouter: WordListRouterProtocol {
     
-    internal weak var presenter: UIViewController?
+    internal weak var wordListViewController: UIViewController!
+    internal weak var rootRouter: MDRootRouter!
     
     deinit {
         debugPrint(#function, Self.self)

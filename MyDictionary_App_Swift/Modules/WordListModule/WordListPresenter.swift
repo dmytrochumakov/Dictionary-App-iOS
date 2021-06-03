@@ -61,12 +61,7 @@ extension WordListPresenter {
 fileprivate extension WordListPresenter {
     
     func subscribe() {
-        NotificationCenter
-            .default
-            .addObserver(self,
-                         selector: #selector(mainTabBarItemDoubleTapAction),
-                         name: .mainTabBarItemDoubleTap,
-                         object: nil)
+        
     }
     
 }

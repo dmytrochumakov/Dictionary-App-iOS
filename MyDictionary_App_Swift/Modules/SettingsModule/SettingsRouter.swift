@@ -7,12 +7,14 @@
 import UIKit
 
 protocol SettingsRouterProtocol {
-    var presenter: UIViewController? { get set }
+    var settingsViewController: UIViewController! { get set }
+    var rootRouter: MDRootRouter! { get set }
 }
 
 final class SettingsRouter: SettingsRouterProtocol {
     
-    internal weak var presenter: UIViewController?
+    internal weak var settingsViewController: UIViewController!
+    internal weak var rootRouter: MDRootRouter!
     
     deinit {
         debugPrint(#function, Self.self)
