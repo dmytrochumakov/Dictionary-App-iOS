@@ -14,7 +14,7 @@ struct MainTabBarAddModuleModel {
 
 final class MainTabBarController: UITabBarController {
           
-    fileprivate let presenter: MainTabBarPresenterInputProtocol
+    let presenter: MainTabBarPresenterInputProtocol
 
     init(presenter: MainTabBarPresenterInputProtocol) {
         self.presenter = presenter

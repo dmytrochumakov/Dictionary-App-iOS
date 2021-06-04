@@ -15,14 +15,14 @@ protocol AppearancePresenterOutputProtocol: AnyObject {
 }
 
 protocol AppearancePresenterProtocol: AppearancePresenterInputProtocol,
-AppearanceInteractorOutputProtocol {
+                                      AppearanceInteractorOutputProtocol {
     var presenterOutput: AppearancePresenterOutputProtocol? { get set }
 }
 
 final class AppearancePresenter: NSObject, AppearancePresenterProtocol {
     
     fileprivate let interactor: AppearanceInteractorInputProtocol
-    fileprivate let router: AppearanceRouterProtocol
+    let router: AppearanceRouterProtocol
     
     internal weak var presenterOutput: AppearancePresenterOutputProtocol?
     

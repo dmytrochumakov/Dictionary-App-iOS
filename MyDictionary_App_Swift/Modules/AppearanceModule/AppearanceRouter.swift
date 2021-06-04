@@ -8,7 +8,6 @@ import UIKit
 
 protocol AppearanceRouterProtocol {
     var appearanceViewController: UIViewController! { get set }
-    func pushInterfaceFromViewController(_ viewController: UIViewController)
     func popAppearanceInterface()
 }
 
@@ -22,11 +21,7 @@ final class AppearanceRouter: AppearanceRouterProtocol {
     
 }
 
-extension AppearanceRouter {
-    
-    func pushInterfaceFromViewController(_ viewController: UIViewController) {
-        viewController.navigationController?.pushViewController(appearanceViewController, animated: true)
-    }
+extension AppearanceRouter {        
     
     func popAppearanceInterface() {
         self.appearanceViewController.navigationController?.popViewController(animated: true)

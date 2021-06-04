@@ -7,14 +7,13 @@
 import UIKit
 
 protocol SettingsRouterProtocol {
-    var appearanceRouter: AppearanceRouter! { get set }
     var settingsViewController: UIViewController! { get set }
     func showAppearanceList()
 }
 
 final class SettingsRouter: SettingsRouterProtocol {
     
-    internal weak var appearanceRouter: AppearanceRouter!
+    internal var appearanceRouter: AppearanceRouterProtocol!
     internal weak var settingsViewController: UIViewController!    
     
     deinit {
@@ -25,8 +24,8 @@ final class SettingsRouter: SettingsRouterProtocol {
 
 extension SettingsRouter {
     
-    func showAppearanceList() {
-        appearanceRouter.pushInterfaceFromViewController(settingsViewController)
+    func showAppearanceList() {        
+        settingsViewController.navigationController?.pushViewController(AppearanceModule.init().module, animated: true)
     }
     
 }

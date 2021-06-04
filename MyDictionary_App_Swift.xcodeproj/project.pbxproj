@@ -28,12 +28,10 @@
 		2299016B2668EC3400D8C74E /* AppearanceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901642668EC3400D8C74E /* AppearanceInteractor.swift */; };
 		2299016C2668EC3400D8C74E /* AppearanceDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901652668EC3400D8C74E /* AppearanceDataProvider.swift */; };
 		2299016D2668EC3400D8C74E /* AppearanceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901662668EC3400D8C74E /* AppearanceDataManager.swift */; };
-		2299016F2668EC9F00D8C74E /* MDAppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299016E2668EC9F00D8C74E /* MDAppDependencies.swift */; };
 		229901712668EE5300D8C74E /* MDAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901702668EE5300D8C74E /* MDAppDelegate.swift */; };
 		2299017A2668FBEA00D8C74E /* MainTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901732668FBEA00D8C74E /* MainTabBarPresenter.swift */; };
 		2299017B2668FBEA00D8C74E /* MainTabBarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901742668FBEA00D8C74E /* MainTabBarRouter.swift */; };
 		2299017D2668FBEA00D8C74E /* MainTabBarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901762668FBEA00D8C74E /* MainTabBarInteractor.swift */; };
-		229901822669041D00D8C74E /* MDRootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901812669041D00D8C74E /* MDRootRouter.swift */; };
 		229E08BC2652C41400DA56C4 /* ReuseIdentifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BB2652C41400DA56C4 /* ReuseIdentifierProtocol.swift */; };
 		229E08BE2652C8E600DA56C4 /* SectionTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BD2652C8E600DA56C4 /* SectionTypeProtocol.swift */; };
 		229E08C02652C9E700DA56C4 /* RowTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BF2652C9E700DA56C4 /* RowTypeProtocol.swift */; };
@@ -41,6 +39,13 @@
 		229E08C42652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C32652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift */; };
 		229E08C72652CB9000DA56C4 /* WordListCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */; };
 		229E08CB2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08CA2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift */; };
+		22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD9999266A480D0063FEFC /* SettingsModule.swift */; };
+		22BD999C266A48D60063FEFC /* MainTabBarModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999B266A48D60063FEFC /* MainTabBarModule.swift */; };
+		22BD999E266A4A2C0063FEFC /* ModuleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999D266A4A2C0063FEFC /* ModuleProtocol.swift */; };
+		22BD99A0266A4AB10063FEFC /* WordListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999F266A4AB10063FEFC /* WordListModule.swift */; };
+		22BD99A2266A4B8D0063FEFC /* AppearanceModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD99A1266A4B8D0063FEFC /* AppearanceModule.swift */; };
+		22BD99A5266A58DE0063FEFC /* RootWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD99A4266A58DE0063FEFC /* RootWindow.swift */; };
+		22BD99A8266A58F40063FEFC /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD99A7266A58F40063FEFC /* RootViewController.swift */; };
 		22CA087D26515E810052D169 /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA087C26515E810052D169 /* WordListViewController.swift */; };
 		22CA087F26515ED90052D169 /* WordListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA087E26515ED90052D169 /* WordListInteractor.swift */; };
 		22CA088126515EEB0052D169 /* WordListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088026515EEB0052D169 /* WordListPresenter.swift */; };
@@ -117,12 +122,10 @@
 		229901642668EC3400D8C74E /* AppearanceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceInteractor.swift; sourceTree = "<group>"; };
 		229901652668EC3400D8C74E /* AppearanceDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceDataProvider.swift; sourceTree = "<group>"; };
 		229901662668EC3400D8C74E /* AppearanceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceDataManager.swift; sourceTree = "<group>"; };
-		2299016E2668EC9F00D8C74E /* MDAppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppDependencies.swift; sourceTree = "<group>"; };
 		229901702668EE5300D8C74E /* MDAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppDelegate.swift; sourceTree = "<group>"; };
 		229901732668FBEA00D8C74E /* MainTabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarPresenter.swift; sourceTree = "<group>"; };
 		229901742668FBEA00D8C74E /* MainTabBarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarRouter.swift; sourceTree = "<group>"; };
 		229901762668FBEA00D8C74E /* MainTabBarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarInteractor.swift; sourceTree = "<group>"; };
-		229901812669041D00D8C74E /* MDRootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDRootRouter.swift; sourceTree = "<group>"; };
 		229E08BB2652C41400DA56C4 /* ReuseIdentifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifierProtocol.swift; sourceTree = "<group>"; };
 		229E08BD2652C8E600DA56C4 /* SectionTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTypeProtocol.swift; sourceTree = "<group>"; };
 		229E08BF2652C9E700DA56C4 /* RowTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowTypeProtocol.swift; sourceTree = "<group>"; };
@@ -130,6 +133,13 @@
 		229E08C32652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfRowsInSectionProtocol.swift; sourceTree = "<group>"; };
 		229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		229E08CA2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourcePropertyProtocol.swift; sourceTree = "<group>"; };
+		22BD9999266A480D0063FEFC /* SettingsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModule.swift; sourceTree = "<group>"; };
+		22BD999B266A48D60063FEFC /* MainTabBarModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarModule.swift; sourceTree = "<group>"; };
+		22BD999D266A4A2C0063FEFC /* ModuleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleProtocol.swift; sourceTree = "<group>"; };
+		22BD999F266A4AB10063FEFC /* WordListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListModule.swift; sourceTree = "<group>"; };
+		22BD99A1266A4B8D0063FEFC /* AppearanceModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceModule.swift; sourceTree = "<group>"; };
+		22BD99A4266A58DE0063FEFC /* RootWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWindow.swift; sourceTree = "<group>"; };
+		22BD99A7266A58F40063FEFC /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		22CA087C26515E810052D169 /* WordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListViewController.swift; sourceTree = "<group>"; };
 		22CA087E26515ED90052D169 /* WordListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListInteractor.swift; sourceTree = "<group>"; };
 		22CA088026515EEB0052D169 /* WordListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListPresenter.swift; sourceTree = "<group>"; };
@@ -189,6 +199,8 @@
 		2223F8A526512BE8004F2FE9 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
+				22BD99A6266A58EF0063FEFC /* RootViewController */,
+				22BD99A3266A58D90063FEFC /* RootWindow */,
 				22CA088A265165370052D169 /* AppStyling */,
 				2223F8B526512F54004F2FE9 /* Enums */,
 				2223F8B226512EF2004F2FE9 /* KeysForTranslate */,
@@ -213,6 +225,7 @@
 				229E08C32652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift */,
 				229E08CA2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift */,
 				22E2B4EB2664EE1400978E62 /* FillWithModelProtocol.swift */,
+				22BD999D266A4A2C0063FEFC /* ModuleProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -285,6 +298,7 @@
 				22E2B4E52664EB8000978E62 /* SettingsCollectionViewDelegate.swift */,
 				22E2B4DB2664E43B00978E62 /* SettingsDataManager.swift */,
 				22E2B4DA2664E43B00978E62 /* SettingsDataProvider.swift */,
+				22BD9999266A480D0063FEFC /* SettingsModule.swift */,
 				22E2B4D72664E43B00978E62 /* SettingsRouter.swift */,
 				22E2B4D92664E43B00978E62 /* SettingsInteractor.swift */,
 				22E2B4D62664E43B00978E62 /* SettingsPresenter.swift */,
@@ -317,14 +331,12 @@
 			isa = PBXGroup;
 			children = (
 				22E2B4FC266515C600978E62 /* Typealias */,
-				229901832669043400D8C74E /* Common */,
 				22CA086F26515D240052D169 /* Modules */,
 				2223F8B826512F71004F2FE9 /* Services */,
 				2223F8A926512C48004F2FE9 /* Extensions */,
 				2223F8A526512BE8004F2FE9 /* Utilites */,
 				228BC46F26497B270030FB30 /* CoreData */,
 				228BC46A26497AEC0030FB30 /* Resources */,
-				2299016E2668EC9F00D8C74E /* MDAppDependencies.swift */,
 				229901702668EE5300D8C74E /* MDAppDelegate.swift */,
 			);
 			path = MyDictionary_App_Swift;
@@ -407,24 +419,9 @@
 				229901642668EC3400D8C74E /* AppearanceInteractor.swift */,
 				229901612668EC3400D8C74E /* AppearancePresenter.swift */,
 				229901632668EC3400D8C74E /* AppearanceViewController.swift */,
+				22BD99A1266A4B8D0063FEFC /* AppearanceModule.swift */,
 			);
 			path = AppearanceModule;
-			sourceTree = "<group>";
-		};
-		229901802669041800D8C74E /* MDRootRouter */ = {
-			isa = PBXGroup;
-			children = (
-				229901812669041D00D8C74E /* MDRootRouter.swift */,
-			);
-			path = MDRootRouter;
-			sourceTree = "<group>";
-		};
-		229901832669043400D8C74E /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				229901802669041800D8C74E /* MDRootRouter */,
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		229C2B092652512700B270C1 /* CollectionViewDelegate */ = {
@@ -443,6 +440,22 @@
 			path = CollectionViewDataSource;
 			sourceTree = "<group>";
 		};
+		22BD99A3266A58D90063FEFC /* RootWindow */ = {
+			isa = PBXGroup;
+			children = (
+				22BD99A4266A58DE0063FEFC /* RootWindow.swift */,
+			);
+			path = RootWindow;
+			sourceTree = "<group>";
+		};
+		22BD99A6266A58EF0063FEFC /* RootViewController */ = {
+			isa = PBXGroup;
+			children = (
+				22BD99A7266A58F40063FEFC /* RootViewController.swift */,
+			);
+			path = RootViewController;
+			sourceTree = "<group>";
+		};
 		22CA086F26515D240052D169 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -459,7 +472,6 @@
 			children = (
 				229E08C52652CB6900DA56C4 /* CollectionViewDataSource */,
 				229C2B092652512700B270C1 /* CollectionViewDelegate */,
-				22CA087926515D9A0052D169 /* Protocols */,
 				22CA087826515D960052D169 /* Models */,
 				22CA087726515D840052D169 /* WordListLogic */,
 				22CA087626515D800052D169 /* WordListRules */,
@@ -469,6 +481,7 @@
 				22CA087E26515ED90052D169 /* WordListInteractor.swift */,
 				22CA088026515EEB0052D169 /* WordListPresenter.swift */,
 				22CA087C26515E810052D169 /* WordListViewController.swift */,
+				22BD999F266A4AB10063FEFC /* WordListModule.swift */,
 			);
 			path = WordListModule;
 			sourceTree = "<group>";
@@ -510,13 +523,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		22CA087926515D9A0052D169 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		22CA088A265165370052D169 /* AppStyling */ = {
 			isa = PBXGroup;
 			children = (
@@ -529,6 +535,7 @@
 			isa = PBXGroup;
 			children = (
 				22CA08922651701B0052D169 /* Enum */,
+				22BD999B266A48D60063FEFC /* MainTabBarModule.swift */,
 				229901742668FBEA00D8C74E /* MainTabBarRouter.swift */,
 				229901762668FBEA00D8C74E /* MainTabBarInteractor.swift */,
 				229901732668FBEA00D8C74E /* MainTabBarPresenter.swift */,
@@ -724,12 +731,11 @@
 				22E2B4F32665085E00978E62 /* SettingsRowType.swift in Sources */,
 				2299017B2668FBEA00D8C74E /* MainTabBarRouter.swift in Sources */,
 				22CA0896265178DE0052D169 /* ScrollToTopProtocol.swift in Sources */,
-				2299016F2668EC9F00D8C74E /* MDAppDependencies.swift in Sources */,
-				229901822669041D00D8C74E /* MDRootRouter.swift in Sources */,
 				229901692668EC3400D8C74E /* AppearanceRouter.swift in Sources */,
 				22E2B4F7266509B900978E62 /* SettingsSectionModel.swift in Sources */,
 				2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */,
 				2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */,
+				22BD99A0266A4AB10063FEFC /* WordListModule.swift in Sources */,
 				227D5E6A2652586F00B54524 /* WordListCollectionViewDelegate.swift in Sources */,
 				22CA0894265170200052D169 /* MainTabBarItem.swift in Sources */,
 				229E08CB2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift in Sources */,
@@ -745,15 +751,21 @@
 				2299016C2668EC3400D8C74E /* AppearanceDataProvider.swift in Sources */,
 				22E2B4E02664E43B00978E62 /* SettingsInteractor.swift in Sources */,
 				22E2B4EC2664EE1400978E62 /* FillWithModelProtocol.swift in Sources */,
+				22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */,
 				2299016A2668EC3400D8C74E /* AppearanceViewController.swift in Sources */,
+				22BD99A5266A58DE0063FEFC /* RootWindow.swift in Sources */,
 				2299016D2668EC3400D8C74E /* AppearanceDataManager.swift in Sources */,
 				22E2B4DF2664E43B00978E62 /* SettingsViewController.swift in Sources */,
+				22BD99A8266A58F40063FEFC /* RootViewController.swift in Sources */,
 				22E2B4FB266509DC00978E62 /* SettingsDataProviderModel.swift in Sources */,
 				22E2B4E22664E43B00978E62 /* SettingsDataManager.swift in Sources */,
+				22BD999C266A48D60063FEFC /* MainTabBarModule.swift in Sources */,
 				22CA088C265165460052D169 /* AppStyling.swift in Sources */,
 				22E2B4EA2664EDA200978E62 /* SettingsCell.swift in Sources */,
 				22E2B4FE266515D400978E62 /* CollectionViewDelegateFlowLayout.swift in Sources */,
+				22BD999E266A4A2C0063FEFC /* ModuleProtocol.swift in Sources */,
 				229E08C72652CB9000DA56C4 /* WordListCollectionViewDataSource.swift in Sources */,
+				22BD99A2266A4B8D0063FEFC /* AppearanceModule.swift in Sources */,
 				2223F8B426512F01004F2FE9 /* KeysForTranslate.swift in Sources */,
 				2223F8AE26512DEB004F2FE9 /* Constants.swift in Sources */,
 				2299016B2668EC3400D8C74E /* AppearanceInteractor.swift in Sources */,

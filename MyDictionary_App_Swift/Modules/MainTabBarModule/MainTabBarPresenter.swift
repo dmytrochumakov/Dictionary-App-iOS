@@ -24,7 +24,7 @@ final class MainTabBarPresenter: NSObject,
                                  MainTabBarPresenterProtocol {
     
     fileprivate let interactor: MainTabBarInteractorInputProtocol
-    fileprivate let router: MainTabBarRouterProtocol
+    let router: MainTabBarRouterProtocol
     
     internal weak var presenterOutput: MainTabBarPresenterOutputProtocol?
     internal var modules: [MainTabBarAddModuleModel] {

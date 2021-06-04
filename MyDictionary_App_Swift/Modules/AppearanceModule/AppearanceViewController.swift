@@ -8,7 +8,7 @@ import UIKit
 
 final class AppearanceViewController: UIViewController {
 
-    fileprivate let presenter: AppearancePresenterInputProtocol
+    let presenter: AppearancePresenterInputProtocol
 
     init(presenter: AppearancePresenterInputProtocol) {
         self.presenter = presenter
