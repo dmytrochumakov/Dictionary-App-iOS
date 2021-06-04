@@ -19,6 +19,7 @@ final class MainTabBarController: UITabBarController {
     init(presenter: MainTabBarPresenterInputProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
+        setup()
     }
     
     required init?(coder: NSCoder) {

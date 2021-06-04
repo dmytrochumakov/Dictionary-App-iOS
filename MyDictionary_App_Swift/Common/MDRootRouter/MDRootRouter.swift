@@ -15,13 +15,8 @@ final class MDRootRouter: NSObject,
                           MDRootRouterProtocol {
     
     func showRootViewController(_ viewController: UIViewController, inWindow window: UIWindow) {
-        let navigationController: UINavigationController? = self.navigationControllerFromWindow(window)
-        navigationController?.viewControllers = [viewController]
-    }
-    
-    func navigationControllerFromWindow(_ window: UIWindow) -> UINavigationController? {
-        guard let rootViewController = window.rootViewController else { return nil }
-        return UINavigationController.init(rootViewController: rootViewController)
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
     }
     
 }

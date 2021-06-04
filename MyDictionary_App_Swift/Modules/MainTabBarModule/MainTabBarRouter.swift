@@ -7,14 +7,14 @@
 import UIKit
 
 protocol MainTabBarRouterProtocol {
-    var mainTabBarController: UITabBarController! { get set }
+    var mainTabBarController: UIViewController! { get set }
     var rootRouter: MDRootRouter! { get set }
     func presentMainTabBarInterfaceFromWindow(_ window: UIWindow)
 }
 
 final class MainTabBarRouter: MainTabBarRouterProtocol {
     
-    internal weak var mainTabBarController: UITabBarController!
+    internal weak var mainTabBarController: UIViewController!
     internal weak var rootRouter: MDRootRouter!
     
     deinit {

@@ -21,8 +21,7 @@ final class MDAppDelegate: UIResponder,
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let window: UIWindow = .init(frame: UIScreen.main.bounds)
-        window.makeKeyAndVisible()
+        let window: UIWindow = .init(frame: UIScreen.main.bounds)        
         self.rootWindow = window
         let dependencies: MDAppDependenciesProtocol = MDAppDependencies.init()
         self.dependencies = dependencies;

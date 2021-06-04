@@ -11,13 +11,12 @@ protocol MDAppDependenciesProtocol {
     func installRootViewControllerIntoWindow(_ window: UIWindow)
 }
 
-final class MDAppDependencies: NSObject,
-                               MDAppDependenciesProtocol {
+final class MDAppDependencies: MDAppDependenciesProtocol {
     
+    fileprivate var rootRouter: MDRootRouterProtocol!
     fileprivate var mainTabBarRouter: MainTabBarRouterProtocol!
     
-    override init() {
-        super.init()
+    init() {
         self.configureDependencies()
     }
     
@@ -41,7 +40,7 @@ fileprivate extension MDAppDependencies {
     func configureDependencies() {
         // Root Level Classes
         let rootRouter = MDRootRouter.init()
-        
+        self.rootRouter = rootRouter
         // Word List Module Classes
         let wordListDataProvider: WordListDataProviderProcotol = WordListDataProvider.init()
         var wordListDataManager: WordListDataManagerProtocol = WordListDataManager.init(dataProvider: wordListDataProvider)
@@ -105,9 +104,9 @@ fileprivate extension MDAppDependencies {
         // Main Tab Bar Module Classes
         let selectedMainTabBarItem: MainTabBarItem = .wordList
         let wordListModule: MainTabBarAddModuleModel = .init(mainTabBarItem: .wordList,
-                                                             viewController: wordListVC)
+                                                             viewController: UINavigationController.init(rootViewController: wordListVC))
         let settingsModule: MainTabBarAddModuleModel = .init(mainTabBarItem: .settings,
-                                                             viewController: settingsVC)
+                                                             viewController: UINavigationController.init(rootViewController: settingsVC) )
         let modules: [MainTabBarAddModuleModel] = [wordListModule, settingsModule]
         var mainTabBarInteractor: MainTabBarInteractorProtocol = MainTabBarInteractor.init(mainTabBarItems: modules.map({ $0.mainTabBarItem }),
                                                                                            modules: modules,
