@@ -22,7 +22,8 @@ extension SettingsModule {
         // Settings Module Classes
         let settingsDataProviderModel: SettingsDataProviderModel = .init(sections: [.init(sectionType: .list,
                                                                                           rows: [.init(rowType: .appearance,
-                                                                                                       titleText: KeysForTranslate.appearance.localized)])])
+                                                                                                       titleText: KeysForTranslate.appearance.localized,
+                                                                                                       appearanceType: Appearance.current.appearanceType)])])
         let settingsDataProvider: SettingsDataProviderProtocol = SettingsDataProvider.init(model: settingsDataProviderModel)
         var settingsDataManager: SettingsDataManagerProtocol = SettingsDataManager.init(dataProvider: settingsDataProvider)
         let settingsCollectionViewDelegate: SettingsCollectionViewDelegateProtocol = SettingsCollectionViewDelegate.init(dataProvider: settingsDataProvider)

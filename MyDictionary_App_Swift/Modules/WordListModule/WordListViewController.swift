@@ -14,6 +14,7 @@ final class WordListViewController: UIViewController {
         let flowLayout: UICollectionViewFlowLayout = .init()
         let collectionView = UICollectionView.init(frame: .zero,
                                                    collectionViewLayout: flowLayout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
     
@@ -96,14 +97,14 @@ fileprivate extension WordListViewController {
     }
     
     func configureView() {
-        self.view.backgroundColor = AppStyling.Color.systemWhite.color()
+        self.view.backgroundColor = AppStyling.viewBackgroundColor()
         self.title = KeysForTranslate.words.localized
     }
     
     func configureCollectionView() {
         self.collectionView.delegate = self.presenter.collectionViewDelegate
         self.collectionView.dataSource = self.presenter.collectionViewDataSource
-        self.collectionView.backgroundColor = AppStyling.Color.systemWhite.color()
+        self.collectionView.backgroundColor = AppStyling.viewBackgroundColor()
     }
     
 }

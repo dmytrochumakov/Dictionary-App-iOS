@@ -6,12 +6,13 @@
 
 import UIKit
 
-protocol AppearancePresenterInputProtocol {
+protocol AppearancePresenterInputProtocol: CollectionViewDelegateFlowLayoutPropertyProtocol,
+                                           CollectionViewDataSourcePropertyProtocol {
     
 }
 
 protocol AppearancePresenterOutputProtocol: AnyObject {
-    
+    func reloadRows(_ rows: [IndexPath : AppearanceRowModel])
 }
 
 protocol AppearancePresenterProtocol: AppearancePresenterInputProtocol,
@@ -19,17 +20,27 @@ protocol AppearancePresenterProtocol: AppearancePresenterInputProtocol,
     var presenterOutput: AppearancePresenterOutputProtocol? { get set }
 }
 
-final class AppearancePresenter: NSObject, AppearancePresenterProtocol {
+final class AppearancePresenter: NSObject,
+                                 AppearancePresenterProtocol {
     
     fileprivate let interactor: AppearanceInteractorInputProtocol
-    let router: AppearanceRouterProtocol
+    fileprivate let router: AppearanceRouterProtocol
+    
+    var collectionViewDelegate: UICollectionViewDelegateFlowLayout {
+        return interactor.appearanceCollectionViewDelegate
+    }
+    var collectionViewDataSource: UICollectionViewDataSource {
+        return interactor.appearanceCollectionViewDataSource
+    }
     
     internal weak var presenterOutput: AppearancePresenterOutputProtocol?
     
     init(interactor: AppearanceInteractorInputProtocol,
          router: AppearanceRouterProtocol) {
+        
         self.interactor = interactor
         self.router = router
+        
         super.init()
     }
     
@@ -41,5 +52,9 @@ final class AppearancePresenter: NSObject, AppearancePresenterProtocol {
 
 // MARK: - AppearanceInteractorOutputProtocol
 extension AppearancePresenter {
+    
+    func reloadRows(_ rows: [IndexPath : AppearanceRowModel]) {
+        presenterOutput?.reloadRows(rows)
+    }
     
 }

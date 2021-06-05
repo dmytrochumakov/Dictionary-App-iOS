@@ -7,24 +7,38 @@
 import UIKit
 
 protocol AppearanceInteractorInputProtocol {
-    
+    var appearanceCollectionViewDelegate: AppearanceCollectionViewDelegateProtocol { get }
+    var appearanceCollectionViewDataSource: AppearanceCollectionViewDataSourceProtocol { get }
 }
 
 protocol AppearanceInteractorOutputProtocol: AnyObject {
-    
+    func reloadRows(_ rows: [IndexPath : AppearanceRowModel])
 }
 
-protocol AppearanceInteractorProtocol: AppearanceInteractorInputProtocol, AppearanceDataManagerOutputProtocol {
+protocol AppearanceInteractorProtocol: AppearanceInteractorInputProtocol,
+                                       AppearanceDataManagerOutputProtocol {
     var interactorOutput: AppearanceInteractorOutputProtocol? { get set }
 }
 
-final class AppearanceInteractor: AppearanceInteractorProtocol {
-
+final class AppearanceInteractor: NSObject,
+                                  AppearanceInteractorProtocol {
+    
     fileprivate let dataManager: AppearanceDataManagerInputProtocol
+    internal let appearanceCollectionViewDelegate: AppearanceCollectionViewDelegateProtocol
+    internal let appearanceCollectionViewDataSource: AppearanceCollectionViewDataSourceProtocol
     internal weak var interactorOutput: AppearanceInteractorOutputProtocol?
     
-    init(dataManager: AppearanceDataManagerInputProtocol) {
+    init(dataManager: AppearanceDataManagerInputProtocol,
+         appearanceCollectionViewDelegate: AppearanceCollectionViewDelegateProtocol,
+         appearanceCollectionViewDataSource: AppearanceCollectionViewDataSourceProtocol) {
+        
         self.dataManager = dataManager
+        self.appearanceCollectionViewDelegate = appearanceCollectionViewDelegate
+        self.appearanceCollectionViewDataSource = appearanceCollectionViewDataSource
+        
+        super.init()
+        subscribe()
+        
     }
     
     deinit {
@@ -35,5 +49,24 @@ final class AppearanceInteractor: AppearanceInteractorProtocol {
 
 // MARK: - AppearanceDataManagerOutputProtocol
 extension AppearanceInteractor {
+    
+    func rowsForUpdate(_ rows: [IndexPath : AppearanceRowModel]) {
+        interactorOutput?.reloadRows(rows)
+    }
+    
+}
+
+// MARK: - Subscribe
+fileprivate extension AppearanceInteractor {
+    
+    func subscribe() {
+        didSelectItemAtIndexPathSubscribe()
+    }
+    
+    func didSelectItemAtIndexPathSubscribe() {
+        appearanceCollectionViewDelegate.didSelectItemAtIndexPath = { [weak self] (indexPath) in
+            self?.dataManager.didSelectItemAtIndexPath(indexPath)
+        }
+    }
     
 }

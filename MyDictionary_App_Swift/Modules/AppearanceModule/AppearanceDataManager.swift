@@ -7,11 +7,11 @@
 import Foundation
 
 protocol AppearanceDataManagerInputProtocol {
-    
+    func didSelectItemAtIndexPath(_ indexPath: IndexPath)
 }
 
 protocol AppearanceDataManagerOutputProtocol: AnyObject {
-    
+    func rowsForUpdate(_ rows: [IndexPath : AppearanceRowModel])
 }
 
 protocol AppearanceDataManagerProtocol: AppearanceDataManagerInputProtocol {
@@ -30,6 +30,22 @@ final class AppearanceDataManager: AppearanceDataManagerProtocol {
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension AppearanceDataManager {
+    
+    func didSelectItemAtIndexPath(_ indexPath: IndexPath) {
+        var rowsForUpdate: [IndexPath : AppearanceRowModel] = [:]
+        dataProvider.rows.forEach { row in
+            rowsForUpdate.updateValue(.init(titleText: row.titleText,
+                                            rowType: row.rowType,
+                                            isSelected: indexPath.row == row.rowType.rawValue),
+                                      forKey: .init(item: row.rowType.rawValue,
+                                                    section: .zero))
+        }
+        dataManagerOutput?.rowsForUpdate(rowsForUpdate)
     }
     
 }
