@@ -97,7 +97,7 @@ fileprivate extension SettingsCell {
     }
     
     func configureView() {
-        self.backgroundColor = AppStyling.viewBackgroundColor()
+        self.backgroundColor = AppStyling.cellBackgroundColor()
     }
     
     func configureTitleLabel() {
