@@ -24,6 +24,10 @@ final class Appearance: NSObject {
         self.didChangeAppearanceObservable = .init(value: self.internalAppearanceType)
     }
     
+    deinit {
+        didChangeAppearanceObservable.removeObserver(self)
+    }
+    
 }
 
 // MARK: - Update Appearance
