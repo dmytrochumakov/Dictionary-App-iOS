@@ -51,6 +51,7 @@
 		22B2268D266CDE93007AB292 /* ConfigurationAppearanceCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B2268C266CDE93007AB292 /* ConfigurationAppearanceCellProtocol.swift */; };
 		22B2268F266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B2268E266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift */; };
 		22B22691266CF866007AB292 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B22690266CF866007AB292 /* UIViewController+Extension.swift */; };
+		22B22693266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B22692266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift */; };
 		22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD9999266A480D0063FEFC /* SettingsModule.swift */; };
 		22BD999C266A48D60063FEFC /* MainTabBarModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999B266A48D60063FEFC /* MainTabBarModule.swift */; };
 		22BD999E266A4A2C0063FEFC /* ModuleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999D266A4A2C0063FEFC /* ModuleProtocol.swift */; };
@@ -158,6 +159,7 @@
 		22B2268C266CDE93007AB292 /* ConfigurationAppearanceCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationAppearanceCellProtocol.swift; sourceTree = "<group>"; };
 		22B2268E266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationAppearanceControllerProtocol.swift; sourceTree = "<group>"; };
 		22B22690266CF866007AB292 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		22B22692266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceTypePropertyProtocol.swift; sourceTree = "<group>"; };
 		22BD9999266A480D0063FEFC /* SettingsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModule.swift; sourceTree = "<group>"; };
 		22BD999B266A48D60063FEFC /* MainTabBarModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarModule.swift; sourceTree = "<group>"; };
 		22BD999D266A4A2C0063FEFC /* ModuleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleProtocol.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				22B22688266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift */,
 				22B2268C266CDE93007AB292 /* ConfigurationAppearanceCellProtocol.swift */,
 				22B2268E266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift */,
+				22B22692266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -845,6 +848,7 @@
 				226FEE89266BB2130044A5F9 /* AppearanceRowType.swift in Sources */,
 				2299016C2668EC3400D8C74E /* AppearanceDataProvider.swift in Sources */,
 				22E2B4E02664E43B00978E62 /* SettingsInteractor.swift in Sources */,
+				22B22693266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift in Sources */,
 				22E2B4EC2664EE1400978E62 /* FillWithModelProtocol.swift in Sources */,
 				22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */,
 				2299016A2668EC3400D8C74E /* AppearanceViewController.swift in Sources */,

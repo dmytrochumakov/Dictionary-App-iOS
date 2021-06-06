@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct AppearanceRowModel {
+struct AppearanceRowModel: AppearanceTypePropertyProtocol {
     
     let titleText: String
     let rowType: AppearanceRowType
