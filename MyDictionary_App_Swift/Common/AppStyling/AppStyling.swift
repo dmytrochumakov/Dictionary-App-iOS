@@ -109,6 +109,23 @@ extension AppStyling {
         }
     }
     
+    /// - Parameter fromAppearanceType type: Appearance.current.appearanceType by default
+    static func cellBackgroundColor(fromAppearanceType type: AppearanceType = Appearance.current.appearanceType) -> UIColor {
+        switch type {
+        case .automatic:
+            switch Self.automaticAppearanceType(fromUserInterfaceStyle: UITraitCollection.current.userInterfaceStyle) {
+            case .dark:
+                return self.viewBackgroundColor(fromAppearanceType: .dark)
+            default:
+                return self.viewBackgroundColor(fromAppearanceType: .light)
+            }
+        case .light:
+            return Color.systemWhite.color()
+        case .dark:
+            return Color.systemGray.color()
+        }
+    }
+    
 }
 
 fileprivate extension AppStyling {
