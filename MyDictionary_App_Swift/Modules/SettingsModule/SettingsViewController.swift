@@ -58,6 +58,14 @@ extension SettingsViewController: SettingsPresenterOutputProtocol {
                                     animated: true)
     }
     
+    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
+        configureViewBackgroundColor(fromAppearanceType: newValue)
+        configureCollectionViewBackgroundColor(fromAppearanceType: newValue,
+                                               collectionView: collectionView)
+        configureNavigationBar(fromAppearanceType: newValue)
+        configureTabBar(fromAppearanceType: newValue)
+    }
+    
 }
 
 // MARK: - Add Views

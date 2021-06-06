@@ -12,7 +12,8 @@ protocol SettingsPresenterInputProtocol: CollectionViewDelegateFlowLayoutPropert
 }
 
 protocol SettingsPresenterOutputProtocol: AnyObject,
-                                          ScrollToTopProtocol {
+                                          ScrollToTopProtocol,
+                                          AppearanceHasBeenUpdatedProtocol {
     
 }
 
@@ -54,6 +55,10 @@ extension SettingsPresenter {
     
     func didSelectAppearanceRow() {
         router.showAppearanceList()        
+    }
+    
+    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
+        self.presenterOutput?.appearanceHasBeenUpdated(newValue)
     }
     
 }

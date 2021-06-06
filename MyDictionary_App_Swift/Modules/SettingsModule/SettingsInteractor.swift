@@ -11,7 +11,8 @@ protocol SettingsInteractorInputProtocol {
     var collectionViewDataSource: SettingsCollectionViewDataSourceProtocol { get }
 }
 
-protocol SettingsInteractorOutputProtocol: AnyObject {
+protocol SettingsInteractorOutputProtocol: AnyObject,
+                                           AppearanceHasBeenUpdatedProtocol {
     func didSelectAppearanceRow()
 }
 
@@ -44,6 +45,7 @@ final class SettingsInteractor: NSObject,
     
     deinit {
         debugPrint(#function, Self.self)
+        unsubscribe()
     }
     
 }
@@ -52,6 +54,7 @@ final class SettingsInteractor: NSObject,
 fileprivate extension SettingsInteractor {
     
     func subscribe() {
+        didChangeAppearanceObservableSubscribe()
         didSelectItemAtIndexPathSubscribe()
     }
     
@@ -65,6 +68,27 @@ fileprivate extension SettingsInteractor {
                 break
             }
         }
+    }
+    
+    func didChangeAppearanceObservableSubscribe() {
+        Appearance
+            .current
+            .didChangeAppearanceObservable
+            .addObserver(self) { [weak self] (value) in
+                self?.interactorOutput?.appearanceHasBeenUpdated(value)
+            }
+    }
+    
+}
+
+// MARK: - Unsubscribe
+fileprivate extension SettingsInteractor {
+    
+    func unsubscribe() {
+        Appearance
+            .current
+            .didChangeAppearanceObservable
+            .removeObserver(self)
     }
     
 }
