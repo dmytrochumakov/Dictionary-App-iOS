@@ -7,6 +7,7 @@
 import Foundation
 
 protocol AppearanceDataManagerInputProtocol {
+    var dataProvider: AppearanceDataProviderProtocol { get }
     func didSelectItemAtIndexPath(_ indexPath: IndexPath)
 }
 
@@ -15,7 +16,6 @@ protocol AppearanceDataManagerOutputProtocol: AnyObject {
 }
 
 protocol AppearanceDataManagerProtocol: AppearanceDataManagerInputProtocol {
-    var dataProvider: AppearanceDataProviderProtocol { get }
     var dataManagerOutput: AppearanceDataManagerOutputProtocol? { get set }
 }
 

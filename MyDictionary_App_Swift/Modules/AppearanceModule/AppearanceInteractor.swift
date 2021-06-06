@@ -65,8 +65,20 @@ fileprivate extension AppearanceInteractor {
     
     func didSelectItemAtIndexPathSubscribe() {
         appearanceCollectionViewDelegate.didSelectItemAtIndexPath = { [weak self] (indexPath) in
-            self?.dataManager.didSelectItemAtIndexPath(indexPath)
+            guard let self = self else { return }
+            let appearanceType = self.dataManager.dataProvider.row(atIndexPath: indexPath).rowType.appearanceType
+            self.dataManager.didSelectItemAtIndexPath(indexPath)
+            self.updateAppearance(appearanceType)
         }
+    }
+    
+}
+
+// MARK: - Update Appearance
+fileprivate extension AppearanceInteractor {
+    
+    func updateAppearance(_ newValue: AppearanceType) {
+        Appearance.current.updateAppearance(newValue)
     }
     
 }
