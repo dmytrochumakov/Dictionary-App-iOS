@@ -115,9 +115,9 @@ extension AppStyling {
         case .automatic:
             switch Self.automaticAppearanceType(fromUserInterfaceStyle: UITraitCollection.current.userInterfaceStyle) {
             case .dark:
-                return self.viewBackgroundColor(fromAppearanceType: .dark)
+                return self.cellBackgroundColor(fromAppearanceType: .dark)
             default:
-                return self.viewBackgroundColor(fromAppearanceType: .light)
+                return self.cellBackgroundColor(fromAppearanceType: .light)
             }
         case .light:
             return Color.systemWhite.color()
