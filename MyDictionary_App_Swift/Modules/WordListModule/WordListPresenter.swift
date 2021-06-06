@@ -14,7 +14,8 @@ protocol WordListPresenterInputProtocol: CollectionViewDelegateFlowLayoutPropert
 
 protocol WordListPresenterOutputProtocol: AnyObject,
                                           ReloadDataProtocol,
-                                          ScrollToTopProtocol {
+                                          ScrollToTopProtocol,
+                                          AppearanceHasBeenUpdatedProtocol {
     
 }
 
@@ -54,6 +55,10 @@ final class WordListPresenter: NSObject,
 
 // MARK: - WordListInteractorOutputProtocol
 extension WordListPresenter {
+    
+    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
+        self.presenterOutput?.appearanceHasBeenUpdated(newValue)
+    }
     
 }
 
