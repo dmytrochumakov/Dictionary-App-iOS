@@ -49,21 +49,7 @@ extension Observable {
         self.accessQueue.async(flags: .barrier) {
             self.observers.removeValue(forKey: id)
         }
-    }
-    
-    func removeObservers(_ observer: AnyObject) {
-        let id = ObjectIdentifier(observer)
-        let filterObservers = {
-            self.accessQueue.sync {
-                return self.observers.filter({ $0.key == id })
-            }
-        }
-        filterObservers().forEach { (id, _) in
-            self.accessQueue.async(flags: .barrier) {
-                self.observers.removeValue(forKey: id)
-            }
-        }
-    }
+    }        
     
 }
 
