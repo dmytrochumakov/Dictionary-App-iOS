@@ -28,18 +28,3 @@ extension AppearanceRowType: RowTypeProtocol {
     }
     
 }
-
-extension AppearanceRowType {
-    
-    var appearanceType: AppearanceType {
-        switch self {
-        case .automatic:
-            return .automatic
-        case .light:
-            return .light
-        case .dark:
-            return .dark
-        }
-    }
-    
-}

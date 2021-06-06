@@ -9,6 +9,7 @@ import Foundation
 protocol AppearanceDataManagerInputProtocol {
     var dataProvider: AppearanceDataProviderProtocol { get }
     func didSelectItemAtIndexPath(_ indexPath: IndexPath)
+    func appearanceType(atIndexPath indexPath: IndexPath) -> AppearanceType
 }
 
 protocol AppearanceDataManagerOutputProtocol: AnyObject {
@@ -42,11 +43,30 @@ extension AppearanceDataManager {
             rowsForUpdate.updateValue(.init(titleText: row.titleText,
                                             rowType: row.rowType,
                                             isSelected: indexPath.row == row.rowType.rawValue,
-                                            appearanceType: dataProvider.row(atIndexPath: indexPath).rowType.appearanceType),
+                                            appearanceType: appearanceType(atIndexPath: indexPath)),
                                       forKey: .init(item: row.rowType.rawValue,
                                                     section: .zero))
         }
         dataManagerOutput?.rowsForUpdate(rowsForUpdate)
+    }
+    
+}
+
+extension AppearanceDataManager {
+    
+    func appearanceType(atIndexPath indexPath: IndexPath) -> AppearanceType {
+        return Self.appearanceType(fromAppearanceRowType: dataProvider.row(atIndexPath: indexPath).rowType)
+    }
+    
+    static func appearanceType(fromAppearanceRowType type: AppearanceRowType) -> AppearanceType {
+        switch type {
+        case .automatic:
+            return .automatic
+        case .light:
+            return .light
+        case .dark:
+            return .dark
+        }
     }
     
 }

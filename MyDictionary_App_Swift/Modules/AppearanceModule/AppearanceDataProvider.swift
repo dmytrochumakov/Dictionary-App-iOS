@@ -47,26 +47,35 @@ fileprivate extension AppearanceDataProvider {
     static func configuredRows(fromAppearanceType appearanceType: AppearanceType) -> [AppearanceRowModel] {
         var rows: [AppearanceRowModel] = []
         AppearanceRowType.allCases.forEach { rowType in
-            switch rowType {
-            case .automatic:
-                rows.append(.init(titleText: KeysForTranslate.automatic.localized,
-                                  rowType: rowType,
-                                  isSelected: true,
-                                  appearanceType: appearanceType))
-            case .light:
-                rows.append(.init(titleText: KeysForTranslate.light.localized,
-                                  rowType: rowType,
-                                  isSelected: false,
-                                  appearanceType: appearanceType))
-            case .dark:
-                rows.append(.init(titleText: KeysForTranslate.dark.localized,
-                                  rowType: rowType,
-                                  isSelected: false,
-                                  appearanceType: appearanceType))
-            }
+            rows.append(.init(titleText: Self.configuredTitleText(rowType: rowType),
+                              rowType: rowType,
+                              isSelected: Self.appearanceRowType(fromAppearanceType: appearanceType) == rowType,
+                              appearanceType: appearanceType))
             
         }
         return rows
+    }
+    
+    static func configuredTitleText(rowType: AppearanceRowType) -> String {
+        switch rowType {
+        case .automatic:
+            return KeysForTranslate.automatic.localized
+        case .light:
+            return KeysForTranslate.light.localized
+        case .dark:
+            return KeysForTranslate.dark.localized
+        }
+    }
+    
+    static func appearanceRowType(fromAppearanceType appearanceType: AppearanceType) -> AppearanceRowType{
+        switch appearanceType {
+        case .automatic:
+            return .automatic
+        case .light:
+            return .light
+        case .dark:
+            return .dark
+        }
     }
     
 }
