@@ -7,15 +7,25 @@
 import UIKit
 
 protocol SettingsRouterProtocol {
-    var presenter: UIViewController? { get set }
+    var settingsViewController: UIViewController! { get set }
+    func showAppearanceList()
 }
 
 final class SettingsRouter: SettingsRouterProtocol {
     
-    internal weak var presenter: UIViewController?
+    internal var appearanceRouter: AppearanceRouterProtocol!
+    internal weak var settingsViewController: UIViewController!    
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension SettingsRouter {
+    
+    func showAppearanceList() {        
+        settingsViewController.navigationController?.pushViewController(AppearanceModule.init().module, animated: true)
     }
     
 }

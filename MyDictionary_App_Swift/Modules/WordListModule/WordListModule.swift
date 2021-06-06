@@ -2,46 +2,47 @@
 //  WordListModule.swift
 //  MyDictionary_App_Swift
 //
-//  Created by Dmytro Chumakov on 16.05.2021.
+//  Created by Dmytro Chumakov on 04.06.2021.
 //
 
 import UIKit
 
-final class WordListModule {
+protocol WordListModuleProtocol: ModuleProtocol {
     
-    let sender: Any?
+}
+
+struct WordListModuleSender {
     
-    init(sender: Any?) {
-        self.sender = sender
-    }
-    
-    deinit {
-        debugPrint(#function, Self.self)
-    }
+}
+
+final class WordListModule: WordListModuleProtocol {
     
 }
 
 extension WordListModule {
     
     var module: UIViewController {
-        let dataProvider: WordListDataProviderProcotol = WordListDataProvider.init()
-        var dataManager: WordListDataManagerProtocol = WordListDataManager.init(dataProvider: dataProvider)
-        let collectionViewDelegate: WordListCollectionViewDelegateProtocol = WordListCollectionViewDelegate.init(dataProvider: dataProvider)
-        let collectionViewDataSource: WordListCollectionViewDataSourceProtocol = WordListCollectionViewDataSource.init(dataProvider: dataProvider)
+        // Word List Module Classes
+        let wordListDataProvider: WordListDataProviderProcotol = WordListDataProvider.init()
+        var wordListDataManager: WordListDataManagerProtocol = WordListDataManager.init(dataProvider: wordListDataProvider)
+        let wordListCollectionViewDelegate: WordListCollectionViewDelegateProtocol = WordListCollectionViewDelegate.init(dataProvider: wordListDataProvider)
+        let wordListCollectionViewDataSource: WordListCollectionViewDataSourceProtocol = WordListCollectionViewDataSource.init(dataProvider: wordListDataProvider)
         
-        let interactor: WordListInteractorProtocol = WordListInteractor.init(dataManager: dataManager,
-                                                                             collectionViewDelegate: collectionViewDelegate,
-                                                                             collectionViewDataSource: collectionViewDataSource)
-        var router: WordListRouterProtocol = WordListRouter.init()
-        let presenter: WordListPresenterProtocol = WordListPresenter.init(interactor: interactor, router: router)
-        let vc = WordListViewController.init(presenter: presenter)
+        let wordListInteractor: WordListInteractorProtocol = WordListInteractor.init(dataManager: wordListDataManager,
+                                                                                     collectionViewDelegate: wordListCollectionViewDelegate,
+                                                                                     collectionViewDataSource: wordListCollectionViewDataSource)
+        var wordListRouter: WordListRouterProtocol = WordListRouter.init()
+        let wordListPresenter: WordListPresenterProtocol = WordListPresenter.init(interactor: wordListInteractor,
+                                                                                  router: wordListRouter)
+        let wordListVC = WordListViewController.init(presenter: wordListPresenter)
         
-        presenter.presenterOutput = vc
-        interactor.interactorOutput = presenter
-        dataManager.dataManagerOutput = interactor
-        router.presenter = vc
-        
-        return vc 
+        // Word List Module
+        wordListPresenter.presenterOutput = wordListVC
+        wordListInteractor.interactorOutput = wordListPresenter
+        wordListDataManager.dataManagerOutput = wordListInteractor
+        wordListRouter.wordListViewController = wordListVC
+        //
+        return wordListVC
     }
     
 }

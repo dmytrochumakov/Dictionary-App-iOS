@@ -1,15 +1,13 @@
 //
-//  WordListViewController.swift
+//  AppearanceViewController.swift
 //  MyDictionary_App_Swift
 //
-//  Created by Dmytro Chumakov on 16.05.2021.
-//
+//  Created Dmytro Chumakov on 03.06.2021.
 
 import UIKit
 
-final class WordListViewController: UIViewController {
+final class AppearanceViewController: UIViewController {
     
-    fileprivate let presenter: WordListPresenterInputProtocol
     fileprivate let collectionView: UICollectionView = {
         let flowLayout: UICollectionViewFlowLayout = .init()
         let collectionView = UICollectionView.init(frame: .zero,
@@ -18,7 +16,9 @@ final class WordListViewController: UIViewController {
         return collectionView
     }()
     
-    init(presenter: WordListPresenterInputProtocol) {
+    let presenter: AppearancePresenterInputProtocol
+    
+    init(presenter: AppearancePresenterInputProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
@@ -48,15 +48,13 @@ final class WordListViewController: UIViewController {
     
 }
 
-// MARK: - WordListPresenterOutputProtocol
-extension WordListViewController: WordListPresenterOutputProtocol {
+// MARK: - AppearancePresenterOutputProtocol
+extension AppearanceViewController: AppearancePresenterOutputProtocol {
     
-    func reloadData() {
-        
-    }
-    
-    func scrollToTop() {
-        
+    func reloadRows(_ rows: [IndexPath : AppearanceRowModel]) {
+        rows.forEach { (indexPath, model) in
+            (collectionView.cellForItem(at: indexPath) as! AppearanceCell).fillWithModel(model)
+        }
     }
     
     func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
@@ -70,7 +68,7 @@ extension WordListViewController: WordListPresenterOutputProtocol {
 }
 
 // MARK: - Add Views
-fileprivate extension WordListViewController {
+fileprivate extension AppearanceViewController {
     
     func addViews() {
         addCollectionView()
@@ -83,7 +81,7 @@ fileprivate extension WordListViewController {
 }
 
 // MARK: - Add Constraints
-fileprivate extension WordListViewController {
+fileprivate extension AppearanceViewController {
     
     func addConstraints() {
         addCollectionConstraints()
@@ -97,7 +95,7 @@ fileprivate extension WordListViewController {
 }
 
 // MARK: - Configure UI
-fileprivate extension WordListViewController {
+fileprivate extension AppearanceViewController {
     
     func configureUI() {
         configureView()
@@ -108,7 +106,7 @@ fileprivate extension WordListViewController {
     
     func configureView() {
         self.configureViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType)
-        self.title = KeysForTranslate.words.localized
+        self.title = KeysForTranslate.appearance.localized
     }
     
     func configureCollectionView() {
@@ -116,6 +114,7 @@ fileprivate extension WordListViewController {
         self.collectionView.dataSource = self.presenter.collectionViewDataSource
         self.configureCollectionViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType,
                                                     collectionView: collectionView)
-    }
-    
+        self.collectionView.register(AppearanceCell.self)
+    }        
+            
 }

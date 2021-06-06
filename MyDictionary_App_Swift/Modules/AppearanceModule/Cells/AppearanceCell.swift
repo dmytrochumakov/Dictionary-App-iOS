@@ -1,21 +1,21 @@
 //
-//  SettingsCell.swift
+//  AppearanceCell.swift
 //  MyDictionary_App_Swift
 //
-//  Created by Dmytro Chumakov on 31.05.2021.
+//  Created by Dmytro Chumakov on 05.06.2021.
 //
 
 import UIKit
 
-final class SettingsCell: UICollectionViewCell,
-                          ReuseIdentifierProtocol {
+final class AppearanceCell: UICollectionViewCell,
+                            ReuseIdentifierProtocol {
     
     static let height: CGFloat = 40
     
     fileprivate let titleLabel: UILabel = {
-        let label: UILabel = .init()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+        let titleLabel: UILabel = .init()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        return titleLabel
     }()
     
     override init(frame: CGRect) {
@@ -36,11 +36,11 @@ final class SettingsCell: UICollectionViewCell,
 }
 
 // MARK: - FillWithModelProtocol
-extension SettingsCell: FillWithModelProtocol {
+extension AppearanceCell: FillWithModelProtocol {
     
-    typealias Model = SettingsRowModel
+    typealias Model = AppearanceRowModel
     
-    func fillWithModel(_ model: SettingsRowModel) {
+    func fillWithModel(_ model: AppearanceRowModel) {
         self.updateSelfView(model)
         self.updateTitleLabel(model)
     }
@@ -48,7 +48,7 @@ extension SettingsCell: FillWithModelProtocol {
 }
 
 // MARK: - Add Views
-fileprivate extension SettingsCell {
+fileprivate extension AppearanceCell {
     
     func addViews() {
         addTitleLabel()
@@ -61,7 +61,7 @@ fileprivate extension SettingsCell {
 }
 
 // MARK: - Add Constraints
-fileprivate extension SettingsCell {
+fileprivate extension AppearanceCell {
     
     func addConstraints() {
         addTitleLabelConstraints()
@@ -85,7 +85,7 @@ fileprivate extension SettingsCell {
 }
 
 // MARK: - Configure UI
-fileprivate extension SettingsCell {
+fileprivate extension AppearanceCell {
     
     func configureUI() {
         configureView()
@@ -97,7 +97,7 @@ fileprivate extension SettingsCell {
     }
     
     func configureTitleLabel() {
-        self.titleLabel.font = AppStyling.Font.systemFont.font()
+        self.updateTitleLabelFont(isSelected: false)
         self.titleLabel.textColor = ConfigurationAppearanceCell.labelTextColor()
         self.titleLabel.textAlignment = .left
         self.titleLabel.numberOfLines = .zero
@@ -106,15 +106,33 @@ fileprivate extension SettingsCell {
 }
 
 // MARK: - Update
-fileprivate extension SettingsCell {
+fileprivate extension AppearanceCell {
     
-    func updateSelfView(_ model: SettingsRowModel) {
+    func updateSelfView(_ model: AppearanceRowModel) {
         self.backgroundColor = ConfigurationAppearanceCell.viewBackgroundColor(fromAppearanceType: model.appearanceType)
     }
     
-    func updateTitleLabel(_ model: SettingsRowModel) {
+    func updateTitleLabel(_ model: AppearanceRowModel) {
         self.titleLabel.textColor = ConfigurationAppearanceCell.labelTextColor(fromAppearanceType: model.appearanceType)
         self.titleLabel.text = model.titleText
+        self.updateTitleLabelFont(isSelected: model.isSelected)
+    }
+    
+    func updateTitleLabelFont(isSelected: Bool) {
+        self.titleLabel.font = self.titleLabelFont(isSelected: isSelected)
+    }
+    
+}
+
+// MARK: - Title Label Font
+fileprivate extension AppearanceCell {
+    
+    func titleLabelFont(isSelected: Bool) -> UIFont {
+        if (isSelected) {
+            return AppStyling.Font.boldSystemFont.font()
+        } else {
+            return AppStyling.Font.systemFont.font()
+        }
     }
     
 }

@@ -14,7 +14,8 @@ protocol WordListPresenterInputProtocol: CollectionViewDelegateFlowLayoutPropert
 
 protocol WordListPresenterOutputProtocol: AnyObject,
                                           ReloadDataProtocol,
-                                          ScrollToTopProtocol {
+                                          ScrollToTopProtocol,
+                                          AppearanceHasBeenUpdatedProtocol {
     
 }
 
@@ -55,18 +56,17 @@ final class WordListPresenter: NSObject,
 // MARK: - WordListInteractorOutputProtocol
 extension WordListPresenter {
     
+    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
+        self.presenterOutput?.appearanceHasBeenUpdated(newValue)
+    }
+    
 }
 
 // MARK: - Subscribe
 fileprivate extension WordListPresenter {
     
     func subscribe() {
-        NotificationCenter
-            .default
-            .addObserver(self,
-                         selector: #selector(mainTabBarItemDoubleTapAction),
-                         name: .mainTabBarItemDoubleTap,
-                         object: nil)
+        
     }
     
 }

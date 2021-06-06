@@ -7,13 +7,14 @@
 import UIKit
 
 final class SettingsViewController: UIViewController {
-
+    
     fileprivate let presenter: SettingsPresenterInputProtocol
-
+    
     fileprivate let collectionView: UICollectionView = {
         let flowLayout: UICollectionViewFlowLayout = .init()
         let collectionView = UICollectionView.init(frame: .zero,
                                                    collectionViewLayout: flowLayout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
     
@@ -44,17 +45,31 @@ final class SettingsViewController: UIViewController {
         super.viewDidLayoutSubviews()
         addConstraints()
     }
-
+    
 }
 
 // MARK: - SettingsPresenterOutputProtocol
 extension SettingsViewController: SettingsPresenterOutputProtocol {
-       
+    
     func scrollToTop() {
         collectionView.scrollToItem(at: .init(item: .zero,
                                               section: .zero),
                                     at: .top,
                                     animated: true)
+    }
+    
+    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
+        configureViewBackgroundColor(fromAppearanceType: newValue)
+        configureCollectionViewBackgroundColor(fromAppearanceType: newValue,
+                                               collectionView: collectionView)
+        configureNavigationBar(fromAppearanceType: newValue)
+        configureTabBar(fromAppearanceType: newValue)
+    }
+
+    func reloadRows(_ rows: [IndexPath : SettingsRowModel]) {
+        rows.forEach { (indexPath, rowModel) in
+            (collectionView.cellForItem(at: indexPath) as! SettingsCell).fillWithModel(rowModel)
+        }
     }
     
 }
@@ -92,10 +107,12 @@ fileprivate extension SettingsViewController {
     func configureUI() {
         configureView()
         configureCollectionView()
+        configureNavigationBar(fromAppearanceType: Appearance.current.appearanceType)
+        configureTabBar(fromAppearanceType: Appearance.current.appearanceType)
     }
     
     func configureView() {
-        self.view.backgroundColor = AppStyling.Color.systemWhite.color()
+        self.view.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor()
         self.title = KeysForTranslate.settings.localized
     }
     
@@ -103,7 +120,7 @@ fileprivate extension SettingsViewController {
         self.collectionView.delegate = self.presenter.collectionViewDelegate
         self.collectionView.dataSource = self.presenter.collectionViewDataSource
         self.collectionView.register(SettingsCell.self)
-        self.collectionView.backgroundColor = AppStyling.Color.systemWhite.color()
+        self.collectionView.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor()
     }
-
+    
 }

@@ -12,8 +12,9 @@ protocol SettingsPresenterInputProtocol: CollectionViewDelegateFlowLayoutPropert
 }
 
 protocol SettingsPresenterOutputProtocol: AnyObject,
-                                          ScrollToTopProtocol {
-    
+                                          ScrollToTopProtocol,
+                                          AppearanceHasBeenUpdatedProtocol {
+    func reloadRows(_ rows: [IndexPath : SettingsRowModel])
 }
 
 protocol SettingsPresenterProtocol: SettingsPresenterInputProtocol,
@@ -53,7 +54,15 @@ final class SettingsPresenter: NSObject,
 extension SettingsPresenter {
     
     func didSelectAppearanceRow() {
-        debugPrint(Self.self, #function)
+        router.showAppearanceList()        
+    }
+    
+    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
+        self.presenterOutput?.appearanceHasBeenUpdated(newValue)
+    }
+    
+    func reloadRows(_ rows: [IndexPath : SettingsRowModel]) {
+        self.presenterOutput?.reloadRows(rows)
     }
     
 }
