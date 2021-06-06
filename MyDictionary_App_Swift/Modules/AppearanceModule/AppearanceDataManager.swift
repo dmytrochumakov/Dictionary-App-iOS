@@ -42,7 +42,7 @@ extension AppearanceDataManager {
             rowsForUpdate.updateValue(.init(titleText: row.titleText,
                                             rowType: row.rowType,
                                             isSelected: indexPath.row == row.rowType.rawValue,
-                                            configurationAppearanceCell: ConfigurationAppearanceCellModel.init(appearanceType: dataProvider.row(atIndexPath: indexPath).rowType.appearanceType)),
+                                            appearanceType: dataProvider.row(atIndexPath: indexPath).rowType.appearanceType),
                                       forKey: .init(item: row.rowType.rawValue,
                                                     section: .zero))
         }

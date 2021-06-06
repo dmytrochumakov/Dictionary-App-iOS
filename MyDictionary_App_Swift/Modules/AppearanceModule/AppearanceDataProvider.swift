@@ -45,7 +45,6 @@ extension AppearanceDataProvider {
 fileprivate extension AppearanceDataProvider {
     
     static func configuredRows(fromAppearanceType appearanceType: AppearanceType) -> [AppearanceRowModel] {
-        let configurationAppearanceCell = ConfigurationAppearanceCellModel.init(appearanceType: appearanceType)
         var rows: [AppearanceRowModel] = []
         AppearanceRowType.allCases.forEach { rowType in
             switch rowType {
@@ -53,17 +52,17 @@ fileprivate extension AppearanceDataProvider {
                 rows.append(.init(titleText: KeysForTranslate.automatic.localized,
                                   rowType: rowType,
                                   isSelected: true,
-                                  configurationAppearanceCell: configurationAppearanceCell))
+                                  appearanceType: appearanceType))
             case .light:
                 rows.append(.init(titleText: KeysForTranslate.light.localized,
                                   rowType: rowType,
                                   isSelected: false,
-                                  configurationAppearanceCell: configurationAppearanceCell))
+                                  appearanceType: appearanceType))
             case .dark:
                 rows.append(.init(titleText: KeysForTranslate.dark.localized,
                                   rowType: rowType,
                                   isSelected: false,
-                                  configurationAppearanceCell: configurationAppearanceCell))
+                                  appearanceType: appearanceType))
             }
             
         }

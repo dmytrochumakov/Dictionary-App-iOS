@@ -7,20 +7,52 @@
 
 import UIKit
 
-protocol ConfigurationAppearanceCellProtocol: ConfigureAppearanceCellViewBackgroundColor,
+protocol ConfigurationAppearanceCellProtocol: ConfigureAppearanceViewBackgroundColor,
                                               ConfigureAppearanceCellLabelTextColor {
     
     
 }
 
-struct ConfigurationAppearanceCellModel: ConfigurationAppearanceCellProtocol {
+struct ConfigurationAppearanceCell: ConfigurationAppearanceCellProtocol {
     
-    var cellViewBackgroundColor: UIColor
-    var labelTextColor: UIColor
     
-    init(appearanceType: AppearanceType) {
-        self.cellViewBackgroundColor = AppStyling.cellBackgroundColor(fromAppearanceType: appearanceType)
-        self.labelTextColor = AppStyling.labelTextColor(fromAppearanceType: appearanceType)
+}
+
+// MARK: - Configured
+extension ConfigurationAppearanceCell {
+    
+    /// - Parameter fromAppearanceType type: Appearance.current.appearanceType by default
+    static func viewBackgroundColor(fromAppearanceType type: AppearanceType = Appearance.current.appearanceType) -> UIColor {
+        switch type {
+        case .automatic:
+            switch AppStyling.automaticAppearanceType(fromUserInterfaceStyle: UITraitCollection.current.userInterfaceStyle) {
+            case .dark:
+                return self.viewBackgroundColor(fromAppearanceType: .dark)
+            default:
+                return self.viewBackgroundColor(fromAppearanceType: .light)
+            }
+        case .light:
+            return AppStyling.Color.systemWhite.color()
+        case .dark:
+            return AppStyling.Color.systemGray.color()
+        }
+    }
+    
+    /// - Parameter fromAppearanceType type: Appearance.current.appearanceType by default
+    static func labelTextColor(fromAppearanceType type: AppearanceType = Appearance.current.appearanceType) -> UIColor {
+        switch type {
+        case .automatic:
+            switch AppStyling.automaticAppearanceType(fromUserInterfaceStyle: UITraitCollection.current.userInterfaceStyle) {
+            case .dark:
+                return self.labelTextColor(fromAppearanceType: .dark)
+            default:
+                return self.labelTextColor(fromAppearanceType: .light)
+            }
+        case .light:
+            return AppStyling.Color.systemBlack.color()
+        case .dark:
+            return AppStyling.Color.systemWhite.color()
+        }
     }
     
 }

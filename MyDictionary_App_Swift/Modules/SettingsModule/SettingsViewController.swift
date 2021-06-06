@@ -7,9 +7,9 @@
 import UIKit
 
 final class SettingsViewController: UIViewController {
-
+    
     fileprivate let presenter: SettingsPresenterInputProtocol
-
+    
     fileprivate let collectionView: UICollectionView = {
         let flowLayout: UICollectionViewFlowLayout = .init()
         let collectionView = UICollectionView.init(frame: .zero,
@@ -45,12 +45,12 @@ final class SettingsViewController: UIViewController {
         super.viewDidLayoutSubviews()
         addConstraints()
     }
-
+    
 }
 
 // MARK: - SettingsPresenterOutputProtocol
 extension SettingsViewController: SettingsPresenterOutputProtocol {
-       
+    
     func scrollToTop() {
         collectionView.scrollToItem(at: .init(item: .zero,
                                               section: .zero),
@@ -93,10 +93,12 @@ fileprivate extension SettingsViewController {
     func configureUI() {
         configureView()
         configureCollectionView()
+        configureNavigationBar(fromAppearanceType: Appearance.current.appearanceType)
+        configureTabBar(fromAppearanceType: Appearance.current.appearanceType)
     }
     
     func configureView() {
-        self.view.backgroundColor = AppStyling.viewBackgroundColor()
+        self.view.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor()
         self.title = KeysForTranslate.settings.localized
     }
     
@@ -104,7 +106,7 @@ fileprivate extension SettingsViewController {
         self.collectionView.delegate = self.presenter.collectionViewDelegate
         self.collectionView.dataSource = self.presenter.collectionViewDataSource
         self.collectionView.register(SettingsCell.self)
-        self.collectionView.backgroundColor = AppStyling.viewBackgroundColor()
+        self.collectionView.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor()
     }
-
+    
 }

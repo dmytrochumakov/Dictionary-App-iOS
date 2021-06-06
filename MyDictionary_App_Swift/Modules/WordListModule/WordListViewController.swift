@@ -94,17 +94,19 @@ fileprivate extension WordListViewController {
     func configureUI() {
         configureView()
         configureCollectionView()
+        configureNavigationBar(fromAppearanceType: Appearance.current.appearanceType)
+        configureTabBar(fromAppearanceType: Appearance.current.appearanceType)
     }
     
     func configureView() {
-        self.view.backgroundColor = AppStyling.viewBackgroundColor()
+        self.view.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor()
         self.title = KeysForTranslate.words.localized
     }
     
     func configureCollectionView() {
         self.collectionView.delegate = self.presenter.collectionViewDelegate
         self.collectionView.dataSource = self.presenter.collectionViewDataSource
-        self.collectionView.backgroundColor = AppStyling.viewBackgroundColor()
+        self.collectionView.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor()
     }
     
 }

@@ -8,5 +8,5 @@
 import UIKit
 
 protocol ConfigureAppearanceCellLabelTextColor {
-    var labelTextColor: UIColor { get }
+    static func labelTextColor(fromAppearanceType type: AppearanceType) -> UIColor
 }

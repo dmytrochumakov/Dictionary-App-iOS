@@ -9,12 +9,7 @@ import UIKit
 
 final class SettingsCell: UICollectionViewCell,
                           ReuseIdentifierProtocol {
-    
-    fileprivate static let titleLabelConfiguration = StandardLabelConfigurationModel.init(font: AppStyling.Font.systemFont.font(),
-                                                                                          textColor: AppStyling.labelTextColor(),
-                                                                                          textAlignment: .left,
-                                                                                          numberOfLines: .zero)
-    
+        
     static let height: CGFloat = 40
     
     fileprivate let titleLabel: UILabel = {
@@ -22,7 +17,7 @@ final class SettingsCell: UICollectionViewCell,
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+            
     override init(frame: CGRect) {
         super.init(frame: frame)
         addViews()
@@ -97,11 +92,14 @@ fileprivate extension SettingsCell {
     }
     
     func configureView() {
-        self.backgroundColor = AppStyling.cellBackgroundColor()
+        self.backgroundColor = ConfigurationAppearanceCell.viewBackgroundColor()
     }
     
     func configureTitleLabel() {
-        self.titleLabel.configure(withConfiguration: Self.titleLabelConfiguration)
+        self.titleLabel.font = AppStyling.Font.systemFont.font()
+        self.titleLabel.textColor = ConfigurationAppearanceCell.labelTextColor()
+        self.titleLabel.textAlignment = .left
+        self.titleLabel.numberOfLines = .zero
     }
     
 }

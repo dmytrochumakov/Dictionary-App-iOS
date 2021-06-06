@@ -7,11 +7,11 @@
 
 import UIKit
 
-struct AppearanceRowModel: ConfigurationAppearanceCellPropertyProtocol {
+struct AppearanceRowModel {
     
     let titleText: String
     let rowType: AppearanceRowType
     var isSelected: Bool
-    var configurationAppearanceCell: ConfigurationAppearanceCellProtocol
+    var appearanceType: AppearanceType
     
 }

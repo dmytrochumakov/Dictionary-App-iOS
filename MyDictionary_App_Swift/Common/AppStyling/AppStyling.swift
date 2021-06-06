@@ -71,65 +71,6 @@ struct AppStyling {
 
 extension AppStyling {
     
-    /// - Parameter fromAppearanceType type: Appearance.current.appearanceType by default
-    static func labelTextColor(fromAppearanceType type: AppearanceType = Appearance.current.appearanceType) -> UIColor {
-        switch type {
-        case .automatic:
-            switch Self.automaticAppearanceType(fromUserInterfaceStyle: UITraitCollection.current.userInterfaceStyle) {
-            case .dark:
-                return self.labelTextColor(fromAppearanceType: .dark)
-            default:
-                return self.labelTextColor(fromAppearanceType: .light)
-            }
-        case .light:
-            return Color.systemBlack.color()
-        case .dark:
-            return Color.systemWhite.color()
-        }
-    }
-    
-}
-
-extension AppStyling {
-    
-    /// - Parameter fromAppearanceType type: Appearance.current.appearanceType by default
-    static func viewBackgroundColor(fromAppearanceType type: AppearanceType = Appearance.current.appearanceType) -> UIColor {
-        switch type {
-        case .automatic:
-            switch Self.automaticAppearanceType(fromUserInterfaceStyle: UITraitCollection.current.userInterfaceStyle) {
-            case .dark:
-                return self.viewBackgroundColor(fromAppearanceType: .dark)
-            default:
-                return self.viewBackgroundColor(fromAppearanceType: .light)
-            }
-        case .light:
-            return Color.lightGray.color()
-        case .dark:
-            return Color.darkGray.color()
-        }
-    }
-    
-    /// - Parameter fromAppearanceType type: Appearance.current.appearanceType by default
-    static func cellBackgroundColor(fromAppearanceType type: AppearanceType = Appearance.current.appearanceType) -> UIColor {
-        switch type {
-        case .automatic:
-            switch Self.automaticAppearanceType(fromUserInterfaceStyle: UITraitCollection.current.userInterfaceStyle) {
-            case .dark:
-                return self.cellBackgroundColor(fromAppearanceType: .dark)
-            default:
-                return self.cellBackgroundColor(fromAppearanceType: .light)
-            }
-        case .light:
-            return Color.systemWhite.color()
-        case .dark:
-            return Color.systemGray.color()
-        }
-    }
-    
-}
-
-fileprivate extension AppStyling {
-    
     static func automaticAppearanceType(fromUserInterfaceStyle userInterfaceStyle: UIUserInterfaceStyle) -> AppearanceType {
         switch userInterfaceStyle {
         case .light:

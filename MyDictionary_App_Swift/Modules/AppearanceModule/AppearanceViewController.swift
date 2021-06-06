@@ -59,7 +59,10 @@ extension AppearanceViewController: AppearancePresenterOutputProtocol {
     
     func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
         configureViewBackgroundColor(fromAppearanceType: newValue)
-        configureCollectionViewBackgroundColor(fromAppearanceType: newValue)
+        configureCollectionViewBackgroundColor(fromAppearanceType: newValue,
+                                               collectionView: collectionView)
+        configureNavigationBar(fromAppearanceType: newValue)
+        configureTabBar(fromAppearanceType: newValue)
     }
     
 }
@@ -97,6 +100,8 @@ fileprivate extension AppearanceViewController {
     func configureUI() {
         configureView()
         configureCollectionView()
+        configureNavigationBar(fromAppearanceType: Appearance.current.appearanceType)
+        configureTabBar(fromAppearanceType: Appearance.current.appearanceType)
     }
     
     func configureView() {
@@ -104,19 +109,12 @@ fileprivate extension AppearanceViewController {
         self.title = KeysForTranslate.appearance.localized
     }
     
-    func configureViewBackgroundColor(fromAppearanceType type: AppearanceType) {
-        self.view.backgroundColor = AppStyling.viewBackgroundColor(fromAppearanceType: type)
-    }
-    
     func configureCollectionView() {
         self.collectionView.delegate = self.presenter.collectionViewDelegate
         self.collectionView.dataSource = self.presenter.collectionViewDataSource
-        self.configureCollectionViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType)
+        self.configureCollectionViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType,
+                                                    collectionView: collectionView)
         self.collectionView.register(AppearanceCell.self)
-    }
-    
-    func configureCollectionViewBackgroundColor(fromAppearanceType type: AppearanceType) {
-        self.collectionView.backgroundColor = AppStyling.viewBackgroundColor(fromAppearanceType: type)
-    }
-    
+    }        
+            
 }

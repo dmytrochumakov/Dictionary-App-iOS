@@ -18,11 +18,6 @@ final class AppearanceCell: UICollectionViewCell,
         return titleLabel
     }()
     
-    fileprivate static let titleLabelConfiguration = StandardLabelConfigurationModel.init(font: AppStyling.Font.systemFont.font(),
-                                                                                          textColor: AppStyling.labelTextColor(),
-                                                                                          textAlignment: .left,
-                                                                                          numberOfLines: .zero)
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addViews()
@@ -69,7 +64,7 @@ fileprivate extension AppearanceCell {
 fileprivate extension AppearanceCell {
     
     func addConstraints() {
-        addTitleLabelConstraints()        
+        addTitleLabelConstraints()
     }
     
     func addTitleLabelConstraints() {
@@ -98,11 +93,14 @@ fileprivate extension AppearanceCell {
     }
     
     func configureView() {
-        self.backgroundColor = AppStyling.cellBackgroundColor()
+        self.backgroundColor = ConfigurationAppearanceCell.viewBackgroundColor()
     }
     
     func configureTitleLabel() {
-        self.titleLabel.configure(withConfiguration: Self.titleLabelConfiguration)
+        self.updateTitleLabelFont(isSelected: false)
+        self.titleLabel.textColor = ConfigurationAppearanceCell.labelTextColor()
+        self.titleLabel.textAlignment = .left
+        self.titleLabel.numberOfLines = .zero
     }
     
 }
@@ -111,20 +109,29 @@ fileprivate extension AppearanceCell {
 fileprivate extension AppearanceCell {
     
     func updateSelfView(_ model: AppearanceRowModel) {
-        self.backgroundColor = model.configurationAppearanceCell.cellViewBackgroundColor
+        self.backgroundColor = ConfigurationAppearanceCell.viewBackgroundColor(fromAppearanceType: model.appearanceType)
     }
     
     func updateTitleLabel(_ model: AppearanceRowModel) {
-        self.titleLabel.textColor = model.configurationAppearanceCell.labelTextColor
+        self.titleLabel.textColor = ConfigurationAppearanceCell.labelTextColor(fromAppearanceType: model.appearanceType)
         self.titleLabel.text = model.titleText
         self.updateTitleLabelFont(isSelected: model.isSelected)
     }
     
     func updateTitleLabelFont(isSelected: Bool) {
+        self.titleLabel.font = self.titleLabelFont(isSelected: isSelected)
+    }
+    
+}
+
+// MARK: - Title Label Font
+fileprivate extension AppearanceCell {
+    
+    func titleLabelFont(isSelected: Bool) -> UIFont {
         if (isSelected) {
-            self.titleLabel.font = AppStyling.Font.boldSystemFont.font()
+            return AppStyling.Font.boldSystemFont.font()
         } else {
-            self.titleLabel.font = AppStyling.Font.systemFont.font()
+            return AppStyling.Font.systemFont.font()
         }
     }
     
