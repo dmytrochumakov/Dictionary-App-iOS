@@ -11,7 +11,8 @@ protocol AppearancePresenterInputProtocol: CollectionViewDelegateFlowLayoutPrope
     
 }
 
-protocol AppearancePresenterOutputProtocol: AnyObject {
+protocol AppearancePresenterOutputProtocol: AnyObject,
+                                            AppearanceHasBeenUpdatedProtocol {
     func reloadRows(_ rows: [IndexPath : AppearanceRowModel])
 }
 
@@ -55,6 +56,10 @@ extension AppearancePresenter {
     
     func reloadRows(_ rows: [IndexPath : AppearanceRowModel]) {
         presenterOutput?.reloadRows(rows)
+    }
+    
+    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
+        presenterOutput?.appearanceHasBeenUpdated(newValue)
     }
     
 }

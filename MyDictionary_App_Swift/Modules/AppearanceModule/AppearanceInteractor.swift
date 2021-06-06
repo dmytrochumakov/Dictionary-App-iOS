@@ -11,7 +11,8 @@ protocol AppearanceInteractorInputProtocol {
     var appearanceCollectionViewDataSource: AppearanceCollectionViewDataSourceProtocol { get }
 }
 
-protocol AppearanceInteractorOutputProtocol: AnyObject {
+protocol AppearanceInteractorOutputProtocol: AnyObject,
+                                             AppearanceHasBeenUpdatedProtocol {
     func reloadRows(_ rows: [IndexPath : AppearanceRowModel])
 }
 
@@ -78,6 +79,7 @@ fileprivate extension AppearanceInteractor {
 fileprivate extension AppearanceInteractor {
     
     func updateAppearance(_ newValue: AppearanceType) {
+        interactorOutput?.appearanceHasBeenUpdated(newValue)
         Appearance.current.updateAppearance(newValue)
     }
     
