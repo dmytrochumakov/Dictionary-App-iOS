@@ -7,13 +7,7 @@
 
 import Foundation
 
-protocol Observable {
-    func addObserver<T>(_ observer: AnyObject, completion: @escaping MDObservable<T>.CompletionHandler)
-    func removeObserver(_ observer: AnyObject)
-    func removeObservers(_ observer: AnyObject)
-}
-
-final class MDObservable<T> {
+final class Observable<T> {
     
     typealias CompletionHandler = ((T) -> Void)
     
@@ -40,7 +34,7 @@ final class MDObservable<T> {
 }
 
 // MARK: - Add Observer
-extension MDObservable {
+extension Observable {
     
     func addObserver(_ observer: AnyObject, completion: @escaping CompletionHandler) {
         let id = ObjectIdentifier(observer)
@@ -52,7 +46,7 @@ extension MDObservable {
 }
 
 // MARK: - Remove Observer
-extension MDObservable {
+extension Observable {
     
     func removeObserver(_ observer: AnyObject) {
         let id = ObjectIdentifier(observer)
@@ -78,7 +72,7 @@ extension MDObservable {
 }
 
 // MARK: - Notify Observers
-fileprivate extension MDObservable {
+fileprivate extension Observable {
     
     func notifyObservers(_ observers: [ObjectIdentifier : CompletionHandler]) {
         let observers = {
