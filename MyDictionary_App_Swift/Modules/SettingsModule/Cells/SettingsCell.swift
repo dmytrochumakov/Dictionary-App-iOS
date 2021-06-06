@@ -9,7 +9,7 @@ import UIKit
 
 final class SettingsCell: UICollectionViewCell,
                           ReuseIdentifierProtocol {
-        
+    
     static let height: CGFloat = 40
     
     fileprivate let titleLabel: UILabel = {
@@ -17,7 +17,7 @@ final class SettingsCell: UICollectionViewCell,
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-            
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addViews()
@@ -38,10 +38,11 @@ final class SettingsCell: UICollectionViewCell,
 // MARK: - FillWithModelProtocol
 extension SettingsCell: FillWithModelProtocol {
     
-    typealias Model = SettingsRowModel?
+    typealias Model = SettingsRowModel
     
-    func fillWithModel(_ model: SettingsRowModel?) {
-        self.titleLabel.text = model?.titleText
+    func fillWithModel(_ model: SettingsRowModel) {
+        self.updateSelfView(model)
+        self.updateTitleLabel(model)
     }
     
 }
@@ -100,6 +101,20 @@ fileprivate extension SettingsCell {
         self.titleLabel.textColor = ConfigurationAppearanceCell.labelTextColor()
         self.titleLabel.textAlignment = .left
         self.titleLabel.numberOfLines = .zero
+    }
+    
+}
+
+// MARK: - Update
+fileprivate extension SettingsCell {
+    
+    func updateSelfView(_ model: SettingsRowModel) {
+        self.backgroundColor = ConfigurationAppearanceCell.viewBackgroundColor(fromAppearanceType: model.appearanceType)
+    }
+    
+    func updateTitleLabel(_ model: SettingsRowModel) {
+        self.titleLabel.textColor = ConfigurationAppearanceCell.labelTextColor(fromAppearanceType: model.appearanceType)
+        self.titleLabel.text = model.titleText
     }
     
 }

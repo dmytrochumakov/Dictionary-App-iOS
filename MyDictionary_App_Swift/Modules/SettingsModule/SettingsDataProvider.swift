@@ -8,7 +8,8 @@ import Foundation
 
 protocol SettingsDataProviderProtocol: NumberOfSectionsProtocol,
                                        NumberOfRowsInSectionProtocol {
-    func rowModel(atIndexPath indexPath: IndexPath) -> SettingsRowModel?
+    func rows(atSection section: Int) -> [SettingsRowModel]
+    func rowModel(atIndexPath indexPath: IndexPath) -> SettingsRowModel
 }
 
 final class SettingsDataProvider: SettingsDataProviderProtocol {
@@ -35,12 +36,12 @@ extension SettingsDataProvider {
 
 extension SettingsDataProvider {
     
-    func rowModel(atIndexPath indexPath: IndexPath) -> SettingsRowModel? {
-        if (model.sections[indexPath.section].rows.isEmpty) {
-            return nil
-        } else {            
-            return model.sections[indexPath.section].rows[indexPath.row]
-        }
+    func rowModel(atIndexPath indexPath: IndexPath) -> SettingsRowModel {
+        return model.sections[indexPath.section].rows[indexPath.row]        
+    }
+    
+    func rows(atSection section: Int) -> [SettingsRowModel] {
+        return model.sections[section].rows
     }
     
 }

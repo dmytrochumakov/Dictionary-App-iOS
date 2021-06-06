@@ -14,6 +14,7 @@ protocol SettingsInteractorInputProtocol {
 protocol SettingsInteractorOutputProtocol: AnyObject,
                                            AppearanceHasBeenUpdatedProtocol {
     func didSelectAppearanceRow()
+    func reloadRows(_ rows: [IndexPath : SettingsRowModel])
 }
 
 protocol SettingsInteractorProtocol: SettingsInteractorInputProtocol,
@@ -50,6 +51,15 @@ final class SettingsInteractor: NSObject,
     
 }
 
+// MARK: - SettingsDataManagerOutputProtocol
+extension SettingsInteractor {
+    
+    func rowsForUpdate(_ rows: [IndexPath : SettingsRowModel]) {
+        self.interactorOutput?.reloadRows(rows)
+    }
+    
+}
+
 // MARK: - Subscribe
 fileprivate extension SettingsInteractor {
     
@@ -76,6 +86,7 @@ fileprivate extension SettingsInteractor {
             .didChangeAppearanceObservable
             .addObserver(self) { [weak self] (value) in
                 self?.interactorOutput?.appearanceHasBeenUpdated(value)
+                self?.dataManager.appearanceHasBeenUpdated(value)
             }
     }
     

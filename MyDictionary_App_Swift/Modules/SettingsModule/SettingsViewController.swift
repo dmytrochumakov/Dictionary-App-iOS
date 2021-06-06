@@ -65,6 +65,12 @@ extension SettingsViewController: SettingsPresenterOutputProtocol {
         configureNavigationBar(fromAppearanceType: newValue)
         configureTabBar(fromAppearanceType: newValue)
     }
+
+    func reloadRows(_ rows: [IndexPath : SettingsRowModel]) {
+        rows.forEach { (indexPath, rowModel) in
+            (collectionView.cellForItem(at: indexPath) as! SettingsCell).fillWithModel(rowModel)
+        }
+    }
     
 }
 
