@@ -10,5 +10,4 @@ import Foundation
 struct SettingsRowModel {
     let rowType: SettingsRowType
     let titleText: String
-    let appearanceType: AppearanceType
 }

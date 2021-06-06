@@ -13,11 +13,7 @@ final class Observable<T> {
     
     fileprivate let accessQueue: DispatchQueue
     fileprivate var observers: [ObjectIdentifier : CompletionHandler]
-    fileprivate var value: T {
-        didSet {
-            self.notifyObservers(self.observers)
-        }
-    }
+    fileprivate var value: T
     
     init(value: T,
          accessQueue: DispatchQueue = .init(label: ("MDObservable_Dispatch_Queue_Concurrent"),
@@ -67,6 +63,16 @@ extension Observable {
                 self.observers.removeValue(forKey: id)
             }
         }
+    }
+    
+}
+
+// MARK: - Update Value
+extension Observable {
+
+    func updateValue(_ newValue: T) {
+        self.value = newValue
+        self.notifyObservers(self.observers)
     }
     
 }

@@ -7,11 +7,31 @@
 
 import Foundation
 
-struct Appearance {
+final class Appearance: NSObject {
+    
+    /// Default is .automatic
+    fileprivate var internalAppearanceType: AppearanceType
+    internal var appearanceType: AppearanceType {
+        return internalAppearanceType
+    }
+    /// Default is equal internalAppearanceType
+    internal var didChangeAppearanceObservable: Observable<AppearanceType>
     
     static let current: Appearance = .init()
     
-    /// Default is .automatic
-    var appearanceType: AppearanceType = .automatic
+    fileprivate override init() {
+        self.internalAppearanceType = .automatic
+        self.didChangeAppearanceObservable = .init(value: self.internalAppearanceType)
+    }
+    
+}
+
+// MARK: - Update Appearance
+extension Appearance {
+    
+    func updateAppearance(_ newValue: AppearanceType) {
+        self.internalAppearanceType = newValue
+        self.didChangeAppearanceObservable.updateValue(newValue)
+    }
     
 }
