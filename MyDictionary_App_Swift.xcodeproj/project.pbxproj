@@ -49,6 +49,10 @@
 		229E08C72652CB9000DA56C4 /* WordListCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */; };
 		229E08CB2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08CA2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift */; };
 		22B22681266CC033007AB292 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B22680266CC033007AB292 /* Observable.swift */; };
+		22B22687266CDE3E007AB292 /* ConfigureAppearanceCellViewBackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B22686266CDE3E007AB292 /* ConfigureAppearanceCellViewBackgroundColor.swift */; };
+		22B22689266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B22688266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift */; };
+		22B2268B266CDE86007AB292 /* ConfigurationAppearanceCellPropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B2268A266CDE86007AB292 /* ConfigurationAppearanceCellPropertyProtocol.swift */; };
+		22B2268D266CDE93007AB292 /* ConfigurationAppearanceCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B2268C266CDE93007AB292 /* ConfigurationAppearanceCellProtocol.swift */; };
 		22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD9999266A480D0063FEFC /* SettingsModule.swift */; };
 		22BD999C266A48D60063FEFC /* MainTabBarModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999B266A48D60063FEFC /* MainTabBarModule.swift */; };
 		22BD999E266A4A2C0063FEFC /* ModuleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999D266A4A2C0063FEFC /* ModuleProtocol.swift */; };
@@ -154,6 +158,10 @@
 		229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		229E08CA2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourcePropertyProtocol.swift; sourceTree = "<group>"; };
 		22B22680266CC033007AB292 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		22B22686266CDE3E007AB292 /* ConfigureAppearanceCellViewBackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureAppearanceCellViewBackgroundColor.swift; sourceTree = "<group>"; };
+		22B22688266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureAppearanceCellLabelTextColor.swift; sourceTree = "<group>"; };
+		22B2268A266CDE86007AB292 /* ConfigurationAppearanceCellPropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationAppearanceCellPropertyProtocol.swift; sourceTree = "<group>"; };
+		22B2268C266CDE93007AB292 /* ConfigurationAppearanceCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationAppearanceCellProtocol.swift; sourceTree = "<group>"; };
 		22BD9999266A480D0063FEFC /* SettingsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModule.swift; sourceTree = "<group>"; };
 		22BD999B266A48D60063FEFC /* MainTabBarModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarModule.swift; sourceTree = "<group>"; };
 		22BD999D266A4A2C0063FEFC /* ModuleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleProtocol.swift; sourceTree = "<group>"; };
@@ -246,6 +254,10 @@
 				22BD999D266A4A2C0063FEFC /* ModuleProtocol.swift */,
 				226FEE7F266B73B10044A5F9 /* StandardLabelConfigurationProtocol.swift */,
 				226FEE86266B7E300044A5F9 /* AppearanceHasBeenUpdatedProtocol.swift */,
+				22B22686266CDE3E007AB292 /* ConfigureAppearanceCellViewBackgroundColor.swift */,
+				22B22688266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift */,
+				22B2268A266CDE86007AB292 /* ConfigurationAppearanceCellPropertyProtocol.swift */,
+				22B2268C266CDE93007AB292 /* ConfigurationAppearanceCellProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -803,6 +815,7 @@
 				22E2B4F02664EF3200978E62 /* UICollectionView+Extension.swift in Sources */,
 				22BD99AB266A67A60063FEFC /* AppearanceType.swift in Sources */,
 				226FEE7D266B65080044A5F9 /* AppearanceCell.swift in Sources */,
+				22B22689266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift in Sources */,
 				2299017D2668FBEA00D8C74E /* MainTabBarInteractor.swift in Sources */,
 				229E08C22652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift in Sources */,
 				226FEE80266B73B10044A5F9 /* StandardLabelConfigurationProtocol.swift in Sources */,
@@ -851,12 +864,15 @@
 				22BD999C266A48D60063FEFC /* MainTabBarModule.swift in Sources */,
 				22CA088C265165460052D169 /* AppStyling.swift in Sources */,
 				22E2B4EA2664EDA200978E62 /* SettingsCell.swift in Sources */,
+				22B2268B266CDE86007AB292 /* ConfigurationAppearanceCellPropertyProtocol.swift in Sources */,
 				22E2B4FE266515D400978E62 /* CollectionViewDelegateFlowLayout.swift in Sources */,
 				22BD999E266A4A2C0063FEFC /* ModuleProtocol.swift in Sources */,
 				229E08C72652CB9000DA56C4 /* WordListCollectionViewDataSource.swift in Sources */,
 				22BD99A2266A4B8D0063FEFC /* AppearanceModule.swift in Sources */,
 				2223F8B426512F01004F2FE9 /* KeysForTranslate.swift in Sources */,
 				2223F8AE26512DEB004F2FE9 /* Constants.swift in Sources */,
+				22B2268D266CDE93007AB292 /* ConfigurationAppearanceCellProtocol.swift in Sources */,
+				22B22687266CDE3E007AB292 /* ConfigureAppearanceCellViewBackgroundColor.swift in Sources */,
 				2299016B2668EC3400D8C74E /* AppearanceInteractor.swift in Sources */,
 				22CA088126515EEB0052D169 /* WordListPresenter.swift in Sources */,
 				2223F8AB26512C5A004F2FE9 /* String+Extension.swift in Sources */,

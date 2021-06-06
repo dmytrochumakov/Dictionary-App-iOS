@@ -16,8 +16,8 @@ final class AppearanceDataProvider: AppearanceDataProviderProtocol {
     
     internal let rows: [AppearanceRowModel]
     
-    init() {
-        self.rows = Self.configuredRows
+    init(appearanceType: AppearanceType) {
+        self.rows = Self.configuredRows(fromAppearanceType: appearanceType)
     }
     
 }
@@ -44,22 +44,26 @@ extension AppearanceDataProvider {
 
 fileprivate extension AppearanceDataProvider {
     
-    static var configuredRows: [AppearanceRowModel] {
+    static func configuredRows(fromAppearanceType appearanceType: AppearanceType) -> [AppearanceRowModel] {
+        let configurationAppearanceCell = ConfigurationAppearanceCellModel.init(appearanceType: appearanceType)
         var rows: [AppearanceRowModel] = []
         AppearanceRowType.allCases.forEach { rowType in
             switch rowType {
             case .automatic:
                 rows.append(.init(titleText: KeysForTranslate.automatic.localized,
                                   rowType: rowType,
-                                  isSelected: true))
+                                  isSelected: true,
+                                  configurationAppearanceCell: configurationAppearanceCell))
             case .light:
                 rows.append(.init(titleText: KeysForTranslate.light.localized,
                                   rowType: rowType,
-                                  isSelected: false))
+                                  isSelected: false,
+                                  configurationAppearanceCell: configurationAppearanceCell))
             case .dark:
                 rows.append(.init(titleText: KeysForTranslate.dark.localized,
                                   rowType: rowType,
-                                  isSelected: false))
+                                  isSelected: false,
+                                  configurationAppearanceCell: configurationAppearanceCell))
             }
             
         }

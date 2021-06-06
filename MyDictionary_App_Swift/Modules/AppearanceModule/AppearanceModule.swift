@@ -19,7 +19,7 @@ extension AppearanceModule {
     
     var module: UIViewController {
         // Appearance Module Classes
-        let appearanceDataProvider: AppearanceDataProviderProtocol = AppearanceDataProvider.init()
+        let appearanceDataProvider: AppearanceDataProviderProtocol = AppearanceDataProvider.init(appearanceType: Appearance.current.appearanceType)
         let appearanceCollectionViewDelegate: AppearanceCollectionViewDelegateProtocol = AppearanceCollectionViewDelegate.init(dataProvider: appearanceDataProvider)
         let appearanceCollectionViewDataSource: AppearanceCollectionViewDataSourceProtocol = AppearanceCollectionViewDataSource.init(dataProvider: appearanceDataProvider)
         var appearanceDataManager: AppearanceDataManagerProtocol = AppearanceDataManager.init(dataProvider: appearanceDataProvider)

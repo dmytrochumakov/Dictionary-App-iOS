@@ -5,10 +5,13 @@
 //  Created by Dmytro Chumakov on 05.06.2021.
 //
 
-import Foundation
+import UIKit
 
-struct AppearanceRowModel {
+struct AppearanceRowModel: ConfigurationAppearanceCellPropertyProtocol {
+    
     let titleText: String
     let rowType: AppearanceRowType
     var isSelected: Bool
+    var configurationAppearanceCell: ConfigurationAppearanceCellProtocol
+    
 }

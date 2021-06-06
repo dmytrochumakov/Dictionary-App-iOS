@@ -23,12 +23,6 @@ final class AppearanceCell: UICollectionViewCell,
                                                                                           textAlignment: .left,
                                                                                           numberOfLines: .zero)
     
-    fileprivate let imageView: UIImageView = {
-        let imageView: UIImageView = .init()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addViews()
@@ -52,8 +46,8 @@ extension AppearanceCell: FillWithModelProtocol {
     typealias Model = AppearanceRowModel
     
     func fillWithModel(_ model: AppearanceRowModel) {
+        self.updateSelfView(model)
         self.updateTitleLabel(model)
-        self.updateImageView(isSelected: model.isSelected)
     }
     
 }
@@ -63,15 +57,10 @@ fileprivate extension AppearanceCell {
     
     func addViews() {
         addTitleLabel()
-        addImageView()
     }
     
     func addTitleLabel() {
         addSubview(titleLabel)
-    }
-    
-    func addImageView() {
-        addSubview(imageView)
     }
     
 }
@@ -80,8 +69,7 @@ fileprivate extension AppearanceCell {
 fileprivate extension AppearanceCell {
     
     func addConstraints() {
-        addTitleLabelConstraints()
-        addImageViewConstraints()
+        addTitleLabelConstraints()        
     }
     
     func addTitleLabelConstraints() {
@@ -99,19 +87,6 @@ fileprivate extension AppearanceCell {
                                                                constant: .zero)
     }
     
-    func addImageViewConstraints() {
-        NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: imageView,
-                                                               constant: 24)
-        NSLayoutConstraint.addEqualWidthConstraintAndActivate(item: imageView,
-                                                              constant: 24)
-        NSLayoutConstraint.addEqualCenterYConstraintAndActivate(item: imageView,
-                                                                toItem: self,
-                                                                constant: .zero)
-        NSLayoutConstraint.addEqualRightConstraintAndActivate(item: imageView,
-                                                              toItem: self,
-                                                              constant: .zero)
-    }
-    
 }
 
 // MARK: - Configure UI
@@ -120,19 +95,14 @@ fileprivate extension AppearanceCell {
     func configureUI() {
         configureView()
         configureTitleLabel()
-        configureImageView()
     }
     
     func configureView() {
-        updateSelfView()
+        self.backgroundColor = AppStyling.cellBackgroundColor()
     }
     
     func configureTitleLabel() {
         self.titleLabel.configure(withConfiguration: Self.titleLabelConfiguration)
-    }
-    
-    func configureImageView() {
-        updateImageView(isSelected: false)
     }
     
 }
@@ -140,20 +110,21 @@ fileprivate extension AppearanceCell {
 // MARK: - Update
 fileprivate extension AppearanceCell {
     
-    func updateSelfView() {
-        self.backgroundColor = AppStyling.cellBackgroundColor()
+    func updateSelfView(_ model: AppearanceRowModel) {
+        self.backgroundColor = model.configurationAppearanceCell.cellViewBackgroundColor
     }
     
     func updateTitleLabel(_ model: AppearanceRowModel) {
-        self.titleLabel.configure(withConfiguration: Self.titleLabelConfiguration,
-                                  andText: model.titleText)
+        self.titleLabel.textColor = model.configurationAppearanceCell.labelTextColor
+        self.titleLabel.text = model.titleText
+        self.updateTitleLabelFont(isSelected: model.isSelected)
     }
     
-    func updateImageView(isSelected: Bool) {
+    func updateTitleLabelFont(isSelected: Bool) {
         if (isSelected) {
-            self.imageView.backgroundColor = AppStyling.Color.systemBlack.color()
+            self.titleLabel.font = AppStyling.Font.boldSystemFont.font()
         } else {
-            self.imageView.backgroundColor = AppStyling.Color.systemGray.color()
+            self.titleLabel.font = AppStyling.Font.systemFont.font()
         }
     }
     
