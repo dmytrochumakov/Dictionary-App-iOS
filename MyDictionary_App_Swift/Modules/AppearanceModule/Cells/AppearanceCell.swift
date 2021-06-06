@@ -141,7 +141,7 @@ fileprivate extension AppearanceCell {
 fileprivate extension AppearanceCell {
     
     func updateSelfView() {
-        self.backgroundColor = AppStyling.viewBackgroundColor()
+        self.backgroundColor = AppStyling.cellBackgroundColor()
     }
     
     func updateTitleLabel(_ model: AppearanceRowModel) {
