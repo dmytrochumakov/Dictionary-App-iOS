@@ -20,7 +20,7 @@ final class Appearance: NSObject {
     static let current: Appearance = .init()
     
     fileprivate override init() {
-        self.internalAppearanceType = .automatic
+        self.internalAppearanceType = Self.getSavedAppearanceType()
         self.didChangeAppearanceObservable = .init(value: self.internalAppearanceType)
     }
     
@@ -34,8 +34,27 @@ final class Appearance: NSObject {
 extension Appearance {
     
     func updateAppearance(_ newValue: AppearanceType) {
+        Self.saveAppearanceType(newValue)
         self.internalAppearanceType = newValue
         self.didChangeAppearanceObservable.updateValue(newValue)
+    }
+    
+}
+
+fileprivate extension Appearance {
+    
+    struct Constants {
+        static let appearanceTypeKey: String = "Appearance_Type_Key"
+    }
+    
+    static func getSavedAppearanceType() -> AppearanceType {
+        guard let appearanceType: AppearanceType = .init(rawValue: UserDefaults.standard.integer(forKey: Constants.appearanceTypeKey)) else { return .automatic }
+        return appearanceType
+    }
+    
+    static func saveAppearanceType(_ appearanceType: AppearanceType) {
+        UserDefaults.standard.setValue(appearanceType.rawValue,
+                                       forKey: Constants.appearanceTypeKey)
     }
     
 }
