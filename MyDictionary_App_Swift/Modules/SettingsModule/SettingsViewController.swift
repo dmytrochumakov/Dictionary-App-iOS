@@ -59,13 +59,10 @@ extension SettingsViewController: SettingsPresenterOutputProtocol {
     }
     
     func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
-        configureViewBackgroundColor(fromAppearanceType: newValue)
-        configureCollectionViewBackgroundColor(fromAppearanceType: newValue,
-                                               collectionView: collectionView)
-        configureNavigationBar(fromAppearanceType: newValue)
-        configureTabBar(fromAppearanceType: newValue)
+        configureAppearance(fromAppearanceType: newValue,
+                            collectionView: collectionView)
     }
-
+    
     func reloadRows(_ rows: [IndexPath : SettingsRowModel]) {
         rows.forEach { (indexPath, rowModel) in
             (collectionView.cellForItem(at: indexPath) as! SettingsCell).fillWithModel(rowModel)
@@ -107,8 +104,8 @@ fileprivate extension SettingsViewController {
     func configureUI() {
         configureView()
         configureCollectionView()
-        configureNavigationBar(fromAppearanceType: Appearance.current.appearanceType)
-        configureTabBar(fromAppearanceType: Appearance.current.appearanceType)
+        configureNavigationBarAppearance(fromAppearanceType: Appearance.current.appearanceType)
+        configureTabBarAppearance(fromAppearanceType: Appearance.current.appearanceType)
     }
     
     func configureView() {

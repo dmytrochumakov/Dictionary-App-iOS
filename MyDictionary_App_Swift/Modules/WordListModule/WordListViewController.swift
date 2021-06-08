@@ -60,11 +60,8 @@ extension WordListViewController: WordListPresenterOutputProtocol {
     }
     
     func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
-        configureViewBackgroundColor(fromAppearanceType: newValue)
-        configureCollectionViewBackgroundColor(fromAppearanceType: newValue,
-                                               collectionView: collectionView)
-        configureNavigationBar(fromAppearanceType: newValue)
-        configureTabBar(fromAppearanceType: newValue)
+        configureAppearance(fromAppearanceType: newValue,
+                            collectionView: collectionView)
     }
     
 }
@@ -102,8 +99,8 @@ fileprivate extension WordListViewController {
     func configureUI() {
         configureView()
         configureCollectionView()
-        configureNavigationBar(fromAppearanceType: Appearance.current.appearanceType)
-        configureTabBar(fromAppearanceType: Appearance.current.appearanceType)
+        configureNavigationBarAppearance(fromAppearanceType: Appearance.current.appearanceType)
+        configureTabBarAppearance(fromAppearanceType: Appearance.current.appearanceType)
     }
     
     func configureView() {

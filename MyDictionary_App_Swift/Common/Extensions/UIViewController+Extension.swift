@@ -9,12 +9,25 @@ import UIKit
 
 extension UIViewController {
     
-    func configureNavigationBar(fromAppearanceType type: AppearanceType) {
+    func configureAppearance(fromAppearanceType type: AppearanceType,
+                             collectionView: UICollectionView) {
+        configureAppearance(fromAppearanceType: type)
+        configureCollectionViewBackgroundColor(fromAppearanceType: type,
+                                               collectionView: collectionView)
+    }
+    
+    func configureAppearance(fromAppearanceType type: AppearanceType) {
+        configureViewBackgroundColor(fromAppearanceType: type)
+        configureNavigationBarAppearance(fromAppearanceType: type)
+        configureTabBarAppearance(fromAppearanceType: type)
+    }
+    
+    func configureNavigationBarAppearance(fromAppearanceType type: AppearanceType) {
         configureNavigationBarTintColor(fromAppearanceType: type)
         configureNavigationBarTitleTextAttributes(fromAppearanceType: type)
     }
     
-    func configureTabBar(fromAppearanceType type: AppearanceType) {
+    func configureTabBarAppearance(fromAppearanceType type: AppearanceType) {
         configureTabBarTintColor(fromAppearanceType: type)
     }
     
