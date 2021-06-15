@@ -16,11 +16,6 @@ struct AppStyling {
         case lightGray
         case darkGray
         case systemGray
-        case systemGray2
-        case systemGray3
-        case systemGray4
-        case systemGray5
-        case systemGray6
         
         /// - Parameter alpha: 1.0 by default
         func color(_ alpha: CGFloat = 1.0) -> UIColor {
@@ -35,16 +30,6 @@ struct AppStyling {
                 return UIColor.white.withAlphaComponent(alpha)
             case .systemGray:
                 return UIColor.systemGray.withAlphaComponent(alpha)
-            case .systemGray2:
-                return UIColor.systemGray2.withAlphaComponent(alpha)
-            case .systemGray3:
-                return UIColor.systemGray3.withAlphaComponent(alpha)
-            case .systemGray4:
-                return UIColor.systemGray4.withAlphaComponent(alpha)
-            case .systemGray5:
-                return UIColor.systemGray5.withAlphaComponent(alpha)
-            case .systemGray6:
-                return UIColor.systemGray6.withAlphaComponent(alpha)
             }
         }
         
@@ -65,21 +50,6 @@ struct AppStyling {
             }
         }
         
-    }
-    
-}
-
-extension AppStyling {
-    
-    static func automaticAppearanceType(fromUserInterfaceStyle userInterfaceStyle: UIUserInterfaceStyle) -> AppearanceType {
-        switch userInterfaceStyle {
-        case .light:
-            return .light
-        case .dark:
-            return .dark
-        default:
-            return .light
-        }
     }
     
 }

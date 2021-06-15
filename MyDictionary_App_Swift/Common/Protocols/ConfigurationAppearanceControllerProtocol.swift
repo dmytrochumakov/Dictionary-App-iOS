@@ -44,12 +44,7 @@ extension ConfigurationAppearanceController {
     static func viewBackgroundColor(fromAppearanceType type: AppearanceType = Appearance.current.appearanceType) -> UIColor {
         switch type {
         case .automatic:
-            switch AppStyling.automaticAppearanceType(fromUserInterfaceStyle: UITraitCollection.current.userInterfaceStyle) {
-            case .dark:
-                return self.viewBackgroundColor(fromAppearanceType: .dark)
-            default:
-                return self.viewBackgroundColor(fromAppearanceType: .light)
-            }
+            return self.viewBackgroundColor(fromAppearanceType: .light)
         case .light:
             return AppStyling.Color.lightGray.color()
         case .dark:
@@ -61,12 +56,7 @@ extension ConfigurationAppearanceController {
     static func navigationBarTitleTextAttributes(fromAppearanceType type: AppearanceType = Appearance.current.appearanceType) -> [NSAttributedString.Key : Any] {
         switch type {
         case .automatic:
-            switch AppStyling.automaticAppearanceType(fromUserInterfaceStyle: UITraitCollection.current.userInterfaceStyle) {
-            case .dark:
-                return self.navigationBarTitleTextAttributes(fromAppearanceType: .dark)
-            default:
-                return self.navigationBarTitleTextAttributes(fromAppearanceType: .light)
-            }
+            return self.navigationBarTitleTextAttributes(fromAppearanceType: .light)
         case .light, .dark:
             return self.navigationBarAttributedStringForegroundColor(fromAppearanceType: type)
         }
@@ -87,12 +77,7 @@ extension ConfigurationAppearanceController {
     static func navigationBarTintColor(fromAppearanceType type: AppearanceType = Appearance.current.appearanceType) -> UIColor {
         switch type {
         case .automatic:
-            switch AppStyling.automaticAppearanceType(fromUserInterfaceStyle: UITraitCollection.current.userInterfaceStyle) {
-            case .dark:
-                return self.navigationBarTintColor(fromAppearanceType: .dark)
-            default:
-                return self.navigationBarTintColor(fromAppearanceType: .light)
-            }
+            return self.navigationBarTintColor(fromAppearanceType: .light)
         case .light:
             return AppStyling.Color.systemWhite.color()
         case .dark:
@@ -103,13 +88,8 @@ extension ConfigurationAppearanceController {
     /// - Parameter fromAppearanceType type: Appearance.current.appearanceType by default
     static func tabBarTintColor(fromAppearanceType type: AppearanceType = Appearance.current.appearanceType) -> UIColor {
         switch type {
-        case .automatic:
-            switch AppStyling.automaticAppearanceType(fromUserInterfaceStyle: UITraitCollection.current.userInterfaceStyle) {
-            case .dark:
-                return self.tabBarTintColor(fromAppearanceType: .dark)
-            default:
-                return self.tabBarTintColor(fromAppearanceType: .light)
-            }
+        case .automatic:            
+            return self.tabBarTintColor(fromAppearanceType: .light)
         case .light:
             return AppStyling.Color.lightGray.color()
         case .dark:

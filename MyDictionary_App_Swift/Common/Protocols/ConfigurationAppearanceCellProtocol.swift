@@ -25,12 +25,7 @@ extension ConfigurationAppearanceCell {
     static func viewBackgroundColor(fromAppearanceType type: AppearanceType = Appearance.current.appearanceType) -> UIColor {
         switch type {
         case .automatic:
-            switch AppStyling.automaticAppearanceType(fromUserInterfaceStyle: UITraitCollection.current.userInterfaceStyle) {
-            case .dark:
-                return self.viewBackgroundColor(fromAppearanceType: .dark)
-            default:
-                return self.viewBackgroundColor(fromAppearanceType: .light)
-            }
+            return self.viewBackgroundColor(fromAppearanceType: .light)
         case .light:
             return AppStyling.Color.systemWhite.color()
         case .dark:
@@ -42,12 +37,7 @@ extension ConfigurationAppearanceCell {
     static func labelTextColor(fromAppearanceType type: AppearanceType = Appearance.current.appearanceType) -> UIColor {
         switch type {
         case .automatic:
-            switch AppStyling.automaticAppearanceType(fromUserInterfaceStyle: UITraitCollection.current.userInterfaceStyle) {
-            case .dark:
-                return self.labelTextColor(fromAppearanceType: .dark)
-            default:
-                return self.labelTextColor(fromAppearanceType: .light)
-            }
+            return self.labelTextColor(fromAppearanceType: .light)            
         case .light:
             return AppStyling.Color.systemBlack.color()
         case .dark:
