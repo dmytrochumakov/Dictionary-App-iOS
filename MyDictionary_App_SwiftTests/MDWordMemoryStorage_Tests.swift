@@ -28,13 +28,33 @@ class MDWordMemoryStorage_Tests: XCTestCase {
                                                                                       arrayWords: arrayWords)
         self.wordMemoryStorage = wordMemoryStorage
     }
-        
+    
     func test_Create_One_Word_Functionality() {
         wordMemoryStorage.createWord(Self.mockedWord0) { [weak self] result in
             switch result {
-            case .success(let word):
-                XCTAssertTrue(word == Self.mockedWord0)
+            case .success(let createdWord):
+                XCTAssertTrue(createdWord == Self.mockedWord0)
                 XCTAssertTrue(self?.wordMemoryStorage.arrayWordsCount == 1)
+            case .failure:
+                XCTExpectFailure()
+            }
+        }
+    }
+    
+    func test_Read_One_Created_Word_Functionality() {
+        wordMemoryStorage.createWord(Self.mockedWord0) { [weak self] result in
+            switch result {
+            case .success(let createdWord):
+                XCTAssertTrue(createdWord == Self.mockedWord0)
+                XCTAssertTrue(self?.wordMemoryStorage.arrayWordsCount == 1)
+                self?.wordMemoryStorage.readWord(fromUUID: createdWord.uuid, { result in
+                    switch result {
+                    case .success(let fetchedWord):
+                        XCTAssertTrue(fetchedWord == createdWord)
+                    case .failure:
+                        XCTExpectFailure()
+                    }
+                })
             case .failure:
                 XCTExpectFailure()
             }
