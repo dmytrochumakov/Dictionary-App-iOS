@@ -17,6 +17,13 @@ class MDWordMemoryStorage_Tests: XCTestCase {
                                               createdDate: .init(),
                                               updatedDate: .init())
     
+    static let mockedWordForUpdate: WordModel = .init(uuid: .init(),
+                                                      word: "word for update",
+                                                      wordDescription: "word for update Description",
+                                                      wordLanguage: "Spanish",
+                                                      createdDate: .init(),
+                                                      updatedDate: .init())
+    
     var wordMemoryStorage: MDWordMemoryStorageProtocol!
     
     override func setUpWithError() throws {
@@ -51,6 +58,29 @@ class MDWordMemoryStorage_Tests: XCTestCase {
                     switch result {
                     case .success(let fetchedWord):
                         XCTAssertTrue(fetchedWord.uuid == createdWord.uuid)
+                    case .failure:
+                        XCTExpectFailure()
+                    }
+                })
+            case .failure:
+                XCTExpectFailure()
+            }
+        }
+    }
+    
+    func test_Updated_One_Created_Word_Functionality() {
+        wordMemoryStorage.createWord(Self.mockedWord0) { [weak self] createdResult in
+            switch createdResult {
+            case .success:
+                self?.wordMemoryStorage.updateWord(Self.mockedWordForUpdate, { [weak self] updatedResult in
+                    switch updatedResult {
+                    case .success(let updatedWord):
+                        XCTAssertTrue(updatedWord.uuid == Self.mockedWordForUpdate.uuid)
+                        XCTAssertTrue(updatedWord.word == Self.mockedWordForUpdate.word)
+                        XCTAssertTrue(updatedWord.wordDescription == Self.mockedWordForUpdate.wordDescription)
+                        XCTAssertTrue(updatedWord.wordLanguage == Self.mockedWordForUpdate.wordLanguage)
+                        XCTAssertTrue(updatedWord.createdDate == Self.mockedWordForUpdate.createdDate)
+                        XCTAssertTrue(updatedWord.updatedDate == Self.mockedWordForUpdate.updatedDate)
                     case .failure:
                         XCTExpectFailure()
                     }

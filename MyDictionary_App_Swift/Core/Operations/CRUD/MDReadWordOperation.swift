@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDReadWordOperation: MDWordOperation {
+final class MDReadWordMemoryStorageOperation: MDWordOperation {
     
     fileprivate let wordStorage: MDWordStorageProtocol
     fileprivate let uuid: UUID
@@ -35,5 +35,5 @@ final class MDReadWordOperation: MDWordOperation {
         debugPrint(Self.self, #function)
         self.finish()
     }
-
+    
 }

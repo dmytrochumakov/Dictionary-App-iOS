@@ -38,15 +38,24 @@ extension MDWordMemoryStorage {
     }
     
     func readWord(fromUUID uuid: UUID, _ completionHandler: @escaping(MDReadWordResult)) {
-        
+        let operation = MDReadWordMemoryStorageOperation.init(wordStorage: self, uuid: uuid) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
     }
     
     func updateWord(_ word: WordModel, _ completionHandler: @escaping(MDUpdateWordResult)) {
-        
+        let operation = MDUpdateWordMemoryStorageOperation.init(wordStorage: self, word: word) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
     }
     
     func deleteWord(_ word: WordModel, _ completionHandler: @escaping(MDDeleteWordResult)) {
-        
+        let operation = MDDeleteWordMemoryStorageOperation.init(wordStorage: self, word: word) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
     }
     
 }
