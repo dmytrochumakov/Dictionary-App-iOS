@@ -68,12 +68,12 @@ class MDWordMemoryStorage_Tests: XCTestCase {
         }
     }
     
-    func test_Updated_One_Created_Word_Functionality() {
-        wordMemoryStorage.createWord(Self.mockedWord0) { [weak self] createdResult in
-            switch createdResult {
+    func test_Update_One_Created_Word_Functionality() {
+        wordMemoryStorage.createWord(Self.mockedWord0) { [weak self] createResult in
+            switch createResult {
             case .success:
-                self?.wordMemoryStorage.updateWord(Self.mockedWordForUpdate, { [weak self] updatedResult in
-                    switch updatedResult {
+                self?.wordMemoryStorage.updateWord(Self.mockedWordForUpdate, { [weak self] updateResult in
+                    switch updateResult {
                     case .success(let updatedWord):
                         XCTAssertTrue(updatedWord.uuid == Self.mockedWordForUpdate.uuid)
                         XCTAssertTrue(updatedWord.word == Self.mockedWordForUpdate.word)
@@ -81,6 +81,24 @@ class MDWordMemoryStorage_Tests: XCTestCase {
                         XCTAssertTrue(updatedWord.wordLanguage == Self.mockedWordForUpdate.wordLanguage)
                         XCTAssertTrue(updatedWord.createdDate == Self.mockedWordForUpdate.createdDate)
                         XCTAssertTrue(updatedWord.updatedDate == Self.mockedWordForUpdate.updatedDate)
+                    case .failure:
+                        XCTExpectFailure()
+                    }
+                })
+            case .failure:
+                XCTExpectFailure()
+            }
+        }
+    }
+    
+    func test_Delete_One_Created_Word_Functionality() {
+        wordMemoryStorage.createWord(Self.mockedWord0) { [weak self] createResult in
+            switch createResult {
+            case .success(let createdWord):
+                self?.wordMemoryStorage.deleteWord(createdWord, { deleteResult in
+                    switch deleteResult {
+                    case .success:
+                        XCTAssertTrue(self?.wordMemoryStorage.arrayWordsCount == .zero)
                     case .failure:
                         XCTExpectFailure()
                     }
