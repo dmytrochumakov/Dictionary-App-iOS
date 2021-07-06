@@ -9,11 +9,11 @@ import Foundation
 
 final class MDDeleteWordMemoryStorageOperation: MDWordOperation {
     
-    fileprivate let wordStorage: MDWordStorageProtocol
+    fileprivate let wordStorage: MDWordMemoryStorage
     fileprivate let word: WordModel
     fileprivate let result: MDDeleteWordOperationResult?
     
-    init(wordStorage: MDWordStorageProtocol,
+    init(wordStorage: MDWordMemoryStorage,
          word: WordModel,
          result: MDDeleteWordOperationResult?) {
         
@@ -25,10 +25,15 @@ final class MDDeleteWordMemoryStorageOperation: MDWordOperation {
     }
     
     override func main() {
-        self.wordStorage.deleteWord(word) { [weak self] result in
-            self?.result?(result)
-            self?.finish()
+        guard let index = self.wordStorage.arrayWords.firstIndex(where: { $0.uuid == self.word.uuid })
+        else {
+            self.result?(.failure(MDReadWordMemoryStorageOperationError.cantFindWord));
+            self.finish();
+            return
         }
+        self.wordStorage.arrayWords.remove(at: index)
+        self.result?(.success(self.word))
+        self.finish()
     }
     
     deinit {

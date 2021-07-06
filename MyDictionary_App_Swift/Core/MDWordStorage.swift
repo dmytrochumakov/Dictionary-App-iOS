@@ -43,12 +43,12 @@ extension MDWordStorage {
         }
     }
     
-    func updateWord(_ word: WordModel, _ completionHandler: @escaping(MDUpdateWordResult)) {
+    func updateWord(byUUID uuid: UUID, word: WordModel, _ completionHandler: @escaping(MDUpdateWordResult)) {
         switch storageType {
         case .none:
             break
         case .memory:
-            memoryStorage.updateWord(word, completionHandler)
+            memoryStorage.updateWord(byUUID: uuid, word: word, completionHandler)
         }
     }
     

@@ -7,13 +7,17 @@
 
 import Foundation
 
+enum MDReadWordMemoryStorageOperationError: Error {
+    case cantFindWord
+}
+
 final class MDReadWordMemoryStorageOperation: MDWordOperation {
     
-    fileprivate let wordStorage: MDWordStorageProtocol
+    fileprivate let wordStorage: MDWordMemoryStorage
     fileprivate let uuid: UUID
     fileprivate let result: MDReadWordOperationResult?
     
-    init(wordStorage: MDWordStorageProtocol,
+    init(wordStorage: MDWordMemoryStorage,
          uuid: UUID,
          result: MDReadWordOperationResult?) {
         
@@ -25,10 +29,14 @@ final class MDReadWordMemoryStorageOperation: MDWordOperation {
     }
     
     override func main() {
-        self.wordStorage.readWord(fromUUID: uuid) { [weak self] result in
-            self?.result?(result)
-            self?.finish()
+        guard let word = self.wordStorage.arrayWords.first(where: { $0.uuid == self.uuid })
+        else {
+            self.result?(.failure(MDReadWordMemoryStorageOperationError.cantFindWord));
+            self.finish();
+            return
         }
+        self.result?(.success(word))
+        self.finish()
     }
     
     deinit {

@@ -8,23 +8,25 @@
 import XCTest
 @testable import MyDictionary_App_Swift
 
-class MDWordMemoryStorage_Tests: XCTestCase {
+final class MDWordMemoryStorage_Tests: XCTestCase {
     
-    static let mockedWord0: WordModel = .init(uuid: .init(),
-                                              word: "word",
-                                              wordDescription: "wordDescription",
-                                              wordLanguage: "English",
-                                              createdDate: .init(),
-                                              updatedDate: .init())
+    fileprivate static let testTimeout: TimeInterval = 20.0
     
-    static let mockedWordForUpdate: WordModel = .init(uuid: .init(),
-                                                      word: "word for update",
-                                                      wordDescription: "word for update Description",
-                                                      wordLanguage: "Spanish",
-                                                      createdDate: .init(),
-                                                      updatedDate: .init())
+    fileprivate static let mockedWord0: WordModel = .init(uuid: .init(),
+                                                          word: "word",
+                                                          wordDescription: "wordDescription",
+                                                          wordLanguage: "English",
+                                                          createdDate: .init(),
+                                                          updatedDate: .init())
     
-    var wordMemoryStorage: MDWordMemoryStorageProtocol!
+    fileprivate static let mockedWordForUpdate: WordModel = .init(uuid: .init(),
+                                                                  word: "word for update",
+                                                                  wordDescription: "word for update Description",
+                                                                  wordLanguage: "Spanish",
+                                                                  createdDate: .init(),
+                                                                  updatedDate: .init())
+    
+    fileprivate var wordMemoryStorage: MDWordMemoryStorageProtocol!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -36,28 +38,43 @@ class MDWordMemoryStorage_Tests: XCTestCase {
         self.wordMemoryStorage = wordMemoryStorage
     }
     
+}
+
+extension MDWordMemoryStorage_Tests {
+    
     func test_Create_One_Word_Functionality() {
-        wordMemoryStorage.createWord(Self.mockedWord0) { [weak self] result in
+        
+        let expectation = XCTestExpectation(description: "Create One Word Expectation")
+        
+        wordMemoryStorage.createWord(Self.mockedWord0) { [unowned self] result in
             switch result {
             case .success(let createdWord):
                 XCTAssertTrue(createdWord.uuid == Self.mockedWord0.uuid)
-                XCTAssertTrue(self?.wordMemoryStorage.arrayWordsCount == 1)
+                XCTAssertTrue(self.wordMemoryStorage.arrayWordsCount == 1)
+                expectation.fulfill()
             case .failure:
                 XCTExpectFailure()
             }
         }
+        
+        wait(for: [expectation], timeout: Self.testTimeout)
+        
     }
     
     func test_Read_One_Created_Word_Functionality() {
-        wordMemoryStorage.createWord(Self.mockedWord0) { [weak self] result in
+        
+        let expectation = XCTestExpectation(description: "Read One Created Word Expectation")
+        
+        wordMemoryStorage.createWord(Self.mockedWord0) { [unowned self] result in
             switch result {
             case .success(let createdWord):
                 XCTAssertTrue(createdWord.uuid == Self.mockedWord0.uuid)
-                XCTAssertTrue(self?.wordMemoryStorage.arrayWordsCount == 1)
-                self?.wordMemoryStorage.readWord(fromUUID: createdWord.uuid, { result in
+                XCTAssertTrue(self.wordMemoryStorage.arrayWordsCount == 1)
+                self.wordMemoryStorage.readWord(fromUUID: createdWord.uuid, { [unowned self] result in
                     switch result {
                     case .success(let fetchedWord):
                         XCTAssertTrue(fetchedWord.uuid == createdWord.uuid)
+                        expectation.fulfill()
                     case .failure:
                         XCTExpectFailure()
                     }
@@ -66,39 +83,54 @@ class MDWordMemoryStorage_Tests: XCTestCase {
                 XCTExpectFailure()
             }
         }
+        
+        wait(for: [expectation], timeout: Self.testTimeout)
+        
     }
     
     func test_Update_One_Created_Word_Functionality() {
-        wordMemoryStorage.createWord(Self.mockedWord0) { [weak self] createResult in
+        
+        let expectation = XCTestExpectation(description: "Update One Created Word Expectation")
+        
+        wordMemoryStorage.createWord(Self.mockedWord0) { [unowned self] createResult in
             switch createResult {
-            case .success:
-                self?.wordMemoryStorage.updateWord(Self.mockedWordForUpdate, { [weak self] updateResult in
-                    switch updateResult {
-                    case .success(let updatedWord):
-                        XCTAssertTrue(updatedWord.uuid == Self.mockedWordForUpdate.uuid)
-                        XCTAssertTrue(updatedWord.word == Self.mockedWordForUpdate.word)
-                        XCTAssertTrue(updatedWord.wordDescription == Self.mockedWordForUpdate.wordDescription)
-                        XCTAssertTrue(updatedWord.wordLanguage == Self.mockedWordForUpdate.wordLanguage)
-                        XCTAssertTrue(updatedWord.createdDate == Self.mockedWordForUpdate.createdDate)
-                        XCTAssertTrue(updatedWord.updatedDate == Self.mockedWordForUpdate.updatedDate)
-                    case .failure:
-                        XCTExpectFailure()
-                    }
-                })
+            case .success(let createdWord):
+                self.wordMemoryStorage.updateWord(byUUID: createdWord.uuid,
+                                                  word: Self.mockedWordForUpdate, { [unowned self] updateResult in
+                                                    switch updateResult {
+                                                    case .success(let updatedWord):
+                                                        XCTAssertTrue(updatedWord.uuid == Self.mockedWordForUpdate.uuid)
+                                                        XCTAssertTrue(updatedWord.word == Self.mockedWordForUpdate.word)
+                                                        XCTAssertTrue(updatedWord.wordDescription == Self.mockedWordForUpdate.wordDescription)
+                                                        XCTAssertTrue(updatedWord.wordLanguage == Self.mockedWordForUpdate.wordLanguage)
+                                                        XCTAssertTrue(updatedWord.createdDate == Self.mockedWordForUpdate.createdDate)
+                                                        XCTAssertTrue(updatedWord.updatedDate == Self.mockedWordForUpdate.updatedDate)
+                                                        expectation.fulfill()
+                                                    case .failure:
+                                                        XCTExpectFailure()
+                                                    }
+                                                  })
             case .failure:
                 XCTExpectFailure()
             }
         }
+        
+        wait(for: [expectation], timeout: Self.testTimeout)
+        
     }
     
     func test_Delete_One_Created_Word_Functionality() {
-        wordMemoryStorage.createWord(Self.mockedWord0) { [weak self] createResult in
+        
+        let expectation = XCTestExpectation(description: "Delete One Created Word Expectation")
+        
+        wordMemoryStorage.createWord(Self.mockedWord0) { [unowned self] createResult in
             switch createResult {
             case .success(let createdWord):
-                self?.wordMemoryStorage.deleteWord(createdWord, { deleteResult in
+                self.wordMemoryStorage.deleteWord(createdWord, { [unowned self] deleteResult in
                     switch deleteResult {
                     case .success:
-                        XCTAssertTrue(self?.wordMemoryStorage.arrayWordsCount == .zero)
+                        XCTAssertTrue(self.wordMemoryStorage.arrayWordsCount == .zero)
+                        expectation.fulfill()
                     case .failure:
                         XCTExpectFailure()
                     }
@@ -107,6 +139,9 @@ class MDWordMemoryStorage_Tests: XCTestCase {
                 XCTExpectFailure()
             }
         }
+        
+        wait(for: [expectation], timeout: Self.testTimeout)
+        
     }
     
 }
