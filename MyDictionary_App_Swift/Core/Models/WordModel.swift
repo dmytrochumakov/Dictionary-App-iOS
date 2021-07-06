@@ -22,11 +22,3 @@ struct WordModel: MDUUIDPropertyProtocol,
     let updatedDate: Date
         
 }
-
-extension WordModel: Equatable {
-    
-    static func == (lhs: WordModel, rhs: WordModel) -> Bool {
-        return (lhs.uuid == rhs.uuid)
-    }
-    
-}
