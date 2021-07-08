@@ -30,7 +30,7 @@ final class MDUpdateWordMemoryStorageOperation: MDWordOperation {
     override func main() {
         guard let index = self.wordStorage.arrayWords.firstIndex(where: { $0.uuid == self.uuid })
         else {
-            self.result?(.failure(MDReadWordMemoryStorageOperationError.cantFindWord));
+            self.result?(.failure(OperationError.cantFindWord));
             self.finish();
             return
         }

@@ -18,6 +18,14 @@
 		22493C312697159E000DA480 /* CDResultSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C302697159E000DA480 /* CDResultSaved.swift */; };
 		22493C33269715A9000DA480 /* CDResultSavedEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C32269715A9000DA480 /* CDResultSavedEnum.swift */; };
 		22493C3526971726000DA480 /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C3426971726000DA480 /* TestCoreDataStack.swift */; };
+		22493C3726972232000DA480 /* MDWordCoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C3626972232000DA480 /* MDWordCoreDataStorage.swift */; };
+		22493C39269722AA000DA480 /* MDCRUDWordProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C38269722AA000DA480 /* MDCRUDWordProtocol.swift */; };
+		22493C3B269724CB000DA480 /* CoreDataEntityName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C3A269724CB000DA480 /* CoreDataEntityName.swift */; };
+		22493C3E2697259D000DA480 /* MDCDResultSavedWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C3D2697259D000DA480 /* MDCDResultSavedWord.swift */; };
+		22493C41269726A4000DA480 /* CDWordEntityAttributeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C40269726A4000DA480 /* CDWordEntityAttributeName.swift */; };
+		22493C4726972877000DA480 /* MDReadWordsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C4626972877000DA480 /* MDReadWordsResult.swift */; };
+		22493C4926972A03000DA480 /* CDWordEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C4826972A03000DA480 /* CDWordEntity+Extension.swift */; };
+		22493C4C26972E27000DA480 /* OperationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C4B26972E26000DA480 /* OperationError.swift */; };
 		226FEE78266B63F10044A5F9 /* AppearanceCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226FEE77266B63F10044A5F9 /* AppearanceCollectionViewDelegate.swift */; };
 		226FEE7A266B644F0044A5F9 /* AppearanceCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226FEE79266B644F0044A5F9 /* AppearanceCollectionViewDataSource.swift */; };
 		226FEE7D266B65080044A5F9 /* AppearanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226FEE7C266B65080044A5F9 /* AppearanceCell.swift */; };
@@ -153,6 +161,14 @@
 		22493C302697159E000DA480 /* CDResultSaved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDResultSaved.swift; sourceTree = "<group>"; };
 		22493C32269715A9000DA480 /* CDResultSavedEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDResultSavedEnum.swift; sourceTree = "<group>"; };
 		22493C3426971726000DA480 /* TestCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
+		22493C3626972232000DA480 /* MDWordCoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordCoreDataStorage.swift; sourceTree = "<group>"; };
+		22493C38269722AA000DA480 /* MDCRUDWordProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCRUDWordProtocol.swift; sourceTree = "<group>"; };
+		22493C3A269724CB000DA480 /* CoreDataEntityName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEntityName.swift; sourceTree = "<group>"; };
+		22493C3D2697259D000DA480 /* MDCDResultSavedWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCDResultSavedWord.swift; sourceTree = "<group>"; };
+		22493C40269726A4000DA480 /* CDWordEntityAttributeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDWordEntityAttributeName.swift; sourceTree = "<group>"; };
+		22493C4626972877000DA480 /* MDReadWordsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadWordsResult.swift; sourceTree = "<group>"; };
+		22493C4826972A03000DA480 /* CDWordEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDWordEntity+Extension.swift"; sourceTree = "<group>"; };
+		22493C4B26972E26000DA480 /* OperationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationError.swift; sourceTree = "<group>"; };
 		226FEE77266B63F10044A5F9 /* AppearanceCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		226FEE79266B644F0044A5F9 /* AppearanceCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		226FEE7C266B65080044A5F9 /* AppearanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceCell.swift; sourceTree = "<group>"; };
@@ -387,8 +403,33 @@
 		222EF9AF2694808E00542D3D /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				22493C3A269724CB000DA480 /* CoreDataEntityName.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		22493C3C2697258F000DA480 /* CDSave */ = {
+			isa = PBXGroup;
+			children = (
+				22493C3D2697259D000DA480 /* MDCDResultSavedWord.swift */,
+			);
+			path = CDSave;
+			sourceTree = "<group>";
+		};
+		22493C3F26972687000DA480 /* AttributeName */ = {
+			isa = PBXGroup;
+			children = (
+				22493C40269726A4000DA480 /* CDWordEntityAttributeName.swift */,
+			);
+			path = AttributeName;
+			sourceTree = "<group>";
+		};
+		22493C4A26972E0E000DA480 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				22493C4B26972E26000DA480 /* OperationError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		226FEE7B266B64FD0044A5F9 /* Cells */ = {
@@ -460,6 +501,7 @@
 				2289CECE2678CC34007254C3 /* Protocols */,
 				2289CEDB2678CC34007254C3 /* Services */,
 				2289CEDD2678CC34007254C3 /* MDWordOperation.swift */,
+				22493C3626972232000DA480 /* MDWordCoreDataStorage.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -483,6 +525,7 @@
 		2289CEBC2678CC34007254C3 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				22493C4A26972E0E000DA480 /* Error */,
 				2289CEBD2678CC34007254C3 /* CRUD */,
 			);
 			path = Operations;
@@ -502,6 +545,7 @@
 		2289CEC22678CC34007254C3 /* Results */ = {
 			isa = PBXGroup;
 			children = (
+				22493C3C2697258F000DA480 /* CDSave */,
 				2289CEC32678CC34007254C3 /* OperationCRUD */,
 				2289CEC82678CC34007254C3 /* CRUD */,
 			);
@@ -526,6 +570,7 @@
 				2289CECA2678CC34007254C3 /* MDUpdateWordResult.swift */,
 				2289CECB2678CC34007254C3 /* MDDeleteWordResult.swift */,
 				2289CECC2678CC34007254C3 /* MDCreateWordResult.swift */,
+				22493C4626972877000DA480 /* MDReadWordsResult.swift */,
 			);
 			path = CRUD;
 			sourceTree = "<group>";
@@ -540,6 +585,7 @@
 				2289CED42678CC34007254C3 /* MDWordPropertyProtocol.swift */,
 				2289CED52678CC34007254C3 /* CRUD */,
 				2289CEDA2678CC34007254C3 /* MDCreatedDateProtocol.swift */,
+				22493C38269722AA000DA480 /* MDCRUDWordProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -656,11 +702,13 @@
 		228BC46F26497B270030FB30 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				22493C3F26972687000DA480 /* AttributeName */,
 				222EF9AF2694808E00542D3D /* Entity */,
 				228BC47026497B2D0030FB30 /* Model */,
 				22493C2D26971413000DA480 /* CoreDataStack.swift */,
 				22493C302697159E000DA480 /* CDResultSaved.swift */,
 				22493C32269715A9000DA480 /* CDResultSavedEnum.swift */,
+				22493C4826972A03000DA480 /* CDWordEntity+Extension.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -1007,6 +1055,7 @@
 				2289CEF12678CC34007254C3 /* MDUpdatedDateProtocol.swift in Sources */,
 				2289CEE92678CC34007254C3 /* MDReadWordResult.swift in Sources */,
 				226FEE78266B63F10044A5F9 /* AppearanceCollectionViewDelegate.swift in Sources */,
+				22493C4926972A03000DA480 /* CDWordEntity+Extension.swift in Sources */,
 				22493C312697159E000DA480 /* CDResultSaved.swift in Sources */,
 				22E2B4F02664EF3200978E62 /* UICollectionView+Extension.swift in Sources */,
 				2289CEF72678CC34007254C3 /* MDCreateWordProtocol.swift in Sources */,
@@ -1027,12 +1076,15 @@
 				22CA088726515F6A0052D169 /* WordListDataManager.swift in Sources */,
 				22E2B4E12664E43B00978E62 /* SettingsDataProvider.swift in Sources */,
 				22E2B4F32665085E00978E62 /* SettingsRowType.swift in Sources */,
+				22493C39269722AA000DA480 /* MDCRUDWordProtocol.swift in Sources */,
 				2289CEEA2678CC34007254C3 /* MDUpdateWordResult.swift in Sources */,
 				2299017B2668FBEA00D8C74E /* MainTabBarRouter.swift in Sources */,
+				22493C4C26972E27000DA480 /* OperationError.swift in Sources */,
 				22CA0896265178DE0052D169 /* ScrollToTopProtocol.swift in Sources */,
 				229901692668EC3400D8C74E /* AppearanceRouter.swift in Sources */,
 				2289CEE82678CC34007254C3 /* MDDeleteWordOperationResult.swift in Sources */,
 				22E2B4F7266509B900978E62 /* SettingsSectionModel.swift in Sources */,
+				22493C3726972232000DA480 /* MDWordCoreDataStorage.swift in Sources */,
 				2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */,
 				2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */,
 				22BD99A0266A4AB10063FEFC /* WordListModule.swift in Sources */,
@@ -1097,11 +1149,14 @@
 				2223F8AB26512C5A004F2FE9 /* String+Extension.swift in Sources */,
 				2289CEF82678CC34007254C3 /* MDCreatedDateProtocol.swift in Sources */,
 				22CA088E265167620052D169 /* ReloadDataProtocol.swift in Sources */,
+				22493C41269726A4000DA480 /* CDWordEntityAttributeName.swift in Sources */,
 				2289CEED2678CC34007254C3 /* MDWordStorage.swift in Sources */,
 				228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */,
 				2289CEE12678CC34007254C3 /* MDCreateWordOperation.swift in Sources */,
 				22CA08892651603A0052D169 /* WordListDataProvider.swift in Sources */,
+				22493C3E2697259D000DA480 /* MDCDResultSavedWord.swift in Sources */,
 				22E2B4F52665097900978E62 /* SettingsSectionType.swift in Sources */,
+				22493C3B269724CB000DA480 /* CoreDataEntityName.swift in Sources */,
 				227D5E642652584700B54524 /* NSLayoutConstraint+Extension.swift in Sources */,
 				22E2B500266515E700978E62 /* CollectionViewDataSource.swift in Sources */,
 				229E08BC2652C41400DA56C4 /* ReuseIdentifierProtocol.swift in Sources */,
@@ -1111,6 +1166,7 @@
 				226FEE7A266B644F0044A5F9 /* AppearanceCollectionViewDataSource.swift in Sources */,
 				22E2B4E62664EB8000978E62 /* SettingsCollectionViewDelegate.swift in Sources */,
 				2223F8A826512C1A004F2FE9 /* LocalizableProtocol.swift in Sources */,
+				22493C4726972877000DA480 /* MDReadWordsResult.swift in Sources */,
 				226FEE87266B7E300044A5F9 /* AppearanceHasBeenUpdatedProtocol.swift in Sources */,
 				22493C33269715A9000DA480 /* CDResultSavedEnum.swift in Sources */,
 			);

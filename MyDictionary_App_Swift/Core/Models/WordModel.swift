@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct WordModel: MDUUIDPropertyProtocol,
                   MDWordPropertyProtocol,
@@ -20,5 +21,14 @@ struct WordModel: MDUUIDPropertyProtocol,
     let wordLanguage: String
     let createdDate: Date
     let updatedDate: Date
-        
+    
+}
+
+extension WordModel {
+    
+    func cdWordEntity(insertIntoManagedObjectContext: NSManagedObjectContext) -> CDWordEntity {
+        return .init(wordModel: self,
+                     insertIntoManagedObjectContext: insertIntoManagedObjectContext)
+    }
+    
 }

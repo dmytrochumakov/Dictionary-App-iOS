@@ -7,10 +7,7 @@
 
 import Foundation
 
-protocol MDWordMemoryStorageProtocol: MDCreateWordProtocol,
-                                      MDReadWordProtocol,
-                                      MDUpdateWordProtocol,
-                                      MDDeleteWordProtocol {
+protocol MDWordMemoryStorageProtocol: MDCRUDWordProtocol {
     
     var arrayWordsCount: Int { get }
     
@@ -55,6 +52,10 @@ extension MDWordMemoryStorage {
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
+    }
+    
+    func readWords(fetchLimit: Int, fetchOffset: Int, _ completionHandler: @escaping (MDReadWordsResult)) {
+        completionHandler(.success([]))
     }
     
     func updateWord(byUUID uuid: UUID, word: WordModel, _ completionHandler: @escaping(MDUpdateWordResult)) {
