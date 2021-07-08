@@ -8,3 +8,4 @@
 import Foundation
 
 typealias MDReadWordOperationResult = MDReadWordResult
+typealias MDReadWordsOperationResult = MDReadWordsResult
