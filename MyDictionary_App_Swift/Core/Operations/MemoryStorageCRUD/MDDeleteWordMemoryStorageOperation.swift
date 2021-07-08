@@ -1,5 +1,5 @@
 //
-//  MDReadWordOperation.swift
+//  MDDeleteWordMemoryStorageOperation.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 29.05.2021.
@@ -7,31 +7,32 @@
 
 import Foundation
 
-final class MDReadWordMemoryStorageOperation: MDWordOperation {
+final class MDDeleteWordMemoryStorageOperation: MDWordOperation {
     
     fileprivate let wordStorage: MDWordMemoryStorage
-    fileprivate let uuid: UUID
-    fileprivate let result: MDReadWordOperationResult?
+    fileprivate let word: WordModel
+    fileprivate let result: MDDeleteWordOperationResult?
     
     init(wordStorage: MDWordMemoryStorage,
-         uuid: UUID,
-         result: MDReadWordOperationResult?) {
+         word: WordModel,
+         result: MDDeleteWordOperationResult?) {
         
         self.wordStorage = wordStorage
-        self.uuid = uuid
+        self.word = word
         self.result = result
         
         super.init()
     }
     
     override func main() {
-        guard let word = self.wordStorage.arrayWords.first(where: { $0.uuid == self.uuid })
+        guard let index = self.wordStorage.arrayWords.firstIndex(where: { $0.uuid == self.word.uuid })
         else {
             self.result?(.failure(OperationError.cantFindWord));
             self.finish();
             return
         }
-        self.result?(.success(word))
+        self.wordStorage.arrayWords.remove(at: index)
+        self.result?(.success(self.word))
         self.finish()
     }
     
