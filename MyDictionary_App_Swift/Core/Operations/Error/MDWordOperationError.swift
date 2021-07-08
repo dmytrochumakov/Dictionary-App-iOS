@@ -9,4 +9,5 @@ import Foundation
 
 enum MDWordOperationError: Error {
     case cantFindWord
+    case objectRemovedFromMemory
 }

@@ -54,6 +54,7 @@ extension MDWordMemoryStorage_Tests {
                 expectation.fulfill()
             case .failure:
                 XCTExpectFailure()
+                expectation.fulfill()
             }
         }
         
@@ -77,10 +78,12 @@ extension MDWordMemoryStorage_Tests {
                         expectation.fulfill()
                     case .failure:
                         XCTExpectFailure()
+                        expectation.fulfill()
                     }
                 })
             case .failure:
                 XCTExpectFailure()
+                expectation.fulfill()
             }
         }
         
@@ -108,10 +111,12 @@ extension MDWordMemoryStorage_Tests {
                                                         expectation.fulfill()
                                                     case .failure:
                                                         XCTExpectFailure()
+                                                        expectation.fulfill()
                                                     }
                                                   })
             case .failure:
                 XCTExpectFailure()
+                expectation.fulfill()
             }
         }
         
@@ -133,10 +138,12 @@ extension MDWordMemoryStorage_Tests {
                         expectation.fulfill()
                     case .failure:
                         XCTExpectFailure()
+                        expectation.fulfill()
                     }
                 })
             case .failure:
                 XCTExpectFailure()
+                expectation.fulfill()
             }
         }
         

@@ -32,24 +32,24 @@ final class MDReadWordCoreDataStorageOperation: MDWordOperation {
         
         let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: CoreDataEntityName.CDWordEntity)
         fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %@", uuid.uuidString)
-        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [unowned self] asynchronousFetchResult in
+        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
             
             if let result = asynchronousFetchResult.finalResult {
                 if let word = result.map({ $0.wordModel }).first {
                     DispatchQueue.main.async {
-                        self.result?(.success(word))
-                        self.finish()
+                        self?.result?(.success(word))
+                        self?.finish()
                     }
                 } else {
                     DispatchQueue.main.async {
-                        self.result?(.failure(MDWordOperationError.cantFindWord))
-                        self.finish()
+                        self?.result?(.failure(MDWordOperationError.cantFindWord))
+                        self?.finish()
                     }
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.result?(.failure(MDWordOperationError.cantFindWord))
-                    self.finish()
+                    self?.result?(.failure(MDWordOperationError.cantFindWord))
+                    self?.finish()
                 }
             }
             
@@ -99,17 +99,17 @@ final class MDReadWordsCoreDataStorageOperation: MDWordOperation {
         let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: CoreDataEntityName.CDWordEntity)
         fetchRequest.fetchLimit = self.fetchLimit
         fetchRequest.fetchOffset = self.fetchOffset
-        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [unowned self] asynchronousFetchResult in
+        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
             
             if let result = asynchronousFetchResult.finalResult {
                 DispatchQueue.main.async {
-                    self.result?(.success(result.map({ $0.wordModel })))
-                    self.finish()
+                    self?.result?(.success(result.map({ $0.wordModel })))
+                    self?.finish()
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.result?(.failure(MDWordOperationError.cantFindWord))
-                    self.finish()
+                    self?.result?(.failure(MDWordOperationError.cantFindWord))
+                    self?.finish()
                 }
             }
             

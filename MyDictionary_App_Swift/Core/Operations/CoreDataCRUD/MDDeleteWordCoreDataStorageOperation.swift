@@ -35,15 +35,21 @@ final class MDDeleteWordCoreDataStorageOperation: MDWordOperation {
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         do {
             try managedObjectContext.execute(batchDeleteRequest)
-            self.wordStorage.savePerform { [unowned self] (result) in
+            self.wordStorage.savePerform { [weak self] (result) in
                 DispatchQueue.main.async {
                     switch result {
                     case .success:
+                        guard let self = self
+                        else {
+                            self?.result?(.failure(MDWordOperationError.objectRemovedFromMemory));
+                            self?.finish() ;
+                            return
+                        }
                         self.result?(.success(self.word))
                         self.finish()
                     case .failure(let error):
-                        self.result?(.failure(error))
-                        self.finish()
+                        self?.result?(.failure(error))
+                        self?.finish()
                     }
                 }
             }

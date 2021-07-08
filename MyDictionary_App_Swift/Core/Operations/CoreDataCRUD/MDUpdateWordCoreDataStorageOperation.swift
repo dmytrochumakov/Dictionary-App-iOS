@@ -42,15 +42,15 @@ final class MDUpdateWordCoreDataStorageOperation: MDWordOperation {
         
         do {
             try managedObjectContext.execute(batchUpdateRequest)
-            self.wordStorage.savePerform(word: self.word.cdWordEntity(insertIntoManagedObjectContext: managedObjectContext)) { [unowned self] (result) in
+            self.wordStorage.savePerform(word: self.word.cdWordEntity(insertIntoManagedObjectContext: managedObjectContext)) { [weak self] (result) in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let updatedWord):
-                        self.result?(.success(updatedWord))
-                        self.finish()
+                        self?.result?(.success(updatedWord))
+                        self?.finish()
                     case .failure(let error):
-                        self.result?(.failure(error))
-                        self.finish()
+                        self?.result?(.failure(error))
+                        self?.finish()
                     }
                 }
             }
