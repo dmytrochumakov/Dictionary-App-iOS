@@ -9,6 +9,7 @@ import UIKit
 
 protocol MDAppDelegateProtocol {
     var rootWindow: UIWindow! { get }
+    var dependencies: MDAppDependenciesProtocol! { get }
 }
 
 @main
@@ -17,10 +18,12 @@ final class MDAppDelegate: UIResponder,
                            MDAppDelegateProtocol {
     
     var rootWindow: UIWindow!
+    var dependencies: MDAppDependenciesProtocol!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         self.rootWindow = RootWindow.window
+        self.dependencies = MDAppDependencies.init()
         
         return true
     }

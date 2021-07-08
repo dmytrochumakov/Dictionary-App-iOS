@@ -42,7 +42,6 @@
 		2289CEED2678CC34007254C3 /* MDWordStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CECD2678CC34007254C3 /* MDWordStorage.swift */; };
 		2289CEEE2678CC34007254C3 /* MDWordDescriptionPropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CECF2678CC34007254C3 /* MDWordDescriptionPropertyProtocol.swift */; };
 		2289CEEF2678CC34007254C3 /* MDWordLanguagePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CED02678CC34007254C3 /* MDWordLanguagePropertyProtocol.swift */; };
-		2289CEF02678CC34007254C3 /* MDWordStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CED12678CC34007254C3 /* MDWordStorageProtocol.swift */; };
 		2289CEF12678CC34007254C3 /* MDUpdatedDateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CED22678CC34007254C3 /* MDUpdatedDateProtocol.swift */; };
 		2289CEF22678CC34007254C3 /* MDUUIDPropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CED32678CC34007254C3 /* MDUUIDPropertyProtocol.swift */; };
 		2289CEF32678CC34007254C3 /* MDWordPropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CED42678CC34007254C3 /* MDWordPropertyProtocol.swift */; };
@@ -81,6 +80,7 @@
 		22B2268F266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B2268E266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift */; };
 		22B22691266CF866007AB292 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B22690266CF866007AB292 /* UIViewController+Extension.swift */; };
 		22B22693266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B22692266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift */; };
+		22B6B9E426958F4E0076B003 /* MDAppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6B9E326958F4D0076B003 /* MDAppDependencies.swift */; };
 		22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD9999266A480D0063FEFC /* SettingsModule.swift */; };
 		22BD999C266A48D60063FEFC /* MainTabBarModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999B266A48D60063FEFC /* MainTabBarModule.swift */; };
 		22BD999E266A4A2C0063FEFC /* ModuleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999D266A4A2C0063FEFC /* ModuleProtocol.swift */; };
@@ -173,7 +173,6 @@
 		2289CECD2678CC34007254C3 /* MDWordStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordStorage.swift; sourceTree = "<group>"; };
 		2289CECF2678CC34007254C3 /* MDWordDescriptionPropertyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordDescriptionPropertyProtocol.swift; sourceTree = "<group>"; };
 		2289CED02678CC34007254C3 /* MDWordLanguagePropertyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordLanguagePropertyProtocol.swift; sourceTree = "<group>"; };
-		2289CED12678CC34007254C3 /* MDWordStorageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordStorageProtocol.swift; sourceTree = "<group>"; };
 		2289CED22678CC34007254C3 /* MDUpdatedDateProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDUpdatedDateProtocol.swift; sourceTree = "<group>"; };
 		2289CED32678CC34007254C3 /* MDUUIDPropertyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDUUIDPropertyProtocol.swift; sourceTree = "<group>"; };
 		2289CED42678CC34007254C3 /* MDWordPropertyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordPropertyProtocol.swift; sourceTree = "<group>"; };
@@ -218,6 +217,7 @@
 		22B2268E266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationAppearanceControllerProtocol.swift; sourceTree = "<group>"; };
 		22B22690266CF866007AB292 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		22B22692266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceTypePropertyProtocol.swift; sourceTree = "<group>"; };
+		22B6B9E326958F4D0076B003 /* MDAppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppDependencies.swift; sourceTree = "<group>"; };
 		22BD9999266A480D0063FEFC /* SettingsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModule.swift; sourceTree = "<group>"; };
 		22BD999B266A48D60063FEFC /* MainTabBarModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarModule.swift; sourceTree = "<group>"; };
 		22BD999D266A4A2C0063FEFC /* ModuleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleProtocol.swift; sourceTree = "<group>"; };
@@ -527,7 +527,6 @@
 			children = (
 				2289CECF2678CC34007254C3 /* MDWordDescriptionPropertyProtocol.swift */,
 				2289CED02678CC34007254C3 /* MDWordLanguagePropertyProtocol.swift */,
-				2289CED12678CC34007254C3 /* MDWordStorageProtocol.swift */,
 				2289CED22678CC34007254C3 /* MDUpdatedDateProtocol.swift */,
 				2289CED32678CC34007254C3 /* MDUUIDPropertyProtocol.swift */,
 				2289CED42678CC34007254C3 /* MDWordPropertyProtocol.swift */,
@@ -588,6 +587,7 @@
 				228BC46F26497B270030FB30 /* CoreData */,
 				228BC46A26497AEC0030FB30 /* Resources */,
 				229901702668EE5300D8C74E /* MDAppDelegate.swift */,
+				22B6B9E326958F4D0076B003 /* MDAppDependencies.swift */,
 			);
 			path = MyDictionary_App_Swift;
 			sourceTree = "<group>";
@@ -1037,7 +1037,6 @@
 				22B22681266CC033007AB292 /* Observable.swift in Sources */,
 				22E2B4DD2664E43B00978E62 /* SettingsPresenter.swift in Sources */,
 				229E08BE2652C8E600DA56C4 /* SectionTypeProtocol.swift in Sources */,
-				2289CEF02678CC34007254C3 /* MDWordStorageProtocol.swift in Sources */,
 				2289CEF22678CC34007254C3 /* MDUUIDPropertyProtocol.swift in Sources */,
 				2299017A2668FBEA00D8C74E /* MainTabBarPresenter.swift in Sources */,
 				2289CEFA2678CC34007254C3 /* MDWordOperation.swift in Sources */,
@@ -1065,6 +1064,7 @@
 				22E2B4FB266509DC00978E62 /* SettingsDataProviderModel.swift in Sources */,
 				22E2B4E22664E43B00978E62 /* SettingsDataManager.swift in Sources */,
 				2289CEF42678CC34007254C3 /* MDUpdateWordProtocol.swift in Sources */,
+				22B6B9E426958F4E0076B003 /* MDAppDependencies.swift in Sources */,
 				22BD999C266A48D60063FEFC /* MainTabBarModule.swift in Sources */,
 				2289CEEE2678CC34007254C3 /* MDWordDescriptionPropertyProtocol.swift in Sources */,
 				22CA088C265165460052D169 /* AppStyling.swift in Sources */,

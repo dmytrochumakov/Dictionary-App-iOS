@@ -7,21 +7,34 @@
 
 import Foundation
 
-protocol MDWordMemoryStorageProtocol: MDWordStorageProtocol {
+protocol MDWordMemoryStorageProtocol: MDCreateWordProtocol,
+                                      MDReadWordProtocol,
+                                      MDUpdateWordProtocol,
+                                      MDDeleteWordProtocol {
+    
     var arrayWordsCount: Int { get }
+    
 }
 
 final class MDWordMemoryStorage: MDWordMemoryStorageProtocol {
     
     fileprivate let operationQueueService: OperationQueueServiceProtocol
+    
     var arrayWords: [WordModel]
     var arrayWordsCount: Int {
         return arrayWords.count
     }
+    
     init(operationQueueService: OperationQueueServiceProtocol,
          arrayWords: [WordModel]) {
+        
         self.operationQueueService = operationQueueService
         self.arrayWords = arrayWords
+        
+    }
+    
+    deinit {
+        debugPrint(#function, Self.self)
     }
     
 }
