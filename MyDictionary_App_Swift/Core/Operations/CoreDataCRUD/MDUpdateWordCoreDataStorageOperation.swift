@@ -13,19 +13,22 @@ final class MDUpdateWordCoreDataStorageOperation: MDWordOperation {
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let wordStorage: MDWordCoreDataStorage
     fileprivate let uuid: UUID
-    fileprivate let word: WordModel
+    fileprivate let word: String
+    fileprivate let wordDescription: String
     fileprivate let result: MDUpdateWordOperationResult?
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
          uuid: UUID,
-         word: WordModel,
+         word: String,
+         wordDescription: String,
          result: MDUpdateWordOperationResult?) {
         
         self.managedObjectContext = managedObjectContext
         self.wordStorage = wordStorage
         self.uuid = uuid
         self.word = word
+        self.wordDescription = wordDescription
         self.result = result
         
         super.init()
@@ -34,14 +37,14 @@ final class MDUpdateWordCoreDataStorageOperation: MDWordOperation {
     override func main() {
         
         let batchUpdateRequest = NSBatchUpdateRequest(entityName: CoreDataEntityName.CDWordEntity)
-        batchUpdateRequest.propertiesToUpdate = [CDWordEntityAttributeName.word : self.word.word,
-                                                 CDWordEntityAttributeName.wordDescription : self.word.wordDescription                                                 
+        batchUpdateRequest.propertiesToUpdate = [CDWordEntityAttributeName.word : self.word,
+                                                 CDWordEntityAttributeName.wordDescription : self.wordDescription
         ]
-        batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %@", self.word.uuid.uuidString)
+        batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %@", self.uuid.uuidString)
         
         do {
             try managedObjectContext.execute(batchUpdateRequest)
-            self.wordStorage.savePerform(word: self.word.cdWordEntity(insertIntoManagedObjectContext: managedObjectContext)) { [weak self] (result) in
+            self.wordStorage.savePerform(uuid: self.uuid) { [weak self] (result) in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let updatedWord):

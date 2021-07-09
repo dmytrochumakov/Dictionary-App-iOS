@@ -76,11 +76,12 @@ extension MDWordCoreDataStorage {
 // MARK: - Update
 extension MDWordCoreDataStorage {
     
-    func updateWord(byUUID uuid: UUID, word: WordModel, _ completionHandler: @escaping (MDUpdateWordResult)) {
+    func updateWord(byUUID uuid: UUID, word: String, wordDescription: String, _ completionHandler: @escaping (MDUpdateWordResult)) {
         let operation = MDUpdateWordCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                   wordStorage: self,
                                                                   uuid: uuid,
-                                                                  word: word) { result in
+                                                                  word: word,
+                                                                  wordDescription: wordDescription) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
@@ -109,11 +110,11 @@ extension MDWordCoreDataStorage {
         coreDataStack.savePerform(completionHandler: completionHandler)
     }
     
-    func savePerform(word: CDWordEntity, completionHandler: @escaping MDCDResultSavedWord) {
+    func savePerform(uuid: UUID, completionHandler: @escaping MDCDResultSavedWord) {
         coreDataStack.savePerform() { [unowned self] (result) in
             switch result {
             case .success:
-                self.readWord(fromUUID: word.uuid!) { [unowned self] (result) in
+                self.readWord(fromUUID: uuid) { [unowned self] (result) in
                     switch result {
                     case .success(let wordModel):
                         completionHandler(.success(wordModel))
@@ -127,11 +128,11 @@ extension MDWordCoreDataStorage {
         }
     }
     
-    func save(word: CDWordEntity, completionHandler: @escaping MDCDResultSavedWord) {
+    func save(uuid: UUID, completionHandler: @escaping MDCDResultSavedWord) {
         coreDataStack.savePerformAndWait() { [unowned self] (result) in
             switch result {
             case .success:
-                self.readWord(fromUUID: word.uuid!) { [unowned self] (result) in
+                self.readWord(fromUUID: uuid) { [unowned self] (result) in
                     switch result {
                     case .success(let wordModel):
                         completionHandler(.success(wordModel))

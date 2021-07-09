@@ -10,7 +10,7 @@ import Foundation
 protocol MDWordStorageProtocol {    
     func createWord(_ wordModel: WordModel, storageType: MDWordStorageType, _ completionHandler: @escaping(MDCreateWordResult))
     func readWord(fromUUID uuid: UUID, storageType: MDWordStorageType, _ completionHandler: @escaping(MDReadWordResult))
-    func updateWord(byUUID uuid: UUID, word: WordModel, storageType: MDWordStorageType, _ completionHandler: @escaping(MDUpdateWordResult))
+    func updateWord(byUUID uuid: UUID, word: String, wordDescription: String, storageType: MDWordStorageType, _ completionHandler: @escaping(MDUpdateWordResult))
     func deleteWord(_ word: WordModel, storageType: MDWordStorageType, _ completionHandler: @escaping(MDDeleteWordResult))
 }
 
@@ -51,12 +51,12 @@ extension MDWordStorage {
         }
     }
     
-    func updateWord(byUUID uuid: UUID, word: WordModel, storageType: MDWordStorageType, _ completionHandler: @escaping(MDUpdateWordResult)) {
+    func updateWord(byUUID uuid: UUID, word: String, wordDescription: String, storageType: MDWordStorageType, _ completionHandler: @escaping(MDUpdateWordResult)) {
         switch storageType {
         case .none:
             break
         case .memory:
-            memoryStorage.updateWord(byUUID: uuid, word: word, completionHandler)
+            memoryStorage.updateWord(byUUID: uuid, word: word, wordDescription: wordDescription, completionHandler)
         }
     }
     

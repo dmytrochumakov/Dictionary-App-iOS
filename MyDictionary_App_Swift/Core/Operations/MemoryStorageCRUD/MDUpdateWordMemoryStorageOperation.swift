@@ -11,17 +11,20 @@ final class MDUpdateWordMemoryStorageOperation: MDWordOperation {
     
     fileprivate let wordStorage: MDWordMemoryStorage
     fileprivate let uuid: UUID
-    fileprivate let word: WordModel
+    fileprivate let word: String
+    fileprivate let wordDescription: String
     fileprivate let result: MDUpdateWordOperationResult?
     
     init(wordStorage: MDWordMemoryStorage,
          uuid: UUID,
-         word: WordModel,
+         word: String,
+         wordDescription: String,
          result: MDUpdateWordOperationResult?) {
         
         self.wordStorage = wordStorage
         self.uuid = uuid
         self.word = word
+        self.wordDescription = wordDescription
         self.result = result
         
         super.init()
@@ -34,8 +37,9 @@ final class MDUpdateWordMemoryStorageOperation: MDWordOperation {
             self.finish();
             return
         }
-        self.wordStorage.arrayWords[index] = self.word
-        self.result?(.success(self.word))
+        self.wordStorage.arrayWords[index].word = self.word
+        self.wordStorage.arrayWords[index].wordDescription = self.wordDescription
+        self.result?(.success(self.wordStorage.arrayWords[index]))
         self.finish()
     }
     

@@ -114,7 +114,7 @@ extension MDWordCoreDataStorage_Tests {
 // MARK: - Update
 extension MDWordCoreDataStorage_Tests {
     
-    func test_Update_One_Created_Word_Functionality() {
+    func test_Update_One_Created_Word_Word_String_And_Word_Description_String_Functionality() {
         
         let expectation = XCTestExpectation(description: "Update One Created Word Expectation")
         
@@ -122,15 +122,12 @@ extension MDWordCoreDataStorage_Tests {
             switch createResult {
             case .success(let createdWord):
                 self.wordCoreDataStorage.updateWord(byUUID: createdWord.uuid,
-                                                    word: Self.mockedWordForUpdate, { [unowned self] updateResult in
+                                                    word: Self.mockedWordForUpdate.word,
+                                                    wordDescription: Self.mockedWordForUpdate.wordDescription, { [unowned self] updateResult in
                                                         switch updateResult {
                                                         case .success(let updatedWord):
-                                                            XCTAssertTrue(updatedWord.uuid == Self.mockedWordForUpdate.uuid)
                                                             XCTAssertTrue(updatedWord.word == Self.mockedWordForUpdate.word)
                                                             XCTAssertTrue(updatedWord.wordDescription == Self.mockedWordForUpdate.wordDescription)
-                                                            XCTAssertTrue(updatedWord.wordLanguage == Self.mockedWordForUpdate.wordLanguage)
-                                                            XCTAssertTrue(updatedWord.createdDate == Self.mockedWordForUpdate.createdDate)
-                                                            XCTAssertTrue(updatedWord.updatedDate == Self.mockedWordForUpdate.updatedDate)
                                                             expectation.fulfill()
                                                         case .failure:
                                                             XCTExpectFailure()

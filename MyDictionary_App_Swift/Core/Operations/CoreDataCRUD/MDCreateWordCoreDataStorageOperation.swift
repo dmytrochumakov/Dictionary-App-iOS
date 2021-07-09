@@ -33,7 +33,7 @@ final class MDCreateWordCoreDataStorageOperation: MDWordOperation {
         let newWord = CDWordEntity.init(wordModel: self.word,
                                         insertIntoManagedObjectContext: self.managedObjectContext)
         
-        self.wordStorage.save(word: newWord) { [weak self] result in
+        self.wordStorage.save(uuid: newWord.uuid!) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let createdWord):

@@ -16,8 +16,8 @@ struct WordModel: MDUUIDPropertyProtocol,
                   MDUpdatedDateProtocol {
     
     let uuid: UUID
-    let word: String
-    let wordDescription: String
+    var word: String
+    var wordDescription: String
     let wordLanguage: String
     let createdDate: Date
     let updatedDate: Date
