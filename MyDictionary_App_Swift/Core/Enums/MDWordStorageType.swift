@@ -9,5 +9,6 @@ import Foundation
 
 enum MDWordStorageType: Int {
     case none
-    case memory    
+    case memory
+    case coreData
 }
