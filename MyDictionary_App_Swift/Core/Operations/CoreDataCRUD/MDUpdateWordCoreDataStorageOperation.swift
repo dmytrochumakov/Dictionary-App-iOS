@@ -35,8 +35,7 @@ final class MDUpdateWordCoreDataStorageOperation: MDWordOperation {
         
         let batchUpdateRequest = NSBatchUpdateRequest(entityName: CoreDataEntityName.CDWordEntity)
         batchUpdateRequest.propertiesToUpdate = [CDWordEntityAttributeName.word : self.word.word,
-                                                 CDWordEntityAttributeName.wordDescription : self.word.wordDescription,
-                                                 CDWordEntityAttributeName.wordLanguage : self.word.wordLanguage
+                                                 CDWordEntityAttributeName.wordDescription : self.word.wordDescription                                                 
         ]
         batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %@", self.word.uuid.uuidString)
         
