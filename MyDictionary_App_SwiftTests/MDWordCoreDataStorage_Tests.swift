@@ -56,7 +56,16 @@ extension MDWordCoreDataStorage_Tests {
             switch result {
             case .success(let createdWord):
                 XCTAssertTrue(createdWord.uuid == Self.mockedWord0.uuid)
-                expectation.fulfill()
+                self.wordCoreDataStorage.readWords(fetchLimit: .zero, fetchOffset: .zero) { readResult in
+                    switch readResult {
+                    case .success(let readWords):
+                        XCTAssertTrue(readWords.count == 1)
+                        expectation.fulfill()
+                    case .failure:
+                        XCTExpectFailure()
+                        expectation.fulfill()
+                    }
+                }
             case .failure:
                 XCTExpectFailure()
                 expectation.fulfill()
