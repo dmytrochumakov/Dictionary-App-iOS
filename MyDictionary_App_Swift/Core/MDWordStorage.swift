@@ -39,6 +39,8 @@ extension MDWordStorage {
             break
         case .memory:
             memoryStorage.createWord(wordModel, completionHandler)
+        case .coreData:
+            break
         }
     }
     
@@ -48,6 +50,8 @@ extension MDWordStorage {
             break
         case .memory:
             memoryStorage.readWord(fromUUID: uuid, completionHandler)
+        case .coreData:
+            break
         }
     }
     
@@ -57,6 +61,8 @@ extension MDWordStorage {
             break
         case .memory:
             memoryStorage.updateWord(byUUID: uuid, word: word, wordDescription: wordDescription, completionHandler)
+        case .coreData:
+            break
         }
     }
     
@@ -66,6 +72,8 @@ extension MDWordStorage {
             break
         case .memory:
             memoryStorage.deleteWord(word, completionHandler)
+        case .coreData:
+            break
         }
     }
     
