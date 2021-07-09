@@ -12,10 +12,12 @@ protocol MDAppDependenciesProtocol {
 }
 
 final class MDAppDependencies: MDAppDependenciesProtocol {
-
+    
     var operationQueue: OperationQueue!
     var operationQueueService: OperationQueueServiceProtocol!
     var memoryStorage: MDWordMemoryStorageProtocol!
+    var coreDataStorage: MDWordCoreDataStorageProtocol!
+    var coreDataStack: CoreDataStack!
     var wordStorage: MDWordStorageProtocol!
     
     init() {
@@ -40,9 +42,15 @@ extension MDAppDependencies {
         
         let memoryStorage: MDWordMemoryStorageProtocol = MDWordMemoryStorage.init(operationQueueService: operationQueueService,
                                                                                   arrayWords: [])
-        self.memoryStorage = memoryStorage
         
-        let wordStorage: MDWordStorageProtocol = MDWordStorage.init(memoryStorage: memoryStorage)
+        let coreDataStack: CoreDataStack = CoreDataStack.init()
+        let coreDataStorage: MDWordCoreDataStorageProtocol = MDWordCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                                        managedObjectContext: coreDataStack.privateContext,
+                                                                                        coreDataStack: coreDataStack)
+        self.coreDataStorage = coreDataStorage
+        
+        let wordStorage: MDWordStorageProtocol = MDWordStorage.init(memoryStorage: memoryStorage,
+                                                                    coreDataStorage: coreDataStorage)
         self.wordStorage = wordStorage
         
     }

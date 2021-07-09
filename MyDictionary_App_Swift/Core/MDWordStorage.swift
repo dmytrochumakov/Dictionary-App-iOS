@@ -17,10 +17,13 @@ protocol MDWordStorageProtocol {
 final class MDWordStorage: MDWordStorageProtocol {
     
     fileprivate let memoryStorage: MDWordMemoryStorageProtocol
+    fileprivate let coreDataStorage: MDWordCoreDataStorageProtocol
     
-    init(memoryStorage: MDWordMemoryStorageProtocol) {
+    init(memoryStorage: MDWordMemoryStorageProtocol,
+         coreDataStorage: MDWordCoreDataStorageProtocol) {
         
         self.memoryStorage = memoryStorage
+        self.coreDataStorage = coreDataStorage
         
     }
     
@@ -40,7 +43,7 @@ extension MDWordStorage {
         case .memory:
             memoryStorage.createWord(wordModel, completionHandler)
         case .coreData:
-            break
+            coreDataStorage.createWord(wordModel, completionHandler)
         }
     }
     
@@ -51,7 +54,7 @@ extension MDWordStorage {
         case .memory:
             memoryStorage.readWord(fromUUID: uuid, completionHandler)
         case .coreData:
-            break
+            coreDataStorage.readWord(fromUUID: uuid, completionHandler)
         }
     }
     
@@ -62,7 +65,7 @@ extension MDWordStorage {
         case .memory:
             memoryStorage.updateWord(byUUID: uuid, word: word, wordDescription: wordDescription, completionHandler)
         case .coreData:
-            break
+            coreDataStorage.updateWord(byUUID: uuid, word: word, wordDescription: wordDescription, completionHandler)
         }
     }
     
@@ -73,7 +76,7 @@ extension MDWordStorage {
         case .memory:
             memoryStorage.deleteWord(word, completionHandler)
         case .coreData:
-            break
+            coreDataStorage.deleteWord(word, completionHandler)
         }
     }
     
