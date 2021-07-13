@@ -7,9 +7,8 @@
 
 import Foundation
 
-protocol MDWordMemoryStorageProtocol: MDCRUDWordProtocol {
-    
-    var arrayWordsCount: Int { get }
+protocol MDWordMemoryStorageProtocol: MDCRUDWordProtocol,
+                                      MDWordsCountProtocol {
     
 }
 
@@ -18,9 +17,6 @@ final class MDWordMemoryStorage: MDWordMemoryStorageProtocol {
     fileprivate let operationQueueService: OperationQueueServiceProtocol
     
     var arrayWords: [WordModel]
-    var arrayWordsCount: Int {
-        return arrayWords.count
-    }
     
     init(operationQueueService: OperationQueueServiceProtocol,
          arrayWords: [WordModel]) {
@@ -32,6 +28,22 @@ final class MDWordMemoryStorage: MDWordMemoryStorageProtocol {
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+// MARK: - Count
+extension MDWordMemoryStorage {
+    
+    func wordsCount(_ completionHandler: @escaping (MDWordsCountResult)) {
+        self.readAllWords() { [unowned self] result in
+            switch result {
+            case .success(let words):
+                completionHandler(.success(words.count))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
     }
     
 }
@@ -55,7 +67,11 @@ extension MDWordMemoryStorage {
     }
     
     func readWords(fetchLimit: Int, fetchOffset: Int, _ completionHandler: @escaping (MDReadWordsResult)) {
-        completionHandler(.success([]))
+        completionHandler(.failure(MDWordOperationError.cantFindWord))
+    }
+    
+    func readAllWords(_ completionHandler: @escaping (MDReadWordsResult)) {
+        completionHandler(.success(self.arrayWords))
     }
     
     func updateWord(byUUID uuid: UUID, word: String, wordDescription: String, _ completionHandler: @escaping(MDUpdateWordResult)) {

@@ -56,10 +56,10 @@ extension MDWordCoreDataStorage_Tests {
             switch result {
             case .success(let createdWord):
                 XCTAssertTrue(createdWord.uuid == Self.mockedWord0.uuid)
-                self.wordCoreDataStorage.readWords(fetchLimit: .zero, fetchOffset: .zero) { readResult in
-                    switch readResult {
-                    case .success(let readWords):
-                        XCTAssertTrue(readWords.count == 1)
+                self.wordCoreDataStorage.wordsCount() { [unowned self] wordsCountResult in
+                    switch wordsCountResult {
+                    case .success(let count):
+                        XCTAssertTrue(count == 1)
                         expectation.fulfill()
                     case .failure:
                         XCTExpectFailure()
@@ -159,10 +159,10 @@ extension MDWordCoreDataStorage_Tests {
                 self.wordCoreDataStorage.deleteWord(createdWord, { [unowned self] deleteResult in
                     switch deleteResult {
                     case .success:
-                        self.wordCoreDataStorage.readWords(fetchLimit: .zero, fetchOffset: .zero) { [unowned self] readResult  in
-                            switch readResult {
-                            case .success(let readWords):
-                                XCTAssertTrue(readWords.count == .zero)
+                        self.wordCoreDataStorage.wordsCount() { [unowned self] wordsCountResult in
+                            switch wordsCountResult {
+                            case .success(let count):
+                                XCTAssertTrue(count == .zero)
                                 expectation.fulfill()
                             case .failure:
                                 XCTExpectFailure()

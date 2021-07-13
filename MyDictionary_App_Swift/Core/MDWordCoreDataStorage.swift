@@ -8,7 +8,8 @@
 import Foundation
 import CoreData
 
-protocol MDWordCoreDataStorageProtocol: MDCRUDWordProtocol {
+protocol MDWordCoreDataStorageProtocol: MDCRUDWordProtocol,
+                                        MDWordsCountProtocol {
     
 }
 
@@ -31,6 +32,22 @@ final class MDWordCoreDataStorage: NSObject,
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+// MARK: - Count
+extension MDWordCoreDataStorage {
+    
+    func wordsCount(_ completionHandler: @escaping (MDWordsCountResult)) {
+        self.readAllWords() { [unowned self] result in
+            switch result {
+            case .success(let words):
+                completionHandler(.success(words.count))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
     }
     
 }
@@ -66,6 +83,16 @@ extension MDWordCoreDataStorage {
                                                                  wordStorage: self,
                                                                  fetchLimit: fetchLimit,
                                                                  fetchOffset: fetchOffset) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
+    }
+    
+    func readAllWords(_ completionHandler: @escaping (MDReadWordsResult)) {
+        let operation = MDReadWordsCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                 wordStorage: self,
+                                                                 fetchLimit: .zero,
+                                                                 fetchOffset: .zero) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)

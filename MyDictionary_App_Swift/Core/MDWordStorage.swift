@@ -7,7 +7,8 @@
 
 import Foundation
 
-protocol MDWordStorageProtocol {    
+protocol MDWordStorageProtocol {
+    func wordsCount(storageType: MDWordStorageType, _ completionHandler: @escaping (MDWordsCountResult))
     func createWord(_ wordModel: WordModel, storageType: MDWordStorageType, _ completionHandler: @escaping(MDCreateWordResult))
     func readWord(fromUUID uuid: UUID, storageType: MDWordStorageType, _ completionHandler: @escaping(MDReadWordResult))
     func updateWord(byUUID uuid: UUID, word: String, wordDescription: String, storageType: MDWordStorageType, _ completionHandler: @escaping(MDUpdateWordResult))
@@ -29,6 +30,22 @@ final class MDWordStorage: MDWordStorageProtocol {
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+// MARK: - Count
+extension MDWordStorage {
+    
+    func wordsCount(storageType: MDWordStorageType, _ completionHandler: @escaping (MDWordsCountResult)) {
+        switch storageType {
+        case .none:
+            break
+        case .memory:
+            memoryStorage.wordsCount(completionHandler)
+        case .coreData:
+            coreDataStorage.wordsCount(completionHandler)
+        }
     }
     
 }
