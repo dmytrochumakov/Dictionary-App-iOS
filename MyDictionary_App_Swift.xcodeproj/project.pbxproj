@@ -136,6 +136,7 @@
 		22E2B4FE266515D400978E62 /* CollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4FD266515D400978E62 /* CollectionViewDelegateFlowLayout.swift */; };
 		22E2B500266515E700978E62 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */; };
 		22EF01DF269D8EC600FE4435 /* MDWordStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF01DE269D8EC600FE4435 /* MDWordStorage_Tests.swift */; };
+		22EF01E1269D97C800FE4435 /* OperationQueueService_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF01E0269D97C800FE4435 /* OperationQueueService_Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -291,6 +292,7 @@
 		22E2B4FD266515D400978E62 /* CollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegateFlowLayout.swift; sourceTree = "<group>"; };
 		22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		22EF01DE269D8EC600FE4435 /* MDWordStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordStorage_Tests.swift; sourceTree = "<group>"; };
+		22EF01E0269D97C800FE4435 /* OperationQueueService_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationQueueService_Tests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -677,6 +679,7 @@
 				22493C3426971726000DA480 /* TestCoreDataStack.swift */,
 				22493C5726974F4C000DA480 /* MDWordCoreDataStorage_Tests.swift */,
 				22EF01DE269D8EC600FE4435 /* MDWordStorage_Tests.swift */,
+				22EF01E0269D97C800FE4435 /* OperationQueueService_Tests.swift */,
 				228BC453264979FF0030FB30 /* Info.plist */,
 			);
 			path = MyDictionary_App_SwiftTests;
@@ -1206,6 +1209,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22EF01E1269D97C800FE4435 /* OperationQueueService_Tests.swift in Sources */,
 				22EF01DF269D8EC600FE4435 /* MDWordStorage_Tests.swift in Sources */,
 				2289CEFC2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift in Sources */,
 				22493C5826974F4C000DA480 /* MDWordCoreDataStorage_Tests.swift in Sources */,
