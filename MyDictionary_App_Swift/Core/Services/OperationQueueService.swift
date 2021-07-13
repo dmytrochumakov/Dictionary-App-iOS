@@ -10,6 +10,7 @@ import Foundation
 protocol OperationQueueServiceProtocol {
     func enqueue(_ operation: Operation)
     func cancelAllOperations()
+    func operationCount() -> Int
 }
 
 final class OperationQueueService: OperationQueueServiceProtocol {
@@ -34,6 +35,10 @@ extension OperationQueueService {
     
     func cancelAllOperations() {
         operationQueue.cancelAllOperations()
+    }
+    
+    func operationCount() -> Int {
+        return operationQueue.operationCount
     }
     
 }
