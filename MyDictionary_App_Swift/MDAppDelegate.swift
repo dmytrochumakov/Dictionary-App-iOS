@@ -25,6 +25,9 @@ final class MDAppDelegate: UIResponder,
         self.rootWindow = RootWindow.window
         self.dependencies = MDAppDependencies.init()
         
+        let asdas: MDAPIWordProtocol = MDAPIWord.init()
+        asdas.create()
+        
         return true
     }
     
