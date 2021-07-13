@@ -18,6 +18,19 @@ struct Constants {
         static let omoExtension: String = "omo"
         static let momExtension: String = "mom"
         static let sqliteExtension: String = "sqlite"
-    }    
+    }
+    
+    struct HTTPHeaderConstants {
+        
+        static let contentType: String = "Content-Type"
+        static let applicationJson: String = "application/json"
+        
+        /// return
+        /// Content-Type : application/json
+        static func defaultHeaders() -> HTTPHeader {
+            return [contentType : applicationJson]
+        }
+        
+    }
     
 }

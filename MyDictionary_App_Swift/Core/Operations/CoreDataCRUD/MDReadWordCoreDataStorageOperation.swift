@@ -1,0 +1,134 @@
+//
+//  MDReadWordCoreDataStorageOperation.swift
+//  MyDictionary_App_Swift
+//
+//  Created by Dmytro Chumakov on 08.07.2021.
+//
+
+import Foundation
+import CoreData
+
+final class MDReadWordCoreDataStorageOperation: MDWordOperation {
+    
+    fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let wordStorage: MDWordCoreDataStorage
+    fileprivate let uuid: UUID
+    fileprivate let result: MDReadWordOperationResult?
+    
+    init(managedObjectContext: NSManagedObjectContext,
+         wordStorage: MDWordCoreDataStorage,
+         uuid: UUID,
+         result: MDReadWordOperationResult?) {
+        
+        self.managedObjectContext = managedObjectContext
+        self.wordStorage = wordStorage
+        self.uuid = uuid
+        self.result = result
+        
+        super.init()
+    }
+    
+    override func main() {
+        
+        let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: CoreDataEntityName.CDWordEntity)
+        fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %@", uuid.uuidString)
+        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
+            
+            if let result = asynchronousFetchResult.finalResult {
+                if let word = result.map({ $0.wordModel }).first {
+                    DispatchQueue.main.async {
+                        self?.result?(.success(word))
+                        self?.finish()
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self?.result?(.failure(MDWordOperationError.cantFindWord))
+                        self?.finish()
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self?.result?(.failure(MDWordOperationError.cantFindWord))
+                    self?.finish()
+                }
+            }
+            
+        }
+        
+        do {
+            try managedObjectContext.execute(asynchronousFetchRequest)
+        } catch let error {
+            self.result?(.failure(error))
+            self.finish()
+        }
+        
+    }
+    
+    deinit {
+        debugPrint(Self.self, #function)
+        self.finish()
+    }
+    
+}
+
+final class MDReadWordsCoreDataStorageOperation: MDWordOperation {
+    
+    fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let wordStorage: MDWordCoreDataStorage
+    fileprivate let fetchLimit: Int
+    fileprivate let fetchOffset: Int
+    fileprivate let result: MDReadWordsOperationResult?
+    
+    init(managedObjectContext: NSManagedObjectContext,
+         wordStorage: MDWordCoreDataStorage,
+         fetchLimit: Int,
+         fetchOffset: Int,
+         result: MDReadWordsOperationResult?) {
+        
+        self.managedObjectContext = managedObjectContext
+        self.wordStorage = wordStorage
+        self.fetchLimit = fetchLimit
+        self.fetchOffset = fetchOffset
+        self.result = result
+        
+        super.init()
+    }
+    
+    override func main() {
+        
+        let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: CoreDataEntityName.CDWordEntity)
+        fetchRequest.fetchLimit = self.fetchLimit
+        fetchRequest.fetchOffset = self.fetchOffset
+        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
+            
+            if let result = asynchronousFetchResult.finalResult {
+                DispatchQueue.main.async {
+                    self?.result?(.success(result.map({ $0.wordModel })))
+                    self?.finish()
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self?.result?(.failure(MDWordOperationError.cantFindWord))
+                    self?.finish()
+                }
+            }
+            
+        }
+        
+        do {
+            try managedObjectContext.execute(asynchronousFetchRequest)
+        } catch let error {
+            DispatchQueue.main.async {
+                self.result?(.failure(error))
+                self.finish()
+            }
+        }
+        
+    }
+    
+    deinit {
+        debugPrint(Self.self, #function)
+        self.finish()
+    }
+    
+}
