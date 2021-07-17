@@ -5,13 +5,13 @@
         <attribute name="username" attributeType="String"/>
     </entity>
     <entity name="CDWordEntity" representedClassName="CDWordEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="createdDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="created_at" attributeType="String"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="updatedDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="updated_at" attributeType="String"/>
         <attribute name="user_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="word" attributeType="String"/>
-        <attribute name="wordDescription" attributeType="String"/>
-        <attribute name="wordLanguage" attributeType="String"/>
+        <attribute name="word_description" attributeType="String"/>
+        <attribute name="word_language" attributeType="String"/>
     </entity>
     <elements>
         <element name="CDWordEntity" positionX="-63" positionY="-18" width="128" height="134"/>

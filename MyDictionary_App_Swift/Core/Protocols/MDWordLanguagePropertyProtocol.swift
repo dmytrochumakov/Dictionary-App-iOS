@@ -8,5 +8,5 @@
 import Foundation
 
 protocol MDWordLanguagePropertyProtocol {
-    var wordLanguage: String { get }
+    var word_language: String { get }
 }

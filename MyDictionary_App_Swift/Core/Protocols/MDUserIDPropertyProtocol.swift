@@ -8,5 +8,5 @@
 import Foundation
 
 protocol MDUserIDPropertyProtocol {
-    var user_ID: Int64 { get }
+    var user_id: Int64 { get }
 }

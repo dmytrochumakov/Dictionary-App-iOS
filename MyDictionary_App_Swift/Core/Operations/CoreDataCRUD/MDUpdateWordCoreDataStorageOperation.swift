@@ -14,21 +14,21 @@ final class MDUpdateWordCoreDataStorageOperation: MDWordOperation {
     fileprivate let wordStorage: MDWordCoreDataStorage
     fileprivate let id: Int64
     fileprivate let word: String
-    fileprivate let wordDescription: String
+    fileprivate let word_description: String
     fileprivate let result: MDUpdateWordOperationResult?
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
          id: Int64,
          word: String,
-         wordDescription: String,
+         word_description: String,
          result: MDUpdateWordOperationResult?) {
         
         self.managedObjectContext = managedObjectContext
         self.wordStorage = wordStorage
         self.id = id
         self.word = word
-        self.wordDescription = wordDescription
+        self.word_description = word_description
         self.result = result
         
         super.init()
@@ -38,7 +38,7 @@ final class MDUpdateWordCoreDataStorageOperation: MDWordOperation {
         
         let batchUpdateRequest = NSBatchUpdateRequest(entityName: CoreDataEntityName.CDWordEntity)
         batchUpdateRequest.propertiesToUpdate = [CDWordEntityAttributeName.word : self.word,
-                                                 CDWordEntityAttributeName.wordDescription : self.wordDescription
+                                                 CDWordEntityAttributeName.word_description : self.word_description
         ]
         batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.id) == %i", self.id)
         

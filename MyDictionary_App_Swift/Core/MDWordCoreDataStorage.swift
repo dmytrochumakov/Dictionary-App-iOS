@@ -103,12 +103,12 @@ extension MDWordCoreDataStorage {
 // MARK: - Update
 extension MDWordCoreDataStorage {
     
-    func updateWord(byID id: Int64, word: String, wordDescription: String, _ completionHandler: @escaping (MDUpdateWordResult)) {
+    func updateWord(byID id: Int64, word: String, word_description: String, _ completionHandler: @escaping (MDUpdateWordResult)) {
         let operation = MDUpdateWordCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                   wordStorage: self,
                                                                   id: id,
                                                                   word: word,
-                                                                  wordDescription: wordDescription) { result in
+                                                                  word_description: word_description) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)

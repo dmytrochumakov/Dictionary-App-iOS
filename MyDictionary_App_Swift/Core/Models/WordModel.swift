@@ -13,16 +13,16 @@ struct WordModel: MDIDPropertyProtocol,
                   MDWordPropertyProtocol,
                   MDWordDescriptionPropertyProtocol,
                   MDWordLanguagePropertyProtocol,
-                  MDCreatedDateProtocol,
-                  MDUpdatedDateProtocol {
+                  MDCreatedAtProtocol,
+                  MDUpdatedAtProtocol {
     
-    let user_ID: Int64
+    let user_id: Int64
     let id: Int64
     var word: String
-    var wordDescription: String
-    let wordLanguage: String
-    let createdDate: Date
-    let updatedDate: Date
+    var word_description: String
+    let word_language: String
+    let created_at: String
+    let updated_at: String
     
 }
 

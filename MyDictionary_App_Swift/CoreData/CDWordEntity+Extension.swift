@@ -16,13 +16,13 @@ extension CDWordEntity {
         let entity = NSEntityDescription.entity(forEntityName: CoreDataEntityName.CDWordEntity, in: context)!
         self.init(entity: entity, insertInto: context)
         
-        self.user_id = wordModel.user_ID
+        self.user_id = wordModel.user_id
         self.id = wordModel.id
         self.word = wordModel.word
-        self.wordDescription = wordModel.wordDescription
-        self.wordLanguage = wordModel.wordLanguage
-        self.createdDate = wordModel.createdDate
-        self.updatedDate = wordModel.updatedDate
+        self.word_description = wordModel.word_description
+        self.word_language = wordModel.word_language
+        self.created_at = wordModel.created_at
+        self.updated_at = wordModel.updated_at
         
     }
     
@@ -32,20 +32,20 @@ extension CDWordEntity {
     
     var wordModel: WordModel {
         guard let word = self.word,
-              let wordDescription = self.wordDescription,
-              let wordLanguage = self.wordLanguage,
-              let createdDate = self.createdDate,
-              let updatedDate = self.updatedDate
+              let word_description = self.word_description,
+              let word_language = self.word_language,
+              let created_at = self.created_at,
+              let updated_at = self.updated_at
         else {
             fatalError()
         }
-        return .init(user_ID: self.user_id,
+        return .init(user_id: self.user_id,
                      id: self.id,
                      word: word,
-                     wordDescription: wordDescription,
-                     wordLanguage: wordLanguage,
-                     createdDate: createdDate,
-                     updatedDate: updatedDate)
+                     word_description: word_description,
+                     word_language: word_language,
+                     created_at: created_at,
+                     updated_at: updated_at)
     }
     
 }

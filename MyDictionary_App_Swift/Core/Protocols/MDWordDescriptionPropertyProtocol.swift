@@ -8,5 +8,5 @@
 import Foundation
 
 protocol MDWordDescriptionPropertyProtocol {
-    var wordDescription: String { get }
+    var word_description: String { get }
 }

@@ -74,8 +74,8 @@ extension MDWordMemoryStorage {
         completionHandler(.success(self.arrayWords))
     }
     
-    func updateWord(byID id: Int64, word: String, wordDescription: String, _ completionHandler: @escaping(MDUpdateWordResult)) {
-        let operation = MDUpdateWordMemoryStorageOperation.init(wordStorage: self, id: id, word: word, wordDescription: wordDescription) { result in
+    func updateWord(byID id: Int64, word: String, word_description: String, _ completionHandler: @escaping(MDUpdateWordResult)) {
+        let operation = MDUpdateWordMemoryStorageOperation.init(wordStorage: self, id: id, word: word, word_description: word_description) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
