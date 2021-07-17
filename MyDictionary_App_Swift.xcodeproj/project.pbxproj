@@ -75,6 +75,8 @@
 		228BC447264979FE0030FB30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228BC445264979FE0030FB30 /* LaunchScreen.storyboard */; };
 		228BC45D264979FF0030FB30 /* MyDictionary_App_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BC45C264979FF0030FB30 /* MyDictionary_App_SwiftUITests.swift */; };
 		2294D6BF26A2EF710066BE77 /* MDUserIDPropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294D6BE26A2EF710066BE77 /* MDUserIDPropertyProtocol.swift */; };
+		2294D6C126A2F1000066BE77 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294D6C026A2F1000066BE77 /* UserModel.swift */; };
+		2294D6C326A2F1B60066BE77 /* CDUserEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294D6C226A2F1B60066BE77 /* CDUserEntity+Extension.swift */; };
 		229901682668EC3400D8C74E /* AppearancePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901612668EC3400D8C74E /* AppearancePresenter.swift */; };
 		229901692668EC3400D8C74E /* AppearanceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901622668EC3400D8C74E /* AppearanceRouter.swift */; };
 		2299016A2668EC3400D8C74E /* AppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901632668EC3400D8C74E /* AppearanceViewController.swift */; };
@@ -248,6 +250,8 @@
 		228BC45C264979FF0030FB30 /* MyDictionary_App_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDictionary_App_SwiftUITests.swift; sourceTree = "<group>"; };
 		228BC45E264979FF0030FB30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2294D6BE26A2EF710066BE77 /* MDUserIDPropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUserIDPropertyProtocol.swift; sourceTree = "<group>"; };
+		2294D6C026A2F1000066BE77 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		2294D6C226A2F1B60066BE77 /* CDUserEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDUserEntity+Extension.swift"; sourceTree = "<group>"; };
 		229901612668EC3400D8C74E /* AppearancePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePresenter.swift; sourceTree = "<group>"; };
 		229901622668EC3400D8C74E /* AppearanceRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceRouter.swift; sourceTree = "<group>"; };
 		229901632668EC3400D8C74E /* AppearanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceViewController.swift; sourceTree = "<group>"; };
@@ -580,6 +584,7 @@
 			isa = PBXGroup;
 			children = (
 				2289CEBB2678CC34007254C3 /* WordModel.swift */,
+				2294D6C026A2F1000066BE77 /* UserModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -778,6 +783,7 @@
 				22493C302697159E000DA480 /* CDResultSaved.swift */,
 				22493C32269715A9000DA480 /* CDResultSavedEnum.swift */,
 				22493C4826972A03000DA480 /* CDWordEntity+Extension.swift */,
+				2294D6C226A2F1B60066BE77 /* CDUserEntity+Extension.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -1286,6 +1292,7 @@
 				2299016C2668EC3400D8C74E /* AppearanceDataProvider.swift in Sources */,
 				22E2B4E02664E43B00978E62 /* SettingsInteractor.swift in Sources */,
 				22B22693266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift in Sources */,
+				2294D6C126A2F1000066BE77 /* UserModel.swift in Sources */,
 				22E2B4EC2664EE1400978E62 /* FillWithModelProtocol.swift in Sources */,
 				22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */,
 				2299016A2668EC3400D8C74E /* AppearanceViewController.swift in Sources */,
@@ -1329,6 +1336,7 @@
 				2289CEED2678CC34007254C3 /* MDWordStorage.swift in Sources */,
 				228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */,
 				22EF01E5269D9EBC00FE4435 /* MDWordsCountResult.swift in Sources */,
+				2294D6C326A2F1B60066BE77 /* CDUserEntity+Extension.swift in Sources */,
 				2289CEE12678CC34007254C3 /* MDCreateWordMemoryStorageOperation.swift in Sources */,
 				22CA08892651603A0052D169 /* WordListDataProvider.swift in Sources */,
 				22493C3E2697259D000DA480 /* MDCDResultSavedWord.swift in Sources */,
