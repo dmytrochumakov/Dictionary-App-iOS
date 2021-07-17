@@ -10,19 +10,19 @@ import Foundation
 final class MDUpdateWordMemoryStorageOperation: MDWordOperation {
     
     fileprivate let wordStorage: MDWordMemoryStorage
-    fileprivate let uuid: UUID
+    fileprivate let id: Int64
     fileprivate let word: String
     fileprivate let wordDescription: String
     fileprivate let result: MDUpdateWordOperationResult?
     
     init(wordStorage: MDWordMemoryStorage,
-         uuid: UUID,
+         id: Int64,
          word: String,
          wordDescription: String,
          result: MDUpdateWordOperationResult?) {
         
         self.wordStorage = wordStorage
-        self.uuid = uuid
+        self.id = id
         self.word = word
         self.wordDescription = wordDescription
         self.result = result
@@ -31,7 +31,7 @@ final class MDUpdateWordMemoryStorageOperation: MDWordOperation {
     }
     
     override func main() {
-        guard let index = self.wordStorage.arrayWords.firstIndex(where: { $0.uuid == self.uuid })
+        guard let index = self.wordStorage.arrayWords.firstIndex(where: { $0.id == self.id })
         else {
             self.result?(.failure(MDWordOperationError.cantFindWord));
             self.finish();

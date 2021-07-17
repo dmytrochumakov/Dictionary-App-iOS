@@ -8,14 +8,14 @@
 import Foundation
 import CoreData
 
-struct WordModel: MDUUIDPropertyProtocol,
+struct WordModel: MDIDPropertyProtocol,
                   MDWordPropertyProtocol,
                   MDWordDescriptionPropertyProtocol,
                   MDWordLanguagePropertyProtocol,
                   MDCreatedDateProtocol,
                   MDUpdatedDateProtocol {
     
-    let uuid: UUID
+    let id: Int64
     var word: String
     var wordDescription: String
     let wordLanguage: String

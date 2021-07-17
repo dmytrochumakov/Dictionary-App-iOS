@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MDReadWordProtocol {
-    func readWord(fromUUID uuid: UUID, _ completionHandler: @escaping(MDReadWordResult))
+    func readWord(fromID id: Int64, _ completionHandler: @escaping(MDReadWordResult))
     func readWords(fetchLimit: Int, fetchOffset: Int, _ completionHandler: @escaping(MDReadWordsResult))
     func readAllWords(_ completionHandler: @escaping(MDReadWordsResult))
 }

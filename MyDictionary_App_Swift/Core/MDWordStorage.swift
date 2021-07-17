@@ -10,8 +10,8 @@ import Foundation
 protocol MDWordStorageProtocol {
     func wordsCount(storageType: MDWordStorageType, _ completionHandler: @escaping (MDWordsCountResult))
     func createWord(_ wordModel: WordModel, storageType: MDWordStorageType, _ completionHandler: @escaping(MDCreateWordResult))
-    func readWord(fromUUID uuid: UUID, storageType: MDWordStorageType, _ completionHandler: @escaping(MDReadWordResult))
-    func updateWord(byUUID uuid: UUID, word: String, wordDescription: String, storageType: MDWordStorageType, _ completionHandler: @escaping(MDUpdateWordResult))
+    func readWord(fromID id: Int64, storageType: MDWordStorageType, _ completionHandler: @escaping(MDReadWordResult))
+    func updateWord(byID id: Int64, word: String, wordDescription: String, storageType: MDWordStorageType, _ completionHandler: @escaping(MDUpdateWordResult))
     func deleteWord(_ word: WordModel, storageType: MDWordStorageType, _ completionHandler: @escaping(MDDeleteWordResult))
 }
 
@@ -64,25 +64,25 @@ extension MDWordStorage {
         }
     }
     
-    func readWord(fromUUID uuid: UUID, storageType: MDWordStorageType, _ completionHandler: @escaping(MDReadWordResult)) {
+    func readWord(fromID id: Int64, storageType: MDWordStorageType, _ completionHandler: @escaping(MDReadWordResult)) {
         switch storageType {
         case .none:
             break
         case .memory:
-            memoryStorage.readWord(fromUUID: uuid, completionHandler)
+            memoryStorage.readWord(fromID: id, completionHandler)
         case .coreData:
-            coreDataStorage.readWord(fromUUID: uuid, completionHandler)
+            coreDataStorage.readWord(fromID: id, completionHandler)
         }
     }
     
-    func updateWord(byUUID uuid: UUID, word: String, wordDescription: String, storageType: MDWordStorageType, _ completionHandler: @escaping(MDUpdateWordResult)) {
+    func updateWord(byID id: Int64, word: String, wordDescription: String, storageType: MDWordStorageType, _ completionHandler: @escaping(MDUpdateWordResult)) {
         switch storageType {
         case .none:
             break
         case .memory:
-            memoryStorage.updateWord(byUUID: uuid, word: word, wordDescription: wordDescription, completionHandler)
+            memoryStorage.updateWord(byID: id, word: word, wordDescription: wordDescription, completionHandler)
         case .coreData:
-            coreDataStorage.updateWord(byUUID: uuid, word: word, wordDescription: wordDescription, completionHandler)
+            coreDataStorage.updateWord(byID: id, word: word, wordDescription: wordDescription, completionHandler)
         }
     }
     

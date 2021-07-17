@@ -8,5 +8,5 @@
 import Foundation
 
 protocol MDUpdateWordProtocol {
-    func updateWord(byUUID uuid: UUID, word: String, wordDescription: String, _ completionHandler: @escaping(MDUpdateWordResult))
+    func updateWord(byID id: Int64, word: String, wordDescription: String, _ completionHandler: @escaping(MDUpdateWordResult))
 }

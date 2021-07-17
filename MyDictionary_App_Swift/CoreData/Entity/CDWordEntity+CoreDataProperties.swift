@@ -16,7 +16,7 @@ extension CDWordEntity {
         return NSFetchRequest<CDWordEntity>(entityName: "CDWordEntity")
     }
 
-    @NSManaged public var uuid: UUID
+    @NSManaged public var id: Int
     @NSManaged public var word: String
     @NSManaged public var wordDescription: String
     @NSManaged public var wordLanguage: String

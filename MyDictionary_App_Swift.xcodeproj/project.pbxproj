@@ -60,7 +60,7 @@
 		2289CEEE2678CC34007254C3 /* MDWordDescriptionPropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CECF2678CC34007254C3 /* MDWordDescriptionPropertyProtocol.swift */; };
 		2289CEEF2678CC34007254C3 /* MDWordLanguagePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CED02678CC34007254C3 /* MDWordLanguagePropertyProtocol.swift */; };
 		2289CEF12678CC34007254C3 /* MDUpdatedDateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CED22678CC34007254C3 /* MDUpdatedDateProtocol.swift */; };
-		2289CEF22678CC34007254C3 /* MDUUIDPropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CED32678CC34007254C3 /* MDUUIDPropertyProtocol.swift */; };
+		2289CEF22678CC34007254C3 /* MDIDPropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CED32678CC34007254C3 /* MDIDPropertyProtocol.swift */; };
 		2289CEF32678CC34007254C3 /* MDWordPropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CED42678CC34007254C3 /* MDWordPropertyProtocol.swift */; };
 		2289CEF42678CC34007254C3 /* MDUpdateWordProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CED62678CC34007254C3 /* MDUpdateWordProtocol.swift */; };
 		2289CEF52678CC34007254C3 /* MDReadWordProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CED72678CC34007254C3 /* MDReadWordProtocol.swift */; };
@@ -226,7 +226,7 @@
 		2289CECF2678CC34007254C3 /* MDWordDescriptionPropertyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordDescriptionPropertyProtocol.swift; sourceTree = "<group>"; };
 		2289CED02678CC34007254C3 /* MDWordLanguagePropertyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordLanguagePropertyProtocol.swift; sourceTree = "<group>"; };
 		2289CED22678CC34007254C3 /* MDUpdatedDateProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDUpdatedDateProtocol.swift; sourceTree = "<group>"; };
-		2289CED32678CC34007254C3 /* MDUUIDPropertyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDUUIDPropertyProtocol.swift; sourceTree = "<group>"; };
+		2289CED32678CC34007254C3 /* MDIDPropertyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDIDPropertyProtocol.swift; sourceTree = "<group>"; };
 		2289CED42678CC34007254C3 /* MDWordPropertyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordPropertyProtocol.swift; sourceTree = "<group>"; };
 		2289CED62678CC34007254C3 /* MDUpdateWordProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDUpdateWordProtocol.swift; sourceTree = "<group>"; };
 		2289CED72678CC34007254C3 /* MDReadWordProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDReadWordProtocol.swift; sourceTree = "<group>"; };
@@ -643,7 +643,7 @@
 				2289CECF2678CC34007254C3 /* MDWordDescriptionPropertyProtocol.swift */,
 				2289CED02678CC34007254C3 /* MDWordLanguagePropertyProtocol.swift */,
 				2289CED22678CC34007254C3 /* MDUpdatedDateProtocol.swift */,
-				2289CED32678CC34007254C3 /* MDUUIDPropertyProtocol.swift */,
+				2289CED32678CC34007254C3 /* MDIDPropertyProtocol.swift */,
 				2289CED42678CC34007254C3 /* MDWordPropertyProtocol.swift */,
 				2289CED52678CC34007254C3 /* CRUD */,
 				2289CEDA2678CC34007254C3 /* MDCreatedDateProtocol.swift */,
@@ -1269,7 +1269,7 @@
 				22E2B4DD2664E43B00978E62 /* SettingsPresenter.swift in Sources */,
 				22EF01E3269D9CDA00FE4435 /* MDWordsCountProtocol.swift in Sources */,
 				229E08BE2652C8E600DA56C4 /* SectionTypeProtocol.swift in Sources */,
-				2289CEF22678CC34007254C3 /* MDUUIDPropertyProtocol.swift in Sources */,
+				2289CEF22678CC34007254C3 /* MDIDPropertyProtocol.swift in Sources */,
 				2299017A2668FBEA00D8C74E /* MainTabBarPresenter.swift in Sources */,
 				2289CEFA2678CC34007254C3 /* MDWordOperation.swift in Sources */,
 				22CA089126516C810052D169 /* MainTabBarController.swift in Sources */,

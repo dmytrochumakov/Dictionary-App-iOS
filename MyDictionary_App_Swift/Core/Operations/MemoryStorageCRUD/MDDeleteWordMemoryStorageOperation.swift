@@ -25,7 +25,7 @@ final class MDDeleteWordMemoryStorageOperation: MDWordOperation {
     }
     
     override func main() {
-        guard let index = self.wordStorage.arrayWords.firstIndex(where: { $0.uuid == self.word.uuid })
+        guard let index = self.wordStorage.arrayWords.firstIndex(where: { $0.id == self.word.id })
         else {
             self.result?(.failure(MDWordOperationError.cantFindWord));
             self.finish();

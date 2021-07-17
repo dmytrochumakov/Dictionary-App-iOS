@@ -12,17 +12,17 @@ final class MDReadWordCoreDataStorageOperation: MDWordOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let wordStorage: MDWordCoreDataStorage
-    fileprivate let uuid: UUID
+    fileprivate let id: Int64
     fileprivate let result: MDReadWordOperationResult?
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
-         uuid: UUID,
+         id: Int64,
          result: MDReadWordOperationResult?) {
         
         self.managedObjectContext = managedObjectContext
         self.wordStorage = wordStorage
-        self.uuid = uuid
+        self.id = id
         self.result = result
         
         super.init()
@@ -31,7 +31,7 @@ final class MDReadWordCoreDataStorageOperation: MDWordOperation {
     override func main() {
         
         let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: CoreDataEntityName.CDWordEntity)
-        fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %@", uuid.uuidString)
+        fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.id) == %i", id)
         let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
             
             if let result = asynchronousFetchResult.finalResult {

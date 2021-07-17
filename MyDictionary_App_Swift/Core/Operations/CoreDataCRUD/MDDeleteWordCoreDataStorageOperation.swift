@@ -31,7 +31,7 @@ final class MDDeleteWordCoreDataStorageOperation: MDWordOperation {
     override func main() {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDWordEntity)
-        fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %@", word.uuid.uuidString)
+        fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.id) == %i", word.id)
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         do {
             try managedObjectContext.execute(batchDeleteRequest)
