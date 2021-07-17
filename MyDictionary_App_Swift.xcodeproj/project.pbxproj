@@ -77,6 +77,7 @@
 		2294D6BF26A2EF710066BE77 /* MDUserIDPropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294D6BE26A2EF710066BE77 /* MDUserIDPropertyProtocol.swift */; };
 		2294D6C126A2F1000066BE77 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294D6C026A2F1000066BE77 /* UserModel.swift */; };
 		2294D6C326A2F1B60066BE77 /* CDUserEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294D6C226A2F1B60066BE77 /* CDUserEntity+Extension.swift */; };
+		2294D6C526A2F5DC0066BE77 /* Constants_For_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294D6C426A2F5DC0066BE77 /* Constants_For_Tests.swift */; };
 		229901682668EC3400D8C74E /* AppearancePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901612668EC3400D8C74E /* AppearancePresenter.swift */; };
 		229901692668EC3400D8C74E /* AppearanceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901622668EC3400D8C74E /* AppearanceRouter.swift */; };
 		2299016A2668EC3400D8C74E /* AppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901632668EC3400D8C74E /* AppearanceViewController.swift */; };
@@ -252,6 +253,7 @@
 		2294D6BE26A2EF710066BE77 /* MDUserIDPropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUserIDPropertyProtocol.swift; sourceTree = "<group>"; };
 		2294D6C026A2F1000066BE77 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		2294D6C226A2F1B60066BE77 /* CDUserEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDUserEntity+Extension.swift"; sourceTree = "<group>"; };
+		2294D6C426A2F5DC0066BE77 /* Constants_For_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants_For_Tests.swift; sourceTree = "<group>"; };
 		229901612668EC3400D8C74E /* AppearancePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePresenter.swift; sourceTree = "<group>"; };
 		229901622668EC3400D8C74E /* AppearanceRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceRouter.swift; sourceTree = "<group>"; };
 		229901632668EC3400D8C74E /* AppearanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceViewController.swift; sourceTree = "<group>"; };
@@ -720,6 +722,7 @@
 		228BC450264979FF0030FB30 /* MyDictionary_App_SwiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				2294D6C426A2F5DC0066BE77 /* Constants_For_Tests.swift */,
 				2289CEFB2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift */,
 				22493C3426971726000DA480 /* TestCoreDataStack.swift */,
 				22493C5726974F4C000DA480 /* MDWordCoreDataStorage_Tests.swift */,
@@ -1368,6 +1371,7 @@
 				22EF01E1269D97C800FE4435 /* OperationQueueService_Tests.swift in Sources */,
 				22EF01DF269D8EC600FE4435 /* MDWordStorage_Tests.swift in Sources */,
 				2289CEFC2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift in Sources */,
+				2294D6C526A2F5DC0066BE77 /* Constants_For_Tests.swift in Sources */,
 				22493C5826974F4C000DA480 /* MDWordCoreDataStorage_Tests.swift in Sources */,
 				22493C3526971726000DA480 /* TestCoreDataStack.swift in Sources */,
 			);
