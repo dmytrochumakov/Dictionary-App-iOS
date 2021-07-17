@@ -9,12 +9,14 @@ import Foundation
 import CoreData
 
 struct WordModel: MDIDPropertyProtocol,
+                  MDUserIDPropertyProtocol,
                   MDWordPropertyProtocol,
                   MDWordDescriptionPropertyProtocol,
                   MDWordLanguagePropertyProtocol,
                   MDCreatedDateProtocol,
                   MDUpdatedDateProtocol {
     
+    let user_ID: Int64
     let id: Int64
     var word: String
     var wordDescription: String

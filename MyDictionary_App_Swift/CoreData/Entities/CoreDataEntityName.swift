@@ -9,4 +9,5 @@ import Foundation
 
 struct CoreDataEntityName {
     static let CDWordEntity = "CDWordEntity"
+    static let CDUserEntity = "CDUserEntity"
 }

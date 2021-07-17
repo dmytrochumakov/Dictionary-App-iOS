@@ -16,6 +16,7 @@ extension CDWordEntity {
         let entity = NSEntityDescription.entity(forEntityName: CoreDataEntityName.CDWordEntity, in: context)!
         self.init(entity: entity, insertInto: context)
         
+        self.user_id = wordModel.user_ID
         self.id = wordModel.id
         self.word = wordModel.word
         self.wordDescription = wordModel.wordDescription
@@ -38,7 +39,8 @@ extension CDWordEntity {
         else {
             fatalError()
         }
-        return .init(id: self.id,
+        return .init(user_ID: self.user_id,
+                     id: self.id,
                      word: word,
                      wordDescription: wordDescription,
                      wordLanguage: wordLanguage,
