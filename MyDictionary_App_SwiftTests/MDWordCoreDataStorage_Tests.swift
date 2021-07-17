@@ -12,14 +12,14 @@ final class MDWordCoreDataStorage_Tests: XCTestCase {
     
     fileprivate static let testTimeout: TimeInterval = 20.0
     
-    fileprivate static let mockedWord0: WordModel = .init(uuid: .init(),
+    fileprivate static let mockedWord0: WordModel = .init(id: .init(),
                                                           word: "MOSF",
                                                           wordDescription: "metal–oxide–semiconductor-field",
                                                           wordLanguage: "English",
                                                           createdDate: .init(),
                                                           updatedDate: .init())
     
-    fileprivate static let mockedWordForUpdate: WordModel = .init(uuid: .init(),
+    fileprivate static let mockedWordForUpdate: WordModel = .init(id: .init(),
                                                                   word: "MOSFC",
                                                                   wordDescription: "metal–oxide–semiconductor-field-c",
                                                                   wordLanguage: "Spanish",
@@ -55,7 +55,7 @@ extension MDWordCoreDataStorage_Tests {
         wordCoreDataStorage.createWord(Self.mockedWord0) { [unowned self] result in
             switch result {
             case .success(let createdWord):
-                XCTAssertTrue(createdWord.uuid == Self.mockedWord0.uuid)
+                XCTAssertTrue(createdWord.id == Self.mockedWord0.id)
                 self.wordCoreDataStorage.wordsCount() { [unowned self] wordsCountResult in
                     switch wordsCountResult {
                     case .success(let count):
@@ -88,11 +88,11 @@ extension MDWordCoreDataStorage_Tests {
         wordCoreDataStorage.createWord(Self.mockedWord0) { [unowned self] result in
             switch result {
             case .success(let createdWord):
-                XCTAssertTrue(createdWord.uuid == Self.mockedWord0.uuid)
-                self.wordCoreDataStorage.readWord(fromUUID: createdWord.uuid, { [unowned self] result in
+                XCTAssertTrue(createdWord.id == Self.mockedWord0.id)
+                self.wordCoreDataStorage.readWord(fromID: createdWord.id, { [unowned self] result in
                     switch result {
                     case .success(let fetchedWord):
-                        XCTAssertTrue(fetchedWord.uuid == createdWord.uuid)
+                        XCTAssertTrue(fetchedWord.id == createdWord.id)
                         expectation.fulfill()
                     case .failure:
                         XCTExpectFailure()
@@ -121,7 +121,7 @@ extension MDWordCoreDataStorage_Tests {
         wordCoreDataStorage.createWord(Self.mockedWord0) { [unowned self] createResult in
             switch createResult {
             case .success(let createdWord):
-                self.wordCoreDataStorage.updateWord(byUUID: createdWord.uuid,
+                self.wordCoreDataStorage.updateWord(byID: createdWord.id,
                                                     word: Self.mockedWordForUpdate.word,
                                                     wordDescription: Self.mockedWordForUpdate.wordDescription, { [unowned self] updateResult in
                                                         switch updateResult {
