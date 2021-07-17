@@ -21,3 +21,18 @@ extension UserModel {
     }
     
 }
+
+extension UserModel: Decodable {
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case username = "username"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(Int64.self, forKey: .id)
+        self.username = try container.decode(String.self, forKey: .username)
+    }
+    
+}
