@@ -16,7 +16,7 @@ final class MDAPIWord: MDAPIWordProtocol {
     fileprivate let requestDispatcher: MDRequestDispatcherProtocol
     
     convenience init() {
-        self.init(requestDispatcher: MDRequestDispatcher.init(environment: MDAPIEnvironment.openLibrary,
+        self.init(requestDispatcher: MDRequestDispatcher.init(environment: MDAPIEnvironment.production,
                                                               networkSession: MDNetworkSession()))
     }
     

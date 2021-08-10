@@ -121,6 +121,7 @@
 		22CA089126516C810052D169 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA089026516C810052D169 /* MainTabBarController.swift */; };
 		22CA0894265170200052D169 /* MainTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA0893265170200052D169 /* MainTabBarItem.swift */; };
 		22CA0896265178DE0052D169 /* ScrollToTopProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA0895265178DE0052D169 /* ScrollToTopProtocol.swift */; };
+		22DEAE3226C289F100B64B16 /* MDAPIVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DEAE3126C289F100B64B16 /* MDAPIVersion.swift */; };
 		22E2B4DD2664E43B00978E62 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4D62664E43B00978E62 /* SettingsPresenter.swift */; };
 		22E2B4DE2664E43B00978E62 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4D72664E43B00978E62 /* SettingsRouter.swift */; };
 		22E2B4DF2664E43B00978E62 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4D82664E43B00978E62 /* SettingsViewController.swift */; };
@@ -297,6 +298,7 @@
 		22CA089026516C810052D169 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		22CA0893265170200052D169 /* MainTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarItem.swift; sourceTree = "<group>"; };
 		22CA0895265178DE0052D169 /* ScrollToTopProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollToTopProtocol.swift; sourceTree = "<group>"; };
+		22DEAE3126C289F100B64B16 /* MDAPIVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIVersion.swift; sourceTree = "<group>"; };
 		22E2B4D62664E43B00978E62 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		22E2B4D72664E43B00978E62 /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
 		22E2B4D82664E43B00978E62 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -1086,6 +1088,7 @@
 			isa = PBXGroup;
 			children = (
 				22EF020C269DAFC000FE4435 /* MDAPIEnvironment.swift */,
+				22DEAE3126C289F100B64B16 /* MDAPIVersion.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1357,6 +1360,7 @@
 				226FEE7A266B644F0044A5F9 /* AppearanceCollectionViewDataSource.swift in Sources */,
 				22E2B4E62664EB8000978E62 /* SettingsCollectionViewDelegate.swift in Sources */,
 				2223F8A826512C1A004F2FE9 /* LocalizableProtocol.swift in Sources */,
+				22DEAE3226C289F100B64B16 /* MDAPIVersion.swift in Sources */,
 				22493C4726972877000DA480 /* MDReadWordsResult.swift in Sources */,
 				226FEE87266B7E300044A5F9 /* AppearanceHasBeenUpdatedProtocol.swift in Sources */,
 				22493C33269715A9000DA480 /* CDResultSavedEnum.swift in Sources */,

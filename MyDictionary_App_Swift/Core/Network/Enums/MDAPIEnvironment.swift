@@ -9,15 +9,12 @@ import Foundation
 
 enum MDAPIEnvironment: MDEnvironmentProtocol {
     
-    case development
-    case openLibrary
+    case production
     
     var baseURL: String {
         switch self {
-        case .development:
-            return "http://localhost:8000/api/"
-        case .openLibrary:
-            return "https://openlibrary.org/"
+        case .production:
+            return "https://my-dictionary-rest-api-cloud-run-service-s3h77mhuwa-uc.a.run.app/api/\(MDAPIVersion.v1.rawValue)/"
         }
     }
     
