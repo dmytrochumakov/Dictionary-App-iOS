@@ -50,14 +50,7 @@ final class SettingsViewController: UIViewController {
 
 // MARK: - SettingsPresenterOutputProtocol
 extension SettingsViewController: SettingsPresenterOutputProtocol {
-    
-    func scrollToTop() {
-        collectionView.scrollToItem(at: .init(item: .zero,
-                                              section: .zero),
-                                    at: .top,
-                                    animated: true)
-    }
-    
+        
     func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
         configureAppearance(fromAppearanceType: newValue,
                             collectionView: collectionView)

@@ -53,11 +53,7 @@ extension WordListViewController: WordListPresenterOutputProtocol {
     
     func reloadData() {
         
-    }
-    
-    func scrollToTop() {
-        
-    }
+    }    
     
     func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
         configureAppearance(fromAppearanceType: newValue,

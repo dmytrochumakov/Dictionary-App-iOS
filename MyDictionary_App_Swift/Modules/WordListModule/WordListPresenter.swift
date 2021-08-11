@@ -14,7 +14,6 @@ protocol WordListPresenterInputProtocol: CollectionViewDelegateFlowLayoutPropert
 
 protocol WordListPresenterOutputProtocol: AnyObject,
                                           ReloadDataProtocol,
-                                          ScrollToTopProtocol,
                                           AppearanceHasBeenUpdatedProtocol {
     
 }
@@ -72,10 +71,6 @@ fileprivate extension WordListPresenter {
 }
 
 // MARK: - Actions
-fileprivate extension WordListPresenter {
-    
-    @objc func mainTabBarItemDoubleTapAction() {
-        self.presenterOutput?.scrollToTop()
-    }
+fileprivate extension WordListPresenter {       
     
 }
