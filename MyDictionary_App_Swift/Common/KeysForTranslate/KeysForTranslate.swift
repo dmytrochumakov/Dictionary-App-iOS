@@ -19,6 +19,7 @@ enum KeysForTranslate: String {
     case dark
     case light
     case courses
+    case add
 }
 
 // MARK: - LocalizableProtocol

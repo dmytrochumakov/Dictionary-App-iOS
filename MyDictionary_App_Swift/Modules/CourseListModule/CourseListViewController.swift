@@ -15,6 +15,22 @@ final class CourseListViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+            
+    fileprivate let settingsButton: UIButton = {
+        let button: UIButton = .init()
+        button.setTitle(KeysForTranslate.settings.localized, for: .normal)
+        button.setTitleColor(ConfigurationAppearanceController.buttonTextColor(), for: .normal)
+        button.titleLabel?.font = AppStyling.Font.systemFont.font(ofSize: 17)
+        return button
+    }()
+    
+    fileprivate let addNewCourseButton: UIButton = {
+        let button: UIButton = .init()
+        button.setTitle(KeysForTranslate.add.localized, for: .normal)
+        button.setTitleColor(ConfigurationAppearanceController.buttonTextColor(), for: .normal)
+        button.titleLabel?.font = AppStyling.Font.systemFont.font(ofSize: 17)
+        return button
+    }()
     
     init(presenter: CourseListPresenterInputProtocol) {
         self.presenter = presenter
@@ -62,6 +78,16 @@ fileprivate extension CourseListViewController {
         view.addSubview(tableView)
     }
     
+    func addLeftNavigationButton() {
+        settingsButton.addTarget(self, action: #selector(settingsButtonAction), for: .touchUpInside)
+        self.navigationItem.leftBarButtonItem = .init(customView: self.settingsButton)
+    }
+    
+    func addRightNavigationButton() {
+        addNewCourseButton.addTarget(self, action: #selector(addNewCourseButtonAction), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = .init(customView: self.addNewCourseButton)
+    }
+    
 }
 
 // MARK: - Add Constraints
@@ -84,7 +110,8 @@ fileprivate extension CourseListViewController {
     func configureUI() {
         configureView()
         configureTableView()
-        configureNavigationBarAppearance(fromAppearanceType: Appearance.current.appearanceType)        
+        configureNavigationBarAppearance(fromAppearanceType: Appearance.current.appearanceType)
+        configureNavigationItemLeftAndRightButtons()
     }
     
     func configureView() {
@@ -97,6 +124,24 @@ fileprivate extension CourseListViewController {
         self.tableView.dataSource = self.presenter.tableViewDataSource
         self.configureTableViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType,
                                                tableView: tableView)
+    }
+    
+    func configureNavigationItemLeftAndRightButtons() {
+        addLeftNavigationButton()
+        addRightNavigationButton()
+    }
+    
+}
+
+// MARK: - Actions
+fileprivate extension CourseListViewController {
+    
+    @objc func addNewCourseButtonAction() {
+        presenter.addNewCourseButtonClicked()
+    }
+    
+    @objc func settingsButtonAction() {
+        presenter.settingsButtonClicked()
     }
     
 }

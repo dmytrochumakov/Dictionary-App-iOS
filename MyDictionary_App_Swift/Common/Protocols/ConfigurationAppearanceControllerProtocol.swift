@@ -19,8 +19,13 @@ protocol ConfigureAppearanceNavigationBarProtocol: ConfigureAppearanceNavigation
     static func navigationBarTitleTextAttributes(fromAppearanceType type: AppearanceType) -> [NSAttributedString.Key : Any]
 }
 
+protocol ConfigureAppearanceButtonTextColor {
+    static func buttonTextColor(fromAppearanceType type: AppearanceType) -> UIColor
+}
+
 protocol ConfigurationAppearanceControllerProtocol: ConfigureAppearanceViewBackgroundColor,
-                                                    ConfigureAppearanceNavigationBarProtocol {
+                                                    ConfigureAppearanceNavigationBarProtocol,
+                                                    ConfigureAppearanceButtonTextColor {
     
 }
 
@@ -73,6 +78,18 @@ extension ConfigurationAppearanceController {
             return AppStyling.Color.md_Light_Gray_0_Light_Appearence.color()
         case .dark:
             return AppStyling.Color.md_Light_Gray_0_Dark_Appearence.color()
+        }
+    }
+    
+    /// - Parameter fromAppearanceType type: Appearance.current.appearanceType by default
+    static func buttonTextColor(fromAppearanceType type: AppearanceType = Appearance.current.appearanceType) -> UIColor {
+        switch type {
+        case .automatic:
+            return self.buttonTextColor(fromAppearanceType: .light)
+        case .light:
+            return AppStyling.Color.md_Blue_0_Light_Appearence.color()
+        case .dark:
+            return AppStyling.Color.md_Blue_0_Dark_Appearence.color()
         }
     }
     

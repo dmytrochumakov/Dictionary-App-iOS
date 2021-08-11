@@ -8,7 +8,8 @@ import UIKit
 
 protocol CourseListPresenterInputProtocol: TableViewDelegatePropertyProtocol,
                                            TableViewDataSourcePropertyProtocol {
-    
+    func addNewCourseButtonClicked()
+    func settingsButtonClicked()
 }
 
 protocol CourseListPresenterOutputProtocol: AnyObject {
@@ -24,14 +25,7 @@ final class CourseListPresenter: NSObject, CourseListPresenterProtocol {
     
     fileprivate let interactor: CourseListInteractorInputProtocol
     fileprivate let router: CourseListRouterProtocol
-    
-    internal var tableViewDelegate: UITableViewDelegate {
-        return interactor.tableViewDelegate
-    }
-    internal var tableViewDataSource: UITableViewDataSource {
-        return interactor.tableViewDataSource
-    }
-    
+       
     internal weak var presenterOutput: CourseListPresenterOutputProtocol?
     
     init(interactor: CourseListInteractorInputProtocol,
@@ -49,5 +43,28 @@ final class CourseListPresenter: NSObject, CourseListPresenterProtocol {
 
 // MARK: - CourseListInteractorOutputProtocol
 extension CourseListPresenter {
+    
+}
+
+// MARK: - CourseListPresenterInputProtocol
+extension CourseListPresenter {
+    
+    internal var tableViewDelegate: UITableViewDelegate {
+        return interactor.tableViewDelegate
+    }
+    
+    internal var tableViewDataSource: UITableViewDataSource {
+        return interactor.tableViewDataSource
+    }
+    
+    // Actions //
+    func addNewCourseButtonClicked() {
+        debugPrint(Self.self, #function)
+    }
+    
+    func settingsButtonClicked() {
+        debugPrint(Self.self, #function)
+    }
+    // --- //
     
 }
