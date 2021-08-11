@@ -93,8 +93,8 @@ fileprivate extension CourseListViewController {
     }
     
     func configureTableView() {
-        //        self.tableView.delegate = self.presenter.collectionViewDelegate
-        //        self.tableView.dataSource = self.presenter.collectionViewDataSource
+        self.tableView.delegate = self.presenter.tableViewDelegate
+        self.tableView.dataSource = self.presenter.tableViewDataSource
         self.configureTableViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType,
                                                tableView: tableView)
     }

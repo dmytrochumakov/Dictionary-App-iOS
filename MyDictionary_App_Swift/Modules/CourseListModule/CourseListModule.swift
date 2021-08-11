@@ -26,7 +26,13 @@ extension CourseListModule {
         let dataProvider: CourseListDataProviderProtocol = CourseListDataProvider.init()
         var dataManager: CourseListDataManagerProtocol = CourseListDataManager.init(dataProvider: dataProvider)
         
-        let interactor: CourseListInteractorProtocol = CourseListInteractor.init(dataManager: dataManager)
+        let tableViewDelegate: CourseListTableViewDelegateProtocol = CourseListTableViewDelegate.init(dataProvider: dataProvider)
+        let tableViewDataSource: CourseListTableViewDataSourceProtocol = CourseListTableViewDataSource.init(dataProvider: dataProvider)
+        
+        let interactor: CourseListInteractorProtocol = CourseListInteractor.init(dataManager: dataManager,
+                                                                                 tableViewDelegate: tableViewDelegate,
+                                                                                 tableViewDataSource: tableViewDataSource)
+        
         var router: CourseListRouterProtocol = CourseListRouter.init()
         let presenter: CourseListPresenterProtocol = CourseListPresenter.init(interactor: interactor, router: router)
         let vc = CourseListViewController.init(presenter: presenter)

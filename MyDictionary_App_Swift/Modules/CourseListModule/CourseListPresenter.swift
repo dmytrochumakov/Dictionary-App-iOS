@@ -6,7 +6,8 @@
 
 import UIKit
 
-protocol CourseListPresenterInputProtocol {
+protocol CourseListPresenterInputProtocol: TableViewDelegatePropertyProtocol,
+                                           TableViewDataSourcePropertyProtocol {
     
 }
 
@@ -23,6 +24,13 @@ final class CourseListPresenter: NSObject, CourseListPresenterProtocol {
     
     fileprivate let interactor: CourseListInteractorInputProtocol
     fileprivate let router: CourseListRouterProtocol
+    
+    internal var tableViewDelegate: UITableViewDelegate {
+        return interactor.tableViewDelegate
+    }
+    internal var tableViewDataSource: UITableViewDataSource {
+        return interactor.tableViewDataSource
+    }
     
     internal weak var presenterOutput: CourseListPresenterOutputProtocol?
     

@@ -6,10 +6,23 @@
 
 import Foundation
 
-protocol CourseListDataProviderProtocol {
+protocol CourseListDataProviderProtocol: NumberOfSectionsProtocol,
+                                         NumberOfRowsInSectionProtocol {
     
 }
 
 final class CourseListDataProvider: CourseListDataProviderProtocol {
+    
+}
+
+extension CourseListDataProvider {
+    
+    var numberOfSections: Int {
+        return 0
+    }
+    
+    func numberOfRowsInSection(_ section: Int) -> Int {
+        return 0
+    }
     
 }
