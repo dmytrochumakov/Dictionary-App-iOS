@@ -42,4 +42,8 @@ extension UIViewController {
         collectionView.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor(fromAppearanceType: type)
     }
     
+    func configureTableViewBackgroundColor(fromAppearanceType type: AppearanceType, tableView: UITableView) {
+        tableView.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor(fromAppearanceType: type)
+    }
+    
 }
