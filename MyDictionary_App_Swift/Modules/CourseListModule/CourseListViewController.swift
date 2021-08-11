@@ -30,7 +30,7 @@ final class CourseListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureUI()
     }
     
     override func viewDidLayoutSubviews() {
@@ -43,4 +43,28 @@ final class CourseListViewController: UIViewController {
 // MARK: - CourseListPresenterOutputProtocol
 extension CourseListViewController: CourseListPresenterOutputProtocol {
        
+}
+
+// MARK: - Configure UI
+fileprivate extension CourseListViewController {
+    
+    func configureUI() {
+        configureView()
+        configureTableView()
+        configureNavigationBarAppearance(fromAppearanceType: Appearance.current.appearanceType)
+        configureTabBarAppearance(fromAppearanceType: Appearance.current.appearanceType)
+    }
+    
+    func configureView() {
+        self.configureViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType)
+        self.title = KeysForTranslate.courses.localized
+    }
+    
+    func configureTableView() {
+//        self.tableView.delegate = self.presenter.collectionViewDelegate
+//        self.tableView.dataSource = self.presenter.collectionViewDataSource
+//        self.configureTableViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType,
+//                                                    collectionView: collectionView)
+    }
+    
 }
