@@ -10,10 +10,7 @@ import UIKit
 struct RootViewController {
     
     static var viewController: UIViewController {
-        let wordListModule = WordListModule.init().module
-        let settingsModule = SettingsModule.init().module
-        return MainTabBarModule.init(sender: .init(wordListVC: wordListModule,
-                                                   settingsVC: settingsModule)).module
+        return UINavigationController.init(rootViewController: CourseListModule.init(sender: nil).module)
     }
     
 }
