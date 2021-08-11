@@ -63,7 +63,7 @@ extension CourseListPresenter {
     }
     
     func settingsButtonClicked() {
-        debugPrint(Self.self, #function)
+        router.openSettings()        
     }
     // --- //
     

@@ -7,7 +7,11 @@
 import UIKit
 
 protocol CourseListRouterProtocol {
+    
     var presenter: UIViewController? { get set }
+    
+    func openSettings()
+    
 }
 
 final class CourseListRouter: CourseListRouterProtocol {
@@ -16,6 +20,14 @@ final class CourseListRouter: CourseListRouterProtocol {
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension CourseListRouter {
+    
+    func openSettings() {        
+        presenter?.show(SettingsModule.init().module, sender: nil)
     }
     
 }
