@@ -16,6 +16,13 @@ extension UIViewController {
                                                collectionView: collectionView)
     }
     
+    func configureAppearance(fromAppearanceType type: AppearanceType,
+                             tableView: UITableView) {
+        configureAppearance(fromAppearanceType: type)
+        configureTableViewBackgroundColor(fromAppearanceType: type,
+                                          tableView: tableView)
+    }
+    
     func configureAppearance(fromAppearanceType type: AppearanceType) {
         configureViewBackgroundColor(fromAppearanceType: type)
         configureNavigationBarAppearance(fromAppearanceType: type)        

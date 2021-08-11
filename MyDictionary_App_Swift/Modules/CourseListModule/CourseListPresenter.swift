@@ -12,7 +12,8 @@ protocol CourseListPresenterInputProtocol: TableViewDelegatePropertyProtocol,
     func settingsButtonClicked()
 }
 
-protocol CourseListPresenterOutputProtocol: AnyObject {
+protocol CourseListPresenterOutputProtocol: AnyObject,
+                                            AppearanceHasBeenUpdatedProtocol {
     
 }
 
@@ -25,14 +26,17 @@ final class CourseListPresenter: NSObject, CourseListPresenterProtocol {
     
     fileprivate let interactor: CourseListInteractorInputProtocol
     fileprivate let router: CourseListRouterProtocol
-       
+    
     internal weak var presenterOutput: CourseListPresenterOutputProtocol?
     
     init(interactor: CourseListInteractorInputProtocol,
          router: CourseListRouterProtocol) {
+        
         self.interactor = interactor
         self.router = router
+        
         super.init()
+        
     }
     
     deinit {
@@ -43,6 +47,10 @@ final class CourseListPresenter: NSObject, CourseListPresenterProtocol {
 
 // MARK: - CourseListInteractorOutputProtocol
 extension CourseListPresenter {
+    
+    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
+        presenterOutput?.appearanceHasBeenUpdated(newValue)
+    }
     
 }
 
@@ -63,7 +71,7 @@ extension CourseListPresenter {
     }
     
     func settingsButtonClicked() {
-        router.openSettings()        
+        router.openSettings()
     }
     // --- //
     

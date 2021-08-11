@@ -65,6 +65,11 @@ final class CourseListViewController: UIViewController {
 // MARK: - CourseListPresenterOutputProtocol
 extension CourseListViewController: CourseListPresenterOutputProtocol {
     
+    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
+        configureAppearance(fromAppearanceType: newValue,
+                            tableView: tableView)
+    }
+    
 }
 
 // MARK: - Add Views

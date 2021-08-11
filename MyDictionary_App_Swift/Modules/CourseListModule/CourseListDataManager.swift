@@ -6,7 +6,7 @@
 
 import Foundation
 
-protocol CourseListDataManagerInputProtocol {
+protocol CourseListDataManagerInputProtocol: AppearanceHasBeenUpdatedProtocol {
     
 }
 
@@ -30,6 +30,14 @@ final class CourseListDataManager: CourseListDataManagerProtocol {
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension CourseListDataManager {
+    
+    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
+        
     }
     
 }

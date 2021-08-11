@@ -11,7 +11,8 @@ protocol CourseListInteractorInputProtocol {
     var tableViewDataSource: CourseListTableViewDataSourceProtocol { get }
 }
 
-protocol CourseListInteractorOutputProtocol: AnyObject {
+protocol CourseListInteractorOutputProtocol: AnyObject,
+                                             AppearanceHasBeenUpdatedProtocol {
     
 }
 
@@ -20,7 +21,7 @@ protocol CourseListInteractorProtocol: CourseListInteractorInputProtocol,
     var interactorOutput: CourseListInteractorOutputProtocol? { get set }
 }
 
-final class CourseListInteractor: CourseListInteractorProtocol {
+final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
 
     fileprivate let dataManager: CourseListDataManagerInputProtocol
     
@@ -36,15 +37,50 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         self.tableViewDelegate = tableViewDelegate
         self.tableViewDataSource = tableViewDataSource
         
+        super.init()
+        subscribe()        
+        
     }
     
     deinit {
         debugPrint(#function, Self.self)
+        unsubscribe()
     }
     
 }
 
 // MARK: - CourseListDataManagerOutputProtocol
 extension CourseListInteractor {
+    
+}
+
+// MARK: - Subscribe
+fileprivate extension CourseListInteractor {
+    
+    func subscribe() {
+        didChangeAppearanceObservableSubscribe()
+    }
+    
+    func didChangeAppearanceObservableSubscribe() {
+        Appearance
+            .current
+            .didChangeAppearanceObservable
+            .addObserver(self) { [weak self] (value) in
+                self?.interactorOutput?.appearanceHasBeenUpdated(value)
+                self?.dataManager.appearanceHasBeenUpdated(value)
+            }
+    }
+    
+}
+
+// MARK: - Unsubscribe
+fileprivate extension CourseListInteractor {
+    
+    func unsubscribe() {
+        Appearance
+            .current
+            .didChangeAppearanceObservable
+            .removeObserver(self)
+    }
     
 }
