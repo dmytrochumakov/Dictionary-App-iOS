@@ -15,21 +15,12 @@ protocol ConfigureAppearanceNavigationBarTintColor {
     static func navigationBarTintColor(fromAppearanceType type: AppearanceType) -> UIColor
 }
 
-protocol ConfigureAppearanceTabBarTintColor {
-    static func tabBarTintColor(fromAppearanceType type: AppearanceType) -> UIColor
-}
-
 protocol ConfigureAppearanceNavigationBarProtocol: ConfigureAppearanceNavigationBarTintColor {
     static func navigationBarTitleTextAttributes(fromAppearanceType type: AppearanceType) -> [NSAttributedString.Key : Any]
 }
 
-protocol ConfigureAppearanceTabBarProtocol: ConfigureAppearanceTabBarTintColor {
-    
-}
-
 protocol ConfigurationAppearanceControllerProtocol: ConfigureAppearanceViewBackgroundColor,
-                                                    ConfigureAppearanceNavigationBarProtocol,
-                                                    ConfigureAppearanceTabBarProtocol {
+                                                    ConfigureAppearanceNavigationBarProtocol {
     
 }
 
@@ -83,18 +74,6 @@ extension ConfigurationAppearanceController {
         case .dark:
             return AppStyling.Color.darkGray.color()
         }
-    }
-    
-    /// - Parameter fromAppearanceType type: Appearance.current.appearanceType by default
-    static func tabBarTintColor(fromAppearanceType type: AppearanceType = Appearance.current.appearanceType) -> UIColor {
-        switch type {
-        case .automatic:            
-            return self.tabBarTintColor(fromAppearanceType: .light)
-        case .light:
-            return AppStyling.Color.lightGray.color()
-        case .dark:
-            return AppStyling.Color.darkGray.color()
-        }
-    }
+    }      
     
 }
