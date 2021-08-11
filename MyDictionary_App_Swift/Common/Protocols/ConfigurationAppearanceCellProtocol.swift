@@ -27,9 +27,9 @@ extension ConfigurationAppearanceCell {
         case .automatic:
             return self.viewBackgroundColor(fromAppearanceType: .light)
         case .light:
-            return AppStyling.Color.systemWhite.color()
+            return AppStyling.Color.md_White_0_Light_Appearence.color()
         case .dark:
-            return AppStyling.Color.systemGray.color()
+            return AppStyling.Color.md_Black_0_Dark_Appearence.color()
         }
     }
     
@@ -39,9 +39,9 @@ extension ConfigurationAppearanceCell {
         case .automatic:
             return self.labelTextColor(fromAppearanceType: .light)            
         case .light:
-            return AppStyling.Color.systemBlack.color()
+            return AppStyling.Color.md_Black_0_Light_Appearence.color()
         case .dark:
-            return AppStyling.Color.systemWhite.color()
+            return AppStyling.Color.md_White_0_Dark_Appearence.color()
         }
     }
     

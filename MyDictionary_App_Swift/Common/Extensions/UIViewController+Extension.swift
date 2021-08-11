@@ -18,17 +18,12 @@ extension UIViewController {
     
     func configureAppearance(fromAppearanceType type: AppearanceType) {
         configureViewBackgroundColor(fromAppearanceType: type)
-        configureNavigationBarAppearance(fromAppearanceType: type)
-        configureTabBarAppearance(fromAppearanceType: type)
+        configureNavigationBarAppearance(fromAppearanceType: type)        
     }
     
     func configureNavigationBarAppearance(fromAppearanceType type: AppearanceType) {
         configureNavigationBarTintColor(fromAppearanceType: type)
         configureNavigationBarTitleTextAttributes(fromAppearanceType: type)
-    }
-    
-    func configureTabBarAppearance(fromAppearanceType type: AppearanceType) {
-        configureTabBarTintColor(fromAppearanceType: type)
     }
     
     func configureNavigationBarTintColor(fromAppearanceType type: AppearanceType) {
@@ -37,10 +32,6 @@ extension UIViewController {
     
     func configureNavigationBarTitleTextAttributes(fromAppearanceType type: AppearanceType) {
         navigationController?.navigationBar.titleTextAttributes = ConfigurationAppearanceController.navigationBarTitleTextAttributes(fromAppearanceType: type)
-    }
-    
-    func configureTabBarTintColor(fromAppearanceType type: AppearanceType) {
-        tabBarController?.tabBar.barTintColor = ConfigurationAppearanceController.tabBarTintColor(fromAppearanceType: type)
     }
     
     func configureViewBackgroundColor(fromAppearanceType type: AppearanceType) {

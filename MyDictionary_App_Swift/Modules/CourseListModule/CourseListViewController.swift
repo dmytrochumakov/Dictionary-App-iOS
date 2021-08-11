@@ -51,8 +51,7 @@ fileprivate extension CourseListViewController {
     func configureUI() {
         configureView()
         configureTableView()
-        configureNavigationBarAppearance(fromAppearanceType: Appearance.current.appearanceType)
-        configureTabBarAppearance(fromAppearanceType: Appearance.current.appearanceType)
+        configureNavigationBarAppearance(fromAppearanceType: Appearance.current.appearanceType)        
     }
     
     func configureView() {

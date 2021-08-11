@@ -99,8 +99,7 @@ fileprivate extension WordListViewController {
     func configureUI() {
         configureView()
         configureCollectionView()
-        configureNavigationBarAppearance(fromAppearanceType: Appearance.current.appearanceType)
-        configureTabBarAppearance(fromAppearanceType: Appearance.current.appearanceType)
+        configureNavigationBarAppearance(fromAppearanceType: Appearance.current.appearanceType)        
     }
     
     func configureView() {

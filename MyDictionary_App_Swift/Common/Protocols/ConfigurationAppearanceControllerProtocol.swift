@@ -37,9 +37,9 @@ extension ConfigurationAppearanceController {
         case .automatic:
             return self.viewBackgroundColor(fromAppearanceType: .light)
         case .light:
-            return AppStyling.Color.lightGray.color()
+            return AppStyling.Color.md_White_0_Light_Appearence.color()
         case .dark:
-            return AppStyling.Color.darkGray.color()
+            return AppStyling.Color.md_Black_0_Dark_Appearence.color()
         }
     }
     
@@ -56,9 +56,9 @@ extension ConfigurationAppearanceController {
     fileprivate static func navigationBarAttributedStringForegroundColor(fromAppearanceType type: AppearanceType) -> [NSAttributedString.Key : Any] {
         switch type {
         case .light:
-            return [NSAttributedString.Key.foregroundColor : AppStyling.Color.systemBlack.color()]
+            return [NSAttributedString.Key.foregroundColor : AppStyling.Color.md_Black_0_Light_Appearence.color()]
         case .dark:
-            return [NSAttributedString.Key.foregroundColor : AppStyling.Color.systemWhite.color()]
+            return [NSAttributedString.Key.foregroundColor : AppStyling.Color.md_White_0_Dark_Appearence.color()]
         default:
             return Self.navigationBarAttributedStringForegroundColor(fromAppearanceType: .light)
         }
@@ -70,10 +70,10 @@ extension ConfigurationAppearanceController {
         case .automatic:
             return self.navigationBarTintColor(fromAppearanceType: .light)
         case .light:
-            return AppStyling.Color.systemWhite.color()
+            return AppStyling.Color.md_Light_Gray_0_Light_Appearence.color()
         case .dark:
-            return AppStyling.Color.darkGray.color()
+            return AppStyling.Color.md_Light_Gray_0_Dark_Appearence.color()
         }
-    }      
+    }
     
 }
