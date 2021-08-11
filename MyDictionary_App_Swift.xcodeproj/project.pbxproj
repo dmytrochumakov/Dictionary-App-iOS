@@ -122,6 +122,7 @@
 		22DB2F7B26C3BE7900C1AADA /* CourseListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7426C3BE7900C1AADA /* CourseListInteractor.swift */; };
 		22DB2F7C26C3BE7900C1AADA /* CourseListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7526C3BE7900C1AADA /* CourseListDataProvider.swift */; };
 		22DB2F7D26C3BE7900C1AADA /* CourseListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7626C3BE7900C1AADA /* CourseListDataManager.swift */; };
+		22DB2F7F26C3C3A900C1AADA /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7E26C3C3A800C1AADA /* UIColor+Extension.swift */; };
 		22DEAE3226C289F100B64B16 /* MDAPIVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DEAE3126C289F100B64B16 /* MDAPIVersion.swift */; };
 		22E2B4DD2664E43B00978E62 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4D62664E43B00978E62 /* SettingsPresenter.swift */; };
 		22E2B4DE2664E43B00978E62 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4D72664E43B00978E62 /* SettingsRouter.swift */; };
@@ -300,6 +301,7 @@
 		22DB2F7426C3BE7900C1AADA /* CourseListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListInteractor.swift; sourceTree = "<group>"; };
 		22DB2F7526C3BE7900C1AADA /* CourseListDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListDataProvider.swift; sourceTree = "<group>"; };
 		22DB2F7626C3BE7900C1AADA /* CourseListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListDataManager.swift; sourceTree = "<group>"; };
+		22DB2F7E26C3C3A800C1AADA /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		22DEAE3126C289F100B64B16 /* MDAPIVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIVersion.swift; sourceTree = "<group>"; };
 		22E2B4D62664E43B00978E62 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		22E2B4D72664E43B00978E62 /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 				2223F8AA26512C5A004F2FE9 /* String+Extension.swift */,
 				22E2B4EF2664EF3200978E62 /* UICollectionView+Extension.swift */,
 				22B22690266CF866007AB292 /* UIViewController+Extension.swift */,
+				22DB2F7E26C3C3A800C1AADA /* UIColor+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1255,6 +1258,7 @@
 				22493C4C26972E27000DA480 /* MDWordOperationError.swift in Sources */,
 				22CA0896265178DE0052D169 /* ScrollToTopProtocol.swift in Sources */,
 				229901692668EC3400D8C74E /* AppearanceRouter.swift in Sources */,
+				22DB2F7F26C3C3A900C1AADA /* UIColor+Extension.swift in Sources */,
 				2289CEE82678CC34007254C3 /* MDDeleteWordOperationResult.swift in Sources */,
 				22E2B4F7266509B900978E62 /* SettingsSectionModel.swift in Sources */,
 				22493C3726972232000DA480 /* MDWordCoreDataStorage.swift in Sources */,
