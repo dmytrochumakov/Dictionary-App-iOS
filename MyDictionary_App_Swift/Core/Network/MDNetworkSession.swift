@@ -30,20 +30,6 @@ final class MDNetworkSession: NSObject {
         debugPrint(Self.self, #function)
     }
         
-    public override convenience init() {
-        // Configure the default URLSessionConfiguration.
-        let sessionConfiguration = URLSessionConfiguration.default
-        sessionConfiguration.timeoutIntervalForResource = 30        
-        
-        // Create a `OperationQueue` instance for scheduling the delegate calls and completion handlers.
-        let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 3
-        queue.qualityOfService = .userInitiated
-        
-        // Call the designated initializer
-        self.init(configuration: sessionConfiguration, delegateQueue: queue)
-    }
-        
     public init(configuration: URLSessionConfiguration, delegateQueue: OperationQueue) {
         super.init()
         self.session = URLSession.init(configuration: configuration, delegate: self, delegateQueue: delegateQueue)

@@ -23,10 +23,7 @@ final class MDAppDelegate: UIResponder,
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         self.rootWindow = RootWindow.window
-        self.dependencies = MDAppDependencies.init()
-        
-        let asdas: MDAPIWordProtocol = MDAPIWord.init()
-        asdas.create()
+        self.dependencies = MDAppDependencies.init()                
         
         return true
     }

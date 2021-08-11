@@ -15,14 +15,18 @@ final class MDAPIWord: MDAPIWordProtocol {
     
     fileprivate let requestDispatcher: MDRequestDispatcherProtocol
     
-    convenience init() {
-        self.init(requestDispatcher: MDRequestDispatcher.init(environment: MDAPIEnvironment.production,
-                                                              networkSession: MDNetworkSession()))
-    }
-    
     init(requestDispatcher: MDRequestDispatcherProtocol) {
         self.requestDispatcher = requestDispatcher
     }
+    
+    deinit {
+        debugPrint(Self.self, #function)
+    }
+    
+}
+
+// MARK: - Endpoint
+extension MDAPIWord {
     
     enum MDWordEndpoint: MDEndpoint {
         
@@ -71,6 +75,7 @@ final class MDAPIWord: MDAPIWordProtocol {
         }
         
     }
+    
     
 }
 
