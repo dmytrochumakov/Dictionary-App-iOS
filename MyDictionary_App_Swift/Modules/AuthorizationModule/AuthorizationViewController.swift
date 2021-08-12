@@ -10,6 +10,8 @@ final class AuthorizationViewController: UIViewController {
     
     fileprivate let presenter: AuthorizationPresenterInputProtocol
     
+    fileprivate let defaultLineViewHeight: CGFloat = 0.5
+    
     fileprivate let nicknameTextFieldHeight: CGFloat = 40
     fileprivate let nicknameTextFieldTopOffset: CGFloat = 56
     fileprivate let nicknameTextField: UITextField = {
@@ -22,6 +24,13 @@ final class AuthorizationViewController: UIViewController {
         textField.textColor = ConfigurationAppearanceController.labelTextColor()
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
+    }()
+    
+    fileprivate let nicknameTextFieldBottomLineView: UIView = {
+        let view: UIView = .init()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = AppStyling.Color.light_Gray_0.color()
+        return view
     }()
     
     fileprivate let passwordTextFieldHeight: CGFloat = 40
@@ -37,6 +46,13 @@ final class AuthorizationViewController: UIViewController {
         textField.textColor = ConfigurationAppearanceController.labelTextColor()
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
+    }()
+        
+    fileprivate let passwordTextFieldBottomLineView: UIView = {
+        let view: UIView = .init()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = AppStyling.Color.light_Gray_0.color()
+        return view
     }()
     
     fileprivate let loginButtonHeight: CGFloat = 56
@@ -90,7 +106,9 @@ fileprivate extension AuthorizationViewController {
     
     func addViews() {
         addNicknameTextField()
+        addNicknameTextFieldBottomLineView()
         addPasswordTextField()
+        addPasswordTextFieldBottomLineView()
         addLoginButton()
     }
     
@@ -98,8 +116,16 @@ fileprivate extension AuthorizationViewController {
         view.addSubview(nicknameTextField)
     }
     
+    func addNicknameTextFieldBottomLineView() {
+        view.addSubview(nicknameTextFieldBottomLineView)
+    }
+    
     func addPasswordTextField() {
         view.addSubview(passwordTextField)
+    }
+    
+    func addPasswordTextFieldBottomLineView() {
+        view.addSubview(passwordTextFieldBottomLineView)
     }
     
     func addLoginButton() {
@@ -113,7 +139,9 @@ fileprivate extension AuthorizationViewController {
     
     func addConstraints() {
         addNicknameTextFieldConstraints()
+        addNicknameTextFieldBottomLineViewConstraints()
         addPasswordTextFieldConstraints()
+        addPasswordTextFieldBottomLineViewConstraints()
         addLoginButtonConstraints()
     }
     
@@ -136,6 +164,25 @@ fileprivate extension AuthorizationViewController {
                                                                constant: self.nicknameTextFieldHeight)
     }
     
+    func addNicknameTextFieldBottomLineViewConstraints() {
+        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.nicknameTextFieldBottomLineView,
+                                                         attribute: .top,
+                                                         toItem: self.nicknameTextField,
+                                                         attribute: .bottom,
+                                                         constant: 0)
+        
+        NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.nicknameTextFieldBottomLineView,
+                                                             toItem: self.view,
+                                                             constant: 0)
+        
+        NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.nicknameTextFieldBottomLineView,
+                                                              toItem: self.view,
+                                                              constant: 0)
+        
+        NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.nicknameTextFieldBottomLineView,
+                                                               constant: self.defaultLineViewHeight)
+    }
+    
     func addPasswordTextFieldConstraints() {
         NSLayoutConstraint.addEqualConstraintAndActivate(item: self.passwordTextField,
                                                          attribute: .top,
@@ -153,6 +200,25 @@ fileprivate extension AuthorizationViewController {
         
         NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.passwordTextField,
                                                                constant: self.passwordTextFieldHeight)
+    }
+    
+    func addPasswordTextFieldBottomLineViewConstraints() {
+        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.passwordTextFieldBottomLineView,
+                                                         attribute: .top,
+                                                         toItem: self.passwordTextField,
+                                                         attribute: .bottom,
+                                                         constant: 0)
+        
+        NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.passwordTextFieldBottomLineView,
+                                                             toItem: self.view,
+                                                             constant: 0)
+        
+        NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.passwordTextFieldBottomLineView,
+                                                              toItem: self.view,
+                                                              constant: 0)
+        
+        NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.passwordTextFieldBottomLineView,
+                                                               constant: self.defaultLineViewHeight)
     }
     
     func addLoginButtonConstraints() {
