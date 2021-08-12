@@ -7,7 +7,7 @@
 import UIKit
 
 protocol AuthorizationInteractorInputProtocol {
-    
+    var textFieldDelegate: AuthTextFieldDelegateProtocol { get }
 }
 
 protocol AuthorizationInteractorOutputProtocol: AnyObject {
@@ -24,8 +24,14 @@ final class AuthorizationInteractor: AuthorizationInteractorProtocol {
     fileprivate let dataManager: AuthorizationDataManagerInputProtocol
     internal weak var interactorOutput: AuthorizationInteractorOutputProtocol?
     
-    init(dataManager: AuthorizationDataManagerInputProtocol) {
+    internal var textFieldDelegate: AuthTextFieldDelegateProtocol
+    
+    init(dataManager: AuthorizationDataManagerInputProtocol,
+         textFieldDelegate: AuthTextFieldDelegateProtocol) {
+        
         self.dataManager = dataManager
+        self.textFieldDelegate = textFieldDelegate
+        
     }
     
     deinit {

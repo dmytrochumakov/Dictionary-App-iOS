@@ -114,6 +114,7 @@ fileprivate extension AuthorizationViewController {
     }
     
     func addNicknameTextField() {
+        nicknameTextField.delegate = presenter.textFieldDelegate
         view.addSubview(nicknameTextField)
     }
     
@@ -122,6 +123,7 @@ fileprivate extension AuthorizationViewController {
     }
     
     func addPasswordTextField() {
+        passwordTextField.delegate = presenter.textFieldDelegate
         view.addSubview(passwordTextField)
     }
     

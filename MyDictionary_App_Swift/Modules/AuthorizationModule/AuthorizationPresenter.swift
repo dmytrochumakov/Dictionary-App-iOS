@@ -7,6 +7,7 @@
 import UIKit
 
 protocol AuthorizationPresenterInputProtocol {
+    var textFieldDelegate: UITextFieldDelegate { get }
     func loginButtonClicked()
 }
 
@@ -49,6 +50,10 @@ extension AuthorizationPresenter {
 
 // MARK: - AuthorizationPresenterInputProtocol
 extension AuthorizationPresenter {
+    
+    var textFieldDelegate: UITextFieldDelegate {
+        return interactor.textFieldDelegate
+    }
     
     // Actions //
     func loginButtonClicked() {
