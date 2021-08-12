@@ -37,7 +37,7 @@ final class AuthorizationViewController: UIViewController {
     fileprivate let passwordTextFieldTopOffset: CGFloat = 16
     fileprivate let passwordTextField: UITextField = {
         let textField: UITextField = .init()
-        textField.placeholder = KeysForTranslate.password.localized        
+        textField.placeholder = KeysForTranslate.password.localized
         textField.autocorrectionType = .no
         textField.textAlignment = .center
         textField.clearButtonMode = .whileEditing
@@ -128,6 +128,7 @@ fileprivate extension AuthorizationViewController {
     }
     
     func addLoginButton() {
+        loginButton.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
         view.addSubview(loginButton)
     }
     
@@ -249,6 +250,15 @@ fileprivate extension AuthorizationViewController {
     
     func configureTitle() {
         self.title = KeysForTranslate.authorization.localized
+    }
+    
+}
+
+// MARK: - Actions
+fileprivate extension AuthorizationViewController {
+    
+    @objc func loginButtonAction() {
+        presenter.loginButtonClicked()
     }
     
 }

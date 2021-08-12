@@ -7,7 +7,7 @@
 import UIKit
 
 protocol AuthorizationPresenterInputProtocol {
-    
+    func loginButtonClicked()
 }
 
 protocol AuthorizationPresenterOutputProtocol: AnyObject {
@@ -44,5 +44,16 @@ final class AuthorizationPresenter: NSObject, AuthorizationPresenterProtocol {
 
 // MARK: - AuthorizationInteractorOutputProtocol
 extension AuthorizationPresenter {
+    
+}
+
+// MARK: - AuthorizationPresenterInputProtocol
+extension AuthorizationPresenter {
+    
+    // Actions //
+    func loginButtonClicked() {
+        debugPrint(Self.self, #function)
+    }
+    // End Actions //
     
 }
