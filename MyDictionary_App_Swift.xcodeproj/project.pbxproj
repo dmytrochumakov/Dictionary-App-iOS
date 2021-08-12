@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		221D280E26C5064A004BC4F7 /* AuthorizationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280726C5064A004BC4F7 /* AuthorizationModule.swift */; };
+		221D280F26C5064A004BC4F7 /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */; };
+		221D281026C5064A004BC4F7 /* AuthorizationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */; };
+		221D281126C5064A004BC4F7 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280A26C5064A004BC4F7 /* AuthorizationViewController.swift */; };
+		221D281226C5064A004BC4F7 /* AuthorizationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280B26C5064A004BC4F7 /* AuthorizationInteractor.swift */; };
+		221D281326C5064A004BC4F7 /* AuthorizationDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280C26C5064A004BC4F7 /* AuthorizationDataProvider.swift */; };
+		221D281426C5064A004BC4F7 /* AuthorizationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280D26C5064A004BC4F7 /* AuthorizationDataManager.swift */; };
 		2223F8A826512C1A004F2FE9 /* LocalizableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8A726512C1A004F2FE9 /* LocalizableProtocol.swift */; };
 		2223F8AB26512C5A004F2FE9 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8AA26512C5A004F2FE9 /* String+Extension.swift */; };
 		2223F8AE26512DEB004F2FE9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8AD26512DEB004F2FE9 /* Constants.swift */; };
@@ -185,6 +192,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		221D280726C5064A004BC4F7 /* AuthorizationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModule.swift; sourceTree = "<group>"; };
+		221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPresenter.swift; sourceTree = "<group>"; };
+		221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationRouter.swift; sourceTree = "<group>"; };
+		221D280A26C5064A004BC4F7 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
+		221D280B26C5064A004BC4F7 /* AuthorizationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationInteractor.swift; sourceTree = "<group>"; };
+		221D280C26C5064A004BC4F7 /* AuthorizationDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationDataProvider.swift; sourceTree = "<group>"; };
+		221D280D26C5064A004BC4F7 /* AuthorizationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationDataManager.swift; sourceTree = "<group>"; };
 		2223F8A726512C1A004F2FE9 /* LocalizableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableProtocol.swift; sourceTree = "<group>"; };
 		2223F8AA26512C5A004F2FE9 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		2223F8AD26512DEB004F2FE9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -376,6 +390,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		221D280626C5062A004BC4F7 /* AuthorizationModule */ = {
+			isa = PBXGroup;
+			children = (
+				221D280726C5064A004BC4F7 /* AuthorizationModule.swift */,
+				221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */,
+				221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */,
+				221D280A26C5064A004BC4F7 /* AuthorizationViewController.swift */,
+				221D280B26C5064A004BC4F7 /* AuthorizationInteractor.swift */,
+				221D280C26C5064A004BC4F7 /* AuthorizationDataProvider.swift */,
+				221D280D26C5064A004BC4F7 /* AuthorizationDataManager.swift */,
+			);
+			path = AuthorizationModule;
+			sourceTree = "<group>";
+		};
 		2223F8A526512BE8004F2FE9 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
@@ -888,6 +916,7 @@
 		22CA086F26515D240052D169 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				221D280626C5062A004BC4F7 /* AuthorizationModule */,
 				22DB2F6F26C3BE3C00C1AADA /* CourseListModule */,
 				2299015F2668EC2900D8C74E /* AppearanceModule */,
 				227864EE2663740100921778 /* SettingsModule */,
@@ -1282,6 +1311,7 @@
 				227D5E672652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift in Sources */,
 				22CA088726515F6A0052D169 /* WordListDataManager.swift in Sources */,
 				22E2B4E12664E43B00978E62 /* SettingsDataProvider.swift in Sources */,
+				221D281426C5064A004BC4F7 /* AuthorizationDataManager.swift in Sources */,
 				22E2B4F32665085E00978E62 /* SettingsRowType.swift in Sources */,
 				22EF01FF269DA99800FE4435 /* MDAPIError.swift in Sources */,
 				22DB2F7C26C3BE7900C1AADA /* CourseListDataProvider.swift in Sources */,
@@ -1303,6 +1333,7 @@
 				229E08CB2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift in Sources */,
 				226FEE85266B7DF90044A5F9 /* Appearance.swift in Sources */,
 				22DB2F7926C3BE7900C1AADA /* CourseListRouter.swift in Sources */,
+				221D281026C5064A004BC4F7 /* AuthorizationRouter.swift in Sources */,
 				22CA088326515F020052D169 /* WordListRouter.swift in Sources */,
 				22493C50269741D0000DA480 /* MDCreateWordCoreDataStorageOperation.swift in Sources */,
 				229E08C42652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift in Sources */,
@@ -1323,6 +1354,7 @@
 				2289CEF92678CC34007254C3 /* OperationQueueService.swift in Sources */,
 				22E2B4DE2664E43B00978E62 /* SettingsRouter.swift in Sources */,
 				2289CEE02678CC34007254C3 /* WordModel.swift in Sources */,
+				221D280E26C5064A004BC4F7 /* AuthorizationModule.swift in Sources */,
 				226FEE89266BB2130044A5F9 /* AppearanceRowType.swift in Sources */,
 				22DB2F7A26C3BE7900C1AADA /* CourseListViewController.swift in Sources */,
 				2299016C2668EC3400D8C74E /* AppearanceDataProvider.swift in Sources */,
@@ -1379,17 +1411,20 @@
 				22EF01E5269D9EBC00FE4435 /* MDWordsCountResult.swift in Sources */,
 				2294D6C326A2F1B60066BE77 /* CDUserEntity+Extension.swift in Sources */,
 				2289CEE12678CC34007254C3 /* MDCreateWordMemoryStorageOperation.swift in Sources */,
+				221D281226C5064A004BC4F7 /* AuthorizationInteractor.swift in Sources */,
 				22CA08892651603A0052D169 /* WordListDataProvider.swift in Sources */,
 				22493C3E2697259D000DA480 /* MDCDResultSavedWord.swift in Sources */,
 				22E2B4F52665097900978E62 /* SettingsSectionType.swift in Sources */,
 				22493C3B269724CB000DA480 /* CoreDataEntityName.swift in Sources */,
 				22493C542697420F000DA480 /* MDReadWordCoreDataStorageOperation.swift in Sources */,
+				221D280F26C5064A004BC4F7 /* AuthorizationPresenter.swift in Sources */,
 				227D5E642652584700B54524 /* NSLayoutConstraint+Extension.swift in Sources */,
 				22E2B500266515E700978E62 /* CollectionViewDataSource.swift in Sources */,
 				229E08BC2652C41400DA56C4 /* ReuseIdentifierProtocol.swift in Sources */,
 				22EF01F6269DA81100FE4435 /* MDRequestDispatcher.swift in Sources */,
 				2289CEE72678CC34007254C3 /* MDReadWordOperationResult.swift in Sources */,
 				226FEE8C266BB2620044A5F9 /* AppearanceRowModel.swift in Sources */,
+				221D281126C5064A004BC4F7 /* AuthorizationViewController.swift in Sources */,
 				22EF01EE269DA73100FE4435 /* HTTPHeader.swift in Sources */,
 				22CA087F26515ED90052D169 /* WordListInteractor.swift in Sources */,
 				226FEE7A266B644F0044A5F9 /* AppearanceCollectionViewDataSource.swift in Sources */,
@@ -1398,6 +1433,7 @@
 				22DEAE3226C289F100B64B16 /* MDAPIVersion.swift in Sources */,
 				22DB2F8B26C3D4D200C1AADA /* TableViewDelegatePropertyProtocol.swift in Sources */,
 				22493C4726972877000DA480 /* MDReadWordsResult.swift in Sources */,
+				221D281326C5064A004BC4F7 /* AuthorizationDataProvider.swift in Sources */,
 				226FEE87266B7E300044A5F9 /* AppearanceHasBeenUpdatedProtocol.swift in Sources */,
 				22493C33269715A9000DA480 /* CDResultSavedEnum.swift in Sources */,
 				22EF020D269DAFC000FE4435 /* MDAPIEnvironment.swift in Sources */,
