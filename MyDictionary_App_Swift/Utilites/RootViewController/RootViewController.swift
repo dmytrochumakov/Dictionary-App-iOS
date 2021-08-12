@@ -10,7 +10,7 @@ import UIKit
 struct RootViewController {
     
     static var viewController: UIViewController {
-        return UINavigationController.init(rootViewController: CourseListModule.init(sender: nil).module)
+        return UINavigationController.init(rootViewController: AuthorizationModule.init(sender: nil).module)
     }
     
 }
