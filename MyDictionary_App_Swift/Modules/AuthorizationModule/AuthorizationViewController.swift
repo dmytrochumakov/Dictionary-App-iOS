@@ -37,8 +37,7 @@ final class AuthorizationViewController: UIViewController {
     fileprivate let passwordTextFieldTopOffset: CGFloat = 16
     fileprivate let passwordTextField: UITextField = {
         let textField: UITextField = .init()
-        textField.placeholder = KeysForTranslate.password.localized
-        textField.isSecureTextEntry = true
+        textField.placeholder = KeysForTranslate.password.localized        
         textField.autocorrectionType = .no
         textField.textAlignment = .center
         textField.clearButtonMode = .whileEditing
