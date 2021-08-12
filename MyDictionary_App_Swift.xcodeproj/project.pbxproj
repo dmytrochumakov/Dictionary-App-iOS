@@ -391,6 +391,7 @@
 		221D280626C5062A004BC4F7 /* AuthorizationModule */ = {
 			isa = PBXGroup;
 			children = (
+				221D281626C53270004BC4F7 /* AuthValidation */,
 				221D280726C5064A004BC4F7 /* AuthorizationModule.swift */,
 				221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */,
 				221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */,
@@ -400,6 +401,13 @@
 				221D280D26C5064A004BC4F7 /* AuthorizationDataManager.swift */,
 			);
 			path = AuthorizationModule;
+			sourceTree = "<group>";
+		};
+		221D281626C53270004BC4F7 /* AuthValidation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AuthValidation;
 			sourceTree = "<group>";
 		};
 		2223F8A526512BE8004F2FE9 /* Utilites */ = {
