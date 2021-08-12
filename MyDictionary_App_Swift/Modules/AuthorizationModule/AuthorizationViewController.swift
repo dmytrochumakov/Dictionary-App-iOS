@@ -23,6 +23,7 @@ final class AuthorizationViewController: UIViewController {
         textField.font = AppStyling.Font.default
         textField.textColor = ConfigurationAppearanceController.labelTextColor()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.tag = AuthTextFieldTag.nickname.rawValue
         return textField
     }()
     
@@ -44,6 +45,7 @@ final class AuthorizationViewController: UIViewController {
         textField.font = AppStyling.Font.default
         textField.textColor = ConfigurationAppearanceController.labelTextColor()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.tag = AuthTextFieldTag.password.rawValue
         return textField
     }()
         
