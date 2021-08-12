@@ -9,10 +9,13 @@ import UIKit
 protocol AuthorizationPresenterInputProtocol {
     var textFieldDelegate: UITextFieldDelegate { get }
     func loginButtonClicked()
+    func nicknameTextFieldEditingDidChangeAction(_ text: String?)
+    func passwordTextFieldEditingDidChangeAction(_ text: String?)
 }
 
 protocol AuthorizationPresenterOutputProtocol: AnyObject {
-    
+    func makePasswordFieldActive()
+    func hideKeyboard()
 }
 
 protocol AuthorizationPresenterProtocol: AuthorizationPresenterInputProtocol,
@@ -46,6 +49,14 @@ final class AuthorizationPresenter: NSObject, AuthorizationPresenterProtocol {
 // MARK: - AuthorizationInteractorOutputProtocol
 extension AuthorizationPresenter {
     
+    func makePasswordFieldActive() {
+        presenterOutput?.makePasswordFieldActive()
+    }
+    
+    func hideKeyboard() {
+        presenterOutput?.hideKeyboard()
+    }
+    
 }
 
 // MARK: - AuthorizationPresenterInputProtocol
@@ -57,7 +68,15 @@ extension AuthorizationPresenter {
     
     // Actions //
     func loginButtonClicked() {
-        debugPrint(Self.self, #function)
+        interactor.loginButtonClicked()
+    }
+    
+    func nicknameTextFieldEditingDidChangeAction(_ text: String?) {
+        interactor.nicknameTextFieldEditingDidChangeAction(text)
+    }
+    
+    func passwordTextFieldEditingDidChangeAction(_ text: String?) {
+        interactor.passwordTextFieldEditingDidChangeAction(text)
     }
     // End Actions //
     

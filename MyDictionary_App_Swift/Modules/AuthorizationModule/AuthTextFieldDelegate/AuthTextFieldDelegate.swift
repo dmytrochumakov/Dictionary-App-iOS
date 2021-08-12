@@ -8,13 +8,44 @@
 import UIKit
 
 protocol AuthTextFieldDelegateProtocol: UITextFieldDelegate {
-    
+    var nicknameTextFieldShouldReturnAction: (() -> Void)? { get set }
+    var passwordTextFieldShouldReturnAction: (() -> Void)? { get set }
 }
 
 final class AuthTextFieldDelegate: NSObject, AuthTextFieldDelegateProtocol {
     
+    internal var nicknameTextFieldShouldReturnAction: (() -> Void)?
+    internal var passwordTextFieldShouldReturnAction: (() -> Void)?    
+    
+    deinit {
+        debugPrint(Self.self, #function)
+    }
+    
 }
 
 extension AuthTextFieldDelegate {       
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if (isNicknameTextField(textField)) {
+            nicknameTextFieldShouldReturnAction?()
+        }
+        if (isPasswordTextField(textField)) {
+            passwordTextFieldShouldReturnAction?()
+        }
+        return true
+    }
+    
+}
+
+// MARK: - Check Text Field Type By Tag
+fileprivate extension AuthTextFieldDelegate {
+    
+    func isNicknameTextField(_ textField: UITextField) -> Bool {
+        return (textField.tag == AuthTextFieldTag.nickname.rawValue)
+    }
+    
+    func isPasswordTextField(_ textField: UITextField) -> Bool {
+        return (textField.tag == AuthTextFieldTag.password.rawValue)
+    }
     
 }

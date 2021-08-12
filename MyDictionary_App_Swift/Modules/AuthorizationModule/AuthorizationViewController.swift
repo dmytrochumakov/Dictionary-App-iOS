@@ -35,6 +35,7 @@ final class AuthorizationViewController: UIViewController {
         textField.font = AppStyling.Font.default
         textField.textColor = ConfigurationAppearanceController.labelTextColor()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.returnKeyType = .next
         textField.tag = AuthTextFieldTag.nickname.rawValue
         return textField
     }()
@@ -57,6 +58,7 @@ final class AuthorizationViewController: UIViewController {
         textField.font = AppStyling.Font.default
         textField.textColor = ConfigurationAppearanceController.labelTextColor()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.returnKeyType = .go
         textField.tag = AuthTextFieldTag.password.rawValue
         return textField
     }()
@@ -114,6 +116,14 @@ final class AuthorizationViewController: UIViewController {
 // MARK: - AuthorizationPresenterOutputProtocol
 extension AuthorizationViewController: AuthorizationPresenterOutputProtocol {
     
+    func makePasswordFieldActive() {
+        self.passwordTextField.becomeFirstResponder()
+    }
+    
+    func hideKeyboard() {
+        self.hideKeyboardFunc()
+    }
+    
 }
 
 // MARK: - Add Views
@@ -139,6 +149,7 @@ fileprivate extension AuthorizationViewController {
     
     func addNicknameTextField() {
         nicknameTextField.delegate = presenter.textFieldDelegate
+        nicknameTextField.addTarget(self, action: #selector(nicknameTextFieldEditingDidChangeAction), for: .editingChanged)
         contentView.addSubview(nicknameTextField)
     }
     
@@ -147,6 +158,7 @@ fileprivate extension AuthorizationViewController {
     }
     
     func addPasswordTextField() {
+        passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingDidChangeAction), for: .editingChanged)
         passwordTextField.delegate = presenter.textFieldDelegate
         contentView.addSubview(passwordTextField)
     }
@@ -314,6 +326,23 @@ fileprivate extension AuthorizationViewController {
     
     @objc func loginButtonAction() {
         presenter.loginButtonClicked()
+    }
+    
+    @objc func nicknameTextFieldEditingDidChangeAction() {
+        presenter.nicknameTextFieldEditingDidChangeAction(nicknameTextField.text)
+    }
+    
+    @objc func passwordTextFieldEditingDidChangeAction() {
+        presenter.passwordTextFieldEditingDidChangeAction(passwordTextField.text)
+    }
+    
+}
+
+// MARK: - Hide Keyboard
+fileprivate extension AuthorizationViewController {
+    
+    func hideKeyboardFunc() {
+        self.view.endEditing(true)
     }
     
 }

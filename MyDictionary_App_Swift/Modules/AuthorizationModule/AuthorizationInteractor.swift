@@ -8,10 +8,14 @@ import UIKit
 
 protocol AuthorizationInteractorInputProtocol {
     var textFieldDelegate: AuthTextFieldDelegateProtocol { get }
+    func nicknameTextFieldEditingDidChangeAction(_ text: String?)
+    func passwordTextFieldEditingDidChangeAction(_ text: String?)
+    func loginButtonClicked()
 }
 
 protocol AuthorizationInteractorOutputProtocol: AnyObject {
-    
+    func makePasswordFieldActive()
+    func hideKeyboard()
 }
 
 protocol AuthorizationInteractorProtocol: AuthorizationInteractorInputProtocol,
@@ -19,8 +23,8 @@ protocol AuthorizationInteractorProtocol: AuthorizationInteractorInputProtocol,
     var interactorOutput: AuthorizationInteractorOutputProtocol? { get set }
 }
 
-final class AuthorizationInteractor: AuthorizationInteractorProtocol {
-
+final class AuthorizationInteractor: NSObject, AuthorizationInteractorProtocol {
+    
     fileprivate let dataManager: AuthorizationDataManagerInputProtocol
     internal weak var interactorOutput: AuthorizationInteractorOutputProtocol?
     
@@ -32,6 +36,9 @@ final class AuthorizationInteractor: AuthorizationInteractorProtocol {
         self.dataManager = dataManager
         self.textFieldDelegate = textFieldDelegate
         
+        super.init()
+        subscribe()
+        
     }
     
     deinit {
@@ -42,5 +49,47 @@ final class AuthorizationInteractor: AuthorizationInteractorProtocol {
 
 // MARK: - AuthorizationDataManagerOutputProtocol
 extension AuthorizationInteractor {
+    
+}
+
+// MARK: - AuthorizationInteractorInputProtocol
+extension AuthorizationInteractor {
+    
+    // Actions //
+    
+    func nicknameTextFieldEditingDidChangeAction(_ text: String?) {
+        dataManager.setNickname(text)
+    }
+    
+    func passwordTextFieldEditingDidChangeAction(_ text: String?) {
+        dataManager.setPassword(text)
+    }
+    
+    func loginButtonClicked() {
+        interactorOutput?.hideKeyboard()
+    }
+    
+    // End Actions //
+}
+
+// MARK: - Subscribe
+fileprivate extension AuthorizationInteractor {
+    
+    func subscribe() {
+        nicknameTextFieldShouldReturnActionSubscribe()
+        passwordTextFieldShouldReturnActionSubscribe()
+    }
+    
+    func nicknameTextFieldShouldReturnActionSubscribe() {
+        textFieldDelegate.nicknameTextFieldShouldReturnAction = { [weak self] in
+            self?.interactorOutput?.makePasswordFieldActive()
+        }
+    }
+    
+    func passwordTextFieldShouldReturnActionSubscribe() {
+        textFieldDelegate.passwordTextFieldShouldReturnAction = { [weak self] in
+            self?.interactorOutput?.hideKeyboard()
+        }
+    }
     
 }

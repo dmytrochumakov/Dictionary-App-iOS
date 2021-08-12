@@ -7,7 +7,8 @@
 import Foundation
 
 protocol AuthorizationDataManagerInputProtocol {
-    
+    func setNickname(_ text: String?)
+    func setPassword(_ text: String?)
 }
 
 protocol AuthorizationDataManagerOutputProtocol: AnyObject {
@@ -21,7 +22,7 @@ protocol AuthorizationDataManagerProtocol: AuthorizationDataManagerInputProtocol
 
 final class AuthorizationDataManager: AuthorizationDataManagerProtocol {
     
-    internal let dataProvider: AuthorizationDataProviderProtocol
+    internal var dataProvider: AuthorizationDataProviderProtocol
     internal weak var dataManagerOutput: AuthorizationDataManagerOutputProtocol?
     
     init(dataProvider: AuthorizationDataProviderProtocol) {
@@ -30,6 +31,18 @@ final class AuthorizationDataManager: AuthorizationDataManagerProtocol {
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension AuthorizationDataManager {
+    
+    func setNickname(_ text: String?) {
+        dataProvider.nickname = text
+    }
+    
+    func setPassword(_ text: String?) {        
+        dataProvider.password = text
     }
     
 }
