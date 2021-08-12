@@ -62,7 +62,7 @@ extension ConfigurationAppearanceController {
         switch type {
         case .light:
             return [NSAttributedString.Key.foregroundColor : AppStyling.Color.md_Black_0_Light_Appearence.color()]
-        case .dark:
+        case .dark:            
             return [NSAttributedString.Key.foregroundColor : AppStyling.Color.md_White_0_Dark_Appearence.color()]
         default:
             return Self.navigationBarAttributedStringForegroundColor(fromAppearanceType: .light)

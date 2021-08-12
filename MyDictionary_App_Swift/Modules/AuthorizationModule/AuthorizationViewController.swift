@@ -30,7 +30,7 @@ final class AuthorizationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureUI()
     }
     
     override func viewDidLayoutSubviews() {
@@ -43,4 +43,18 @@ final class AuthorizationViewController: UIViewController {
 // MARK: - AuthorizationPresenterOutputProtocol
 extension AuthorizationViewController: AuthorizationPresenterOutputProtocol {
        
+}
+
+// MARK: - Configure UI
+fileprivate extension AuthorizationViewController {
+    
+    func configureUI() {
+        configureTitle()
+        configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
+    }
+    
+    func configureTitle() {
+        self.title = KeysForTranslate.authorization.localized
+    }
+    
 }
