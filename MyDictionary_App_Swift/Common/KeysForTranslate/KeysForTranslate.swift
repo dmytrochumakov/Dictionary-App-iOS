@@ -23,6 +23,7 @@ enum KeysForTranslate: String {
     case authorization
     case nickname
     case login
+    case password
 }
 
 // MARK: - LocalizableProtocol

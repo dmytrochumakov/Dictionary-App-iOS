@@ -35,6 +35,23 @@ extension NSLayoutConstraint {
 extension NSLayoutConstraint {
     
     /// - Parameter multiplier: 1
+    static func addEqualConstraintAndActivate(item view1: Any,
+                                              attribute attribute1: NSLayoutConstraint.Attribute,
+                                              toItem view2: Any?,
+                                              attribute attribute2: NSLayoutConstraint.Attribute,
+                                              multiplier: CGFloat = 1,
+                                              constant: CGFloat) {
+        
+        NSLayoutConstraint.init(item: view1,
+                                attribute: attribute1,
+                                relatedBy: .equal,
+                                toItem: view2,
+                                attribute: attribute2,
+                                multiplier: multiplier,
+                                constant: constant).isActive = true
+    }
+    
+    /// - Parameter multiplier: 1
     static func addEqualTopConstraintAndActivate(item view1: Any,
                                                  toItem view2: Any?,
                                                  multiplier: CGFloat = 1,

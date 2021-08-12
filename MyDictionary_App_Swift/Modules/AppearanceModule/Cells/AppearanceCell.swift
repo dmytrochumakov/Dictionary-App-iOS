@@ -93,12 +93,12 @@ fileprivate extension AppearanceCell {
     }
     
     func configureView() {
-        self.backgroundColor = ConfigurationAppearanceCell.viewBackgroundColor()
+        self.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor()
     }
     
     func configureTitleLabel() {
         self.updateTitleLabelFont(isSelected: false)
-        self.titleLabel.textColor = ConfigurationAppearanceCell.labelTextColor()
+        self.titleLabel.textColor = ConfigurationAppearanceController.labelTextColor()
         self.titleLabel.textAlignment = .left
         self.titleLabel.numberOfLines = .zero
     }
@@ -109,11 +109,11 @@ fileprivate extension AppearanceCell {
 fileprivate extension AppearanceCell {
     
     func updateSelfView(_ model: AppearanceRowModel) {
-        self.backgroundColor = ConfigurationAppearanceCell.viewBackgroundColor(fromAppearanceType: model.appearanceType)
+        self.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor(fromAppearanceType: model.appearanceType)
     }
     
     func updateTitleLabel(_ model: AppearanceRowModel) {
-        self.titleLabel.textColor = ConfigurationAppearanceCell.labelTextColor(fromAppearanceType: model.appearanceType)
+        self.titleLabel.textColor = ConfigurationAppearanceController.labelTextColor(fromAppearanceType: model.appearanceType)
         self.titleLabel.text = model.titleText
         self.updateTitleLabelFont(isSelected: model.isSelected)
     }

@@ -101,7 +101,6 @@
 		229E08CB2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08CA2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift */; };
 		22B22681266CC033007AB292 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B22680266CC033007AB292 /* Observable.swift */; };
 		22B22689266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B22688266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift */; };
-		22B2268D266CDE93007AB292 /* ConfigurationAppearanceCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B2268C266CDE93007AB292 /* ConfigurationAppearanceCellProtocol.swift */; };
 		22B2268F266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B2268E266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift */; };
 		22B22691266CF866007AB292 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B22690266CF866007AB292 /* UIViewController+Extension.swift */; };
 		22B22693266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B22692266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift */; };
@@ -292,7 +291,6 @@
 		229E08CA2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourcePropertyProtocol.swift; sourceTree = "<group>"; };
 		22B22680266CC033007AB292 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		22B22688266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureAppearanceCellLabelTextColor.swift; sourceTree = "<group>"; };
-		22B2268C266CDE93007AB292 /* ConfigurationAppearanceCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationAppearanceCellProtocol.swift; sourceTree = "<group>"; };
 		22B2268E266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationAppearanceControllerProtocol.swift; sourceTree = "<group>"; };
 		22B22690266CF866007AB292 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		22B22692266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceTypePropertyProtocol.swift; sourceTree = "<group>"; };
@@ -431,7 +429,6 @@
 				22BD999D266A4A2C0063FEFC /* ModuleProtocol.swift */,
 				226FEE86266B7E300044A5F9 /* AppearanceHasBeenUpdatedProtocol.swift */,
 				22B22688266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift */,
-				22B2268C266CDE93007AB292 /* ConfigurationAppearanceCellProtocol.swift */,
 				22B2268E266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift */,
 				22B22692266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift */,
 				22DB2F8A26C3D4D200C1AADA /* TableViewDelegatePropertyProtocol.swift */,
@@ -1394,7 +1391,6 @@
 				2223F8B426512F01004F2FE9 /* KeysForTranslate.swift in Sources */,
 				2289CEEC2678CC34007254C3 /* MDCreateWordResult.swift in Sources */,
 				2223F8AE26512DEB004F2FE9 /* Constants.swift in Sources */,
-				22B2268D266CDE93007AB292 /* ConfigurationAppearanceCellProtocol.swift in Sources */,
 				2299016B2668EC3400D8C74E /* AppearanceInteractor.swift in Sources */,
 				22EF0202269DA9E300FE4435 /* MDResponseOperationResult.swift in Sources */,
 				22DB2F8726C3D2D400C1AADA /* TableViewDelegate.swift in Sources */,

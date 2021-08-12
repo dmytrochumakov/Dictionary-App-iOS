@@ -16,16 +16,26 @@ protocol ConfigureAppearanceNavigationBarTintColor {
 }
 
 protocol ConfigureAppearanceNavigationBarProtocol: ConfigureAppearanceNavigationBarTintColor {
-    static func navigationBarTitleTextAttributes(fromAppearanceType type: AppearanceType) -> [NSAttributedString.Key : Any]    
+    static func navigationBarTitleTextAttributes(fromAppearanceType type: AppearanceType) -> [NSAttributedString.Key : Any]
 }
 
 protocol ConfigureAppearanceButtonTextColor {
     static func buttonTextColor(fromAppearanceType type: AppearanceType) -> UIColor
 }
 
+protocol ConfigureAppearanceButtonBackgroundColor {
+    static func buttonBackgroundColor(fromAppearanceType type: AppearanceType) -> UIColor
+}
+
+protocol ConfigureAppearanceLabelTextColor {
+    static func labelTextColor(fromAppearanceType type: AppearanceType) -> UIColor
+}
+
 protocol ConfigurationAppearanceControllerProtocol: ConfigureAppearanceViewBackgroundColor,
                                                     ConfigureAppearanceNavigationBarProtocol,
-                                                    ConfigureAppearanceButtonTextColor {
+                                                    ConfigureAppearanceButtonTextColor,
+                                                    ConfigureAppearanceButtonBackgroundColor,
+                                                    ConfigureAppearanceLabelTextColor {
     
 }
 
@@ -84,6 +94,18 @@ extension ConfigurationAppearanceController {
     }
     
     /// - Parameter fromAppearanceType type: Appearance.current.appearanceType by default
+    static func buttonBackgroundColor(fromAppearanceType type: AppearanceType = Appearance.current.appearanceType) -> UIColor {
+        switch type {
+        case .automatic:
+            return self.buttonBackgroundColor(fromAppearanceType: .light)
+        case .light:
+            return AppStyling.Color.md_Light_Gray_0_Light_Appearence.color()
+        case .dark:
+            return AppStyling.Color.md_Light_Gray_0_Dark_Appearence.color()
+        }
+    }
+    
+    /// - Parameter fromAppearanceType type: Appearance.current.appearanceType by default
     static func buttonTextColor(fromAppearanceType type: AppearanceType = Appearance.current.appearanceType) -> UIColor {
         switch type {
         case .automatic:
@@ -92,6 +114,18 @@ extension ConfigurationAppearanceController {
             return AppStyling.Color.md_Blue_0_Light_Appearence.color()
         case .dark:
             return AppStyling.Color.md_Blue_0_Dark_Appearence.color()
+        }
+    }
+    
+    /// - Parameter fromAppearanceType type: Appearance.current.appearanceType by default
+    static func labelTextColor(fromAppearanceType type: AppearanceType = Appearance.current.appearanceType) -> UIColor {
+        switch type {
+        case .automatic:
+            return self.labelTextColor(fromAppearanceType: .light)
+        case .light:
+            return AppStyling.Color.md_Black_0_Light_Appearence.color()
+        case .dark:
+            return AppStyling.Color.md_White_0_Dark_Appearence.color()
         }
     }
     

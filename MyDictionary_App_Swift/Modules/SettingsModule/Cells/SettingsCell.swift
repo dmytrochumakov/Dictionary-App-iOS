@@ -93,12 +93,12 @@ fileprivate extension SettingsCell {
     }
     
     func configureView() {
-        self.backgroundColor = ConfigurationAppearanceCell.viewBackgroundColor()
+        self.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor()
     }
     
     func configureTitleLabel() {
         self.titleLabel.font = AppStyling.Font.systemFont.font()
-        self.titleLabel.textColor = ConfigurationAppearanceCell.labelTextColor()
+        self.titleLabel.textColor = ConfigurationAppearanceController.labelTextColor()
         self.titleLabel.textAlignment = .left
         self.titleLabel.numberOfLines = .zero
     }
@@ -109,11 +109,11 @@ fileprivate extension SettingsCell {
 fileprivate extension SettingsCell {
     
     func updateSelfView(_ model: SettingsRowModel) {
-        self.backgroundColor = ConfigurationAppearanceCell.viewBackgroundColor(fromAppearanceType: model.appearanceType)
+        self.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor(fromAppearanceType: model.appearanceType)
     }
     
     func updateTitleLabel(_ model: SettingsRowModel) {
-        self.titleLabel.textColor = ConfigurationAppearanceCell.labelTextColor(fromAppearanceType: model.appearanceType)
+        self.titleLabel.textColor = ConfigurationAppearanceController.labelTextColor(fromAppearanceType: model.appearanceType)
         self.titleLabel.text = model.titleText
     }
     

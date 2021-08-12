@@ -23,6 +23,8 @@ struct AppStyling {
         case md_Light_Gray_0_Dark_Appearence
         case md_Blue_0_Dark_Appearence
         
+        // Other
+        case light_Gray_0
         
         
         /// - Parameter alpha: 1.0 by default
@@ -55,6 +57,9 @@ struct AppStyling {
             case .md_Blue_0_Dark_Appearence:
                 return UIColor.init(rgb: 0x0A84FF, alpha: alpha)
                 
+            case .light_Gray_0:
+                return UIColor.init(rgb: 0xC6C6C6, alpha: alpha)                
+                
             }
         }
         
@@ -73,6 +78,12 @@ struct AppStyling {
             case .boldSystemFont:
                 return .boldSystemFont(ofSize: size)
             }
+        }
+        
+        /// Font: systemFont by default
+        /// Font size: 17.0 by default
+        static var `default`: UIFont {
+            return Font.systemFont.font(ofSize: 17)
         }
         
     }
