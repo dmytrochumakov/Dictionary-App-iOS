@@ -16,7 +16,7 @@ protocol ConfigureAppearanceNavigationBarTintColor {
 }
 
 protocol ConfigureAppearanceNavigationBarProtocol: ConfigureAppearanceNavigationBarTintColor {
-    static func navigationBarTitleTextAttributes(fromAppearanceType type: AppearanceType) -> [NSAttributedString.Key : Any]
+    static func navigationBarTitleTextAttributes(fromAppearanceType type: AppearanceType) -> [NSAttributedString.Key : Any]    
 }
 
 protocol ConfigureAppearanceButtonTextColor {
@@ -54,18 +54,20 @@ extension ConfigurationAppearanceController {
         case .automatic:
             return self.navigationBarTitleTextAttributes(fromAppearanceType: .light)
         case .light, .dark:
-            return self.navigationBarAttributedStringForegroundColor(fromAppearanceType: type)
+            return self.navigationBarAttributedStringForegroundColorAndFont(fromAppearanceType: type)
         }
     }
     
-    fileprivate static func navigationBarAttributedStringForegroundColor(fromAppearanceType type: AppearanceType) -> [NSAttributedString.Key : Any] {
+    fileprivate static func navigationBarAttributedStringForegroundColorAndFont(fromAppearanceType type: AppearanceType) -> [NSAttributedString.Key : Any] {
         switch type {
         case .light:
-            return [NSAttributedString.Key.foregroundColor : AppStyling.Color.md_Black_0_Light_Appearence.color()]
-        case .dark:            
-            return [NSAttributedString.Key.foregroundColor : AppStyling.Color.md_White_0_Dark_Appearence.color()]
+            return [NSAttributedString.Key.foregroundColor : AppStyling.Color.md_Black_0_Light_Appearence.color(),
+                    NSAttributedString.Key.font : AppStyling.Font.systemFont.font(ofSize: 17)]
+        case .dark:
+            return [NSAttributedString.Key.foregroundColor : AppStyling.Color.md_White_0_Dark_Appearence.color(),
+                    NSAttributedString.Key.font : AppStyling.Font.systemFont.font(ofSize: 17)]
         default:
-            return Self.navigationBarAttributedStringForegroundColor(fromAppearanceType: .light)
+            return Self.navigationBarAttributedStringForegroundColorAndFont(fromAppearanceType: .light)
         }
     }
     
