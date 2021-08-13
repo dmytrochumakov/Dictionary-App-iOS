@@ -28,7 +28,12 @@ extension AuthorizationModule {
         
         let textFieldDelegate: AuthTextFieldDelegateProtocol = AuthTextFieldDelegate.init()
         
+        let validationTypes: [AuthValidationType] = [.nickname, .password]
+        let authValidation: AuthValidationProtocol = AuthValidation.init(dataProvider: dataProvider,
+                                                                         validationTypes: validationTypes)
+        
         let interactor: AuthorizationInteractorProtocol = AuthorizationInteractor.init(dataManager: dataManager,
+                                                                                       authValidation: authValidation,
                                                                                        textFieldDelegate: textFieldDelegate)
         var router: AuthorizationRouterProtocol = AuthorizationRouter.init()
         let presenter: AuthorizationPresenterProtocol = AuthorizationPresenter.init(interactor: interactor, router: router)

@@ -16,6 +16,8 @@ protocol AuthorizationInteractorInputProtocol {
 protocol AuthorizationInteractorOutputProtocol: AnyObject {
     func makePasswordFieldActive()
     func hideKeyboard()
+    func showCourseList()
+    func showValidationError(_ error: Error)
 }
 
 protocol AuthorizationInteractorProtocol: AuthorizationInteractorInputProtocol,
@@ -26,14 +28,17 @@ protocol AuthorizationInteractorProtocol: AuthorizationInteractorInputProtocol,
 final class AuthorizationInteractor: NSObject, AuthorizationInteractorProtocol {
     
     fileprivate let dataManager: AuthorizationDataManagerInputProtocol
+    fileprivate let authValidation: AuthValidationProtocol
     internal weak var interactorOutput: AuthorizationInteractorOutputProtocol?
     
     internal var textFieldDelegate: AuthTextFieldDelegateProtocol
     
     init(dataManager: AuthorizationDataManagerInputProtocol,
+         authValidation: AuthValidationProtocol,
          textFieldDelegate: AuthTextFieldDelegateProtocol) {
         
         self.dataManager = dataManager
+        self.authValidation = authValidation
         self.textFieldDelegate = textFieldDelegate
         
         super.init()
@@ -67,6 +72,7 @@ extension AuthorizationInteractor {
     
     func loginButtonClicked() {
         interactorOutput?.hideKeyboard()
+        authValidationRouting()        
     }
     
     // End Actions //
@@ -89,6 +95,20 @@ fileprivate extension AuthorizationInteractor {
     func passwordTextFieldShouldReturnActionSubscribe() {
         textFieldDelegate.passwordTextFieldShouldReturnAction = { [weak self] in
             self?.interactorOutput?.hideKeyboard()
+            self?.authValidationRouting()
+        }
+    }
+    
+}
+
+// MARK: - Auth Validation Routing
+fileprivate extension AuthorizationInteractor {
+   
+    func authValidationRouting() {
+        if (authValidation.isValid) {
+            interactorOutput?.showCourseList()
+        } else {
+            interactorOutput?.showValidationError(authValidation.validationErrors.first!)
         }
     }
     

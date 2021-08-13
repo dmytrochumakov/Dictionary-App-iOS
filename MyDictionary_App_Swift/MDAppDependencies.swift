@@ -5,14 +5,21 @@
 //  Created by Dmytro Chumakov on 07.07.2021.
 //
 
-import Foundation
+import UIKit
 
 protocol MDAppDependenciesProtocol {
-    
+    var rootWindow: UIWindow! { get }
+    var operationQueue: OperationQueue! { get }
+    var operationQueueService: OperationQueueServiceProtocol! { get }
+    var memoryStorage: MDWordMemoryStorageProtocol! { get }
+    var coreDataStorage: MDWordCoreDataStorageProtocol! { get }
+    var coreDataStack: CoreDataStack! { get }
+    var wordStorage: MDWordStorageProtocol! { get }
 }
 
-final class MDAppDependencies: MDAppDependenciesProtocol {
+final class MDAppDependencies: NSObject, MDAppDependenciesProtocol {
     
+    var rootWindow: UIWindow!
     var operationQueue: OperationQueue!
     var operationQueueService: OperationQueueServiceProtocol!
     var memoryStorage: MDWordMemoryStorageProtocol!
@@ -20,7 +27,9 @@ final class MDAppDependencies: MDAppDependenciesProtocol {
     var coreDataStack: CoreDataStack!
     var wordStorage: MDWordStorageProtocol!
     
-    init() {
+    init(rootWindow: UIWindow!) {
+        self.rootWindow = rootWindow
+        super.init()
         configureDependencies()
     }
     

@@ -26,18 +26,18 @@ final class AuthValidation: NSObject, AuthValidationProtocol {
     }
     
     deinit {
-        debugPrint(Self.self, #function)
+        debugPrint(#function, Self.self)
     }
     
-    public lazy var isValid: Bool = {
+    public var isValid: Bool {
         return validationErrors.count == .zero
-    }()
+    }
     
-    public lazy var validationErrors: [AuthValidationError] = {
+    public var validationErrors: [AuthValidationError] {
         return validationResults.filter({ $0.validationError != nil }).map({ $0.validationError! })
-    }()
+    }
     
-    fileprivate lazy var validationResults: [AuthValidationResult] = {
+    fileprivate var validationResults: [AuthValidationResult] {
         var result: [AuthValidationResult] = []
         for type in self.validationTypes {
             switch type {
@@ -50,6 +50,6 @@ final class AuthValidation: NSObject, AuthValidationProtocol {
             }
         }
         return result
-    }()
+    }
     
 }

@@ -41,7 +41,7 @@ final class KeyboardHandler: NSObject {
     
     deinit {
         unsubscribe()
-        debugPrint(Self.self, #function)
+        debugPrint(#function, Self.self)
     }
     
 }

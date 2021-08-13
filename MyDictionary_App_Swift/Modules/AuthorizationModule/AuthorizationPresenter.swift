@@ -16,6 +16,7 @@ protocol AuthorizationPresenterInputProtocol {
 protocol AuthorizationPresenterOutputProtocol: AnyObject {
     func makePasswordFieldActive()
     func hideKeyboard()
+    func showValidationError(_ error: Error)
 }
 
 protocol AuthorizationPresenterProtocol: AuthorizationPresenterInputProtocol,
@@ -55,6 +56,14 @@ extension AuthorizationPresenter {
     
     func hideKeyboard() {
         presenterOutput?.hideKeyboard()
+    }
+    
+    func showCourseList() {
+        router.showCourseList()
+    }
+    
+    func showValidationError(_ error: Error) {
+        presenterOutput?.showValidationError(error)
     }
     
 }

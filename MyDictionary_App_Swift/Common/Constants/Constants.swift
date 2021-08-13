@@ -5,7 +5,7 @@
 //  Created by Dmytro Chumakov on 16.05.2021.
 //
 
-import Foundation
+import UIKit
 
 struct Constants {
     
@@ -72,6 +72,14 @@ struct Constants {
             case .production:
                 return .production
             }
+        }
+        
+    }
+    
+    struct AppDependencies {
+        
+        static var dependencies: MDAppDependenciesProtocol {
+            return (UIApplication.shared.delegate as! MDAppDelegate).dependencies
         }
         
     }

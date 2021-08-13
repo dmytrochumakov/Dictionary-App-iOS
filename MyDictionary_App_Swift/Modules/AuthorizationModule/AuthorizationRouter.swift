@@ -8,6 +8,7 @@ import UIKit
 
 protocol AuthorizationRouterProtocol {
     var presenter: UIViewController? { get set }
+    func showCourseList()
 }
 
 final class AuthorizationRouter: AuthorizationRouterProtocol {
@@ -16,6 +17,14 @@ final class AuthorizationRouter: AuthorizationRouterProtocol {
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension AuthorizationRouter {
+    
+    func showCourseList() {        
+        Constants.AppDependencies.dependencies.rootWindow.rootViewController = CourseListModule.init(sender: nil).module
     }
     
 }

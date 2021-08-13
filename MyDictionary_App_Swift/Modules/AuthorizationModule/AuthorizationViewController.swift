@@ -124,6 +124,12 @@ extension AuthorizationViewController: AuthorizationPresenterOutputProtocol {
         self.hideKeyboardFunc()
     }
     
+    func showValidationError(_ error: Error) {
+        UIAlertController.showAlertWithOkAction(title: KeysForTranslate.error.localized,
+                                                message: error.localizedDescription,
+                                                presenter: self)
+    }
+    
 }
 
 // MARK: - Add Views

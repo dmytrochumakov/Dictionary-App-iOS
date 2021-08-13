@@ -18,7 +18,7 @@ final class AuthTextFieldDelegate: NSObject, AuthTextFieldDelegateProtocol {
     internal var passwordTextFieldShouldReturnAction: (() -> Void)?    
     
     deinit {
-        debugPrint(Self.self, #function)
+        debugPrint(#function, Self.self)
     }
     
 }
