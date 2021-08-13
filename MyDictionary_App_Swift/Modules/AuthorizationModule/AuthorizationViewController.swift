@@ -11,19 +11,7 @@ final class AuthorizationViewController: UIViewController {
     fileprivate let presenter: AuthorizationPresenterInputProtocol
     
     fileprivate let defaultLineViewHeight: CGFloat = 0.5
-    
-    fileprivate let scrollView: UIScrollView = {
-        let scrollView: UIScrollView = .init()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        return scrollView
-    }()
-    
-    fileprivate let contentView: UIView = {
-        let view: UIView = .init()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
+      
     fileprivate let nicknameTextFieldHeight: CGFloat = 40
     fileprivate let nicknameTextFieldTopOffset: CGFloat = 56
     fileprivate let nicknameTextField: UITextField = {
@@ -81,8 +69,6 @@ final class AuthorizationViewController: UIViewController {
         return button
     }()
     
-    fileprivate var keyboardHandler: KeyboardHandler!
-    
     init(presenter: AuthorizationPresenterInputProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -136,8 +122,6 @@ extension AuthorizationViewController: AuthorizationPresenterOutputProtocol {
 fileprivate extension AuthorizationViewController {
     
     func addViews() {
-        addScrollView()
-        addContentView()
         addNicknameTextField()
         addNicknameTextFieldBottomLineView()
         addPasswordTextField()
@@ -145,37 +129,29 @@ fileprivate extension AuthorizationViewController {
         addLoginButton()
     }
     
-    func addScrollView() {
-        view.addSubview(scrollView)
-    }
-    
-    func addContentView() {
-        scrollView.addSubview(contentView)
-    }
-    
     func addNicknameTextField() {
         nicknameTextField.delegate = presenter.textFieldDelegate
         nicknameTextField.addTarget(self, action: #selector(nicknameTextFieldEditingDidChangeAction), for: .editingChanged)
-        contentView.addSubview(nicknameTextField)
+        view.addSubview(nicknameTextField)
     }
     
     func addNicknameTextFieldBottomLineView() {
-        contentView.addSubview(nicknameTextFieldBottomLineView)
+        view.addSubview(nicknameTextFieldBottomLineView)
     }
     
     func addPasswordTextField() {
         passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingDidChangeAction), for: .editingChanged)
         passwordTextField.delegate = presenter.textFieldDelegate
-        contentView.addSubview(passwordTextField)
+        view.addSubview(passwordTextField)
     }
     
     func addPasswordTextFieldBottomLineView() {
-        contentView.addSubview(passwordTextFieldBottomLineView)
+        view.addSubview(passwordTextFieldBottomLineView)
     }
     
     func addLoginButton() {
         loginButton.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
-        contentView.addSubview(loginButton)
+        view.addSubview(loginButton)
     }
     
 }
@@ -184,8 +160,6 @@ fileprivate extension AuthorizationViewController {
 fileprivate extension AuthorizationViewController {
     
     func addConstraints() {
-        addScrollViewConstraints()
-        addContentViewConstraints()
         addNicknameTextFieldConstraints()
         addNicknameTextFieldBottomLineViewConstraints()
         addPasswordTextFieldConstraints()
@@ -193,39 +167,19 @@ fileprivate extension AuthorizationViewController {
         addLoginButtonConstraints()
     }
     
-    func addScrollViewConstraints() {
-        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.scrollView,
-                                                         toItem: self.view)
-    }
-    
-    func addContentViewConstraints() {
-        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.contentView,
-                                                         toItem: self.scrollView)
-        
-        NSLayoutConstraint.addEqualCenterXConstraintAndActivate(item: self.contentView,
-                                                                toItem: self.scrollView,
-                                                                constant: 0)
-        
-        NSLayoutConstraint.addEqualCenterXConstraintAndActivate(item: self.contentView,
-                                                                toItem: self.scrollView,
-                                                                constant: 0)
-        
-        NSLayoutConstraint.addEqualCenterYConstraintAndActivate(item: self.contentView,
-                                                                toItem: self.scrollView,
-                                                                constant: 0)
-    }
-    
     func addNicknameTextFieldConstraints() {
-        NSLayoutConstraint.addEqualTopConstraintAndActivate(item: self.nicknameTextField,
-                                                            toItem: self.contentView,
-                                                            constant: self.nicknameTextFieldTopOffset)
+        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.nicknameTextField,
+                                                         attribute: .top,
+                                                         toItem: self.navigationController!.navigationBar,
+                                                         attribute: .bottom,
+                                                         constant: self.nicknameTextFieldTopOffset)        
         
         NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.nicknameTextField,
-                                                             toItem: self.contentView,
+                                                             toItem: self.view,
                                                              constant: 0)
         
         NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.nicknameTextField,
-                                                              toItem: self.contentView,
+                                                              toItem: self.view,
                                                               constant: 0)
         
         NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.nicknameTextField,
@@ -240,11 +194,11 @@ fileprivate extension AuthorizationViewController {
                                                          constant: 0)
         
         NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.nicknameTextFieldBottomLineView,
-                                                             toItem: self.contentView,
+                                                             toItem: self.view,
                                                              constant: 0)
         
         NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.nicknameTextFieldBottomLineView,
-                                                              toItem: self.contentView,
+                                                              toItem: self.view,
                                                               constant: 0)
         
         NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.nicknameTextFieldBottomLineView,
@@ -259,11 +213,11 @@ fileprivate extension AuthorizationViewController {
                                                          constant: self.passwordTextFieldTopOffset)
         
         NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.passwordTextField,
-                                                             toItem: self.contentView,
+                                                             toItem: self.view,
                                                              constant: 0)
         
         NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.passwordTextField,
-                                                              toItem: self.contentView,
+                                                              toItem: self.view,
                                                               constant: 0)
         
         NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.passwordTextField,
@@ -278,11 +232,11 @@ fileprivate extension AuthorizationViewController {
                                                          constant: 0)
         
         NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.passwordTextFieldBottomLineView,
-                                                             toItem: self.contentView,
+                                                             toItem: self.view,
                                                              constant: 0)
         
         NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.passwordTextFieldBottomLineView,
-                                                              toItem: self.contentView,
+                                                              toItem: self.view,
                                                               constant: 0)
         
         NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.passwordTextFieldBottomLineView,
@@ -291,15 +245,15 @@ fileprivate extension AuthorizationViewController {
     
     func addLoginButtonConstraints() {
         NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.loginButton,
-                                                             toItem: self.contentView,
+                                                             toItem: self.view,
                                                              constant: 0)
         
         NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.loginButton,
-                                                              toItem: self.contentView,
+                                                              toItem: self.view,
                                                               constant: 0)
         
         NSLayoutConstraint.addEqualBottomConstraintAndActivate(item: self.loginButton,
-                                                               toItem: self.contentView,
+                                                               toItem: self.view,
                                                                constant: 0)
         
         NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.loginButton,
@@ -314,17 +268,12 @@ fileprivate extension AuthorizationViewController {
     func configureUI() {
         configureTitle()
         configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
-        configureKeyboardHandler()
     }
     
     func configureTitle() {
         self.title = KeysForTranslate.authorization.localized
     }
-    
-    func configureKeyboardHandler() {
-        self.keyboardHandler = KeyboardHandler.createKeyboardHandler(scrollView: self.scrollView)
-    }
-    
+     
 }
 
 // MARK: - Actions
