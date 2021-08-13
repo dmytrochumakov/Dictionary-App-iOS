@@ -8,6 +8,7 @@ target 'MyDictionary_App_Swift' do
   # Pods for MyDictionary_App_Swift
 
 	pod 'Firebase/Analytics'	
+	pod 'Firebase/Crashlytics'
 
 
   target 'MyDictionary_App_SwiftTests' do
