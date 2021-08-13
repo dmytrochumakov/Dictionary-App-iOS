@@ -92,8 +92,7 @@ extension MDAPIAuth {
                 switch response {
                 case .data(let data, _):
                     do {                        
-                        let authResponse = try JSONDecoder.init().decode(AuthResponse.self, from: data)
-                        completionHandler(.success(authResponse))
+                        completionHandler(.success(try JSONDecoder.init().decode(AuthResponse.self, from: data)))
                     } catch (let error) {
                         completionHandler(.failure(error))
                     }
