@@ -35,7 +35,7 @@ struct AuthValidationLogic: AuthValidationLogicProtocol {
     }
     
     fileprivate static func textIsEmpty(_ text: String?) -> Bool {
-        if (text == nil || text!.isEmpty) {
+        if (text == nil || text!.isEmpty || text!.trimmingCharacters(in: .whitespaces).isEmpty) {
             return true
         } else {
             return false
