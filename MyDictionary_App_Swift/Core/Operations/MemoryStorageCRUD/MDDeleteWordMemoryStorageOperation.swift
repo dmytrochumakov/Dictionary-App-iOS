@@ -37,7 +37,7 @@ final class MDDeleteWordMemoryStorageOperation: MDWordOperation {
     }
     
     deinit {
-        debugPrint(Self.self, #function)
+        debugPrint(#function, Self.self)
         self.finish()
     }
     

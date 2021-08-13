@@ -19,7 +19,7 @@ final class MDAPIOperation {
     }
     
     deinit {
-        debugPrint(Self.self, #function)
+        debugPrint(#function, Self.self)
     }
     
 }

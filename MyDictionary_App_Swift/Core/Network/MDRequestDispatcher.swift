@@ -25,7 +25,7 @@ final class MDRequestDispatcher: MDRequestDispatcherProtocol {
     }
     
     deinit {
-        debugPrint(Self.self, #function)
+        debugPrint(#function, Self.self)
     }
     
 }

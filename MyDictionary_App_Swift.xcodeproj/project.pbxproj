@@ -14,6 +14,7 @@
 		220793C726C66F76003D434B /* AuthValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793C626C66F76003D434B /* AuthValidationError.swift */; };
 		220793C926C66F85003D434B /* AuthValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793C826C66F85003D434B /* AuthValidationResult.swift */; };
 		220793CB26C67432003D434B /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793CA26C67432003D434B /* UIAlertController+Extension.swift */; };
+		220793CE26C68081003D434B /* MDAPIAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793CD26C68081003D434B /* MDAPIAuth.swift */; };
 		221D280E26C5064A004BC4F7 /* AuthorizationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280726C5064A004BC4F7 /* AuthorizationModule.swift */; };
 		221D280F26C5064A004BC4F7 /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */; };
 		221D281026C5064A004BC4F7 /* AuthorizationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */; };
@@ -208,6 +209,7 @@
 		220793C626C66F76003D434B /* AuthValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthValidationError.swift; sourceTree = "<group>"; };
 		220793C826C66F85003D434B /* AuthValidationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthValidationResult.swift; sourceTree = "<group>"; };
 		220793CA26C67432003D434B /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
+		220793CD26C68081003D434B /* MDAPIAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIAuth.swift; sourceTree = "<group>"; };
 		221D280726C5064A004BC4F7 /* AuthorizationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModule.swift; sourceTree = "<group>"; };
 		221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPresenter.swift; sourceTree = "<group>"; };
 		221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationRouter.swift; sourceTree = "<group>"; };
@@ -439,6 +441,15 @@
 				220793C026C66F2A003D434B /* AuthValidationLogic.swift */,
 			);
 			path = Logic;
+			sourceTree = "<group>";
+		};
+		220793CC26C6805C003D434B /* API */ = {
+			isa = PBXGroup;
+			children = (
+				220793CD26C68081003D434B /* MDAPIAuth.swift */,
+				22EF0209269DAE9800FE4435 /* MDAPIWord.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		221D280626C5062A004BC4F7 /* AuthorizationModule */ = {
@@ -1137,6 +1148,7 @@
 		22EF01E6269DA6D400FE4435 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				220793CC26C6805C003D434B /* API */,
 				22EF020B269DAFBB00FE4435 /* Enums */,
 				22EF0206269DAD3900FE4435 /* Protocols */,
 				22EF0203269DACAD00FE4435 /* Operation */,
@@ -1145,7 +1157,6 @@
 				22EF01E7269DA6DF00FE4435 /* Endpoint */,
 				22EF01F3269DA7C000FE4435 /* MDNetworkSession.swift */,
 				22EF01F5269DA81100FE4435 /* MDRequestDispatcher.swift */,
-				22EF0209269DAE9800FE4435 /* MDAPIWord.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1424,6 +1435,7 @@
 				2289CEDF2678CC34007254C3 /* MDWordStorageType.swift in Sources */,
 				22B22681266CC033007AB292 /* Observable.swift in Sources */,
 				22E2B4DD2664E43B00978E62 /* SettingsPresenter.swift in Sources */,
+				220793CE26C68081003D434B /* MDAPIAuth.swift in Sources */,
 				22EF01E3269D9CDA00FE4435 /* MDWordsCountProtocol.swift in Sources */,
 				229E08BE2652C8E600DA56C4 /* SectionTypeProtocol.swift in Sources */,
 				2289CEF22678CC34007254C3 /* MDIDPropertyProtocol.swift in Sources */,

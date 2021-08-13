@@ -36,13 +36,13 @@ struct Constants {
     
     struct URLSessionConfigurationConstants {
         /// Default is default
-        static let sessionConfiguration: URLSessionConfiguration = .default
+        fileprivate static let sessionConfiguration: URLSessionConfiguration = .default
         /// Default is 30 seconds
-        static let timeoutIntervalForResource: TimeInterval = 30
+        fileprivate static let timeoutIntervalForResource: TimeInterval = 30
         /// Default is 3
-        static let maxConcurrentOperationCount: Int = 3
+        fileprivate static let maxConcurrentOperationCount: Int = 3
         /// Default is QualityOfService.userInitiated
-        static let qualityOfService: QualityOfService = .userInitiated
+        fileprivate static let qualityOfService: QualityOfService = .userInitiated
         /// Default is .init()
         static var sessionConfigurationOperationQueue: OperationQueue {
             let operationQueue: OperationQueue = .init()
@@ -81,6 +81,25 @@ struct Constants {
         
         static var dependencies: MDAppDependenciesProtocol {
             return (UIApplication.shared.delegate as! MDAppDelegate).dependencies
+        }
+        
+    }
+    
+    struct NetworkSession {
+        
+        static var defaultNetworkSession: MDNetworkSessionProtocol {
+            return MDNetworkSession.init(configuration: URLSessionConfigurationConstants.sessionWithConfiguration,
+                                         delegateQueue: URLSessionConfigurationConstants.sessionConfigurationOperationQueue)
+        }
+        
+    }
+    
+    
+    struct RequestDispatcher {
+        
+        static var defaultRequestDispatcher: MDRequestDispatcherProtocol {
+            return MDRequestDispatcher.init(environment: APIEnvironment.current,
+                                            networkSession: NetworkSession.defaultNetworkSession)
         }
         
     }

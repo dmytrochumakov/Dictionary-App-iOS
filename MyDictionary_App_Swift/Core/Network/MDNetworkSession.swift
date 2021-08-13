@@ -27,7 +27,7 @@ final class MDNetworkSession: NSObject {
         session.invalidateAndCancel()
         session = nil
         taskToHandlersMap = [:]
-        debugPrint(Self.self, #function)
+        debugPrint(#function, Self.self)
     }
         
     public init(configuration: URLSessionConfiguration, delegateQueue: OperationQueue) {

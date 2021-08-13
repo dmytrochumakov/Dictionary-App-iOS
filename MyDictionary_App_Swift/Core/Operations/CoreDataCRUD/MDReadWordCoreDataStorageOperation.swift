@@ -65,7 +65,7 @@ final class MDReadWordCoreDataStorageOperation: MDWordOperation {
     }
     
     deinit {
-        debugPrint(Self.self, #function)
+        debugPrint(#function, Self.self)
         self.finish()
     }
     
@@ -127,7 +127,7 @@ final class MDReadWordsCoreDataStorageOperation: MDWordOperation {
     }
     
     deinit {
-        debugPrint(Self.self, #function)
+        debugPrint(#function, Self.self)
         self.finish()
     }
     

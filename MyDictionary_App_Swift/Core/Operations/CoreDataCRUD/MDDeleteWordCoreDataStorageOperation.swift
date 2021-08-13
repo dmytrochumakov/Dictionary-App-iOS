@@ -63,7 +63,7 @@ final class MDDeleteWordCoreDataStorageOperation: MDWordOperation {
     }
     
     deinit {
-        debugPrint(Self.self, #function)
+        debugPrint(#function, Self.self)
         self.finish()
     }
     

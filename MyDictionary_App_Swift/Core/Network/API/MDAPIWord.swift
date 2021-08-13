@@ -20,7 +20,7 @@ final class MDAPIWord: MDAPIWordProtocol {
     }
     
     deinit {
-        debugPrint(Self.self, #function)
+        debugPrint(#function, Self.self)
     }
     
 }

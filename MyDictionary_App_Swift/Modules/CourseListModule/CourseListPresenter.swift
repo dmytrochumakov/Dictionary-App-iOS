@@ -67,7 +67,7 @@ extension CourseListPresenter {
     
     // Actions //
     func addNewCourseButtonClicked() {
-        debugPrint(Self.self, #function)
+        debugPrint(#function, Self.self)
     }
     
     func settingsButtonClicked() {
