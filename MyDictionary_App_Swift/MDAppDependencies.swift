@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 protocol MDAppDependenciesProtocol {
     var rootWindow: UIWindow! { get }
@@ -61,6 +62,9 @@ extension MDAppDependencies {
         let wordStorage: MDWordStorageProtocol = MDWordStorage.init(memoryStorage: memoryStorage,
                                                                     coreDataStorage: coreDataStorage)
         self.wordStorage = wordStorage
+        
+        // Configure FirebaseApp
+        FirebaseApp.configure()
         
     }
     
