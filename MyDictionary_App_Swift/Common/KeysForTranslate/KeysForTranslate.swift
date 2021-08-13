@@ -24,6 +24,8 @@ enum KeysForTranslate: String {
     case nickname
     case login
     case password
+    case nicknameIsEmpty = "nickname_Is_Empty"
+    case passwordIsEmpty = "password_Is_Empty"
 }
 
 // MARK: - LocalizableProtocol
