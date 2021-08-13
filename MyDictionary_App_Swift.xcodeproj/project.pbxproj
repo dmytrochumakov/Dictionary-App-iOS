@@ -17,6 +17,7 @@
 		220793CE26C68081003D434B /* MDAPIAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793CD26C68081003D434B /* MDAPIAuth.swift */; };
 		220793D126C6B2D9003D434B /* AuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793D026C6B2D9003D434B /* AuthRequest.swift */; };
 		220793D326C6B303003D434B /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793D226C6B303003D434B /* Encodable+Extension.swift */; };
+		220793D626C6B514003D434B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 220793D526C6B514003D434B /* GoogleService-Info.plist */; };
 		221D280E26C5064A004BC4F7 /* AuthorizationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280726C5064A004BC4F7 /* AuthorizationModule.swift */; };
 		221D280F26C5064A004BC4F7 /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */; };
 		221D281026C5064A004BC4F7 /* AuthorizationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */; };
@@ -214,6 +215,7 @@
 		220793CD26C68081003D434B /* MDAPIAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIAuth.swift; sourceTree = "<group>"; };
 		220793D026C6B2D9003D434B /* AuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequest.swift; sourceTree = "<group>"; };
 		220793D226C6B303003D434B /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
+		220793D526C6B514003D434B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		221D280726C5064A004BC4F7 /* AuthorizationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModule.swift; sourceTree = "<group>"; };
 		221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPresenter.swift; sourceTree = "<group>"; };
 		221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationRouter.swift; sourceTree = "<group>"; };
@@ -462,6 +464,14 @@
 				220793D026C6B2D9003D434B /* AuthRequest.swift */,
 			);
 			path = Request;
+			sourceTree = "<group>";
+		};
+		220793D426C6B4E2003D434B /* GoogleServiceInfoPlist */ = {
+			isa = PBXGroup;
+			children = (
+				220793D526C6B514003D434B /* GoogleService-Info.plist */,
+			);
+			path = GoogleServiceInfoPlist;
 			sourceTree = "<group>";
 		};
 		221D280626C5062A004BC4F7 /* AuthorizationModule */ = {
@@ -890,6 +900,7 @@
 		228BC46A26497AEC0030FB30 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				220793D426C6B4E2003D434B /* GoogleServiceInfoPlist */,
 				228BC46E26497B120030FB30 /* InfoPlist */,
 				228BC46D26497B080030FB30 /* LaunchScreen */,
 				228BC46C26497AFE0030FB30 /* Assets */,
@@ -1356,6 +1367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2223F8BC26512FFD004F2FE9 /* Localizable.strings in Resources */,
+				220793D626C6B514003D434B /* GoogleService-Info.plist in Resources */,
 				228BC447264979FE0030FB30 /* LaunchScreen.storyboard in Resources */,
 				228BC444264979FE0030FB30 /* Assets.xcassets in Resources */,
 			);
