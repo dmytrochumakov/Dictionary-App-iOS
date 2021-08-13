@@ -91,9 +91,8 @@ extension MDAPIAuth {
             .execute(in: requestDispatcher) { [unowned self] (response) in
                 switch response {
                 case .data(let data, _):
-                    do {
-                        let jsonDecoder = JSONDecoder.init()
-                        let authResponse = try jsonDecoder.decode(AuthResponse.self, from: data)
+                    do {                        
+                        let authResponse = try JSONDecoder.init().decode(AuthResponse.self, from: data)
                         completionHandler(.success(authResponse))
                     } catch (let error) {
                         completionHandler(.failure(error))
