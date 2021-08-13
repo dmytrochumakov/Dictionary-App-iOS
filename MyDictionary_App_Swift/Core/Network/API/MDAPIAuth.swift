@@ -83,7 +83,7 @@ extension MDAPIAuth {
     
 }
 
-// MARK: - Login
+// MARK: - Auth
 extension MDAPIAuth {
     
     func login(authRequest: AuthRequest) {
@@ -102,38 +102,6 @@ extension MDAPIAuth {
     
     func register(authRequest: AuthRequest) {
         
-    }
-    
-}
-
-struct AuthRequest {
-    let nickname: String
-    let password: String
-}
-
-extension AuthRequest: Encodable {
-    
-    enum CodingKeys: String, CodingKey {
-        case nickname
-        case password
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(nickname, forKey: .nickname)
-        try container.encode(password, forKey: .password)
-    }
-    
-}
-
-extension Encodable {
-    
-    var data: Data {
-        do {
-            return try JSONEncoder.init().encode(self)
-        } catch {
-            fatalError("Impossible Try Encode Data")
-        }
     }
     
 }

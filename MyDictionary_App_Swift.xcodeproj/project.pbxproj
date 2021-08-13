@@ -15,6 +15,8 @@
 		220793C926C66F85003D434B /* AuthValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793C826C66F85003D434B /* AuthValidationResult.swift */; };
 		220793CB26C67432003D434B /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793CA26C67432003D434B /* UIAlertController+Extension.swift */; };
 		220793CE26C68081003D434B /* MDAPIAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793CD26C68081003D434B /* MDAPIAuth.swift */; };
+		220793D126C6B2D9003D434B /* AuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793D026C6B2D9003D434B /* AuthRequest.swift */; };
+		220793D326C6B303003D434B /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793D226C6B303003D434B /* Encodable+Extension.swift */; };
 		221D280E26C5064A004BC4F7 /* AuthorizationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280726C5064A004BC4F7 /* AuthorizationModule.swift */; };
 		221D280F26C5064A004BC4F7 /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */; };
 		221D281026C5064A004BC4F7 /* AuthorizationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */; };
@@ -210,6 +212,8 @@
 		220793C826C66F85003D434B /* AuthValidationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthValidationResult.swift; sourceTree = "<group>"; };
 		220793CA26C67432003D434B /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		220793CD26C68081003D434B /* MDAPIAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIAuth.swift; sourceTree = "<group>"; };
+		220793D026C6B2D9003D434B /* AuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequest.swift; sourceTree = "<group>"; };
+		220793D226C6B303003D434B /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
 		221D280726C5064A004BC4F7 /* AuthorizationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModule.swift; sourceTree = "<group>"; };
 		221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPresenter.swift; sourceTree = "<group>"; };
 		221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationRouter.swift; sourceTree = "<group>"; };
@@ -452,6 +456,14 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		220793CF26C6B2CC003D434B /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				220793D026C6B2D9003D434B /* AuthRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 		221D280626C5062A004BC4F7 /* AuthorizationModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -533,6 +545,7 @@
 				22B22690266CF866007AB292 /* UIViewController+Extension.swift */,
 				22DB2F7E26C3C3A800C1AADA /* UIColor+Extension.swift */,
 				220793CA26C67432003D434B /* UIAlertController+Extension.swift */,
+				220793D226C6B303003D434B /* Encodable+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1148,6 +1161,7 @@
 		22EF01E6269DA6D400FE4435 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				220793CF26C6B2CC003D434B /* Request */,
 				220793CC26C6805C003D434B /* API */,
 				22EF020B269DAFBB00FE4435 /* Enums */,
 				22EF0206269DAD3900FE4435 /* Protocols */,
@@ -1407,6 +1421,7 @@
 				2289CEEA2678CC34007254C3 /* MDUpdateWordResult.swift in Sources */,
 				22493C562697421C000DA480 /* MDUpdateWordCoreDataStorageOperation.swift in Sources */,
 				22493C4C26972E27000DA480 /* MDWordOperationError.swift in Sources */,
+				220793D126C6B2D9003D434B /* AuthRequest.swift in Sources */,
 				229901692668EC3400D8C74E /* AppearanceRouter.swift in Sources */,
 				22DB2F7F26C3C3A900C1AADA /* UIColor+Extension.swift in Sources */,
 				2289CEE82678CC34007254C3 /* MDDeleteWordOperationResult.swift in Sources */,
@@ -1418,6 +1433,7 @@
 				2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */,
 				22BD99A0266A4AB10063FEFC /* WordListModule.swift in Sources */,
 				22EF01EC269DA70300FE4435 /* Endpoint.swift in Sources */,
+				220793D326C6B303003D434B /* Encodable+Extension.swift in Sources */,
 				227D5E6A2652586F00B54524 /* WordListCollectionViewDelegate.swift in Sources */,
 				229E08CB2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift in Sources */,
 				226FEE85266B7DF90044A5F9 /* Appearance.swift in Sources */,
