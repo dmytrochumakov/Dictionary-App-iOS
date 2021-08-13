@@ -396,11 +396,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		220793BC26C65BB0003D434B /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				221D281826C53356004BC4F7 /* AuthTextFieldTag.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		220793BD26C65BB8003D434B /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				221D281B26C533AF004BC4F7 /* AuthTextFieldDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		221D280626C5062A004BC4F7 /* AuthorizationModule */ = {
 			isa = PBXGroup;
 			children = (
-				221D281A26C533A0004BC4F7 /* AuthTextFieldDelegate */,
-				221D281726C5333E004BC4F7 /* AuthTextFieldTag */,
+				220793BD26C65BB8003D434B /* Delegates */,
+				220793BC26C65BB0003D434B /* Enums */,
 				221D281626C53270004BC4F7 /* AuthValidation */,
 				221D280726C5064A004BC4F7 /* AuthorizationModule.swift */,
 				221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */,
@@ -418,22 +434,6 @@
 			children = (
 			);
 			path = AuthValidation;
-			sourceTree = "<group>";
-		};
-		221D281726C5333E004BC4F7 /* AuthTextFieldTag */ = {
-			isa = PBXGroup;
-			children = (
-				221D281826C53356004BC4F7 /* AuthTextFieldTag.swift */,
-			);
-			path = AuthTextFieldTag;
-			sourceTree = "<group>";
-		};
-		221D281A26C533A0004BC4F7 /* AuthTextFieldDelegate */ = {
-			isa = PBXGroup;
-			children = (
-				221D281B26C533AF004BC4F7 /* AuthTextFieldDelegate.swift */,
-			);
-			path = AuthTextFieldDelegate;
 			sourceTree = "<group>";
 		};
 		221D281D26C54952004BC4F7 /* KeyboardHandler */ = {
