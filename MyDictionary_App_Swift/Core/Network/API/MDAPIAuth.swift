@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MDAPIAuthProtocol {
-    func login(authRequest: AuthRequest)
+    func login(authRequest: AuthRequest, completionHandler: @escaping MDAuthResponseResult)
     func register(authRequest: AuthRequest)
 }
 
@@ -86,15 +86,23 @@ extension MDAPIAuth {
 // MARK: - Auth
 extension MDAPIAuth {
     
-    func login(authRequest: AuthRequest) {
+    func login(authRequest: AuthRequest, completionHandler: @escaping MDAuthResponseResult) {
         MDAPIOperation.init(MDAPIAuthEndpoint.login(authRequest: authRequest))
             .execute(in: requestDispatcher) { [unowned self] (response) in
                 switch response {
                 case .data(let data, _):
-                    debugPrint(data.count)
+                    do {
+                        let jsonDecoder = JSONDecoder.init()
+                        let authResponse = try jsonDecoder.decode(AuthResponse.self, from: data)
+                        completionHandler(.success(authResponse))
+                    } catch (let error) {
+                        completionHandler(.failure(error))
+                    }
+                    debugPrint(#function, Self.self, "dataCount: ", data.count)
                     break
                 case .error(let error, _):
-                    debugPrint(error.localizedDescription)
+                    debugPrint(#function, Self.self, "error: ", error.localizedDescription)
+                    completionHandler(.failure(error))
                     break
                 }
             }

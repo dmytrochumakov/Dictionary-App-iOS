@@ -19,6 +19,7 @@
 		220793D326C6B303003D434B /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793D226C6B303003D434B /* Encodable+Extension.swift */; };
 		220793D626C6B514003D434B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 220793D526C6B514003D434B /* GoogleService-Info.plist */; };
 		220793DA26C6BF58003D434B /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793D926C6BF58003D434B /* AuthResponse.swift */; };
+		220793DC26C6C057003D434B /* MDAuthResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793DB26C6C057003D434B /* MDAuthResponseResult.swift */; };
 		221D280E26C5064A004BC4F7 /* AuthorizationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280726C5064A004BC4F7 /* AuthorizationModule.swift */; };
 		221D280F26C5064A004BC4F7 /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */; };
 		221D281026C5064A004BC4F7 /* AuthorizationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */; };
@@ -221,6 +222,7 @@
 		220793D226C6B303003D434B /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
 		220793D526C6B514003D434B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		220793D926C6BF58003D434B /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		220793DB26C6C057003D434B /* MDAuthResponseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAuthResponseResult.swift; sourceTree = "<group>"; };
 		221D280726C5064A004BC4F7 /* AuthorizationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModule.swift; sourceTree = "<group>"; };
 		221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPresenter.swift; sourceTree = "<group>"; };
 		221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationRouter.swift; sourceTree = "<group>"; };
@@ -1261,6 +1263,7 @@
 			isa = PBXGroup;
 			children = (
 				22EF0201269DA9E300FE4435 /* MDResponseOperationResult.swift */,
+				220793DB26C6C057003D434B /* MDAuthResponseResult.swift */,
 			);
 			path = Result;
 			sourceTree = "<group>";
@@ -1618,6 +1621,7 @@
 				2289CEE82678CC34007254C3 /* MDDeleteWordOperationResult.swift in Sources */,
 				22DB2F8926C3D3F400C1AADA /* CourseListTableViewDelegate.swift in Sources */,
 				220793C526C66F6A003D434B /* AuthValidationType.swift in Sources */,
+				220793DC26C6C057003D434B /* MDAuthResponseResult.swift in Sources */,
 				22E2B4F7266509B900978E62 /* SettingsSectionModel.swift in Sources */,
 				220793DA26C6BF58003D434B /* AuthResponse.swift in Sources */,
 				22493C3726972232000DA480 /* MDWordCoreDataStorage.swift in Sources */,

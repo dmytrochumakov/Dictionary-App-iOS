@@ -8,9 +8,19 @@
 import Foundation
 
 struct AuthResponse {
+    
     let accessToken: String
     /// Time Zone - UTC
     let expirationDate: String
+    
+    var expDate: Date? {
+        let format: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        let dateFormatter: DateFormatter = .init()
+        dateFormatter.timeZone = TimeZone.init(identifier: "UTC")!
+        dateFormatter.dateFormat = format
+        return dateFormatter.date(from: expirationDate)
+    }
+    
 }
 
 extension AuthResponse: Decodable {
