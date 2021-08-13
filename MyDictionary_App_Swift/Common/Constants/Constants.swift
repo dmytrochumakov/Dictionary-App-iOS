@@ -18,6 +18,7 @@ struct Constants {
         static let omoExtension: String = "omo"
         static let momExtension: String = "mom"
         static let sqliteExtension: String = "sqlite"
+        static let spaceString: String = " "
     }
     
     struct HTTPHeaderConstants {
