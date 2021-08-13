@@ -24,7 +24,7 @@ final class AuthorizationRouter: AuthorizationRouterProtocol {
 extension AuthorizationRouter {
     
     func showCourseList() {        
-        Constants.AppDependencies.dependencies.rootWindow.rootViewController = CourseListModule.init(sender: nil).module
+        Constants.AppDependencies.dependencies.rootWindow.rootViewController = UINavigationController.init(rootViewController: CourseListModule.init(sender: nil).module)
     }
     
 }
