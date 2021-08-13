@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		220793BB26C65965003D434B /* MDEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793BA26C65965003D434B /* MDEnvironment.swift */; };
 		221D280E26C5064A004BC4F7 /* AuthorizationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280726C5064A004BC4F7 /* AuthorizationModule.swift */; };
 		221D280F26C5064A004BC4F7 /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */; };
 		221D281026C5064A004BC4F7 /* AuthorizationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */; };
@@ -194,6 +195,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		220793BA26C65965003D434B /* MDEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEnvironment.swift; sourceTree = "<group>"; };
 		221D280726C5064A004BC4F7 /* AuthorizationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModule.swift; sourceTree = "<group>"; };
 		221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPresenter.swift; sourceTree = "<group>"; };
 		221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationRouter.swift; sourceTree = "<group>"; };
@@ -662,6 +664,7 @@
 				2289CEB92678CC34007254C3 /* MDWordStorageType.swift */,
 				22EF01F9269DA8E700FE4435 /* MDRequestType.swift */,
 				22EF01FB269DA90000FE4435 /* MDResponseType.swift */,
+				220793BA26C65965003D434B /* MDEnvironment.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1410,6 +1413,7 @@
 				2289CEF62678CC34007254C3 /* MDDeleteWordProtocol.swift in Sources */,
 				2289CEE22678CC34007254C3 /* MDDeleteWordMemoryStorageOperation.swift in Sources */,
 				22DB2F7B26C3BE7900C1AADA /* CourseListInteractor.swift in Sources */,
+				220793BB26C65965003D434B /* MDEnvironment.swift in Sources */,
 				2289CEE42678CC34007254C3 /* MDUpdateWordMemoryStorageOperation.swift in Sources */,
 				22B2268F266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift in Sources */,
 				22E2B4DF2664E43B00978E62 /* SettingsViewController.swift in Sources */,

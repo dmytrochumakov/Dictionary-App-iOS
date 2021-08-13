@@ -57,4 +57,23 @@ struct Constants {
         }
     }
     
+    struct Environment {
+        /// MDEnvironment.development by default
+        static let current: MDEnvironment = .development
+    }
+    
+    struct APIEnvironment {
+        
+        /// Depends on the current MDEnvironment
+        static var current: MDAPIEnvironment {
+            switch Environment.current {
+            case .development:
+                return .development
+            case .production:
+                return .production
+            }
+        }
+        
+    }
+    
 }
