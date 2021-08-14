@@ -9,7 +9,7 @@ import Foundation
 
 struct KeychainService {
     
-    func save(_ string: String, for account: String) {
+    func savePassword(_ string: String, for account: String) {
         let data = string.data(using: .utf8)!
         let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword,
                                     kSecAttrAccount as String: account,
@@ -18,7 +18,7 @@ struct KeychainService {
         guard status == errSecSuccess else { return debugPrint(#function, Self.self, "save error") }
     }
     
-    func retrive(for account: String) -> String? {
+    func retrivePassword(for account: String) -> String? {
         let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword,
                                     kSecAttrAccount as String: account,
                                     kSecMatchLimit as String: kSecMatchLimitOne,
@@ -31,6 +31,23 @@ struct KeychainService {
         
         guard let data = retrivedData as? Data else { return nil }
         return String(data: data, encoding: .utf8)
+    }
+    
+    func deletePassword(for account: String) {
+        let query: [String: AnyObject] = [
+            // uniquely identify the item to delete in Keychain
+            kSecAttrAccount as String: account as AnyObject,
+            kSecClass as String: kSecClassGenericPassword
+        ]
+        
+        // SecItemDelete attempts to perform a delete operation
+        // for the item identified by query. The status indicates
+        // if the operation succeeded or failed.
+        let status = SecItemDelete(query as CFDictionary)
+        
+        // Any status other than errSecSuccess indicates the
+        // delete operation failed.
+        guard status == errSecSuccess else { return debugPrint(#function, Self.self, "delete error") }
     }
     
 }

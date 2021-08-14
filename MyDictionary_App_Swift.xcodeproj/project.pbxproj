@@ -140,6 +140,7 @@
 		22C5864226C7B7AE0030B12D /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5864126C7B7AE0030B12D /* UserEntity.swift */; };
 		22C5864426C7B7E30030B12D /* MDRegistrationResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5864326C7B7E30030B12D /* MDRegistrationResponseResult.swift */; };
 		22C5864726C7D1F30030B12D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5864626C7D1F30030B12D /* KeychainService.swift */; };
+		22C5864A26C7D3E60030B12D /* MDSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5864926C7D3E60030B12D /* MDSession.swift */; };
 		22CA087D26515E810052D169 /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA087C26515E810052D169 /* WordListViewController.swift */; };
 		22CA087F26515ED90052D169 /* WordListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA087E26515ED90052D169 /* WordListInteractor.swift */; };
 		22CA088126515EEB0052D169 /* WordListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088026515EEB0052D169 /* WordListPresenter.swift */; };
@@ -361,6 +362,7 @@
 		22C5864126C7B7AE0030B12D /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 		22C5864326C7B7E30030B12D /* MDRegistrationResponseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDRegistrationResponseResult.swift; sourceTree = "<group>"; };
 		22C5864626C7D1F30030B12D /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		22C5864926C7D3E60030B12D /* MDSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSession.swift; sourceTree = "<group>"; };
 		22CA087C26515E810052D169 /* WordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListViewController.swift; sourceTree = "<group>"; };
 		22CA087E26515ED90052D169 /* WordListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListInteractor.swift; sourceTree = "<group>"; };
 		22CA088026515EEB0052D169 /* WordListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListPresenter.swift; sourceTree = "<group>"; };
@@ -763,6 +765,7 @@
 		2289CEB62678CC34007254C3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				22C5864826C7D3D80030B12D /* Session */,
 				22EF01E6269DA6D400FE4435 /* Network */,
 				2289CEB82678CC34007254C3 /* Enums */,
 				2289CEBA2678CC34007254C3 /* Models */,
@@ -1115,6 +1118,14 @@
 				22C5864626C7D1F30030B12D /* KeychainService.swift */,
 			);
 			path = KeychainService;
+			sourceTree = "<group>";
+		};
+		22C5864826C7D3D80030B12D /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				22C5864926C7D3E60030B12D /* MDSession.swift */,
+			);
+			path = Session;
 			sourceTree = "<group>";
 		};
 		22CA086F26515D240052D169 /* Modules */ = {
@@ -1721,6 +1732,7 @@
 				22B22681266CC033007AB292 /* Observable.swift in Sources */,
 				22E2B4DD2664E43B00978E62 /* SettingsPresenter.swift in Sources */,
 				220793CE26C68081003D434B /* MDAPIAuth.swift in Sources */,
+				22C5864A26C7D3E60030B12D /* MDSession.swift in Sources */,
 				22EF01E3269D9CDA00FE4435 /* MDWordsCountProtocol.swift in Sources */,
 				229E08BE2652C8E600DA56C4 /* SectionTypeProtocol.swift in Sources */,
 				2289CEF22678CC34007254C3 /* MDIDPropertyProtocol.swift in Sources */,
