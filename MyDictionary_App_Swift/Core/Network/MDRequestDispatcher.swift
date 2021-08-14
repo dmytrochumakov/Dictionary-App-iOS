@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol MDRequestDispatcherProtocol {
     init(environment: MDEnvironmentProtocol, networkSession: MDNetworkSessionProtocol)
@@ -34,8 +35,13 @@ final class MDRequestDispatcher: MDRequestDispatcherProtocol {
 extension MDRequestDispatcher {
     
     func execute(endpoint: MDEndpoint, completion: @escaping (MDResponseOperationResult) -> Void) -> URLSessionTask? {
+        // Show Indicator //
+        showNetworkActivityIndicator()
         // Create a URL request.
         guard let urlRequest = endpoint.urlRequest(with: environment) else {
+            // Hide Indicator //
+            hideNetworkActivityIndicator()
+            // -------------- //
             completion(.error(MDAPIError.badRequest, nil))
             return nil
         }
@@ -46,6 +52,9 @@ extension MDRequestDispatcher {
         case .data:
             task = networkSession.dataTask(with: urlRequest, completionHandler: { (data, urlResponse, error) in
                 self.handleJsonTaskResponse(data: data, urlResponse: urlResponse, error: error, completion: completion)
+                // Hide Indicator //
+                self.hideNetworkActivityIndicator()
+                // -------------- //
             })
             break
         }
@@ -103,6 +112,21 @@ fileprivate extension MDRequestDispatcher {
             return .failure(MDAPIError.conflict)
         case .internalServerError:
             return .failure(MDAPIError.internalServerError)
+        }
+    }
+    
+}
+
+// MARK: - Network Activity Indicator
+fileprivate extension MDRequestDispatcher {
+    
+    func showNetworkActivityIndicator() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func hideNetworkActivityIndicator() {
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
     }
     
