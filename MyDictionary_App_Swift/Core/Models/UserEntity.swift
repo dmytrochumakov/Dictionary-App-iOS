@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct UserEntity {
     
@@ -32,7 +33,16 @@ struct UserEntity {
         dateFormatter.dateFormat = format
         return dateFormatter.date(from: updatedAt)
     }
-   
+    
+}
+
+extension UserEntity {
+    
+    func cdUserEntity(insertIntoManagedObjectContext: NSManagedObjectContext) -> CDUserEntity {
+        return .init(userEntity: self,
+                     insertIntoManagedObjectContext: insertIntoManagedObjectContext)
+    }
+    
 }
 
 extension UserEntity: Decodable {

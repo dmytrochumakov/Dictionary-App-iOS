@@ -9,14 +9,17 @@ import CoreData
 
 extension CDUserEntity {
     
-    convenience init(userModel: UserModel,
+    convenience init(userEntity: UserEntity,
                      insertIntoManagedObjectContext context: NSManagedObjectContext!) {
         
         let entity = NSEntityDescription.entity(forEntityName: CoreDataEntityName.CDUserEntity, in: context)!
         self.init(entity: entity, insertInto: context)
         
-        self.id = userModel.id
-        self.username = userModel.username        
+        self.userId = userEntity.userId
+        self.nickname = userEntity.nickname
+        self.password = userEntity.password
+        self.createdAt = userEntity.createdAt
+        self.updatedAt = userEntity.updatedAt
         
     }
     
@@ -24,13 +27,19 @@ extension CDUserEntity {
 
 extension CDUserEntity {
     
-    var userModel: UserModel {
-        guard let username = self.username
+    var userEntity: UserEntity {
+        guard let nickname = self.nickname,
+              let password = self.password,
+              let createdAt = self.createdAt,
+              let updatedAt = self.updatedAt
         else {
             fatalError()
         }
-        return .init(id: self.id,
-                     username: username)
+        return .init(userId: self.userId,
+                     nickname: nickname,
+                     password: password,
+                     createdAt: createdAt,
+                     updatedAt: updatedAt)
     }
     
 }
