@@ -106,7 +106,6 @@ struct Constants {
     
     struct KeychainKeys {
         static let passwordKey: String = "Password_Keychain_Key"
-        static let accessTokenKey: String = "Access_Token_Keychain_Key"
     }
     
 }
