@@ -73,14 +73,12 @@ PODS:
   - nanopb/encode (2.30906.0)
   - PromisesObjC (1.2.11)
   - ReachabilitySwift (5.0.0)
-  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Crashlytics
   - KeychainAccess
   - ReachabilitySwift
-  - SVProgressHUD
 
 SPEC REPOS:
   trunk:
@@ -97,7 +95,6 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - ReachabilitySwift
-    - SVProgressHUD
 
 SPEC CHECKSUMS:
   Firebase: 78e8dd2e39d653de6270432ad84fe8b59f7bf4e8
@@ -113,8 +110,7 @@ SPEC CHECKSUMS:
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
-  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 5333b246146d4e0a1bfe904e4432b5030b0dfe7a
+PODFILE CHECKSUM: 829999e86fac95830b0c72c6d825881268a78505
 
 COCOAPODS: 1.10.2
