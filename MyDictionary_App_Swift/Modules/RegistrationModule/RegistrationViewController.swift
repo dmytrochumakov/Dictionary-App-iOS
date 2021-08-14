@@ -25,17 +25,17 @@ final class RegistrationViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        
+        addViews()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureUI()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        addConstraints()
     }
 
 }
@@ -43,4 +43,36 @@ final class RegistrationViewController: UIViewController {
 // MARK: - RegistrationPresenterOutputProtocol
 extension RegistrationViewController: RegistrationPresenterOutputProtocol {
        
+}
+
+// MARK: - Add Views
+fileprivate extension RegistrationViewController {
+    
+    func addViews() {
+        
+    }
+    
+}
+
+// MARK: - Add Constraints
+fileprivate extension RegistrationViewController {
+    
+    func addConstraints() {
+        
+    }
+    
+}
+
+// MARK: - Configure UI
+fileprivate extension RegistrationViewController {
+    
+    func configureUI() {
+        configureTitle()
+        configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
+    }
+    
+    func configureTitle() {
+        self.title = KeysForTranslate.registration.localized
+    }
+    
 }

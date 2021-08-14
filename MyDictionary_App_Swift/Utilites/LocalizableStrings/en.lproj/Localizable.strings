@@ -45,4 +45,4 @@
 "conflict_api_auth_error" = "Nickname exists. \n Please try another nickname.";
 // End Api Auth Errors //
 
-"register" = "Register";
+"registration" = "Registration";
