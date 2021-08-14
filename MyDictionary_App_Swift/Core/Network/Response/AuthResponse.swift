@@ -11,6 +11,7 @@ struct AuthResponse {
     
     let accessToken: String
     /// Time Zone - UTC
+    /// Date Format - yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
     let expirationDate: String
     
     var expDate: Date? {
