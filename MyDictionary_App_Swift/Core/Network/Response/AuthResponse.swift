@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct AuthResponse {
     
@@ -20,6 +21,15 @@ struct AuthResponse {
         dateFormatter.timeZone = TimeZone.init(identifier: "UTC")!
         dateFormatter.dateFormat = format
         return dateFormatter.date(from: expirationDate)
+    }
+    
+}
+
+extension AuthResponse {
+    
+    func cdAuthResponseEntity(insertIntoManagedObjectContext: NSManagedObjectContext) -> CDAuthResponseEntity {
+        return .init(authResponse: self,
+                     insertIntoManagedObjectContext: insertIntoManagedObjectContext)
     }
     
 }
