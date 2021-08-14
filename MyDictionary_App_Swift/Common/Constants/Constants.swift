@@ -104,8 +104,4 @@ struct Constants {
         
     }
     
-    struct KeychainKeys {
-        static let passwordKey: String = "Password_Keychain_Key"
-    }
-    
 }
