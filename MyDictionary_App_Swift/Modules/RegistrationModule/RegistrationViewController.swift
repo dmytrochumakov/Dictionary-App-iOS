@@ -168,9 +168,10 @@ fileprivate extension RegistrationViewController {
     }
     
     func addNicknameTextFieldConstraints() {
+        guard let navigationBar = self.navigationController?.navigationBar else { return }
         NSLayoutConstraint.addEqualConstraintAndActivate(item: self.nicknameTextField,
                                                          attribute: .top,
-                                                         toItem: self.navigationController!.navigationBar,
+                                                         toItem: navigationBar,
                                                          attribute: .bottom,
                                                          constant: self.nicknameTextFieldTopOffset)
         
