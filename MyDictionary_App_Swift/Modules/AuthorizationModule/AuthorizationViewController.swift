@@ -73,7 +73,7 @@ final class AuthorizationViewController: UIViewController {
     fileprivate let registerButton: UIButton = {
         let button: UIButton = .init()
         button.backgroundColor = ConfigurationAppearanceController.buttonBackgroundColor()
-        button.setTitle(KeysForTranslate.register.localized, for: .normal)
+        button.setTitle(KeysForTranslate.registration.localized, for: .normal)
         button.setTitleColor(ConfigurationAppearanceController.buttonTextColor(), for: .normal)
         button.titleLabel?.font = AppStyling.Font.default
         button.translatesAutoresizingMaskIntoConstraints = false

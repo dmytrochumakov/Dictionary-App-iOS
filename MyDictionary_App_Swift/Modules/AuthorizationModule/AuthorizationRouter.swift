@@ -29,7 +29,8 @@ extension AuthorizationRouter {
     }
     
     func showRegistration() {
-//        Constants.AppDependencies.dependencies.rootWindow.rootViewController = UINavigationController.init(rootViewController:)
+        Constants.AppDependencies.dependencies.rootWindow.rootViewController = UINavigationController.init(rootViewController: RegistrationModule.init(sender: nil).module)
     }
     
 }
+
