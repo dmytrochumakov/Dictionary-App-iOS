@@ -104,4 +104,11 @@ struct Constants {
         
     }
     
+    struct Keychain {
+        static let nicknameKey: String = "Nickname_Keychain_Key"
+        static let passwordKey: String = "Password_Keychain_Key"
+        static let accessTokenKey: String = "Access_Token_Keychain_Key"
+        static let accessTokenExpireAt: String = "Access_Token_Expire_At_Keychain_Key"
+    }
+    
 }
