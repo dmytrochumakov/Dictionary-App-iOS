@@ -48,6 +48,8 @@ enum KeysForTranslate: String {
     // End Api Auth Errors //
     
     case registration
+    case register
+    
 }
 
 // MARK: - LocalizableProtocol

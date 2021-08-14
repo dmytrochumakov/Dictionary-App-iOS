@@ -6,9 +6,8 @@
 
 import Foundation
 
-protocol AuthorizationDataProviderProtocol {
-    var nickname: String? { get set }
-    var password: String? { get set }
+protocol AuthorizationDataProviderProtocol: AuthValidationDataProviderProtocol {
+    
 }
 
 final class AuthorizationDataProvider: AuthorizationDataProviderProtocol {

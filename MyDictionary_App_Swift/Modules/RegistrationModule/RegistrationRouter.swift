@@ -8,6 +8,7 @@ import UIKit
 
 protocol RegistrationRouterProtocol {
     var presenter: UIViewController? { get set }
+    func showCourseList()
 }
 
 final class RegistrationRouter: RegistrationRouterProtocol {
@@ -16,6 +17,14 @@ final class RegistrationRouter: RegistrationRouterProtocol {
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension RegistrationRouter {
+    
+    func showCourseList() {
+        Constants.AppDependencies.dependencies.rootWindow.rootViewController = UINavigationController.init(rootViewController: CourseListModule.init(sender: nil).module)
     }
     
 }

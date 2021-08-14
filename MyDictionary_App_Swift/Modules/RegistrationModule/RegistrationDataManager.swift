@@ -7,7 +7,10 @@
 import Foundation
 
 protocol RegistrationDataManagerInputProtocol {
-    
+    func getNickname() -> String?
+    func getPassword() -> String?
+    func setNickname(_ text: String?)
+    func setPassword(_ text: String?)
 }
 
 protocol RegistrationDataManagerOutputProtocol: AnyObject {
@@ -21,7 +24,7 @@ protocol RegistrationDataManagerProtocol: RegistrationDataManagerInputProtocol {
 
 final class RegistrationDataManager: RegistrationDataManagerProtocol {
     
-    internal let dataProvider: RegistrationDataProviderProtocol
+    internal var dataProvider: RegistrationDataProviderProtocol
     internal weak var dataManagerOutput: RegistrationDataManagerOutputProtocol?
     
     init(dataProvider: RegistrationDataProviderProtocol) {
@@ -30,6 +33,26 @@ final class RegistrationDataManager: RegistrationDataManagerProtocol {
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension RegistrationDataManager {
+    
+    func getNickname() -> String? {
+        return dataProvider.nickname
+    }
+    
+    func getPassword() -> String? {
+        return dataProvider.password
+    }
+    
+    func setNickname(_ text: String?) {
+        dataProvider.nickname = text
+    }
+    
+    func setPassword(_ text: String?) {
+        dataProvider.password = text
     }
     
 }

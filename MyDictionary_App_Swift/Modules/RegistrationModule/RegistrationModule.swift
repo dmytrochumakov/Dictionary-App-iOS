@@ -26,7 +26,18 @@ extension RegistrationModule {
         let dataProvider: RegistrationDataProviderProtocol = RegistrationDataProvider.init()
         var dataManager: RegistrationDataManagerProtocol = RegistrationDataManager.init(dataProvider: dataProvider)
         
-        let interactor: RegistrationInteractorProtocol = RegistrationInteractor.init(dataManager: dataManager)
+        let textFieldDelegate: AuthTextFieldDelegateProtocol = AuthTextFieldDelegate.init()
+        
+        let validationTypes: [AuthValidationType] = [.nickname, .password]
+        let authValidation: AuthValidationProtocol = AuthValidation.init(dataProvider: dataProvider,
+                                                                         validationTypes: validationTypes)
+        
+        let apiAuth: MDAPIAuthProtocol = MDAPIAuth.init(requestDispatcher: Constants.RequestDispatcher.defaultRequestDispatcher)
+        
+        let interactor: RegistrationInteractorProtocol = RegistrationInteractor.init(dataManager: dataManager,
+                                                                                       authValidation: authValidation,
+                                                                                       textFieldDelegate: textFieldDelegate,
+                                                                                       apiAuth: apiAuth)
         var router: RegistrationRouterProtocol = RegistrationRouter.init()
         let presenter: RegistrationPresenterProtocol = RegistrationPresenter.init(interactor: interactor, router: router)
         let vc = RegistrationViewController.init(presenter: presenter)

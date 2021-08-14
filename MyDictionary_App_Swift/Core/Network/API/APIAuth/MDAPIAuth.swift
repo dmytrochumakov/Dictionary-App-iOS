@@ -9,7 +9,7 @@ import Foundation
 
 protocol MDAPIAuthProtocol {
     func login(authRequest: AuthRequest, completionHandler: @escaping MDAuthResponseResult)
-    func register(authRequest: AuthRequest)
+    func register(authRequest: AuthRequest, completionHandler: @escaping MDRegistrationResponseResult)
 }
 
 final class MDAPIAuth: MDAPIAuthProtocol {
@@ -110,8 +110,28 @@ extension MDAPIAuth {
             }
     }
     
-    func register(authRequest: AuthRequest) {
-        
+    func register(authRequest: AuthRequest, completionHandler: @escaping MDRegistrationResponseResult) {
+        MDAPIOperation.init(MDAPIAuthEndpoint.register(authRequest: authRequest))
+            .execute(in: requestDispatcher) { [unowned self] (response) in
+                switch response {
+                case .data(let data, _):
+                    do {
+                        completionHandler(.success(try JSONDecoder.init().decode(UserEntity.self, from: data)))
+                    } catch (_) {
+                        completionHandler(.failure(MDAPIError.parseError))
+                    }
+                    debugPrint(#function, Self.self, "dataCount: ", data.count)
+                    break
+                case .error(let error, let httpURLResponse):
+                    debugPrint(#function, Self.self, "error: ", error.localizedDescription)
+                    if (httpURLResponse?.statusCode == MDAPIStatusCode.conflict.rawValue) {
+                        completionHandler(.failure(MDAPIAuthError.conflict))
+                    } else {
+                        completionHandler(.failure(error))
+                    }
+                    break
+                }
+            }
     }
     
 }

@@ -12,12 +12,17 @@ protocol AuthValidationProtocol {
     var validationErrors: [AuthValidationError] { get }
 }
 
+protocol AuthValidationDataProviderProtocol {
+    var nickname: String? { get set }
+    var password: String? { get set }
+}
+
 final class AuthValidation: NSObject, AuthValidationProtocol {
     
-    fileprivate let dataProvider: AuthorizationDataProviderProtocol
+    fileprivate let dataProvider: AuthValidationDataProviderProtocol
     fileprivate let validationTypes: [AuthValidationType]
     
-    init(dataProvider: AuthorizationDataProviderProtocol,
+    init(dataProvider: AuthValidationDataProviderProtocol,
          validationTypes: [AuthValidationType]) {
         
         self.dataProvider = dataProvider

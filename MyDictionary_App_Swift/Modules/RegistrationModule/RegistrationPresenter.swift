@@ -7,11 +7,16 @@
 import UIKit
 
 protocol RegistrationPresenterInputProtocol {
-    
+    var textFieldDelegate: UITextFieldDelegate { get }    
+    func registerButtonClicked()
+    func nicknameTextFieldEditingDidChangeAction(_ text: String?)
+    func passwordTextFieldEditingDidChangeAction(_ text: String?)
 }
 
 protocol RegistrationPresenterOutputProtocol: AnyObject {
-    
+    func makePasswordFieldActive()
+    func hideKeyboard()
+    func showValidationError(_ error: Error)
 }
 
 protocol RegistrationPresenterProtocol: RegistrationPresenterInputProtocol,
@@ -44,5 +49,44 @@ final class RegistrationPresenter: NSObject, RegistrationPresenterProtocol {
 
 // MARK: - RegistrationInteractorOutputProtocol
 extension RegistrationPresenter {
+    
+    func makePasswordFieldActive() {
+        presenterOutput?.makePasswordFieldActive()
+    }
+    
+    func hideKeyboard() {
+        presenterOutput?.hideKeyboard()
+    }
+    
+    func showValidationError(_ error: Error) {
+        presenterOutput?.showValidationError(error)
+    }
+    
+    func showCourseList() {
+        router.showCourseList()
+    }
+    
+}
+
+// MARK: - RegistrationPresenterInputProtocol
+extension RegistrationPresenter {
+    
+    var textFieldDelegate: UITextFieldDelegate {
+        return interactor.textFieldDelegate
+    }
+    
+    // Actions //
+    func registerButtonClicked() {
+        interactor.registerButtonClicked()
+    }
+    
+    func nicknameTextFieldEditingDidChangeAction(_ text: String?) {
+        interactor.nicknameTextFieldEditingDidChangeAction(text)
+    }
+    
+    func passwordTextFieldEditingDidChangeAction(_ text: String?) {
+        interactor.passwordTextFieldEditingDidChangeAction(text)
+    }
+    // End Actions //
     
 }
