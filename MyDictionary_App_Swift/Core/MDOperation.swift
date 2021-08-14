@@ -1,5 +1,5 @@
 //
-//  MDWordOperation.swift
+//  MDOperation.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 21.05.2021.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol MDWordOperationProtocol {
+protocol MDOperationProtocol {
     func finish()
 }
 
-open class MDWordOperation: Operation,
-                            MDWordOperationProtocol {
+open class MDOperation: Operation,
+                        MDOperationProtocol {
     
     fileprivate enum State: String {
         case ready = "isReady"
@@ -46,7 +46,7 @@ open class MDWordOperation: Operation,
     override open var isAsynchronous: Bool {
         return true
     }
-
+    
     open override func start() {
         
         guard !isCancelled else {
@@ -73,7 +73,7 @@ open class MDWordOperation: Operation,
     
 }
 
-extension MDWordOperation {
+extension MDOperation {
     
     func finish() {
         if isExecuting {

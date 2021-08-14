@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDReadWordMemoryStorageOperation: MDWordOperation {
+final class MDReadWordMemoryStorageOperation: MDOperation {
     
     fileprivate let wordStorage: MDWordMemoryStorage
     fileprivate let id: Int64

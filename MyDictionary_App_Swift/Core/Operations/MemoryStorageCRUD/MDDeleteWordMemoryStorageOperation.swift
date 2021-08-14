@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDDeleteWordMemoryStorageOperation: MDWordOperation {
+final class MDDeleteWordMemoryStorageOperation: MDOperation {
     
     fileprivate let wordStorage: MDWordMemoryStorage
     fileprivate let word: WordModel

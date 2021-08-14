@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-final class MDReadWordCoreDataStorageOperation: MDWordOperation {
+final class MDReadWordCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let wordStorage: MDWordCoreDataStorage
@@ -71,7 +71,7 @@ final class MDReadWordCoreDataStorageOperation: MDWordOperation {
     
 }
 
-final class MDReadWordsCoreDataStorageOperation: MDWordOperation {
+final class MDReadWordsCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let wordStorage: MDWordCoreDataStorage

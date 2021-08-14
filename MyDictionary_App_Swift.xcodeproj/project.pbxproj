@@ -91,7 +91,7 @@
 		2289CEF72678CC34007254C3 /* MDCreateWordProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CED92678CC34007254C3 /* MDCreateWordProtocol.swift */; };
 		2289CEF82678CC34007254C3 /* MDCreatedAtProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEDA2678CC34007254C3 /* MDCreatedAtProtocol.swift */; };
 		2289CEF92678CC34007254C3 /* OperationQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEDC2678CC34007254C3 /* OperationQueueService.swift */; };
-		2289CEFA2678CC34007254C3 /* MDWordOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEDD2678CC34007254C3 /* MDWordOperation.swift */; };
+		2289CEFA2678CC34007254C3 /* MDOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEDD2678CC34007254C3 /* MDOperation.swift */; };
 		2289CEFC2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEFB2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift */; };
 		228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 228BC440264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld */; };
 		228BC444264979FE0030FB30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228BC443264979FE0030FB30 /* Assets.xcassets */; };
@@ -309,7 +309,7 @@
 		2289CED92678CC34007254C3 /* MDCreateWordProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDCreateWordProtocol.swift; sourceTree = "<group>"; };
 		2289CEDA2678CC34007254C3 /* MDCreatedAtProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDCreatedAtProtocol.swift; sourceTree = "<group>"; };
 		2289CEDC2678CC34007254C3 /* OperationQueueService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueueService.swift; sourceTree = "<group>"; };
-		2289CEDD2678CC34007254C3 /* MDWordOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordOperation.swift; sourceTree = "<group>"; };
+		2289CEDD2678CC34007254C3 /* MDOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDOperation.swift; sourceTree = "<group>"; };
 		2289CEFB2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordMemoryStorage_Tests.swift; sourceTree = "<group>"; };
 		228BC434264979FD0030FB30 /* MyDictionary_App_Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyDictionary_App_Swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		228BC441264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyDictionary_App_Swift.xcdatamodel; sourceTree = "<group>"; };
@@ -781,7 +781,7 @@
 				22493C3626972232000DA480 /* MDWordCoreDataStorage.swift */,
 				2289CECE2678CC34007254C3 /* Protocols */,
 				2289CEDB2678CC34007254C3 /* Services */,
-				2289CEDD2678CC34007254C3 /* MDWordOperation.swift */,
+				2289CEDD2678CC34007254C3 /* MDOperation.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1735,7 +1735,7 @@
 				229E08BE2652C8E600DA56C4 /* SectionTypeProtocol.swift in Sources */,
 				2289CEF22678CC34007254C3 /* MDIDPropertyProtocol.swift in Sources */,
 				22C5863E26C7AFB80030B12D /* RegistrationInteractor.swift in Sources */,
-				2289CEFA2678CC34007254C3 /* MDWordOperation.swift in Sources */,
+				2289CEFA2678CC34007254C3 /* MDOperation.swift in Sources */,
 				22EF01F4269DA7C000FE4435 /* MDNetworkSession.swift in Sources */,
 				22E2B4E42664EB6900978E62 /* SettingsCollectionViewDataSource.swift in Sources */,
 				2289CEF92678CC34007254C3 /* OperationQueueService.swift in Sources */,
