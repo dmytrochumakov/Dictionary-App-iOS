@@ -9,6 +9,7 @@ import UIKit
 protocol AuthorizationPresenterInputProtocol {
     var textFieldDelegate: UITextFieldDelegate { get }
     func loginButtonClicked()
+    func registerButtonClicked()
     func nicknameTextFieldEditingDidChangeAction(_ text: String?)
     func passwordTextFieldEditingDidChangeAction(_ text: String?)
 }
@@ -62,6 +63,10 @@ extension AuthorizationPresenter {
         router.showCourseList()
     }
     
+    func showRegistration() {
+        router.showRegistration()
+    }
+    
     func showValidationError(_ error: Error) {
         presenterOutput?.showValidationError(error)
     }
@@ -78,6 +83,10 @@ extension AuthorizationPresenter {
     // Actions //
     func loginButtonClicked() {
         interactor.loginButtonClicked()
+    }
+    
+    func registerButtonClicked() {
+        interactor.registerButtonClicked()
     }
     
     func nicknameTextFieldEditingDidChangeAction(_ text: String?) {

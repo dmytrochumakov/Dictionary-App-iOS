@@ -11,12 +11,14 @@ protocol AuthorizationInteractorInputProtocol {
     func nicknameTextFieldEditingDidChangeAction(_ text: String?)
     func passwordTextFieldEditingDidChangeAction(_ text: String?)
     func loginButtonClicked()
+    func registerButtonClicked()
 }
 
 protocol AuthorizationInteractorOutputProtocol: AnyObject {
     func makePasswordFieldActive()
     func hideKeyboard()
     func showCourseList()
+    func showRegistration()
     func showValidationError(_ error: Error)
 }
 
@@ -77,6 +79,11 @@ extension AuthorizationInteractor {
     func loginButtonClicked() {
         interactorOutput?.hideKeyboard()
         authValidationAndRouting()
+    }
+    
+    func registerButtonClicked() {
+        interactorOutput?.hideKeyboard()
+        interactorOutput?.showRegistration()
     }
     
     // End Actions //

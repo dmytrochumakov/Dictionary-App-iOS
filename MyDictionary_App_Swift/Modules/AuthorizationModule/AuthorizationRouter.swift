@@ -9,6 +9,7 @@ import UIKit
 protocol AuthorizationRouterProtocol {
     var presenter: UIViewController? { get set }
     func showCourseList()
+    func showRegistration()
 }
 
 final class AuthorizationRouter: AuthorizationRouterProtocol {
@@ -25,6 +26,10 @@ extension AuthorizationRouter {
     
     func showCourseList() {        
         Constants.AppDependencies.dependencies.rootWindow.rootViewController = UINavigationController.init(rootViewController: CourseListModule.init(sender: nil).module)
+    }
+    
+    func showRegistration() {
+//        Constants.AppDependencies.dependencies.rootWindow.rootViewController = UINavigationController.init(rootViewController:)
     }
     
 }

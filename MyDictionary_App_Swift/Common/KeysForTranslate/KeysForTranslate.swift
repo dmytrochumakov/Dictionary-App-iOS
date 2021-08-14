@@ -47,6 +47,7 @@ enum KeysForTranslate: String {
     case conflictApiAuthError = "conflict_api_auth_error"
     // End Api Auth Errors //
     
+    case register
 }
 
 // MARK: - LocalizableProtocol

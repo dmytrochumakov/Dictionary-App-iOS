@@ -69,6 +69,17 @@ final class AuthorizationViewController: UIViewController {
         return button
     }()
     
+    fileprivate let registerButtonHeight: CGFloat = 56
+    fileprivate let registerButton: UIButton = {
+        let button: UIButton = .init()
+        button.backgroundColor = ConfigurationAppearanceController.buttonBackgroundColor()
+        button.setTitle(KeysForTranslate.register.localized, for: .normal)
+        button.setTitleColor(ConfigurationAppearanceController.buttonTextColor(), for: .normal)
+        button.titleLabel?.font = AppStyling.Font.default
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     init(presenter: AuthorizationPresenterInputProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -127,6 +138,7 @@ fileprivate extension AuthorizationViewController {
         addPasswordTextField()
         addPasswordTextFieldBottomLineView()
         addLoginButton()
+        addRegisterButton()
     }
     
     func addNicknameTextField() {
@@ -154,6 +166,11 @@ fileprivate extension AuthorizationViewController {
         view.addSubview(loginButton)
     }
     
+    func addRegisterButton() {
+        registerButton.addTarget(self, action: #selector(registerButtonAction), for: .touchUpInside)
+        view.addSubview(registerButton)
+    }
+    
 }
 
 // MARK: - Add Constraints
@@ -165,6 +182,7 @@ fileprivate extension AuthorizationViewController {
         addPasswordTextFieldConstraints()
         addPasswordTextFieldBottomLineViewConstraints()
         addLoginButtonConstraints()
+        addRegisterButtonConstraints()
     }
     
     func addNicknameTextFieldConstraints() {
@@ -248,9 +266,11 @@ fileprivate extension AuthorizationViewController {
                                                              toItem: self.view,
                                                              constant: 0)
         
-        NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.loginButton,
-                                                              toItem: self.view,
-                                                              constant: 0)
+        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.loginButton,
+                                                         attribute: .right,
+                                                         toItem: self.view,
+                                                         attribute: .centerX,
+                                                         constant: 0)
         
         NSLayoutConstraint.addEqualBottomConstraintAndActivate(item: self.loginButton,
                                                                toItem: self.view,
@@ -258,6 +278,25 @@ fileprivate extension AuthorizationViewController {
         
         NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.loginButton,
                                                                constant: self.loginButtonHeight)
+    }
+    
+    func addRegisterButtonConstraints() {
+        NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.registerButton,
+                                                             toItem: self.view,
+                                                             constant: 0)
+        
+        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.registerButton,
+                                                         attribute: .left,
+                                                         toItem: self.view,
+                                                         attribute: .centerX,
+                                                         constant: 0)
+        
+        NSLayoutConstraint.addEqualBottomConstraintAndActivate(item: self.registerButton,
+                                                               toItem: self.view,
+                                                               constant: 0)
+        
+        NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.registerButton,
+                                                               constant: self.registerButtonHeight)
     }
     
 }
@@ -281,6 +320,10 @@ fileprivate extension AuthorizationViewController {
     
     @objc func loginButtonAction() {
         presenter.loginButtonClicked()
+    }
+    
+    @objc func registerButtonAction() {
+        presenter.registerButtonClicked()
     }
     
     @objc func nicknameTextFieldEditingDidChangeAction() {

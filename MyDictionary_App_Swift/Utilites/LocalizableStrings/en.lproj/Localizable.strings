@@ -44,3 +44,5 @@
 "unauthorized_api_auth_error" = "User with this nickname does not exist. \n Please check the entered data or create a new account.";
 "conflict_api_auth_error" = "Nickname exists. \n Please try another nickname.";
 // End Api Auth Errors //
+
+"register" = "Register";
