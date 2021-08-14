@@ -7,6 +7,8 @@
 import Foundation
 
 protocol AuthorizationDataManagerInputProtocol {
+    func getNickname() -> String?
+    func getPassword() -> String?
     func setNickname(_ text: String?)
     func setPassword(_ text: String?)
 }
@@ -36,6 +38,14 @@ final class AuthorizationDataManager: AuthorizationDataManagerProtocol {
 }
 
 extension AuthorizationDataManager {
+    
+    func getNickname() -> String? {
+        return dataProvider.nickname
+    }
+    
+    func getPassword() -> String? {
+        return dataProvider.password
+    }
     
     func setNickname(_ text: String?) {
         dataProvider.nickname = text

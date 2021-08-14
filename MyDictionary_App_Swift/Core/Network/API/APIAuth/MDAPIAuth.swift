@@ -93,14 +93,18 @@ extension MDAPIAuth {
                 case .data(let data, _):
                     do {                        
                         completionHandler(.success(try JSONDecoder.init().decode(AuthResponse.self, from: data)))
-                    } catch (let error) {
-                        completionHandler(.failure(error))
+                    } catch (_) {
+                        completionHandler(.failure(MDAPIError.parseError))
                     }
                     debugPrint(#function, Self.self, "dataCount: ", data.count)
                     break
-                case .error(let error, _):
+                case .error(let error, let httpURLResponse):
                     debugPrint(#function, Self.self, "error: ", error.localizedDescription)
-                    completionHandler(.failure(error))
+                    if (httpURLResponse?.statusCode == MDAPIStatusCode.unauthorized.rawValue) {
+                        completionHandler(.failure(MDAPIAuthError.unauthorized))
+                    } else {
+                        completionHandler(.failure(error))
+                    }
                     break
                 }
             }

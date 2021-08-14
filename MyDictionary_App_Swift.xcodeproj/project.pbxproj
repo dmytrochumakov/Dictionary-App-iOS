@@ -128,6 +128,8 @@
 		22BD99A5266A58DE0063FEFC /* RootWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD99A4266A58DE0063FEFC /* RootWindow.swift */; };
 		22BD99A8266A58F40063FEFC /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD99A7266A58F40063FEFC /* RootViewController.swift */; };
 		22BD99AB266A67A60063FEFC /* AppearanceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD99AA266A67A60063FEFC /* AppearanceType.swift */; };
+		22C5862D26C79D360030B12D /* MDAPIStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5862C26C79D360030B12D /* MDAPIStatusCode.swift */; };
+		22C5863126C7A5690030B12D /* MDAPIAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5863026C7A5690030B12D /* MDAPIAuthError.swift */; };
 		22CA087D26515E810052D169 /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA087C26515E810052D169 /* WordListViewController.swift */; };
 		22CA087F26515ED90052D169 /* WordListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA087E26515ED90052D169 /* WordListInteractor.swift */; };
 		22CA088126515EEB0052D169 /* WordListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088026515EEB0052D169 /* WordListPresenter.swift */; };
@@ -337,6 +339,8 @@
 		22BD99A4266A58DE0063FEFC /* RootWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWindow.swift; sourceTree = "<group>"; };
 		22BD99A7266A58F40063FEFC /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		22BD99AA266A67A60063FEFC /* AppearanceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceType.swift; sourceTree = "<group>"; };
+		22C5862C26C79D360030B12D /* MDAPIStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIStatusCode.swift; sourceTree = "<group>"; };
+		22C5863026C7A5690030B12D /* MDAPIAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIAuthError.swift; sourceTree = "<group>"; };
 		22CA087C26515E810052D169 /* WordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListViewController.swift; sourceTree = "<group>"; };
 		22CA087E26515ED90052D169 /* WordListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListInteractor.swift; sourceTree = "<group>"; };
 		22CA088026515EEB0052D169 /* WordListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListPresenter.swift; sourceTree = "<group>"; };
@@ -471,7 +475,7 @@
 		220793CC26C6805C003D434B /* API */ = {
 			isa = PBXGroup;
 			children = (
-				220793CD26C68081003D434B /* MDAPIAuth.swift */,
+				22C5862E26C7A5420030B12D /* APIAuth */,
 				22EF0209269DAE9800FE4435 /* MDAPIWord.swift */,
 			);
 			path = API;
@@ -1052,6 +1056,23 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
+		22C5862E26C7A5420030B12D /* APIAuth */ = {
+			isa = PBXGroup;
+			children = (
+				22C5862F26C7A54B0030B12D /* Error */,
+				220793CD26C68081003D434B /* MDAPIAuth.swift */,
+			);
+			path = APIAuth;
+			sourceTree = "<group>";
+		};
+		22C5862F26C7A54B0030B12D /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				22C5863026C7A5690030B12D /* MDAPIAuthError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		22CA086F26515D240052D169 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -1289,6 +1310,7 @@
 			children = (
 				22EF020C269DAFC000FE4435 /* MDAPIEnvironment.swift */,
 				22DEAE3126C289F100B64B16 /* MDAPIVersion.swift */,
+				22C5862C26C79D360030B12D /* MDAPIStatusCode.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1612,6 +1634,7 @@
 				22EF01FF269DA99800FE4435 /* MDAPIError.swift in Sources */,
 				22DB2F7C26C3BE7900C1AADA /* CourseListDataProvider.swift in Sources */,
 				22493C39269722AA000DA480 /* MDCRUDWordProtocol.swift in Sources */,
+				22C5862D26C79D360030B12D /* MDAPIStatusCode.swift in Sources */,
 				2289CEEA2678CC34007254C3 /* MDUpdateWordResult.swift in Sources */,
 				22493C562697421C000DA480 /* MDUpdateWordCoreDataStorageOperation.swift in Sources */,
 				22493C4C26972E27000DA480 /* MDWordOperationError.swift in Sources */,
@@ -1735,6 +1758,7 @@
 				22EF01EE269DA73100FE4435 /* HTTPHeader.swift in Sources */,
 				22CA087F26515ED90052D169 /* WordListInteractor.swift in Sources */,
 				226FEE7A266B644F0044A5F9 /* AppearanceCollectionViewDataSource.swift in Sources */,
+				22C5863126C7A5690030B12D /* MDAPIAuthError.swift in Sources */,
 				22E2B4E62664EB8000978E62 /* SettingsCollectionViewDelegate.swift in Sources */,
 				221D281F26C54960004BC4F7 /* KeyboardHandler.swift in Sources */,
 				2223F8A826512C1A004F2FE9 /* LocalizableProtocol.swift in Sources */,

@@ -36,7 +36,7 @@ extension MDRequestDispatcher {
     func execute(endpoint: MDEndpoint, completion: @escaping (MDResponseOperationResult) -> Void) -> URLSessionTask? {
         // Create a URL request.
         guard let urlRequest = endpoint.urlRequest(with: environment) else {
-            completion(.error(MDAPIError.badRequest("Invalid URL for: \(endpoint)"), nil))
+            completion(.error(MDAPIError.badRequest, nil))
             return nil
         }
         
@@ -81,19 +81,28 @@ fileprivate extension MDRequestDispatcher {
     }
     
     func verify(data: Data?, urlResponse: HTTPURLResponse, error: Error?) -> Result<Data, Error> {
-        switch urlResponse.statusCode {
-        case 200...299:
+        guard let statusCode = MDAPIStatusCode.init(rawValue: urlResponse.statusCode) else { return .failure(MDAPIError.unknown) }
+        switch statusCode {
+        case .ok:
             if let data = data {
                 return .success(data)
             } else {
                 return .failure(MDAPIError.noData)
             }
-        case 400...499:
-            return .failure(MDAPIError.badRequest(error?.localizedDescription))
-        case 500...599:
-            return .failure(MDAPIError.serverError(error?.localizedDescription))
-        default:
-            return .failure(MDAPIError.unknown)
+        case .badRequest:
+            return .failure(MDAPIError.badRequest)
+        case .unauthorized:
+            return .failure(MDAPIError.unauthorized)
+        case .forbidden:
+            return .failure(MDAPIError.forbidden)
+        case .notFound:
+            return .failure(MDAPIError.notFound)
+        case .methodNotAllowed:
+            return .failure(MDAPIError.methodNotAllowed)
+        case .conflict:
+            return .failure(MDAPIError.conflict)
+        case .internalServerError:
+            return .failure(MDAPIError.internalServerError)
         }
     }
     

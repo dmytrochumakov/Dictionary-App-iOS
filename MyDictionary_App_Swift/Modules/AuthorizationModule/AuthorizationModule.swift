@@ -32,9 +32,12 @@ extension AuthorizationModule {
         let authValidation: AuthValidationProtocol = AuthValidation.init(dataProvider: dataProvider,
                                                                          validationTypes: validationTypes)
         
+        let apiAuth: MDAPIAuthProtocol = MDAPIAuth.init(requestDispatcher: Constants.RequestDispatcher.defaultRequestDispatcher)
+        
         let interactor: AuthorizationInteractorProtocol = AuthorizationInteractor.init(dataManager: dataManager,
                                                                                        authValidation: authValidation,
-                                                                                       textFieldDelegate: textFieldDelegate)
+                                                                                       textFieldDelegate: textFieldDelegate,
+                                                                                       apiAuth: apiAuth)
         var router: AuthorizationRouterProtocol = AuthorizationRouter.init()
         let presenter: AuthorizationPresenterProtocol = AuthorizationPresenter.init(interactor: interactor, router: router)
         let vc = AuthorizationViewController.init(presenter: presenter)

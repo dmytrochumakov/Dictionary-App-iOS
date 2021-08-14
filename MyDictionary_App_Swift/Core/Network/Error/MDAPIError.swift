@@ -10,8 +10,44 @@ import Foundation
 enum MDAPIError: Error {
     case noData
     case invalidResponse
-    case badRequest(String?)
-    case serverError(String?)
-    case parseError(String?)
-    case unknown
+    case badRequest
+    case unauthorized
+    case forbidden
+    case notFound
+    case methodNotAllowed
+    case conflict
+    case internalServerError
+    case parseError
+    case unknown    
+}
+
+extension MDAPIError: LocalizedError {
+    
+    var errorDescription: String? {
+        switch self {
+        case .noData:
+            return KeysForTranslate.noDataApiError.localized
+        case .invalidResponse:
+            return KeysForTranslate.invalidResponseApiError.localized
+        case .badRequest:
+            return KeysForTranslate.badRequestApiError.localized
+        case .unauthorized:
+            return KeysForTranslate.unauthorizedApiError.localized
+        case .forbidden:
+            return KeysForTranslate.forbiddenApiError.localized
+        case .notFound:
+            return KeysForTranslate.notFoundApiError.localized
+        case .methodNotAllowed:
+            return KeysForTranslate.methodNotAllowedApiError.localized
+        case .conflict:
+            return KeysForTranslate.conflictApiError.localized
+        case .internalServerError:
+            return KeysForTranslate.internalServerErrorApiError.localized
+        case .parseError:
+            return KeysForTranslate.parseErrorApiError.localized
+        case .unknown:
+            return KeysForTranslate.unknownApiError.localized
+        }
+    }
+    
 }

@@ -29,17 +29,21 @@ final class AuthorizationInteractor: NSObject, AuthorizationInteractorProtocol {
     
     fileprivate let dataManager: AuthorizationDataManagerInputProtocol
     fileprivate let authValidation: AuthValidationProtocol
+    fileprivate let apiAuth: MDAPIAuthProtocol
+    
     internal weak var interactorOutput: AuthorizationInteractorOutputProtocol?
     
     internal var textFieldDelegate: AuthTextFieldDelegateProtocol
     
     init(dataManager: AuthorizationDataManagerInputProtocol,
          authValidation: AuthValidationProtocol,
-         textFieldDelegate: AuthTextFieldDelegateProtocol) {
+         textFieldDelegate: AuthTextFieldDelegateProtocol,
+         apiAuth: MDAPIAuthProtocol) {
         
         self.dataManager = dataManager
         self.authValidation = authValidation
         self.textFieldDelegate = textFieldDelegate
+        self.apiAuth = apiAuth
         
         super.init()
         subscribe()
@@ -72,7 +76,7 @@ extension AuthorizationInteractor {
     
     func loginButtonClicked() {
         interactorOutput?.hideKeyboard()
-        authValidationRouting()        
+        authValidationAndRouting()
     }
     
     // End Actions //
@@ -95,18 +99,28 @@ fileprivate extension AuthorizationInteractor {
     func passwordTextFieldShouldReturnActionSubscribe() {
         textFieldDelegate.passwordTextFieldShouldReturnAction = { [weak self] in
             self?.interactorOutput?.hideKeyboard()
-            self?.authValidationRouting()
+            self?.authValidationAndRouting()
         }
     }
     
 }
 
-// MARK: - Auth Validation Routing
+// MARK: - Auth Validation And Routing
 fileprivate extension AuthorizationInteractor {
    
-    func authValidationRouting() {
+    func authValidationAndRouting() {
         if (authValidation.isValid) {
-            interactorOutput?.showCourseList()
+            apiAuth.login(authRequest: .init(nickname: dataManager.getNickname()!,
+                                             password: dataManager.getPassword()!)) { [weak self] (result) in
+                switch result {
+                case .success(let authResponse):
+                    self?.interactorOutput?.showCourseList()
+                    break
+                case .failure(let error):
+                    self?.interactorOutput?.showValidationError(error)
+                    break
+                }
+            }
         } else {
             interactorOutput?.showValidationError(authValidation.validationErrors.first!)
         }
