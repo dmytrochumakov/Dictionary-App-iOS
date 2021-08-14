@@ -1,5 +1,4 @@
 PODS:
-  - CryptoSwift (1.4.1)
   - Firebase/Analytics (7.1.0):
     - Firebase/Core
   - Firebase/Core (7.1.0):
@@ -66,7 +65,6 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.1.0):
     - GoogleUtilities/Logger
-  - KeychainAccess (4.2.2)
   - nanopb (2.30906.0):
     - nanopb/decode (= 2.30906.0)
     - nanopb/encode (= 2.30906.0)
@@ -76,15 +74,12 @@ PODS:
   - ReachabilitySwift (5.0.0)
 
 DEPENDENCIES:
-  - CryptoSwift
   - Firebase/Analytics
   - Firebase/Crashlytics
-  - KeychainAccess
   - ReachabilitySwift
 
 SPEC REPOS:
   trunk:
-    - CryptoSwift
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -94,13 +89,11 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
-    - KeychainAccess
     - nanopb
     - PromisesObjC
     - ReachabilitySwift
 
 SPEC CHECKSUMS:
-  CryptoSwift: 0bc800a7e6a24c4fc9ebeab97d44b0d5f73a78bd
   Firebase: 78e8dd2e39d653de6270432ad84fe8b59f7bf4e8
   FirebaseAnalytics: 7f165a56dea86ddd5b8ce02af3bee982c683405c
   FirebaseCore: 20046127eef0fcb8fa25df7fc12f7b97d4e48611
@@ -110,11 +103,10 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 89e1a64593f968713b0506ba1b53b38a154bf9a5
   GoogleDataTransport: e4085e6762f36a6141738f46b0153473ce57fb18
   GoogleUtilities: f734da554aade8cc7928a31c2f3311897933a1bd
-  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
 
-PODFILE CHECKSUM: 047facd7dc44be906d3191be2bdecf7e4356b763
+PODFILE CHECKSUM: 61b159e5d12022820f6036aca450b604f1469b57
 
 COCOAPODS: 1.10.2

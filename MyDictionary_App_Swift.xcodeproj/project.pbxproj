@@ -139,6 +139,7 @@
 		22C5864026C7AFB80030B12D /* RegistrationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5863926C7AFB80030B12D /* RegistrationDataManager.swift */; };
 		22C5864226C7B7AE0030B12D /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5864126C7B7AE0030B12D /* UserEntity.swift */; };
 		22C5864426C7B7E30030B12D /* MDRegistrationResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5864326C7B7E30030B12D /* MDRegistrationResponseResult.swift */; };
+		22C5864726C7D1F30030B12D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5864626C7D1F30030B12D /* KeychainService.swift */; };
 		22CA087D26515E810052D169 /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA087C26515E810052D169 /* WordListViewController.swift */; };
 		22CA087F26515ED90052D169 /* WordListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA087E26515ED90052D169 /* WordListInteractor.swift */; };
 		22CA088126515EEB0052D169 /* WordListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088026515EEB0052D169 /* WordListPresenter.swift */; };
@@ -359,6 +360,7 @@
 		22C5863926C7AFB80030B12D /* RegistrationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDataManager.swift; sourceTree = "<group>"; };
 		22C5864126C7B7AE0030B12D /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 		22C5864326C7B7E30030B12D /* MDRegistrationResponseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDRegistrationResponseResult.swift; sourceTree = "<group>"; };
+		22C5864626C7D1F30030B12D /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		22CA087C26515E810052D169 /* WordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListViewController.swift; sourceTree = "<group>"; };
 		22CA087E26515ED90052D169 /* WordListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListInteractor.swift; sourceTree = "<group>"; };
 		22CA088026515EEB0052D169 /* WordListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListPresenter.swift; sourceTree = "<group>"; };
@@ -562,6 +564,7 @@
 		2223F8A526512BE8004F2FE9 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
+				22C5864526C7D1ED0030B12D /* KeychainService */,
 				221D281D26C54952004BC4F7 /* KeyboardHandler */,
 				22BD99A6266A58EF0063FEFC /* RootViewController */,
 				22BD99A3266A58D90063FEFC /* RootWindow */,
@@ -1104,6 +1107,14 @@
 				22C5863926C7AFB80030B12D /* RegistrationDataManager.swift */,
 			);
 			path = RegistrationModule;
+			sourceTree = "<group>";
+		};
+		22C5864526C7D1ED0030B12D /* KeychainService */ = {
+			isa = PBXGroup;
+			children = (
+				22C5864626C7D1F30030B12D /* KeychainService.swift */,
+			);
+			path = KeychainService;
 			sourceTree = "<group>";
 		};
 		22CA086F26515D240052D169 /* Modules */ = {
@@ -1704,6 +1715,7 @@
 				2289CEF52678CC34007254C3 /* MDReadWordProtocol.swift in Sources */,
 				220793C926C66F85003D434B /* AuthValidationResult.swift in Sources */,
 				229E08C02652C9E700DA56C4 /* RowTypeProtocol.swift in Sources */,
+				22C5864726C7D1F30030B12D /* KeychainService.swift in Sources */,
 				2289CEEF2678CC34007254C3 /* MDWordLanguagePropertyProtocol.swift in Sources */,
 				2289CEDF2678CC34007254C3 /* MDWordStorageType.swift in Sources */,
 				22B22681266CC033007AB292 /* Observable.swift in Sources */,

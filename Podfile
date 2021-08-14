@@ -10,8 +10,6 @@ target 'MyDictionary_App_Swift' do
 	pod 'Firebase/Analytics'	
 	pod 'Firebase/Crashlytics'
 	pod 'ReachabilitySwift'
-	pod 'KeychainAccess'
-	pod 'CryptoSwift'
 
 
   target 'MyDictionary_App_SwiftTests' do
