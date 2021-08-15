@@ -28,7 +28,7 @@ final class MDReadUserMemoryStorageOperation: MDOperation {
         guard let userEntity = self.memoryStorage.userEntity,
               userEntity.userId == self.userId
         else {
-            self.result?(.failure(MDUserOperationError.cantFindUser));
+            self.result?(.failure(MDEntityOperationError.cantFindEntity));
             self.finish();
             return
         }

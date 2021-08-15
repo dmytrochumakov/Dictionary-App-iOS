@@ -42,13 +42,13 @@ final class MDReadWordCoreDataStorageOperation: MDOperation {
                     }
                 } else {
                     DispatchQueue.main.async {
-                        self?.result?(.failure(MDWordOperationError.cantFindWord))
+                        self?.result?(.failure(MDEntityOperationError.cantFindEntity))
                         self?.finish()
                     }
                 }
             } else {
                 DispatchQueue.main.async {
-                    self?.result?(.failure(MDWordOperationError.cantFindWord))
+                    self?.result?(.failure(MDEntityOperationError.cantFindEntity))
                     self?.finish()
                 }
             }
@@ -108,7 +108,7 @@ final class MDReadWordsCoreDataStorageOperation: MDOperation {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self?.result?(.failure(MDWordOperationError.cantFindWord))
+                    self?.result?(.failure(MDEntityOperationError.cantFindEntity))
                     self?.finish()
                 }
             }

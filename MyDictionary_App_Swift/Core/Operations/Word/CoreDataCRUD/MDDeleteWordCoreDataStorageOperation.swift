@@ -41,7 +41,7 @@ final class MDDeleteWordCoreDataStorageOperation: MDOperation {
                     case .success:
                         guard let self = self
                         else {
-                            self?.result?(.failure(MDWordOperationError.objectRemovedFromMemory));
+                            self?.result?(.failure(MDEntityOperationError.objectRemovedFromMemory));
                             self?.finish() ;
                             return
                         }

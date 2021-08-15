@@ -31,7 +31,7 @@ final class MDUpdateJWTMemoryStorageOperation: MDOperation {
         guard let authResponse = self.memoryStorage.authResponse,
               authResponse.accessToken == self.oldAccessToken
         else {
-            self.result?(.failure(MDJWTOperationError.cantFindAuthResponse));
+            self.result?(.failure(MDEntityOperationError.cantFindEntity));
             self.finish();
             return
         }

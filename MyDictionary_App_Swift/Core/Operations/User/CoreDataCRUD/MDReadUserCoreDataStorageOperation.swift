@@ -43,13 +43,13 @@ final class MDReadUserCoreDataStorageOperation: MDOperation {
                     }
                 } else {
                     DispatchQueue.main.async {
-                        self?.result?(.failure(MDUserOperationError.cantFindUser))
+                        self?.result?(.failure(MDEntityOperationError.cantFindEntity))
                         self?.finish()
                     }
                 }
             } else {
                 DispatchQueue.main.async {
-                    self?.result?(.failure(MDUserOperationError.cantFindUser))
+                    self?.result?(.failure(MDEntityOperationError.cantFindEntity))
                     self?.finish()
                 }
             }

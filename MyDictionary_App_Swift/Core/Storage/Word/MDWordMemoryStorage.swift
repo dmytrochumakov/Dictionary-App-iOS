@@ -67,7 +67,7 @@ extension MDWordMemoryStorage {
     }
     
     func readWords(fetchLimit: Int, fetchOffset: Int, _ completionHandler: @escaping (MDEntitiesResult<WordModel>)) {
-        completionHandler(.failure(MDWordOperationError.cantFindWord))
+        completionHandler(.failure(MDEntityOperationError.cantFindEntity))
     }
     
     func readAllWords(_ completionHandler: @escaping (MDEntitiesResult<WordModel>)) {

@@ -29,7 +29,7 @@ final class MDDeleteUserMemoryStorageOperation: MDOperation {
         guard let userEntity = self.memoryStorage.userEntity,
               userEntity.userId == self.userEntity.userId
         else {
-            self.result?(.failure(MDUserOperationError.cantFindUser));
+            self.result?(.failure(MDEntityOperationError.cantFindEntity));
             self.finish();
             return
         }

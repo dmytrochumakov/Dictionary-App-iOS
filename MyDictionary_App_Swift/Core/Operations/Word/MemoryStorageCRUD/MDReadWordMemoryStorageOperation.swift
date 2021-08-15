@@ -27,7 +27,7 @@ final class MDReadWordMemoryStorageOperation: MDOperation {
     override func main() {
         guard let word = self.wordStorage.arrayWords.first(where: { $0.id == self.id })
         else {
-            self.result?(.failure(MDWordOperationError.cantFindWord));
+            self.result?(.failure(MDEntityOperationError.cantFindEntity));
             self.finish();
             return
         }

@@ -1,5 +1,5 @@
 //
-//  MDWordOperationError.swift
+//  MDEntityOperationError.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 08.07.2021.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MDWordOperationError: Error {
-    case cantFindWord
+enum MDEntityOperationError: Error {
+    case cantFindEntity
     case objectRemovedFromMemory
 }

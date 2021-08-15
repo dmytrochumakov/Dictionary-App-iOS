@@ -29,7 +29,7 @@ final class MDDeleteJWTMemoryStorageOperation: MDOperation {
         guard let authResponse = self.memoryStorage.authResponse,
               authResponse.accessToken == self.authResponse.accessToken
         else {
-            self.result?(.failure(MDJWTOperationError.cantFindAuthResponse));
+            self.result?(.failure(MDEntityOperationError.cantFindEntity));
             self.finish();
             return
         }
