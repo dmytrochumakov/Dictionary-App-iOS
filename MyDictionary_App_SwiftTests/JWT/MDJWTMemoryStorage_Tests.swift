@@ -85,7 +85,8 @@ extension MDJWTMemoryStorage_Tests {
             switch createResult {
             case .success(let createdJWT):
                 XCTAssertTrue(createdJWT.accessToken == Constants_For_Tests.mockedJWT.accessToken)
-                jwtMemoryStorage.updateJWT(byAuthResponse: Constants_For_Tests.mockedJWTForUpdate) { updatedResult in
+                jwtMemoryStorage.updateJWT(oldAccessToken: createdJWT.accessToken,
+                                           newAuthResponse: Constants_For_Tests.mockedJWTForUpdate) { updatedResult in
                     switch updatedResult {
                     case .success(let updatedJWT):
                         XCTAssertTrue(updatedJWT.accessToken == Constants_For_Tests.mockedJWTForUpdate.accessToken)
