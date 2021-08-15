@@ -58,7 +58,7 @@ extension MDJWTMemoryStorage {
         
     }
     
-    func updateJWT(byAccessToken accessToken: String, _ completionHandler: @escaping (MDEntityResult<AuthResponse>)) {
+    func updateJWT(byAuthResponse authResponse: AuthResponse, _ completionHandler: @escaping (MDEntityResult<AuthResponse>)) {
         
     }
     
