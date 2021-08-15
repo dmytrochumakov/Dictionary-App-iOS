@@ -28,4 +28,10 @@ struct Constants_For_Tests {
                                                              created_at: .init(),
                                                              updated_at: .init())
     
+    public static let mockedUser: UserEntity = .init(userId: 0,
+                                                     nickname: "Test nickname",
+                                                     password: "test password",
+                                                     createdAt: "2021-08-15T10:34:33.998Z",
+                                                     updatedAt: "2021-08-15T10:34:33.998Z")
+    
 }
