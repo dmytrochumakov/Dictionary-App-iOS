@@ -10,12 +10,15 @@ import Foundation
 final class MDDeleteUserMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDUserMemoryStorage
+    fileprivate let userEntity: UserEntity
     fileprivate let result: MDEntityResult<UserEntity>?
     
     init(memoryStorage: MDUserMemoryStorage,
+         userEntity: UserEntity,
          result: MDEntityResult<UserEntity>?) {
         
         self.memoryStorage = memoryStorage
+        self.userEntity = userEntity
         self.result = result
         
         super.init()
@@ -23,7 +26,8 @@ final class MDDeleteUserMemoryStorageOperation: MDOperation {
     }
     
     override func main() {
-        guard let userEntity = self.memoryStorage.userEntity
+        guard let userEntity = self.memoryStorage.userEntity,
+              userEntity.userId == self.userEntity.userId
         else {
             self.result?(.failure(MDUserOperationError.cantFindUser));
             self.finish();
