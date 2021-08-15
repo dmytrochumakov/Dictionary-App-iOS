@@ -551,6 +551,24 @@
 			path = MDTextFieldWithToolBar;
 			sourceTree = "<group>";
 		};
+		220FFE7826C9060100702CCE /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				220FFE7926C9060500702CCE /* Word */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		220FFE7926C9060500702CCE /* Word */ = {
+			isa = PBXGroup;
+			children = (
+				2289CECD2678CC34007254C3 /* MDWordStorage.swift */,
+				2289CEB72678CC34007254C3 /* MDWordMemoryStorage.swift */,
+				22493C3626972232000DA480 /* MDWordCoreDataStorage.swift */,
+			);
+			path = Word;
+			sourceTree = "<group>";
+		};
 		221D280626C5062A004BC4F7 /* AuthorizationModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -793,14 +811,12 @@
 		2289CEB62678CC34007254C3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				220FFE7826C9060100702CCE /* Storage */,
 				22EF01E6269DA6D400FE4435 /* Network */,
 				2289CEB82678CC34007254C3 /* Enums */,
 				2289CEBA2678CC34007254C3 /* Models */,
 				2289CEBC2678CC34007254C3 /* Operations */,
 				2289CEC22678CC34007254C3 /* Results */,
-				2289CECD2678CC34007254C3 /* MDWordStorage.swift */,
-				2289CEB72678CC34007254C3 /* MDWordMemoryStorage.swift */,
-				22493C3626972232000DA480 /* MDWordCoreDataStorage.swift */,
 				2289CECE2678CC34007254C3 /* Protocols */,
 				2289CEDB2678CC34007254C3 /* Services */,
 				2289CEDD2678CC34007254C3 /* MDOperation.swift */,
