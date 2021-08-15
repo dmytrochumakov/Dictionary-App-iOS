@@ -72,7 +72,11 @@ extension MDJWTMemoryStorage {
     }
     
     func deleteJWT(_ authResponse: AuthResponse, _ completionHandler: @escaping (MDEntityResult<AuthResponse>)) {
-        
+        let operation = MDDeleteJWTMemoryStorageOperation.init(memoryStorage: self,
+                                                               authResponse: authResponse) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
     }
     
 }
