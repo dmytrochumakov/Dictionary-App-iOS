@@ -8,8 +8,9 @@
 import Foundation
 import CoreData
 
-protocol MDUserCoreDataStorageProtocol: MDCRUDUserProtocol {
-    func usersCount(_ completionHandler: @escaping (MDEntityCountResult))
+protocol MDUserCoreDataStorageProtocol: MDCRUDUserProtocol,
+                                        MDUsersCountProtocol {
+    
 }
 
 final class MDUserCoreDataStorage: NSObject,

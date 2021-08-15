@@ -7,7 +7,8 @@
 
 import Foundation
 
-protocol MDUserMemoryStorageProtocol: MDCRUDUserProtocol {
+protocol MDUserMemoryStorageProtocol: MDCRUDUserProtocol,
+                                      MDUsersCountProtocol {
     
 }
 
@@ -27,6 +28,18 @@ final class MDUserMemoryStorage: MDUserMemoryStorageProtocol {
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension MDUserMemoryStorage {
+    
+    func usersCount(_ completionHandler: @escaping (MDEntityCountResult)) {
+        if (userEntity == nil) {
+            completionHandler(.success(0))
+        } else {
+            completionHandler(.success(1))
+        }
     }
     
 }

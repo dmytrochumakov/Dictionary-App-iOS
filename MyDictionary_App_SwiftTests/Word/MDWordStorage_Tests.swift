@@ -41,7 +41,7 @@ extension MDWordStorage_Tests {
     func test_Create_One_Word_In_Memory_Functionality() {
         
         let expectation = XCTestExpectation(description: "Create One Word In Memory Expectation")
-        let storageType: MDWordStorageType = .memory
+        let storageType: MDStorageType = .memory
         
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] result in
             switch result {
@@ -66,7 +66,7 @@ extension MDWordStorage_Tests {
     func test_Read_One_Created_Word_From_Memory_Functionality() {
         
         let expectation = XCTestExpectation(description: "Read One Created Word From Memory Expectation")
-        let storageType: MDWordStorageType = .memory
+        let storageType: MDStorageType = .memory
         
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] result in
             switch result {
@@ -95,7 +95,7 @@ extension MDWordStorage_Tests {
     func test_Update_One_Created_Word_Memory_Word_String_And_Word_Description_String_Functionality() {
         
         let expectation = XCTestExpectation(description: "Update One Created Word In Memory Expectation")
-        let storageType: MDWordStorageType = .memory
+        let storageType: MDStorageType = .memory
         
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResult in
             switch createResult {
@@ -127,7 +127,7 @@ extension MDWordStorage_Tests {
     func test_Delete_One_Created_Word_From_Memory_Functionality() {
         
         let expectation = XCTestExpectation(description: "Delete One Created Word From Memory Expectation")
-        let storageType: MDWordStorageType = .memory
+        let storageType: MDStorageType = .memory
         
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResult in
             switch createResult {
@@ -160,7 +160,7 @@ extension MDWordStorage_Tests {
     func test_Create_One_Word_Into_Core_Data_Functionality() {
         
         let expectation = XCTestExpectation(description: "Create One Word Into Core Data Expectation")
-        let storageType: MDWordStorageType = .coreData
+        let storageType: MDStorageType = .coreData
         
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] result in
             switch result {
@@ -185,7 +185,7 @@ extension MDWordStorage_Tests {
     func test_Read_One_Created_Word_From_Core_Data_Functionality() {
         
         let expectation = XCTestExpectation(description: "Read One Created Word From Core Data Expectation")
-        let storageType: MDWordStorageType = .coreData
+        let storageType: MDStorageType = .coreData
         
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] result in
             switch result {
@@ -214,7 +214,7 @@ extension MDWordStorage_Tests {
     func test_Update_One_Created_Word_Core_Data_Word_String_And_Word_Description_String_Functionality() {
         
         let expectation = XCTestExpectation(description: "Update One Created Word Into Core Data Expectation")
-        let storageType: MDWordStorageType = .coreData
+        let storageType: MDStorageType = .coreData
         
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResult in
             switch createResult {
@@ -246,7 +246,7 @@ extension MDWordStorage_Tests {
     func test_Delete_One_Created_Word_From_Core_Data_Functionality() {
         
         let expectation = XCTestExpectation(description: "Delete One Created Word From Core Data Expectation")
-        let storageType: MDWordStorageType = .coreData
+        let storageType: MDStorageType = .coreData
         
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResult in
             switch createResult {
