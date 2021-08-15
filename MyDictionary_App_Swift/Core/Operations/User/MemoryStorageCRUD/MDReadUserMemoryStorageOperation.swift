@@ -25,7 +25,8 @@ final class MDReadUserMemoryStorageOperation: MDOperation {
     }
     
     override func main() {
-        guard let userEntity = self.memoryStorage.userEntity
+        guard let userEntity = self.memoryStorage.userEntity,
+              userEntity.userId == self.userId
         else {
             self.result?(.failure(MDUserOperationError.cantFindUser));
             self.finish();
