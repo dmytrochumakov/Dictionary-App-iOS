@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 protocol MDWordCoreDataStorageProtocol: MDCRUDWordProtocol,
-                                        MDWordsCountProtocol {
+                                        MDEntitiesCountProtocol {
     
 }
 
@@ -39,7 +39,7 @@ final class MDWordCoreDataStorage: NSObject,
 // MARK: - Count
 extension MDWordCoreDataStorage {
     
-    func wordsCount(_ completionHandler: @escaping (MDEntityCountResult)) {
+    func entitiesCount(_ completionHandler: @escaping (MDEntityCountResult)) {
         self.readAllWords() { [unowned self] result in
             switch result {
             case .success(let words):

@@ -33,7 +33,7 @@ final class MDUserCoreDataStorage_Tests: XCTestCase {
 extension MDUserCoreDataStorage_Tests {
     
     func test_Create_User_Functionality() {
-
+        
         let expectation = XCTestExpectation(description: "Create User Expectation")
         
         userCoreDataStorage.createUser(Constants_For_Tests.mockedUser) { [unowned self] result in
@@ -56,7 +56,7 @@ extension MDUserCoreDataStorage_Tests {
     }
     
     func test_Read_User_Functionality() {
-
+        
         let expectation = XCTestExpectation(description: "Read User Expectation")
         
         userCoreDataStorage.createUser(Constants_For_Tests.mockedUser) { [unowned self] createResult in
@@ -87,7 +87,7 @@ extension MDUserCoreDataStorage_Tests {
     }
     
     func test_Delete_User_Functionality() {
-
+        
         let expectation = XCTestExpectation(description: "Delete User Expectation")
         
         userCoreDataStorage.createUser(Constants_For_Tests.mockedUser) { [unowned self] createResult in
@@ -97,7 +97,7 @@ extension MDUserCoreDataStorage_Tests {
                     switch deleteResult {
                     case .success(let deleteUser):
                         XCTAssertTrue(createdUser.userId == deleteUser.userId)
-                        self.userCoreDataStorage.usersCount { [unowned self] countResult in
+                        self.userCoreDataStorage.entitiesCount { [unowned self] countResult in
                             switch countResult {
                             case .success(let usersCount):
                                 XCTAssertTrue(usersCount == 0)

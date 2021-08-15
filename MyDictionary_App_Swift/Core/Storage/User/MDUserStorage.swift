@@ -41,9 +41,9 @@ extension MDUserStorage {
         case .none:
             break
         case .memory:
-            memoryStorage.usersCount(completionHandler)
+            memoryStorage.entitiesCount(completionHandler)
         case .coreData:
-            coreDataStorage.usersCount(completionHandler)
+            coreDataStorage.entitiesCount(completionHandler)
         }
     }
     

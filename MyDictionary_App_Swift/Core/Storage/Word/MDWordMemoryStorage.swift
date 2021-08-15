@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MDWordMemoryStorageProtocol: MDCRUDWordProtocol,
-                                      MDWordsCountProtocol {
+                                      MDEntitiesCountProtocol {
     
 }
 
@@ -35,7 +35,7 @@ final class MDWordMemoryStorage: MDWordMemoryStorageProtocol {
 // MARK: - Count
 extension MDWordMemoryStorage {
     
-    func wordsCount(_ completionHandler: @escaping (MDEntityCountResult)) {
+    func entitiesCount(_ completionHandler: @escaping (MDEntityCountResult)) {
         self.readAllWords() { [unowned self] result in
             switch result {
             case .success(let words):

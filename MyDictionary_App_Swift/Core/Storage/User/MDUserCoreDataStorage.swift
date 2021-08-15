@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 protocol MDUserCoreDataStorageProtocol: MDCRUDUserProtocol,
-                                        MDUsersCountProtocol {
+                                        MDEntitiesCountProtocol {
     
 }
 
@@ -39,7 +39,7 @@ final class MDUserCoreDataStorage: NSObject,
 // MARK: - Count
 extension MDUserCoreDataStorage {
     
-    func usersCount(_ completionHandler: @escaping (MDEntityCountResult)) {
+    func entitiesCount(_ completionHandler: @escaping (MDEntityCountResult)) {
         self.readAllUsers() { [unowned self] result in
             switch result {
             case .success(let words):

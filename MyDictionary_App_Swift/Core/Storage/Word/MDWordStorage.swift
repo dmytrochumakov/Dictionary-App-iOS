@@ -42,9 +42,9 @@ extension MDWordStorage {
         case .none:
             break
         case .memory:
-            memoryStorage.wordsCount(completionHandler)
+            memoryStorage.entitiesCount(completionHandler)
         case .coreData:
-            coreDataStorage.wordsCount(completionHandler)
+            coreDataStorage.entitiesCount(completionHandler)
         }
     }
     

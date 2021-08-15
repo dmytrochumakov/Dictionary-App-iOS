@@ -40,7 +40,7 @@ extension MDWordCoreDataStorage_Tests {
             switch result {
             case .success(let createdWord):
                 XCTAssertTrue(createdWord.id == Constants_For_Tests.mockedWord0.id)
-                self.wordCoreDataStorage.wordsCount() { [unowned self] wordsCountResult in
+                self.wordCoreDataStorage.entitiesCount() { [unowned self] wordsCountResult in
                     switch wordsCountResult {
                     case .success(let count):
                         XCTAssertTrue(count == 1)
@@ -143,7 +143,7 @@ extension MDWordCoreDataStorage_Tests {
                 self.wordCoreDataStorage.deleteWord(createdWord, { [unowned self] deleteResult in
                     switch deleteResult {
                     case .success:
-                        self.wordCoreDataStorage.wordsCount() { [unowned self] wordsCountResult in
+                        self.wordCoreDataStorage.entitiesCount() { [unowned self] wordsCountResult in
                             switch wordsCountResult {
                             case .success(let count):
                                 XCTAssertTrue(count == .zero)
