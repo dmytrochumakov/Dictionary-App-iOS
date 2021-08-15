@@ -9,15 +9,15 @@ import Foundation
 
 final class MDReadUserMemoryStorageOperation: MDOperation {
     
-    fileprivate let wordStorage: MDUserMemoryStorage
+    fileprivate let memoryStorage: MDUserMemoryStorage
     fileprivate let userId: Int64
     fileprivate let result: MDUserOperationResult?
     
-    init(wordStorage: MDUserMemoryStorage,
+    init(memoryStorage: MDUserMemoryStorage,
          userId: Int64,
          result: MDUserOperationResult?) {
         
-        self.wordStorage = wordStorage
+        self.memoryStorage = memoryStorage
         self.userId = userId
         self.result = result
         
@@ -25,7 +25,7 @@ final class MDReadUserMemoryStorageOperation: MDOperation {
     }
     
     override func main() {
-        guard let userEntity = self.wordStorage.userEntity
+        guard let userEntity = self.memoryStorage.userEntity
         else {
             self.result?(.failure(MDUserOperationError.cantFindUser));
             self.finish();

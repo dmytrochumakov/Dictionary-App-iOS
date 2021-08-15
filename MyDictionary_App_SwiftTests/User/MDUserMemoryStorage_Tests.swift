@@ -90,7 +90,7 @@ extension MDUserMemoryStorage_Tests {
         userMemoryStorage.createUser(Constants_For_Tests.mockedUser) { [unowned self] createResult in
             switch createResult {
             case .success(let createdUser):
-                self.userMemoryStorage.deleteWord(createdUser) { deleteResult in
+                self.userMemoryStorage.deleteUser(createdUser) { deleteResult in
                     switch deleteResult {
                     case .success(let deleteUser):
                         XCTAssertTrue(createdUser.userId == deleteUser.userId)

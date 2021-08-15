@@ -34,7 +34,7 @@ final class MDUserMemoryStorage: MDUserMemoryStorageProtocol {
 extension MDUserMemoryStorage {
     
     func createUser(_ userEntity: UserEntity, _ completionHandler: @escaping (MDUserResult)) {
-        let operation = MDCreateUserMemoryStorageOperation.init(wordStorage: self,
+        let operation = MDCreateUserMemoryStorageOperation.init(memoryStorage: self,
                                                                 userEntity: userEntity) { result in
             completionHandler(result)
         }
@@ -42,14 +42,14 @@ extension MDUserMemoryStorage {
     }
     
     func readUser(fromUserID userId: Int64, _ completionHandler: @escaping (MDUserResult)) {
-        let operation = MDReadUserMemoryStorageOperation.init(wordStorage: self, userId: userId) { result in
+        let operation = MDReadUserMemoryStorageOperation.init(memoryStorage: self, userId: userId) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
     }
     
-    func deleteWord(_ userEntity: UserEntity, _ completionHandler: @escaping (MDUserResult)) {
-        let operation = MDDeleteUserMemoryStorageOperation.init(wordStorage: self) { result in
+    func deleteUser(_ userEntity: UserEntity, _ completionHandler: @escaping (MDUserResult)) {
+        let operation = MDDeleteUserMemoryStorageOperation.init(memoryStorage: self) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)

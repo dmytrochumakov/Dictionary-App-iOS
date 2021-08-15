@@ -9,13 +9,13 @@ import Foundation
 
 final class MDDeleteUserMemoryStorageOperation: MDOperation {
     
-    fileprivate let wordStorage: MDUserMemoryStorage
+    fileprivate let memoryStorage: MDUserMemoryStorage
     fileprivate let result: MDUserOperationResult?
     
-    init(wordStorage: MDUserMemoryStorage,
+    init(memoryStorage: MDUserMemoryStorage,
          result: MDUserOperationResult?) {
         
-        self.wordStorage = wordStorage
+        self.memoryStorage = memoryStorage
         self.result = result
         
         super.init()
@@ -23,13 +23,13 @@ final class MDDeleteUserMemoryStorageOperation: MDOperation {
     }
     
     override func main() {
-        guard let userEntity = self.wordStorage.userEntity
+        guard let userEntity = self.memoryStorage.userEntity
         else {
             self.result?(.failure(MDUserOperationError.cantFindUser));
             self.finish();
             return
         }
-        self.wordStorage.userEntity = nil
+        self.memoryStorage.userEntity = nil
         self.result?(.success(userEntity))
         self.finish()
     }

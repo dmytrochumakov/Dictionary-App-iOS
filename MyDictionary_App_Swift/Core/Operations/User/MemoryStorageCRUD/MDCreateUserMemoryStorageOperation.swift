@@ -9,15 +9,15 @@ import Foundation
 
 final class MDCreateUserMemoryStorageOperation: MDOperation {
     
-    fileprivate let wordStorage: MDUserMemoryStorage
+    fileprivate let memoryStorage: MDUserMemoryStorage
     fileprivate let userEntity: UserEntity
     fileprivate let result: MDUserOperationResult?
     
-    init(wordStorage: MDUserMemoryStorage,
+    init(memoryStorage: MDUserMemoryStorage,
          userEntity: UserEntity,
          result: MDUserOperationResult?) {
         
-        self.wordStorage = wordStorage
+        self.memoryStorage = memoryStorage
         self.userEntity = userEntity
         self.result = result
         
@@ -25,7 +25,7 @@ final class MDCreateUserMemoryStorageOperation: MDOperation {
     }
     
     override func main() {
-        self.wordStorage.userEntity = self.userEntity
+        self.memoryStorage.userEntity = self.userEntity
         self.result?(.success(self.userEntity))
         self.finish()
     }
