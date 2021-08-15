@@ -41,6 +41,7 @@
 		220FFEB326C91F6600702CCE /* MDUserCoreDataStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFEB226C91F6600702CCE /* MDUserCoreDataStorage_Tests.swift */; };
 		220FFEB526C9298200702CCE /* MDReadUsersCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFEB426C9298200702CCE /* MDReadUsersCoreDataStorageOperation.swift */; };
 		220FFEB826C9390500702CCE /* MDUsersCountProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFEB726C9390500702CCE /* MDUsersCountProtocol.swift */; };
+		220FFEBA26C93A0000702CCE /* MDUserStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFEB926C93A0000702CCE /* MDUserStorage_Tests.swift */; };
 		221D280E26C5064A004BC4F7 /* AuthorizationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280726C5064A004BC4F7 /* AuthorizationModule.swift */; };
 		221D280F26C5064A004BC4F7 /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */; };
 		221D281026C5064A004BC4F7 /* AuthorizationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */; };
@@ -272,6 +273,7 @@
 		220FFEB226C91F6600702CCE /* MDUserCoreDataStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUserCoreDataStorage_Tests.swift; sourceTree = "<group>"; };
 		220FFEB426C9298200702CCE /* MDReadUsersCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadUsersCoreDataStorageOperation.swift; sourceTree = "<group>"; };
 		220FFEB726C9390500702CCE /* MDUsersCountProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUsersCountProtocol.swift; sourceTree = "<group>"; };
+		220FFEB926C93A0000702CCE /* MDUserStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUserStorage_Tests.swift; sourceTree = "<group>"; };
 		221D280726C5064A004BC4F7 /* AuthorizationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModule.swift; sourceTree = "<group>"; };
 		221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPresenter.swift; sourceTree = "<group>"; };
 		221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationRouter.swift; sourceTree = "<group>"; };
@@ -683,6 +685,7 @@
 		220FFEA626C9167000702CCE /* User */ = {
 			isa = PBXGroup;
 			children = (
+				220FFEB926C93A0000702CCE /* MDUserStorage_Tests.swift */,
 				220FFEA726C9168700702CCE /* MDUserMemoryStorage_Tests.swift */,
 				220FFEB226C91F6600702CCE /* MDUserCoreDataStorage_Tests.swift */,
 			);
@@ -1990,6 +1993,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22EF01E1269D97C800FE4435 /* OperationQueueService_Tests.swift in Sources */,
+				220FFEBA26C93A0000702CCE /* MDUserStorage_Tests.swift in Sources */,
 				22EF01DF269D8EC600FE4435 /* MDWordStorage_Tests.swift in Sources */,
 				220FFEA826C9168700702CCE /* MDUserMemoryStorage_Tests.swift in Sources */,
 				2289CEFC2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift in Sources */,
