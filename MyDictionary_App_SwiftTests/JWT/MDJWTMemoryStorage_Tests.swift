@@ -49,4 +49,32 @@ extension MDJWTMemoryStorage_Tests {
         
     }
     
+    func test_Read_JWT_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Read JWT Expectation")
+        
+        jwtMemoryStorage.createJWT(Constants_For_Tests.mockedJWT) { [unowned self] createResult in
+            switch createResult {
+            case .success(let createdJWT):
+                jwtMemoryStorage.readJWT(fromAccessToken: createdJWT.accessToken) { [unowned self] readResult in
+                    switch readResult {
+                    case .success(let readJWT):
+                        XCTAssertTrue(createdJWT.accessToken == readJWT.accessToken)
+                        XCTAssertTrue(createdJWT.expirationDate == readJWT.expirationDate)
+                        expectation.fulfill()
+                    case .failure:
+                        XCTExpectFailure()
+                        expectation.fulfill()
+                    }
+                }
+            case .failure:
+                XCTExpectFailure()
+                expectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
+    
 }
