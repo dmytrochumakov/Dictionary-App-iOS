@@ -11,7 +11,7 @@ import XCTest
 struct Constants_For_Tests {
     
     public static let testExpectationTimeout: TimeInterval = 20.0
-       
+    
     public static let mockedWord0: WordModel = .init(user_id: .init(),
                                                      id: .init(),
                                                      word: "MOSF",
@@ -36,5 +36,8 @@ struct Constants_For_Tests {
     
     public static let mockedJWT: AuthResponse = .init(accessToken: "asdas;dka;sld;akdkasd;laskld;al",
                                                       expirationDate: "2021-08-15T11:34:33.998Z")
+    
+    public static let mockedJWTForUpdate: AuthResponse = .init(accessToken: "updated asdas;dka;sld;akdkasd;laskld;al",
+                                                               expirationDate: "2021-08-15T13:34:33.998Z")
     
 }
