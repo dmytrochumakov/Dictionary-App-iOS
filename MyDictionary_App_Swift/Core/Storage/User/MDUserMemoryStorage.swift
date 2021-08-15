@@ -41,8 +41,11 @@ extension MDUserMemoryStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readUser(fromID id: Int64, _ completionHandler: @escaping (MDUserResult)) {
-        
+    func readUser(fromUserID userId: Int64, _ completionHandler: @escaping (MDUserResult)) {
+        let operation = MDReadUserMemoryStorageOperation.init(wordStorage: self, userId: userId) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
     }
     
     func deleteWord(_ userEntity: UserEntity, _ completionHandler: @escaping (MDUserResult)) {

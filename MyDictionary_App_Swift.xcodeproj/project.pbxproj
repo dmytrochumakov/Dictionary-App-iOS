@@ -36,6 +36,7 @@
 		220FFE9926C912A000702CCE /* MDUserOperationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFE9826C912A000702CCE /* MDUserOperationError.swift */; };
 		220FFE9B26C912B300702CCE /* MDDeleteUserMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFE9A26C912B300702CCE /* MDDeleteUserMemoryStorageOperation.swift */; };
 		220FFEA226C9150100702CCE /* MDCreateUserMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFEA126C9150100702CCE /* MDCreateUserMemoryStorageOperation.swift */; };
+		220FFEA426C915C700702CCE /* MDReadUserMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFEA326C915C700702CCE /* MDReadUserMemoryStorageOperation.swift */; };
 		221D280E26C5064A004BC4F7 /* AuthorizationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280726C5064A004BC4F7 /* AuthorizationModule.swift */; };
 		221D280F26C5064A004BC4F7 /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */; };
 		221D281026C5064A004BC4F7 /* AuthorizationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */; };
@@ -264,6 +265,7 @@
 		220FFE9826C912A000702CCE /* MDUserOperationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUserOperationError.swift; sourceTree = "<group>"; };
 		220FFE9A26C912B300702CCE /* MDDeleteUserMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteUserMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		220FFEA126C9150100702CCE /* MDCreateUserMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateUserMemoryStorageOperation.swift; sourceTree = "<group>"; };
+		220FFEA326C915C700702CCE /* MDReadUserMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadUserMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		221D280726C5064A004BC4F7 /* AuthorizationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModule.swift; sourceTree = "<group>"; };
 		221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPresenter.swift; sourceTree = "<group>"; };
 		221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationRouter.swift; sourceTree = "<group>"; };
@@ -641,6 +643,7 @@
 			isa = PBXGroup;
 			children = (
 				220FFEA126C9150100702CCE /* MDCreateUserMemoryStorageOperation.swift */,
+				220FFEA326C915C700702CCE /* MDReadUserMemoryStorageOperation.swift */,
 				220FFE9A26C912B300702CCE /* MDDeleteUserMemoryStorageOperation.swift */,
 			);
 			path = MemoryStorageCRUD;
@@ -1847,6 +1850,7 @@
 				22DB2F8326C3D28900C1AADA /* CourseListTableViewDataSource.swift in Sources */,
 				22C5864426C7B7E30030B12D /* MDRegistrationResponseResult.swift in Sources */,
 				229901682668EC3400D8C74E /* AppearancePresenter.swift in Sources */,
+				220FFEA426C915C700702CCE /* MDReadUserMemoryStorageOperation.swift in Sources */,
 				227D5E672652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift in Sources */,
 				22CA088726515F6A0052D169 /* WordListDataManager.swift in Sources */,
 				22E2B4E12664E43B00978E62 /* SettingsDataProvider.swift in Sources */,
