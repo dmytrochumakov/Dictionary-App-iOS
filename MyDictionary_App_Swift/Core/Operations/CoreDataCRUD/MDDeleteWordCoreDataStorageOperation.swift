@@ -13,12 +13,12 @@ final class MDDeleteWordCoreDataStorageOperation: MDOperation {
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let wordStorage: MDWordCoreDataStorage
     fileprivate let word: WordModel
-    fileprivate let result: MDDeleteWordOperationResult?
+    fileprivate let result: MDWordOperationResult?
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
          word: WordModel,
-         result: MDDeleteWordOperationResult?) {
+         result: MDWordOperationResult?) {
         
         self.managedObjectContext = managedObjectContext
         self.wordStorage = wordStorage
