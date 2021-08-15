@@ -8,11 +8,11 @@
 import Foundation
 
 protocol MDWordStorageProtocol {
-    func wordsCount(storageType: MDWordStorageType, _ completionHandler: @escaping (MDWordsCountResult))
-    func createWord(_ wordModel: WordModel, storageType: MDWordStorageType, _ completionHandler: @escaping(MDWordResult))
-    func readWord(fromID id: Int64, storageType: MDWordStorageType, _ completionHandler: @escaping(MDWordResult))
-    func updateWord(byID id: Int64, word: String, word_description: String, storageType: MDWordStorageType, _ completionHandler: @escaping(MDWordResult))
-    func deleteWord(_ word: WordModel, storageType: MDWordStorageType, _ completionHandler: @escaping(MDWordResult))
+    func wordsCount(storageType: MDWordStorageType, _ completionHandler: @escaping (MDEntityCountResult))
+    func createWord(_ wordModel: WordModel, storageType: MDWordStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>))
+    func readWord(fromID id: Int64, storageType: MDWordStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>))
+    func updateWord(byID id: Int64, word: String, word_description: String, storageType: MDWordStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>))
+    func deleteWord(_ word: WordModel, storageType: MDWordStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>))
 }
 
 final class MDWordStorage: MDWordStorageProtocol {
@@ -37,7 +37,7 @@ final class MDWordStorage: MDWordStorageProtocol {
 // MARK: - Count
 extension MDWordStorage {
     
-    func wordsCount(storageType: MDWordStorageType, _ completionHandler: @escaping (MDWordsCountResult)) {
+    func wordsCount(storageType: MDWordStorageType, _ completionHandler: @escaping (MDEntityCountResult)) {
         switch storageType {
         case .none:
             break
@@ -53,7 +53,7 @@ extension MDWordStorage {
 // MARK: - CRUD
 extension MDWordStorage {
     
-    func createWord(_ wordModel: WordModel, storageType: MDWordStorageType, _ completionHandler: @escaping(MDWordResult)) {
+    func createWord(_ wordModel: WordModel, storageType: MDWordStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>)) {
         switch storageType {
         case .none:
             break
@@ -64,7 +64,7 @@ extension MDWordStorage {
         }
     }
     
-    func readWord(fromID id: Int64, storageType: MDWordStorageType, _ completionHandler: @escaping(MDWordResult)) {
+    func readWord(fromID id: Int64, storageType: MDWordStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>)) {
         switch storageType {
         case .none:
             break
@@ -75,7 +75,7 @@ extension MDWordStorage {
         }
     }
     
-    func updateWord(byID id: Int64, word: String, word_description: String, storageType: MDWordStorageType, _ completionHandler: @escaping(MDWordResult)) {
+    func updateWord(byID id: Int64, word: String, word_description: String, storageType: MDWordStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>)) {
         switch storageType {
         case .none:
             break
@@ -86,7 +86,7 @@ extension MDWordStorage {
         }
     }
     
-    func deleteWord(_ word: WordModel, storageType: MDWordStorageType, _ completionHandler: @escaping(MDWordResult)) {
+    func deleteWord(_ word: WordModel, storageType: MDWordStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>)) {
         switch storageType {
         case .none:
             break

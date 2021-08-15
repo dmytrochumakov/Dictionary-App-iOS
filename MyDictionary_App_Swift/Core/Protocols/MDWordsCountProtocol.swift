@@ -8,5 +8,5 @@
 import Foundation
 
 protocol MDWordsCountProtocol {
-    func wordsCount(_ completionHandler: @escaping (MDWordsCountResult))
+    func wordsCount(_ completionHandler: @escaping (MDEntityCountResult))
 }

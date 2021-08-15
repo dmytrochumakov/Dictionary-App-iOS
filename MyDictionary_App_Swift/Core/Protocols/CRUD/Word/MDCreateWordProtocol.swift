@@ -8,5 +8,5 @@
 import Foundation
 
 protocol MDCreateWordProtocol {
-    func createWord(_ wordModel: WordModel, _ completionHandler: @escaping(MDWordResult))
+    func createWord(_ wordModel: WordModel, _ completionHandler: @escaping(MDEntityResult<WordModel>))
 }

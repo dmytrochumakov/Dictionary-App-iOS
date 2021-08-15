@@ -10,10 +10,10 @@ import Foundation
 final class MDDeleteUserMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDUserMemoryStorage
-    fileprivate let result: MDUserOperationResult?
+    fileprivate let result: MDEntityResult<UserEntity>?
     
     init(memoryStorage: MDUserMemoryStorage,
-         result: MDUserOperationResult?) {
+         result: MDEntityResult<UserEntity>?) {
         
         self.memoryStorage = memoryStorage
         self.result = result

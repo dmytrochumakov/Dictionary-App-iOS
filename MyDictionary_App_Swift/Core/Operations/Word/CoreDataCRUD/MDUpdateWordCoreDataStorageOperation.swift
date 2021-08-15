@@ -15,14 +15,14 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
     fileprivate let id: Int64
     fileprivate let word: String
     fileprivate let word_description: String
-    fileprivate let result: MDWordOperationResult?
+    fileprivate let result: MDEntityResult<WordModel>?
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
          id: Int64,
          word: String,
          word_description: String,
-         result: MDWordOperationResult?) {
+         result: MDEntityResult<WordModel>?) {
         
         self.managedObjectContext = managedObjectContext
         self.wordStorage = wordStorage

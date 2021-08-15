@@ -12,12 +12,12 @@ final class MDDeleteUserCoreDataStorageOperation: MDOperation {
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDUserCoreDataStorage
     fileprivate let userEntity: UserEntity
-    fileprivate let result: MDUserOperationResult?
+    fileprivate let result: MDEntityResult<UserEntity>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDUserCoreDataStorage,
          userEntity: UserEntity,
-         result: MDUserOperationResult?) {
+         result: MDEntityResult<UserEntity>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage

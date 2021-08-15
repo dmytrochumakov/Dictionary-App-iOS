@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 protocol MDUserCoreDataStorageProtocol: MDCRUDUserProtocol {
-    
+    func usersCount(_ completionHandler: @escaping (MDEntityCountResult))
 }
 
 final class MDUserCoreDataStorage: NSObject,
@@ -35,10 +35,26 @@ final class MDUserCoreDataStorage: NSObject,
     
 }
 
+// MARK: - Count
+extension MDUserCoreDataStorage {
+    
+    func usersCount(_ completionHandler: @escaping (MDEntityCountResult)) {
+        self.readAllUsers() { [unowned self] result in
+            switch result {
+            case .success(let words):
+                completionHandler(.success(words.count))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
+    }
+    
+}
+
 // MARK: - Create
 extension MDUserCoreDataStorage {
     
-    func createUser(_ userEntity: UserEntity, _ completionHandler: @escaping (MDUserResult)) {
+    func createUser(_ userEntity: UserEntity, _ completionHandler: @escaping (MDEntityResult<UserEntity>)) {
         let operation = MDCreateUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                   coreDataStorage: self,
                                                                   userEntity: userEntity) { result in
@@ -52,10 +68,18 @@ extension MDUserCoreDataStorage {
 // MARK: - Read
 extension MDUserCoreDataStorage {
     
-    func readUser(fromUserID userId: Int64, _ completionHandler: @escaping (MDUserResult)) {
+    func readUser(fromUserID userId: Int64, _ completionHandler: @escaping (MDEntityResult<UserEntity>)) {
         let operation = MDReadUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                 coreDataStorage: self,
                                                                 userId: userId) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
+    }
+    
+    func readAllUsers(_ completionHandler: @escaping (MDEntitiesResult<UserEntity>)) {
+        let operation = MDReadUsersCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                 coreDataStorage: self) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
@@ -72,7 +96,7 @@ extension MDUserCoreDataStorage {
 // MARK: - Delete
 extension MDUserCoreDataStorage {
     
-    func deleteUser(_ userEntity: UserEntity, _ completionHandler: @escaping (MDUserResult)) {
+    func deleteUser(_ userEntity: UserEntity, _ completionHandler: @escaping (MDEntityResult<UserEntity>)) {
         let operation = MDDeleteUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                   coreDataStorage: self,
                                                                   userEntity: userEntity) { result in
@@ -90,7 +114,7 @@ extension MDUserCoreDataStorage {
         coreDataStack.savePerform(completionHandler: completionHandler)
     }
     
-    func savePerform(userId: Int64, completionHandler: @escaping MDCDResultSavedUser) {
+    func savePerform(userId: Int64, completionHandler: @escaping MDEntityResult<UserEntity>) {
         coreDataStack.savePerform() { [unowned self] (result) in
             switch result {
             case .success:
@@ -108,7 +132,7 @@ extension MDUserCoreDataStorage {
         }
     }
     
-    func save(userId: Int64, completionHandler: @escaping MDCDResultSavedUser) {
+    func save(userId: Int64, completionHandler: @escaping MDEntityResult<UserEntity>) {
         coreDataStack.savePerformAndWait() { [unowned self] (result) in
             switch result {
             case .success:
