@@ -8,5 +8,7 @@
 import Foundation
 
 protocol MDUpdateJWTProtocol {
-    func updateJWT(byAuthResponse authResponse: AuthResponse, _ completionHandler: @escaping(MDEntityResult<AuthResponse>))
+    func updateJWT(oldAccessToken accessToken: String,
+                   newAuthResponse authResponse: AuthResponse,
+                   _ completionHandler: @escaping(MDEntityResult<AuthResponse>))
 }
