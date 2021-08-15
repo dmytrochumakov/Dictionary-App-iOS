@@ -9,4 +9,5 @@ import Foundation
 
 enum MDUserOperationError: Error {
     case cantFindUser
+    case objectRemovedFromMemory
 }

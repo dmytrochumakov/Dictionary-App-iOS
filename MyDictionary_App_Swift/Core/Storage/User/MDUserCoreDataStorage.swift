@@ -73,7 +73,12 @@ extension MDUserCoreDataStorage {
 extension MDUserCoreDataStorage {
     
     func deleteUser(_ userEntity: UserEntity, _ completionHandler: @escaping (MDUserResult)) {
-        
+        let operation = MDDeleteUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                  coreDataStorage: self,
+                                                                  userEntity: userEntity) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
     }
     
 }
