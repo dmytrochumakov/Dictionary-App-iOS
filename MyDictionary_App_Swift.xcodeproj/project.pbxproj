@@ -33,6 +33,8 @@
 		220FFE8E26C90B2A00702CCE /* MDUpdateUserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFE8D26C90B2A00702CCE /* MDUpdateUserProtocol.swift */; };
 		220FFE9026C90B3700702CCE /* MDDeleteUserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFE8F26C90B3700702CCE /* MDDeleteUserProtocol.swift */; };
 		220FFE9226C90B5000702CCE /* MDCRUDUserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFE9126C90B5000702CCE /* MDCRUDUserProtocol.swift */; };
+		220FFE9926C912A000702CCE /* MDUserOperationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFE9826C912A000702CCE /* MDUserOperationError.swift */; };
+		220FFE9B26C912B300702CCE /* MDDeleteUserMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFE9A26C912B300702CCE /* MDDeleteUserMemoryStorageOperation.swift */; };
 		221D280E26C5064A004BC4F7 /* AuthorizationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280726C5064A004BC4F7 /* AuthorizationModule.swift */; };
 		221D280F26C5064A004BC4F7 /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */; };
 		221D281026C5064A004BC4F7 /* AuthorizationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */; };
@@ -258,6 +260,8 @@
 		220FFE8D26C90B2A00702CCE /* MDUpdateUserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUpdateUserProtocol.swift; sourceTree = "<group>"; };
 		220FFE8F26C90B3700702CCE /* MDDeleteUserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteUserProtocol.swift; sourceTree = "<group>"; };
 		220FFE9126C90B5000702CCE /* MDCRUDUserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCRUDUserProtocol.swift; sourceTree = "<group>"; };
+		220FFE9826C912A000702CCE /* MDUserOperationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUserOperationError.swift; sourceTree = "<group>"; };
+		220FFE9A26C912B300702CCE /* MDDeleteUserMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteUserMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		221D280726C5064A004BC4F7 /* AuthorizationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModule.swift; sourceTree = "<group>"; };
 		221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPresenter.swift; sourceTree = "<group>"; };
 		221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationRouter.swift; sourceTree = "<group>"; };
@@ -614,6 +618,89 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		220FFE9326C9124C00702CCE /* Word */ = {
+			isa = PBXGroup;
+			children = (
+				22493C4E2697419F000DA480 /* CoreDataCRUD */,
+				2289CEBD2678CC34007254C3 /* MemoryStorageCRUD */,
+			);
+			path = Word;
+			sourceTree = "<group>";
+		};
+		220FFE9426C9125400702CCE /* User */ = {
+			isa = PBXGroup;
+			children = (
+				220FFE9526C9126000702CCE /* MemoryStorageCRUD */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		220FFE9526C9126000702CCE /* MemoryStorageCRUD */ = {
+			isa = PBXGroup;
+			children = (
+				220FFE9A26C912B300702CCE /* MDDeleteUserMemoryStorageOperation.swift */,
+			);
+			path = MemoryStorageCRUD;
+			sourceTree = "<group>";
+		};
+		220FFE9626C9129300702CCE /* Word */ = {
+			isa = PBXGroup;
+			children = (
+				22493C4B26972E26000DA480 /* MDWordOperationError.swift */,
+			);
+			path = Word;
+			sourceTree = "<group>";
+		};
+		220FFE9726C9129800702CCE /* User */ = {
+			isa = PBXGroup;
+			children = (
+				220FFE9826C912A000702CCE /* MDUserOperationError.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		220FFE9C26C912FA00702CCE /* Word */ = {
+			isa = PBXGroup;
+			children = (
+				2289CEB92678CC34007254C3 /* MDWordStorageType.swift */,
+			);
+			path = Word;
+			sourceTree = "<group>";
+		};
+		220FFE9D26C9132300702CCE /* Word */ = {
+			isa = PBXGroup;
+			children = (
+				2289CEC42678CC34007254C3 /* MDWordOperationResult.swift */,
+				220FFE8126C9089A00702CCE /* MDWordsOperationResult.swift */,
+			);
+			path = Word;
+			sourceTree = "<group>";
+		};
+		220FFE9E26C9133100702CCE /* Word */ = {
+			isa = PBXGroup;
+			children = (
+				2289CECC2678CC34007254C3 /* MDWordResult.swift */,
+				22493C4626972877000DA480 /* MDWordsResult.swift */,
+			);
+			path = Word;
+			sourceTree = "<group>";
+		};
+		220FFE9F26C9133900702CCE /* User */ = {
+			isa = PBXGroup;
+			children = (
+				220FFE8526C90AD800702CCE /* MDUserOperationResult.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		220FFEA026C9133F00702CCE /* User */ = {
+			isa = PBXGroup;
+			children = (
+				220FFE8326C90ACB00702CCE /* MDUserResult.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		221D280626C5062A004BC4F7 /* AuthorizationModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -780,7 +867,8 @@
 		22493C4A26972E0E000DA480 /* Error */ = {
 			isa = PBXGroup;
 			children = (
-				22493C4B26972E26000DA480 /* MDWordOperationError.swift */,
+				220FFE9726C9129800702CCE /* User */,
+				220FFE9626C9129300702CCE /* Word */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -872,7 +960,7 @@
 		2289CEB82678CC34007254C3 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				2289CEB92678CC34007254C3 /* MDWordStorageType.swift */,
+				220FFE9C26C912FA00702CCE /* Word */,
 				22EF01F9269DA8E700FE4435 /* MDRequestType.swift */,
 				22EF01FB269DA90000FE4435 /* MDResponseType.swift */,
 				220793BA26C65965003D434B /* MDEnvironment.swift */,
@@ -892,9 +980,9 @@
 		2289CEBC2678CC34007254C3 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				220FFE9426C9125400702CCE /* User */,
+				220FFE9326C9124C00702CCE /* Word */,
 				22493C4A26972E0E000DA480 /* Error */,
-				22493C4E2697419F000DA480 /* CoreDataCRUD */,
-				2289CEBD2678CC34007254C3 /* MemoryStorageCRUD */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -924,9 +1012,8 @@
 		2289CEC32678CC34007254C3 /* OperationCRUD */ = {
 			isa = PBXGroup;
 			children = (
-				2289CEC42678CC34007254C3 /* MDWordOperationResult.swift */,
-				220FFE8126C9089A00702CCE /* MDWordsOperationResult.swift */,
-				220FFE8526C90AD800702CCE /* MDUserOperationResult.swift */,
+				220FFE9F26C9133900702CCE /* User */,
+				220FFE9D26C9132300702CCE /* Word */,
 			);
 			path = OperationCRUD;
 			sourceTree = "<group>";
@@ -934,9 +1021,8 @@
 		2289CEC82678CC34007254C3 /* CRUD */ = {
 			isa = PBXGroup;
 			children = (
-				2289CECC2678CC34007254C3 /* MDWordResult.swift */,
-				22493C4626972877000DA480 /* MDWordsResult.swift */,
-				220FFE8326C90ACB00702CCE /* MDUserResult.swift */,
+				220FFEA026C9133F00702CCE /* User */,
+				220FFE9E26C9133100702CCE /* Word */,
 			);
 			path = CRUD;
 			sourceTree = "<group>";
@@ -1743,6 +1829,7 @@
 				22493C2E26971413000DA480 /* CoreDataStack.swift in Sources */,
 				226FEE7D266B65080044A5F9 /* AppearanceCell.swift in Sources */,
 				22B22689266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift in Sources */,
+				220FFE9926C912A000702CCE /* MDUserOperationError.swift in Sources */,
 				22EF01FC269DA90000FE4435 /* MDResponseType.swift in Sources */,
 				229E08C22652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift in Sources */,
 				22CA087D26515E810052D169 /* WordListViewController.swift in Sources */,
@@ -1798,6 +1885,7 @@
 				22493C50269741D0000DA480 /* MDCreateWordCoreDataStorageOperation.swift in Sources */,
 				229E08C42652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift in Sources */,
 				2289CEDE2678CC34007254C3 /* MDWordMemoryStorage.swift in Sources */,
+				220FFE9B26C912B300702CCE /* MDDeleteUserMemoryStorageOperation.swift in Sources */,
 				2289CEE32678CC34007254C3 /* MDReadWordMemoryStorageOperation.swift in Sources */,
 				2289CEF52678CC34007254C3 /* MDReadWordProtocol.swift in Sources */,
 				220793C926C66F85003D434B /* AuthValidationResult.swift in Sources */,

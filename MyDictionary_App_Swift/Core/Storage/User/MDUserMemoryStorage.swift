@@ -6,3 +6,46 @@
 //
 
 import Foundation
+
+protocol MDUserMemoryStorageProtocol: MDCRUDUserProtocol {
+    
+}
+
+final class MDUserMemoryStorage: MDUserMemoryStorageProtocol {
+    
+    fileprivate let operationQueueService: OperationQueueServiceProtocol
+    
+    var userEntity: UserEntity?
+    
+    init(operationQueueService: OperationQueueServiceProtocol,
+         userEntity: UserEntity?) {
+        
+        self.operationQueueService = operationQueueService
+        self.userEntity = userEntity
+        
+    }
+    
+    deinit {
+        debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension MDUserMemoryStorage {
+    
+    func createUser(_ userEntity: UserEntity, _ completionHandler: @escaping (MDUserResult)) {
+            
+    }
+    
+    func readUser(fromID id: Int64, _ completionHandler: @escaping (MDUserResult)) {
+        
+    }
+    
+    func deleteWord(_ userEntity: UserEntity, _ completionHandler: @escaping (MDUserResult)) {
+        let operation = MDDeleteUserMemoryStorageOperation.init(wordStorage: self) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
+    }
+    
+}
