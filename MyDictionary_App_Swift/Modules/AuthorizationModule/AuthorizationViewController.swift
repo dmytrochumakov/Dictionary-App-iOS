@@ -14,8 +14,8 @@ final class AuthorizationViewController: UIViewController {
       
     fileprivate let nicknameTextFieldHeight: CGFloat = 40
     fileprivate let nicknameTextFieldTopOffset: CGFloat = 56
-    fileprivate let nicknameTextField: UITextField = {
-        let textField: UITextField = .init()
+    fileprivate let nicknameTextField: MDTextFieldWithToolBar = {        
+        let textField: MDTextFieldWithToolBar = .init(keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.nickname.localized
         textField.autocorrectionType = .no
         textField.textAlignment = .center
@@ -37,8 +37,8 @@ final class AuthorizationViewController: UIViewController {
     
     fileprivate let passwordTextFieldHeight: CGFloat = 40
     fileprivate let passwordTextFieldTopOffset: CGFloat = 16
-    fileprivate let passwordTextField: UITextField = {
-        let textField: UITextField = .init()
+    fileprivate let passwordTextField: MDTextFieldWithToolBar = {
+        let textField: MDTextFieldWithToolBar = .init(keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.password.localized
         textField.autocorrectionType = .no
         textField.textAlignment = .center

@@ -20,6 +20,8 @@
 		220793D626C6B514003D434B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 220793D526C6B514003D434B /* GoogleService-Info.plist */; };
 		220793DA26C6BF58003D434B /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793D926C6BF58003D434B /* AuthResponse.swift */; };
 		220793DC26C6C057003D434B /* MDAuthResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793DB26C6C057003D434B /* MDAuthResponseResult.swift */; };
+		220FFE7426C8F83A00702CCE /* MDKeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFE7326C8F83A00702CCE /* MDKeyboardToolbar.swift */; };
+		220FFE7726C9031800702CCE /* MDTextFieldWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFE7626C9031800702CCE /* MDTextFieldWithToolBar.swift */; };
 		221D280E26C5064A004BC4F7 /* AuthorizationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280726C5064A004BC4F7 /* AuthorizationModule.swift */; };
 		221D280F26C5064A004BC4F7 /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */; };
 		221D281026C5064A004BC4F7 /* AuthorizationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */; };
@@ -238,6 +240,8 @@
 		220793D526C6B514003D434B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		220793D926C6BF58003D434B /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		220793DB26C6C057003D434B /* MDAuthResponseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAuthResponseResult.swift; sourceTree = "<group>"; };
+		220FFE7326C8F83A00702CCE /* MDKeyboardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDKeyboardToolbar.swift; sourceTree = "<group>"; };
+		220FFE7626C9031800702CCE /* MDTextFieldWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDTextFieldWithToolBar.swift; sourceTree = "<group>"; };
 		221D280726C5064A004BC4F7 /* AuthorizationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModule.swift; sourceTree = "<group>"; };
 		221D280826C5064A004BC4F7 /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPresenter.swift; sourceTree = "<group>"; };
 		221D280926C5064A004BC4F7 /* AuthorizationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationRouter.swift; sourceTree = "<group>"; };
@@ -531,6 +535,22 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
+		220FFE7226C8F82D00702CCE /* KeyboardToolbar */ = {
+			isa = PBXGroup;
+			children = (
+				220FFE7326C8F83A00702CCE /* MDKeyboardToolbar.swift */,
+			);
+			path = KeyboardToolbar;
+			sourceTree = "<group>";
+		};
+		220FFE7526C9031200702CCE /* MDTextFieldWithToolBar */ = {
+			isa = PBXGroup;
+			children = (
+				220FFE7626C9031800702CCE /* MDTextFieldWithToolBar.swift */,
+			);
+			path = MDTextFieldWithToolBar;
+			sourceTree = "<group>";
+		};
 		221D280626C5062A004BC4F7 /* AuthorizationModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,6 +590,8 @@
 		2223F8A526512BE8004F2FE9 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
+				220FFE7526C9031200702CCE /* MDTextFieldWithToolBar */,
+				220FFE7226C8F82D00702CCE /* KeyboardToolbar */,
 				22C5864526C7D1ED0030B12D /* KeychainService */,
 				221D281D26C54952004BC4F7 /* KeyboardHandler */,
 				22BD99A6266A58EF0063FEFC /* RootViewController */,
@@ -1748,6 +1770,7 @@
 				22E2B4E02664E43B00978E62 /* SettingsInteractor.swift in Sources */,
 				22B22693266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift in Sources */,
 				22E2B4EC2664EE1400978E62 /* FillWithModelProtocol.swift in Sources */,
+				220FFE7426C8F83A00702CCE /* MDKeyboardToolbar.swift in Sources */,
 				22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */,
 				2299016A2668EC3400D8C74E /* AppearanceViewController.swift in Sources */,
 				22BD99A5266A58DE0063FEFC /* RootWindow.swift in Sources */,
@@ -1813,6 +1836,7 @@
 				22493C3B269724CB000DA480 /* CoreDataEntityName.swift in Sources */,
 				22493C542697420F000DA480 /* MDReadWordCoreDataStorageOperation.swift in Sources */,
 				221D280F26C5064A004BC4F7 /* AuthorizationPresenter.swift in Sources */,
+				220FFE7726C9031800702CCE /* MDTextFieldWithToolBar.swift in Sources */,
 				22EDF02A26C7E91D00D19DA1 /* CDUserEntityAttributeName.swift in Sources */,
 				227D5E642652584700B54524 /* NSLayoutConstraint+Extension.swift in Sources */,
 				22E2B500266515E700978E62 /* CollectionViewDataSource.swift in Sources */,
