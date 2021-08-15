@@ -53,7 +53,12 @@ extension MDUserCoreDataStorage {
 extension MDUserCoreDataStorage {
     
     func readUser(fromUserID userId: Int64, _ completionHandler: @escaping (MDUserResult)) {
-        
+        let operation = MDReadUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                coreDataStorage: self,
+                                                                userId: userId) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
     }
     
 }
