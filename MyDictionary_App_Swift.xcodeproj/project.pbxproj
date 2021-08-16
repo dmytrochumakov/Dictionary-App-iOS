@@ -81,6 +81,7 @@
 		22557FD326C95D5A00A4FF31 /* MDReadJWTMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22557FD226C95D5A00A4FF31 /* MDReadJWTMemoryStorageOperation.swift */; };
 		22557FD526C9625400A4FF31 /* MDUpdateJWTMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22557FD426C9625400A4FF31 /* MDUpdateJWTMemoryStorageOperation.swift */; };
 		22557FD726C9660F00A4FF31 /* MDDeleteJWTMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22557FD626C9660F00A4FF31 /* MDDeleteJWTMemoryStorageOperation.swift */; };
+		2258921D26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2258921C26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift */; };
 		226FEE78266B63F10044A5F9 /* AppearanceCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226FEE77266B63F10044A5F9 /* AppearanceCollectionViewDelegate.swift */; };
 		226FEE7A266B644F0044A5F9 /* AppearanceCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226FEE79266B644F0044A5F9 /* AppearanceCollectionViewDataSource.swift */; };
 		226FEE7D266B65080044A5F9 /* AppearanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226FEE7C266B65080044A5F9 /* AppearanceCell.swift */; };
@@ -324,6 +325,7 @@
 		22557FD226C95D5A00A4FF31 /* MDReadJWTMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadJWTMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		22557FD426C9625400A4FF31 /* MDUpdateJWTMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUpdateJWTMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		22557FD626C9660F00A4FF31 /* MDDeleteJWTMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteJWTMemoryStorageOperation.swift; sourceTree = "<group>"; };
+		2258921C26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateJWTCoreDataStorageOperation.swift; sourceTree = "<group>"; };
 		226FEE77266B63F10044A5F9 /* AppearanceCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		226FEE79266B644F0044A5F9 /* AppearanceCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		226FEE7C266B65080044A5F9 /* AppearanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceCell.swift; sourceTree = "<group>"; };
@@ -903,6 +905,14 @@
 			path = JWT;
 			sourceTree = "<group>";
 		};
+		2258921B26CA37D400AD6F18 /* CoreDataCRUD */ = {
+			isa = PBXGroup;
+			children = (
+				2258921C26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift */,
+			);
+			path = CoreDataCRUD;
+			sourceTree = "<group>";
+		};
 		226FEE7B266B64FD0044A5F9 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1413,6 +1423,7 @@
 		22DE582526C9537C0032A94C /* JWT */ = {
 			isa = PBXGroup;
 			children = (
+				2258921B26CA37D400AD6F18 /* CoreDataCRUD */,
 				22557FCA26C958F100A4FF31 /* MemoryStorageCRUD */,
 			);
 			path = JWT;
@@ -1854,6 +1865,7 @@
 				22493C312697159E000DA480 /* CDResultSaved.swift in Sources */,
 				22EF01F2269DA75E00FE4435 /* HTTPParameters.swift in Sources */,
 				22493C52269741FF000DA480 /* MDDeleteWordCoreDataStorageOperation.swift in Sources */,
+				2258921D26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift in Sources */,
 				22E2B4F02664EF3200978E62 /* UICollectionView+Extension.swift in Sources */,
 				2289CEF72678CC34007254C3 /* MDCreateWordProtocol.swift in Sources */,
 				22EF020A269DAE9800FE4435 /* MDAPIWord.swift in Sources */,
