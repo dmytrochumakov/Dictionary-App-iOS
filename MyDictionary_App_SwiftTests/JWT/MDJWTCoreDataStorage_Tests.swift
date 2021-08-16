@@ -79,5 +79,41 @@ extension MDJWTCoreDataStorage_Tests {
         wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
         
     }
+    
+    func test_Delete_JWT_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Delete JWT Expectation")
+        
+        jwtCoreDataStorage.createJWT(Constants_For_Tests.mockedJWT) { [unowned self] createResult in
+            switch createResult {
+            case .success(let createdJWT):
+                self.jwtCoreDataStorage.deleteJWT(createdJWT) { deleteResult in
+                    switch deleteResult {
+                    case .success(let deleteJWT):
+                        XCTAssertTrue(createdJWT.accessToken == deleteJWT.accessToken)
+                        self.jwtCoreDataStorage.entitiesCount { [unowned self] countResult in
+                            switch countResult {
+                            case .success(let entitiesCount):
+                                XCTAssertTrue(entitiesCount == 0)
+                                expectation.fulfill()
+                            case .failure:
+                                XCTExpectFailure()
+                                expectation.fulfill()
+                            }
+                        }
+                    case .failure:
+                        XCTExpectFailure()
+                        expectation.fulfill()
+                    }
+                }
+            case .failure:
+                XCTExpectFailure()
+                expectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
 
 }
