@@ -219,8 +219,8 @@
 		22EDF02A26C7E91D00D19DA1 /* CDUserEntityAttributeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDF02926C7E91D00D19DA1 /* CDUserEntityAttributeName.swift */; };
 		22EF01DF269D8EC600FE4435 /* MDWordStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF01DE269D8EC600FE4435 /* MDWordStorage_Tests.swift */; };
 		22EF01E1269D97C800FE4435 /* OperationQueueService_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF01E0269D97C800FE4435 /* OperationQueueService_Tests.swift */; };
-		22EF01E3269D9CDA00FE4435 /* MDEntitiesCountProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF01E2269D9CDA00FE4435 /* MDEntitiesCountProtocol.swift */; };
-		22EF01E5269D9EBC00FE4435 /* MDEntityCountResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF01E4269D9EBC00FE4435 /* MDEntityCountResult.swift */; };
+		22EF01E3269D9CDA00FE4435 /* MDEntitiesIsEmptyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF01E2269D9CDA00FE4435 /* MDEntitiesIsEmptyProtocol.swift */; };
+		22EF01E5269D9EBC00FE4435 /* MDEntitiesIsEmptyResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF01E4269D9EBC00FE4435 /* MDEntitiesIsEmptyResult.swift */; };
 		22EF01EC269DA70300FE4435 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF01EB269DA70300FE4435 /* Endpoint.swift */; };
 		22EF01EE269DA73100FE4435 /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF01ED269DA73100FE4435 /* HTTPHeader.swift */; };
 		22EF01F0269DA74000FE4435 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF01EF269DA74000FE4435 /* HTTPMethod.swift */; };
@@ -476,8 +476,8 @@
 		22EDF02926C7E91D00D19DA1 /* CDUserEntityAttributeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDUserEntityAttributeName.swift; sourceTree = "<group>"; };
 		22EF01DE269D8EC600FE4435 /* MDWordStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordStorage_Tests.swift; sourceTree = "<group>"; };
 		22EF01E0269D97C800FE4435 /* OperationQueueService_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationQueueService_Tests.swift; sourceTree = "<group>"; };
-		22EF01E2269D9CDA00FE4435 /* MDEntitiesCountProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountProtocol.swift; sourceTree = "<group>"; };
-		22EF01E4269D9EBC00FE4435 /* MDEntityCountResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntityCountResult.swift; sourceTree = "<group>"; };
+		22EF01E2269D9CDA00FE4435 /* MDEntitiesIsEmptyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesIsEmptyProtocol.swift; sourceTree = "<group>"; };
+		22EF01E4269D9EBC00FE4435 /* MDEntitiesIsEmptyResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesIsEmptyResult.swift; sourceTree = "<group>"; };
 		22EF01EB269DA70300FE4435 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		22EF01ED269DA73100FE4435 /* HTTPHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
 		22EF01EF269DA74000FE4435 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -1046,7 +1046,7 @@
 			children = (
 				22493C4626972877000DA480 /* MDEntitiesResult.swift */,
 				2289CECC2678CC34007254C3 /* MDEntityResult.swift */,
-				22EF01E4269D9EBC00FE4435 /* MDEntityCountResult.swift */,
+				22EF01E4269D9EBC00FE4435 /* MDEntitiesIsEmptyResult.swift */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -1061,7 +1061,7 @@
 				2289CED42678CC34007254C3 /* MDWordPropertyProtocol.swift */,
 				2289CED52678CC34007254C3 /* CRUD */,
 				2289CEDA2678CC34007254C3 /* MDCreatedAtProtocol.swift */,
-				22EF01E2269D9CDA00FE4435 /* MDEntitiesCountProtocol.swift */,
+				22EF01E2269D9CDA00FE4435 /* MDEntitiesIsEmptyProtocol.swift */,
 				2294D6BE26A2EF710066BE77 /* MDUserIDPropertyProtocol.swift */,
 			);
 			path = Protocols;
@@ -1960,7 +1960,7 @@
 				22B22681266CC033007AB292 /* Observable.swift in Sources */,
 				22E2B4DD2664E43B00978E62 /* SettingsPresenter.swift in Sources */,
 				220793CE26C68081003D434B /* MDAPIAuth.swift in Sources */,
-				22EF01E3269D9CDA00FE4435 /* MDEntitiesCountProtocol.swift in Sources */,
+				22EF01E3269D9CDA00FE4435 /* MDEntitiesIsEmptyProtocol.swift in Sources */,
 				229E08BE2652C8E600DA56C4 /* SectionTypeProtocol.swift in Sources */,
 				2289CEF22678CC34007254C3 /* MDIDPropertyProtocol.swift in Sources */,
 				22C5863E26C7AFB80030B12D /* RegistrationInteractor.swift in Sources */,
@@ -2040,7 +2040,7 @@
 				2289CEED2678CC34007254C3 /* MDWordStorage.swift in Sources */,
 				228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */,
 				22DE582A26C9549B0032A94C /* MDCreateJWTProtocol.swift in Sources */,
-				22EF01E5269D9EBC00FE4435 /* MDEntityCountResult.swift in Sources */,
+				22EF01E5269D9EBC00FE4435 /* MDEntitiesIsEmptyResult.swift in Sources */,
 				22C5863B26C7AFB80030B12D /* RegistrationPresenter.swift in Sources */,
 				2294D6C326A2F1B60066BE77 /* CDUserEntity+Extension.swift in Sources */,
 				22DE582826C9548B0032A94C /* MDCRUDJWTProtocol.swift in Sources */,

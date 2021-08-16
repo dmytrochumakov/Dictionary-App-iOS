@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 protocol MDWordCoreDataStorageProtocol: MDCRUDWordProtocol,
-                                        MDEntitiesCountProtocol {
+                                        MDEntitiesIsEmptyProtocol {
     
 }
 
@@ -36,14 +36,14 @@ final class MDWordCoreDataStorage: NSObject,
     
 }
 
-// MARK: - Count
+// MARK: - Is Empty
 extension MDWordCoreDataStorage {
     
-    func entitiesCount(_ completionHandler: @escaping (MDEntityCountResult)) {
+    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResult)) {
         self.readAllWords() { [unowned self] result in
             switch result {
             case .success(let words):
-                completionHandler(.success(words.count))
+                completionHandler(.success(words.isEmpty))
             case .failure(let error):
                 completionHandler(.failure(error))
             }

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MDWordMemoryStorageProtocol: MDCRUDWordProtocol,
-                                      MDEntitiesCountProtocol {
+                                      MDEntitiesIsEmptyProtocol {
     
 }
 
@@ -32,14 +32,14 @@ final class MDWordMemoryStorage: MDWordMemoryStorageProtocol {
     
 }
 
-// MARK: - Count
+// MARK: - Is Empty
 extension MDWordMemoryStorage {
     
-    func entitiesCount(_ completionHandler: @escaping (MDEntityCountResult)) {
+    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResult)) {
         self.readAllWords() { [unowned self] result in
             switch result {
             case .success(let words):
-                completionHandler(.success(words.count))
+                completionHandler(.success(words.isEmpty))
             case .failure(let error):
                 completionHandler(.failure(error))
             }

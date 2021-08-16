@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MDWordStorageProtocol {
-    func wordsCount(storageType: MDStorageType, _ completionHandler: @escaping (MDEntityCountResult))
+    func entitiesIsEmpty(storageType: MDStorageType, _ completionHandler: @escaping (MDEntitiesIsEmptyResult))
     func createWord(_ wordModel: WordModel, storageType: MDStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>))
     func readWord(fromID id: Int64, storageType: MDStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>))
     func updateWord(byID id: Int64, word: String, word_description: String, storageType: MDStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>))
@@ -34,17 +34,17 @@ final class MDWordStorage: MDWordStorageProtocol {
     
 }
 
-// MARK: - Count
+// MARK: - Is Empty
 extension MDWordStorage {
     
-    func wordsCount(storageType: MDStorageType, _ completionHandler: @escaping (MDEntityCountResult)) {
+    func entitiesIsEmpty(storageType: MDStorageType, _ completionHandler: @escaping (MDEntitiesIsEmptyResult)) {
         switch storageType {
         case .none:
             break
         case .memory:
-            memoryStorage.entitiesCount(completionHandler)
+            memoryStorage.entitiesIsEmpty(completionHandler)
         case .coreData:
-            coreDataStorage.entitiesCount(completionHandler)
+            coreDataStorage.entitiesIsEmpty(completionHandler)
         }
     }
     

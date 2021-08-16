@@ -9,7 +9,7 @@ import Foundation
 
 protocol MDJWTStorageProtocol {
     
-    func entitiesCount(storageType: MDStorageType, _ completionHandler: @escaping (MDEntityCountResult))
+    func entitiesIsEmpty(storageType: MDStorageType, _ completionHandler: @escaping (MDEntitiesIsEmptyResult))
     
     func createJWT(storageType: MDStorageType, jwtResponse: JWTResponse, _ completionHandler: @escaping(MDEntityResult<JWTResponse>))
     
@@ -43,17 +43,17 @@ final class MDJWTStorage: MDJWTStorageProtocol {
     
 }
 
-// MARK: - Count
+// MARK: - Is Empty
 extension MDJWTStorage {
     
-    func entitiesCount(storageType: MDStorageType, _ completionHandler: @escaping (MDEntityCountResult)) {
+    func entitiesIsEmpty(storageType: MDStorageType, _ completionHandler: @escaping (MDEntitiesIsEmptyResult)) {
         switch storageType {
         case .none:
             break
         case .memory:
-            memoryStorage.entitiesCount(completionHandler)
+            memoryStorage.entitiesIsEmpty(completionHandler)
         case .coreData:
-            coreDataStorage.entitiesCount(completionHandler)
+            coreDataStorage.entitiesIsEmpty(completionHandler)
         }
     }
     

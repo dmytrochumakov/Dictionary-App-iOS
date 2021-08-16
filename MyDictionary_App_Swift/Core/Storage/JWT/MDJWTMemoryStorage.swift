@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MDJWTMemoryStorageProtocol: MDCRUDJWTProtocol,
-                                     MDEntitiesCountProtocol {
+                                     MDEntitiesIsEmptyProtocol {
     
 }
 
@@ -34,11 +34,11 @@ final class MDJWTMemoryStorage: MDJWTMemoryStorageProtocol {
 
 extension MDJWTMemoryStorage {
     
-    func entitiesCount(_ completionHandler: @escaping (MDEntityCountResult)) {
+    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResult)) {
         if (jwtResponse == nil) {
-            completionHandler(.success(0))
+            completionHandler(.success(true))
         } else {
-            completionHandler(.success(1))
+            completionHandler(.success(false))
         }
     }
     

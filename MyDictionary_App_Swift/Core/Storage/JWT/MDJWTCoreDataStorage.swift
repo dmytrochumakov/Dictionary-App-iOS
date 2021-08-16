@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 protocol MDJWTCoreDataStorageProtocol: MDCRUDJWTProtocol,
-                                       MDEntitiesCountProtocol {
+                                       MDEntitiesIsEmptyProtocol {
     
 }
 
@@ -36,14 +36,14 @@ final class MDJWTCoreDataStorage: NSObject,
     
 }
 
-// MARK: - Count
+// MARK: - Is Empty
 extension MDJWTCoreDataStorage {
     
-    func entitiesCount(_ completionHandler: @escaping (MDEntityCountResult)) {
+    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResult)) {
         self.readAllJWTs() { [unowned self] result in
             switch result {
             case .success(let entities):
-                completionHandler(.success(entities.count))
+                completionHandler(.success(entities.isEmpty))
             case .failure(let error):
                 completionHandler(.failure(error))
             }
