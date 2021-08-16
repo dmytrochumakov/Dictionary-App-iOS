@@ -590,6 +590,8 @@
 		220793D826C6BF51003D434B /* Response */ = {
 			isa = PBXGroup;
 			children = (
+				2289CEBB2678CC34007254C3 /* WordModel.swift */,
+				22C5864126C7B7AE0030B12D /* UserEntity.swift */,
 				220793D926C6BF58003D434B /* AuthResponse.swift */,
 			);
 			path = Response;
@@ -994,7 +996,6 @@
 				220FFE7826C9060100702CCE /* Storage */,
 				22EF01E6269DA6D400FE4435 /* Network */,
 				2289CEB82678CC34007254C3 /* Enums */,
-				2289CEBA2678CC34007254C3 /* Models */,
 				2289CEBC2678CC34007254C3 /* Operations */,
 				2289CEC22678CC34007254C3 /* Results */,
 				2289CECE2678CC34007254C3 /* Protocols */,
@@ -1013,15 +1014,6 @@
 				220793BA26C65965003D434B /* MDEnvironment.swift */,
 			);
 			path = Enums;
-			sourceTree = "<group>";
-		};
-		2289CEBA2678CC34007254C3 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				2289CEBB2678CC34007254C3 /* WordModel.swift */,
-				22C5864126C7B7AE0030B12D /* UserEntity.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		2289CEBC2678CC34007254C3 /* Operations */ = {
