@@ -92,7 +92,13 @@ extension MDJWTCoreDataStorage {
 extension MDJWTCoreDataStorage {
     
     func updateJWT(oldAccessToken accessToken: String, newAuthResponse authResponse: AuthResponse, _ completionHandler: @escaping (MDEntityResult<AuthResponse>)) {
-        
+        let operation = MDUpdateJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                 coreDataStorage: self,
+                                                                 oldAccessToken: accessToken,
+                                                                 newAuthResponse: authResponse) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
     }
     
 }
