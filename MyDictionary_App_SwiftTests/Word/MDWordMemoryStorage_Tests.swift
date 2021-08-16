@@ -34,10 +34,10 @@ extension MDWordMemoryStorage_Tests {
             switch result {
             case .success(let createdWord):
                 XCTAssertTrue(createdWord.id == Constants_For_Tests.mockedWord0.id)
-                self.wordMemoryStorage.entitiesCount() { [unowned self] wordsCountResult in
-                    switch wordsCountResult {
-                    case .success(let count):
-                        XCTAssertTrue(count == 1)
+                self.wordMemoryStorage.entitiesIsEmpty() { [unowned self] entitiesIsEmptyResult in
+                    switch entitiesIsEmptyResult {
+                    case .success(let entitiesIsEmpty):
+                        XCTAssertFalse(entitiesIsEmpty)
                         expectation.fulfill()
                     case .failure:
                         XCTExpectFailure()
@@ -62,10 +62,10 @@ extension MDWordMemoryStorage_Tests {
             switch result {
             case .success(let createdWord):
                 XCTAssertTrue(createdWord.id == Constants_For_Tests.mockedWord0.id)
-                self.wordMemoryStorage.entitiesCount() { [unowned self] wordsCountResult in
-                    switch wordsCountResult {
-                    case .success(let count):
-                        XCTAssertTrue(count == 1)
+                self.wordMemoryStorage.entitiesIsEmpty() { [unowned self] entitiesIsEmptyResult in
+                    switch entitiesIsEmptyResult {
+                    case .success(let entitiesIsEmpty):
+                        XCTAssertFalse(entitiesIsEmpty)
                         self.wordMemoryStorage.readWord(fromID: createdWord.id, { [unowned self] result in
                             switch result {
                             case .success(let fetchedWord):
@@ -131,10 +131,10 @@ extension MDWordMemoryStorage_Tests {
                 self.wordMemoryStorage.deleteWord(createdWord, { [unowned self] deleteResult in
                     switch deleteResult {
                     case .success:
-                        self.wordMemoryStorage.entitiesCount() { [unowned self] wordsCountResult in
-                            switch wordsCountResult {
-                            case .success(let count):
-                                XCTAssertTrue(count == .zero)
+                        self.wordMemoryStorage.entitiesIsEmpty() { [unowned self] entitiesIsEmptyResult in
+                            switch entitiesIsEmptyResult {
+                            case .success(let entitiesIsEmpty):
+                                XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
                             case .failure:
                                 XCTExpectFailure()

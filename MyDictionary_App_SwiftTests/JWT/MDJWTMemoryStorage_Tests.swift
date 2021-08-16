@@ -118,10 +118,10 @@ extension MDJWTMemoryStorage_Tests {
                     switch deleteResult {
                     case .success(let deleteJWT):
                         XCTAssertTrue(createdJWT.accessToken == deleteJWT.accessToken)
-                        self.jwtMemoryStorage.entitiesCount { [unowned self] (countResult) in
-                            switch countResult {
-                            case .success(let jwtCount):
-                                XCTAssertTrue(jwtCount == 0)
+                        self.jwtMemoryStorage.entitiesIsEmpty { [unowned self] (entitiesIsEmptyResult) in
+                            switch entitiesIsEmptyResult {
+                            case .success(let entitiesIsEmpty):
+                                XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
                             case .failure:
                                 XCTExpectFailure()

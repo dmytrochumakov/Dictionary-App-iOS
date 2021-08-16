@@ -120,10 +120,10 @@ extension MDJWTCoreDataStorage_Tests {
                     switch deleteResult {
                     case .success(let deleteJWT):
                         XCTAssertTrue(createdJWT.accessToken == deleteJWT.accessToken)
-                        self.jwtCoreDataStorage.entitiesCount { [unowned self] countResult in
-                            switch countResult {
-                            case .success(let entitiesCount):
-                                XCTAssertTrue(entitiesCount == 0)
+                        self.jwtCoreDataStorage.entitiesIsEmpty { [unowned self] entitiesIsEmptyResult in
+                            switch entitiesIsEmptyResult {
+                            case .success(let entitiesIsEmpty):
+                                XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
                             case .failure:
                                 XCTExpectFailure()

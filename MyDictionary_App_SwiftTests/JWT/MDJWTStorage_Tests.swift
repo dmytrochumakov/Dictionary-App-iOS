@@ -142,10 +142,10 @@ extension MDJWTStorage_Tests {
                         
                         XCTAssertTrue(createdJWT.accessToken == deleteJWT.accessToken)
                         
-                        self.jwtStorage.entitiesCount(storageType: storageType) { [unowned self] (entitiesCount) in
-                            switch entitiesCount {
-                            case .success(let jwtCount):
-                                XCTAssertTrue(jwtCount == 0)
+                        self.jwtStorage.entitiesIsEmpty(storageType: storageType) { [unowned self] (entitiesIsEmptyResult) in
+                            switch entitiesIsEmptyResult {
+                            case .success(let entitiesIsEmpty):
+                                XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
                             case .failure:
                                 XCTExpectFailure()
@@ -273,10 +273,10 @@ extension MDJWTStorage_Tests {
                     case .success(let deleteJWT):
                         XCTAssertTrue(createdJWT.accessToken == deleteJWT.accessToken)
                         
-                        self.jwtStorage.entitiesCount(storageType: storageType) { [unowned self] countResult in
-                            switch countResult {
-                            case .success(let entitiesCount):
-                                XCTAssertTrue(entitiesCount == 0)
+                        self.jwtStorage.entitiesIsEmpty(storageType: storageType) { [unowned self] entitiesIsEmptyResult in
+                            switch entitiesIsEmptyResult {
+                            case .success(let entitiesIsEmpty):
+                                XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
                             case .failure:
                                 XCTExpectFailure()

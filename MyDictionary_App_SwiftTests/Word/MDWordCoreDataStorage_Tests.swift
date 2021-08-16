@@ -40,10 +40,10 @@ extension MDWordCoreDataStorage_Tests {
             switch result {
             case .success(let createdWord):
                 XCTAssertTrue(createdWord.id == Constants_For_Tests.mockedWord0.id)
-                self.wordCoreDataStorage.entitiesCount() { [unowned self] wordsCountResult in
-                    switch wordsCountResult {
-                    case .success(let count):
-                        XCTAssertTrue(count == 1)
+                self.wordCoreDataStorage.entitiesIsEmpty() { [unowned self] entitiesIsEmptyResult in
+                    switch entitiesIsEmptyResult {
+                    case .success(let entitiesIsEmpty):
+                        XCTAssertFalse(entitiesIsEmpty)
                         expectation.fulfill()
                     case .failure:
                         XCTExpectFailure()
@@ -143,10 +143,10 @@ extension MDWordCoreDataStorage_Tests {
                 self.wordCoreDataStorage.deleteWord(createdWord, { [unowned self] deleteResult in
                     switch deleteResult {
                     case .success:
-                        self.wordCoreDataStorage.entitiesCount() { [unowned self] wordsCountResult in
-                            switch wordsCountResult {
-                            case .success(let count):
-                                XCTAssertTrue(count == .zero)
+                        self.wordCoreDataStorage.entitiesIsEmpty() { [unowned self] entitiesIsEmptyResult in
+                            switch entitiesIsEmptyResult {
+                            case .success(let entitiesIsEmpty):
+                                XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
                             case .failure:
                                 XCTExpectFailure()

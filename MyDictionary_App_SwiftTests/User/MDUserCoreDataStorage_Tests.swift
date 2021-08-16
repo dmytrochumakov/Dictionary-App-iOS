@@ -97,10 +97,10 @@ extension MDUserCoreDataStorage_Tests {
                     switch deleteResult {
                     case .success(let deleteUser):
                         XCTAssertTrue(createdUser.userId == deleteUser.userId)
-                        self.userCoreDataStorage.entitiesCount { [unowned self] countResult in
-                            switch countResult {
-                            case .success(let usersCount):
-                                XCTAssertTrue(usersCount == 0)
+                        self.userCoreDataStorage.entitiesIsEmpty { [unowned self] entitiesIsEmptyResult in
+                            switch entitiesIsEmptyResult {
+                            case .success(let entitiesIsEmpty):
+                                XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
                             case .failure:
                                 XCTExpectFailure()
