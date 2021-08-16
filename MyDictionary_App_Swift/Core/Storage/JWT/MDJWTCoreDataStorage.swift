@@ -63,7 +63,12 @@ extension MDJWTCoreDataStorage {
 extension MDJWTCoreDataStorage {
     
     func readJWT(fromAccessToken accessToken: String, _ completionHandler: @escaping (MDEntityResult<AuthResponse>)) {
-        
+        let operation = MDReadJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                               coreDataStorage: self,
+                                                               accessToken: accessToken) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
     }
     
     func readAllJWTs(fromAccessToken accessToken: String, _ completionHandler: @escaping (MDEntitiesResult<AuthResponse>)) {
