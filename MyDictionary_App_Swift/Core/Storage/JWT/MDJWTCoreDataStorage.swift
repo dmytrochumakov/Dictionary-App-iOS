@@ -40,7 +40,14 @@ final class MDJWTCoreDataStorage: NSObject,
 extension MDJWTCoreDataStorage {
     
     func entitiesCount(_ completionHandler: @escaping (MDEntityCountResult)) {
-        
+        self.readAllJWTs() { [unowned self] result in
+            switch result {
+            case .success(let entities):
+                completionHandler(.success(entities.count))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
     }
     
 }
@@ -71,8 +78,12 @@ extension MDJWTCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readAllJWTs(fromAccessToken accessToken: String, _ completionHandler: @escaping (MDEntitiesResult<AuthResponse>)) {
-        
+    func readAllJWTs(_ completionHandler: @escaping (MDEntitiesResult<AuthResponse>)) {
+        let operation = MDReadJWTsCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                coreDataStorage: self) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
     }
     
 }

@@ -1,21 +1,21 @@
 //
-//  MDReadUsersCoreDataStorageOperation.swift
+//  MDReadJWTsCoreDataStorageOperation.swift
 //  MyDictionary_App_Swift
 //
-//  Created by Dmytro Chumakov on 15.08.2021.
+//  Created by Dmytro Chumakov on 16.08.2021.
 //
 
 import CoreData
 
-final class MDReadUsersCoreDataStorageOperation: MDOperation {
+final class MDReadJWTsCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStorage: MDUserCoreDataStorage
-    fileprivate let result: MDEntitiesResult<UserEntity>?
+    fileprivate let coreDataStorage: MDJWTCoreDataStorage
+    fileprivate let result: MDEntitiesResult<AuthResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStorage: MDUserCoreDataStorage,
-         result: MDEntitiesResult<UserEntity>?) {
+         coreDataStorage: MDJWTCoreDataStorage,
+         result: MDEntitiesResult<AuthResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage
@@ -26,13 +26,13 @@ final class MDReadUsersCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        let fetchRequest = NSFetchRequest<CDUserEntity>(entityName: CoreDataEntityName.CDUserEntity)
+        let fetchRequest = NSFetchRequest<CDAuthResponseEntity>(entityName: CoreDataEntityName.CDAuthResponseEntity)
         
         let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
             
             if let result = asynchronousFetchResult.finalResult {
                 DispatchQueue.main.async {
-                    self?.result?(.success(result.map({ $0.userEntity })))
+                    self?.result?(.success(result.map({ $0.authResponse })))
                     self?.finish()
                 }
             } else {

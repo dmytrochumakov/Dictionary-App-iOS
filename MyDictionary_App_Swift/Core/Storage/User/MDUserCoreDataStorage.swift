@@ -42,8 +42,8 @@ extension MDUserCoreDataStorage {
     func entitiesCount(_ completionHandler: @escaping (MDEntityCountResult)) {
         self.readAllUsers() { [unowned self] result in
             switch result {
-            case .success(let words):
-                completionHandler(.success(words.count))
+            case .success(let entities):
+                completionHandler(.success(entities.count))
             case .failure(let error):
                 completionHandler(.failure(error))
             }
