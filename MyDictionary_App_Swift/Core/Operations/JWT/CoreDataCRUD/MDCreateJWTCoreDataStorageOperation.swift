@@ -36,8 +36,8 @@ final class MDCreateJWTCoreDataStorageOperation: MDOperation {
         self.coreDataStorage.save(accessToken: newAuthResponse.accessToken!) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let createdWord):
-                    self?.result?(.success(createdWord))
+                case .success(let createdJWT):
+                    self?.result?(.success(createdJWT))
                     self?.finish()
                 case .failure(let error):
                     self?.result?(.failure(error))

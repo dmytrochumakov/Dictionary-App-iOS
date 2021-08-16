@@ -103,8 +103,8 @@ extension MDJWTCoreDataStorage {
             case .success:
                 self.readJWT(fromAccessToken: accessToken) { [unowned self] (result) in
                     switch result {
-                    case .success(let userEntity):
-                        completionHandler(.success(userEntity))
+                    case .success(let authResponse):
+                        completionHandler(.success(authResponse))
                     case .failure(let error):
                         completionHandler(.failure(error))
                     }
@@ -121,8 +121,8 @@ extension MDJWTCoreDataStorage {
             case .success:
                 self.readJWT(fromAccessToken: accessToken) { [unowned self] (result) in
                     switch result {
-                    case .success(let userEntity):
-                        completionHandler(.success(userEntity))
+                    case .success(let authResponse):
+                        completionHandler(.success(authResponse))
                     case .failure(let error):
                         completionHandler(.failure(error))
                     }
