@@ -19,7 +19,7 @@ final class MDJWTMemoryStorage_Tests: XCTestCase {
         let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
         
         let jwtMemoryStorage: MDJWTMemoryStorageProtocol = MDJWTMemoryStorage.init(operationQueueService: operationQueueService,
-                                                                                   authResponse: nil)
+                                                                                   jwtResponse: nil)
         
         self.jwtMemoryStorage = jwtMemoryStorage
         
@@ -86,7 +86,7 @@ extension MDJWTMemoryStorage_Tests {
             case .success(let createdJWT):
                 XCTAssertTrue(createdJWT.accessToken == Constants_For_Tests.mockedJWT.accessToken)
                 jwtMemoryStorage.updateJWT(oldAccessToken: createdJWT.accessToken,
-                                           newAuthResponse: Constants_For_Tests.mockedJWTForUpdate) { updatedResult in
+                                           newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { updatedResult in
                     switch updatedResult {
                     case .success(let updatedJWT):
                         XCTAssertTrue(updatedJWT.accessToken == Constants_For_Tests.mockedJWTForUpdate.accessToken)

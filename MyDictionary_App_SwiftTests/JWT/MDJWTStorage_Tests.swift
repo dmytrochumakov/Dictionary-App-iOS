@@ -20,7 +20,7 @@ final class MDJWTStorage_Tests: XCTestCase {
         let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
         
         let memoryStorage: MDJWTMemoryStorageProtocol = MDJWTMemoryStorage.init(operationQueueService: operationQueueService,
-                                                                                authResponse: nil)
+                                                                                jwtResponse: nil)
         
         let coreDataStack: CoreDataStack = CoreDataStack.init()
         let coreDataStorage: MDJWTCoreDataStorageProtocol = MDJWTCoreDataStorage.init(operationQueueService: operationQueueService,
@@ -44,7 +44,7 @@ extension MDJWTStorage_Tests {
         let expectation = XCTestExpectation(description: "Create JWT In Memory Expectation")
         let storageType: MDStorageType = .memory
         
-        jwtStorage.createJWT(storageType: storageType, authResponse: Constants_For_Tests.mockedJWT) { [unowned self] result in
+        jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] result in
             switch result {
             case .success(let createdJWT):
                 XCTAssertTrue(createdJWT.accessToken == Constants_For_Tests.mockedJWT.accessToken)
@@ -65,7 +65,7 @@ extension MDJWTStorage_Tests {
         let expectation = XCTestExpectation(description: "Read JWT From Memory Expectation")
         let storageType: MDStorageType = .memory
         
-        jwtStorage.createJWT(storageType: storageType, authResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResult in
+        jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResult in
             switch createResult {
             case .success(let createdJWT):
                 jwtStorage.readJWT(storageType: storageType, fromAccessToken: createdJWT.accessToken) { [unowned self] readResult in
@@ -94,7 +94,7 @@ extension MDJWTStorage_Tests {
         let expectation = XCTestExpectation(description: "Update JWT In Memory Expectation")
         let storageType: MDStorageType = .memory
         
-        jwtStorage.createJWT(storageType: storageType, authResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResult in
+        jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResult in
             switch createResult {
             case .success(let createdJWT):
                 
@@ -102,7 +102,7 @@ extension MDJWTStorage_Tests {
                 
                 jwtStorage.updateJWT(storageType: storageType,
                                      oldAccessToken: createdJWT.accessToken,
-                                     newAuthResponse: Constants_For_Tests.mockedJWTForUpdate) { updatedResult in
+                                     newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { updatedResult in
                     
                     switch updatedResult {
                     case .success(let updatedJWT):
@@ -131,11 +131,11 @@ extension MDJWTStorage_Tests {
         let expectation = XCTestExpectation(description: "Delete JWT From Memory Expectation")
         let storageType: MDStorageType = .memory
         
-        jwtStorage.createJWT(storageType: storageType, authResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResult in
+        jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResult in
             switch createResult {
             case .success(let createdJWT):
                 
-                self.jwtStorage.deleteJWT(storageType: storageType, authResponse: createdJWT) { deleteResult in
+                self.jwtStorage.deleteJWT(storageType: storageType, jwtResponse: createdJWT) { deleteResult in
                     
                     switch deleteResult {
                     case .success(let deleteJWT):
@@ -179,7 +179,7 @@ extension MDJWTStorage_Tests {
         let expectation = XCTestExpectation(description: "Create JWT In Core Data Expectation")
         let storageType: MDStorageType = .coreData
         
-        jwtStorage.createJWT(storageType: storageType, authResponse: Constants_For_Tests.mockedJWT) { [unowned self] result in
+        jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] result in
             switch result {
             case .success(let createdJWT):
                 XCTAssertTrue(createdJWT.accessToken == Constants_For_Tests.mockedJWT.accessToken)
@@ -200,7 +200,7 @@ extension MDJWTStorage_Tests {
         let expectation = XCTestExpectation(description: "Read From Core Data Expectation")
         let storageType: MDStorageType = .coreData
         
-        jwtStorage.createJWT(storageType: storageType, authResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResult in
+        jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResult in
             switch createResult {
             case .success(let createdJWT):
                 jwtStorage.readJWT(storageType: storageType, fromAccessToken: createdJWT.accessToken) { [unowned self] readResult in
@@ -229,13 +229,13 @@ extension MDJWTStorage_Tests {
         let expectation = XCTestExpectation(description: "Update JWT In Core Data Expectation")
         let storageType: MDStorageType = .coreData
         
-        jwtStorage.createJWT(storageType: storageType, authResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResult in
+        jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResult in
             switch createResult {
             case .success(let createdJWT):
                 
                 self.jwtStorage.updateJWT(storageType: storageType,
                                           oldAccessToken: createdJWT.accessToken,
-                                          newAuthResponse: Constants_For_Tests.mockedJWTForUpdate) { [unowned self] updateResult in
+                                          newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { [unowned self] updateResult in
                     
                     switch updateResult {
                     case .success(let updatedJWT):
@@ -264,11 +264,11 @@ extension MDJWTStorage_Tests {
         let expectation = XCTestExpectation(description: "Delete JWT From Core Data Expectation")
         let storageType: MDStorageType = .coreData
         
-        jwtStorage.createJWT(storageType: storageType, authResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResult in
+        jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResult in
             switch createResult {
             case .success(let createdJWT):
                 
-                self.jwtStorage.deleteJWT(storageType: storageType, authResponse: createdJWT) { deleteResult in
+                self.jwtStorage.deleteJWT(storageType: storageType, jwtResponse: createdJWT) { deleteResult in
                     switch deleteResult {
                     case .success(let deleteJWT):
                         XCTAssertTrue(createdJWT.accessToken == deleteJWT.accessToken)

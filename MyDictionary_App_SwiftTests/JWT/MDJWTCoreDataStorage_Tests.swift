@@ -88,7 +88,7 @@ extension MDJWTCoreDataStorage_Tests {
             switch createResult {
             case .success(let createdJWT):
                 self.jwtCoreDataStorage.updateJWT(oldAccessToken: createdJWT.accessToken,
-                                                  newAuthResponse: Constants_For_Tests.mockedJWTForUpdate) { [unowned self] updateResult in
+                                                  newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { [unowned self] updateResult in
                     switch updateResult {
                     case .success(let updatedJWT):                        
                         XCTAssertTrue(updatedJWT.accessToken == Constants_For_Tests.mockedJWTForUpdate.accessToken)
