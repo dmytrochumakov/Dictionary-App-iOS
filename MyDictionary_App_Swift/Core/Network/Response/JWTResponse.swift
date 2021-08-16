@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct JWTResponse {
     
@@ -20,6 +21,15 @@ struct JWTResponse {
         dateFormatter.timeZone = TimeZone.init(identifier: "UTC")!
         dateFormatter.dateFormat = format
         return dateFormatter.date(from: expirationDate)
+    }
+    
+}
+
+extension JWTResponse {
+    
+    func cdJWTResponseEntity(insertIntoManagedObjectContext: NSManagedObjectContext) -> CDJWTResponseEntity {
+        return .init(jwtResponse: self,
+                     insertIntoManagedObjectContext: insertIntoManagedObjectContext)
     }
     
 }

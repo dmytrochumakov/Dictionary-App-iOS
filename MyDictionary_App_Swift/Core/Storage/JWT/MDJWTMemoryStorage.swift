@@ -16,13 +16,13 @@ final class MDJWTMemoryStorage: MDJWTMemoryStorageProtocol {
     
     fileprivate let operationQueueService: OperationQueueServiceProtocol
     
-    var authResponse: AuthResponse?
+    var jwtResponse: JWTResponse?
     
     init(operationQueueService: OperationQueueServiceProtocol,
-         authResponse: AuthResponse?) {
+         jwtResponse: JWTResponse?) {
         
         self.operationQueueService = operationQueueService
-        self.authResponse = authResponse
+        self.jwtResponse = jwtResponse
         
     }
     
@@ -35,7 +35,7 @@ final class MDJWTMemoryStorage: MDJWTMemoryStorageProtocol {
 extension MDJWTMemoryStorage {
     
     func entitiesCount(_ completionHandler: @escaping (MDEntityCountResult)) {
-        if (authResponse == nil) {
+        if (jwtResponse == nil) {
             completionHandler(.success(0))
         } else {
             completionHandler(.success(1))
@@ -46,15 +46,15 @@ extension MDJWTMemoryStorage {
 
 extension MDJWTMemoryStorage {
     
-    func createJWT(_ authResponse: AuthResponse, _ completionHandler: @escaping (MDEntityResult<AuthResponse>)) {
+    func createJWT(_ jwtResponse: JWTResponse, _ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
         let operation = MDCreateJWTMemoryStorageOperation.init(memoryStorage: self,
-                                                               authResponse: authResponse) { result in
+                                                               jwtResponse: jwtResponse) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
     }
     
-    func readJWT(fromAccessToken accessToken: String, _ completionHandler: @escaping (MDEntityResult<AuthResponse>)) {
+    func readJWT(fromAccessToken accessToken: String, _ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
         let operation = MDReadJWTMemoryStorageOperation.init(memoryStorage: self,
                                                              accessToken: accessToken) { result in
             completionHandler(result)
@@ -62,18 +62,18 @@ extension MDJWTMemoryStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func updateJWT(oldAccessToken accessToken: String, newAuthResponse authResponse: AuthResponse, _ completionHandler: @escaping (MDEntityResult<AuthResponse>)) {
+    func updateJWT(oldAccessToken accessToken: String, newJWTResponse jwtResponse: JWTResponse, _ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
         let operation = MDUpdateJWTMemoryStorageOperation.init(memoryStorage: self,
                                                                oldAccessToken: accessToken,
-                                                               newAuthResponse: authResponse) { result in
+                                                               newJWTResponse: jwtResponse) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
     }
     
-    func deleteJWT(_ authResponse: AuthResponse, _ completionHandler: @escaping (MDEntityResult<AuthResponse>)) {
+    func deleteJWT(_ jwtResponse: JWTResponse, _ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
         let operation = MDDeleteJWTMemoryStorageOperation.init(memoryStorage: self,
-                                                               authResponse: authResponse) { result in
+                                                               jwtResponse: jwtResponse) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)

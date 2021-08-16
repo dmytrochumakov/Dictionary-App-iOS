@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20G80" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="CDAuthResponseEntity" representedClassName="CDAuthResponseEntity" syncable="YES" codeGenerationType="class">
+    <entity name="CDJWTResponseEntity" representedClassName="CDJWTResponseEntity" syncable="YES" codeGenerationType="class">
         <attribute name="accessToken" attributeType="String"/>
         <attribute name="expirationDate" attributeType="String"/>
     </entity>
@@ -21,8 +21,8 @@
         <attribute name="word_language" attributeType="String"/>
     </entity>
     <elements>
+        <element name="CDJWTResponseEntity" positionX="-63" positionY="36" width="128" height="59"/>
         <element name="CDUserEntity" positionX="-63" positionY="27" width="128" height="104"/>
         <element name="CDWordEntity" positionX="-63" positionY="-18" width="128" height="134"/>
-        <element name="CDAuthResponseEntity" positionX="-63" positionY="36" width="128" height="59"/>
     </elements>
 </model>

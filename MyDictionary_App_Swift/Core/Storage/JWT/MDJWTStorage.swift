@@ -11,16 +11,16 @@ protocol MDJWTStorageProtocol {
     
     func entitiesCount(storageType: MDStorageType, _ completionHandler: @escaping (MDEntityCountResult))
     
-    func createJWT(storageType: MDStorageType, authResponse: AuthResponse, _ completionHandler: @escaping(MDEntityResult<AuthResponse>))
+    func createJWT(storageType: MDStorageType, jwtResponse: JWTResponse, _ completionHandler: @escaping(MDEntityResult<JWTResponse>))
     
-    func readJWT(storageType: MDStorageType, fromAccessToken accessToken: String, _ completionHandler: @escaping(MDEntityResult<AuthResponse>))
+    func readJWT(storageType: MDStorageType, fromAccessToken accessToken: String, _ completionHandler: @escaping(MDEntityResult<JWTResponse>))
     
     func updateJWT(storageType: MDStorageType,
                    oldAccessToken accessToken: String,
-                   newAuthResponse authResponse: AuthResponse,
-                   _ completionHandler: @escaping(MDEntityResult<AuthResponse>))
+                   newJWTResponse jwtResponse: JWTResponse,
+                   _ completionHandler: @escaping(MDEntityResult<JWTResponse>))
     
-    func deleteJWT(storageType: MDStorageType, authResponse: AuthResponse, _ completionHandler: @escaping(MDEntityResult<AuthResponse>))
+    func deleteJWT(storageType: MDStorageType, jwtResponse: JWTResponse, _ completionHandler: @escaping(MDEntityResult<JWTResponse>))
     
 }
 
@@ -62,18 +62,18 @@ extension MDJWTStorage {
 // MARK: - CRUD
 extension MDJWTStorage {
     
-    func createJWT(storageType: MDStorageType, authResponse: AuthResponse, _ completionHandler: @escaping (MDEntityResult<AuthResponse>)) {
+    func createJWT(storageType: MDStorageType, jwtResponse: JWTResponse, _ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
         switch storageType {
         case .none:
             break
         case .memory:
-            memoryStorage.createJWT(authResponse, completionHandler)
+            memoryStorage.createJWT(jwtResponse, completionHandler)
         case .coreData:
-            coreDataStorage.createJWT(authResponse, completionHandler)
+            coreDataStorage.createJWT(jwtResponse, completionHandler)
         }
     }
     
-    func readJWT(storageType: MDStorageType, fromAccessToken accessToken: String, _ completionHandler: @escaping (MDEntityResult<AuthResponse>)) {
+    func readJWT(storageType: MDStorageType, fromAccessToken accessToken: String, _ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
         switch storageType {
         case .none:
             break
@@ -84,25 +84,25 @@ extension MDJWTStorage {
         }
     }
     
-    func updateJWT(storageType: MDStorageType, oldAccessToken accessToken: String, newAuthResponse authResponse: AuthResponse, _ completionHandler: @escaping (MDEntityResult<AuthResponse>)) {
+    func updateJWT(storageType: MDStorageType, oldAccessToken accessToken: String, newJWTResponse jwtResponse: JWTResponse, _ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
         switch storageType {
         case .none:
             break
         case .memory:
-            memoryStorage.updateJWT(oldAccessToken: accessToken, newAuthResponse: authResponse, completionHandler)
+            memoryStorage.updateJWT(oldAccessToken: accessToken, newJWTResponse: jwtResponse, completionHandler)
         case .coreData:
-            coreDataStorage.updateJWT(oldAccessToken: accessToken, newAuthResponse: authResponse, completionHandler)
+            coreDataStorage.updateJWT(oldAccessToken: accessToken, newJWTResponse: jwtResponse, completionHandler)
         }
     }
     
-    func deleteJWT(storageType: MDStorageType, authResponse: AuthResponse, _ completionHandler: @escaping (MDEntityResult<AuthResponse>)) {
+    func deleteJWT(storageType: MDStorageType, jwtResponse: JWTResponse, _ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
         switch storageType {
         case .none:
             break
         case .memory:
-            memoryStorage.deleteJWT(authResponse, completionHandler)
+            memoryStorage.deleteJWT(jwtResponse, completionHandler)
         case .coreData:
-            coreDataStorage.deleteJWT(authResponse, completionHandler)
+            coreDataStorage.deleteJWT(jwtResponse, completionHandler)
         }
     }
     

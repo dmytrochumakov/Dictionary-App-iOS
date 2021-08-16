@@ -55,10 +55,10 @@ extension MDJWTCoreDataStorage {
 // MARK: - Create
 extension MDJWTCoreDataStorage {
     
-    func createJWT(_ authResponse: AuthResponse, _ completionHandler: @escaping (MDEntityResult<AuthResponse>)) {
+    func createJWT(_ jwtResponse: JWTResponse, _ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
         let operation = MDCreateJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                  coreDataStorage: self,
-                                                                 authResponse: authResponse) { result in
+                                                                 jwtResponse: jwtResponse) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
@@ -69,7 +69,7 @@ extension MDJWTCoreDataStorage {
 // MARK: - Read
 extension MDJWTCoreDataStorage {
     
-    func readJWT(fromAccessToken accessToken: String, _ completionHandler: @escaping (MDEntityResult<AuthResponse>)) {
+    func readJWT(fromAccessToken accessToken: String, _ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
         let operation = MDReadJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                coreDataStorage: self,
                                                                accessToken: accessToken) { result in
@@ -78,7 +78,7 @@ extension MDJWTCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readAllJWTs(_ completionHandler: @escaping (MDEntitiesResult<AuthResponse>)) {
+    func readAllJWTs(_ completionHandler: @escaping (MDEntitiesResult<JWTResponse>)) {
         let operation = MDReadJWTsCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                 coreDataStorage: self) { result in
             completionHandler(result)
@@ -91,11 +91,11 @@ extension MDJWTCoreDataStorage {
 // MARK: - Update
 extension MDJWTCoreDataStorage {
     
-    func updateJWT(oldAccessToken accessToken: String, newAuthResponse authResponse: AuthResponse, _ completionHandler: @escaping (MDEntityResult<AuthResponse>)) {
+    func updateJWT(oldAccessToken accessToken: String, newJWTResponse jwtResponse: JWTResponse, _ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
         let operation = MDUpdateJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                  coreDataStorage: self,
                                                                  oldAccessToken: accessToken,
-                                                                 newAuthResponse: authResponse) { result in
+                                                                 newJWTResponse: jwtResponse) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
@@ -106,10 +106,10 @@ extension MDJWTCoreDataStorage {
 // MARK: - Delete
 extension MDJWTCoreDataStorage {
     
-    func deleteJWT(_ authResponse: AuthResponse, _ completionHandler: @escaping (MDEntityResult<AuthResponse>)) {
+    func deleteJWT(_ jwtResponse: JWTResponse, _ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
         let operation = MDDeleteJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                  coreDataStorage: self,
-                                                                 authResponse: authResponse) { result in
+                                                                 jwtResponse: jwtResponse) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
@@ -124,7 +124,7 @@ extension MDJWTCoreDataStorage {
         coreDataStack.savePerform(completionHandler: completionHandler)
     }
     
-    func savePerform(accessToken: String, completionHandler: @escaping MDEntityResult<AuthResponse>) {
+    func savePerform(accessToken: String, completionHandler: @escaping MDEntityResult<JWTResponse>) {
         coreDataStack.savePerform() { [unowned self] (result) in
             switch result {
             case .success:
@@ -142,7 +142,7 @@ extension MDJWTCoreDataStorage {
         }
     }
     
-    func save(accessToken: String, completionHandler: @escaping MDEntityResult<AuthResponse>) {
+    func save(accessToken: String, completionHandler: @escaping MDEntityResult<JWTResponse>) {
         coreDataStack.savePerformAndWait() { [unowned self] (result) in
             switch result {
             case .success:

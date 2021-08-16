@@ -6,45 +6,25 @@
 //
 
 import Foundation
-import CoreData
 
 struct AuthResponse {
     
-    let accessToken: String
-    /// Time Zone - UTC
-    /// Date Format - yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
-    let expirationDate: String
-    
-    var expDate: Date? {
-        let format: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        let dateFormatter: DateFormatter = .init()
-        dateFormatter.timeZone = TimeZone.init(identifier: "UTC")!
-        dateFormatter.dateFormat = format
-        return dateFormatter.date(from: expirationDate)
-    }
-    
-}
-
-extension AuthResponse {
-    
-    func cdAuthResponseEntity(insertIntoManagedObjectContext: NSManagedObjectContext) -> CDAuthResponseEntity {
-        return .init(authResponse: self,
-                     insertIntoManagedObjectContext: insertIntoManagedObjectContext)
-    }
+    let userEntity: UserEntity
+    let jwtResponse: JWTResponse
     
 }
 
 extension AuthResponse: Decodable {
     
     enum CodingKeys: String, CodingKey {
-        case accessToken = "access_token"
-        case expirationDate = "expiration_date"
+        case userEntity = "user_entity"
+        case jwtResponse = "jwt"
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.accessToken = try container.decode(String.self, forKey: .accessToken)
-        self.expirationDate = try container.decode(String.self, forKey: .expirationDate)
+        self.userEntity = try container.decode(UserEntity.self, forKey: .userEntity)
+        self.jwtResponse = try container.decode(JWTResponse.self, forKey: .jwtResponse)
     }
     
 }

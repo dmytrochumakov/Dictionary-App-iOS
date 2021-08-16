@@ -10,5 +10,5 @@ import Foundation
 struct CoreDataEntityName {
     static let CDWordEntity = "CDWordEntity"
     static let CDUserEntity = "CDUserEntity"
-    static let CDAuthResponseEntity = "CDAuthResponseEntity"
+    static let CDJWTResponseEntity = "CDJWTResponseEntity"
 }

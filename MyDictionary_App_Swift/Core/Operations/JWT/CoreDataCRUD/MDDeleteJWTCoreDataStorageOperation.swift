@@ -11,17 +11,17 @@ final class MDDeleteJWTCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDJWTCoreDataStorage
-    fileprivate let authResponse: AuthResponse
-    fileprivate let result: MDEntityResult<AuthResponse>?
+    fileprivate let jwtResponse: JWTResponse
+    fileprivate let result: MDEntityResult<JWTResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDJWTCoreDataStorage,
-         authResponse: AuthResponse,
-         result: MDEntityResult<AuthResponse>?) {
+         jwtResponse: JWTResponse,
+         result: MDEntityResult<JWTResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage
-        self.authResponse = authResponse
+        self.jwtResponse = jwtResponse
         self.result = result
         
         super.init()
@@ -30,8 +30,8 @@ final class MDDeleteJWTCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDAuthResponseEntity)
-        fetchRequest.predicate = NSPredicate(format: "\(CDAuthResponseEntityAttributeName.accessToken) == %@", authResponse.accessToken)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDJWTResponseEntity)
+        fetchRequest.predicate = NSPredicate(format: "\(CDJWTResponseEntityAttributeName.accessToken) == %@", jwtResponse.accessToken)
         
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
@@ -49,7 +49,7 @@ final class MDDeleteJWTCoreDataStorageOperation: MDOperation {
                             self?.finish() ;
                             return
                         }
-                        self.result?(.success(self.authResponse))
+                        self.result?(.success(self.jwtResponse))
                         self.finish()
                     case .failure(let error):
                         self?.result?(.failure(error))

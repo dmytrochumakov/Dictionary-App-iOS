@@ -1,5 +1,5 @@
 //
-//  CDAuthResponseEntity+Extension.swift
+//  CDJWTResponseEntity+Extension.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 14.08.2021.
@@ -7,24 +7,24 @@
 
 import CoreData
 
-extension CDAuthResponseEntity {
+extension CDJWTResponseEntity {
     
-    convenience init(authResponse: AuthResponse,
+    convenience init(jwtResponse: JWTResponse,
                      insertIntoManagedObjectContext context: NSManagedObjectContext!) {
         
-        let entity = NSEntityDescription.entity(forEntityName: CoreDataEntityName.CDAuthResponseEntity, in: context)!
+        let entity = NSEntityDescription.entity(forEntityName: CoreDataEntityName.CDJWTResponseEntity, in: context)!
         self.init(entity: entity, insertInto: context)
         
-        self.accessToken = authResponse.accessToken
-        self.expirationDate = authResponse.expirationDate
+        self.accessToken = jwtResponse.accessToken
+        self.expirationDate = jwtResponse.expirationDate
         
     }
     
 }
 
-extension CDAuthResponseEntity {
+extension CDJWTResponseEntity {
     
-    var authResponse: AuthResponse {
+    var jwtResponse: JWTResponse {
         guard let accessToken = self.accessToken,
               let expirationDate = self.expirationDate
         else {

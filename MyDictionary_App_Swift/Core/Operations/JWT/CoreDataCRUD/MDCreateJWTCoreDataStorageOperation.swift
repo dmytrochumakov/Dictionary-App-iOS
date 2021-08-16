@@ -12,17 +12,17 @@ final class MDCreateJWTCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDJWTCoreDataStorage
-    fileprivate let authResponse: AuthResponse
-    fileprivate let result: MDEntityResult<AuthResponse>?
+    fileprivate let jwtResponse: JWTResponse
+    fileprivate let result: MDEntityResult<JWTResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDJWTCoreDataStorage,
-         authResponse: AuthResponse,
-         result: MDEntityResult<AuthResponse>?) {
+         jwtResponse: JWTResponse,
+         result: MDEntityResult<JWTResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage
-        self.authResponse = authResponse
+        self.jwtResponse = jwtResponse
         self.result = result
         
         super.init()
@@ -30,7 +30,7 @@ final class MDCreateJWTCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        let newAuthResponse = CDAuthResponseEntity.init(authResponse: self.authResponse,
+        let newAuthResponse = CDJWTResponseEntity.init(jwtResponse: self.jwtResponse,
                                                         insertIntoManagedObjectContext: self.managedObjectContext)
         
         self.coreDataStorage.save(accessToken: newAuthResponse.accessToken!) { [weak self] result in

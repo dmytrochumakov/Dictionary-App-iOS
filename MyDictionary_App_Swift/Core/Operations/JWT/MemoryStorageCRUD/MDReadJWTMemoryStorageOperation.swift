@@ -11,11 +11,11 @@ final class MDReadJWTMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDJWTMemoryStorage
     fileprivate let accessToken: String
-    fileprivate let result: MDEntityResult<AuthResponse>?
+    fileprivate let result: MDEntityResult<JWTResponse>?
     
     init(memoryStorage: MDJWTMemoryStorage,
          accessToken: String,
-         result: MDEntityResult<AuthResponse>?) {
+         result: MDEntityResult<JWTResponse>?) {
         
         self.memoryStorage = memoryStorage
         self.accessToken = accessToken
@@ -25,14 +25,14 @@ final class MDReadJWTMemoryStorageOperation: MDOperation {
     }
     
     override func main() {
-        guard let authResponse = self.memoryStorage.authResponse,
-              authResponse.accessToken == self.accessToken
+        guard let jwtResponse = self.memoryStorage.jwtResponse,
+              jwtResponse.accessToken == self.accessToken
         else {
             self.result?(.failure(MDEntityOperationError.cantFindEntity));
             self.finish();
             return
         }
-        self.result?(.success(authResponse))
+        self.result?(.success(jwtResponse))
         self.finish()
     }
     

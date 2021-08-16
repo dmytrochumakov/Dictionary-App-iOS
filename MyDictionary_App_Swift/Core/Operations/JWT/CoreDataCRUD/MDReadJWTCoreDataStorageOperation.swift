@@ -12,12 +12,12 @@ final class MDReadJWTCoreDataStorageOperation: MDOperation {
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDJWTCoreDataStorage
     fileprivate let accessToken: String
-    fileprivate let result: MDEntityResult<AuthResponse>?
+    fileprivate let result: MDEntityResult<JWTResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDJWTCoreDataStorage,
          accessToken: String,
-         result: MDEntityResult<AuthResponse>?) {
+         result: MDEntityResult<JWTResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage
@@ -30,13 +30,13 @@ final class MDReadJWTCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        let fetchRequest = NSFetchRequest<CDAuthResponseEntity>(entityName: CoreDataEntityName.CDAuthResponseEntity)
-        fetchRequest.predicate = NSPredicate(format: "\(CDAuthResponseEntityAttributeName.accessToken) == %@", accessToken)
+        let fetchRequest = NSFetchRequest<CDJWTResponseEntity>(entityName: CoreDataEntityName.CDJWTResponseEntity)
+        fetchRequest.predicate = NSPredicate(format: "\(CDJWTResponseEntityAttributeName.accessToken) == %@", accessToken)
         
         let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
             
             if let result = asynchronousFetchResult.finalResult {
-                if let authResponse = result.map({ $0.authResponse }).first {
+                if let authResponse = result.map({ $0.jwtResponse }).first {
                     DispatchQueue.main.async {
                         self?.result?(.success(authResponse))
                         self?.finish()
@@ -71,4 +71,3 @@ final class MDReadJWTCoreDataStorageOperation: MDOperation {
     }
     
 }
-

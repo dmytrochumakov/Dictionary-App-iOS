@@ -10,23 +10,23 @@ import Foundation
 final class MDCreateJWTMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDJWTMemoryStorage
-    fileprivate let authResponse: AuthResponse
-    fileprivate let result: MDEntityResult<AuthResponse>?
+    fileprivate let jwtResponse: JWTResponse
+    fileprivate let result: MDEntityResult<JWTResponse>?
     
     init(memoryStorage: MDJWTMemoryStorage,
-         authResponse: AuthResponse,
-         result: MDEntityResult<AuthResponse>?) {
+         jwtResponse: JWTResponse,
+         result: MDEntityResult<JWTResponse>?) {
         
         self.memoryStorage = memoryStorage
-        self.authResponse = authResponse
+        self.jwtResponse = jwtResponse
         self.result = result
         
         super.init()
     }
     
     override func main() {
-        self.memoryStorage.authResponse = self.authResponse
-        self.result?(.success(self.authResponse))
+        self.memoryStorage.jwtResponse = self.jwtResponse
+        self.result?(.success(self.jwtResponse))
         self.finish()
     }
     

@@ -214,8 +214,8 @@
 		22E2B4FB266509DC00978E62 /* SettingsDataProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4FA266509DC00978E62 /* SettingsDataProviderModel.swift */; };
 		22E2B4FE266515D400978E62 /* CollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4FD266515D400978E62 /* CollectionViewDelegateFlowLayout.swift */; };
 		22E2B500266515E700978E62 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */; };
-		22EDF02626C7E6A100D19DA1 /* CDAuthResponseEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDF02526C7E6A000D19DA1 /* CDAuthResponseEntity+Extension.swift */; };
-		22EDF02826C7E8B900D19DA1 /* CDAuthResponseEntityAttributeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDF02726C7E8B900D19DA1 /* CDAuthResponseEntityAttributeName.swift */; };
+		22EDF02626C7E6A100D19DA1 /* CDJWTResponseEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDF02526C7E6A000D19DA1 /* CDJWTResponseEntity+Extension.swift */; };
+		22EDF02826C7E8B900D19DA1 /* CDJWTResponseEntityAttributeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDF02726C7E8B900D19DA1 /* CDJWTResponseEntityAttributeName.swift */; };
 		22EDF02A26C7E91D00D19DA1 /* CDUserEntityAttributeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDF02926C7E91D00D19DA1 /* CDUserEntityAttributeName.swift */; };
 		22EF01DF269D8EC600FE4435 /* MDWordStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF01DE269D8EC600FE4435 /* MDWordStorage_Tests.swift */; };
 		22EF01E1269D97C800FE4435 /* OperationQueueService_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF01E0269D97C800FE4435 /* OperationQueueService_Tests.swift */; };
@@ -471,8 +471,8 @@
 		22E2B4FA266509DC00978E62 /* SettingsDataProviderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataProviderModel.swift; sourceTree = "<group>"; };
 		22E2B4FD266515D400978E62 /* CollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegateFlowLayout.swift; sourceTree = "<group>"; };
 		22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
-		22EDF02526C7E6A000D19DA1 /* CDAuthResponseEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDAuthResponseEntity+Extension.swift"; sourceTree = "<group>"; };
-		22EDF02726C7E8B900D19DA1 /* CDAuthResponseEntityAttributeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDAuthResponseEntityAttributeName.swift; sourceTree = "<group>"; };
+		22EDF02526C7E6A000D19DA1 /* CDJWTResponseEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDJWTResponseEntity+Extension.swift"; sourceTree = "<group>"; };
+		22EDF02726C7E8B900D19DA1 /* CDJWTResponseEntityAttributeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDJWTResponseEntityAttributeName.swift; sourceTree = "<group>"; };
 		22EDF02926C7E91D00D19DA1 /* CDUserEntityAttributeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDUserEntityAttributeName.swift; sourceTree = "<group>"; };
 		22EF01DE269D8EC600FE4435 /* MDWordStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordStorage_Tests.swift; sourceTree = "<group>"; };
 		22EF01E0269D97C800FE4435 /* OperationQueueService_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationQueueService_Tests.swift; sourceTree = "<group>"; };
@@ -878,7 +878,7 @@
 			isa = PBXGroup;
 			children = (
 				22493C40269726A4000DA480 /* CDWordEntityAttributeName.swift */,
-				22EDF02726C7E8B900D19DA1 /* CDAuthResponseEntityAttributeName.swift */,
+				22EDF02726C7E8B900D19DA1 /* CDJWTResponseEntityAttributeName.swift */,
 				22EDF02926C7E91D00D19DA1 /* CDUserEntityAttributeName.swift */,
 			);
 			path = AttributeName;
@@ -1194,7 +1194,7 @@
 				22493C32269715A9000DA480 /* CDResultSavedEnum.swift */,
 				22493C4826972A03000DA480 /* CDWordEntity+Extension.swift */,
 				2294D6C226A2F1B60066BE77 /* CDUserEntity+Extension.swift */,
-				22EDF02526C7E6A000D19DA1 /* CDAuthResponseEntity+Extension.swift */,
+				22EDF02526C7E6A000D19DA1 /* CDJWTResponseEntity+Extension.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -1942,7 +1942,7 @@
 				229E08CB2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift in Sources */,
 				226FEE85266B7DF90044A5F9 /* Appearance.swift in Sources */,
 				22DB2F7926C3BE7900C1AADA /* CourseListRouter.swift in Sources */,
-				22EDF02626C7E6A100D19DA1 /* CDAuthResponseEntity+Extension.swift in Sources */,
+				22EDF02626C7E6A100D19DA1 /* CDJWTResponseEntity+Extension.swift in Sources */,
 				221D281026C5064A004BC4F7 /* AuthorizationRouter.swift in Sources */,
 				22CA088326515F020052D169 /* WordListRouter.swift in Sources */,
 				22493C50269741D0000DA480 /* MDCreateWordCoreDataStorageOperation.swift in Sources */,
@@ -1991,7 +1991,7 @@
 				22DB2F7B26C3BE7900C1AADA /* CourseListInteractor.swift in Sources */,
 				220793BB26C65965003D434B /* MDEnvironment.swift in Sources */,
 				2289CEE42678CC34007254C3 /* MDUpdateWordMemoryStorageOperation.swift in Sources */,
-				22EDF02826C7E8B900D19DA1 /* CDAuthResponseEntityAttributeName.swift in Sources */,
+				22EDF02826C7E8B900D19DA1 /* CDJWTResponseEntityAttributeName.swift in Sources */,
 				22C5863C26C7AFB80030B12D /* RegistrationRouter.swift in Sources */,
 				22B2268F266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift in Sources */,
 				22E2B4DF2664E43B00978E62 /* SettingsViewController.swift in Sources */,

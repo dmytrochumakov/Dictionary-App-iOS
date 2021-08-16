@@ -11,32 +11,32 @@ final class MDUpdateJWTMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDJWTMemoryStorage
     fileprivate let oldAccessToken: String
-    fileprivate let newAuthResponse: AuthResponse
-    fileprivate let result: MDEntityResult<AuthResponse>?
+    fileprivate let newJWTResponse: JWTResponse
+    fileprivate let result: MDEntityResult<JWTResponse>?
     
     init(memoryStorage: MDJWTMemoryStorage,
          oldAccessToken: String,
-         newAuthResponse: AuthResponse,
-         result: MDEntityResult<AuthResponse>?) {
+         newJWTResponse: JWTResponse,
+         result: MDEntityResult<JWTResponse>?) {
         
         self.memoryStorage = memoryStorage
         self.oldAccessToken = oldAccessToken
-        self.newAuthResponse = newAuthResponse
+        self.newJWTResponse = newJWTResponse
         self.result = result
         
         super.init()
     }
     
     override func main() {
-        guard let authResponse = self.memoryStorage.authResponse,
-              authResponse.accessToken == self.oldAccessToken
+        guard let jwtResponse = self.memoryStorage.jwtResponse,
+              jwtResponse.accessToken == self.oldAccessToken
         else {
             self.result?(.failure(MDEntityOperationError.cantFindEntity));
             self.finish();
             return
         }
-        self.memoryStorage.authResponse = self.newAuthResponse
-        self.result?(.success(self.newAuthResponse))
+        self.memoryStorage.jwtResponse = self.newJWTResponse
+        self.result?(.success(self.newJWTResponse))
         self.finish()
     }
     
