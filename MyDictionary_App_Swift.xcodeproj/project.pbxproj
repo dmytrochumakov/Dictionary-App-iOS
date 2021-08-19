@@ -636,7 +636,6 @@
 				2289CECD2678CC34007254C3 /* MDWordStorage.swift */,
 				2289CEB72678CC34007254C3 /* MDWordMemoryStorage.swift */,
 				22493C3626972232000DA480 /* MDWordCoreDataStorage.swift */,
-				22E691B726CE5E7700641DFA /* MDWordResultWithoutCompletion.swift */,
 			);
 			path = Word;
 			sourceTree = "<group>";
@@ -1049,6 +1048,7 @@
 		2289CEC22678CC34007254C3 /* Results */ = {
 			isa = PBXGroup;
 			children = (
+				22E691B726CE5E7700641DFA /* MDWordResultWithoutCompletion.swift */,
 				22493C4626972877000DA480 /* MDEntitiesResult.swift */,
 				2289CECC2678CC34007254C3 /* MDEntityResult.swift */,
 				22EF01E4269D9EBC00FE4435 /* MDEntitiesIsEmptyResultWithCompletion.swift */,
