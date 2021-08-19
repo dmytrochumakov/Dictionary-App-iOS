@@ -34,7 +34,7 @@ final class MDJWTMemoryStorage: MDJWTMemoryStorageProtocol {
 
 extension MDJWTMemoryStorage {
     
-    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResult)) {
+    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion)) {
         if (jwtResponse == nil) {
             completionHandler(.success(true))
         } else {

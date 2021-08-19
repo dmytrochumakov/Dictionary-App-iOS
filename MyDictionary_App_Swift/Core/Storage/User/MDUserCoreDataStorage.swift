@@ -39,7 +39,7 @@ final class MDUserCoreDataStorage: NSObject,
 // MARK: - Is Empty
 extension MDUserCoreDataStorage {
     
-    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResult)) {
+    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion)) {
         self.readAllUsers() { [unowned self] result in
             switch result {
             case .success(let entities):

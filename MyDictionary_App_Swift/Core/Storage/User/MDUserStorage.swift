@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MDUserStorageProtocol {
-    func entitiesIsEmpty(storageType: MDStorageType, _ completionHandler: @escaping (MDEntitiesIsEmptyResult))
+    func entitiesIsEmpty(storageType: MDStorageType, _ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion))
     func createUser(_ userEntity: UserEntity, storageType: MDStorageType, _ completionHandler: @escaping(MDEntityResult<UserEntity>))
     func readUser(fromUserID userId: Int64, storageType: MDStorageType, _ completionHandler: @escaping(MDEntityResult<UserEntity>))
     func deleteUser(_ userEntity: UserEntity, storageType: MDStorageType,_ completionHandler: @escaping(MDEntityResult<UserEntity>))
@@ -36,7 +36,7 @@ final class MDUserStorage: MDUserStorageProtocol {
 // MARK: - Is Empty
 extension MDUserStorage {
     
-    func entitiesIsEmpty(storageType: MDStorageType, _ completionHandler: @escaping (MDEntitiesIsEmptyResult)) {
+    func entitiesIsEmpty(storageType: MDStorageType, _ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion)) {
         switch storageType {
         case .none:
             break

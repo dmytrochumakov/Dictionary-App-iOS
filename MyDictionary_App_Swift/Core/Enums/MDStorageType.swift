@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum MDStorageType: Int {
-    case none
+enum MDStorageType: Int, CaseIterable {    
     case memory
     case coreData
+    case all
 }

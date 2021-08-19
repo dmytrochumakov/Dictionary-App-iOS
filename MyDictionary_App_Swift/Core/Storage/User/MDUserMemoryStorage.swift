@@ -34,7 +34,7 @@ final class MDUserMemoryStorage: MDUserMemoryStorageProtocol {
 
 extension MDUserMemoryStorage {
     
-    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResult)) {
+    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion)) {
         if (userEntity == nil) {
             completionHandler(.success(true))
         } else {

@@ -8,5 +8,5 @@
 import Foundation
 
 protocol MDEntitiesIsEmptyProtocol {
-    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResult))
+    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion))
 }

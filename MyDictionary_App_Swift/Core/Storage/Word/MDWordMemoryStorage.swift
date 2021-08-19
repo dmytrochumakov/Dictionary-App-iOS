@@ -35,7 +35,7 @@ final class MDWordMemoryStorage: MDWordMemoryStorageProtocol {
 // MARK: - Is Empty
 extension MDWordMemoryStorage {
     
-    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResult)) {
+    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion)) {
         self.readAllWords() { [unowned self] result in
             switch result {
             case .success(let words):

@@ -8,11 +8,28 @@
 import Foundation
 
 protocol MDWordStorageProtocol {
-    func entitiesIsEmpty(storageType: MDStorageType, _ completionHandler: @escaping (MDEntitiesIsEmptyResult))
-    func createWord(_ wordModel: WordModel, storageType: MDStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>))
-    func readWord(fromID id: Int64, storageType: MDStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>))
-    func updateWord(byID id: Int64, word: String, word_description: String, storageType: MDStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>))
-    func deleteWord(_ word: WordModel, storageType: MDStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>))
+    
+    func entitiesIsEmpty(storageType: MDStorageType,
+                         _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDEntitiesIsEmptyResultWithoutCompletion>))
+    
+    func createWord(_ wordModel: WordModel,
+                    storageType: MDStorageType,
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
+    
+    func readWord(fromID id: Int64,
+                  storageType: MDStorageType,
+                  _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
+    
+    func updateWord(byID id: Int64,
+                    word: String,
+                    word_description: String,
+                    storageType: MDStorageType,
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
+    
+    func deleteWord(_ word: WordModel,
+                    storageType: MDStorageType,
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
+    
 }
 
 final class MDWordStorage: MDWordStorageProtocol {
@@ -37,15 +54,49 @@ final class MDWordStorage: MDWordStorageProtocol {
 // MARK: - Is Empty
 extension MDWordStorage {
     
-    func entitiesIsEmpty(storageType: MDStorageType, _ completionHandler: @escaping (MDEntitiesIsEmptyResult)) {
+    func entitiesIsEmpty(storageType: MDStorageType,
+                         _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDEntitiesIsEmptyResultWithoutCompletion>)) {
+        
         switch storageType {
-        case .none:
-            break
+        
         case .memory:
-            memoryStorage.entitiesIsEmpty(completionHandler)
+            
+            memoryStorage.entitiesIsEmpty { [unowned self] result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
         case .coreData:
-            coreDataStorage.entitiesIsEmpty(completionHandler)
+            
+            coreDataStorage.entitiesIsEmpty { [unowned self] result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDEntitiesIsEmptyResultWithoutCompletion> = []
+            // Check Result in Memory
+            memoryStorage.entitiesIsEmpty { [unowned self] result in
+                
+                finalResult.append(.init(storageType: .memory, result: result))
+                
+                if (finalResult.count == MDStorageType.allCases.count) {
+                    completionHandler(finalResult)
+                }
+                
+            }
+            // Check Result in Core Data
+            coreDataStorage.entitiesIsEmpty { [unowned self] result in
+                
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                if (finalResult.count == MDStorageType.allCases.count) {
+                    completionHandler(finalResult)
+                }
+                
+            }
+            
         }
+        
     }
     
 }
@@ -53,47 +104,198 @@ extension MDWordStorage {
 // MARK: - CRUD
 extension MDWordStorage {
     
-    func createWord(_ wordModel: WordModel, storageType: MDStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>)) {
+    func createWord(_ wordModel: WordModel,
+                    storageType: MDStorageType,
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>)) {
+        
         switch storageType {
-        case .none:
-            break
+        
         case .memory:
-            memoryStorage.createWord(wordModel, completionHandler)
+            
+            memoryStorage.createWord(wordModel) { [unowned self] result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
         case .coreData:
-            coreDataStorage.createWord(wordModel, completionHandler)
+            
+            coreDataStorage.createWord(wordModel) { [unowned self] result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDWordResultWithoutCompletion> = []
+            // Create in Memory
+            memoryStorage.createWord(wordModel) { [unowned self] result in
+                
+                finalResult.append(.init(storageType: .memory, result: result))
+                
+                if (finalResult.count == MDStorageType.allCases.count) {
+                    completionHandler(finalResult)
+                }
+                
+            }
+            // Create in Core Data
+            coreDataStorage.createWord(wordModel) { [unowned self] result in
+                
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                if (finalResult.count == MDStorageType.allCases.count) {
+                    completionHandler(finalResult)
+                }
+                
+            }
+            
         }
+        
     }
     
-    func readWord(fromID id: Int64, storageType: MDStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>)) {
+    func readWord(fromID id: Int64,
+                  storageType: MDStorageType,
+                  _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>)) {
+        
         switch storageType {
-        case .none:
-            break
+        
         case .memory:
-            memoryStorage.readWord(fromID: id, completionHandler)
+            
+            memoryStorage.readWord(fromID: id) { [unowned self] (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
         case .coreData:
-            coreDataStorage.readWord(fromID: id, completionHandler)
+            
+            coreDataStorage.readWord(fromID: id) { [unowned self] (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDWordResultWithoutCompletion> = []
+            // Read From Memory
+            memoryStorage.readWord(fromID: id) { [unowned self] result in
+                
+                finalResult.append(.init(storageType: .memory, result: result))
+                
+                if (finalResult.count == MDStorageType.allCases.count) {
+                    completionHandler(finalResult)
+                }
+                
+            }
+            // Read From Core Data
+            coreDataStorage.readWord(fromID: id) { [unowned self] result in
+                
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                if (finalResult.count == MDStorageType.allCases.count) {
+                    completionHandler(finalResult)
+                }
+                
+            }
+            
         }
+        
     }
     
-    func updateWord(byID id: Int64, word: String, word_description: String, storageType: MDStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>)) {
+    func updateWord(byID id: Int64,
+                    word: String,
+                    word_description: String,
+                    storageType: MDStorageType,
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>)) {
+        
         switch storageType {
-        case .none:
-            break
+        
         case .memory:
-            memoryStorage.updateWord(byID: id, word: word, word_description: word_description, completionHandler)
+            
+            memoryStorage.updateWord(byID: id,
+                                     word: word,
+                                     word_description: word_description) { [unowned self] (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
         case .coreData:
-            coreDataStorage.updateWord(byID: id, word: word, word_description: word_description, completionHandler)
+            
+            coreDataStorage.updateWord(byID: id,
+                                       word: word,
+                                       word_description: word_description) { [unowned self] (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDWordResultWithoutCompletion> = []
+            // Update In Memory
+            memoryStorage.updateWord(byID: id,
+                                     word: word,
+                                     word_description: word_description) { [unowned self] result in
+                
+                finalResult.append(.init(storageType: .memory, result: result))
+                
+                if (finalResult.count == MDStorageType.allCases.count) {
+                    completionHandler(finalResult)
+                }
+                
+            }
+            // Update In Core Data
+            coreDataStorage.updateWord(byID: id,
+                                       word: word,
+                                       word_description: word_description) { [unowned self] result in
+                
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                if (finalResult.count == MDStorageType.allCases.count) {
+                    completionHandler(finalResult)
+                }
+                
+            }
+            
         }
+        
     }
     
-    func deleteWord(_ word: WordModel, storageType: MDStorageType, _ completionHandler: @escaping(MDEntityResult<WordModel>)) {
+    func deleteWord(_ word: WordModel, storageType: MDStorageType, _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>)) {
+        
         switch storageType {
-        case .none:
-            break
+        
         case .memory:
-            memoryStorage.deleteWord(word, completionHandler)
+            
+            memoryStorage.deleteWord(word) { [unowned self] result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
         case .coreData:
-            coreDataStorage.deleteWord(word, completionHandler)
+            
+            coreDataStorage.deleteWord(word) { [unowned self] result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDWordResultWithoutCompletion> = []
+            // Delete From Memory
+            memoryStorage.deleteWord(word) { [unowned self] result in
+                
+                finalResult.append(.init(storageType: .memory, result: result))
+                
+                if (finalResult.count == MDStorageType.allCases.count) {
+                    completionHandler(finalResult)
+                }
+                
+            }
+            // Delete From Core Data
+            coreDataStorage.deleteWord(word) { [unowned self] result in
+                
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                if (finalResult.count == MDStorageType.allCases.count) {
+                    completionHandler(finalResult)
+                }
+                
+            }
+            
         }
     }
     

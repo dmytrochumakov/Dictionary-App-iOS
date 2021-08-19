@@ -39,7 +39,7 @@ final class MDJWTCoreDataStorage: NSObject,
 // MARK: - Is Empty
 extension MDJWTCoreDataStorage {
     
-    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResult)) {
+    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion)) {
         self.readAllJWTs() { [unowned self] result in
             switch result {
             case .success(let entities):

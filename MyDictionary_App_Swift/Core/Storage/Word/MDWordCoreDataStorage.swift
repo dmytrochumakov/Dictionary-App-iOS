@@ -39,7 +39,7 @@ final class MDWordCoreDataStorage: NSObject,
 // MARK: - Is Empty
 extension MDWordCoreDataStorage {
     
-    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResult)) {
+    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion)) {
         self.readAllWords() { [unowned self] result in
             switch result {
             case .success(let words):
