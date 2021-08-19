@@ -31,8 +31,6 @@ protocol MDJWTStorageProtocol {
     
 }
 
-typealias MDJWTResultWithoutCompletion = (Result<JWTResponse, Error>)
-
 final class MDJWTStorage: MDJWTStorageProtocol {
     
     fileprivate let memoryStorage: MDJWTMemoryStorageProtocol
