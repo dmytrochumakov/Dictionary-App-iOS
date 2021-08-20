@@ -79,7 +79,7 @@ extension MDJWTStorage {
                 
                 finalResult.append(.init(storageType: .memory, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -89,7 +89,7 @@ extension MDJWTStorage {
                 
                 finalResult.append(.init(storageType: .coreData, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -131,7 +131,7 @@ extension MDJWTStorage {
                 
                 finalResult.append(.init(storageType: .memory, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -141,7 +141,7 @@ extension MDJWTStorage {
                 
                 finalResult.append(.init(storageType: .coreData, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -178,7 +178,7 @@ extension MDJWTStorage {
                 
                 finalResult.append(.init(storageType: .memory, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -188,7 +188,7 @@ extension MDJWTStorage {
                 
                 finalResult.append(.init(storageType: .coreData, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -228,7 +228,7 @@ extension MDJWTStorage {
                 
                 finalResult.append(.init(storageType: .memory, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -239,7 +239,7 @@ extension MDJWTStorage {
                 
                 finalResult.append(.init(storageType: .coreData, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -276,7 +276,7 @@ extension MDJWTStorage {
                 
                 finalResult.append(.init(storageType: .memory, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -286,7 +286,7 @@ extension MDJWTStorage {
                 
                 finalResult.append(.init(storageType: .coreData, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 

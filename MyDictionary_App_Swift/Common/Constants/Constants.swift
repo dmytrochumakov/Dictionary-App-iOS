@@ -104,4 +104,15 @@ struct Constants {
         
     }
     
+    struct StorageType {
+        
+        public static let storageTypesWithoutAll: [MDStorageType] = [.memory, .coreData]
+        public static let storageTypesWithoutAllCount: Int = storageTypesWithoutAll.count
+        
+        public static func finalResultCountIsEqualStorageTypesWithoutAllCount(_ finalResultCount: Int) -> Bool {
+            return finalResultCount == storageTypesWithoutAllCount
+        }
+        
+    }
+    
 }
