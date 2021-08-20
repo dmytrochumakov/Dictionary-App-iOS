@@ -44,8 +44,8 @@ extension MDUserStorage_Tests {
         let expectation = XCTestExpectation(description: "Create User In Memory Expectation")
         let storageType: MDStorageType = .memory
         
-        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] result in
-            switch result {
+        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] results in
+            switch results.first!.result {
             case .success(let createdUser):
                 XCTAssertTrue(createdUser.userId == Constants_For_Tests.mockedUser.userId)
                 XCTAssertTrue(createdUser.nickname == Constants_For_Tests.mockedUser.nickname)
@@ -68,11 +68,11 @@ extension MDUserStorage_Tests {
         let expectation = XCTestExpectation(description: "Read User From Memory Expectation")
         let storageType: MDStorageType = .memory
         
-        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] createResult in
-            switch createResult {
+        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] createResults in
+            switch createResults.first!.result {
             case .success(let createdUser):
-                userStorage.readUser(fromUserID: createdUser.userId, storageType: storageType) { [unowned self] readResult in
-                    switch readResult {
+                userStorage.readUser(fromUserID: createdUser.userId, storageType: storageType) { [unowned self] readResults in
+                    switch readResults.first!.result {
                     case .success(let readUser):
                         XCTAssertTrue(createdUser.userId == readUser.userId)
                         XCTAssertTrue(createdUser.nickname == readUser.nickname)
@@ -100,15 +100,15 @@ extension MDUserStorage_Tests {
         let expectation = XCTestExpectation(description: "Delete User From Memory Expectation")
         let storageType: MDStorageType = .memory
         
-        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] createResult in
-            switch createResult {
+        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] createResults in
+            switch createResults.first!.result {
             case .success(let createdUser):
-                self.userStorage.deleteUser(createdUser, storageType: storageType) { deleteResult in
-                    switch deleteResult {
+                self.userStorage.deleteUser(createdUser, storageType: storageType) { deleteResults in
+                    switch deleteResults.first!.result {
                     case .success(let deleteUser):
                         XCTAssertTrue(createdUser.userId == deleteUser.userId)
-                        self.userStorage.entitiesIsEmpty(storageType: storageType) { [unowned self] entitiesIsEmptyResult in
-                            switch entitiesIsEmptyResult {
+                        self.userStorage.entitiesIsEmpty(storageType: storageType) { [unowned self] entitiesIsEmptyResults in
+                            switch entitiesIsEmptyResults.first!.result {
                             case .success(let entitiesIsEmpty):
                                 XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
@@ -142,8 +142,8 @@ extension MDUserStorage_Tests {
         let expectation = XCTestExpectation(description: "Create User In Core Data Expectation")
         let storageType: MDStorageType = .coreData
         
-        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] result in
-            switch result {
+        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] results in
+            switch results.first!.result {
             case .success(let createdUser):
                 XCTAssertTrue(createdUser.userId == Constants_For_Tests.mockedUser.userId)
                 XCTAssertTrue(createdUser.nickname == Constants_For_Tests.mockedUser.nickname)
@@ -166,11 +166,11 @@ extension MDUserStorage_Tests {
         let expectation = XCTestExpectation(description: "Read User From Core Data Expectation")
         let storageType: MDStorageType = .coreData
         
-        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] createResult in
-            switch createResult {
+        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] createResults in
+            switch createResults.first!.result {
             case .success(let createdUser):
-                userStorage.readUser(fromUserID: createdUser.userId, storageType: storageType) { [unowned self] readResult in
-                    switch readResult {
+                userStorage.readUser(fromUserID: createdUser.userId, storageType: storageType) { [unowned self] readResults in
+                    switch readResults.first!.result {
                     case .success(let readUser):
                         XCTAssertTrue(createdUser.userId == readUser.userId)
                         XCTAssertTrue(createdUser.nickname == readUser.nickname)
@@ -198,15 +198,15 @@ extension MDUserStorage_Tests {
         let expectation = XCTestExpectation(description: "Delete From Core Data User Expectation")
         let storageType: MDStorageType = .coreData
         
-        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] createResult in
-            switch createResult {
+        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] createResults in
+            switch createResults.first!.result {
             case .success(let createdUser):
-                self.userStorage.deleteUser(createdUser, storageType: storageType) { deleteResult in
-                    switch deleteResult {
+                self.userStorage.deleteUser(createdUser, storageType: storageType) { deleteResults in
+                    switch deleteResults.first!.result {
                     case .success(let deleteUser):
                         XCTAssertTrue(createdUser.userId == deleteUser.userId)
-                        self.userStorage.entitiesIsEmpty(storageType: storageType) { [unowned self] entitiesIsEmptyResult in
-                            switch entitiesIsEmptyResult {
+                        self.userStorage.entitiesIsEmpty(storageType: storageType) { [unowned self] entitiesIsEmptyResults in
+                            switch entitiesIsEmptyResults.first!.result {
                             case .success(let entitiesIsEmpty):
                                 XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
