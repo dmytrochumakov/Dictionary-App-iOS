@@ -88,21 +88,6 @@ extension MDJWTCoreDataStorage {
     
 }
 
-// MARK: - Update
-extension MDJWTCoreDataStorage {
-    
-    func updateJWT(oldAccessToken accessToken: String, newJWTResponse jwtResponse: JWTResponse, _ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
-        let operation = MDUpdateJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
-                                                                 coreDataStorage: self,
-                                                                 oldAccessToken: accessToken,
-                                                                 newJWTResponse: jwtResponse) { result in
-            completionHandler(result)
-        }
-        operationQueueService.enqueue(operation)
-    }
-    
-}
-
 // MARK: - Delete
 extension MDJWTCoreDataStorage {
     

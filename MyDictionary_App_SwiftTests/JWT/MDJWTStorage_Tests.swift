@@ -45,11 +45,15 @@ extension MDJWTStorage_Tests {
         let storageType: MDStorageType = .memory
         
         jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] results in
+            
             switch results.first!.result {
+            
             case .success(let createdJWT):
+                
                 XCTAssertTrue(createdJWT.accessToken == Constants_For_Tests.mockedJWT.accessToken)
                 XCTAssertTrue(createdJWT.expirationDate == Constants_For_Tests.mockedJWT.expirationDate)
                 expectation.fulfill()
+                
             case .failure:
                 XCTExpectFailure()
                 expectation.fulfill()
@@ -66,14 +70,21 @@ extension MDJWTStorage_Tests {
         let storageType: MDStorageType = .memory
         
         jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResults in
+            
             switch createResults.first!.result {
+            
             case .success(let createdJWT):
+                
                 jwtStorage.readJWT(storageType: storageType, fromAccessToken: createdJWT.accessToken) { [unowned self] readResults in
+                    
                     switch readResults.first!.result {
+                    
                     case .success(let readJWT):
+                        
                         XCTAssertTrue(createdJWT.accessToken == readJWT.accessToken)
                         XCTAssertTrue(createdJWT.expirationDate == readJWT.expirationDate)
                         expectation.fulfill()
+                        
                     case .failure:
                         XCTExpectFailure()
                         expectation.fulfill()
@@ -88,65 +99,35 @@ extension MDJWTStorage_Tests {
         wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
         
     }
-    
-    func test_Update_JWT_In_Memory_Functionality() {
-        
-        let expectation = XCTestExpectation(description: "Update JWT In Memory Expectation")
-        let storageType: MDStorageType = .memory
-        
-        jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResults in
-            switch createResults.first!.result {
-            case .success(let createdJWT):
-                
-                XCTAssertTrue(createdJWT.accessToken == Constants_For_Tests.mockedJWT.accessToken)
-                
-                jwtStorage.updateJWT(storageType: storageType,
-                                     oldAccessToken: createdJWT.accessToken,
-                                     newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { updatedResults in
-                    
-                    switch updatedResults.first!.result {
-                    case .success(let updatedJWT):
-                        XCTAssertTrue(updatedJWT.accessToken == Constants_For_Tests.mockedJWTForUpdate.accessToken)
-                        XCTAssertTrue(updatedJWT.expirationDate == Constants_For_Tests.mockedJWTForUpdate.expirationDate)
-                        expectation.fulfill()
-                    case .failure:
-                        XCTExpectFailure()
-                        expectation.fulfill()
-                    }
-                    
-                }
-                
-            case .failure:
-                XCTExpectFailure()
-                expectation.fulfill()
-            }
-        }
-        
-        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
-        
-    }
-    
+       
     func test_Delete_JWT_From_Memory_Functionality() {
         
         let expectation = XCTestExpectation(description: "Delete JWT From Memory Expectation")
         let storageType: MDStorageType = .memory
         
         jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResults in
+            
             switch createResults.first!.result {
+            
             case .success(let createdJWT):
                 
-                self.jwtStorage.deleteJWT(storageType: storageType, jwtResponse: createdJWT) { deleteResults in
+                self.jwtStorage.deleteJWT(storageType: storageType, jwtResponse: createdJWT) { [unowned self] deleteResults in
                     
                     switch deleteResults.first!.result {
+                    
                     case .success(let deleteJWT):
                         
                         XCTAssertTrue(createdJWT.accessToken == deleteJWT.accessToken)
                         
                         self.jwtStorage.entitiesIsEmpty(storageType: storageType) { [unowned self] (entitiesIsEmptyResults) in
+                            
                             switch entitiesIsEmptyResults.first!.result {
+                            
                             case .success(let entitiesIsEmpty):
+                                
                                 XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
+                                
                             case .failure:
                                 XCTExpectFailure()
                                 expectation.fulfill()
@@ -180,11 +161,15 @@ extension MDJWTStorage_Tests {
         let storageType: MDStorageType = .coreData
         
         jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] results in
+            
             switch results.first!.result {
+            
             case .success(let createdJWT):
+                
                 XCTAssertTrue(createdJWT.accessToken == Constants_For_Tests.mockedJWT.accessToken)
                 XCTAssertTrue(createdJWT.expirationDate == Constants_For_Tests.mockedJWT.expirationDate)
                 expectation.fulfill()
+                
             case .failure:
                 XCTExpectFailure()
                 expectation.fulfill()
@@ -201,14 +186,20 @@ extension MDJWTStorage_Tests {
         let storageType: MDStorageType = .coreData
         
         jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResults in
+            
             switch createResults.first!.result {
+            
             case .success(let createdJWT):
                 jwtStorage.readJWT(storageType: storageType, fromAccessToken: createdJWT.accessToken) { [unowned self] readResults in
+                    
                     switch readResults.first!.result {
+                    
                     case .success(let readJWT):
+                        
                         XCTAssertTrue(createdJWT.accessToken == readJWT.accessToken)
                         XCTAssertTrue(createdJWT.expirationDate == readJWT.expirationDate)
                         expectation.fulfill()
+                        
                     case .failure:
                         XCTExpectFailure()
                         expectation.fulfill()
@@ -223,61 +214,35 @@ extension MDJWTStorage_Tests {
         wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
         
     }
-    
-    func test_Update_JWT_In_Core_Data_Functionality() {
-        
-        let expectation = XCTestExpectation(description: "Update JWT In Core Data Expectation")
-        let storageType: MDStorageType = .coreData
-        
-        jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResults in
-            switch createResults.first!.result {
-            case .success(let createdJWT):
-                
-                self.jwtStorage.updateJWT(storageType: storageType,
-                                          oldAccessToken: createdJWT.accessToken,
-                                          newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { [unowned self] updateResults in
-                    
-                    switch updateResults.first!.result {
-                    case .success(let updatedJWT):
-                        XCTAssertTrue(updatedJWT.accessToken == Constants_For_Tests.mockedJWTForUpdate.accessToken)
-                        XCTAssertTrue(updatedJWT.expirationDate == Constants_For_Tests.mockedJWTForUpdate.expirationDate)
-                        expectation.fulfill()
-                    case .failure:
-                        XCTExpectFailure()
-                        expectation.fulfill()
-                    }
-                    
-                }
-                
-            case .failure:
-                XCTExpectFailure()
-                expectation.fulfill()
-            }
-        }
-        
-        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
-        
-    }
-    
+      
     func test_Delete_JWT_From_Core_Data_Functionality() {
         
         let expectation = XCTestExpectation(description: "Delete JWT From Core Data Expectation")
         let storageType: MDStorageType = .coreData
         
-        jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResults in
+        jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { createResults in
+            
             switch createResults.first!.result {
+            
             case .success(let createdJWT):
                 
                 self.jwtStorage.deleteJWT(storageType: storageType, jwtResponse: createdJWT) { deleteResults in
+                    
                     switch deleteResults.first!.result {
+                    
                     case .success(let deleteJWT):
+                        
                         XCTAssertTrue(createdJWT.accessToken == deleteJWT.accessToken)
                         
-                        self.jwtStorage.entitiesIsEmpty(storageType: storageType) { [unowned self] entitiesIsEmptyResults in
+                        self.jwtStorage.entitiesIsEmpty(storageType: storageType) { entitiesIsEmptyResults in
+                            
                             switch entitiesIsEmptyResults.first!.result {
+                            
                             case .success(let entitiesIsEmpty):
+                                
                                 XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
+                                
                             case .failure:
                                 XCTExpectFailure()
                                 expectation.fulfill()
@@ -390,56 +355,6 @@ extension MDJWTStorage_Tests {
         
     }
     
-    func test_Update_JWT_In_All_Functionality() {
-        
-        let expectation = XCTestExpectation(description: "Update JWT In All Expectation")
-        let storageType: MDStorageType = .all
-        
-        var resultCount: Int = .zero
-        
-        jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResults in
-            
-            switch createResults.first!.result {
-            
-            case .success(let createdJWT):
-                
-                self.jwtStorage.updateJWT(storageType: storageType,
-                                          oldAccessToken: createdJWT.accessToken,
-                                          newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { [unowned self] updateResults in
-                    
-                    updateResults.forEach { updateResult in
-                        
-                        switch updateResult.result {
-                        case .success(let updatedJWT):
-                            
-                            resultCount += 1
-                            
-                            XCTAssertTrue(updatedJWT.accessToken == Constants_For_Tests.mockedJWTForUpdate.accessToken)
-                            XCTAssertTrue(updatedJWT.expirationDate == Constants_For_Tests.mockedJWTForUpdate.expirationDate)
-                            
-                            if (resultCount == updateResults.count) {
-                                expectation.fulfill()
-                            }
-                            
-                        case .failure:
-                            XCTExpectFailure()
-                            expectation.fulfill()
-                        }
-                        
-                    }
-                }
-                
-            case .failure:
-                XCTExpectFailure()
-                expectation.fulfill()
-            }
-            
-        }
-        
-        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
-        
-    }
-    
     func test_Delete_JWT_From_All_Functionality() {
         
         let expectation = XCTestExpectation(description: "Delete JWT From All Expectation")
@@ -452,35 +367,33 @@ extension MDJWTStorage_Tests {
             switch createResults.first!.result {
             case .success(let createdJWT):
                 
-                self.jwtStorage.deleteJWT(storageType: storageType, jwtResponse: createdJWT) { deleteResults in
+                self.jwtStorage.deleteJWT(storageType: storageType, jwtResponse: createdJWT) { [unowned self] deleteResults in
                     
                     deleteResults.forEach { deleteResult in
                         
                         switch deleteResult.result {
+                        
                         case .success(let deleteJWT):
                             
                             XCTAssertTrue(createdJWT.accessToken == deleteJWT.accessToken)
                             
-                            self.jwtStorage.entitiesIsEmpty(storageType: storageType) { [unowned self] entitiesIsEmptyResults in
+                            self.jwtStorage.entitiesIsEmpty(storageType: deleteResult.storageType) { [unowned self] entitiesIsEmptyResults in
                                 
-                                entitiesIsEmptyResults.forEach { entitiesIsEmptyResult in
+                                switch entitiesIsEmptyResults.first!.result {
+                                
+                                case .success(let entitiesIsEmpty):
                                     
-                                    switch entitiesIsEmptyResult.result {
-                                    case .success(let entitiesIsEmpty):
-                                        
-                                        resultCount += 1
-                                        
-                                        XCTAssertTrue(entitiesIsEmpty)
-                                        
-                                        if (resultCount == entitiesIsEmptyResults.count) {
-                                            expectation.fulfill()
-                                        }
-                                        
-                                    case .failure:
-                                        XCTExpectFailure()
+                                    resultCount += 1
+                                    
+                                    XCTAssertTrue(entitiesIsEmpty)
+                                    
+                                    if (resultCount == deleteResults.count) {
                                         expectation.fulfill()
                                     }
                                     
+                                case .failure:
+                                    XCTExpectFailure()
+                                    expectation.fulfill()
                                 }
                             }
                             

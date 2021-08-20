@@ -39,21 +39,15 @@ final class MDDeleteJWTCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            self.coreDataStorage.savePerform { [weak self] (result) in
+            self.coreDataStorage.savePerform { (result) in
                 DispatchQueue.main.async {
                     switch result {
                     case .success:
-                        guard let self = self
-                        else {
-                            self?.result?(.failure(MDEntityOperationError.objectRemovedFromMemory));
-                            self?.finish() ;
-                            return
-                        }
                         self.result?(.success(self.jwtResponse))
                         self.finish()
                     case .failure(let error):
-                        self?.result?(.failure(error))
-                        self?.finish()
+                        self.result?(.failure(error))
+                        self.finish()
                     }
                 }
             }

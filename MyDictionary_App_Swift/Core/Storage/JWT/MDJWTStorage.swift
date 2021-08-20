@@ -20,11 +20,6 @@ protocol MDJWTStorageProtocol {
                  fromAccessToken accessToken: String,
                  _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDJWTResultWithoutCompletion>))
     
-    func updateJWT(storageType: MDStorageType,
-                   oldAccessToken accessToken: String,
-                   newJWTResponse jwtResponse: JWTResponse,
-                   _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDJWTResultWithoutCompletion>))
-    
     func deleteJWT(storageType: MDStorageType,
                    jwtResponse: JWTResponse,
                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDJWTResultWithoutCompletion>))
@@ -196,58 +191,7 @@ extension MDJWTStorage {
             
         }
         
-    }
-    
-    func updateJWT(storageType: MDStorageType,
-                   oldAccessToken accessToken: String,
-                   newJWTResponse jwtResponse: JWTResponse,
-                   _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDJWTResultWithoutCompletion>)) {
-        
-        switch storageType {
-        
-        case .memory:
-            
-            memoryStorage.updateJWT(oldAccessToken: accessToken,
-                                    newJWTResponse: jwtResponse) { [unowned self] result in
-                completionHandler([.init(storageType: storageType, result: result)])
-            }
-            
-        case .coreData:
-            
-            coreDataStorage.updateJWT(oldAccessToken: accessToken, newJWTResponse: jwtResponse) { [unowned self] (result) in
-                completionHandler([.init(storageType: storageType, result: result)])
-            }
-            
-        case .all:
-            
-            // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDJWTResultWithoutCompletion> = []
-            // Update In Memory
-            memoryStorage.updateJWT(oldAccessToken: accessToken,
-                                    newJWTResponse: jwtResponse) { [unowned self] result in
-                
-                finalResult.append(.init(storageType: .memory, result: result))
-                
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
-                
-            }
-            // Update In Core Data
-            coreDataStorage.updateJWT(oldAccessToken: accessToken,
-                                      newJWTResponse: jwtResponse) { [unowned self] (result) in
-                
-                finalResult.append(.init(storageType: .coreData, result: result))
-                
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
-                
-            }
-            
-        }
-        
-    }
+    }      
     
     func deleteJWT(storageType: MDStorageType,
                    jwtResponse: JWTResponse,
