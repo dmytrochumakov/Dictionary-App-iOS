@@ -140,6 +140,9 @@
 		229E08C42652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C32652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift */; };
 		229E08C72652CB9000DA56C4 /* WordListCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */; };
 		229E08CB2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08CA2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift */; };
+		22A2521226CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521126CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift */; };
+		22A2521426CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521326CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift */; };
+		22A2521626CFE5230013FCF5 /* MDEntitiesCountProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521526CFE5230013FCF5 /* MDEntitiesCountProtocol.swift */; };
 		22B22681266CC033007AB292 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B22680266CC033007AB292 /* Observable.swift */; };
 		22B22689266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B22688266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift */; };
 		22B2268F266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B2268E266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift */; };
@@ -399,6 +402,9 @@
 		229E08C32652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfRowsInSectionProtocol.swift; sourceTree = "<group>"; };
 		229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		229E08CA2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourcePropertyProtocol.swift; sourceTree = "<group>"; };
+		22A2521126CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountResultWithoutCompletion.swift; sourceTree = "<group>"; };
+		22A2521326CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountResultWithCompletion.swift; sourceTree = "<group>"; };
+		22A2521526CFE5230013FCF5 /* MDEntitiesCountProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountProtocol.swift; sourceTree = "<group>"; };
 		22B22680266CC033007AB292 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		22B22688266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureAppearanceCellLabelTextColor.swift; sourceTree = "<group>"; };
 		22B2268E266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationAppearanceControllerProtocol.swift; sourceTree = "<group>"; };
@@ -1053,6 +1059,8 @@
 				22E691B526CE5E5200641DFA /* MDStorageResult.swift */,
 				22E691B926CE72C600641DFA /* MDUserdResultWithoutCompletion.swift */,
 				22E691BB26CE76EB00641DFA /* MDJWTResultWithoutCompletion.swift */,
+				22A2521126CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift */,
+				22A2521326CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -1069,6 +1077,7 @@
 				2289CEDA2678CC34007254C3 /* MDCreatedAtProtocol.swift */,
 				22EF01E2269D9CDA00FE4435 /* MDEntitiesIsEmptyProtocol.swift */,
 				2294D6BE26A2EF710066BE77 /* MDUserIDPropertyProtocol.swift */,
+				22A2521526CFE5230013FCF5 /* MDEntitiesCountProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1936,6 +1945,7 @@
 				220793DC26C6C057003D434B /* MDAuthResponseResult.swift in Sources */,
 				22DE583026C954C00032A94C /* MDDeleteJWTProtocol.swift in Sources */,
 				220FFEB526C9298200702CCE /* MDReadUsersCoreDataStorageOperation.swift in Sources */,
+				22A2521426CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift in Sources */,
 				22E2B4F7266509B900978E62 /* SettingsSectionModel.swift in Sources */,
 				220793DA26C6BF58003D434B /* AuthResponse.swift in Sources */,
 				22493C3726972232000DA480 /* MDWordCoreDataStorage.swift in Sources */,
@@ -1947,6 +1957,7 @@
 				227D5E6A2652586F00B54524 /* WordListCollectionViewDelegate.swift in Sources */,
 				22C5863F26C7AFB80030B12D /* RegistrationDataProvider.swift in Sources */,
 				229E08CB2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift in Sources */,
+				22A2521626CFE5230013FCF5 /* MDEntitiesCountProtocol.swift in Sources */,
 				226FEE85266B7DF90044A5F9 /* Appearance.swift in Sources */,
 				22DB2F7926C3BE7900C1AADA /* CourseListRouter.swift in Sources */,
 				22EDF02626C7E6A100D19DA1 /* CDJWTResponseEntity+Extension.swift in Sources */,
@@ -2072,6 +2083,7 @@
 				22EF01F6269DA81100FE4435 /* MDRequestDispatcher.swift in Sources */,
 				226FEE8C266BB2620044A5F9 /* AppearanceRowModel.swift in Sources */,
 				221D281126C5064A004BC4F7 /* AuthorizationViewController.swift in Sources */,
+				22A2521226CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift in Sources */,
 				22EF01EE269DA73100FE4435 /* HTTPHeader.swift in Sources */,
 				22CA087F26515ED90052D169 /* WordListInteractor.swift in Sources */,
 				220FFE8A26C90B1300702CCE /* MDCreateUserProtocol.swift in Sources */,

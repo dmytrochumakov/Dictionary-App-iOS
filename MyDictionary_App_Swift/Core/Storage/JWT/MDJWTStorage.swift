@@ -12,6 +12,9 @@ protocol MDJWTStorageProtocol {
     func entitiesIsEmpty(storageType: MDStorageType,
                          _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDEntitiesIsEmptyResultWithoutCompletion>))
     
+    func entitiesCount(storageType: MDStorageType,
+                       _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDEntitiesCountResultWithoutCompletion>))
+    
     func createJWT(storageType: MDStorageType,
                    jwtResponse: JWTResponse,
                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDJWTResultWithoutCompletion>))
@@ -81,6 +84,57 @@ extension MDJWTStorage {
             }
             // Check in Core Data
             coreDataStorage.entitiesIsEmpty() { [unowned self] result in
+                
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
+                    completionHandler(finalResult)
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+}
+
+// MARK: - Count
+extension MDJWTStorage {
+    
+    func entitiesCount(storageType: MDStorageType,
+                       _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDEntitiesCountResultWithoutCompletion>)) {
+        
+        switch storageType {
+        
+        case .memory:
+            
+            memoryStorage.entitiesCount() { [unowned self] (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .coreData:
+            
+            coreDataStorage.entitiesCount() { [unowned self] (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDEntitiesCountResultWithoutCompletion> = []
+            // Check in Memory
+            memoryStorage.entitiesCount() { [unowned self] result in
+                
+                finalResult.append(.init(storageType: .memory, result: result))
+                
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
+                    completionHandler(finalResult)
+                }
+                
+            }
+            // Check in Core Data
+            coreDataStorage.entitiesCount() { [unowned self] result in
                 
                 finalResult.append(.init(storageType: .coreData, result: result))
                 
