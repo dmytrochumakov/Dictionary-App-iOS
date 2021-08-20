@@ -83,16 +83,7 @@ extension MDAPIWord {
 extension MDAPIWord {
     
     func create() {
-        MDAPIOperation.init(MDWordEndpoint.createWord)
-            .execute(in: requestDispatcher) { [unowned self] (response) in
-                switch response {
-                case .data(let data, _):
-                    debugPrint(data.count)
-                    break
-                case .error(let error, _):
-                    break
-                }
-            }
+        //
     }
     
 }

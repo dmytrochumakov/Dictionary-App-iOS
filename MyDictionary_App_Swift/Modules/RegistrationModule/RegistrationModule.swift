@@ -32,7 +32,8 @@ extension RegistrationModule {
         let authValidation: AuthValidationProtocol = AuthValidation.init(dataProvider: dataProvider,
                                                                          validationTypes: validationTypes)
         
-        let apiAuth: MDAPIAuthProtocol = MDAPIAuth.init(requestDispatcher: Constants.RequestDispatcher.defaultRequestDispatcher)
+        let apiAuth: MDAPIAuthProtocol = MDAPIAuth.init(requestDispatcher: Constants.RequestDispatcher.defaultRequestDispatcher,
+                                                        operationQueueService: Constants.AppDependencies.dependencies.operationQueueService)
         
         let interactor: RegistrationInteractorProtocol = RegistrationInteractor.init(dataManager: dataManager,
                                                                                        authValidation: authValidation,

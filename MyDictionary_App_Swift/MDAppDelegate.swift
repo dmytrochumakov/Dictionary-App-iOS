@@ -22,8 +22,8 @@ final class MDAppDelegate: UIResponder,
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        self.rootWindow = RootWindow.window
         self.dependencies = MDAppDependencies.init(rootWindow: rootWindow)
+        self.rootWindow = RootWindow.window        
         
         return true
     }

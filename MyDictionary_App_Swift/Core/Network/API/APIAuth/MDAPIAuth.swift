@@ -15,9 +15,14 @@ protocol MDAPIAuthProtocol {
 final class MDAPIAuth: MDAPIAuthProtocol {
     
     fileprivate let requestDispatcher: MDRequestDispatcherProtocol
+    fileprivate let operationQueueService: OperationQueueServiceProtocol
     
-    init(requestDispatcher: MDRequestDispatcherProtocol) {
+    init(requestDispatcher: MDRequestDispatcherProtocol,
+         operationQueueService: OperationQueueServiceProtocol) {
+        
         self.requestDispatcher = requestDispatcher
+        self.operationQueueService = operationQueueService
+        
     }
     
     deinit {
@@ -87,51 +92,79 @@ extension MDAPIAuth {
 extension MDAPIAuth {
     
     func login(authRequest: AuthRequest, completionHandler: @escaping MDAuthResponseResult) {
-        MDAPIOperation.init(MDAPIAuthEndpoint.login(authRequest: authRequest))
-            .execute(in: requestDispatcher) { [unowned self] (response) in
-                switch response {
-                case .data(let data, _):
-                    do {                        
-                        completionHandler(.success(try JSONDecoder.init().decode(AuthResponse.self, from: data)))
-                    } catch (_) {
-                        completionHandler(.failure(MDAPIError.parseError))
-                    }
-                    debugPrint(#function, Self.self, "dataCount: ", data.count)
-                    break
-                case .error(let error, let httpURLResponse):
-                    debugPrint(#function, Self.self, "error: ", error.localizedDescription)
-                    if (httpURLResponse?.statusCode == MDAPIStatusCode.unauthorized.rawValue) {
-                        completionHandler(.failure(MDAPIAuthError.unauthorized))
-                    } else {
-                        completionHandler(.failure(error))
-                    }
-                    break
+        
+        let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
+                                              endpoint: MDAPIAuthEndpoint.login(authRequest: authRequest)) { [unowned self] result in
+            
+            switch result {
+            
+            case .data(let data, _):
+                
+                debugPrint(#function, Self.self, "dataCount: ", data.count)
+                
+                do {
+                    completionHandler(.success(try JSONDecoder.init().decode(AuthResponse.self, from: data)))
+                } catch (_) {
+                    completionHandler(.failure(MDAPIError.parseError))
                 }
+                
+                break
+                
+            case .error(let error, let httpURLResponse):
+                
+                debugPrint(#function, Self.self, "error: ", error.localizedDescription)
+                
+                if (httpURLResponse?.statusCode == MDAPIStatusCode.unauthorized.rawValue) {
+                    completionHandler(.failure(MDAPIAuthError.unauthorized))
+                } else {
+                    completionHandler(.failure(error))
+                }
+                
+                break
+                
             }
+        }
+        
+        operationQueueService.enqueue(operation)
+        
     }
     
+    
     func register(authRequest: AuthRequest, completionHandler: @escaping MDRegistrationResponseResult) {
-        MDAPIOperation.init(MDAPIAuthEndpoint.register(authRequest: authRequest))
-            .execute(in: requestDispatcher) { [unowned self] (response) in
-                switch response {
-                case .data(let data, _):
-                    do {
-                        completionHandler(.success(try JSONDecoder.init().decode(UserEntity.self, from: data)))
-                    } catch (_) {
-                        completionHandler(.failure(MDAPIError.parseError))
-                    }
-                    debugPrint(#function, Self.self, "dataCount: ", data.count)
-                    break
-                case .error(let error, let httpURLResponse):
-                    debugPrint(#function, Self.self, "error: ", error.localizedDescription)
-                    if (httpURLResponse?.statusCode == MDAPIStatusCode.conflict.rawValue) {
-                        completionHandler(.failure(MDAPIAuthError.conflict))
-                    } else {
-                        completionHandler(.failure(error))
-                    }
-                    break
+        
+        let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
+                                              endpoint: MDAPIAuthEndpoint.register(authRequest: authRequest)) { [unowned self] result in
+            
+            switch result {
+            
+            case .data(let data, _):
+                
+                debugPrint(#function, Self.self, "dataCount: ", data.count)
+                
+                do {
+                    completionHandler(.success(try JSONDecoder.init().decode(UserEntity.self, from: data)))
+                } catch (_) {
+                    completionHandler(.failure(MDAPIError.parseError))
                 }
+                
+                break
+                
+            case .error(let error, let httpURLResponse):
+                
+                debugPrint(#function, Self.self, "error: ", error.localizedDescription)
+                
+                if (httpURLResponse?.statusCode == MDAPIStatusCode.conflict.rawValue) {
+                    completionHandler(.failure(MDAPIAuthError.conflict))
+                } else {
+                    completionHandler(.failure(error))
+                }
+                
+                break
+                
             }
+        }
+        
+        operationQueueService.enqueue(operation)
     }
     
 }

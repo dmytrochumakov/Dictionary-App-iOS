@@ -7,39 +7,40 @@
 
 import Foundation
 
-final class MDAPIOperation {
+typealias MDAPIOperationResult = ((MDAPIOperation.Output) -> Void)
+
+final class MDAPIOperation: MDOperation {
     
     typealias Output = MDResponseOperationResult
     
-    fileprivate var task: URLSessionTask?
-    internal var endpoint: MDEndpoint
+    fileprivate let requestDispatcher: MDRequestDispatcherProtocol
+    fileprivate let endpoint: MDEndpoint
+    fileprivate let result: MDAPIOperationResult?
     
-    init(_ endpoint: MDEndpoint) {
+    fileprivate var task: URLSessionTask?
+    
+    init(requestDispatcher: MDRequestDispatcherProtocol,
+         endpoint: MDEndpoint,
+         result: MDAPIOperationResult?) {
+        
+        self.requestDispatcher = requestDispatcher
         self.endpoint = endpoint
+        self.result = result
+        
+    }
+    
+    override func main() {
+        self.task = self.requestDispatcher.execute(endpoint: self.endpoint) { [weak self] result in
+            self?.result?(result)
+            self?.finish()
+        }
     }
     
     deinit {
         debugPrint(#function, Self.self)
-    }
-    
-}
-
-// MARK: - Execute
-extension MDAPIOperation {
- 
-    func execute(in requestDispatcher: MDRequestDispatcherProtocol, completion: @escaping (MDResponseOperationResult) -> Void) {
-        task = requestDispatcher.execute(endpoint: endpoint, completion: { result in
-            completion(result)
-        })
-    }
-    
-}
-
-// MARK: - Cancel
-extension MDAPIOperation {
-
-    func cancel() {
-        task?.cancel()
+        self.task?.cancel()
+        self.task = nil
+        self.finish()
     }
     
 }
