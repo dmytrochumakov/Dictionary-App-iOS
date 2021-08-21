@@ -115,6 +115,43 @@ extension MDJWTStorage_Tests {
         
     }
     
+    func test_Update_JWT_In_Memory_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Update JWT In Memory Expectation")
+        let storageType: MDStorageType = .memory
+        
+        jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResults in
+            switch createResults.first!.result {
+            case .success(let createdJWT):
+                
+                XCTAssertTrue(createdJWT.accessToken == Constants_For_Tests.mockedJWT.accessToken)
+                
+                jwtStorage.updateJWT(storageType: storageType,
+                                     oldAccessToken: createdJWT.accessToken,
+                                     newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { updatedResults in
+                    
+                    switch updatedResults.first!.result {
+                    case .success(let updatedJWT):
+                        XCTAssertTrue(updatedJWT.accessToken == Constants_For_Tests.mockedJWTForUpdate.accessToken)
+                        XCTAssertTrue(updatedJWT.expirationDate == Constants_For_Tests.mockedJWTForUpdate.expirationDate)
+                        expectation.fulfill()
+                    case .failure:
+                        XCTExpectFailure()
+                        expectation.fulfill()
+                    }
+                    
+                }
+                
+            case .failure:
+                XCTExpectFailure()
+                expectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
+    
     func test_Delete_JWT_From_Memory_Functionality() {
         
         let expectation = XCTestExpectation(description: "Delete JWT From Memory Expectation")
@@ -235,6 +272,41 @@ extension MDJWTStorage_Tests {
                         expectation.fulfill()
                     }
                 }
+            case .failure:
+                XCTExpectFailure()
+                expectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
+    
+    func test_Update_JWT_In_Core_Data_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Update JWT In Core Data Expectation")
+        let storageType: MDStorageType = .coreData
+        
+        jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResults in
+            switch createResults.first!.result {
+            case .success(let createdJWT):
+                
+                self.jwtStorage.updateJWT(storageType: storageType,
+                                          oldAccessToken: createdJWT.accessToken,
+                                          newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { [unowned self] updateResults in
+                    
+                    switch updateResults.first!.result {
+                    case .success(let updatedJWT):
+                        XCTAssertTrue(updatedJWT.accessToken == Constants_For_Tests.mockedJWTForUpdate.accessToken)
+                        XCTAssertTrue(updatedJWT.expirationDate == Constants_For_Tests.mockedJWTForUpdate.expirationDate)
+                        expectation.fulfill()
+                    case .failure:
+                        XCTExpectFailure()
+                        expectation.fulfill()
+                    }
+                    
+                }
+                
             case .failure:
                 XCTExpectFailure()
                 expectation.fulfill()
@@ -372,6 +444,56 @@ extension MDJWTStorage_Tests {
                         
                     }
                     
+                }
+                
+            case .failure:
+                XCTExpectFailure()
+                expectation.fulfill()
+            }
+            
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
+    
+    func test_Update_JWT_In_All_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Update JWT In All Expectation")
+        let storageType: MDStorageType = .all
+        
+        var resultCount: Int = .zero
+        
+        jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResults in
+            
+            switch createResults.first!.result {
+            
+            case .success(let createdJWT):
+                
+                self.jwtStorage.updateJWT(storageType: storageType,
+                                          oldAccessToken: createdJWT.accessToken,
+                                          newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { [unowned self] updateResults in
+                    
+                    updateResults.forEach { updateResult in
+                        
+                        switch updateResult.result {
+                        case .success(let updatedJWT):
+                            
+                            resultCount += 1
+                            
+                            XCTAssertTrue(updatedJWT.accessToken == Constants_For_Tests.mockedJWTForUpdate.accessToken)
+                            XCTAssertTrue(updatedJWT.expirationDate == Constants_For_Tests.mockedJWTForUpdate.expirationDate)
+                            
+                            if (resultCount == updateResults.count) {
+                                expectation.fulfill()
+                            }
+                            
+                        case .failure:
+                            XCTExpectFailure()
+                            expectation.fulfill()
+                        }
+                        
+                    }
                 }
                 
             case .failure:
