@@ -18,6 +18,7 @@ enum MDAPIError: Error {
     case conflict
     case internalServerError
     case parseError
+    case noInternetConnection
     case unknown    
 }
 
@@ -45,6 +46,8 @@ extension MDAPIError: LocalizedError {
             return KeysForTranslate.internalServerErrorApiError.localized
         case .parseError:
             return KeysForTranslate.parseErrorApiError.localized
+        case .noInternetConnection:
+            return KeysForTranslate.noInternetConnection.localized
         case .unknown:
             return KeysForTranslate.unknownApiError.localized
         }

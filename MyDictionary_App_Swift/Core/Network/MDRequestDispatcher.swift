@@ -7,22 +7,29 @@
 
 import Foundation
 import UIKit
+import Reachability
 
 protocol MDRequestDispatcherProtocol {
-    init(environment: MDEnvironmentProtocol, networkSession: MDNetworkSessionProtocol)
+    init(reachability: Reachability, environment: MDEnvironmentProtocol, networkSession: MDNetworkSessionProtocol)
     func execute(endpoint: MDEndpoint, completion: @escaping (MDResponseOperationResult) -> Void) -> URLSessionTask?
 }
 
 final class MDRequestDispatcher: MDRequestDispatcherProtocol {
     
+    fileprivate let reachability: Reachability
     /// The environment configuration.
     fileprivate var environment: MDEnvironmentProtocol
     /// The network session configuration.
     fileprivate var networkSession: MDNetworkSessionProtocol
     
-    required init(environment: MDEnvironmentProtocol, networkSession: MDNetworkSessionProtocol) {
+    required init(reachability: Reachability,
+                  environment: MDEnvironmentProtocol,
+                  networkSession: MDNetworkSessionProtocol) {
+        
+        self.reachability = reachability
         self.environment = environment
         self.networkSession = networkSession
+        
     }
     
     deinit {
@@ -35,6 +42,13 @@ final class MDRequestDispatcher: MDRequestDispatcherProtocol {
 extension MDRequestDispatcher {
     
     func execute(endpoint: MDEndpoint, completion: @escaping (MDResponseOperationResult) -> Void) -> URLSessionTask? {
+        // Check Internet Connection
+        guard (isReachable) else {
+            DispatchQueue.main.async {
+                completion(.error(MDAPIError.noInternetConnection, nil))
+            }
+            return nil
+        }
         // Show Indicator //
         showNetworkActivityIndicator()
         // Create a URL request.
@@ -128,6 +142,15 @@ fileprivate extension MDRequestDispatcher {
         DispatchQueue.main.async {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
+    }
+    
+}
+
+// MARK: - Check Internet Connection
+fileprivate extension MDRequestDispatcher {
+    
+    var isReachable: Bool {
+        return (reachability.connection == .cellular || reachability.connection == .wifi)
     }
     
 }

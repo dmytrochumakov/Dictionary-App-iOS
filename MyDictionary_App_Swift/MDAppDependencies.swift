@@ -7,9 +7,11 @@
 
 import UIKit
 import Firebase
+import Reachability
 
 protocol MDAppDependenciesProtocol {
     var rootWindow: UIWindow! { get }
+    var reachability: Reachability! { get }
     var operationQueue: OperationQueue! { get }
     var operationQueueService: OperationQueueServiceProtocol! { get }
     var memoryStorage: MDWordMemoryStorageProtocol! { get }
@@ -21,6 +23,7 @@ protocol MDAppDependenciesProtocol {
 final class MDAppDependencies: NSObject, MDAppDependenciesProtocol {
     
     var rootWindow: UIWindow!
+    var reachability: Reachability!
     var operationQueue: OperationQueue!
     var operationQueueService: OperationQueueServiceProtocol!
     var memoryStorage: MDWordMemoryStorageProtocol!
@@ -43,6 +46,9 @@ final class MDAppDependencies: NSObject, MDAppDependenciesProtocol {
 extension MDAppDependencies {
     
     func configureDependencies() {
+        
+        guard let reachability = try? Reachability.init() else { fatalError("Impossible initialize Reachability Service") }
+        self.reachability = reachability
         
         let operationQueue: OperationQueue = .init()
         self.operationQueue = operationQueue

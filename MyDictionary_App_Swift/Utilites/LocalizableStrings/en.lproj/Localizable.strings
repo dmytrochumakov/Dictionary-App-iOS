@@ -49,4 +49,5 @@
 "register" = "Register";
 
 "you_are_offline" = "You are offline";
-"please_check_your_internet_connection" = "please check your internet connection";
+"please_check_your_internet_connection" = "Please check your internet connection";
+"no_internet_connection" = "No internet connection";

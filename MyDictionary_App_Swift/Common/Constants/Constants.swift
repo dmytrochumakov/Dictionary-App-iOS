@@ -98,7 +98,8 @@ struct Constants {
     struct RequestDispatcher {
         
         static var defaultRequestDispatcher: MDRequestDispatcherProtocol {
-            return MDRequestDispatcher.init(environment: APIEnvironment.current,
+            return MDRequestDispatcher.init(reachability: AppDependencies.dependencies.reachability,
+                                            environment: APIEnvironment.current,
                                             networkSession: NetworkSession.defaultNetworkSession)
         }
         

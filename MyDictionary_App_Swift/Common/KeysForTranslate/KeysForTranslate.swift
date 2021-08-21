@@ -51,6 +51,7 @@ enum KeysForTranslate: String {
     case register
     case youAreOffline = "you_are_offline"
     case pleaseCheckYourInternetConnection = "please_check_your_internet_connection"
+    case noInternetConnection = "no_internet_connection"
     
 }
 
