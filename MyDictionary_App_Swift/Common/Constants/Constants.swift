@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Reachability
 
 struct Constants {
     
@@ -97,8 +98,8 @@ struct Constants {
     
     struct RequestDispatcher {
         
-        static var defaultRequestDispatcher: MDRequestDispatcherProtocol {
-            return MDRequestDispatcher.init(reachability: AppDependencies.dependencies.reachability,
+        static func defaultRequestDispatcher(reachability: Reachability) -> MDRequestDispatcherProtocol {
+            return MDRequestDispatcher.init(reachability: reachability,
                                             environment: APIEnvironment.current,
                                             networkSession: NetworkSession.defaultNetworkSession)
         }

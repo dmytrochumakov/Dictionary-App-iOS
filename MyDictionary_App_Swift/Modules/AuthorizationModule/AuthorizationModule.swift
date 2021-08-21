@@ -33,10 +33,18 @@ extension AuthorizationModule {
         let authValidation: AuthValidationProtocol = AuthValidation.init(dataProvider: dataProvider,
                                                                          validationTypes: validationTypes)                
         
+        let apiAuth: MDAPIAuthProtocol = MDAPIAuth.init(requestDispatcher: Constants.RequestDispatcher.defaultRequestDispatcher(reachability: Constants.AppDependencies.dependencies.reachability),
+                                                        operationQueueService: Constants.AppDependencies.dependencies.operationQueueService)
+        
+        let authManager: MDAuthManagerProtocol = MDAuthManager.init(apiAuth: apiAuth,
+                                                                    userStorage: Constants.AppDependencies.dependencies.userStorage,
+                                                                    jwtStorage: Constants.AppDependencies.dependencies.jwtStorage,
+                                                                    keychainService: Constants.AppDependencies.dependencies.keychainService)
+        
         let interactor: AuthorizationInteractorProtocol = AuthorizationInteractor.init(dataManager: dataManager,
                                                                                        authValidation: authValidation,
                                                                                        textFieldDelegate: textFieldDelegate,
-                                                                                       authManager: Constants.AppDependencies.dependencies.authManager)
+                                                                                       authManager: authManager)
         
         var router: AuthorizationRouterProtocol = AuthorizationRouter.init()
         let presenter: AuthorizationPresenterProtocol = AuthorizationPresenter.init(interactor: interactor, router: router)
