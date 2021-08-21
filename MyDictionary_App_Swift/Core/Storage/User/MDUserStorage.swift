@@ -55,39 +55,51 @@ extension MDUserStorage {
         
         case .memory:
             
-            memoryStorage.entitiesIsEmpty() { [unowned self] (result) in
+            memoryStorage.entitiesIsEmpty() { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .coreData:
             
-            coreDataStorage.entitiesIsEmpty() { [unowned self] (result) in
+            coreDataStorage.entitiesIsEmpty() { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .all:
             
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
             // Initialize final result
             var finalResult: MDStorageResultsWithoutCompletion<MDEntitiesIsEmptyResultWithoutCompletion> = []
+            
             // Check in Memory
-            memoryStorage.entitiesIsEmpty() { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.entitiesIsEmpty() {  result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .memory, result: result))
-                
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
             }
+            
             // Check in Core Data
-            coreDataStorage.entitiesIsEmpty() { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.entitiesIsEmpty() { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
-                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
             }
             
         }
@@ -105,39 +117,51 @@ extension MDUserStorage {
         
         case .memory:
             
-            memoryStorage.createUser(userEntity) { [unowned self] (result) in
+            memoryStorage.createUser(userEntity) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .coreData:
             
-            coreDataStorage.createUser(userEntity) { [unowned self] (result) in
+            coreDataStorage.createUser(userEntity) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .all:
             
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
             // Initialize final result
             var finalResult: MDStorageResultsWithoutCompletion<MDUserResultWithoutCompletion> = []
+            
             // Create in Memory
-            memoryStorage.createUser(userEntity) { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.createUser(userEntity) { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .memory, result: result))
-                
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
             }
+            
             // Create in Core Data
-            coreDataStorage.createUser(userEntity) { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.createUser(userEntity) { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
-                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
             }
             
         }
@@ -149,39 +173,51 @@ extension MDUserStorage {
         
         case .memory:
             
-            memoryStorage.readUser(fromUserID: userId) { [unowned self] (result) in
+            memoryStorage.readUser(fromUserID: userId) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .coreData:
             
-            coreDataStorage.readUser(fromUserID: userId) { [unowned self] (result) in
+            coreDataStorage.readUser(fromUserID: userId) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .all:
             
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
             // Initialize final result
             var finalResult: MDStorageResultsWithoutCompletion<MDUserResultWithoutCompletion> = []
+            
             // Read From Memory
-            memoryStorage.readUser(fromUserID: userId) { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.readUser(fromUserID: userId) { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .memory, result: result))
-                
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
             }
+            
             // Read From Core Data
-            coreDataStorage.readUser(fromUserID: userId) { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.readUser(fromUserID: userId) { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
-                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
             }
             
         }
@@ -194,39 +230,51 @@ extension MDUserStorage {
         
         case .memory:
             
-            memoryStorage.deleteUser(userEntity) { [unowned self] (result) in
+            memoryStorage.deleteUser(userEntity) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .coreData:
             
-            coreDataStorage.deleteUser(userEntity) { [unowned self] (result) in
+            coreDataStorage.deleteUser(userEntity) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .all:
             
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
             // Initialize final result
             var finalResult: MDStorageResultsWithoutCompletion<MDUserResultWithoutCompletion> = []
+            
             // Delete From Memory
-            memoryStorage.deleteUser(userEntity) { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.deleteUser(userEntity) { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .memory, result: result))
-                
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
             }
+            
             // Delete From Core Data
-            coreDataStorage.deleteUser(userEntity) { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.deleteUser(userEntity) { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
-                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
             }
             
         }
