@@ -44,15 +44,34 @@ extension MDWordStorage_Tests {
         let storageType: MDStorageType = .memory
         
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] results in
+            
             switch results.first!.result {
+            
             case .success(let createdWord):
+                
                 XCTAssertTrue(createdWord.id == Constants_For_Tests.mockedWord0.id)
                 XCTAssertTrue(createdWord.word == Constants_For_Tests.mockedWord0.word)
                 XCTAssertTrue(createdWord.word_description == Constants_For_Tests.mockedWord0.word_description)
                 XCTAssertTrue(createdWord.word_language == Constants_For_Tests.mockedWord0.word_language)
                 XCTAssertTrue(createdWord.created_at == Constants_For_Tests.mockedWord0.created_at)
                 XCTAssertTrue(createdWord.updated_at == Constants_For_Tests.mockedWord0.updated_at)                
-                expectation.fulfill()
+                
+                wordStorage.entitiesCount(storageType: storageType) { [unowned self] entitiesCountResults in
+                    
+                    switch entitiesCountResults.first!.result {
+                    
+                    case .success(let entitiesCount):
+                        
+                        XCTAssertTrue(entitiesCount == 1)
+                        expectation.fulfill()
+                        
+                    case .failure:
+                        XCTExpectFailure()
+                        expectation.fulfill()
+                    }
+                    
+                }
+                
             case .failure:
                 XCTExpectFailure()
                 expectation.fulfill()
@@ -69,19 +88,34 @@ extension MDWordStorage_Tests {
         let storageType: MDStorageType = .memory
         
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResults in
+            
             switch createResults.first!.result {
+            
             case .success(let createdWord):
+                
                 XCTAssertTrue(createdWord.id == Constants_For_Tests.mockedWord0.id)
+                
                 self.wordStorage.readWord(fromID: createdWord.id, storageType: storageType, { [unowned self] readResults in
+                    
                     switch readResults.first!.result {
-                    case .success(let fetchedWord):
-                        XCTAssertTrue(fetchedWord.id == createdWord.id)
+                    
+                    case .success(let readWord):
+                        
+                        XCTAssertTrue(readWord.id == createdWord.id)
+                        XCTAssertTrue(readWord.word == createdWord.word)
+                        XCTAssertTrue(readWord.word_description == createdWord.word_description)
+                        XCTAssertTrue(readWord.word_language == createdWord.word_language)
+                        XCTAssertTrue(readWord.created_at == createdWord.created_at)
+                        XCTAssertTrue(readWord.updated_at == createdWord.updated_at)
+                        
                         expectation.fulfill()
+                        
                     case .failure:
                         XCTExpectFailure()
                         expectation.fulfill()
                     }
                 })
+                
             case .failure:
                 XCTExpectFailure()
                 expectation.fulfill()
@@ -98,17 +132,24 @@ extension MDWordStorage_Tests {
         let storageType: MDStorageType = .memory
         
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResults in
+            
             switch createResults.first!.result {
+            
             case .success(let createdWord):
+                
                 self.wordStorage.updateWord(byID: createdWord.id,
                                             word: Constants_For_Tests.mockedWordForUpdate.word,
                                             word_description: Constants_For_Tests.mockedWordForUpdate.word_description,
                                             storageType: storageType, { [unowned self] updateResults in
+                                                
                                                 switch updateResults.first!.result {
+                                                
                                                 case .success(let updatedWord):
+                                                    
                                                     XCTAssertTrue(updatedWord.word == Constants_For_Tests.mockedWordForUpdate.word)
                                                     XCTAssertTrue(updatedWord.word_description == Constants_For_Tests.mockedWordForUpdate.word_description)
                                                     expectation.fulfill()
+                                                    
                                                 case .failure:
                                                     XCTExpectFailure()
                                                     expectation.fulfill()
@@ -130,18 +171,40 @@ extension MDWordStorage_Tests {
         let storageType: MDStorageType = .memory
         
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResults in
+            
             switch createResults.first!.result {
+            
             case .success(let createdWord):
+                
                 self.wordStorage.deleteWord(createdWord,
                                             storageType: storageType, { [unowned self] deleteResults in
+                                                
                                                 switch deleteResults.first!.result {
+                                                
                                                 case .success:
-                                                    expectation.fulfill()
+                                                    
+                                                    self.wordStorage.entitiesIsEmpty(storageType: storageType) { [unowned self] entitiesIsEmptyResults in
+                                                        
+                                                        switch entitiesIsEmptyResults.first!.result {
+                                                        
+                                                        case .success(let entitiesIsEmpty):
+                                                            
+                                                            XCTAssertTrue(entitiesIsEmpty)
+                                                            expectation.fulfill()
+                                                            
+                                                        case .failure(_):
+                                                            XCTExpectFailure()
+                                                            expectation.fulfill()
+                                                        }
+                                                        
+                                                    }
+                                                    
                                                 case .failure:
                                                     XCTExpectFailure()
                                                     expectation.fulfill()
                                                 }
                                             })
+                
             case .failure:
                 XCTExpectFailure()
                 expectation.fulfill()
@@ -163,15 +226,34 @@ extension MDWordStorage_Tests {
         let storageType: MDStorageType = .coreData
         
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResults in
+            
             switch createResults.first!.result {
+            
             case .success(let createdWord):
+                
                 XCTAssertTrue(createdWord.id == Constants_For_Tests.mockedWord0.id)
                 XCTAssertTrue(createdWord.word == Constants_For_Tests.mockedWord0.word)
                 XCTAssertTrue(createdWord.word_description == Constants_For_Tests.mockedWord0.word_description)
                 XCTAssertTrue(createdWord.word_language == Constants_For_Tests.mockedWord0.word_language)
                 XCTAssertTrue(createdWord.created_at == Constants_For_Tests.mockedWord0.created_at)
                 XCTAssertTrue(createdWord.updated_at == Constants_For_Tests.mockedWord0.updated_at)
-                expectation.fulfill()
+                
+                wordStorage.entitiesCount(storageType: storageType) { [unowned self] entitiesCountResults in
+                    
+                    switch entitiesCountResults.first!.result {
+                    
+                    case .success(let entitiesCount):
+                        
+                        XCTAssertTrue(entitiesCount == 1)
+                        expectation.fulfill()
+                        
+                    case .failure:
+                        XCTExpectFailure()
+                        expectation.fulfill()
+                    }
+                    
+                }
+                
             case .failure:
                 XCTExpectFailure()
                 expectation.fulfill()
@@ -188,14 +270,28 @@ extension MDWordStorage_Tests {
         let storageType: MDStorageType = .coreData
         
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResults in
+            
             switch createResults.first!.result {
+            
             case .success(let createdWord):
+                
                 XCTAssertTrue(createdWord.id == Constants_For_Tests.mockedWord0.id)
+                
                 self.wordStorage.readWord(fromID: createdWord.id, storageType: storageType, { [unowned self] readResults in
+                    
                     switch readResults.first!.result {
-                    case .success(let fetchedWord):
-                        XCTAssertTrue(fetchedWord.id == createdWord.id)
+                    
+                    case .success(let readWord):
+                        
+                        XCTAssertTrue(readWord.id == createdWord.id)
+                        XCTAssertTrue(readWord.word == createdWord.word)
+                        XCTAssertTrue(readWord.word_description == createdWord.word_description)
+                        XCTAssertTrue(readWord.word_language == createdWord.word_language)
+                        XCTAssertTrue(readWord.created_at == createdWord.created_at)
+                        XCTAssertTrue(readWord.updated_at == createdWord.updated_at)
+                        
                         expectation.fulfill()
+                        
                     case .failure:
                         XCTExpectFailure()
                         expectation.fulfill()
@@ -217,22 +313,30 @@ extension MDWordStorage_Tests {
         let storageType: MDStorageType = .coreData
         
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResults in
+            
             switch createResults.first!.result {
+            
             case .success(let createdWord):
+                
                 self.wordStorage.updateWord(byID: createdWord.id,
                                             word: Constants_For_Tests.mockedWordForUpdate.word,
                                             word_description: Constants_For_Tests.mockedWordForUpdate.word_description,
                                             storageType: storageType, { [unowned self] updateResults in
+                                                
                                                 switch updateResults.first!.result {
+                                                
                                                 case .success(let updatedWord):
+                                                    
                                                     XCTAssertTrue(updatedWord.word == Constants_For_Tests.mockedWordForUpdate.word)
                                                     XCTAssertTrue(updatedWord.word_description == Constants_For_Tests.mockedWordForUpdate.word_description)
                                                     expectation.fulfill()
+                                                    
                                                 case .failure:
                                                     XCTExpectFailure()
                                                     expectation.fulfill()
                                                 }
                                             })
+                
             case .failure:
                 XCTExpectFailure()
                 expectation.fulfill()
@@ -249,13 +353,34 @@ extension MDWordStorage_Tests {
         let storageType: MDStorageType = .coreData
         
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResults in
+            
             switch createResults.first!.result {
+            
             case .success(let createdWord):
+                
                 self.wordStorage.deleteWord(createdWord,
                                             storageType: storageType, { [unowned self] deleteResults in
+                                                
                                                 switch deleteResults.first!.result {
+                                                
                                                 case .success:
-                                                    expectation.fulfill()
+                                                    
+                                                    self.wordStorage.entitiesIsEmpty(storageType: storageType) { [unowned self] entitiesIsEmptyResults in
+                                                        
+                                                        switch entitiesIsEmptyResults.first!.result {
+                                                        
+                                                        case .success(let entitiesIsEmpty):
+                                                            
+                                                            XCTAssertTrue(entitiesIsEmpty)
+                                                            expectation.fulfill()
+                                                            
+                                                        case .failure(_):
+                                                            XCTExpectFailure()
+                                                            expectation.fulfill()
+                                                        }
+                                                        
+                                                    }
+                                                    
                                                 case .failure:
                                                     XCTExpectFailure()
                                                     expectation.fulfill()
@@ -265,6 +390,232 @@ extension MDWordStorage_Tests {
                 XCTExpectFailure()
                 expectation.fulfill()
             }
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
+    
+}
+
+// MARK: - All CRUD
+extension MDWordStorage_Tests {
+    
+    func test_Create_One_Word_In_All_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Create One Word In All Expectation")
+        let storageType: MDStorageType = .all
+        
+        var resultCount: Int = .zero
+        
+        wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResults in
+            
+            createResults.forEach { createResult in
+                
+                switch createResult.result {
+                case .success(let createdWord):
+                    
+                    resultCount += 1
+                    
+                    XCTAssertTrue(createdWord.id == Constants_For_Tests.mockedWord0.id)
+                    XCTAssertTrue(createdWord.word == Constants_For_Tests.mockedWord0.word)
+                    XCTAssertTrue(createdWord.word_description == Constants_For_Tests.mockedWord0.word_description)
+                    XCTAssertTrue(createdWord.word_language == Constants_For_Tests.mockedWord0.word_language)
+                    XCTAssertTrue(createdWord.created_at == Constants_For_Tests.mockedWord0.created_at)
+                    XCTAssertTrue(createdWord.updated_at == Constants_For_Tests.mockedWord0.updated_at)
+                    
+                    wordStorage.entitiesCount(storageType: createResult.storageType) { [unowned self] entitiesCountResults in
+                        
+                        switch entitiesCountResults.first!.result {
+                        
+                        case .success(let entitiesCount):
+                            
+                            XCTAssertTrue(entitiesCount == 1)
+                            
+                            if (resultCount == createResults.count) {
+                                expectation.fulfill()
+                            }
+                            
+                        case .failure:
+                            XCTExpectFailure()
+                            expectation.fulfill()
+                        }
+                        
+                    }
+                    
+                case .failure:
+                    XCTExpectFailure()
+                    expectation.fulfill()
+                }
+                
+            }
+            
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
+    
+    func test_Read_One_Word_From_All_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Read One Word From All Expectation")
+        let storageType: MDStorageType = .all
+        
+        var resultCount: Int = .zero
+        
+        wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResults in
+            
+            switch createResults.first!.result {
+            
+            case .success(let createdWord):
+                
+                wordStorage.readWord(fromID: createdWord.id, storageType: storageType) { [unowned self] readResults in
+                    
+                    readResults.forEach { readResult in
+                        
+                        switch readResult.result {
+                        case .success(let readWord):
+                            
+                            resultCount += 1
+                            
+                            XCTAssertTrue(readWord.id == createdWord.id)
+                            XCTAssertTrue(readWord.word == createdWord.word)
+                            XCTAssertTrue(readWord.word_description == createdWord.word_description)
+                            XCTAssertTrue(readWord.word_language == createdWord.word_language)
+                            XCTAssertTrue(readWord.created_at == createdWord.created_at)
+                            XCTAssertTrue(readWord.updated_at == createdWord.updated_at)
+                            
+                            if (resultCount == readResults.count) {
+                                expectation.fulfill()
+                            }
+                            
+                        case .failure:
+                            XCTExpectFailure()
+                            expectation.fulfill()
+                        }
+                        
+                    }
+                    
+                }
+                
+            case .failure:
+                XCTExpectFailure()
+                expectation.fulfill()
+            }
+            
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
+    
+    func test_Update_One_Word_In_All_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Update One Word In All Expectation")
+        let storageType: MDStorageType = .all
+        
+        var resultCount: Int = .zero
+        
+        wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResults in
+            
+            switch createResults.first!.result {
+            
+            case .success(let createdWord):
+                
+                self.wordStorage.updateWord(byID: createdWord.id,
+                                            word: Constants_For_Tests.mockedWordForUpdate.word,
+                                            word_description: Constants_For_Tests.mockedWordForUpdate.word_description,
+                                            storageType: storageType) { [unowned self] updateResults in
+                    
+                    updateResults.forEach { updateResult in
+                        
+                        switch updateResult.result {
+                        case .success(let updatedWord):
+                            
+                            resultCount += 1
+                            
+                            XCTAssertTrue(updatedWord.word == Constants_For_Tests.mockedWordForUpdate.word)
+                            XCTAssertTrue(updatedWord.word_description == Constants_For_Tests.mockedWordForUpdate.word_description)
+                            
+                            if (resultCount == updateResults.count) {
+                                expectation.fulfill()
+                            }
+                            
+                        case .failure:
+                            XCTExpectFailure()
+                            expectation.fulfill()
+                        }
+                        
+                    }
+                }
+                
+            case .failure:
+                XCTExpectFailure()
+                expectation.fulfill()
+            }
+            
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
+    
+    func test_Delete_One_Word_From_All_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Delete One Word From All Expectation")
+        let storageType: MDStorageType = .all
+        
+        var resultCount: Int = .zero
+        
+        wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResults in
+            
+            switch createResults.first!.result {
+            
+            case .success(let createdWord):
+                
+                self.wordStorage.deleteWord(createdWord, storageType: storageType) { [unowned self] deleteResults in
+                    
+                    deleteResults.forEach { deleteResult in
+                        
+                        switch deleteResult.result {
+                        
+                        case .success(let deleteWord):
+                            
+                            XCTAssertTrue(createdWord.id == deleteWord.id)
+                            
+                            self.wordStorage.entitiesIsEmpty(storageType: deleteResult.storageType) { [unowned self] entitiesIsEmptyResults in
+                                
+                                switch entitiesIsEmptyResults.first!.result {
+                                
+                                case .success(let entitiesIsEmpty):
+                                    
+                                    resultCount += 1
+                                    
+                                    XCTAssertTrue(entitiesIsEmpty)
+                                    
+                                    if (resultCount == deleteResults.count) {
+                                        expectation.fulfill()
+                                    }
+                                    
+                                case .failure:
+                                    XCTExpectFailure()
+                                    expectation.fulfill()
+                                }
+                            }
+                            
+                        case .failure:
+                            XCTExpectFailure()
+                            expectation.fulfill()
+                        }
+                        
+                    }
+                }
+                
+            case .failure:
+                XCTExpectFailure()
+                expectation.fulfill()
+            }
+            
         }
         
         wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)

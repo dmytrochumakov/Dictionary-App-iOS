@@ -12,6 +12,9 @@ protocol MDWordStorageProtocol {
     func entitiesIsEmpty(storageType: MDStorageType,
                          _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDEntitiesIsEmptyResultWithoutCompletion>))
     
+    func entitiesCount(storageType: MDStorageType,
+                       _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDEntitiesCountResultWithoutCompletion>))
+    
     func createWord(_ wordModel: WordModel,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
@@ -51,8 +54,53 @@ final class MDWordStorage: MDWordStorageProtocol {
     
 }
 
-// MARK: - Is Empty
 extension MDWordStorage {
+    
+    func entitiesCount(storageType: MDStorageType,
+                       _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDEntitiesCountResultWithoutCompletion>)) {
+        
+        switch storageType {
+        
+        case .memory:
+            
+            memoryStorage.entitiesCount() { [unowned self] (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .coreData:
+            
+            coreDataStorage.entitiesCount() { [unowned self] (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDEntitiesCountResultWithoutCompletion> = []
+            // Check in Memory
+            memoryStorage.entitiesCount() { [unowned self] result in
+                
+                finalResult.append(.init(storageType: .memory, result: result))
+                
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
+                    completionHandler(finalResult)
+                }
+                
+            }
+            // Check in Core Data
+            coreDataStorage.entitiesCount() { [unowned self] result in
+                
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
+                    completionHandler(finalResult)
+                }
+                
+            }
+            
+        }
+        
+    }
     
     func entitiesIsEmpty(storageType: MDStorageType,
                          _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDEntitiesIsEmptyResultWithoutCompletion>)) {
@@ -79,7 +127,7 @@ extension MDWordStorage {
                 
                 finalResult.append(.init(storageType: .memory, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -89,7 +137,7 @@ extension MDWordStorage {
                 
                 finalResult.append(.init(storageType: .coreData, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -131,7 +179,7 @@ extension MDWordStorage {
                 
                 finalResult.append(.init(storageType: .memory, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -141,7 +189,7 @@ extension MDWordStorage {
                 
                 finalResult.append(.init(storageType: .coreData, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -178,7 +226,7 @@ extension MDWordStorage {
                 
                 finalResult.append(.init(storageType: .memory, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -188,7 +236,7 @@ extension MDWordStorage {
                 
                 finalResult.append(.init(storageType: .coreData, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -233,7 +281,7 @@ extension MDWordStorage {
                 
                 finalResult.append(.init(storageType: .memory, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -245,7 +293,7 @@ extension MDWordStorage {
                 
                 finalResult.append(.init(storageType: .coreData, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -280,7 +328,7 @@ extension MDWordStorage {
                 
                 finalResult.append(.init(storageType: .memory, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
@@ -290,7 +338,7 @@ extension MDWordStorage {
                 
                 finalResult.append(.init(storageType: .coreData, result: result))
                 
-                if (finalResult.count == MDStorageType.allCases.count) {
+                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
                     completionHandler(finalResult)
                 }
                 
