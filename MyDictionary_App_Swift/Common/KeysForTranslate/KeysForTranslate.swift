@@ -49,6 +49,8 @@ enum KeysForTranslate: String {
     
     case registration
     case register
+    case youAreOffline = "you_are_offline"
+    case pleaseCheckYourInternetConnection = "please_check_your_internet_connection"
     
 }
 
