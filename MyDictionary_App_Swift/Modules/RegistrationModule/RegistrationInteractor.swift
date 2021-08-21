@@ -29,7 +29,7 @@ final class RegistrationInteractor: NSObject, RegistrationInteractorProtocol {
     
     fileprivate let dataManager: RegistrationDataManagerInputProtocol
     fileprivate let authValidation: AuthValidationProtocol
-    fileprivate let apiAuth: MDAPIAuthProtocol
+    fileprivate let apiManager: MDAuthManagerProtocol
     
     internal weak var interactorOutput: RegistrationInteractorOutputProtocol?
     
@@ -38,12 +38,12 @@ final class RegistrationInteractor: NSObject, RegistrationInteractorProtocol {
     init(dataManager: RegistrationDataManagerInputProtocol,
          authValidation: AuthValidationProtocol,
          textFieldDelegate: AuthTextFieldDelegateProtocol,
-         apiAuth: MDAPIAuthProtocol) {
+         apiManager: MDAuthManagerProtocol) {
         
         self.dataManager = dataManager
         self.authValidation = authValidation
         self.textFieldDelegate = textFieldDelegate
-        self.apiAuth = apiAuth
+        self.apiManager = apiManager
         
         super.init()
         subscribe()
@@ -109,41 +109,33 @@ fileprivate extension RegistrationInteractor {
 fileprivate extension RegistrationInteractor {
     
     func authValidationAndRouting() {
+        
         if (authValidation.isValid) {
             
             let authRequest: AuthRequest = .init(nickname: dataManager.getNickname()!,
                                                  password: dataManager.getPassword()!)
             
-            apiAuth.register(authRequest: authRequest) { [weak self] (registerResult) in
+            apiManager.register(authRequest: authRequest) { [weak self] (registerResult) in
+                
                 switch registerResult {
-                case .success(let userEntity):
+                
+                case .success:
                     
-                    debugPrint(#function, Self.self, "userEntitry: ", userEntity)
-                    
-                    self?.apiAuth.login(authRequest: authRequest) { loginResult in
-                        switch loginResult {
-                        case .success(let authResponse):
-                            
-                            debugPrint(#function, Self.self, "authResponse: ", authResponse)
-                            
-                            self?.interactorOutput?.showCourseList()
-                            
-                        case .failure(let error):
-                            self?.interactorOutput?.showValidationError(error)
-                            break
-                        }
-                    }
-                    
+                    self?.interactorOutput?.showCourseList()
                     break
+                    
                 case .failure(let error):
+                    
                     self?.interactorOutput?.showValidationError(error)
                     break
+                    
                 }
                 
             }
         } else {
             interactorOutput?.showValidationError(authValidation.validationErrors.first!)
         }
+        
     }
     
 }

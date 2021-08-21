@@ -23,6 +23,7 @@ final class RegistrationModule {
 extension RegistrationModule {
     
     var module: UIViewController {
+        
         let dataProvider: RegistrationDataProviderProtocol = RegistrationDataProvider.init()
         var dataManager: RegistrationDataManagerProtocol = RegistrationDataManager.init(dataProvider: dataProvider)
         
@@ -35,10 +36,14 @@ extension RegistrationModule {
         let apiAuth: MDAPIAuthProtocol = MDAPIAuth.init(requestDispatcher: Constants.RequestDispatcher.defaultRequestDispatcher,
                                                         operationQueueService: Constants.AppDependencies.dependencies.operationQueueService)
         
+        let authManager: MDAuthManagerProtocol = MDAuthManager.init(apiAuth: apiAuth,
+                                                                    userStorage: Constants.AppDependencies.dependencies.userStorage,
+                                                                    jwtStorage: Constants.AppDependencies.dependencies.jwtStorage)
+        
         let interactor: RegistrationInteractorProtocol = RegistrationInteractor.init(dataManager: dataManager,
-                                                                                       authValidation: authValidation,
-                                                                                       textFieldDelegate: textFieldDelegate,
-                                                                                       apiAuth: apiAuth)
+                                                                                     authValidation: authValidation,
+                                                                                     textFieldDelegate: textFieldDelegate,
+                                                                                     apiManager: authManager)
         var router: RegistrationRouterProtocol = RegistrationRouter.init()
         let presenter: RegistrationPresenterProtocol = RegistrationPresenter.init(interactor: interactor, router: router)
         let vc = RegistrationViewController.init(presenter: presenter)
@@ -49,6 +54,7 @@ extension RegistrationModule {
         router.presenter = vc
         
         return vc
+        
     }
     
 }
