@@ -63,39 +63,51 @@ extension MDWordStorage {
         
         case .memory:
             
-            memoryStorage.entitiesCount() { [unowned self] (result) in
+            memoryStorage.entitiesCount() { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .coreData:
             
-            coreDataStorage.entitiesCount() { [unowned self] (result) in
+            coreDataStorage.entitiesCount() { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .all:
             
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
             // Initialize final result
             var finalResult: MDStorageResultsWithoutCompletion<MDEntitiesCountResultWithoutCompletion> = []
+            
             // Check in Memory
-            memoryStorage.entitiesCount() { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.entitiesCount() { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .memory, result: result))
-                
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
             }
+            
             // Check in Core Data
-            coreDataStorage.entitiesCount() { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.entitiesCount() { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
-                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
             }
             
         }
@@ -109,38 +121,51 @@ extension MDWordStorage {
         
         case .memory:
             
-            memoryStorage.entitiesIsEmpty { [unowned self] result in
+            memoryStorage.entitiesIsEmpty { result in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .coreData:
             
-            coreDataStorage.entitiesIsEmpty { [unowned self] result in
+            coreDataStorage.entitiesIsEmpty { result in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .all:
+            
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
             // Initialize final result
             var finalResult: MDStorageResultsWithoutCompletion<MDEntitiesIsEmptyResultWithoutCompletion> = []
+            
             // Check Result in Memory
-            memoryStorage.entitiesIsEmpty { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.entitiesIsEmpty { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .memory, result: result))
-                
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
             }
+            
             // Check Result in Core Data
-            coreDataStorage.entitiesIsEmpty { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.entitiesIsEmpty { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
-                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
             }
             
         }
@@ -160,39 +185,51 @@ extension MDWordStorage {
         
         case .memory:
             
-            memoryStorage.createWord(wordModel) { [unowned self] result in
+            memoryStorage.createWord(wordModel) { result in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .coreData:
             
-            coreDataStorage.createWord(wordModel) { [unowned self] result in
+            coreDataStorage.createWord(wordModel) { result in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .all:
             
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
             // Initialize final result
             var finalResult: MDStorageResultsWithoutCompletion<MDWordResultWithoutCompletion> = []
+            
             // Create in Memory
-            memoryStorage.createWord(wordModel) { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.createWord(wordModel) { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .memory, result: result))
-                
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
             }
+            
             // Create in Core Data
-            coreDataStorage.createWord(wordModel) { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.createWord(wordModel) { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
-                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
             }
             
         }
@@ -207,39 +244,52 @@ extension MDWordStorage {
         
         case .memory:
             
-            memoryStorage.readWord(fromID: id) { [unowned self] (result) in
+            memoryStorage.readWord(fromID: id) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .coreData:
             
-            coreDataStorage.readWord(fromID: id) { [unowned self] (result) in
+            coreDataStorage.readWord(fromID: id) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .all:
             
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
             // Initialize final result
             var finalResult: MDStorageResultsWithoutCompletion<MDWordResultWithoutCompletion> = []
+            
             // Read From Memory
-            memoryStorage.readWord(fromID: id) { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.readWord(fromID: id) { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .memory, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
                 
             }
+            
             // Read From Core Data
-            coreDataStorage.readWord(fromID: id) { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.readWord(fromID: id) { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
-                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
             }
             
         }
@@ -258,7 +308,7 @@ extension MDWordStorage {
             
             memoryStorage.updateWord(byID: id,
                                      word: word,
-                                     word_description: word_description) { [unowned self] (result) in
+                                     word_description: word_description) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
@@ -266,37 +316,50 @@ extension MDWordStorage {
             
             coreDataStorage.updateWord(byID: id,
                                        word: word,
-                                       word_description: word_description) { [unowned self] (result) in
+                                       word_description: word_description) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .all:
             
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
             // Initialize final result
             var finalResult: MDStorageResultsWithoutCompletion<MDWordResultWithoutCompletion> = []
+            
             // Update In Memory
+            // Dispatch Group Enter
+            dispatchGroup.enter()
             memoryStorage.updateWord(byID: id,
                                      word: word,
-                                     word_description: word_description) { [unowned self] result in
+                                     word_description: word_description) { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .memory, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
                 
             }
+            
             // Update In Core Data
+            // Dispatch Group Enter
+            dispatchGroup.enter()
             coreDataStorage.updateWord(byID: id,
                                        word: word,
-                                       word_description: word_description) { [unowned self] result in
+                                       word_description: word_description) { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
-                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
             }
             
         }
@@ -309,39 +372,51 @@ extension MDWordStorage {
         
         case .memory:
             
-            memoryStorage.deleteWord(word) { [unowned self] result in
+            memoryStorage.deleteWord(word) { result in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .coreData:
             
-            coreDataStorage.deleteWord(word) { [unowned self] result in
+            coreDataStorage.deleteWord(word) { result in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .all:
             
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
             // Initialize final result
             var finalResult: MDStorageResultsWithoutCompletion<MDWordResultWithoutCompletion> = []
+            
             // Delete From Memory
-            memoryStorage.deleteWord(word) { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.deleteWord(word) { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .memory, result: result))
-                
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
             }
+            
             // Delete From Core Data
-            coreDataStorage.deleteWord(word) { [unowned self] result in
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.deleteWord(word) { result in
                 
+                // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
                 
-                if (Constants.StorageType.finalResultCountIsEqualStorageTypesWithoutAllCount(finalResult.count)) {
-                    completionHandler(finalResult)
-                }
-                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
             }
             
         }
