@@ -14,15 +14,15 @@ protocol MDUserStorageProtocol {
     
     func createUser(_ userEntity: UserEntity,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDUserdResultWithoutCompletion>))
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>))
     
     func readUser(fromUserID userId: Int64,
                   storageType: MDStorageType,
-                  _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDUserdResultWithoutCompletion>))
+                  _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>))
     
     func deleteUser(_ userEntity: UserEntity,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDUserdResultWithoutCompletion>))
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>))
     
 }
 
@@ -99,7 +99,7 @@ extension MDUserStorage {
 // MARK: - CRUD
 extension MDUserStorage {
     
-    func createUser(_ userEntity: UserEntity, storageType: MDStorageType, _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserdResultWithoutCompletion>)) {
+    func createUser(_ userEntity: UserEntity, storageType: MDStorageType, _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
         
         switch storageType {
         
@@ -118,7 +118,7 @@ extension MDUserStorage {
         case .all:
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDUserdResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDUserResultWithoutCompletion> = []
             // Create in Memory
             memoryStorage.createUser(userEntity) { [unowned self] result in
                 
@@ -143,7 +143,7 @@ extension MDUserStorage {
         }
     }
     
-    func readUser(fromUserID userId: Int64, storageType: MDStorageType, _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserdResultWithoutCompletion>)) {
+    func readUser(fromUserID userId: Int64, storageType: MDStorageType, _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
         
         switch storageType {
         
@@ -162,7 +162,7 @@ extension MDUserStorage {
         case .all:
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDUserdResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDUserResultWithoutCompletion> = []
             // Read From Memory
             memoryStorage.readUser(fromUserID: userId) { [unowned self] result in
                 
@@ -188,7 +188,7 @@ extension MDUserStorage {
         
     }
     
-    func deleteUser(_ userEntity: UserEntity, storageType: MDStorageType, _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserdResultWithoutCompletion>)) {
+    func deleteUser(_ userEntity: UserEntity, storageType: MDStorageType, _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
         
         switch storageType {
         
@@ -207,7 +207,7 @@ extension MDUserStorage {
         case .all:
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDUserdResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDUserResultWithoutCompletion> = []
             // Delete From Memory
             memoryStorage.deleteUser(userEntity) { [unowned self] result in
                 

@@ -99,6 +99,10 @@
 		227F8AB326CAB0DC00375A38 /* JWTResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F8AB226CAB0DC00375A38 /* JWTResponse.swift */; };
 		228722CC26D0DDC500C9D1BC /* MDUpdateJWTCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722CB26D0DDC500C9D1BC /* MDUpdateJWTCoreDataStorageOperation.swift */; };
 		228722CE26D0DE7500C9D1BC /* MDUpdateJWTMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722CD26D0DE7500C9D1BC /* MDUpdateJWTMemoryStorageOperation.swift */; };
+		228722D126D0F18400C9D1BC /* MDAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722D026D0F18400C9D1BC /* MDAuthManager.swift */; };
+		228722D326D0F93B00C9D1BC /* MDUserResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722D226D0F93B00C9D1BC /* MDUserResultWithCompletion.swift */; };
+		228722D526D0F98800C9D1BC /* MDJWTResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722D426D0F98800C9D1BC /* MDJWTResultWithCompletion.swift */; };
+		228722D726D0FFD300C9D1BC /* MDAuthResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722D626D0FFD300C9D1BC /* MDAuthResultWithCompletion.swift */; };
 		2289CEDE2678CC34007254C3 /* MDWordMemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEB72678CC34007254C3 /* MDWordMemoryStorage.swift */; };
 		2289CEDF2678CC34007254C3 /* MDStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEB92678CC34007254C3 /* MDStorageType.swift */; };
 		2289CEE02678CC34007254C3 /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEBB2678CC34007254C3 /* WordModel.swift */; };
@@ -168,7 +172,6 @@
 		22C5863F26C7AFB80030B12D /* RegistrationDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5863826C7AFB80030B12D /* RegistrationDataProvider.swift */; };
 		22C5864026C7AFB80030B12D /* RegistrationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5863926C7AFB80030B12D /* RegistrationDataManager.swift */; };
 		22C5864226C7B7AE0030B12D /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5864126C7B7AE0030B12D /* UserEntity.swift */; };
-		22C5864426C7B7E30030B12D /* MDRegistrationResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5864326C7B7E30030B12D /* MDRegistrationResponseResult.swift */; };
 		22C5864726C7D1F30030B12D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5864626C7D1F30030B12D /* KeychainService.swift */; };
 		22C5864C26C7E1040030B12D /* KeychainService_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5864B26C7E1040030B12D /* KeychainService_Tests.swift */; };
 		22CA087D26515E810052D169 /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA087C26515E810052D169 /* WordListViewController.swift */; };
@@ -219,7 +222,7 @@
 		22E2B500266515E700978E62 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */; };
 		22E691B626CE5E5200641DFA /* MDStorageResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E691B526CE5E5200641DFA /* MDStorageResult.swift */; };
 		22E691B826CE5E7700641DFA /* MDWordResultWithoutCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E691B726CE5E7700641DFA /* MDWordResultWithoutCompletion.swift */; };
-		22E691BA26CE72C600641DFA /* MDUserdResultWithoutCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E691B926CE72C600641DFA /* MDUserdResultWithoutCompletion.swift */; };
+		22E691BA26CE72C600641DFA /* MDUserResultWithoutCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E691B926CE72C600641DFA /* MDUserResultWithoutCompletion.swift */; };
 		22E691BC26CE76EB00641DFA /* MDJWTResultWithoutCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E691BB26CE76EB00641DFA /* MDJWTResultWithoutCompletion.swift */; };
 		22EDF02626C7E6A100D19DA1 /* CDJWTResponseEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDF02526C7E6A000D19DA1 /* CDJWTResponseEntity+Extension.swift */; };
 		22EDF02826C7E8B900D19DA1 /* CDJWTResponseEntityAttributeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDF02726C7E8B900D19DA1 /* CDJWTResponseEntityAttributeName.swift */; };
@@ -357,6 +360,10 @@
 		227F8AB226CAB0DC00375A38 /* JWTResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTResponse.swift; sourceTree = "<group>"; };
 		228722CB26D0DDC500C9D1BC /* MDUpdateJWTCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUpdateJWTCoreDataStorageOperation.swift; sourceTree = "<group>"; };
 		228722CD26D0DE7500C9D1BC /* MDUpdateJWTMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUpdateJWTMemoryStorageOperation.swift; sourceTree = "<group>"; };
+		228722D026D0F18400C9D1BC /* MDAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAuthManager.swift; sourceTree = "<group>"; };
+		228722D226D0F93B00C9D1BC /* MDUserResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUserResultWithCompletion.swift; sourceTree = "<group>"; };
+		228722D426D0F98800C9D1BC /* MDJWTResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTResultWithCompletion.swift; sourceTree = "<group>"; };
+		228722D626D0FFD300C9D1BC /* MDAuthResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAuthResultWithCompletion.swift; sourceTree = "<group>"; };
 		2289CEB72678CC34007254C3 /* MDWordMemoryStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordMemoryStorage.swift; sourceTree = "<group>"; };
 		2289CEB92678CC34007254C3 /* MDStorageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDStorageType.swift; sourceTree = "<group>"; };
 		2289CEBB2678CC34007254C3 /* WordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordModel.swift; sourceTree = "<group>"; };
@@ -432,7 +439,6 @@
 		22C5863826C7AFB80030B12D /* RegistrationDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDataProvider.swift; sourceTree = "<group>"; };
 		22C5863926C7AFB80030B12D /* RegistrationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDataManager.swift; sourceTree = "<group>"; };
 		22C5864126C7B7AE0030B12D /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
-		22C5864326C7B7E30030B12D /* MDRegistrationResponseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDRegistrationResponseResult.swift; sourceTree = "<group>"; };
 		22C5864626C7D1F30030B12D /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		22C5864B26C7E1040030B12D /* KeychainService_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService_Tests.swift; sourceTree = "<group>"; };
 		22CA087C26515E810052D169 /* WordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListViewController.swift; sourceTree = "<group>"; };
@@ -483,7 +489,7 @@
 		22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		22E691B526CE5E5200641DFA /* MDStorageResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorageResult.swift; sourceTree = "<group>"; };
 		22E691B726CE5E7700641DFA /* MDWordResultWithoutCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordResultWithoutCompletion.swift; sourceTree = "<group>"; };
-		22E691B926CE72C600641DFA /* MDUserdResultWithoutCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUserdResultWithoutCompletion.swift; sourceTree = "<group>"; };
+		22E691B926CE72C600641DFA /* MDUserResultWithoutCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUserResultWithoutCompletion.swift; sourceTree = "<group>"; };
 		22E691BB26CE76EB00641DFA /* MDJWTResultWithoutCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTResultWithoutCompletion.swift; sourceTree = "<group>"; };
 		22EDF02526C7E6A000D19DA1 /* CDJWTResponseEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDJWTResponseEntity+Extension.swift"; sourceTree = "<group>"; };
 		22EDF02726C7E8B900D19DA1 /* CDJWTResponseEntityAttributeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDJWTResponseEntityAttributeName.swift; sourceTree = "<group>"; };
@@ -1007,9 +1013,18 @@
 			path = SettingsModule;
 			sourceTree = "<group>";
 		};
+		228722CF26D0F16E00C9D1BC /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				228722D026D0F18400C9D1BC /* MDAuthManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		2289CEB62678CC34007254C3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				228722CF26D0F16E00C9D1BC /* Manager */,
 				220FFE7826C9060100702CCE /* Storage */,
 				22EF01E6269DA6D400FE4435 /* Network */,
 				2289CEB82678CC34007254C3 /* Enums */,
@@ -1063,10 +1078,13 @@
 				2289CECC2678CC34007254C3 /* MDEntityResult.swift */,
 				22EF01E4269D9EBC00FE4435 /* MDEntitiesIsEmptyResultWithCompletion.swift */,
 				22E691B526CE5E5200641DFA /* MDStorageResult.swift */,
-				22E691B926CE72C600641DFA /* MDUserdResultWithoutCompletion.swift */,
+				22E691B926CE72C600641DFA /* MDUserResultWithoutCompletion.swift */,
 				22E691BB26CE76EB00641DFA /* MDJWTResultWithoutCompletion.swift */,
 				22A2521126CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift */,
 				22A2521326CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift */,
+				228722D226D0F93B00C9D1BC /* MDUserResultWithCompletion.swift */,
+				228722D426D0F98800C9D1BC /* MDJWTResultWithCompletion.swift */,
+				228722D626D0FFD300C9D1BC /* MDAuthResultWithCompletion.swift */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -1579,7 +1597,6 @@
 			children = (
 				22EF0201269DA9E300FE4435 /* MDResponseOperationResult.swift */,
 				220793DB26C6C057003D434B /* MDAuthResponseResult.swift */,
-				22C5864326C7B7E30030B12D /* MDRegistrationResponseResult.swift */,
 			);
 			path = Result;
 			sourceTree = "<group>";
@@ -1910,6 +1927,7 @@
 				22B22689266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift in Sources */,
 				22EF01FC269DA90000FE4435 /* MDResponseType.swift in Sources */,
 				229E08C22652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift in Sources */,
+				228722D526D0F98800C9D1BC /* MDJWTResultWithCompletion.swift in Sources */,
 				22CA087D26515E810052D169 /* WordListViewController.swift in Sources */,
 				22DB2F8526C3D2B800C1AADA /* TableViewDataSource.swift in Sources */,
 				22B22691266CF866007AB292 /* UIViewController+Extension.swift in Sources */,
@@ -1920,9 +1938,8 @@
 				22557FC726C9589000A4FF31 /* MDJWTMemoryStorage.swift in Sources */,
 				221D281C26C533AF004BC4F7 /* AuthTextFieldDelegate.swift in Sources */,
 				22DB2F8326C3D28900C1AADA /* CourseListTableViewDataSource.swift in Sources */,
-				22C5864426C7B7E30030B12D /* MDRegistrationResponseResult.swift in Sources */,
 				229901682668EC3400D8C74E /* AppearancePresenter.swift in Sources */,
-				22E691BA26CE72C600641DFA /* MDUserdResultWithoutCompletion.swift in Sources */,
+				22E691BA26CE72C600641DFA /* MDUserResultWithoutCompletion.swift in Sources */,
 				22557FD726C9660F00A4FF31 /* MDDeleteJWTMemoryStorageOperation.swift in Sources */,
 				220FFEA426C915C700702CCE /* MDReadUserMemoryStorageOperation.swift in Sources */,
 				227D5E672652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift in Sources */,
@@ -2007,6 +2024,7 @@
 				22E2B4EC2664EE1400978E62 /* FillWithModelProtocol.swift in Sources */,
 				220FFE7426C8F83A00702CCE /* MDKeyboardToolbar.swift in Sources */,
 				22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */,
+				228722D726D0FFD300C9D1BC /* MDAuthResultWithCompletion.swift in Sources */,
 				2299016A2668EC3400D8C74E /* AppearanceViewController.swift in Sources */,
 				22BD99A5266A58DE0063FEFC /* RootWindow.swift in Sources */,
 				2299016D2668EC3400D8C74E /* AppearanceDataManager.swift in Sources */,
@@ -2078,6 +2096,7 @@
 				22C5864226C7B7AE0030B12D /* UserEntity.swift in Sources */,
 				22CA08892651603A0052D169 /* WordListDataProvider.swift in Sources */,
 				22E2B4F52665097900978E62 /* SettingsSectionType.swift in Sources */,
+				228722D126D0F18400C9D1BC /* MDAuthManager.swift in Sources */,
 				22493C3B269724CB000DA480 /* CoreDataEntityName.swift in Sources */,
 				220FFEA226C9150100702CCE /* MDCreateUserMemoryStorageOperation.swift in Sources */,
 				22493C542697420F000DA480 /* MDReadWordCoreDataStorageOperation.swift in Sources */,
@@ -2086,6 +2105,7 @@
 				22EDF02A26C7E91D00D19DA1 /* CDUserEntityAttributeName.swift in Sources */,
 				227D5E642652584700B54524 /* NSLayoutConstraint+Extension.swift in Sources */,
 				22E2B500266515E700978E62 /* CollectionViewDataSource.swift in Sources */,
+				228722D326D0F93B00C9D1BC /* MDUserResultWithCompletion.swift in Sources */,
 				229E08BC2652C41400DA56C4 /* ReuseIdentifierProtocol.swift in Sources */,
 				220FFE9226C90B5000702CCE /* MDCRUDUserProtocol.swift in Sources */,
 				22EF01F6269DA81100FE4435 /* MDRequestDispatcher.swift in Sources */,

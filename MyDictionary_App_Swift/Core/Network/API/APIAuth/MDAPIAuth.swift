@@ -9,7 +9,7 @@ import Foundation
 
 protocol MDAPIAuthProtocol {
     func login(authRequest: AuthRequest, completionHandler: @escaping MDAuthResponseResult)
-    func register(authRequest: AuthRequest, completionHandler: @escaping MDRegistrationResponseResult)
+    func register(authRequest: AuthRequest, completionHandler: @escaping MDAuthResponseResult)
 }
 
 final class MDAPIAuth: MDAPIAuthProtocol {
@@ -130,7 +130,7 @@ extension MDAPIAuth {
     }
     
     
-    func register(authRequest: AuthRequest, completionHandler: @escaping MDRegistrationResponseResult) {
+    func register(authRequest: AuthRequest, completionHandler: @escaping MDAuthResponseResult) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
                                               endpoint: MDAPIAuthEndpoint.register(authRequest: authRequest)) { [unowned self] result in
@@ -142,7 +142,7 @@ extension MDAPIAuth {
                 debugPrint(#function, Self.self, "dataCount: ", data.count)
                 
                 do {
-                    completionHandler(.success(try JSONDecoder.init().decode(UserEntity.self, from: data)))
+                    completionHandler(.success(try JSONDecoder.init().decode(AuthResponse.self, from: data)))
                 } catch (_) {
                     completionHandler(.failure(MDAPIError.parseError))
                 }
