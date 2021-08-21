@@ -31,20 +31,13 @@ extension RegistrationModule {
         
         let validationTypes: [AuthValidationType] = [.nickname, .password]
         let authValidation: AuthValidationProtocol = AuthValidation.init(dataProvider: dataProvider,
-                                                                         validationTypes: validationTypes)
-        
-        let apiAuth: MDAPIAuthProtocol = MDAPIAuth.init(requestDispatcher: Constants.RequestDispatcher.defaultRequestDispatcher,
-                                                        operationQueueService: Constants.AppDependencies.dependencies.operationQueueService)
-        
-        let authManager: MDAuthManagerProtocol = MDAuthManager.init(apiAuth: apiAuth,
-                                                                    userStorage: Constants.AppDependencies.dependencies.userStorage,
-                                                                    jwtStorage: Constants.AppDependencies.dependencies.jwtStorage,
-                                                                    keychainService: Constants.AppDependencies.dependencies.keychainService)
+                                                                         validationTypes: validationTypes)                
         
         let interactor: RegistrationInteractorProtocol = RegistrationInteractor.init(dataManager: dataManager,
                                                                                      authValidation: authValidation,
                                                                                      textFieldDelegate: textFieldDelegate,
-                                                                                     apiManager: authManager)
+                                                                                     apiManager: Constants.AppDependencies.dependencies.authManager)
+        
         var router: RegistrationRouterProtocol = RegistrationRouter.init()
         let presenter: RegistrationPresenterProtocol = RegistrationPresenter.init(interactor: interactor, router: router)
         let vc = RegistrationViewController.init(presenter: presenter)

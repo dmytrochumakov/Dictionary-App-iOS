@@ -31,20 +31,12 @@ extension AuthorizationModule {
         
         let validationTypes: [AuthValidationType] = [.nickname, .password]
         let authValidation: AuthValidationProtocol = AuthValidation.init(dataProvider: dataProvider,
-                                                                         validationTypes: validationTypes)
-        
-        let apiAuth: MDAPIAuthProtocol = MDAPIAuth.init(requestDispatcher: Constants.RequestDispatcher.defaultRequestDispatcher,
-                                                        operationQueueService: Constants.AppDependencies.dependencies.operationQueueService)
-        
-        let authManager: MDAuthManagerProtocol = MDAuthManager.init(apiAuth: apiAuth,
-                                                                    userStorage: Constants.AppDependencies.dependencies.userStorage,
-                                                                    jwtStorage: Constants.AppDependencies.dependencies.jwtStorage,
-                                                                    keychainService: Constants.AppDependencies.dependencies.keychainService)
+                                                                         validationTypes: validationTypes)                
         
         let interactor: AuthorizationInteractorProtocol = AuthorizationInteractor.init(dataManager: dataManager,
                                                                                        authValidation: authValidation,
                                                                                        textFieldDelegate: textFieldDelegate,
-                                                                                       authManager: authManager)
+                                                                                       authManager: Constants.AppDependencies.dependencies.authManager)
         
         var router: AuthorizationRouterProtocol = AuthorizationRouter.init()
         let presenter: AuthorizationPresenterProtocol = AuthorizationPresenter.init(interactor: interactor, router: router)

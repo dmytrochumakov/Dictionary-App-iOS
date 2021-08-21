@@ -16,9 +16,21 @@ protocol MDAppDependenciesProtocol {
     var operationQueueService: OperationQueueServiceProtocol! { get }
     var coreDataStack: CoreDataStack! { get }
     var keychainService: KeychainService! { get }
+    
+    // Storage //
     var wordStorage: MDWordStorageProtocol! { get }
     var userStorage: MDUserStorageProtocol! { get }
     var jwtStorage: MDJWTStorageProtocol! { get }
+    // End Storage
+    
+    // Api //
+    var apiAuth: MDAPIAuthProtocol! { get }
+    // End Api //
+    
+    // Manager //
+    var authManager: MDAuthManagerProtocol! { get }
+    // End Manager //
+    
 }
 
 final class MDAppDependencies: NSObject, MDAppDependenciesProtocol {
@@ -29,9 +41,19 @@ final class MDAppDependencies: NSObject, MDAppDependenciesProtocol {
     var operationQueueService: OperationQueueServiceProtocol!
     var coreDataStack: CoreDataStack!
     var keychainService: KeychainService!
+    // Storage //
     var wordStorage: MDWordStorageProtocol!
     var userStorage: MDUserStorageProtocol!
     var jwtStorage: MDJWTStorageProtocol!
+    // End Storage //
+    
+    // Api //
+    var apiAuth: MDAPIAuthProtocol!
+    // End Api //
+    
+    // Manager //
+    var authManager: MDAuthManagerProtocol!
+    // End Manager //
     
     init(rootWindow: UIWindow!) {
         self.rootWindow = rootWindow
@@ -64,7 +86,7 @@ extension MDAppDependencies {
         let keychainService: KeychainService = .init()
         self.keychainService = keychainService
         //
-        
+        // Storage //
         // Word //
         let wordMemoryStorage: MDWordMemoryStorageProtocol = MDWordMemoryStorage.init(operationQueueService: operationQueueService,
                                                                                       arrayWords: [])
@@ -106,6 +128,24 @@ extension MDAppDependencies {
         
         self.jwtStorage = jwtStorage
         // End JWT //
+        // End Storage //
+        
+        // Api //
+        let apiAuth: MDAPIAuthProtocol = MDAPIAuth.init(requestDispatcher: Constants.RequestDispatcher.defaultRequestDispatcher,
+                                                        operationQueueService: Constants.AppDependencies.dependencies.operationQueueService)
+        
+        self.apiAuth = apiAuth
+        // End Api //
+        
+        // Manager //
+        let authManager: MDAuthManagerProtocol = MDAuthManager.init(apiAuth: apiAuth,
+                                                                    userStorage: userStorage,
+                                                                    jwtStorage: jwtStorage,
+                                                                    keychainService: keychainService)
+        
+        self.authManager = authManager
+        
+        // End Manager //
         
         // Configure FirebaseApp
         FirebaseApp.configure()
