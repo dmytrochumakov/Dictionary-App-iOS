@@ -15,6 +15,7 @@ protocol MDAppDependenciesProtocol {
     var operationQueue: OperationQueue! { get }
     var operationQueueService: OperationQueueServiceProtocol! { get }
     var coreDataStack: CoreDataStack! { get }
+    var keychainService: KeychainService! { get }
     var wordStorage: MDWordStorageProtocol! { get }
     var userStorage: MDUserStorageProtocol! { get }
     var jwtStorage: MDJWTStorageProtocol! { get }
@@ -27,6 +28,7 @@ final class MDAppDependencies: NSObject, MDAppDependenciesProtocol {
     var operationQueue: OperationQueue!
     var operationQueueService: OperationQueueServiceProtocol!
     var coreDataStack: CoreDataStack!
+    var keychainService: KeychainService!
     var wordStorage: MDWordStorageProtocol!
     var userStorage: MDUserStorageProtocol!
     var jwtStorage: MDJWTStorageProtocol!
@@ -50,13 +52,17 @@ extension MDAppDependencies {
         guard let reachability = try? Reachability.init() else { fatalError("Impossible initialize Reachability Service") }
         self.reachability = reachability
         //
-        let coreDataStack: CoreDataStack = .init()
-        //
         let operationQueue: OperationQueue = .init()
         self.operationQueue = operationQueue
         //
         let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
         self.operationQueueService = operationQueueService
+        //
+        let coreDataStack: CoreDataStack = .init()
+        self.coreDataStack = coreDataStack
+        //
+        let keychainService: KeychainService = .init()
+        self.keychainService = keychainService
         //
         
         // Word //

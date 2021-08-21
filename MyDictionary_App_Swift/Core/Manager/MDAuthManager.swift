@@ -17,14 +17,17 @@ final class MDAuthManager: MDAuthManagerProtocol {
     fileprivate let apiAuth: MDAPIAuthProtocol
     fileprivate let userStorage: MDUserStorageProtocol
     fileprivate let jwtStorage: MDJWTStorageProtocol
+    fileprivate let keychainService: KeychainService
     
     init(apiAuth: MDAPIAuthProtocol,
          userStorage: MDUserStorageProtocol,
-         jwtStorage: MDJWTStorageProtocol) {
+         jwtStorage: MDJWTStorageProtocol,
+         keychainService: KeychainService) {
         
         self.apiAuth = apiAuth
         self.userStorage = userStorage
         self.jwtStorage = jwtStorage
+        self.keychainService = keychainService
         
     }
     
@@ -44,8 +47,9 @@ extension MDAuthManager {
             
             case .success(let authResponse):
                 
-                self?.saveUserAndJWT(authResponse: authResponse,
-                                     completionHandler: completionHandler)
+                self?.saveUserAndJWTAndUserPassword(authRequest: authRequest,
+                                                    authResponse: authResponse,
+                                                    completionHandler: completionHandler)
                 
             case .failure(let error):
                 completionHandler(.failure(error))
@@ -63,8 +67,9 @@ extension MDAuthManager {
             
             case .success(let authResponse):
                 
-                self?.saveUserAndJWT(authResponse: authResponse,
-                                     completionHandler: completionHandler)
+                self?.saveUserAndJWTAndUserPassword(authRequest: authRequest,
+                                                    authResponse: authResponse,
+                                                    completionHandler: completionHandler)
                 
             case .failure(let error):
                 completionHandler(.failure(error))
@@ -79,7 +84,9 @@ extension MDAuthManager {
 // MARK: - Save
 fileprivate extension MDAuthManager {
     
-    func saveUserAndJWT(authResponse: AuthResponse, completionHandler: @escaping(MDAuthResultWithCompletion)) {
+    func saveUserAndJWTAndUserPassword(authRequest: AuthRequest,
+                                       authResponse: AuthResponse,
+                                       completionHandler: @escaping(MDAuthResultWithCompletion)) {
         
         let dispatchGroup: DispatchGroup = .init()
         
@@ -118,6 +125,9 @@ fileprivate extension MDAuthManager {
         
         // Pass Result
         dispatchGroup.notify(queue: .main) {
+            // Save Password In Keychain
+            self.savePassword(authRequest: authRequest)
+            //
             completionHandler(.success(()))
         }
         
@@ -175,6 +185,13 @@ fileprivate extension MDAuthManager {
             }
             
         }
+        
+    }
+    
+    func savePassword(authRequest: AuthRequest) {
+        
+        keychainService.savePassword(authRequest.password,
+                                     for: authRequest.nickname)
         
     }
     
