@@ -90,6 +90,14 @@ extension MDJWTCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
+    func readFirstJWT(_ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
+        let operation = MDReadFirstJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                    coreDataStorage: self) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
+    }
+    
     func readAllJWTs(_ completionHandler: @escaping (MDEntitiesResult<JWTResponse>)) {
         let operation = MDReadJWTsCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                 coreDataStorage: self) { result in

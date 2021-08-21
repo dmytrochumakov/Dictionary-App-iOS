@@ -9,4 +9,5 @@ import Foundation
 
 protocol MDReadJWTProtocol {
     func readJWT(fromAccessToken accessToken: String, _ completionHandler: @escaping(MDEntityResult<JWTResponse>))
+    func readFirstJWT(_ completionHandler: @escaping(MDEntityResult<JWTResponse>))
 }

@@ -103,6 +103,9 @@
 		228722D326D0F93B00C9D1BC /* MDUserResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722D226D0F93B00C9D1BC /* MDUserResultWithCompletion.swift */; };
 		228722D526D0F98800C9D1BC /* MDJWTResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722D426D0F98800C9D1BC /* MDJWTResultWithCompletion.swift */; };
 		228722D726D0FFD300C9D1BC /* MDAuthResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722D626D0FFD300C9D1BC /* MDAuthResultWithCompletion.swift */; };
+		228722D926D1161C00C9D1BC /* MDJWTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722D826D1161C00C9D1BC /* MDJWTManager.swift */; };
+		228722DB26D117A900C9D1BC /* MDReadFirstJWTCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722DA26D117A900C9D1BC /* MDReadFirstJWTCoreDataStorageOperation.swift */; };
+		228722DD26D1189700C9D1BC /* MDReadFirstJWTMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722DC26D1189700C9D1BC /* MDReadFirstJWTMemoryStorageOperation.swift */; };
 		2289CEDE2678CC34007254C3 /* MDWordMemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEB72678CC34007254C3 /* MDWordMemoryStorage.swift */; };
 		2289CEDF2678CC34007254C3 /* MDStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEB92678CC34007254C3 /* MDStorageType.swift */; };
 		2289CEE02678CC34007254C3 /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEBB2678CC34007254C3 /* WordModel.swift */; };
@@ -364,6 +367,9 @@
 		228722D226D0F93B00C9D1BC /* MDUserResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUserResultWithCompletion.swift; sourceTree = "<group>"; };
 		228722D426D0F98800C9D1BC /* MDJWTResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTResultWithCompletion.swift; sourceTree = "<group>"; };
 		228722D626D0FFD300C9D1BC /* MDAuthResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAuthResultWithCompletion.swift; sourceTree = "<group>"; };
+		228722D826D1161C00C9D1BC /* MDJWTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTManager.swift; sourceTree = "<group>"; };
+		228722DA26D117A900C9D1BC /* MDReadFirstJWTCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadFirstJWTCoreDataStorageOperation.swift; sourceTree = "<group>"; };
+		228722DC26D1189700C9D1BC /* MDReadFirstJWTMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadFirstJWTMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		2289CEB72678CC34007254C3 /* MDWordMemoryStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordMemoryStorage.swift; sourceTree = "<group>"; };
 		2289CEB92678CC34007254C3 /* MDStorageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDStorageType.swift; sourceTree = "<group>"; };
 		2289CEBB2678CC34007254C3 /* WordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordModel.swift; sourceTree = "<group>"; };
@@ -927,6 +933,7 @@
 			isa = PBXGroup;
 			children = (
 				22557FCB26C959D100A4FF31 /* MDCreateJWTMemoryStorageOperation.swift */,
+				228722DC26D1189700C9D1BC /* MDReadFirstJWTMemoryStorageOperation.swift */,
 				22557FD226C95D5A00A4FF31 /* MDReadJWTMemoryStorageOperation.swift */,
 				22557FD626C9660F00A4FF31 /* MDDeleteJWTMemoryStorageOperation.swift */,
 				228722CD26D0DE7500C9D1BC /* MDUpdateJWTMemoryStorageOperation.swift */,
@@ -949,6 +956,7 @@
 			children = (
 				2258921C26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift */,
 				2258922026CA3B1E00AD6F18 /* MDReadJWTCoreDataStorageOperation.swift */,
+				228722DA26D117A900C9D1BC /* MDReadFirstJWTCoreDataStorageOperation.swift */,
 				2258922226CA3C8F00AD6F18 /* MDReadJWTsCoreDataStorageOperation.swift */,
 				2258922426CA3DC600AD6F18 /* MDDeleteJWTCoreDataStorageOperation.swift */,
 				228722CB26D0DDC500C9D1BC /* MDUpdateJWTCoreDataStorageOperation.swift */,
@@ -1017,6 +1025,7 @@
 			isa = PBXGroup;
 			children = (
 				228722D026D0F18400C9D1BC /* MDAuthManager.swift */,
+				228722D826D1161C00C9D1BC /* MDJWTManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -2014,6 +2023,7 @@
 				2289CEF92678CC34007254C3 /* OperationQueueService.swift in Sources */,
 				22E2B4DE2664E43B00978E62 /* SettingsRouter.swift in Sources */,
 				2289CEE02678CC34007254C3 /* WordModel.swift in Sources */,
+				228722D926D1161C00C9D1BC /* MDJWTManager.swift in Sources */,
 				221D280E26C5064A004BC4F7 /* AuthorizationModule.swift in Sources */,
 				226FEE89266BB2130044A5F9 /* AppearanceRowType.swift in Sources */,
 				220FFE7C26C9071700702CCE /* MDUserCoreDataStorage.swift in Sources */,
@@ -2055,6 +2065,7 @@
 				22E2B4EA2664EDA200978E62 /* SettingsCell.swift in Sources */,
 				2258922326CA3C8F00AD6F18 /* MDReadJWTsCoreDataStorageOperation.swift in Sources */,
 				22E2B4FE266515D400978E62 /* CollectionViewDelegateFlowLayout.swift in Sources */,
+				228722DB26D117A900C9D1BC /* MDReadFirstJWTCoreDataStorageOperation.swift in Sources */,
 				22EF01FA269DA8E700FE4435 /* MDRequestType.swift in Sources */,
 				22BD999E266A4A2C0063FEFC /* ModuleProtocol.swift in Sources */,
 				229E08C72652CB9000DA56C4 /* WordListCollectionViewDataSource.swift in Sources */,
@@ -2107,6 +2118,7 @@
 				22E2B500266515E700978E62 /* CollectionViewDataSource.swift in Sources */,
 				228722D326D0F93B00C9D1BC /* MDUserResultWithCompletion.swift in Sources */,
 				229E08BC2652C41400DA56C4 /* ReuseIdentifierProtocol.swift in Sources */,
+				228722DD26D1189700C9D1BC /* MDReadFirstJWTMemoryStorageOperation.swift in Sources */,
 				220FFE9226C90B5000702CCE /* MDCRUDUserProtocol.swift in Sources */,
 				22EF01F6269DA81100FE4435 /* MDRequestDispatcher.swift in Sources */,
 				226FEE8C266BB2620044A5F9 /* AppearanceRowModel.swift in Sources */,

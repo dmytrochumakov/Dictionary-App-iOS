@@ -63,6 +63,13 @@ extension MDJWTMemoryStorage {
         operationQueueService.enqueue(operation)
     }
     
+    func readFirstJWT(_ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
+        let operation = MDReadFirstJWTMemoryStorageOperation.init(memoryStorage: self) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
+    }
+    
     func readJWT(fromAccessToken accessToken: String, _ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
         let operation = MDReadJWTMemoryStorageOperation.init(memoryStorage: self,
                                                              accessToken: accessToken) { result in
