@@ -31,7 +31,7 @@ final class AuthorizationInteractor: NSObject, AuthorizationInteractorProtocol {
     
     fileprivate let dataManager: AuthorizationDataManagerInputProtocol
     fileprivate let authValidation: AuthValidationProtocol
-    fileprivate let apiAuth: MDAPIAuthProtocol
+    fileprivate let authManager: MDAuthManagerProtocol
     
     internal weak var interactorOutput: AuthorizationInteractorOutputProtocol?
     
@@ -40,12 +40,12 @@ final class AuthorizationInteractor: NSObject, AuthorizationInteractorProtocol {
     init(dataManager: AuthorizationDataManagerInputProtocol,
          authValidation: AuthValidationProtocol,
          textFieldDelegate: AuthTextFieldDelegateProtocol,
-         apiAuth: MDAPIAuthProtocol) {
+         authManager: MDAuthManagerProtocol) {
         
         self.dataManager = dataManager
         self.authValidation = authValidation
         self.textFieldDelegate = textFieldDelegate
-        self.apiAuth = apiAuth
+        self.authManager = authManager
         
         super.init()
         subscribe()
@@ -114,23 +114,33 @@ fileprivate extension AuthorizationInteractor {
 
 // MARK: - Auth Validation And Routing
 fileprivate extension AuthorizationInteractor {
-   
+    
     func authValidationAndRouting() {
+        
         if (authValidation.isValid) {
-            apiAuth.login(authRequest: .init(nickname: dataManager.getNickname()!,
-                                             password: dataManager.getPassword()!)) { [weak self] (result) in
+            
+            authManager.login(authRequest: .init(nickname: dataManager.getNickname()!,
+                                                 password: dataManager.getPassword()!)) { [weak self] (result) in
+                
                 switch result {
-                case .success(let authResponse):
+                case .success:
+                    
                     self?.interactorOutput?.showCourseList()
                     break
+                    
                 case .failure(let error):
+                    
                     self?.interactorOutput?.showValidationError(error)
                     break
+                    
                 }
+                
             }
+            
         } else {
             interactorOutput?.showValidationError(authValidation.validationErrors.first!)
         }
+        
     }
     
 }

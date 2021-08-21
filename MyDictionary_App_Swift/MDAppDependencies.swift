@@ -14,10 +14,10 @@ protocol MDAppDependenciesProtocol {
     var reachability: Reachability! { get }
     var operationQueue: OperationQueue! { get }
     var operationQueueService: OperationQueueServiceProtocol! { get }
-    var memoryStorage: MDWordMemoryStorageProtocol! { get }
-    var coreDataStorage: MDWordCoreDataStorageProtocol! { get }
     var coreDataStack: CoreDataStack! { get }
     var wordStorage: MDWordStorageProtocol! { get }
+    var userStorage: MDUserStorageProtocol! { get }
+    var jwtStorage: MDJWTStorageProtocol! { get }
 }
 
 final class MDAppDependencies: NSObject, MDAppDependenciesProtocol {
@@ -26,10 +26,10 @@ final class MDAppDependencies: NSObject, MDAppDependenciesProtocol {
     var reachability: Reachability!
     var operationQueue: OperationQueue!
     var operationQueueService: OperationQueueServiceProtocol!
-    var memoryStorage: MDWordMemoryStorageProtocol!
-    var coreDataStorage: MDWordCoreDataStorageProtocol!
     var coreDataStack: CoreDataStack!
     var wordStorage: MDWordStorageProtocol!
+    var userStorage: MDUserStorageProtocol!
+    var jwtStorage: MDJWTStorageProtocol!
     
     init(rootWindow: UIWindow!) {
         self.rootWindow = rootWindow
@@ -49,25 +49,57 @@ extension MDAppDependencies {
         
         guard let reachability = try? Reachability.init() else { fatalError("Impossible initialize Reachability Service") }
         self.reachability = reachability
-        
+        //
+        let coreDataStack: CoreDataStack = .init()
+        //
         let operationQueue: OperationQueue = .init()
         self.operationQueue = operationQueue
-        
+        //
         let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
         self.operationQueueService = operationQueueService
+        //
         
-        let memoryStorage: MDWordMemoryStorageProtocol = MDWordMemoryStorage.init(operationQueueService: operationQueueService,
-                                                                                  arrayWords: [])
+        // Word //
+        let wordMemoryStorage: MDWordMemoryStorageProtocol = MDWordMemoryStorage.init(operationQueueService: operationQueueService,
+                                                                                      arrayWords: [])
         
-        let coreDataStack: CoreDataStack = CoreDataStack.init()
-        let coreDataStorage: MDWordCoreDataStorageProtocol = MDWordCoreDataStorage.init(operationQueueService: operationQueueService,
-                                                                                        managedObjectContext: coreDataStack.privateContext,
-                                                                                        coreDataStack: coreDataStack)
-        self.coreDataStorage = coreDataStorage
+        let wordCoreDataStorage: MDWordCoreDataStorageProtocol = MDWordCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                                            managedObjectContext: coreDataStack.privateContext,
+                                                                                            coreDataStack: coreDataStack)
         
-        let wordStorage: MDWordStorageProtocol = MDWordStorage.init(memoryStorage: memoryStorage,
-                                                                    coreDataStorage: coreDataStorage)
+        let wordStorage: MDWordStorageProtocol = MDWordStorage.init(memoryStorage: wordMemoryStorage,
+                                                                    coreDataStorage: wordCoreDataStorage)
+        
         self.wordStorage = wordStorage
+        // End Word //
+        
+        // User //
+        let userMemoryStorage: MDUserMemoryStorageProtocol = MDUserMemoryStorage.init(operationQueueService: operationQueueService,
+                                                                                      userEntity: nil)
+        
+        let userCoreDataStorage: MDUserCoreDataStorageProtocol = MDUserCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                                            managedObjectContext: coreDataStack.privateContext,
+                                                                                            coreDataStack: coreDataStack)
+        
+        let userStorage: MDUserStorageProtocol = MDUserStorage.init(memoryStorage: userMemoryStorage,
+                                                                    coreDataStorage: userCoreDataStorage)
+        
+        self.userStorage = userStorage
+        // End User //
+        
+        // JWT //
+        let jwtMemoryStorage: MDJWTMemoryStorageProtocol = MDJWTMemoryStorage.init(operationQueueService: operationQueueService,
+                                                                                   jwtResponse: nil)
+        
+        let jwtCoreDataStorage: MDJWTCoreDataStorageProtocol = MDJWTCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                                         managedObjectContext: coreDataStack.privateContext,
+                                                                                         coreDataStack: coreDataStack)
+        
+        let jwtStorage: MDJWTStorageProtocol = MDJWTStorage.init(memoryStorage: jwtMemoryStorage,
+                                                                 coreDataStorage: jwtCoreDataStorage)
+        
+        self.jwtStorage = jwtStorage
+        // End JWT //
         
         // Configure FirebaseApp
         FirebaseApp.configure()

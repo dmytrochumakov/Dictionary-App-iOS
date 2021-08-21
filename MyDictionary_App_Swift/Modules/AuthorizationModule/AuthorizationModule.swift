@@ -23,6 +23,7 @@ final class AuthorizationModule {
 extension AuthorizationModule {
     
     var module: UIViewController {
+        
         let dataProvider: AuthorizationDataProviderProtocol = AuthorizationDataProvider.init()
         var dataManager: AuthorizationDataManagerProtocol = AuthorizationDataManager.init(dataProvider: dataProvider)
         
@@ -35,10 +36,15 @@ extension AuthorizationModule {
         let apiAuth: MDAPIAuthProtocol = MDAPIAuth.init(requestDispatcher: Constants.RequestDispatcher.defaultRequestDispatcher,
                                                         operationQueueService: Constants.AppDependencies.dependencies.operationQueueService)
         
+        let authManager: MDAuthManagerProtocol = MDAuthManager.init(apiAuth: apiAuth,
+                                                                    userStorage: Constants.AppDependencies.dependencies.userStorage,
+                                                                    jwtStorage: Constants.AppDependencies.dependencies.jwtStorage)
+        
         let interactor: AuthorizationInteractorProtocol = AuthorizationInteractor.init(dataManager: dataManager,
                                                                                        authValidation: authValidation,
                                                                                        textFieldDelegate: textFieldDelegate,
-                                                                                       apiAuth: apiAuth)
+                                                                                       authManager: authManager)
+        
         var router: AuthorizationRouterProtocol = AuthorizationRouter.init()
         let presenter: AuthorizationPresenterProtocol = AuthorizationPresenter.init(interactor: interactor, router: router)
         let vc = AuthorizationViewController.init(presenter: presenter)
@@ -49,6 +55,7 @@ extension AuthorizationModule {
         router.presenter = vc
         
         return vc
+        
     }
     
 }
