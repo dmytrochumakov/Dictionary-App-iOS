@@ -7,4 +7,4 @@
 
 import Foundation
 
-typealias MDJWTResultWithCompletion = (MDJWTResultWithoutCompletion -> Void)
+typealias MDJWTResultWithCompletion = ((MDJWTResultWithoutCompletion) -> Void)
