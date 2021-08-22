@@ -8,15 +8,20 @@
 import Foundation
 
 protocol MDJWTManagerProtocol {
-    func fetchJWT()
+    func fetchJWT(jwtRequest: JWTRequest, completionHandler: @escaping MDJWTResponseResult)
 }
 
 final class MDJWTManager: MDJWTManagerProtocol {
     
     fileprivate let jwtStorage: MDJWTStorageProtocol
+    fileprivate let apiJWT: MDAPIJWTProtocol
     
-    init(jwtStorage: MDJWTStorageProtocol) {
+    init(jwtStorage: MDJWTStorageProtocol,
+         apiJWT: MDAPIJWTProtocol) {
+        
         self.jwtStorage = jwtStorage
+        self.apiJWT = apiJWT
+        
     }
     
     deinit {
@@ -27,14 +32,65 @@ final class MDJWTManager: MDJWTManagerProtocol {
 
 extension MDJWTManager {
     
-    func fetchJWT() {
+    func fetchJWT(jwtRequest: JWTRequest, completionHandler: @escaping MDJWTResponseResult) {
+                
+        jwtStorage.readFirstJWT(storageType: .memory) { [unowned self] readResults in
+            
+            switch readResults.first!.result {
+            
+            case .success(let readJWTResponse):
+                
+                if (isExpired(jwtExpirationDate: readJWTResponse.expDate)) {
+                    
+                    apiJWT.accessToken(jwtRequest: jwtRequest) { [unowned self] accessTokenResult in
+                        
+                        switch accessTokenResult {
+                        
+                        case .success(let fetchedJWTResponse):
+                            
+                            jwtStorage.updateJWT(storageType: .all,
+                                                 oldAccessToken: readJWTResponse.accessToken,
+                                                 newJWTResponse: fetchedJWTResponse) { updatedResult in
+                                
+                                switch updatedResult.first!.result {
+                                
+                                case .success(let updatedJWTResponse):
+                                    
+                                    completionHandler(.success(updatedJWTResponse))
+                                    
+                                case .failure(let error):
+                                    completionHandler(.failure(error))
+                                }
+                                
+                            }
+                            
+                        case .failure(let error):
+                            completionHandler(.failure(error))
+                        }
+                        
+                    }
+                    
+                } else {
+                    completionHandler(.success(readJWTResponse))
+                }
+            
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+            
+        }
         
-        var results: [MDStorageType : JWTResponse] = [ : ]
-        
-//        jwtStorage.readFirstJWT(storageType: .all) { [weak self] readResult in
-//            
-//        }
-        
+    }
+    
+}
+
+// MARK: - is Expired
+fileprivate extension MDJWTManager {
+    
+    func isExpired(jwtExpirationDate date: Date?) -> Bool {
+        guard let date = date else { return true }
+        let now = Date.init()
+        return now >= date
     }
     
 }
