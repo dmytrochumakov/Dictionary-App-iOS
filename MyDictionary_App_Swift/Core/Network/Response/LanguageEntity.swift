@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct LanguageEntity {
     
@@ -14,6 +15,17 @@ struct LanguageEntity {
     let createdAt: String
     
 }
+
+// MARK: - Core Data
+extension LanguageEntity {
+    
+    func cdLanguageEntity(insertIntoManagedObjectContext: NSManagedObjectContext) -> CDLanguageEntity {
+        return .init(languageEntity: self,
+                     insertIntoManagedObjectContext: insertIntoManagedObjectContext)
+    }
+    
+}
+
 
 // MARK: - Decodable
 extension LanguageEntity: Decodable {
