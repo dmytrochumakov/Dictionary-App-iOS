@@ -25,12 +25,23 @@ struct Constants {
     struct HTTPHeaderConstants {
         
         static let contentType: String = "Content-Type"
+        static let authorization: String = "Authorization"
         static let applicationJson: String = "application/json"
+        static let bearer: String = "Bearer "
         
         /// return
         /// Content-Type : application/json
         static func defaultHeaders() -> HTTPHeader {
             return [contentType : applicationJson]
+        }
+        
+        /// return
+        /// Content-Type : application/json
+        /// Authorization : Bearer
+        static func authorizationHeaders(accessToken: String) -> HTTPHeader {
+            return [contentType   : applicationJson,
+                    authorization : bearer + accessToken
+            ]
         }
         
     }

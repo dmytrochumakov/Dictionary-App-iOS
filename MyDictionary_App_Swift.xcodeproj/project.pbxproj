@@ -102,6 +102,8 @@
 		2270F3A226D262F5006B46F4 /* CourseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A126D262F5006B46F4 /* CourseEntity.swift */; };
 		2270F3A426D264E6006B46F4 /* CDCourseEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A326D264E6006B46F4 /* CDCourseEntity+Extension.swift */; };
 		2270F3A626D2663F006B46F4 /* CDCourseEntityAttributeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A526D2663F006B46F4 /* CDCourseEntityAttributeName.swift */; };
+		2270F3A926D27606006B46F4 /* MDAPILanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A826D27606006B46F4 /* MDAPILanguage.swift */; };
+		2270F3AB26D27D23006B46F4 /* MDLanguagesResponseResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3AA26D27D23006B46F4 /* MDLanguagesResponseResultWithCompletion.swift */; };
 		227D5E642652584700B54524 /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E632652584700B54524 /* NSLayoutConstraint+Extension.swift */; };
 		227D5E672652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E652652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift */; };
 		227D5E6A2652586F00B54524 /* WordListCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E692652586F00B54524 /* WordListCollectionViewDelegate.swift */; };
@@ -368,6 +370,8 @@
 		2270F3A126D262F5006B46F4 /* CourseEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseEntity.swift; sourceTree = "<group>"; };
 		2270F3A326D264E6006B46F4 /* CDCourseEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCourseEntity+Extension.swift"; sourceTree = "<group>"; };
 		2270F3A526D2663F006B46F4 /* CDCourseEntityAttributeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDCourseEntityAttributeName.swift; sourceTree = "<group>"; };
+		2270F3A826D27606006B46F4 /* MDAPILanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPILanguage.swift; sourceTree = "<group>"; };
+		2270F3AA26D27D23006B46F4 /* MDLanguagesResponseResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLanguagesResponseResultWithCompletion.swift; sourceTree = "<group>"; };
 		227D5E632652584700B54524 /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
 		227D5E652652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegateFlowLayoutPropertyProtocol.swift; sourceTree = "<group>"; };
 		227D5E692652586F00B54524 /* WordListCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordListCollectionViewDelegate.swift; sourceTree = "<group>"; };
@@ -597,8 +601,9 @@
 		220793CC26C6805C003D434B /* API */ = {
 			isa = PBXGroup;
 			children = (
-				2270F39426D24FF3006B46F4 /* APIJWT */,
-				22C5862E26C7A5420030B12D /* APIAuth */,
+				2270F3A826D27606006B46F4 /* MDAPILanguage.swift */,
+				220793CD26C68081003D434B /* MDAPIAuth.swift */,
+				2270F39526D2502B006B46F4 /* MDAPIJWT.swift */,
 				22EF0209269DAE9800FE4435 /* MDAPIWord.swift */,
 			);
 			path = API;
@@ -1012,14 +1017,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		2270F39426D24FF3006B46F4 /* APIJWT */ = {
-			isa = PBXGroup;
-			children = (
-				2270F39526D2502B006B46F4 /* MDAPIJWT.swift */,
-			);
-			path = APIJWT;
-			sourceTree = "<group>";
-		};
 		227864EE2663740100921778 /* SettingsModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -1336,23 +1333,6 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
-		22C5862E26C7A5420030B12D /* APIAuth */ = {
-			isa = PBXGroup;
-			children = (
-				22C5862F26C7A54B0030B12D /* Error */,
-				220793CD26C68081003D434B /* MDAPIAuth.swift */,
-			);
-			path = APIAuth;
-			sourceTree = "<group>";
-		};
-		22C5862F26C7A54B0030B12D /* Error */ = {
-			isa = PBXGroup;
-			children = (
-				22C5863026C7A5690030B12D /* MDAPIAuthError.swift */,
-			);
-			path = Error;
-			sourceTree = "<group>";
-		};
 		22C5863226C7AFAC0030B12D /* RegistrationModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -1609,6 +1589,7 @@
 		22EF01FD269DA98D00FE4435 /* Error */ = {
 			isa = PBXGroup;
 			children = (
+				22C5863026C7A5690030B12D /* MDAPIAuthError.swift */,
 				22EF01FE269DA99800FE4435 /* MDAPIError.swift */,
 			);
 			path = Error;
@@ -1620,6 +1601,7 @@
 				22EF0201269DA9E300FE4435 /* MDResponseOperationResult.swift */,
 				220793DB26C6C057003D434B /* MDAuthResponseResult.swift */,
 				2270F39726D251E1006B46F4 /* MDJWTResponseResult.swift */,
+				2270F3AA26D27D23006B46F4 /* MDLanguagesResponseResultWithCompletion.swift */,
 			);
 			path = Result;
 			sourceTree = "<group>";
@@ -1982,6 +1964,7 @@
 				22C5862D26C79D360030B12D /* MDAPIStatusCode.swift in Sources */,
 				22493C562697421C000DA480 /* MDUpdateWordCoreDataStorageOperation.swift in Sources */,
 				22C5863D26C7AFB80030B12D /* RegistrationViewController.swift in Sources */,
+				2270F3A926D27606006B46F4 /* MDAPILanguage.swift in Sources */,
 				22493C4C26972E27000DA480 /* MDEntityOperationError.swift in Sources */,
 				220793D126C6B2D9003D434B /* AuthRequest.swift in Sources */,
 				22557FD326C95D5A00A4FF31 /* MDReadJWTMemoryStorageOperation.swift in Sources */,
@@ -2050,6 +2033,7 @@
 				22E2B4EC2664EE1400978E62 /* FillWithModelProtocol.swift in Sources */,
 				220FFE7426C8F83A00702CCE /* MDKeyboardToolbar.swift in Sources */,
 				22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */,
+				2270F3AB26D27D23006B46F4 /* MDLanguagesResponseResultWithCompletion.swift in Sources */,
 				228722D726D0FFD300C9D1BC /* MDAuthResultWithCompletion.swift in Sources */,
 				2299016A2668EC3400D8C74E /* AppearanceViewController.swift in Sources */,
 				22BD99A5266A58DE0063FEFC /* RootWindow.swift in Sources */,

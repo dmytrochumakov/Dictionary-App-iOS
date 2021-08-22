@@ -135,7 +135,9 @@ fileprivate extension MDRequestDispatcher {
 fileprivate extension MDRequestDispatcher {
     
     func showNetworkActivityIndicator() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        }
     }
     
     func hideNetworkActivityIndicator() {
