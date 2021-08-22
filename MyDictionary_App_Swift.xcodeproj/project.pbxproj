@@ -96,6 +96,7 @@
 		2270F39626D2502B006B46F4 /* MDAPIJWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F39526D2502B006B46F4 /* MDAPIJWT.swift */; };
 		2270F39826D251E1006B46F4 /* MDJWTResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F39726D251E1006B46F4 /* MDJWTResponseResult.swift */; };
 		2270F39A26D251ED006B46F4 /* JWTRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F39926D251ED006B46F4 /* JWTRequest.swift */; };
+		2270F39C26D25ED1006B46F4 /* LanguageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F39B26D25ED1006B46F4 /* LanguageEntity.swift */; };
 		227D5E642652584700B54524 /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E632652584700B54524 /* NSLayoutConstraint+Extension.swift */; };
 		227D5E672652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E652652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift */; };
 		227D5E6A2652586F00B54524 /* WordListCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E692652586F00B54524 /* WordListCollectionViewDelegate.swift */; };
@@ -363,6 +364,7 @@
 		2270F39526D2502B006B46F4 /* MDAPIJWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIJWT.swift; sourceTree = "<group>"; };
 		2270F39726D251E1006B46F4 /* MDJWTResponseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTResponseResult.swift; sourceTree = "<group>"; };
 		2270F39926D251ED006B46F4 /* JWTRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTRequest.swift; sourceTree = "<group>"; };
+		2270F39B26D25ED1006B46F4 /* LanguageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageEntity.swift; sourceTree = "<group>"; };
 		227D5E632652584700B54524 /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
 		227D5E652652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegateFlowLayoutPropertyProtocol.swift; sourceTree = "<group>"; };
 		227D5E692652586F00B54524 /* WordListCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordListCollectionViewDelegate.swift; sourceTree = "<group>"; };
@@ -630,6 +632,7 @@
 				22C5864126C7B7AE0030B12D /* UserEntity.swift */,
 				220793D926C6BF58003D434B /* AuthResponse.swift */,
 				227F8AB226CAB0DC00375A38 /* JWTResponse.swift */,
+				2270F39B26D25ED1006B46F4 /* LanguageEntity.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -2127,6 +2130,7 @@
 				22C5864226C7B7AE0030B12D /* UserEntity.swift in Sources */,
 				22CA08892651603A0052D169 /* WordListDataProvider.swift in Sources */,
 				22E2B4F52665097900978E62 /* SettingsSectionType.swift in Sources */,
+				2270F39C26D25ED1006B46F4 /* LanguageEntity.swift in Sources */,
 				228722D126D0F18400C9D1BC /* MDAuthManager.swift in Sources */,
 				22493C3B269724CB000DA480 /* CoreDataEntityName.swift in Sources */,
 				220FFEA226C9150100702CCE /* MDCreateUserMemoryStorageOperation.swift in Sources */,
