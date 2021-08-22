@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct CourseEntity {
     
@@ -18,9 +19,19 @@ struct CourseEntity {
     
 }
 
+// MARK: - Core Data
+extension CourseEntity {
+    
+    func cdCourseEntity(insertIntoManagedObjectContext: NSManagedObjectContext) -> CDCourseEntity {
+        return .init(courseEntity: self,
+                     insertIntoManagedObjectContext: insertIntoManagedObjectContext)
+    }
+    
+}
+
 // MARK: - Decodable
 extension CourseEntity: Decodable {
-      
+    
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
         case courseId = "course_id"
