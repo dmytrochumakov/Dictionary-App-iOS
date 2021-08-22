@@ -13,13 +13,13 @@ final class MDUpdateWordMemoryStorageOperation: MDOperation {
     fileprivate let id: Int64
     fileprivate let word: String
     fileprivate let word_description: String
-    fileprivate let result: MDEntityResult<WordModel>?
+    fileprivate let result: MDEntityResult<WordEntity>?
     
     init(wordStorage: MDWordMemoryStorage,
          id: Int64,
          word: String,
          word_description: String,
-         result: MDEntityResult<WordModel>?) {
+         result: MDEntityResult<WordEntity>?) {
         
         self.wordStorage = wordStorage
         self.id = id

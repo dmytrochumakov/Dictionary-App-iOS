@@ -12,7 +12,7 @@ struct Constants_For_Tests {
     
     public static let testExpectationTimeout: TimeInterval = 20.0
     
-    public static let mockedWord0: WordModel = .init(user_id: .init(),
+    public static let mockedWord0: WordEntity = .init(user_id: .init(),
                                                      id: .init(),
                                                      word: "MOSF",
                                                      word_description: "metal–oxide–semiconductor-field",
@@ -20,7 +20,7 @@ struct Constants_For_Tests {
                                                      created_at: .init(),
                                                      updated_at: .init())
     
-    public static let mockedWordForUpdate: WordModel = .init(user_id: .init(),
+    public static let mockedWordForUpdate: WordEntity = .init(user_id: .init(),
                                                              id: .init(),
                                                              word: "MOSFC",
                                                              word_description: "metal–oxide–semiconductor-field-c",

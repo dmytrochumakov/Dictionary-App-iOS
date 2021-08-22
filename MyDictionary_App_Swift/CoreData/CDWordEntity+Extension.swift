@@ -10,19 +10,21 @@ import CoreData
 
 extension CDWordEntity {
     
-    convenience init(wordModel: WordModel,
+    convenience init(wordEntity: WordEntity,
                      insertIntoManagedObjectContext context: NSManagedObjectContext!) {
         
         let entity = NSEntityDescription.entity(forEntityName: CoreDataEntityName.CDWordEntity, in: context)!
         self.init(entity: entity, insertInto: context)
         
-        self.user_id = wordModel.user_id
-        self.id = wordModel.id
-        self.word = wordModel.word
-        self.word_description = wordModel.word_description
-        self.word_language = wordModel.word_language
-        self.created_at = wordModel.created_at
-        self.updated_at = wordModel.updated_at
+        self.userId = wordEntity.userId
+        self.wordId = wordEntity.wordId
+        self.courseId = wordEntity.courseId
+        self.languageId = wordEntity.languageId
+        self.wordText = wordEntity.wordText
+        self.wordDescription = wordEntity.wordDescription
+        self.languageName = wordEntity.languageName
+        self.createdAt = wordEntity.createdAt
+        self.updatedAt = wordEntity.updatedAt
         
     }
     
@@ -30,22 +32,24 @@ extension CDWordEntity {
 
 extension CDWordEntity {
     
-    var wordModel: WordModel {
-        guard let word = self.word,
-              let word_description = self.word_description,
-              let word_language = self.word_language,
-              let created_at = self.created_at,
-              let updated_at = self.updated_at
+    var wordEntity: WordEntity {
+        guard let wordText = self.wordText,
+              let wordDescription = self.wordDescription,
+              let languageName = self.languageName,
+              let createdAt = self.createdAt,
+              let updatedAt = self.updatedAt
         else {
             fatalError()
         }
-        return .init(user_id: self.user_id,
-                     id: self.id,
-                     word: word,
-                     word_description: word_description,
-                     word_language: word_language,
-                     created_at: created_at,
-                     updated_at: updated_at)
+        return .init(userId: self.userId,
+                     wordId: self.wordId,
+                     courseId: self.courseId,
+                     languageId: self.languageId,
+                     wordText: wordText,
+                     wordDescription: wordDescription,
+                     languageName: languageName,
+                     createdAt: createdAt,
+                     updatedAt: updatedAt)
     }
     
 }

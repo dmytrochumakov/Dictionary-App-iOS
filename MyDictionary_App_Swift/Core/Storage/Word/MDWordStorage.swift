@@ -15,7 +15,7 @@ protocol MDWordStorageProtocol {
     func entitiesCount(storageType: MDStorageType,
                        _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDEntitiesCountResultWithoutCompletion>))
     
-    func createWord(_ wordModel: WordModel,
+    func createWord(_ wordModel: WordEntity,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
     
@@ -29,7 +29,7 @@ protocol MDWordStorageProtocol {
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
     
-    func deleteWord(_ word: WordModel,
+    func deleteWord(_ word: WordEntity,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
     
@@ -177,7 +177,7 @@ extension MDWordStorage {
 // MARK: - CRUD
 extension MDWordStorage {
     
-    func createWord(_ wordModel: WordModel,
+    func createWord(_ wordModel: WordEntity,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>)) {
         
@@ -366,7 +366,7 @@ extension MDWordStorage {
         
     }
     
-    func deleteWord(_ word: WordModel, storageType: MDStorageType, _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>)) {
+    func deleteWord(_ word: WordEntity, storageType: MDStorageType, _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>)) {
         
         switch storageType {
         

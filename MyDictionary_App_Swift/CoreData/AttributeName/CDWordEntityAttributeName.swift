@@ -8,11 +8,13 @@
 import Foundation
 
 struct CDWordEntityAttributeName {
-    static let id: String = "id"
-    static let user_id: String = "user_id"
-    static let word: String = "word"
-    static let word_description: String = "word_description"
-    static let word_language: String = "word_language"
-    static let created_at: String = "created_at"
-    static let updated_at: String = "updated_at"
+    static let userId: String = "userId"
+    static let wordId: String = "wordId"
+    static let courseId: String = "courseId"
+    static let languageId: String = "languageId"
+    static let wordText: String = "wordText"
+    static let wordDescription: String = "wordDescription"
+    static let languageName: String = "languageName"
+    static let createdAt: String = "createdAt"
+    static let updatedAt: String = "updatedAt"
 }
