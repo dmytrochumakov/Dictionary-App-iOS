@@ -99,6 +99,7 @@
 		2270F39C26D25ED1006B46F4 /* LanguageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F39B26D25ED1006B46F4 /* LanguageEntity.swift */; };
 		2270F39E26D26132006B46F4 /* CDLanguageEntityAttributeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F39D26D26132006B46F4 /* CDLanguageEntityAttributeName.swift */; };
 		2270F3A026D26199006B46F4 /* CDLanguageEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F39F26D26199006B46F4 /* CDLanguageEntity+Extension.swift */; };
+		2270F3A226D262F5006B46F4 /* CourseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A126D262F5006B46F4 /* CourseEntity.swift */; };
 		227D5E642652584700B54524 /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E632652584700B54524 /* NSLayoutConstraint+Extension.swift */; };
 		227D5E672652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E652652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift */; };
 		227D5E6A2652586F00B54524 /* WordListCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E692652586F00B54524 /* WordListCollectionViewDelegate.swift */; };
@@ -369,6 +370,7 @@
 		2270F39B26D25ED1006B46F4 /* LanguageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageEntity.swift; sourceTree = "<group>"; };
 		2270F39D26D26132006B46F4 /* CDLanguageEntityAttributeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDLanguageEntityAttributeName.swift; sourceTree = "<group>"; };
 		2270F39F26D26199006B46F4 /* CDLanguageEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDLanguageEntity+Extension.swift"; sourceTree = "<group>"; };
+		2270F3A126D262F5006B46F4 /* CourseEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseEntity.swift; sourceTree = "<group>"; };
 		227D5E632652584700B54524 /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
 		227D5E652652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegateFlowLayoutPropertyProtocol.swift; sourceTree = "<group>"; };
 		227D5E692652586F00B54524 /* WordListCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordListCollectionViewDelegate.swift; sourceTree = "<group>"; };
@@ -637,6 +639,7 @@
 				220793D926C6BF58003D434B /* AuthResponse.swift */,
 				227F8AB226CAB0DC00375A38 /* JWTResponse.swift */,
 				2270F39B26D25ED1006B46F4 /* LanguageEntity.swift */,
+				2270F3A126D262F5006B46F4 /* CourseEntity.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -2160,6 +2163,7 @@
 				22CA087F26515ED90052D169 /* WordListInteractor.swift in Sources */,
 				220FFE8A26C90B1300702CCE /* MDCreateUserProtocol.swift in Sources */,
 				226FEE7A266B644F0044A5F9 /* AppearanceCollectionViewDataSource.swift in Sources */,
+				2270F3A226D262F5006B46F4 /* CourseEntity.swift in Sources */,
 				22C5863A26C7AFB80030B12D /* RegistrationModule.swift in Sources */,
 				22C5863126C7A5690030B12D /* MDAPIAuthError.swift in Sources */,
 				22E2B4E62664EB8000978E62 /* SettingsCollectionViewDelegate.swift in Sources */,
