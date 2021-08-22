@@ -11,5 +11,6 @@ struct CoreDataEntityName {
     static let CDWordEntity = "CDWordEntity"
     static let CDUserEntity = "CDUserEntity"
     static let CDJWTResponseEntity = "CDJWTResponseEntity"
-    static let CDLanguageEntity = "CDLanguageEntity"    
+    static let CDLanguageEntity = "CDLanguageEntity"
+    static let CDCourseEntity = "CDCourseEntity"
 }
