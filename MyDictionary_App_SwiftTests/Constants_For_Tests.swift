@@ -12,21 +12,25 @@ struct Constants_For_Tests {
     
     public static let testExpectationTimeout: TimeInterval = 20.0
     
-    public static let mockedWord0: WordEntity = .init(user_id: .init(),
-                                                     id: .init(),
-                                                     word: "MOSF",
-                                                     word_description: "metal–oxide–semiconductor-field",
-                                                     word_language: "English",
-                                                     created_at: .init(),
-                                                     updated_at: .init())
+    public static let mockedWord0: WordEntity = .init(userId: .init(),
+                                                      wordId: .init(),
+                                                      courseId: .init(),
+                                                      languageId: .init(),
+                                                      wordText: "MOSF",
+                                                      wordDescription: "metal–oxide–semiconductor-field",
+                                                      languageName: "English",
+                                                      createdAt: .init(),
+                                                      updatedAt: .init())
     
-    public static let mockedWordForUpdate: WordEntity = .init(user_id: .init(),
-                                                             id: .init(),
-                                                             word: "MOSFC",
-                                                             word_description: "metal–oxide–semiconductor-field-c",
-                                                             word_language: "Spanish",
-                                                             created_at: .init(),
-                                                             updated_at: .init())
+    public static let mockedWordForUpdate: WordEntity = .init(userId: .init(),
+                                                              wordId: .init(),
+                                                              courseId: .init(),
+                                                              languageId: .init(),
+                                                              wordText: "MOSFC",
+                                                              wordDescription: "metal–oxide–semiconductor-field-c",
+                                                              languageName: "English",
+                                                              createdAt: .init(),
+                                                              updatedAt: .init())
     
     public static let mockedUser: UserEntity = .init(userId: 0,
                                                      nickname: "Test nickname",
