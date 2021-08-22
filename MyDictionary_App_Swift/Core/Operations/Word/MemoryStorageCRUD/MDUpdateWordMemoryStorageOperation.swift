@@ -10,35 +10,35 @@ import Foundation
 final class MDUpdateWordMemoryStorageOperation: MDOperation {
     
     fileprivate let wordStorage: MDWordMemoryStorage
-    fileprivate let id: Int64
-    fileprivate let word: String
-    fileprivate let word_description: String
+    fileprivate let wordId: Int64
+    fileprivate let newWordText: String
+    fileprivate let newWordDescription: String
     fileprivate let result: MDEntityResult<WordEntity>?
     
     init(wordStorage: MDWordMemoryStorage,
-         id: Int64,
-         word: String,
-         word_description: String,
+         wordId: Int64,
+         newWordText: String,
+         newWordDescription: String,
          result: MDEntityResult<WordEntity>?) {
         
         self.wordStorage = wordStorage
-        self.id = id
-        self.word = word
-        self.word_description = word_description
+        self.wordId = wordId
+        self.newWordText = newWordText
+        self.newWordDescription = newWordDescription
         self.result = result
         
         super.init()
     }
     
     override func main() {
-        guard let index = self.wordStorage.arrayWords.firstIndex(where: { $0.id == self.id })
+        guard let index = self.wordStorage.arrayWords.firstIndex(where: { $0.wordId == self.wordId })
         else {
             self.result?(.failure(MDEntityOperationError.cantFindEntity));
             self.finish();
             return
         }
-        self.wordStorage.arrayWords[index].word = self.word
-        self.wordStorage.arrayWords[index].word_description = self.word_description
+        self.wordStorage.arrayWords[index].wordText = self.newWordText
+        self.wordStorage.arrayWords[index].wordDescription = self.newWordDescription
         self.result?(.success(self.wordStorage.arrayWords[index]))
         self.finish()
     }

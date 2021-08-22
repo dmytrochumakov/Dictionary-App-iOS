@@ -30,10 +30,10 @@ final class MDCreateWordCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        let newWord = CDWordEntity.init(wordModel: self.word,
+        let newWord = CDWordEntity.init(wordEntity: self.word,
                                         insertIntoManagedObjectContext: self.managedObjectContext)
         
-        self.wordStorage.save(id: newWord.id) { [weak self] result in
+        self.wordStorage.save(wordId: newWord.wordId) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let createdWord):

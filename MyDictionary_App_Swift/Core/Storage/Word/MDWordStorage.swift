@@ -19,13 +19,13 @@ protocol MDWordStorageProtocol {
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
     
-    func readWord(fromID id: Int64,
+    func readWord(fromWordID wordId: Int64,
                   storageType: MDStorageType,
                   _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
     
-    func updateWord(byID id: Int64,
-                    word: String,
-                    word_description: String,
+    func updateWord(byWordID wordId: Int64,
+                    newWordText: String,
+                    newWordDescription: String,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
     
@@ -236,7 +236,7 @@ extension MDWordStorage {
         
     }
     
-    func readWord(fromID id: Int64,
+    func readWord(fromWordID wordId: Int64,
                   storageType: MDStorageType,
                   _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>)) {
         
@@ -244,13 +244,13 @@ extension MDWordStorage {
         
         case .memory:
             
-            memoryStorage.readWord(fromID: id) { (result) in
+            memoryStorage.readWord(fromWordID: wordId) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .coreData:
             
-            coreDataStorage.readWord(fromID: id) { (result) in
+            coreDataStorage.readWord(fromWordID: wordId) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
@@ -265,7 +265,7 @@ extension MDWordStorage {
             // Read From Memory
             // Dispatch Group Enter
             dispatchGroup.enter()
-            memoryStorage.readWord(fromID: id) { result in
+            memoryStorage.readWord(fromWordID: wordId) { result in
                 
                 // Append Result
                 finalResult.append(.init(storageType: .memory, result: result))
@@ -278,7 +278,7 @@ extension MDWordStorage {
             // Read From Core Data
             // Dispatch Group Enter
             dispatchGroup.enter()
-            coreDataStorage.readWord(fromID: id) { result in
+            coreDataStorage.readWord(fromWordID: wordId) { result in
                 
                 // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))
@@ -296,9 +296,9 @@ extension MDWordStorage {
         
     }
     
-    func updateWord(byID id: Int64,
-                    word: String,
-                    word_description: String,
+    func updateWord(byWordID wordId: Int64,
+                    newWordText: String,
+                    newWordDescription: String,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>)) {
         
@@ -306,17 +306,17 @@ extension MDWordStorage {
         
         case .memory:
             
-            memoryStorage.updateWord(byID: id,
-                                     word: word,
-                                     word_description: word_description) { (result) in
+            memoryStorage.updateWord(byWordID: wordId,
+                                     newWordText: newWordText,
+                                     newWordDescription: newWordDescription) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .coreData:
             
-            coreDataStorage.updateWord(byID: id,
-                                       word: word,
-                                       word_description: word_description) { (result) in
+            coreDataStorage.updateWord(byWordID: wordId,
+                                       newWordText: newWordText,
+                                       newWordDescription: newWordDescription) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
@@ -331,9 +331,9 @@ extension MDWordStorage {
             // Update In Memory
             // Dispatch Group Enter
             dispatchGroup.enter()
-            memoryStorage.updateWord(byID: id,
-                                     word: word,
-                                     word_description: word_description) { result in
+            memoryStorage.updateWord(byWordID: wordId,
+                                     newWordText: newWordText,
+                                     newWordDescription: newWordDescription) { result in
                 
                 // Append Result
                 finalResult.append(.init(storageType: .memory, result: result))
@@ -346,9 +346,9 @@ extension MDWordStorage {
             // Update In Core Data
             // Dispatch Group Enter
             dispatchGroup.enter()
-            coreDataStorage.updateWord(byID: id,
-                                       word: word,
-                                       word_description: word_description) { result in
+            coreDataStorage.updateWord(byWordID: wordId,
+                                       newWordText: newWordText,
+                                       newWordDescription: newWordDescription) { result in
                 
                 // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))

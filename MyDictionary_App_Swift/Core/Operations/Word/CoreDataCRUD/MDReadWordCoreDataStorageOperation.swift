@@ -12,17 +12,17 @@ final class MDReadWordCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let wordStorage: MDWordCoreDataStorage
-    fileprivate let id: Int64
+    fileprivate let wordId: Int64
     fileprivate let result: MDEntityResult<WordEntity>?
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
-         id: Int64,
+         wordId: Int64,
          result: MDEntityResult<WordEntity>?) {
         
         self.managedObjectContext = managedObjectContext
         self.wordStorage = wordStorage
-        self.id = id
+        self.wordId = wordId
         self.result = result
         
         super.init()
@@ -31,11 +31,11 @@ final class MDReadWordCoreDataStorageOperation: MDOperation {
     override func main() {
         
         let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: CoreDataEntityName.CDWordEntity)
-        fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.id) == %i", id)
+        fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.wordId) == %i", wordId)
         let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
             
             if let result = asynchronousFetchResult.finalResult {
-                if let word = result.map({ $0.wordModel }).first {
+                if let word = result.map({ $0.wordEntity }).first {
                     DispatchQueue.main.async {
                         self?.result?(.success(word))
                         self?.finish()
@@ -97,13 +97,15 @@ final class MDReadWordsCoreDataStorageOperation: MDOperation {
     override func main() {
         
         let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: CoreDataEntityName.CDWordEntity)
+        
         fetchRequest.fetchLimit = self.fetchLimit
         fetchRequest.fetchOffset = self.fetchOffset
+        
         let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
             
             if let result = asynchronousFetchResult.finalResult {
                 DispatchQueue.main.async {
-                    self?.result?(.success(result.map({ $0.wordModel })))
+                    self?.result?(.success(result.map({ $0.wordEntity })))
                     self?.finish()
                 }
             } else {

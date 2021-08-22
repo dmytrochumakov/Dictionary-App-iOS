@@ -36,7 +36,7 @@ final class MDWordMemoryStorage: MDWordMemoryStorageProtocol {
 extension MDWordMemoryStorage {
     
     func entitiesCount(_ completionHandler: @escaping (MDEntitiesCountResultWithCompletion)) {
-        self.readAllWords() { [unowned self] result in
+        self.readAllWords() { result in
             switch result {
             case .success(let words):
                 completionHandler(.success(words.count))
@@ -47,7 +47,7 @@ extension MDWordMemoryStorage {
     }
     
     func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion)) {
-        self.readAllWords() { [unowned self] result in
+        self.readAllWords() { result in
             switch result {
             case .success(let words):
                 completionHandler(.success(words.isEmpty))
@@ -70,8 +70,8 @@ extension MDWordMemoryStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readWord(fromID id: Int64, _ completionHandler: @escaping(MDEntityResult<WordEntity>)) {
-        let operation = MDReadWordMemoryStorageOperation.init(wordStorage: self, id: id) { result in
+    func readWord(fromWordID wordId: Int64, _ completionHandler: @escaping(MDEntityResult<WordEntity>)) {
+        let operation = MDReadWordMemoryStorageOperation.init(wordStorage: self, wordId: wordId) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
@@ -85,8 +85,11 @@ extension MDWordMemoryStorage {
         completionHandler(.success(self.arrayWords))
     }
     
-    func updateWord(byID id: Int64, word: String, word_description: String, _ completionHandler: @escaping(MDEntityResult<WordEntity>)) {
-        let operation = MDUpdateWordMemoryStorageOperation.init(wordStorage: self, id: id, word: word, word_description: word_description) { result in
+    func updateWord(byWordID wordId: Int64, newWordText: String, newWordDescription: String, _ completionHandler: @escaping(MDEntityResult<WordEntity>)) {
+        let operation = MDUpdateWordMemoryStorageOperation.init(wordStorage: self,
+                                                                wordId: wordId,
+                                                                newWordText: newWordText,
+                                                                newWordDescription: newWordDescription) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)

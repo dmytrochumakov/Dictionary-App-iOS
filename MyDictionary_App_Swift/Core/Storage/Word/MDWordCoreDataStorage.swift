@@ -80,10 +80,10 @@ extension MDWordCoreDataStorage {
 // MARK: - Read
 extension MDWordCoreDataStorage {
     
-    func readWord(fromID id: Int64, _ completionHandler: @escaping (MDEntityResult<WordEntity>)) {
+    func readWord(fromWordID wordId: Int64, _ completionHandler: @escaping (MDEntityResult<WordEntity>)) {
         let operation = MDReadWordCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                 wordStorage: self,
-                                                                id: id) { result in
+                                                                wordId: wordId) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
@@ -114,12 +114,12 @@ extension MDWordCoreDataStorage {
 // MARK: - Update
 extension MDWordCoreDataStorage {
     
-    func updateWord(byID id: Int64, word: String, word_description: String, _ completionHandler: @escaping (MDEntityResult<WordEntity>)) {
+    func updateWord(byWordID wordId: Int64, newWordText: String, newWordDescription: String, _ completionHandler: @escaping (MDEntityResult<WordEntity>)) {
         let operation = MDUpdateWordCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                   wordStorage: self,
-                                                                  id: id,
-                                                                  word: word,
-                                                                  word_description: word_description) { result in
+                                                                  wordId: wordId,
+                                                                  newWordText: newWordText,
+                                                                  newWordDescription: newWordDescription) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
@@ -148,11 +148,11 @@ extension MDWordCoreDataStorage {
         coreDataStack.savePerform(completionHandler: completionHandler)
     }
     
-    func savePerform(id: Int64, completionHandler: @escaping MDEntityResult<WordEntity>) {
+    func savePerform(wordId: Int64, completionHandler: @escaping MDEntityResult<WordEntity>) {
         coreDataStack.savePerform() { [unowned self] (result) in
             switch result {
             case .success:
-                self.readWord(fromID: id) { [unowned self] (result) in
+                self.readWord(fromWordID: wordId) { [unowned self] (result) in
                     switch result {
                     case .success(let wordModel):
                         completionHandler(.success(wordModel))
@@ -166,11 +166,11 @@ extension MDWordCoreDataStorage {
         }
     }
     
-    func save(id: Int64, completionHandler: @escaping MDEntityResult<WordEntity>) {
+    func save(wordId: Int64, completionHandler: @escaping MDEntityResult<WordEntity>) {
         coreDataStack.savePerformAndWait() { [unowned self] (result) in
             switch result {
             case .success:
-                self.readWord(fromID: id) { [unowned self] (result) in
+                self.readWord(fromWordID: wordId) { [unowned self] (result) in
                     switch result {
                     case .success(let wordModel):
                         completionHandler(.success(wordModel))

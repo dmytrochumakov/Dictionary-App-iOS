@@ -10,22 +10,22 @@ import Foundation
 final class MDReadWordMemoryStorageOperation: MDOperation {
     
     fileprivate let wordStorage: MDWordMemoryStorage
-    fileprivate let id: Int64
+    fileprivate let wordId: Int64
     fileprivate let result: MDEntityResult<WordEntity>?
     
     init(wordStorage: MDWordMemoryStorage,
-         id: Int64,
+         wordId: Int64,
          result: MDEntityResult<WordEntity>?) {
         
         self.wordStorage = wordStorage
-        self.id = id
+        self.wordId = wordId
         self.result = result
         
         super.init()
     }
     
     override func main() {
-        guard let word = self.wordStorage.arrayWords.first(where: { $0.id == self.id })
+        guard let word = self.wordStorage.arrayWords.first(where: { $0.wordId == self.wordId })
         else {
             self.result?(.failure(MDEntityOperationError.cantFindEntity));
             self.finish();

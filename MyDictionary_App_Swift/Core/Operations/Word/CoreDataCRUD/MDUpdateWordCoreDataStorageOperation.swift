@@ -12,23 +12,23 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let wordStorage: MDWordCoreDataStorage
-    fileprivate let id: Int64
-    fileprivate let word: String
-    fileprivate let word_description: String
+    fileprivate let wordId: Int64
+    fileprivate let newWordText: String
+    fileprivate let newWordDescription: String
     fileprivate let result: MDEntityResult<WordEntity>?
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
-         id: Int64,
-         word: String,
-         word_description: String,
+         wordId: Int64,
+         newWordText: String,
+         newWordDescription: String,
          result: MDEntityResult<WordEntity>?) {
         
         self.managedObjectContext = managedObjectContext
         self.wordStorage = wordStorage
-        self.id = id
-        self.word = word
-        self.word_description = word_description
+        self.wordId = wordId
+        self.newWordText = newWordText
+        self.newWordDescription = newWordDescription
         self.result = result
         
         super.init()
@@ -37,14 +37,18 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
     override func main() {
         
         let batchUpdateRequest = NSBatchUpdateRequest(entityName: CoreDataEntityName.CDWordEntity)
-        batchUpdateRequest.propertiesToUpdate = [CDWordEntityAttributeName.word : self.word,
-                                                 CDWordEntityAttributeName.word_description : self.word_description
+        
+        batchUpdateRequest.propertiesToUpdate = [CDWordEntityAttributeName.wordText : self.newWordText,
+                                                 CDWordEntityAttributeName.wordDescription : self.newWordDescription
         ]
-        batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.id) == %i", self.id)
+        
+        batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.wordId) == %i", self.wordId)
         
         do {
+            
             try managedObjectContext.execute(batchUpdateRequest)
-            self.wordStorage.savePerform(id: self.id) { [weak self] (result) in
+            
+            self.wordStorage.savePerform(wordId: self.wordId) { [weak self] (result) in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let updatedWord):
@@ -56,6 +60,7 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
                     }
                 }
             }
+            
         } catch let error {
             DispatchQueue.main.async {
                 self.result?(.failure(error))

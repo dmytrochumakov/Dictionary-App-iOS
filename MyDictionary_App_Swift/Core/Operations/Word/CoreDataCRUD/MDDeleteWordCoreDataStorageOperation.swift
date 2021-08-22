@@ -31,11 +31,17 @@ final class MDDeleteWordCoreDataStorageOperation: MDOperation {
     override func main() {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDWordEntity)
-        fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.id) == %i", word.id)
+        
+        fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.wordId) == %i", word.wordId)
+        
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
         do {
+            
             try managedObjectContext.execute(batchDeleteRequest)
+            
             self.wordStorage.savePerform { [weak self] (result) in
+                
                 DispatchQueue.main.async {
                     switch result {
                     case .success:
@@ -52,7 +58,9 @@ final class MDDeleteWordCoreDataStorageOperation: MDOperation {
                         self?.finish()
                     }
                 }
+                
             }
+            
         } catch let error {
             DispatchQueue.main.async {
                 self.result?(.failure(error))
