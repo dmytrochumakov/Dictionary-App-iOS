@@ -27,10 +27,6 @@ protocol MDLanguageStorageProtocol {
     
 }
 
-typealias MDLanguageResultWithoutCompletion = (Result<LanguageEntity, Error>)
-typealias MDLanguageResultsWithoutCompletion = (Result<[LanguageEntity], Error>)
-typealias MDDeleteAllLanguagesResultsWithoutCompletion = (Result<Void, Error>)
-
 final class MDLanguageStorage: MDLanguageStorageProtocol {
     
     fileprivate let memoryStorage: MDLanguageMemoryStorageProtocol
