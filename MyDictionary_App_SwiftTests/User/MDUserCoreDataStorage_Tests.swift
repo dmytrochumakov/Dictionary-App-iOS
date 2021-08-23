@@ -37,14 +37,18 @@ extension MDUserCoreDataStorage_Tests {
         let expectation = XCTestExpectation(description: "Create User Expectation")
         
         userCoreDataStorage.createUser(Constants_For_Tests.mockedUser) { result in
+            
             switch result {
+            
             case .success(let createdUser):
+                
                 XCTAssertTrue(createdUser.userId == Constants_For_Tests.mockedUser.userId)
                 XCTAssertTrue(createdUser.nickname == Constants_For_Tests.mockedUser.nickname)
                 XCTAssertTrue(createdUser.password == Constants_For_Tests.mockedUser.password)
                 XCTAssertTrue(createdUser.createdAt == Constants_For_Tests.mockedUser.createdAt)
                 XCTAssertTrue(createdUser.updatedAt == Constants_For_Tests.mockedUser.updatedAt)
                 expectation.fulfill()
+                
             case .failure:
                 XCTExpectFailure()
                 expectation.fulfill()
@@ -60,17 +64,24 @@ extension MDUserCoreDataStorage_Tests {
         let expectation = XCTestExpectation(description: "Read User Expectation")
         
         userCoreDataStorage.createUser(Constants_For_Tests.mockedUser) { [unowned self] createResult in
+            
             switch createResult {
+            
             case .success(let createdUser):
+                
                 userCoreDataStorage.readUser(fromUserID: createdUser.userId) { readResult in
+                    
                     switch readResult {
+                    
                     case .success(let readUser):
+                        
                         XCTAssertTrue(createdUser.userId == readUser.userId)
                         XCTAssertTrue(createdUser.nickname == readUser.nickname)
                         XCTAssertTrue(createdUser.password == readUser.password)
                         XCTAssertTrue(createdUser.createdAt == readUser.createdAt)
                         XCTAssertTrue(createdUser.updatedAt == readUser.updatedAt)
                         expectation.fulfill()
+                        
                     case .failure:
                         XCTExpectFailure()
                         expectation.fulfill()
@@ -91,17 +102,28 @@ extension MDUserCoreDataStorage_Tests {
         let expectation = XCTestExpectation(description: "Delete User Expectation")
         
         userCoreDataStorage.createUser(Constants_For_Tests.mockedUser) { [unowned self] createResult in
+            
             switch createResult {
+            
             case .success(let createdUser):
+                
                 self.userCoreDataStorage.deleteUser(createdUser) { deleteResult in
+                    
                     switch deleteResult {
+                    
                     case .success(let deleteUser):
+                        
                         XCTAssertTrue(createdUser.userId == deleteUser.userId)
+                        
                         self.userCoreDataStorage.entitiesIsEmpty { entitiesIsEmptyResult in
+                            
                             switch entitiesIsEmptyResult {
+                            
                             case .success(let entitiesIsEmpty):
+                                
                                 XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
+                                
                             case .failure:
                                 XCTExpectFailure()
                                 expectation.fulfill()
