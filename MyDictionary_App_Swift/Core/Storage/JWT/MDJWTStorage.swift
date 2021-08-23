@@ -36,11 +36,9 @@ protocol MDJWTStorageProtocol {
                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDJWTResultWithoutCompletion>))
     
     func deleteAllJWT(storageType: MDStorageType,
-                      _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDDeleteAllJWTResultWithoutCompletion>))
+                      _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDDeleteAllEntitiesResultWithoutCompletion>))
     
 }
-
-typealias MDDeleteAllJWTResultWithoutCompletion = (Result<Void, Error>)
 
 final class MDJWTStorage: MDJWTStorageProtocol {
     
@@ -488,7 +486,7 @@ extension MDJWTStorage {
         
     }
     
-    func deleteAllJWT(storageType: MDStorageType, _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDDeleteAllJWTResultWithoutCompletion>)) {
+    func deleteAllJWT(storageType: MDStorageType, _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDDeleteAllEntitiesResultWithoutCompletion>)) {
         
         switch storageType {
         
@@ -510,7 +508,7 @@ extension MDJWTStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDDeleteAllJWTResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDDeleteAllEntitiesResultWithoutCompletion> = []
             
             // Delete From Memory
             // Dispatch Group Enter

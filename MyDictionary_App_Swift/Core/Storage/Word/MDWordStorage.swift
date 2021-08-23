@@ -33,6 +33,9 @@ protocol MDWordStorageProtocol {
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
     
+    func deleteAllWords(storageType: MDStorageType,
+                        _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDDeleteAllEntitiesResultWithoutCompletion>))
+    
 }
 
 final class MDWordStorage: MDWordStorageProtocol {
@@ -366,7 +369,9 @@ extension MDWordStorage {
         
     }
     
-    func deleteWord(_ word: WordEntity, storageType: MDStorageType, _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>)) {
+    func deleteWord(_ word: WordEntity,
+                    storageType: MDStorageType,
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>)) {
         
         switch storageType {
         
@@ -420,6 +425,64 @@ extension MDWordStorage {
             }
             
         }
+    }
+    
+    func deleteAllWords(storageType: MDStorageType,
+                        _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDDeleteAllEntitiesResultWithoutCompletion>)) {
+        
+        switch storageType {
+        
+        case .memory:
+            
+            memoryStorage.deleteAllWords { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .coreData:
+            
+            coreDataStorage.deleteAllWords { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDDeleteAllEntitiesResultWithoutCompletion> = []
+            
+            // Delete From Memory
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.deleteAllWords { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Delete From Core Data
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.deleteAllWords { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
+            }
+            
+        }
+        
     }
     
 }

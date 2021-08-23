@@ -33,7 +33,7 @@ extension MDUserMemoryStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Create User Expectation")
         
-        userMemoryStorage.createUser(Constants_For_Tests.mockedUser) { [unowned self] result in
+        userMemoryStorage.createUser(Constants_For_Tests.mockedUser) { result in
             switch result {
             case .success(let createdUser):
                 XCTAssertTrue(createdUser.userId == Constants_For_Tests.mockedUser.userId)
@@ -59,7 +59,7 @@ extension MDUserMemoryStorage_Tests {
         userMemoryStorage.createUser(Constants_For_Tests.mockedUser) { [unowned self] createResult in
             switch createResult {
             case .success(let createdUser):
-                userMemoryStorage.readUser(fromUserID: createdUser.userId) { [unowned self] readResult in
+                userMemoryStorage.readUser(fromUserID: createdUser.userId) { readResult in
                     switch readResult {
                     case .success(let readUser):
                         XCTAssertTrue(createdUser.userId == readUser.userId)

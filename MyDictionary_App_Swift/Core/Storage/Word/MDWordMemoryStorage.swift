@@ -102,4 +102,11 @@ extension MDWordMemoryStorage {
         operationQueueService.enqueue(operation)
     }
     
+    func deleteAllWords(_ completionHandler: @escaping (MDEntityResult<Void>)) {
+        let operation: MDDeleteAllWordsMemoryStorageOperation = .init(wordStorage: self) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
+    }
+    
 }

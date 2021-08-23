@@ -127,7 +127,7 @@ extension MDWordCoreDataStorage_Tests {
                 
                 self.wordCoreDataStorage.updateWord(byWordID: createdWord.wordId,
                                                     newWordText: Constants_For_Tests.mockedWordForUpdate.wordText,
-                                                    newWordDescription: Constants_For_Tests.mockedWordForUpdate.wordDescription) { [unowned self] updateResult in
+                                                    newWordDescription: Constants_For_Tests.mockedWordForUpdate.wordDescription) { updateResult in
                     
                     switch updateResult {
                     

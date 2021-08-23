@@ -23,7 +23,7 @@ protocol MDLanguageStorageProtocol {
                           _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDLanguageResultsWithoutCompletion>))
     
     func deleteAllLanguages(storageType: MDStorageType,
-                            _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDDeleteAllLanguagesResultsWithoutCompletion>))
+                            _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDDeleteAllEntitiesResultWithoutCompletion>))
     
 }
 
@@ -289,7 +289,7 @@ extension MDLanguageStorage {
     }
     
     func deleteAllLanguages(storageType: MDStorageType,
-                            _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDDeleteAllLanguagesResultsWithoutCompletion>)) {
+                            _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDDeleteAllEntitiesResultWithoutCompletion>)) {
         
         switch storageType {
         
@@ -311,7 +311,7 @@ extension MDLanguageStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDDeleteAllLanguagesResultsWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDDeleteAllEntitiesResultWithoutCompletion> = []
             
             // Delete From Memory
             // Dispatch Group Enter
