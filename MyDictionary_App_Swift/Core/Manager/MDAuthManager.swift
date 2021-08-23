@@ -92,7 +92,7 @@ fileprivate extension MDAuthManager {
         
         // Save User
         dispatchGroup.enter()
-        self.saveUser(userEntity: authResponse.userEntity) { [weak self] (saveUserResult) in
+        self.saveUser(userEntity: authResponse.userEntity) { (saveUserResult) in
             
             switch saveUserResult {
             
@@ -109,7 +109,7 @@ fileprivate extension MDAuthManager {
         
         // Save JWT
         dispatchGroup.enter()
-        self.saveJWT(jwtResponse: authResponse.jwtResponse) { [weak self] (saveJWTResult) in
+        self.saveJWT(jwtResponse: authResponse.jwtResponse) { (saveJWTResult) in
             switch saveJWTResult {
             
             case .success:
@@ -137,7 +137,7 @@ fileprivate extension MDAuthManager {
         
         var userResults: [MDStorageType : UserEntity] = [ : ]
         
-        self.userStorage.createUser(userEntity, storageType: .all) { [unowned self] (createUserResults) in
+        self.userStorage.createUser(userEntity, storageType: .all) { (createUserResults) in
             
             createUserResults.forEach { createUserResult in
                 
@@ -164,7 +164,7 @@ fileprivate extension MDAuthManager {
         
         var jwtResults: [MDStorageType : JWTResponse] = [ : ]
         
-        self.jwtStorage.createJWT(storageType: .all, jwtResponse: jwtResponse) { [unowned self] (createJWTResults) in
+        self.jwtStorage.createJWT(storageType: .all, jwtResponse: jwtResponse) { (createJWTResults) in
             
             createJWTResults.forEach { createJWTResult in
                 

@@ -40,7 +40,7 @@ final class MDUserCoreDataStorage: NSObject,
 extension MDUserCoreDataStorage {
     
     func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion)) {
-        self.readAllUsers() { [unowned self] result in
+        self.readAllUsers() { result in
             switch result {
             case .success(let entities):
                 completionHandler(.success(entities.isEmpty))
@@ -119,7 +119,7 @@ extension MDUserCoreDataStorage {
         coreDataStack.savePerform() { [unowned self] (result) in
             switch result {
             case .success:
-                self.readUser(fromUserID: userId) { [unowned self] (result) in
+                self.readUser(fromUserID: userId) { (result) in
                     switch result {
                     case .success(let userEntity):
                         completionHandler(.success(userEntity))
@@ -137,7 +137,7 @@ extension MDUserCoreDataStorage {
         coreDataStack.savePerformAndWait() { [unowned self] (result) in
             switch result {
             case .success:
-                self.readUser(fromUserID: userId) { [unowned self] (result) in
+                self.readUser(fromUserID: userId) { (result) in
                     switch result {
                     case .success(let userEntity):
                         completionHandler(.success(userEntity))

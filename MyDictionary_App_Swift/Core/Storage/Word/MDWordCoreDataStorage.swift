@@ -40,7 +40,7 @@ final class MDWordCoreDataStorage: NSObject,
 extension MDWordCoreDataStorage {
     
     func entitiesCount(_ completionHandler: @escaping (MDEntitiesCountResultWithCompletion)) {
-        self.readAllWords() { [unowned self] result in
+        self.readAllWords() { result in
             switch result {
             case .success(let words):
                 completionHandler(.success(words.count))
@@ -51,7 +51,7 @@ extension MDWordCoreDataStorage {
     }
     
     func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion)) {
-        self.readAllWords() { [unowned self] result in
+        self.readAllWords() { result in
             switch result {
             case .success(let words):
                 completionHandler(.success(words.isEmpty))
@@ -152,7 +152,7 @@ extension MDWordCoreDataStorage {
         coreDataStack.savePerform() { [unowned self] (result) in
             switch result {
             case .success:
-                self.readWord(fromWordID: wordId) { [unowned self] (result) in
+                self.readWord(fromWordID: wordId) { (result) in
                     switch result {
                     case .success(let wordModel):
                         completionHandler(.success(wordModel))
@@ -170,7 +170,7 @@ extension MDWordCoreDataStorage {
         coreDataStack.savePerformAndWait() { [unowned self] (result) in
             switch result {
             case .success:
-                self.readWord(fromWordID: wordId) { [unowned self] (result) in
+                self.readWord(fromWordID: wordId) { (result) in
                     switch result {
                     case .success(let wordModel):
                         completionHandler(.success(wordModel))

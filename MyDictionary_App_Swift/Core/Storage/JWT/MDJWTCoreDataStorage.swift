@@ -41,7 +41,7 @@ final class MDJWTCoreDataStorage: NSObject,
 extension MDJWTCoreDataStorage {
     
     func entitiesCount(_ completionHandler: @escaping (MDEntitiesCountResultWithCompletion)) {
-        self.readAllJWTs() { [unowned self] result in
+        self.readAllJWTs() { result in
             switch result {
             case .success(let entities):
                 completionHandler(.success(entities.count))
@@ -52,7 +52,7 @@ extension MDJWTCoreDataStorage {
     }
     
     func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion)) {
-        self.readAllJWTs() { [unowned self] result in
+        self.readAllJWTs() { result in
             switch result {
             case .success(let entities):
                 completionHandler(.success(entities.isEmpty))
@@ -149,7 +149,7 @@ extension MDJWTCoreDataStorage {
         coreDataStack.savePerform() { [unowned self] (result) in
             switch result {
             case .success:
-                self.readJWT(fromAccessToken: accessToken) { [unowned self] (result) in
+                self.readJWT(fromAccessToken: accessToken) { (result) in
                     switch result {
                     case .success(let authResponse):
                         completionHandler(.success(authResponse))
@@ -167,7 +167,7 @@ extension MDJWTCoreDataStorage {
         coreDataStack.savePerformAndWait() { [unowned self] (result) in
             switch result {
             case .success:
-                self.readJWT(fromAccessToken: accessToken) { [unowned self] (result) in
+                self.readJWT(fromAccessToken: accessToken) { (result) in
                     switch result {
                     case .success(let authResponse):
                         completionHandler(.success(authResponse))

@@ -94,7 +94,7 @@ extension MDAPIAuth {
     func login(authRequest: AuthRequest, completionHandler: @escaping MDAuthResponseResult) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
-                                              endpoint: MDAPIAuthEndpoint.login(authRequest: authRequest)) { [unowned self] result in
+                                              endpoint: MDAPIAuthEndpoint.login(authRequest: authRequest)) { result in
             
             switch result {
             
@@ -133,7 +133,7 @@ extension MDAPIAuth {
     func register(authRequest: AuthRequest, completionHandler: @escaping MDAuthResponseResult) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
-                                              endpoint: MDAPIAuthEndpoint.register(authRequest: authRequest)) { [unowned self] result in
+                                              endpoint: MDAPIAuthEndpoint.register(authRequest: authRequest)) { result in
             
             switch result {
             
