@@ -40,11 +40,25 @@ final class MDLanguageCoreDataStorage: MDLanguageCoreDataStorageProtocol {
 extension MDLanguageCoreDataStorage {
     
     func entitiesCount(_ completionHandler: @escaping(MDEntitiesCountResultWithCompletion)) {
-        
+        self.readAllLanguages { result in
+            switch result {
+            case .success(let entities):
+                completionHandler(.success(entities.count))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
     }
     
     func entitiesIsEmpty(_ completionHandler: @escaping(MDEntitiesIsEmptyResultWithCompletion)) {
-        
+        self.readAllLanguages { result in
+            switch result {
+            case .success(let entities):
+                completionHandler(.success(entities.isEmpty))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
     }
     
 }
