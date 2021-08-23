@@ -71,7 +71,11 @@ extension MDLanguageCoreDataStorage {
     }
     
     func readAllLanguages(_ completionHandler: @escaping(MDEntityResult<[LanguageEntity]>)) {
-        
+        let operation: MDReadAllLanguagesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                          coreDataStorage: self) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
     }
     
     func deleteAllLanguages(_ completionHandler: @escaping(MDEntityResult<Void>)) {

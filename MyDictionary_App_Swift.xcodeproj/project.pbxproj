@@ -175,6 +175,7 @@
 		22B8E6B726D3917C001CCCA8 /* MDLanguageMemoryStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6B626D3917C001CCCA8 /* MDLanguageMemoryStorage_Tests.swift */; };
 		22B8E6BA26D396B0001CCCA8 /* MDCreateLanguagesCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6B926D396B0001CCCA8 /* MDCreateLanguagesCoreDataStorageOperation.swift */; };
 		22B8E6BC26D39840001CCCA8 /* MDReadLanguageCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6BB26D39840001CCCA8 /* MDReadLanguageCoreDataStorageOperation.swift */; };
+		22B8E6BE26D39BD4001CCCA8 /* MDReadAllLanguagesCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6BD26D39BD4001CCCA8 /* MDReadAllLanguagesCoreDataStorageOperation.swift */; };
 		22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD9999266A480D0063FEFC /* SettingsModule.swift */; };
 		22BD999E266A4A2C0063FEFC /* ModuleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999D266A4A2C0063FEFC /* ModuleProtocol.swift */; };
 		22BD99A0266A4AB10063FEFC /* WordListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999F266A4AB10063FEFC /* WordListModule.swift */; };
@@ -462,6 +463,7 @@
 		22B8E6B626D3917C001CCCA8 /* MDLanguageMemoryStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLanguageMemoryStorage_Tests.swift; sourceTree = "<group>"; };
 		22B8E6B926D396B0001CCCA8 /* MDCreateLanguagesCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateLanguagesCoreDataStorageOperation.swift; sourceTree = "<group>"; };
 		22B8E6BB26D39840001CCCA8 /* MDReadLanguageCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadLanguageCoreDataStorageOperation.swift; sourceTree = "<group>"; };
+		22B8E6BD26D39BD4001CCCA8 /* MDReadAllLanguagesCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadAllLanguagesCoreDataStorageOperation.swift; sourceTree = "<group>"; };
 		22BD9999266A480D0063FEFC /* SettingsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModule.swift; sourceTree = "<group>"; };
 		22BD999D266A4A2C0063FEFC /* ModuleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleProtocol.swift; sourceTree = "<group>"; };
 		22BD999F266A4AB10063FEFC /* WordListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListModule.swift; sourceTree = "<group>"; };
@@ -1391,6 +1393,7 @@
 			children = (
 				22B8E6B926D396B0001CCCA8 /* MDCreateLanguagesCoreDataStorageOperation.swift */,
 				22B8E6BB26D39840001CCCA8 /* MDReadLanguageCoreDataStorageOperation.swift */,
+				22B8E6BD26D39BD4001CCCA8 /* MDReadAllLanguagesCoreDataStorageOperation.swift */,
 			);
 			path = CoreDataCRUD;
 			sourceTree = "<group>";
@@ -2147,6 +2150,7 @@
 				22E2B4FB266509DC00978E62 /* SettingsDataProviderModel.swift in Sources */,
 				22557FCC26C959D100A4FF31 /* MDCreateJWTMemoryStorageOperation.swift in Sources */,
 				22E2B4E22664E43B00978E62 /* SettingsDataManager.swift in Sources */,
+				22B8E6BE26D39BD4001CCCA8 /* MDReadAllLanguagesCoreDataStorageOperation.swift in Sources */,
 				2289CEF42678CC34007254C3 /* MDUpdateWordProtocol.swift in Sources */,
 				22B6B9E426958F4E0076B003 /* MDAppDependencies.swift in Sources */,
 				220FFE8E26C90B2A00702CCE /* MDUpdateUserProtocol.swift in Sources */,
