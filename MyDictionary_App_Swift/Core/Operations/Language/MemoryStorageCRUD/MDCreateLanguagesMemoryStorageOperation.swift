@@ -1,5 +1,5 @@
 //
-//  MDCreateLanguageMemoryStorageOperation.swift
+//  MDCreateLanguagesMemoryStorageOperation.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 23.08.2021.
@@ -7,26 +7,26 @@
 
 import Foundation
 
-final class MDCreateLanguageMemoryStorageOperation: MDOperation {
+final class MDCreateLanguagesMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDLanguageMemoryStorage
-    fileprivate let languageEntity: LanguageEntity
-    fileprivate let result: MDEntityResult<LanguageEntity>?
+    fileprivate let languageEntities: [LanguageEntity]
+    fileprivate let result: MDEntityResult<[LanguageEntity]>?
     
     init(memoryStorage: MDLanguageMemoryStorage,
-         languageEntity: LanguageEntity,
-         result: MDEntityResult<LanguageEntity>?) {
+         languageEntities: [LanguageEntity],
+         result: MDEntityResult<[LanguageEntity]>?) {
         
         self.memoryStorage = memoryStorage
-        self.languageEntity = languageEntity
+        self.languageEntities = languageEntities
         self.result = result
         
         super.init()
     }
     
     override func main() {
-        self.memoryStorage.array.append(languageEntity)
-        self.result?(.success(languageEntity))
+        self.memoryStorage.array = self.languageEntities
+        self.result?(.success(languageEntities))
         self.finish()
     }
     

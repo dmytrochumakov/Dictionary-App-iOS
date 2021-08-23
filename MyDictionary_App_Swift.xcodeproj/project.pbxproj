@@ -165,7 +165,7 @@
 		22B8E69F26D38059001CCCA8 /* MDLanguageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E69E26D38059001CCCA8 /* MDLanguageStorage.swift */; };
 		22B8E6A126D380CE001CCCA8 /* MDLanguageMemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6A026D380CE001CCCA8 /* MDLanguageMemoryStorage.swift */; };
 		22B8E6A326D381EF001CCCA8 /* MDLanguageCoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6A226D381EF001CCCA8 /* MDLanguageCoreDataStorage.swift */; };
-		22B8E6A726D38327001CCCA8 /* MDCreateLanguageMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6A626D38327001CCCA8 /* MDCreateLanguageMemoryStorageOperation.swift */; };
+		22B8E6A726D38327001CCCA8 /* MDCreateLanguagesMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6A626D38327001CCCA8 /* MDCreateLanguagesMemoryStorageOperation.swift */; };
 		22B8E6AA26D3889E001CCCA8 /* MDCRUDLanguageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6A926D3889E001CCCA8 /* MDCRUDLanguageProtocol.swift */; };
 		22B8E6AC26D38A4D001CCCA8 /* MDCreateLanguageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6AB26D38A4D001CCCA8 /* MDCreateLanguageProtocol.swift */; };
 		22B8E6AE26D38A57001CCCA8 /* MDReadLanguageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6AD26D38A57001CCCA8 /* MDReadLanguageProtocol.swift */; };
@@ -447,7 +447,7 @@
 		22B8E69E26D38059001CCCA8 /* MDLanguageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLanguageStorage.swift; sourceTree = "<group>"; };
 		22B8E6A026D380CE001CCCA8 /* MDLanguageMemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLanguageMemoryStorage.swift; sourceTree = "<group>"; };
 		22B8E6A226D381EF001CCCA8 /* MDLanguageCoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLanguageCoreDataStorage.swift; sourceTree = "<group>"; };
-		22B8E6A626D38327001CCCA8 /* MDCreateLanguageMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateLanguageMemoryStorageOperation.swift; sourceTree = "<group>"; };
+		22B8E6A626D38327001CCCA8 /* MDCreateLanguagesMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateLanguagesMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		22B8E6A926D3889E001CCCA8 /* MDCRUDLanguageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCRUDLanguageProtocol.swift; sourceTree = "<group>"; };
 		22B8E6AB26D38A4D001CCCA8 /* MDCreateLanguageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateLanguageProtocol.swift; sourceTree = "<group>"; };
 		22B8E6AD26D38A57001CCCA8 /* MDReadLanguageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadLanguageProtocol.swift; sourceTree = "<group>"; };
@@ -1348,7 +1348,7 @@
 		22B8E6A526D382C4001CCCA8 /* MemoryStorageCRUD */ = {
 			isa = PBXGroup;
 			children = (
-				22B8E6A626D38327001CCCA8 /* MDCreateLanguageMemoryStorageOperation.swift */,
+				22B8E6A626D38327001CCCA8 /* MDCreateLanguagesMemoryStorageOperation.swift */,
 			);
 			path = MemoryStorageCRUD;
 			sourceTree = "<group>";
@@ -2010,7 +2010,7 @@
 				22E2B4E12664E43B00978E62 /* SettingsDataProvider.swift in Sources */,
 				221D281426C5064A004BC4F7 /* AuthorizationDataManager.swift in Sources */,
 				220FFE9026C90B3700702CCE /* MDDeleteUserProtocol.swift in Sources */,
-				22B8E6A726D38327001CCCA8 /* MDCreateLanguageMemoryStorageOperation.swift in Sources */,
+				22B8E6A726D38327001CCCA8 /* MDCreateLanguagesMemoryStorageOperation.swift in Sources */,
 				22E2B4F32665085E00978E62 /* SettingsRowType.swift in Sources */,
 				22EF01FF269DA99800FE4435 /* MDAPIError.swift in Sources */,
 				2270F3A626D2663F006B46F4 /* CDCourseEntityAttributeName.swift in Sources */,
