@@ -44,4 +44,12 @@ struct Constants_For_Tests {
     public static let mockedJWTForUpdate: JWTResponse = .init(accessToken: "updated asdas;dka;sld;akdkasd;laskld;al",
                                                               expirationDate: "2021-08-15T13:34:33.998Z")
     
+    public static let mockedLanguages: [LanguageEntity] = [.init(languageId: 0,
+                                                                 languageName: "English",
+                                                                 createdAt: "2021-08-15T13:34:33.998Z"),
+                                                           .init(languageId: 1,
+                                                                 languageName: "Spanish",
+                                                                 createdAt: "2021-08-15T13:34:33.999Z")
+    ]
+    
 }
