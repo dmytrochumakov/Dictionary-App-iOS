@@ -58,7 +58,11 @@ extension MDCourseMemoryStorage {
     }
     
     func readCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDEntityResult<CourseEntity>)) {
-        
+        let operation: MDReadCourseMemoryStorageOperation = .init(memoryStorage: self,
+                                                                  courseId: courseId) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
     }
     
     func readAllCourses(_ completionHandler: @escaping (MDEntityResult<[CourseEntity]>)) {
