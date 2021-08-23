@@ -40,7 +40,7 @@ final class MDJWTCoreDataStorage: NSObject,
 // MARK: - Is Empty
 extension MDJWTCoreDataStorage {
     
-    func entitiesCount(_ completionHandler: @escaping (MDEntitiesCountResultWithCompletion)) {
+    func entitiesCount(_ completionHandler: @escaping(MDEntitiesCountResultWithCompletion)) {
         self.readAllJWTs() { result in
             switch result {
             case .success(let entities):
@@ -51,7 +51,7 @@ extension MDJWTCoreDataStorage {
         }
     }
     
-    func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion)) {
+    func entitiesIsEmpty(_ completionHandler: @escaping(MDEntitiesIsEmptyResultWithCompletion)) {
         self.readAllJWTs() { result in
             switch result {
             case .success(let entities):
@@ -67,7 +67,7 @@ extension MDJWTCoreDataStorage {
 // MARK: - Create
 extension MDJWTCoreDataStorage {
     
-    func createJWT(_ jwtResponse: JWTResponse, _ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
+    func createJWT(_ jwtResponse: JWTResponse, _ completionHandler: @escaping(MDEntityResult<JWTResponse>)) {
         let operation = MDCreateJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                  coreDataStorage: self,
                                                                  jwtResponse: jwtResponse) { result in
@@ -81,7 +81,7 @@ extension MDJWTCoreDataStorage {
 // MARK: - Read
 extension MDJWTCoreDataStorage {
     
-    func readJWT(fromAccessToken accessToken: String, _ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
+    func readJWT(fromAccessToken accessToken: String, _ completionHandler: @escaping(MDEntityResult<JWTResponse>)) {
         let operation = MDReadJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                coreDataStorage: self,
                                                                accessToken: accessToken) { result in
@@ -127,10 +127,18 @@ extension MDJWTCoreDataStorage {
 // MARK: - Delete
 extension MDJWTCoreDataStorage {
     
-    func deleteJWT(_ jwtResponse: JWTResponse, _ completionHandler: @escaping (MDEntityResult<JWTResponse>)) {
+    func deleteJWT(_ jwtResponse: JWTResponse, _ completionHandler: @escaping(MDEntityResult<JWTResponse>)) {
         let operation = MDDeleteJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                  coreDataStorage: self,
                                                                  jwtResponse: jwtResponse) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
+    }
+    
+    func deleteAllJWT(_ completionHandler: @escaping(MDEntityResult<Void>)) {
+        let operation: MDDeleteAllJWTCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                      coreDataStorage: self) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
@@ -145,7 +153,7 @@ extension MDJWTCoreDataStorage {
         coreDataStack.savePerform(completionHandler: completionHandler)
     }
     
-    func savePerform(accessToken: String, completionHandler: @escaping MDEntityResult<JWTResponse>) {
+    func savePerform(accessToken: String, completionHandler: @escaping(MDEntityResult<JWTResponse>)) {
         coreDataStack.savePerform() { [unowned self] (result) in
             switch result {
             case .success:
@@ -163,7 +171,7 @@ extension MDJWTCoreDataStorage {
         }
     }
     
-    func save(accessToken: String, completionHandler: @escaping MDEntityResult<JWTResponse>) {
+    func save(accessToken: String, completionHandler: @escaping(MDEntityResult<JWTResponse>)) {
         coreDataStack.savePerformAndWait() { [unowned self] (result) in
             switch result {
             case .success:

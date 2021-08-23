@@ -35,7 +35,12 @@ protocol MDJWTStorageProtocol {
                    jwtResponse: JWTResponse,
                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDJWTResultWithoutCompletion>))
     
+    func deleteAllJWT(storageType: MDStorageType,
+                      _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDDeleteAllJWTResultWithoutCompletion>))
+    
 }
+
+typealias MDDeleteAllJWTResultWithoutCompletion = (Result<Void, Error>)
 
 final class MDJWTStorage: MDJWTStorageProtocol {
     
@@ -466,6 +471,63 @@ extension MDJWTStorage {
             // Dispatch Group Enter
             dispatchGroup.enter()
             coreDataStorage.deleteJWT(jwtResponse) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
+            }
+            
+        }
+        
+    }
+    
+    func deleteAllJWT(storageType: MDStorageType, _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDDeleteAllJWTResultWithoutCompletion>)) {
+        
+        switch storageType {
+        
+        case .memory:
+            
+            memoryStorage.deleteAllJWT { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .coreData:
+            
+            coreDataStorage.deleteAllJWT { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDDeleteAllJWTResultWithoutCompletion> = []
+            
+            // Delete From Memory
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.deleteAllJWT { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Delete From Core Data
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.deleteAllJWT { result in
                 
                 // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))

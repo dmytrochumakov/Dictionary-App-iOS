@@ -9,4 +9,5 @@ import Foundation
 
 protocol MDDeleteJWTProtocol {
     func deleteJWT(_ jwtResponse: JWTResponse, _ completionHandler: @escaping(MDEntityResult<JWTResponse>))
+    func deleteAllJWT(_ completionHandler: @escaping(MDEntityResult<Void>))
 }

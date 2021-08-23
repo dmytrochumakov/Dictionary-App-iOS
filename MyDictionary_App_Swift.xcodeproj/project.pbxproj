@@ -182,6 +182,8 @@
 		22B8E6C626D3A3CC001CCCA8 /* MDLanguageResultsWithoutCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6C526D3A3CC001CCCA8 /* MDLanguageResultsWithoutCompletion.swift */; };
 		22B8E6C826D3A3D6001CCCA8 /* MDDeleteAllLanguagesResultsWithoutCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6C726D3A3D6001CCCA8 /* MDDeleteAllLanguagesResultsWithoutCompletion.swift */; };
 		22B8E6CA26D3A53E001CCCA8 /* MDLanguageStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6C926D3A53E001CCCA8 /* MDLanguageStorage_Tests.swift */; };
+		22B8E6CC26D3B398001CCCA8 /* MDDeleteAllJWTCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6CB26D3B398001CCCA8 /* MDDeleteAllJWTCoreDataStorageOperation.swift */; };
+		22B8E6CE26D3B472001CCCA8 /* MDDeleteAllJWTMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6CD26D3B472001CCCA8 /* MDDeleteAllJWTMemoryStorageOperation.swift */; };
 		22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD9999266A480D0063FEFC /* SettingsModule.swift */; };
 		22BD999E266A4A2C0063FEFC /* ModuleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999D266A4A2C0063FEFC /* ModuleProtocol.swift */; };
 		22BD99A0266A4AB10063FEFC /* WordListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999F266A4AB10063FEFC /* WordListModule.swift */; };
@@ -476,6 +478,8 @@
 		22B8E6C526D3A3CC001CCCA8 /* MDLanguageResultsWithoutCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLanguageResultsWithoutCompletion.swift; sourceTree = "<group>"; };
 		22B8E6C726D3A3D6001CCCA8 /* MDDeleteAllLanguagesResultsWithoutCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteAllLanguagesResultsWithoutCompletion.swift; sourceTree = "<group>"; };
 		22B8E6C926D3A53E001CCCA8 /* MDLanguageStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLanguageStorage_Tests.swift; sourceTree = "<group>"; };
+		22B8E6CB26D3B398001CCCA8 /* MDDeleteAllJWTCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteAllJWTCoreDataStorageOperation.swift; sourceTree = "<group>"; };
+		22B8E6CD26D3B472001CCCA8 /* MDDeleteAllJWTMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteAllJWTMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		22BD9999266A480D0063FEFC /* SettingsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModule.swift; sourceTree = "<group>"; };
 		22BD999D266A4A2C0063FEFC /* ModuleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleProtocol.swift; sourceTree = "<group>"; };
 		22BD999F266A4AB10063FEFC /* WordListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListModule.swift; sourceTree = "<group>"; };
@@ -992,6 +996,7 @@
 				228722DC26D1189700C9D1BC /* MDReadFirstJWTMemoryStorageOperation.swift */,
 				22557FD226C95D5A00A4FF31 /* MDReadJWTMemoryStorageOperation.swift */,
 				22557FD626C9660F00A4FF31 /* MDDeleteJWTMemoryStorageOperation.swift */,
+				22B8E6CD26D3B472001CCCA8 /* MDDeleteAllJWTMemoryStorageOperation.swift */,
 				228722CD26D0DE7500C9D1BC /* MDUpdateJWTMemoryStorageOperation.swift */,
 			);
 			path = MemoryStorageCRUD;
@@ -1015,6 +1020,7 @@
 				228722DA26D117A900C9D1BC /* MDReadFirstJWTCoreDataStorageOperation.swift */,
 				2258922226CA3C8F00AD6F18 /* MDReadJWTsCoreDataStorageOperation.swift */,
 				2258922426CA3DC600AD6F18 /* MDDeleteJWTCoreDataStorageOperation.swift */,
+				22B8E6CB26D3B398001CCCA8 /* MDDeleteAllJWTCoreDataStorageOperation.swift */,
 				228722CB26D0DDC500C9D1BC /* MDUpdateJWTCoreDataStorageOperation.swift */,
 			);
 			path = CoreDataCRUD;
@@ -2027,6 +2033,7 @@
 				22493C4926972A03000DA480 /* CDWordEntity+Extension.swift in Sources */,
 				22493C312697159E000DA480 /* CDResultSaved.swift in Sources */,
 				22EF01F2269DA75E00FE4435 /* HTTPParameters.swift in Sources */,
+				22B8E6CE26D3B472001CCCA8 /* MDDeleteAllJWTMemoryStorageOperation.swift in Sources */,
 				22493C52269741FF000DA480 /* MDDeleteWordCoreDataStorageOperation.swift in Sources */,
 				2258921D26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift in Sources */,
 				22E2B4F02664EF3200978E62 /* UICollectionView+Extension.swift in Sources */,
@@ -2196,6 +2203,7 @@
 				2299016B2668EC3400D8C74E /* AppearanceInteractor.swift in Sources */,
 				220793C726C66F76003D434B /* AuthValidationError.swift in Sources */,
 				22EF0202269DA9E300FE4435 /* MDResponseOperationResult.swift in Sources */,
+				22B8E6CC26D3B398001CCCA8 /* MDDeleteAllJWTCoreDataStorageOperation.swift in Sources */,
 				22DB2F8726C3D2D400C1AADA /* TableViewDelegate.swift in Sources */,
 				220793BF26C65BF4003D434B /* AuthValidation.swift in Sources */,
 				22EF0205269DACC300FE4435 /* MDAPIOperation.swift in Sources */,
