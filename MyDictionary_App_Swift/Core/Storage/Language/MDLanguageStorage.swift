@@ -56,10 +56,38 @@ extension MDLanguageStorage {
     func entitiesIsEmpty(storageType: MDStorageType,
                          _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDEntitiesIsEmptyResultWithoutCompletion>)) {
         
+        switch storageType {
+        
+        case .memory:
+            
+            memoryStorage.entitiesIsEmpty { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        default:
+            
+            break
+            
+        }
+        
     }
     
     func entitiesCount(storageType: MDStorageType,
                        _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDEntitiesCountResultWithoutCompletion>)) {
+        
+        switch storageType {
+        
+        case .memory:
+            
+            memoryStorage.entitiesCount { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        default:
+            
+            break
+            
+        }
         
     }
     
@@ -72,14 +100,57 @@ extension MDLanguageStorage {
                          languageEntities: [LanguageEntity],
                          _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDLanguageResultsWithoutCompletion>)) {
         
+        switch storageType {
+        
+        case .memory:
+            
+            memoryStorage.createLanguages(languageEntities) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        default:
+            
+            break
+            
+        }
+        
     }
     
     func readAllLanguages(storageType: MDStorageType,
                           _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDLanguageResultsWithoutCompletion>)) {
         
+        switch storageType {
+        
+        case .memory:
+            
+            memoryStorage.readAllLanguages { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        default:
+            
+            break
+            
+        }
+        
     }
     
-    func deleteAllLanguages(storageType: MDStorageType, _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDDeleteAllLanguagesResultsWithoutCompletion>)) {
+    func deleteAllLanguages(storageType: MDStorageType,
+                            _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDDeleteAllLanguagesResultsWithoutCompletion>)) {
+        
+        switch storageType {
+        
+        case .memory:
+            
+            memoryStorage.deleteAllLanguages { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        default:
+            
+            break
+            
+        }
         
     }
     
