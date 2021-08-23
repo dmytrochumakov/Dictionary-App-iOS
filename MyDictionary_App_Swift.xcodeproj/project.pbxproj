@@ -189,6 +189,10 @@
 		22B8E6D926D3C4F4001CCCA8 /* MDCourseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6D826D3C4F4001CCCA8 /* MDCourseStorage.swift */; };
 		22B8E6DB26D3C519001CCCA8 /* MDCourseMemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6DA26D3C519001CCCA8 /* MDCourseMemoryStorage.swift */; };
 		22B8E6DD26D3C54B001CCCA8 /* MDCourseCoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6DC26D3C54B001CCCA8 /* MDCourseCoreDataStorage.swift */; };
+		22B8E6E026D3C774001CCCA8 /* MDCRUDCourseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6DF26D3C774001CCCA8 /* MDCRUDCourseProtocol.swift */; };
+		22B8E6E226D3C782001CCCA8 /* MDCreateCourseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6E126D3C782001CCCA8 /* MDCreateCourseProtocol.swift */; };
+		22B8E6E426D3C7B7001CCCA8 /* MDReadCourseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6E326D3C7B7001CCCA8 /* MDReadCourseProtocol.swift */; };
+		22B8E6E626D3C7C3001CCCA8 /* MDDeleteCourseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6E526D3C7C3001CCCA8 /* MDDeleteCourseProtocol.swift */; };
 		22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD9999266A480D0063FEFC /* SettingsModule.swift */; };
 		22BD999E266A4A2C0063FEFC /* ModuleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999D266A4A2C0063FEFC /* ModuleProtocol.swift */; };
 		22BD99A0266A4AB10063FEFC /* WordListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999F266A4AB10063FEFC /* WordListModule.swift */; };
@@ -490,6 +494,10 @@
 		22B8E6D826D3C4F4001CCCA8 /* MDCourseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseStorage.swift; sourceTree = "<group>"; };
 		22B8E6DA26D3C519001CCCA8 /* MDCourseMemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseMemoryStorage.swift; sourceTree = "<group>"; };
 		22B8E6DC26D3C54B001CCCA8 /* MDCourseCoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseCoreDataStorage.swift; sourceTree = "<group>"; };
+		22B8E6DF26D3C774001CCCA8 /* MDCRUDCourseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCRUDCourseProtocol.swift; sourceTree = "<group>"; };
+		22B8E6E126D3C782001CCCA8 /* MDCreateCourseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateCourseProtocol.swift; sourceTree = "<group>"; };
+		22B8E6E326D3C7B7001CCCA8 /* MDReadCourseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadCourseProtocol.swift; sourceTree = "<group>"; };
+		22B8E6E526D3C7C3001CCCA8 /* MDDeleteCourseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteCourseProtocol.swift; sourceTree = "<group>"; };
 		22BD9999266A480D0063FEFC /* SettingsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModule.swift; sourceTree = "<group>"; };
 		22BD999D266A4A2C0063FEFC /* ModuleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleProtocol.swift; sourceTree = "<group>"; };
 		22BD999F266A4AB10063FEFC /* WordListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListModule.swift; sourceTree = "<group>"; };
@@ -1190,6 +1198,7 @@
 		2289CED52678CC34007254C3 /* CRUD */ = {
 			isa = PBXGroup;
 			children = (
+				22B8E6DE26D3C76C001CCCA8 /* Course */,
 				22B8E6A826D3887B001CCCA8 /* Language */,
 				22DE582626C953950032A94C /* JWT */,
 				220FFE8826C90B0700702CCE /* User */,
@@ -1441,6 +1450,17 @@
 				22B8E6D826D3C4F4001CCCA8 /* MDCourseStorage.swift */,
 				22B8E6DA26D3C519001CCCA8 /* MDCourseMemoryStorage.swift */,
 				22B8E6DC26D3C54B001CCCA8 /* MDCourseCoreDataStorage.swift */,
+			);
+			path = Course;
+			sourceTree = "<group>";
+		};
+		22B8E6DE26D3C76C001CCCA8 /* Course */ = {
+			isa = PBXGroup;
+			children = (
+				22B8E6DF26D3C774001CCCA8 /* MDCRUDCourseProtocol.swift */,
+				22B8E6E126D3C782001CCCA8 /* MDCreateCourseProtocol.swift */,
+				22B8E6E326D3C7B7001CCCA8 /* MDReadCourseProtocol.swift */,
+				22B8E6E526D3C7C3001CCCA8 /* MDDeleteCourseProtocol.swift */,
 			);
 			path = Course;
 			sourceTree = "<group>";
@@ -2105,6 +2125,7 @@
 				220FFEAF26C91DD400702CCE /* MDReadUserCoreDataStorageOperation.swift in Sources */,
 				227F8AB326CAB0DC00375A38 /* JWTResponse.swift in Sources */,
 				22DB2F7C26C3BE7900C1AADA /* CourseListDataProvider.swift in Sources */,
+				22B8E6E626D3C7C3001CCCA8 /* MDDeleteCourseProtocol.swift in Sources */,
 				22493C39269722AA000DA480 /* MDCRUDWordProtocol.swift in Sources */,
 				22C5862D26C79D360030B12D /* MDAPIStatusCode.swift in Sources */,
 				22493C562697421C000DA480 /* MDUpdateWordCoreDataStorageOperation.swift in Sources */,
@@ -2151,10 +2172,12 @@
 				220793C926C66F85003D434B /* AuthValidationResult.swift in Sources */,
 				229E08C02652C9E700DA56C4 /* RowTypeProtocol.swift in Sources */,
 				22C5864726C7D1F30030B12D /* KeychainService.swift in Sources */,
+				22B8E6E426D3C7B7001CCCA8 /* MDReadCourseProtocol.swift in Sources */,
 				228722CC26D0DDC500C9D1BC /* MDUpdateJWTCoreDataStorageOperation.swift in Sources */,
 				2289CEDF2678CC34007254C3 /* MDStorageType.swift in Sources */,
 				220FFEAD26C91C3000702CCE /* MDCreateUserCoreDataStorageOperation.swift in Sources */,
 				22B22681266CC033007AB292 /* Observable.swift in Sources */,
+				22B8E6E026D3C774001CCCA8 /* MDCRUDCourseProtocol.swift in Sources */,
 				22E2B4DD2664E43B00978E62 /* SettingsPresenter.swift in Sources */,
 				220793CE26C68081003D434B /* MDAPIAuth.swift in Sources */,
 				22EF01E3269D9CDA00FE4435 /* MDEntitiesIsEmptyProtocol.swift in Sources */,
@@ -2301,6 +2324,7 @@
 				221D281326C5064A004BC4F7 /* AuthorizationDataProvider.swift in Sources */,
 				226FEE87266B7E300044A5F9 /* AppearanceHasBeenUpdatedProtocol.swift in Sources */,
 				2258922126CA3B1E00AD6F18 /* MDReadJWTCoreDataStorageOperation.swift in Sources */,
+				22B8E6E226D3C782001CCCA8 /* MDCreateCourseProtocol.swift in Sources */,
 				22493C33269715A9000DA480 /* CDResultSavedEnum.swift in Sources */,
 				22EF020D269DAFC000FE4435 /* MDAPIEnvironment.swift in Sources */,
 			);
