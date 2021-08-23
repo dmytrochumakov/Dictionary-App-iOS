@@ -53,12 +53,15 @@ extension MDLanguageMemoryStorage {
         let operation: MDCreateLanguagesMemoryStorageOperation = .init(memoryStorage: self,
                                                                        languageEntities: languageEntities) { result in
             completionHandler(result)
-        }        
+        }
         operationQueueService.enqueue(operation)
     }
     
     func readAllLanguages(_ completionHandler: @escaping (MDEntityResult<[LanguageEntity]>)) {
-        
+        let operation: MDReadAllLanguagesMemoryStorageOperation = .init(memoryStorage: self) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
     }
     
     func deleteAllLanguages(_ completionHandler: @escaping (MDEntityResult<Void>)) {
