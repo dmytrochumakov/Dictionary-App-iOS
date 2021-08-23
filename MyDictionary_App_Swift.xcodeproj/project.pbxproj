@@ -790,8 +790,8 @@
 			isa = PBXGroup;
 			children = (
 				22EF01DE269D8EC600FE4435 /* MDWordStorage_Tests.swift */,
-				22493C5726974F4C000DA480 /* MDWordCoreDataStorage_Tests.swift */,
 				2289CEFB2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift */,
+				22493C5726974F4C000DA480 /* MDWordCoreDataStorage_Tests.swift */,
 			);
 			path = Word;
 			sourceTree = "<group>";

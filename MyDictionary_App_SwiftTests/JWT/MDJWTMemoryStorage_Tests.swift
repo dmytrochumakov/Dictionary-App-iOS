@@ -33,7 +33,7 @@ extension MDJWTMemoryStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Create JWT Expectation")
         
-        jwtMemoryStorage.createJWT(Constants_For_Tests.mockedJWT) { [unowned self] result in
+        jwtMemoryStorage.createJWT(Constants_For_Tests.mockedJWT) { result in
             switch result {
             case .success(let createdJWT):
                 XCTAssertTrue(createdJWT.accessToken == Constants_For_Tests.mockedJWT.accessToken)
@@ -56,7 +56,7 @@ extension MDJWTMemoryStorage_Tests {
         jwtMemoryStorage.createJWT(Constants_For_Tests.mockedJWT) { [unowned self] createResult in
             switch createResult {
             case .success(let createdJWT):
-                jwtMemoryStorage.readJWT(fromAccessToken: createdJWT.accessToken) { [unowned self] readResult in
+                jwtMemoryStorage.readJWT(fromAccessToken: createdJWT.accessToken) { readResult in
                     switch readResult {
                     case .success(let readJWT):
                         XCTAssertTrue(createdJWT.accessToken == readJWT.accessToken)
@@ -118,7 +118,7 @@ extension MDJWTMemoryStorage_Tests {
                     switch deleteResult {
                     case .success(let deleteJWT):
                         XCTAssertTrue(createdJWT.accessToken == deleteJWT.accessToken)
-                        self.jwtMemoryStorage.entitiesIsEmpty { [unowned self] (entitiesIsEmptyResult) in
+                        self.jwtMemoryStorage.entitiesIsEmpty { (entitiesIsEmptyResult) in
                             switch entitiesIsEmptyResult {
                             case .success(let entitiesIsEmpty):
                                 XCTAssertTrue(entitiesIsEmpty)

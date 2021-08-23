@@ -36,7 +36,7 @@ extension MDUserCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Create User Expectation")
         
-        userCoreDataStorage.createUser(Constants_For_Tests.mockedUser) { [unowned self] result in
+        userCoreDataStorage.createUser(Constants_For_Tests.mockedUser) { result in
             switch result {
             case .success(let createdUser):
                 XCTAssertTrue(createdUser.userId == Constants_For_Tests.mockedUser.userId)
@@ -62,7 +62,7 @@ extension MDUserCoreDataStorage_Tests {
         userCoreDataStorage.createUser(Constants_For_Tests.mockedUser) { [unowned self] createResult in
             switch createResult {
             case .success(let createdUser):
-                userCoreDataStorage.readUser(fromUserID: createdUser.userId) { [unowned self] readResult in
+                userCoreDataStorage.readUser(fromUserID: createdUser.userId) { readResult in
                     switch readResult {
                     case .success(let readUser):
                         XCTAssertTrue(createdUser.userId == readUser.userId)
@@ -97,7 +97,7 @@ extension MDUserCoreDataStorage_Tests {
                     switch deleteResult {
                     case .success(let deleteUser):
                         XCTAssertTrue(createdUser.userId == deleteUser.userId)
-                        self.userCoreDataStorage.entitiesIsEmpty { [unowned self] entitiesIsEmptyResult in
+                        self.userCoreDataStorage.entitiesIsEmpty { entitiesIsEmptyResult in
                             switch entitiesIsEmptyResult {
                             case .success(let entitiesIsEmpty):
                                 XCTAssertTrue(entitiesIsEmpty)

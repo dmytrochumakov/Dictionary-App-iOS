@@ -202,4 +202,51 @@ extension MDWordCoreDataStorage_Tests {
         
     }
     
+    func test_Delete_All_Words_From_Core_Data_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Delete All Words From Core Data Expectation")        
+        
+        wordCoreDataStorage.createWord(Constants_For_Tests.mockedWord0) { [unowned self] createResult in
+            
+            switch createResult {
+            
+            case .success:
+                
+                self.wordCoreDataStorage.deleteAllWords() { [unowned self] deleteResult in
+                    
+                    switch deleteResult {
+                    
+                    case .success:
+                        
+                        self.wordCoreDataStorage.entitiesIsEmpty() { entitiesIsEmptyResult in
+                            
+                            switch entitiesIsEmptyResult {
+                            
+                            case .success(let entitiesIsEmpty):
+                                
+                                XCTAssertTrue(entitiesIsEmpty)
+                                expectation.fulfill()
+                                
+                            case .failure:
+                                XCTExpectFailure()
+                                expectation.fulfill()
+                            }
+                        }
+                        
+                    case .failure:
+                        XCTExpectFailure()
+                        expectation.fulfill()
+                    }
+                }
+                
+            case .failure:
+                XCTExpectFailure()
+                expectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
+    
 }

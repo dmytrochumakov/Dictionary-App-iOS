@@ -36,249 +36,6 @@ final class MDUserStorage_Tests: XCTestCase {
     
 }
 
-// MARK: - Memory CRUD
-extension MDUserStorage_Tests {
-    
-    func test_Create_User_In_Memory_Functionality() {
-        
-        let expectation = XCTestExpectation(description: "Create User In Memory Expectation")
-        let storageType: MDStorageType = .memory
-        
-        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] results in
-            
-            switch results.first!.result {
-            
-            case .success(let createdUser):
-                
-                XCTAssertTrue(createdUser.userId == Constants_For_Tests.mockedUser.userId)
-                XCTAssertTrue(createdUser.nickname == Constants_For_Tests.mockedUser.nickname)
-                XCTAssertTrue(createdUser.password == Constants_For_Tests.mockedUser.password)
-                XCTAssertTrue(createdUser.createdAt == Constants_For_Tests.mockedUser.createdAt)
-                XCTAssertTrue(createdUser.updatedAt == Constants_For_Tests.mockedUser.updatedAt)
-                expectation.fulfill()
-                
-            case .failure:
-                XCTExpectFailure()
-                expectation.fulfill()
-            }
-        }
-        
-        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
-        
-    }
-    
-    func test_Read_User_From_Memory_Functionality() {
-        
-        let expectation = XCTestExpectation(description: "Read User From Memory Expectation")
-        let storageType: MDStorageType = .memory
-        
-        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] createResults in
-            
-            switch createResults.first!.result {
-            
-            case .success(let createdUser):
-                
-                userStorage.readUser(fromUserID: createdUser.userId, storageType: storageType) { [unowned self] readResults in
-                    
-                    switch readResults.first!.result {
-                    
-                    case .success(let readUser):
-                        
-                        XCTAssertTrue(createdUser.userId == readUser.userId)
-                        XCTAssertTrue(createdUser.nickname == readUser.nickname)
-                        XCTAssertTrue(createdUser.password == readUser.password)
-                        XCTAssertTrue(createdUser.createdAt == readUser.createdAt)
-                        XCTAssertTrue(createdUser.updatedAt == readUser.updatedAt)
-                        expectation.fulfill()
-                        
-                    case .failure:
-                        XCTExpectFailure()
-                        expectation.fulfill()
-                    }
-                }
-            case .failure:
-                XCTExpectFailure()
-                expectation.fulfill()
-            }
-        }
-        
-        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
-        
-    }
-    
-    func test_Delete_User_From_Memory_Functionality() {
-        
-        let expectation = XCTestExpectation(description: "Delete User From Memory Expectation")
-        let storageType: MDStorageType = .memory
-        
-        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] createResults in
-            
-            switch createResults.first!.result {
-            
-            case .success(let createdUser):
-                
-                self.userStorage.deleteUser(createdUser, storageType: storageType) { [unowned self] deleteResults in
-                    
-                    switch deleteResults.first!.result {
-                    
-                    case .success(let deleteUser):
-                        
-                        XCTAssertTrue(createdUser.userId == deleteUser.userId)
-                        
-                        self.userStorage.entitiesIsEmpty(storageType: storageType) { [unowned self] entitiesIsEmptyResults in
-                            
-                            switch entitiesIsEmptyResults.first!.result {
-                            
-                            case .success(let entitiesIsEmpty):
-                                
-                                XCTAssertTrue(entitiesIsEmpty)
-                                expectation.fulfill()
-                                
-                            case .failure:
-                                XCTExpectFailure()
-                                expectation.fulfill()
-                            }
-                        }
-                    case .failure:
-                        XCTExpectFailure()
-                        expectation.fulfill()
-                    }
-                }
-            case .failure:
-                XCTExpectFailure()
-                expectation.fulfill()
-            }
-        }
-        
-        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
-        
-    }
-    
-}
-
-// MARK: - Core Data CRUD
-extension MDUserStorage_Tests {
-    
-    func test_Create_User_In_Core_Data_Functionality() {
-        
-        let expectation = XCTestExpectation(description: "Create User In Core Data Expectation")
-        let storageType: MDStorageType = .coreData
-        
-        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] results in
-            
-            switch results.first!.result {
-            
-            case .success(let createdUser):
-                
-                XCTAssertTrue(createdUser.userId == Constants_For_Tests.mockedUser.userId)
-                XCTAssertTrue(createdUser.nickname == Constants_For_Tests.mockedUser.nickname)
-                XCTAssertTrue(createdUser.password == Constants_For_Tests.mockedUser.password)
-                XCTAssertTrue(createdUser.createdAt == Constants_For_Tests.mockedUser.createdAt)
-                XCTAssertTrue(createdUser.updatedAt == Constants_For_Tests.mockedUser.updatedAt)
-                expectation.fulfill()
-                
-            case .failure:
-                XCTExpectFailure()
-                expectation.fulfill()
-            }
-        }
-        
-        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
-        
-    }
-    
-    func test_Read_User_From_Core_Data_Functionality() {
-        
-        let expectation = XCTestExpectation(description: "Read User From Core Data Expectation")
-        let storageType: MDStorageType = .coreData
-        
-        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] createResults in
-            
-            switch createResults.first!.result {
-            
-            case .success(let createdUser):
-                
-                userStorage.readUser(fromUserID: createdUser.userId, storageType: storageType) { [unowned self] readResults in
-                    
-                    switch readResults.first!.result {
-                    
-                    case .success(let readUser):
-                        
-                        XCTAssertTrue(createdUser.userId == readUser.userId)
-                        XCTAssertTrue(createdUser.nickname == readUser.nickname)
-                        XCTAssertTrue(createdUser.password == readUser.password)
-                        XCTAssertTrue(createdUser.createdAt == readUser.createdAt)
-                        XCTAssertTrue(createdUser.updatedAt == readUser.updatedAt)
-                        expectation.fulfill()
-                        
-                    case .failure:
-                        XCTExpectFailure()
-                        expectation.fulfill()
-                    }
-                }
-                
-            case .failure:
-                XCTExpectFailure()
-                expectation.fulfill()
-            }
-        }
-        
-        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
-        
-    }
-    
-    func test_Delete_User_From_Core_Data_Functionality() {
-        
-        let expectation = XCTestExpectation(description: "Delete From Core Data User Expectation")
-        let storageType: MDStorageType = .coreData
-        
-        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] createResults in
-            
-            switch createResults.first!.result {
-            
-            case .success(let createdUser):
-                
-                self.userStorage.deleteUser(createdUser, storageType: storageType) { [unowned self] deleteResults in
-                    
-                    switch deleteResults.first!.result {
-                    
-                    case .success(let deleteUser):
-                        
-                        XCTAssertTrue(createdUser.userId == deleteUser.userId)
-                        
-                        self.userStorage.entitiesIsEmpty(storageType: storageType) { [unowned self] entitiesIsEmptyResults in
-                            
-                            switch entitiesIsEmptyResults.first!.result {
-                            
-                            case .success(let entitiesIsEmpty):
-                                
-                                XCTAssertTrue(entitiesIsEmpty)
-                                expectation.fulfill()
-                                
-                            case .failure:
-                                XCTExpectFailure()
-                                expectation.fulfill()
-                            }
-                            
-                        }
-                        
-                    case .failure:
-                        XCTExpectFailure()
-                        expectation.fulfill()
-                    }
-                }
-            case .failure:
-                XCTExpectFailure()
-                expectation.fulfill()
-            }
-        }
-        
-        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
-        
-    }
-    
-}
-
 // MARK: - All CRUD
 extension MDUserStorage_Tests {
     
@@ -289,7 +46,7 @@ extension MDUserStorage_Tests {
         
         var resultCount: Int = .zero
         
-        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] createResults in
+        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { createResults in
             
             createResults.forEach { createResult in
                 
@@ -334,7 +91,7 @@ extension MDUserStorage_Tests {
             
             case .success(let createdUser):
                 
-                userStorage.readUser(fromUserID: createdUser.userId, storageType: storageType) { [unowned self] readResults in
+                userStorage.readUser(fromUserID: createdUser.userId, storageType: storageType) { readResults in
                     
                     readResults.forEach { readResult in
                         
@@ -395,7 +152,7 @@ extension MDUserStorage_Tests {
                             
                             XCTAssertTrue(createdUser.userId == deleteUser.userId)
                             
-                            self.userStorage.entitiesIsEmpty(storageType: deleteResult.storageType) { [unowned self] entitiesIsEmptyResults in
+                            self.userStorage.entitiesIsEmpty(storageType: deleteResult.storageType) { entitiesIsEmptyResults in
                                 
                                 switch entitiesIsEmptyResults.first!.result {
                                 
