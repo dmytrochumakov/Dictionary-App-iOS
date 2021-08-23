@@ -64,6 +64,12 @@ extension MDLanguageStorage {
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
+        case .coreData:
+            
+            coreDataStorage.entitiesIsEmpty { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
         default:
             
             break
@@ -80,6 +86,12 @@ extension MDLanguageStorage {
         case .memory:
             
             memoryStorage.entitiesCount { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .coreData:
+            
+            coreDataStorage.entitiesCount { result in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
@@ -108,6 +120,12 @@ extension MDLanguageStorage {
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
+        case .coreData:
+            
+            coreDataStorage.createLanguages(languageEntities) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
         default:
             
             break
@@ -127,6 +145,13 @@ extension MDLanguageStorage {
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
+            
+        case .coreData:
+            
+            coreDataStorage.readAllLanguages { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
         default:
             
             break
@@ -143,6 +168,12 @@ extension MDLanguageStorage {
         case .memory:
             
             memoryStorage.deleteAllLanguages { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .coreData:
+            
+            coreDataStorage.deleteAllLanguages { result in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
