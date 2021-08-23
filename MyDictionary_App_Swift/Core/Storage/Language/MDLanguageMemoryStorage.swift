@@ -13,4 +13,10 @@ protocol MDLanguageMemoryStorageProtocol {
 
 final class MDLanguageMemoryStorage: MDLanguageMemoryStorageProtocol {
     
+    var array: [LanguageEntity]
+    
+    init(array: [LanguageEntity]) {
+        self.array = array
+    }
+    
 }
