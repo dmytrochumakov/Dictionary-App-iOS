@@ -49,8 +49,12 @@ extension MDCourseMemoryStorage {
 // MARK: - CRUD
 extension MDCourseMemoryStorage {
     
-    func createCourse(_ courseEntity: CourseEntity, _ completionHandler: @escaping (MDEntityResult<[CourseEntity]>)) {
-        
+    func createCourse(_ courseEntity: CourseEntity, _ completionHandler: @escaping (MDEntityResult<CourseEntity>)) {
+        let operation: MDCreateCourseMemoryStorageOperation = .init(memoryStorage: self,
+                                                                    courseEntity: courseEntity) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
     }
     
     func readCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDEntityResult<CourseEntity>)) {
