@@ -9,8 +9,7 @@ import Foundation
 import CoreData
 
 protocol MDWordCoreDataStorageProtocol: MDCRUDWordProtocol,
-                                        MDEntitiesIsEmptyProtocol,
-                                        MDEntitiesCountProtocol {
+                                        MDStorageInterface {
     
 }
 

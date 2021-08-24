@@ -8,8 +8,7 @@
 import Foundation
 
 protocol MDLanguageMemoryStorageProtocol: MDCRUDLanguageProtocol,
-                                          MDEntitiesCountProtocol,
-                                          MDEntitiesIsEmptyProtocol {
+                                          MDStorageInterface {
     
 }
 

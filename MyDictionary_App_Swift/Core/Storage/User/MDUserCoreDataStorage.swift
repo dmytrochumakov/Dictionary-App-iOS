@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 protocol MDUserCoreDataStorageProtocol: MDCRUDUserProtocol,
-                                        MDEntitiesIsEmptyProtocol {
+                                        MDStorageInterface {
     
 }
 
@@ -36,7 +36,7 @@ final class MDUserCoreDataStorage: NSObject,
     
 }
 
-// MARK: - Is Empty
+// MARK: - Entities
 extension MDUserCoreDataStorage {
     
     func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion)) {
@@ -44,6 +44,17 @@ extension MDUserCoreDataStorage {
             switch result {
             case .success(let entities):
                 completionHandler(.success(entities.isEmpty))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
+    }
+    
+    func entitiesCount(_ completionHandler: @escaping (MDEntitiesCountResultWithCompletion)) {
+        self.readAllUsers() { result in
+            switch result {
+            case .success(let entities):
+                completionHandler(.success(entities.count))
             case .failure(let error):
                 completionHandler(.failure(error))
             }

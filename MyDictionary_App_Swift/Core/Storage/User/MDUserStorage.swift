@@ -7,10 +7,7 @@
 
 import Foundation
 
-protocol MDUserStorageProtocol {
-    
-    func entitiesIsEmpty(storageType: MDStorageType,
-                         _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDEntitiesIsEmptyResultWithoutCompletion>))
+protocol MDUserStorageProtocol: MDStorageProtocol {
     
     func createUser(_ userEntity: UserEntity,
                     storageType: MDStorageType,
@@ -26,7 +23,7 @@ protocol MDUserStorageProtocol {
     
 }
 
-final class MDUserStorage: MDUserStorageProtocol {
+final class MDUserStorage: MDStorage, MDUserStorageProtocol {
     
     fileprivate let memoryStorage: MDUserMemoryStorageProtocol
     fileprivate let coreDataStorage: MDUserCoreDataStorageProtocol
@@ -37,73 +34,13 @@ final class MDUserStorage: MDUserStorageProtocol {
         self.memoryStorage = memoryStorage
         self.coreDataStorage = coreDataStorage
         
+        super.init(memoryStorage: memoryStorage,
+                   coreDataStorage: coreDataStorage)
+        
     }
     
     deinit {
         debugPrint(#function, Self.self)
-    }
-    
-}
-
-// MARK: - Is Empty
-extension MDUserStorage {
-    
-    func entitiesIsEmpty(storageType: MDStorageType,
-                         _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDEntitiesIsEmptyResultWithoutCompletion>)) {
-        
-        switch storageType {
-        
-        case .memory:
-            
-            memoryStorage.entitiesIsEmpty() { (result) in
-                completionHandler([.init(storageType: storageType, result: result)])
-            }
-            
-        case .coreData:
-            
-            coreDataStorage.entitiesIsEmpty() { (result) in
-                completionHandler([.init(storageType: storageType, result: result)])
-            }
-            
-        case .all:
-            
-            // Initialize Dispatch Group
-            let dispatchGroup: DispatchGroup = .init()
-            
-            // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDEntitiesIsEmptyResultWithoutCompletion> = []
-            
-            // Check in Memory
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            memoryStorage.entitiesIsEmpty() {  result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
-                
-            }
-            
-            // Check in Core Data
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            coreDataStorage.entitiesIsEmpty() { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .coreData, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
-                
-            }
-            
-            // Notify And Pass Final Result
-            dispatchGroup.notify(queue: .main) {
-                completionHandler(finalResult)
-            }
-            
-        }
-        
     }
     
 }

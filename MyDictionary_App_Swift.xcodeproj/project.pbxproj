@@ -93,6 +93,8 @@
 		22561C9726D4D93900A6135B /* MDCoursesResultWithoutCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C9626D4D93900A6135B /* MDCoursesResultWithoutCompletion.swift */; };
 		22561C9926D4D94C00A6135B /* MDCourseResultWithoutCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C9826D4D94C00A6135B /* MDCourseResultWithoutCompletion.swift */; };
 		22561C9B26D4D95600A6135B /* MDCourseDeleteResultWithoutCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C9A26D4D95600A6135B /* MDCourseDeleteResultWithoutCompletion.swift */; };
+		22561C9D26D4DEA800A6135B /* MDStorageInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C9C26D4DEA800A6135B /* MDStorageInterface.swift */; };
+		22561C9F26D4DEE200A6135B /* MDStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C9E26D4DEE200A6135B /* MDStorage.swift */; };
 		2258546426CA6A2F00368354 /* MDJWTStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2258546326CA6A2F00368354 /* MDJWTStorage_Tests.swift */; };
 		2258921D26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2258921C26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift */; };
 		2258921F26CA393F00AD6F18 /* MDJWTCoreDataStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2258921E26CA393F00AD6F18 /* MDJWTCoreDataStorage_Tests.swift */; };
@@ -407,6 +409,8 @@
 		22561C9626D4D93900A6135B /* MDCoursesResultWithoutCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCoursesResultWithoutCompletion.swift; sourceTree = "<group>"; };
 		22561C9826D4D94C00A6135B /* MDCourseResultWithoutCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseResultWithoutCompletion.swift; sourceTree = "<group>"; };
 		22561C9A26D4D95600A6135B /* MDCourseDeleteResultWithoutCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseDeleteResultWithoutCompletion.swift; sourceTree = "<group>"; };
+		22561C9C26D4DEA800A6135B /* MDStorageInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorageInterface.swift; sourceTree = "<group>"; };
+		22561C9E26D4DEE200A6135B /* MDStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorage.swift; sourceTree = "<group>"; };
 		2258546326CA6A2F00368354 /* MDJWTStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTStorage_Tests.swift; sourceTree = "<group>"; };
 		2258921C26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateJWTCoreDataStorageOperation.swift; sourceTree = "<group>"; };
 		2258921E26CA393F00AD6F18 /* MDJWTCoreDataStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTCoreDataStorage_Tests.swift; sourceTree = "<group>"; };
@@ -755,6 +759,7 @@
 				22DE582426C9536A0032A94C /* JWT */,
 				220FFE7A26C9062800702CCE /* User */,
 				220FFE7926C9060500702CCE /* Word */,
+				22561C9E26D4DEE200A6135B /* MDStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -1286,6 +1291,7 @@
 				2289CED52678CC34007254C3 /* CRUD */,
 				22EF01E2269D9CDA00FE4435 /* MDEntitiesIsEmptyProtocol.swift */,
 				22A2521526CFE5230013FCF5 /* MDEntitiesCountProtocol.swift */,
+				22561C9C26D4DEA800A6135B /* MDStorageInterface.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2199,6 +2205,7 @@
 				22493C52269741FF000DA480 /* MDDeleteWordCoreDataStorageOperation.swift in Sources */,
 				2258921D26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift in Sources */,
 				22E2B4F02664EF3200978E62 /* UICollectionView+Extension.swift in Sources */,
+				22561C9F26D4DEE200A6135B /* MDStorage.swift in Sources */,
 				228722CE26D0DE7500C9D1BC /* MDUpdateJWTMemoryStorageOperation.swift in Sources */,
 				22B8E6C426D3A3C3001CCCA8 /* MDLanguageResultWithoutCompletion.swift in Sources */,
 				22561C8826D4CDB200A6135B /* MDReadCourseCoreDataStorageOperation.swift in Sources */,
@@ -2422,6 +2429,7 @@
 				22B8E6EA26D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift in Sources */,
 				2270F39E26D26132006B46F4 /* CDLanguageEntityAttributeName.swift in Sources */,
 				227D5E642652584700B54524 /* NSLayoutConstraint+Extension.swift in Sources */,
+				22561C9D26D4DEA800A6135B /* MDStorageInterface.swift in Sources */,
 				22E2B500266515E700978E62 /* CollectionViewDataSource.swift in Sources */,
 				228722D326D0F93B00C9D1BC /* MDUserResultWithCompletion.swift in Sources */,
 				229E08BC2652C41400DA56C4 /* ReuseIdentifierProtocol.swift in Sources */,

@@ -9,8 +9,7 @@ import Foundation
 import CoreData
 
 protocol MDJWTCoreDataStorageProtocol: MDCRUDJWTProtocol,
-                                       MDEntitiesIsEmptyProtocol,
-                                       MDEntitiesCountProtocol {
+                                       MDStorageInterface {
     
 }
 

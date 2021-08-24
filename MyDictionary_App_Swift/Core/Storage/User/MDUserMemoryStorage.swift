@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MDUserMemoryStorageProtocol: MDCRUDUserProtocol,
-                                      MDEntitiesIsEmptyProtocol {
+                                      MDStorageInterface {
     
 }
 
@@ -39,6 +39,14 @@ extension MDUserMemoryStorage {
             completionHandler(.success(true))
         } else {
             completionHandler(.success(false))
+        }
+    }
+    
+    func entitiesCount(_ completionHandler: @escaping (MDEntitiesCountResultWithCompletion)) {
+        if (userEntity == nil) {
+            completionHandler(.success(0))
+        } else {
+            completionHandler(.success(1))
         }
     }
     

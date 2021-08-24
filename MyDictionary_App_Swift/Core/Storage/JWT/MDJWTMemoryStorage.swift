@@ -8,8 +8,7 @@
 import Foundation
 
 protocol MDJWTMemoryStorageProtocol: MDCRUDJWTProtocol,
-                                     MDEntitiesIsEmptyProtocol,
-                                     MDEntitiesCountProtocol {
+                                     MDStorageInterface {
     
 }
 
