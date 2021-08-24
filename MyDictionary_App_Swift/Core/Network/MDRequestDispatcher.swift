@@ -103,15 +103,11 @@ fileprivate extension MDRequestDispatcher {
         }
     }
     
-    func verify(data: Data?, urlResponse: HTTPURLResponse, error: Error?) -> Result<Data, Error> {
+    func verify(data: Data?, urlResponse: HTTPURLResponse, error: Error?) -> Result<Data?, Error> {
         guard let statusCode = MDAPIStatusCode.init(rawValue: urlResponse.statusCode) else { return .failure(MDAPIError.unknown) }
         switch statusCode {
         case .ok:
-            if let data = data {
-                return .success(data)
-            } else {
-                return .failure(MDAPIError.noData)
-            }
+            return .success(data)
         case .badRequest:
             return .failure(MDAPIError.badRequest)
         case .unauthorized:

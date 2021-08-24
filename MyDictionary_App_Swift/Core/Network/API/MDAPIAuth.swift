@@ -100,6 +100,8 @@ extension MDAPIAuth {
             
             case .data(let data, _):
                 
+                guard let data = data else { completionHandler(.failure(MDAPIError.noData)) ; return }
+                
                 debugPrint(#function, Self.self, "dataCount: ", data.count)
                 
                 do {
@@ -138,6 +140,8 @@ extension MDAPIAuth {
             switch result {
             
             case .data(let data, _):
+                
+                guard let data = data else { completionHandler(.failure(MDAPIError.noData)) ; return }
                 
                 debugPrint(#function, Self.self, "dataCount: ", data.count)
                 

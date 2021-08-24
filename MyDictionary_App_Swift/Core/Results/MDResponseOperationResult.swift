@@ -8,6 +8,6 @@
 import Foundation
 
 enum MDResponseOperationResult {
-    case data(_ : Data, _ : HTTPURLResponse?)
+    case data(_ : Data?, _ : HTTPURLResponse?)
     case error(_ : Error, _ : HTTPURLResponse?)
 }

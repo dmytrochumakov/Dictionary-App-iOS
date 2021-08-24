@@ -96,10 +96,12 @@ extension MDAPIUser {
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
                                               endpoint: MDAPIUserEndpoint.getUser(accessToken: accessToken,
                                                                                   userId: userId)) { result in
-        
+            
             switch result {
             
             case .data(let data, _):
+                
+                guard let data = data else { completionHandler(.failure(MDAPIError.noData)) ; return }
                 
                 debugPrint(#function, Self.self, "dataCount: ", data.count)
                 
@@ -114,7 +116,7 @@ extension MDAPIUser {
             case .error(let error, _):
                 
                 debugPrint(#function, Self.self, "error: ", error.localizedDescription)
-                                                                
+                
                 completionHandler(.failure(error))
                 
                 break

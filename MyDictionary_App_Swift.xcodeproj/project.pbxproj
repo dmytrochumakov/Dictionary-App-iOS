@@ -50,6 +50,11 @@
 		221D281926C53356004BC4F7 /* AuthTextFieldTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D281826C53356004BC4F7 /* AuthTextFieldTag.swift */; };
 		221D281C26C533AF004BC4F7 /* AuthTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D281B26C533AF004BC4F7 /* AuthTextFieldDelegate.swift */; };
 		221D281F26C54960004BC4F7 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D281E26C54960004BC4F7 /* KeyboardHandler.swift */; };
+		2220FCB026D50ABF00B22515 /* MDAPICourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220FCAF26D50ABF00B22515 /* MDAPICourse.swift */; };
+		2220FCB226D50BEE00B22515 /* MDCoursesResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220FCB126D50BEE00B22515 /* MDCoursesResultWithCompletion.swift */; };
+		2220FCB426D50E6100B22515 /* CreateCourseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220FCB326D50E6100B22515 /* CreateCourseRequest.swift */; };
+		2220FCB626D50FAD00B22515 /* MDCourseResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220FCB526D50FAD00B22515 /* MDCourseResultWithCompletion.swift */; };
+		2220FCB926D5136D00B22515 /* MDCourseDeleteResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220FCB826D5136D00B22515 /* MDCourseDeleteResultWithCompletion.swift */; };
 		2223F8A826512C1A004F2FE9 /* LocalizableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8A726512C1A004F2FE9 /* LocalizableProtocol.swift */; };
 		2223F8AB26512C5A004F2FE9 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8AA26512C5A004F2FE9 /* String+Extension.swift */; };
 		2223F8AE26512DEB004F2FE9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8AD26512DEB004F2FE9 /* Constants.swift */; };
@@ -368,6 +373,11 @@
 		221D281826C53356004BC4F7 /* AuthTextFieldTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextFieldTag.swift; sourceTree = "<group>"; };
 		221D281B26C533AF004BC4F7 /* AuthTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextFieldDelegate.swift; sourceTree = "<group>"; };
 		221D281E26C54960004BC4F7 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
+		2220FCAF26D50ABF00B22515 /* MDAPICourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPICourse.swift; sourceTree = "<group>"; };
+		2220FCB126D50BEE00B22515 /* MDCoursesResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCoursesResultWithCompletion.swift; sourceTree = "<group>"; };
+		2220FCB326D50E6100B22515 /* CreateCourseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCourseRequest.swift; sourceTree = "<group>"; };
+		2220FCB526D50FAD00B22515 /* MDCourseResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseResultWithCompletion.swift; sourceTree = "<group>"; };
+		2220FCB826D5136D00B22515 /* MDCourseDeleteResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseDeleteResultWithCompletion.swift; sourceTree = "<group>"; };
 		2223F8A726512C1A004F2FE9 /* LocalizableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableProtocol.swift; sourceTree = "<group>"; };
 		2223F8AA26512C5A004F2FE9 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		2223F8AD26512DEB004F2FE9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -706,6 +716,7 @@
 				2270F39526D2502B006B46F4 /* MDAPIJWT.swift */,
 				22EF0209269DAE9800FE4435 /* MDAPIWord.swift */,
 				22561CA226D4F09100A6135B /* MDAPIUser.swift */,
+				2220FCAF26D50ABF00B22515 /* MDAPICourse.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -715,6 +726,7 @@
 			children = (
 				220793D026C6B2D9003D434B /* AuthRequest.swift */,
 				2270F39926D251ED006B46F4 /* JWTRequest.swift */,
+				2220FCB326D50E6100B22515 /* CreateCourseRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -908,6 +920,14 @@
 			path = KeyboardHandler;
 			sourceTree = "<group>";
 		};
+		2220FCB726D50FFE00B22515 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				220793DB26C6C057003D434B /* MDAuthResponseResult.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		2223F8A526512BE8004F2FE9 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
@@ -1097,9 +1117,12 @@
 		22561C9126D4D88100A6135B /* Course */ = {
 			isa = PBXGroup;
 			children = (
+				2220FCB526D50FAD00B22515 /* MDCourseResultWithCompletion.swift */,
 				22561C9626D4D93900A6135B /* MDCoursesResultWithoutCompletion.swift */,
 				22561C9826D4D94C00A6135B /* MDCourseResultWithoutCompletion.swift */,
 				22561C9A26D4D95600A6135B /* MDCourseDeleteResultWithoutCompletion.swift */,
+				2220FCB126D50BEE00B22515 /* MDCoursesResultWithCompletion.swift */,
+				2220FCB826D5136D00B22515 /* MDCourseDeleteResultWithCompletion.swift */,
 			);
 			path = Course;
 			sourceTree = "<group>";
@@ -1107,6 +1130,7 @@
 		22561C9226D4D88500A6135B /* Language */ = {
 			isa = PBXGroup;
 			children = (
+				2270F3AA26D27D23006B46F4 /* MDLanguagesResponseResultWithCompletion.swift */,
 				22B8E6C526D3A3CC001CCCA8 /* MDLanguageResultsWithoutCompletion.swift */,
 				22B8E6C326D3A3C3001CCCA8 /* MDLanguageResultWithoutCompletion.swift */,
 			);
@@ -1133,6 +1157,7 @@
 		22561C9526D4D8A800A6135B /* JWT */ = {
 			isa = PBXGroup;
 			children = (
+				2270F39726D251E1006B46F4 /* MDJWTResponseResult.swift */,
 				228722D426D0F98800C9D1BC /* MDJWTResultWithCompletion.swift */,
 				22E691BB26CE76EB00641DFA /* MDJWTResultWithoutCompletion.swift */,
 			);
@@ -1274,6 +1299,8 @@
 		2289CEC22678CC34007254C3 /* Results */ = {
 			isa = PBXGroup;
 			children = (
+				22EF0201269DA9E300FE4435 /* MDResponseOperationResult.swift */,
+				2220FCB726D50FFE00B22515 /* Auth */,
 				22561C9526D4D8A800A6135B /* JWT */,
 				22561C9226D4D88500A6135B /* Language */,
 				22561C9326D4D88900A6135B /* User */,
@@ -1828,7 +1855,6 @@
 				22EF020B269DAFBB00FE4435 /* Enums */,
 				22EF0206269DAD3900FE4435 /* Protocols */,
 				22EF0203269DACAD00FE4435 /* Operation */,
-				22EF0200269DA9CA00FE4435 /* Result */,
 				22EF01FD269DA98D00FE4435 /* Error */,
 				22EF01E7269DA6DF00FE4435 /* Endpoint */,
 				22EF01F3269DA7C000FE4435 /* MDNetworkSession.swift */,
@@ -1879,17 +1905,6 @@
 				22EF01FE269DA99800FE4435 /* MDAPIError.swift */,
 			);
 			path = Error;
-			sourceTree = "<group>";
-		};
-		22EF0200269DA9CA00FE4435 /* Result */ = {
-			isa = PBXGroup;
-			children = (
-				22EF0201269DA9E300FE4435 /* MDResponseOperationResult.swift */,
-				220793DB26C6C057003D434B /* MDAuthResponseResult.swift */,
-				2270F39726D251E1006B46F4 /* MDJWTResponseResult.swift */,
-				2270F3AA26D27D23006B46F4 /* MDLanguagesResponseResultWithCompletion.swift */,
-			);
-			path = Result;
 			sourceTree = "<group>";
 		};
 		22EF0203269DACAD00FE4435 /* Operation */ = {
@@ -2211,6 +2226,7 @@
 				22493C52269741FF000DA480 /* MDDeleteWordCoreDataStorageOperation.swift in Sources */,
 				2258921D26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift in Sources */,
 				22E2B4F02664EF3200978E62 /* UICollectionView+Extension.swift in Sources */,
+				2220FCB426D50E6100B22515 /* CreateCourseRequest.swift in Sources */,
 				22561C9F26D4DEE200A6135B /* MDStorage.swift in Sources */,
 				228722CE26D0DE7500C9D1BC /* MDUpdateJWTMemoryStorageOperation.swift in Sources */,
 				22B8E6C426D3A3C3001CCCA8 /* MDLanguageResultWithoutCompletion.swift in Sources */,
@@ -2225,6 +2241,7 @@
 				22561C8A26D4CEBA00A6135B /* MDReadAllCoursesCoreDataStorageOperation.swift in Sources */,
 				226FEE7D266B65080044A5F9 /* AppearanceCell.swift in Sources */,
 				22B22689266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift in Sources */,
+				2220FCB026D50ABF00B22515 /* MDAPICourse.swift in Sources */,
 				2270F3A426D264E6006B46F4 /* CDCourseEntity+Extension.swift in Sources */,
 				22EF01FC269DA90000FE4435 /* MDResponseType.swift in Sources */,
 				229E08C22652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift in Sources */,
@@ -2260,6 +2277,7 @@
 				2258922526CA3DC600AD6F18 /* MDDeleteJWTCoreDataStorageOperation.swift in Sources */,
 				220FFEAF26C91DD400702CCE /* MDReadUserCoreDataStorageOperation.swift in Sources */,
 				227F8AB326CAB0DC00375A38 /* JWTResponse.swift in Sources */,
+				2220FCB926D5136D00B22515 /* MDCourseDeleteResultWithCompletion.swift in Sources */,
 				22DB2F7C26C3BE7900C1AADA /* CourseListDataProvider.swift in Sources */,
 				22B8E6E626D3C7C3001CCCA8 /* MDDeleteCourseProtocol.swift in Sources */,
 				22493C39269722AA000DA480 /* MDCRUDWordProtocol.swift in Sources */,
@@ -2390,6 +2408,7 @@
 				2223F8B426512F01004F2FE9 /* KeysForTranslate.swift in Sources */,
 				221D281926C53356004BC4F7 /* AuthTextFieldTag.swift in Sources */,
 				2289CEEC2678CC34007254C3 /* MDEntityResult.swift in Sources */,
+				2220FCB226D50BEE00B22515 /* MDCoursesResultWithCompletion.swift in Sources */,
 				2223F8AE26512DEB004F2FE9 /* Constants.swift in Sources */,
 				2299016B2668EC3400D8C74E /* AppearanceInteractor.swift in Sources */,
 				22561CA326D4F09100A6135B /* MDAPIUser.swift in Sources */,
@@ -2402,6 +2421,7 @@
 				22DB2F7826C3BE7900C1AADA /* CourseListPresenter.swift in Sources */,
 				22CA088126515EEB0052D169 /* WordListPresenter.swift in Sources */,
 				22557FC926C958A200A4FF31 /* MDJWTCoreDataStorage.swift in Sources */,
+				2220FCB626D50FAD00B22515 /* MDCourseResultWithCompletion.swift in Sources */,
 				2223F8AB26512C5A004F2FE9 /* String+Extension.swift in Sources */,
 				22CA088E265167620052D169 /* ReloadDataProtocol.swift in Sources */,
 				22DB2F7726C3BE7900C1AADA /* CourseListModule.swift in Sources */,

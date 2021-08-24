@@ -85,7 +85,7 @@ extension MDAPIJWT {
 
 // MARK: - Access Token
 extension MDAPIJWT {
-        
+    
     func accessToken(jwtRequest: JWTRequest, completionHandler: @escaping MDJWTResponseResult) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
@@ -94,6 +94,8 @@ extension MDAPIJWT {
             switch result {
             
             case .data(let data, _):
+                
+                guard let data = data else { completionHandler(.failure(MDAPIError.noData)) ; return }
                 
                 debugPrint(#function, Self.self, "dataCount: ", data.count)
                 
@@ -108,7 +110,7 @@ extension MDAPIJWT {
             case .error(let error, _):
                 
                 debugPrint(#function, Self.self, "error: ", error.localizedDescription)
-                                                                
+                
                 completionHandler(.failure(error))
                 
                 break

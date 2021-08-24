@@ -87,13 +87,15 @@ extension MDAPILanguage {
     
     func getLanguages(accessToken: String,
                       _ completionHandler: @escaping(MDLanguagesResponseResultWithCompletion)) {
-
+        
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
                                               endpoint: MDAPILanguageEndpoint.getLanguages(accessToken: accessToken)) { result in
             
             switch result {
             
             case .data(let data, _):
+                
+                guard let data = data else { completionHandler(.failure(MDAPIError.noData)) ; return }
                 
                 debugPrint(#function, Self.self, "dataCount: ", data.count)
                 
@@ -108,7 +110,7 @@ extension MDAPILanguage {
             case .error(let error, _):
                 
                 debugPrint(#function, Self.self, "error: ", error.localizedDescription)
-                                                
+                
                 completionHandler(.failure(error))
                 
                 break
