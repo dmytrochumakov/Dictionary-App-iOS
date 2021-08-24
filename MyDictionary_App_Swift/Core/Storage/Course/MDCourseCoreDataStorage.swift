@@ -85,7 +85,11 @@ extension MDCourseCoreDataStorage {
     }
     
     func readAllCourses(_ completionHandler: @escaping (MDEntityResult<[CourseEntity]>)) {
-        
+        let operation: MDReadAllCoursesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                        coreDataStorage: self) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
     }
     
     func deleteCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDEntityResult<Void>)) {
