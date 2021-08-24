@@ -37,11 +37,25 @@ final class MDCourseMemoryStorage: MDCourseMemoryStorageProtocol {
 extension MDCourseMemoryStorage {
     
     func entitiesCount(_ completionHandler: @escaping (MDEntitiesCountResultWithCompletion)) {
-        
+        self.readAllCourses { result in
+            switch result {
+            case .success(let entities):
+                completionHandler(.success(entities.count))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
     }
     
     func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion)) {
-        
+        self.readAllCourses { result in
+            switch result {
+            case .success(let entities):
+                completionHandler(.success(entities.isEmpty))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
     }
     
 }

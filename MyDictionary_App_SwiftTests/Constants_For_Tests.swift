@@ -52,4 +52,11 @@ struct Constants_For_Tests {
                                                                  createdAt: "2021-08-15T13:34:33.999Z")
     ]
     
+    public static let mockedCourse: CourseEntity = .init(userId: 0,
+                                                         courseId: 0,
+                                                         languageId: 0,
+                                                         languageName: "English",
+                                                         createdAt: "2021-08-16T13:35:33.999Z",
+                                                         updatedAt: "2021-08-16T13:35:33.999Z")
+    
 }

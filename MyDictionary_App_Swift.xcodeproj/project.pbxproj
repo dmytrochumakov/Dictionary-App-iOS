@@ -84,6 +84,7 @@
 		22561C7E26D4B67300A6135B /* MDDeleteCourseMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C7D26D4B67300A6135B /* MDDeleteCourseMemoryStorageOperation.swift */; };
 		22561C8026D4B82300A6135B /* MDDeleteAllCoursesMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C7F26D4B82300A6135B /* MDDeleteAllCoursesMemoryStorageOperation.swift */; };
 		22561C8326D4BA5C00A6135B /* MDCreateCourseCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C8226D4BA5C00A6135B /* MDCreateCourseCoreDataStorageOperation.swift */; };
+		22561C8626D4BB8C00A6135B /* MDCourseMemoryStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C8526D4BB8C00A6135B /* MDCourseMemoryStorage_Tests.swift */; };
 		2258546426CA6A2F00368354 /* MDJWTStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2258546326CA6A2F00368354 /* MDJWTStorage_Tests.swift */; };
 		2258921D26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2258921C26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift */; };
 		2258921F26CA393F00AD6F18 /* MDJWTCoreDataStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2258921E26CA393F00AD6F18 /* MDJWTCoreDataStorage_Tests.swift */; };
@@ -389,6 +390,7 @@
 		22561C7D26D4B67300A6135B /* MDDeleteCourseMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteCourseMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		22561C7F26D4B82300A6135B /* MDDeleteAllCoursesMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteAllCoursesMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		22561C8226D4BA5C00A6135B /* MDCreateCourseCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateCourseCoreDataStorageOperation.swift; sourceTree = "<group>"; };
+		22561C8526D4BB8C00A6135B /* MDCourseMemoryStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseMemoryStorage_Tests.swift; sourceTree = "<group>"; };
 		2258546326CA6A2F00368354 /* MDJWTStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTStorage_Tests.swift; sourceTree = "<group>"; };
 		2258921C26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateJWTCoreDataStorageOperation.swift; sourceTree = "<group>"; };
 		2258921E26CA393F00AD6F18 /* MDJWTCoreDataStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTCoreDataStorage_Tests.swift; sourceTree = "<group>"; };
@@ -1052,6 +1054,14 @@
 			path = CoreDataCRUD;
 			sourceTree = "<group>";
 		};
+		22561C8426D4BB8300A6135B /* Course */ = {
+			isa = PBXGroup;
+			children = (
+				22561C8526D4BB8C00A6135B /* MDCourseMemoryStorage_Tests.swift */,
+			);
+			path = Course;
+			sourceTree = "<group>";
+		};
 		2258921B26CA37D400AD6F18 /* CoreDataCRUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -1278,6 +1288,7 @@
 		228BC450264979FF0030FB30 /* MyDictionary_App_SwiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				22561C8426D4BB8300A6135B /* Course */,
 				22B8E6B526D39173001CCCA8 /* Language */,
 				22557FCD26C95A4200A4FF31 /* JWT */,
 				220FFEA626C9167000702CCE /* User */,
@@ -2397,6 +2408,7 @@
 				2258921F26CA393F00AD6F18 /* MDJWTCoreDataStorage_Tests.swift in Sources */,
 				22493C3526971726000DA480 /* TestCoreDataStack.swift in Sources */,
 				22B8E6B726D3917C001CCCA8 /* MDLanguageMemoryStorage_Tests.swift in Sources */,
+				22561C8626D4BB8C00A6135B /* MDCourseMemoryStorage_Tests.swift in Sources */,
 				22B8E6C226D39F30001CCCA8 /* MDLanguageCoreDataStorage_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
