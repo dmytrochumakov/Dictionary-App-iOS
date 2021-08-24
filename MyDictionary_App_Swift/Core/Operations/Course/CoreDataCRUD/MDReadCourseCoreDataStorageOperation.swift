@@ -31,7 +31,7 @@ final class MDReadCourseCoreDataStorageOperation: MDOperation {
     override func main() {
         
         let fetchRequest = NSFetchRequest<CDCourseEntity>(entityName: CoreDataEntityName.CDCourseEntity)
-        fetchRequest.predicate = NSPredicate(format: "\(CDCourseEntityAttributeName.courseId) == %@", self.courseId)
+        fetchRequest.predicate = NSPredicate(format: "\(CDCourseEntityAttributeName.courseId) == %i", self.courseId)
         
         let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
             
