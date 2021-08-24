@@ -102,7 +102,11 @@ extension MDCourseCoreDataStorage {
     }
     
     func deleteAllCourses(_ completionHandler: @escaping (MDEntityResult<Void>)) {
-        
+        let operation: MDDeleteAllCoursesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                          coreDataStorage: self) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
     }
     
 }
