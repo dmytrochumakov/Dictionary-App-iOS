@@ -22,7 +22,8 @@ final class MDWordStorage_Tests: XCTestCase {
         let memoryStorage: MDWordMemoryStorageProtocol = MDWordMemoryStorage.init(operationQueueService: operationQueueService,
                                                                                   arrayWords: [])
         
-        let coreDataStack: CoreDataStack = CoreDataStack.init()
+        let coreDataStack: CoreDataStack = TestCoreDataStack.init()
+        
         let coreDataStorage: MDWordCoreDataStorageProtocol = MDWordCoreDataStorage.init(operationQueueService: operationQueueService,
                                                                                         managedObjectContext: coreDataStack.privateContext,
                                                                                         coreDataStack: coreDataStack)

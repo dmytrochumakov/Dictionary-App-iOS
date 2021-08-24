@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol MDCourseStorageProtocol {
+protocol MDCourseStorageProtocol: MDStorageProtocol {
     
     func createCourse(storageType: MDStorageType,
                       courseEntity: CourseEntity,

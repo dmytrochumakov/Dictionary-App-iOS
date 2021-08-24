@@ -22,7 +22,8 @@ final class MDUserStorage_Tests: XCTestCase {
         let memoryStorage: MDUserMemoryStorageProtocol = MDUserMemoryStorage.init(operationQueueService: operationQueueService,
                                                                                   userEntity: nil)
         
-        let coreDataStack: CoreDataStack = CoreDataStack.init()
+        let coreDataStack: CoreDataStack = TestCoreDataStack.init()
+        
         let coreDataStorage: MDUserCoreDataStorageProtocol = MDUserCoreDataStorage.init(operationQueueService: operationQueueService,
                                                                                         managedObjectContext: coreDataStack.privateContext,
                                                                                         coreDataStack: coreDataStack)
