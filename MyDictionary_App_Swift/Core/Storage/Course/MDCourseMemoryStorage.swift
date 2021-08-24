@@ -73,7 +73,11 @@ extension MDCourseMemoryStorage {
     }
     
     func deleteCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDEntityResult<CourseEntity>)) {
-        
+        let operation: MDDeleteCourseMemoryStorageOperation = .init(memoryStorage: self,
+                                                                    courseId: courseId) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
     }
     
     func deleteAllCourses(_ completionHandler: @escaping (MDEntityResult<Void>)) {
