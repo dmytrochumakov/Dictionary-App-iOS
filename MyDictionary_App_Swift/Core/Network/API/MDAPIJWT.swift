@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MDAPIJWTProtocol {
-    func accessToken(jwtRequest: JWTRequest, completionHandler: @escaping MDJWTResponseResult)
+    func accessToken(jwtApiRequest: JWTApiRequest, completionHandler: @escaping MDJWTResponseResult)
 }
 
 final class MDAPIJWT: MDAPIJWTProtocol {
@@ -35,12 +35,12 @@ extension MDAPIJWT {
     
     enum MDAPIJWTEndpoint: MDEndpoint {
         
-        case accessToken(jwtRequest: JWTRequest)
+        case accessToken(jwtApiRequest: JWTApiRequest)
         
         var path: String {
             switch self {
             case .accessToken:
-                return "auth/login"
+                return "jwt/access_token"
             }
         }
         
@@ -86,10 +86,10 @@ extension MDAPIJWT {
 // MARK: - Access Token
 extension MDAPIJWT {
     
-    func accessToken(jwtRequest: JWTRequest, completionHandler: @escaping MDJWTResponseResult) {
+    func accessToken(jwtApiRequest: JWTApiRequest, completionHandler: @escaping MDJWTResponseResult) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
-                                              endpoint: MDAPIJWTEndpoint.accessToken(jwtRequest: jwtRequest)) { result in
+                                              endpoint: MDAPIJWTEndpoint.accessToken(jwtApiRequest: jwtApiRequest)) { result in
             
             switch result {
             

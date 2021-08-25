@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MDJWTManagerProtocol {
-    func fetchJWT(jwtRequest: JWTRequest, completionHandler: @escaping MDJWTResponseResult)
+    func fetchJWT(jwtApiRequest: JWTApiRequest, completionHandler: @escaping MDJWTResponseResult)
 }
 
 final class MDJWTManager: MDJWTManagerProtocol {
@@ -32,8 +32,8 @@ final class MDJWTManager: MDJWTManagerProtocol {
 
 extension MDJWTManager {
     
-    func fetchJWT(jwtRequest: JWTRequest, completionHandler: @escaping MDJWTResponseResult) {
-                
+    func fetchJWT(jwtApiRequest: JWTApiRequest, completionHandler: @escaping MDJWTResponseResult) {
+        
         jwtStorage.readFirstJWT(storageType: .memory) { [unowned self] readResults in
             
             switch readResults.first!.result {
@@ -42,7 +42,7 @@ extension MDJWTManager {
                 
                 if (isExpired(jwtExpirationDate: readJWTResponse.expDate)) {
                     
-                    apiJWT.accessToken(jwtRequest: jwtRequest) { [unowned self] accessTokenResult in
+                    apiJWT.accessToken(jwtApiRequest: jwtApiRequest) { [unowned self] accessTokenResult in
                         
                         switch accessTokenResult {
                         
@@ -73,7 +73,7 @@ extension MDJWTManager {
                 } else {
                     completionHandler(.success(readJWTResponse))
                 }
-            
+                
             case .failure(let error):
                 completionHandler(.failure(error))
             }
