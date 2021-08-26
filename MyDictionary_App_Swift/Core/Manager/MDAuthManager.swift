@@ -174,7 +174,7 @@ fileprivate extension MDAuthManager {
                     
                     jwtResults.updateValue(jwtEntity, forKey: createJWTResult.storageType)
                     
-                    if (createJWTResults.count == createJWTResults.count) {
+                    if (jwtResults.count == createJWTResults.count) {
                         completionHandler(.success(jwtResults.first!.value))
                     }
                     
