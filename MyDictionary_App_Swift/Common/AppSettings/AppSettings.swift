@@ -8,7 +8,8 @@
 import Foundation
 
 protocol AppSettingsProtocol {
-    var isLoggedIn: Bool { get set }
+    var isLoggedIn: Bool { get }
+    func setIsLoggedIn(_ newValue: Bool)
 }
 
 final class AppSettings: AppSettingsProtocol {
@@ -25,12 +26,11 @@ final class AppSettings: AppSettingsProtocol {
 extension AppSettings {
     
     var isLoggedIn: Bool {
-        get {
-            return userDefaults.bool(forKey: isLoggedInKey)
-        }
-        set {
-            userDefaults.set(newValue, forKey: isLoggedInKey)
-        }
+        return userDefaults.bool(forKey: isLoggedInKey)
+    }
+    
+    func setIsLoggedIn(_ newValue: Bool) {
+        userDefaults.set(newValue, forKey: isLoggedInKey)
     }
     
 }
