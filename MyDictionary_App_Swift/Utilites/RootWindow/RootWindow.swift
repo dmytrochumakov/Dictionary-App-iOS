@@ -9,9 +9,9 @@ import UIKit
 
 struct RootWindow {
     
-    static var window: UIWindow {
+    static func window(isLoggedIn: Bool) -> UIWindow {
         let window: UIWindow = UIWindow.init(frame: UIScreen.main.bounds)
-        window.rootViewController = RootViewController.viewController
+        window.rootViewController = RootViewController.viewController(isLoggedIn: isLoggedIn)
         window.makeKeyAndVisible()
         return window
     }

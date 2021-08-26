@@ -9,8 +9,12 @@ import UIKit
 
 struct RootViewController {
     
-    static var viewController: UIViewController {
-        return UINavigationController.init(rootViewController: AuthorizationModule.init(sender: nil).module)
+    static func viewController(isLoggedIn: Bool) -> UIViewController {
+        if (isLoggedIn) {
+            return UINavigationController.init(rootViewController: AuthorizationModule.init(sender: nil).module)
+        } else {
+            return UINavigationController.init(rootViewController: CourseListModule.init(sender: nil).module)
+        }
     }
     
 }

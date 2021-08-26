@@ -10,6 +10,7 @@ import Firebase
 import Reachability
 
 protocol MDAppDependenciesProtocol {
+    
     var rootWindow: UIWindow! { get }
     var reachability: Reachability! { get }
     var operationQueue: OperationQueue! { get }
@@ -22,6 +23,8 @@ protocol MDAppDependenciesProtocol {
     var userStorage: MDUserStorageProtocol! { get }
     var jwtStorage: MDJWTStorageProtocol! { get }
     // End Storage
+    
+    var appSettings: AppSettingsProtocol! { get }
     
 }
 
@@ -38,6 +41,8 @@ final class MDAppDependencies: NSObject, MDAppDependenciesProtocol {
     var userStorage: MDUserStorageProtocol!
     var jwtStorage: MDJWTStorageProtocol!
     // End Storage //
+    
+    var appSettings: AppSettingsProtocol!
     
     init(rootWindow: UIWindow!) {
         self.rootWindow = rootWindow
@@ -113,6 +118,10 @@ extension MDAppDependencies {
         self.jwtStorage = jwtStorage
         // End JWT //
         // End Storage //        
+        
+        let userDefaults: UserDefaults = .standard
+        let appSettings: AppSettingsProtocol = AppSettings.init(userDefaults:userDefaults )
+        self.appSettings = appSettings
         
         // Configure FirebaseApp
         FirebaseApp.configure()
