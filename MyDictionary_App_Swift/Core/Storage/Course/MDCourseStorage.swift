@@ -22,10 +22,10 @@ protocol MDCourseStorageProtocol: MDStorageProtocol {
     
     func deleteCourse(storageType: MDStorageType,
                       fromCourseId courseId: Int64,
-                      _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDCourseDeleteResultWithoutCompletion>))
+                      _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDDeleteEntityResultWithoutCompletion>))
     
     func deleteAllCourses(storageType: MDStorageType,
-                          _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDDeleteAllEntitiesResultWithoutCompletion>))
+                          _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDDeleteEntityResultWithoutCompletion>))
 }
 
 final class MDCourseStorage: MDStorage, MDCourseStorageProtocol {
@@ -233,7 +233,7 @@ extension MDCourseStorage {
     
     func deleteCourse(storageType: MDStorageType,
                       fromCourseId courseId: Int64,
-                      _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDCourseDeleteResultWithoutCompletion>)) {
+                      _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDDeleteEntityResultWithoutCompletion>)) {
         
         switch storageType {
         
@@ -255,7 +255,7 @@ extension MDCourseStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDDeleteAllEntitiesResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDDeleteEntityResultWithoutCompletion> = []
             
             // Delete From Memory
             // Dispatch Group Enter
@@ -291,7 +291,7 @@ extension MDCourseStorage {
     }
     
     func deleteAllCourses(storageType: MDStorageType,
-                          _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDDeleteAllEntitiesResultWithoutCompletion>)) {
+                          _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDDeleteEntityResultWithoutCompletion>)) {
         
         switch storageType {
         
@@ -313,7 +313,7 @@ extension MDCourseStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDDeleteAllEntitiesResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDDeleteEntityResultWithoutCompletion> = []
             
             // Delete From Memory
             // Dispatch Group Enter

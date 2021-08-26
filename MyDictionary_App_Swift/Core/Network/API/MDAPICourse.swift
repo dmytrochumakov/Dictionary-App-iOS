@@ -20,7 +20,7 @@ protocol MDAPICourseProtocol {
     func deleteCourse(accessToken: String,
                       userId: Int64,
                       courseId: Int64,
-                      completionHandler: @escaping(MDCourseDeleteResultWithCompletion))
+                      completionHandler: @escaping(MDDeleteEntityResultWithCompletion))
     
 }
 
@@ -209,7 +209,7 @@ extension MDAPICourse {
     func deleteCourse(accessToken: String,
                       userId: Int64,
                       courseId: Int64,
-                      completionHandler: @escaping (MDCourseDeleteResultWithCompletion)) {
+                      completionHandler: @escaping (MDDeleteEntityResultWithCompletion)) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
                                               endpoint: MDAPICourseEndpoint.deleteCourse(accessToken: accessToken,
