@@ -135,6 +135,7 @@
 		227D8F0E26D77A04009CB94B /* MDWordsResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D8F0D26D77A04009CB94B /* MDWordsResultWithCompletion.swift */; };
 		227D8F1026D77A10009CB94B /* MDWordsResultWithoutCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D8F0F26D77A10009CB94B /* MDWordsResultWithoutCompletion.swift */; };
 		227D8F1226D77A9B009CB94B /* UpdateWordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D8F1126D77A9B009CB94B /* UpdateWordRequest.swift */; };
+		227D8F1526D7A4FA009CB94B /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D8F1426D7A4FA009CB94B /* AppSettings.swift */; };
 		227F8AB326CAB0DC00375A38 /* JWTResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F8AB226CAB0DC00375A38 /* JWTResponse.swift */; };
 		228722CC26D0DDC500C9D1BC /* MDUpdateJWTCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722CB26D0DDC500C9D1BC /* MDUpdateJWTCoreDataStorageOperation.swift */; };
 		228722CE26D0DE7500C9D1BC /* MDUpdateJWTMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722CD26D0DE7500C9D1BC /* MDUpdateJWTMemoryStorageOperation.swift */; };
@@ -464,6 +465,7 @@
 		227D8F0D26D77A04009CB94B /* MDWordsResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordsResultWithCompletion.swift; sourceTree = "<group>"; };
 		227D8F0F26D77A10009CB94B /* MDWordsResultWithoutCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordsResultWithoutCompletion.swift; sourceTree = "<group>"; };
 		227D8F1126D77A9B009CB94B /* UpdateWordRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateWordRequest.swift; sourceTree = "<group>"; };
+		227D8F1426D7A4FA009CB94B /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		227F8AB226CAB0DC00375A38 /* JWTResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTResponse.swift; sourceTree = "<group>"; };
 		228722CB26D0DDC500C9D1BC /* MDUpdateJWTCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUpdateJWTCoreDataStorageOperation.swift; sourceTree = "<group>"; };
 		228722CD26D0DE7500C9D1BC /* MDUpdateJWTMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUpdateJWTMemoryStorageOperation.swift; sourceTree = "<group>"; };
@@ -1213,6 +1215,7 @@
 		226FEE7E266B735B0044A5F9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				227D8F1326D7A099009CB94B /* AppSettings */,
 				2223F8A926512C48004F2FE9 /* Extensions */,
 				22B2267F266CC02B007AB292 /* Observable */,
 				226FEE83266B7DF20044A5F9 /* Appearance */,
@@ -1257,6 +1260,14 @@
 				22E2B4D82664E43B00978E62 /* SettingsViewController.swift */,
 			);
 			path = SettingsModule;
+			sourceTree = "<group>";
+		};
+		227D8F1326D7A099009CB94B /* AppSettings */ = {
+			isa = PBXGroup;
+			children = (
+				227D8F1426D7A4FA009CB94B /* AppSettings.swift */,
+			);
+			path = AppSettings;
 			sourceTree = "<group>";
 		};
 		228722CF26D0F16E00C9D1BC /* Manager */ = {
@@ -2385,6 +2396,7 @@
 				22DB2F7A26C3BE7900C1AADA /* CourseListViewController.swift in Sources */,
 				2299016C2668EC3400D8C74E /* AppearanceDataProvider.swift in Sources */,
 				22E2B4E02664E43B00978E62 /* SettingsInteractor.swift in Sources */,
+				227D8F1526D7A4FA009CB94B /* AppSettings.swift in Sources */,
 				22B22693266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift in Sources */,
 				22E2B4EC2664EE1400978E62 /* FillWithModelProtocol.swift in Sources */,
 				220FFE7426C8F83A00702CCE /* MDKeyboardToolbar.swift in Sources */,
