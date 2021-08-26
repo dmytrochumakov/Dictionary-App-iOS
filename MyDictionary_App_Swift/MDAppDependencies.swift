@@ -11,7 +11,7 @@ import Reachability
 
 protocol MDAppDependenciesProtocol {
     
-    var rootWindow: UIWindow! { get }
+    var rootWindow: UIWindow! { get set }
     var reachability: Reachability! { get }
     var operationQueue: OperationQueue! { get }
     var operationQueueService: OperationQueueServiceProtocol! { get }
@@ -28,7 +28,8 @@ protocol MDAppDependenciesProtocol {
     
 }
 
-final class MDAppDependencies: NSObject, MDAppDependenciesProtocol {
+final class MDAppDependencies: NSObject,
+                               MDAppDependenciesProtocol {
     
     var rootWindow: UIWindow!
     var reachability: Reachability!
@@ -44,8 +45,7 @@ final class MDAppDependencies: NSObject, MDAppDependenciesProtocol {
     
     var appSettings: AppSettingsProtocol!
     
-    init(rootWindow: UIWindow!) {
-        self.rootWindow = rootWindow
+    override init() {
         super.init()
         configureDependencies()
     }

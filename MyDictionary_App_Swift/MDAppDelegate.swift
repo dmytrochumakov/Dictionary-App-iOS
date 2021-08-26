@@ -22,8 +22,9 @@ final class MDAppDelegate: UIResponder,
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        self.dependencies = MDAppDependencies.init(rootWindow: rootWindow)
+        self.dependencies = MDAppDependencies.init()
         self.rootWindow = RootWindow.window(isLoggedIn: self.dependencies.appSettings.isLoggedIn)
+        self.dependencies.rootWindow = self.rootWindow
         
         return true
     }

@@ -39,7 +39,8 @@ extension AuthorizationModule {
         let authManager: MDAuthManagerProtocol = MDAuthManager.init(apiAuth: apiAuth,
                                                                     userStorage: Constants.AppDependencies.dependencies.userStorage,
                                                                     jwtStorage: Constants.AppDependencies.dependencies.jwtStorage,
-                                                                    keychainService: Constants.AppDependencies.dependencies.keychainService)
+                                                                    keychainService: Constants.AppDependencies.dependencies.keychainService,
+                                                                    appSettings: Constants.AppDependencies.dependencies.appSettings)
         
         let interactor: AuthorizationInteractorProtocol = AuthorizationInteractor.init(dataManager: dataManager,
                                                                                        authValidation: authValidation,
