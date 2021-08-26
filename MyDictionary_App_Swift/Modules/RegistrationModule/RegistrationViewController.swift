@@ -17,6 +17,7 @@ final class RegistrationViewController: UIViewController {
     fileprivate let nicknameTextField: MDTextFieldWithToolBar = {
         let textField: MDTextFieldWithToolBar = .init(keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.nickname.localized
+        textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.textAlignment = .center
         textField.clearButtonMode = .whileEditing
@@ -40,6 +41,7 @@ final class RegistrationViewController: UIViewController {
     fileprivate let passwordTextField: MDTextFieldWithToolBar = {
         let textField: MDTextFieldWithToolBar = .init(keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.password.localized
+        textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.textAlignment = .center
         textField.clearButtonMode = .whileEditing
