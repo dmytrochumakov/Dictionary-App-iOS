@@ -14,11 +14,14 @@ final class MDWordMemoryStorage_Tests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
+        
         let operationQueue: OperationQueue = .init()
+        
         let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
-        let arrayWords: [WordEntity] = []
+        
         let wordMemoryStorage: MDWordMemoryStorageProtocol = MDWordMemoryStorage.init(operationQueueService: operationQueueService,
-                                                                                      arrayWords: arrayWords)
+                                                                                      arrayWords: .init())
+        
         self.wordMemoryStorage = wordMemoryStorage
     }
     

@@ -61,8 +61,7 @@ extension MDCourseStorage_Tests {
                     XCTAssertTrue(createdCourseEntity.courseId == Constants_For_Tests.mockedCourse.courseId)
                     XCTAssertTrue(createdCourseEntity.languageId == Constants_For_Tests.mockedCourse.languageId)
                     XCTAssertTrue(createdCourseEntity.languageName == Constants_For_Tests.mockedCourse.languageName)
-                    XCTAssertTrue(createdCourseEntity.createdAt == Constants_For_Tests.mockedCourse.createdAt)
-                    XCTAssertTrue(createdCourseEntity.updatedAt == Constants_For_Tests.mockedCourse.updatedAt)
+                    XCTAssertTrue(createdCourseEntity.createdAt == Constants_For_Tests.mockedCourse.createdAt)                    
                     
                     if (resultCount == createResults.count) {
                         expectation.fulfill()
@@ -110,8 +109,7 @@ extension MDCourseStorage_Tests {
                             XCTAssertTrue(readCourseEntity.courseId == createCourseEntity.courseId)
                             XCTAssertTrue(readCourseEntity.languageId == createCourseEntity.languageId)
                             XCTAssertTrue(readCourseEntity.languageName == createCourseEntity.languageName)
-                            XCTAssertTrue(readCourseEntity.createdAt == createCourseEntity.createdAt)
-                            XCTAssertTrue(readCourseEntity.updatedAt == createCourseEntity.updatedAt)
+                            XCTAssertTrue(readCourseEntity.createdAt == createCourseEntity.createdAt)                            
                             
                             if (resultCount == readResults.count) {
                                 expectation.fulfill()

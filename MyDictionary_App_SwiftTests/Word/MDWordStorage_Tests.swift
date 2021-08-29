@@ -59,8 +59,7 @@ extension MDWordStorage_Tests {
                     XCTAssertTrue(createdWord.courseId == Constants_For_Tests.mockedWord0.courseId)
                     XCTAssertTrue(createdWord.languageId == Constants_For_Tests.mockedWord0.languageId)
                     XCTAssertTrue(createdWord.languageName == Constants_For_Tests.mockedWord0.languageName)
-                    XCTAssertTrue(createdWord.createdAt == Constants_For_Tests.mockedWord0.createdAt)
-                    XCTAssertTrue(createdWord.updatedAt == Constants_For_Tests.mockedWord0.updatedAt)
+                    XCTAssertTrue(createdWord.createdAt == Constants_For_Tests.mockedWord0.createdAt)                    
                     
                     if (resultCount == createResults.count) {
                         expectation.fulfill()
@@ -105,8 +104,7 @@ extension MDWordStorage_Tests {
                             XCTAssertTrue(readWord.wordText == createdWord.wordText)
                             XCTAssertTrue(readWord.wordDescription == createdWord.wordDescription)
                             XCTAssertTrue(readWord.languageName == createdWord.languageName)
-                            XCTAssertTrue(readWord.createdAt == createdWord.createdAt)
-                            XCTAssertTrue(readWord.updatedAt == createdWord.updatedAt)
+                            XCTAssertTrue(readWord.createdAt == createdWord.createdAt)                            
                             
                             if (resultCount == readResults.count) {
                                 expectation.fulfill()

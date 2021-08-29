@@ -61,7 +61,6 @@ extension MDUserStorage_Tests {
                     XCTAssertTrue(createdUser.nickname == Constants_For_Tests.mockedUser.nickname)
                     XCTAssertTrue(createdUser.password == Constants_For_Tests.mockedUser.password)
                     XCTAssertTrue(createdUser.createdAt == Constants_For_Tests.mockedUser.createdAt)
-                    XCTAssertTrue(createdUser.updatedAt == Constants_For_Tests.mockedUser.updatedAt)
                     
                     if (resultCount == createResults.count) {
                         expectation.fulfill()
@@ -105,8 +104,7 @@ extension MDUserStorage_Tests {
                             XCTAssertTrue(createdUser.userId == readUser.userId)
                             XCTAssertTrue(createdUser.nickname == readUser.nickname)
                             XCTAssertTrue(createdUser.password == readUser.password)
-                            XCTAssertTrue(createdUser.createdAt == readUser.createdAt)
-                            XCTAssertTrue(createdUser.updatedAt == readUser.updatedAt)
+                            XCTAssertTrue(createdUser.createdAt == readUser.createdAt)                            
                             
                             if (resultCount == readResults.count) {
                                 expectation.fulfill()

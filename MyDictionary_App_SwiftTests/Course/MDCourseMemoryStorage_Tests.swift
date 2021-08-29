@@ -44,7 +44,7 @@ extension MDCourseMemoryStorage_Tests {
                 XCTAssertTrue(courseEntity.languageId == Constants_For_Tests.mockedCourse.languageId)
                 XCTAssertTrue(courseEntity.languageName == Constants_For_Tests.mockedCourse.languageName)
                 XCTAssertTrue(courseEntity.createdAt == Constants_For_Tests.mockedCourse.createdAt)
-                XCTAssertTrue(courseEntity.updatedAt == Constants_For_Tests.mockedCourse.updatedAt)
+                
                 expectation.fulfill()
                 
             case .failure:
@@ -79,7 +79,7 @@ extension MDCourseMemoryStorage_Tests {
                         XCTAssertTrue(readCourseEntity.languageId == createCourseEntity.languageId)
                         XCTAssertTrue(readCourseEntity.languageName == createCourseEntity.languageName)
                         XCTAssertTrue(readCourseEntity.createdAt == createCourseEntity.createdAt)
-                        XCTAssertTrue(readCourseEntity.updatedAt == createCourseEntity.updatedAt)
+                        
                         expectation.fulfill()
                         
                     case .failure:

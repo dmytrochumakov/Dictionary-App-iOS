@@ -12,31 +12,28 @@ struct Constants_For_Tests {
     
     public static let testExpectationTimeout: TimeInterval = 20.0
     
-    public static let mockedWord0: WordEntity = .init(userId: .init(),
-                                                      wordId: .init(),
-                                                      courseId: .init(),
-                                                      languageId: .init(),
-                                                      wordText: "MOSF",
-                                                      wordDescription: "metal–oxide–semiconductor-field",
-                                                      languageName: "English",
-                                                      createdAt: .init(),
-                                                      updatedAt: .init())
+    public static let mockedWord0: WordResponse = .init(userId: .init(),
+                                                        wordId: .init(),
+                                                        courseId: .init(),
+                                                        languageId: .init(),
+                                                        wordText: "MOSF",
+                                                        wordDescription: "metal–oxide–semiconductor-field",
+                                                        languageName: "English",
+                                                        createdAt: .init())
     
-    public static let mockedWordForUpdate: WordEntity = .init(userId: .init(),
-                                                              wordId: .init(),
-                                                              courseId: .init(),
-                                                              languageId: .init(),
-                                                              wordText: "MOSFC",
-                                                              wordDescription: "metal–oxide–semiconductor-field-c",
-                                                              languageName: "English",
-                                                              createdAt: .init(),
-                                                              updatedAt: .init())
+    public static let mockedWordForUpdate: WordResponse = .init(userId: .init(),
+                                                                wordId: .init(),
+                                                                courseId: .init(),
+                                                                languageId: .init(),
+                                                                wordText: "MOSFC",
+                                                                wordDescription: "metal–oxide–semiconductor-field-c",
+                                                                languageName: "English",
+                                                                createdAt: .init())
     
-    public static let mockedUser: UserEntity = .init(userId: 0,
-                                                     nickname: "Test nickname",
-                                                     password: "test password",
-                                                     createdAt: "2021-08-15T10:34:33.998Z",
-                                                     updatedAt: "2021-08-15T10:34:33.998Z")
+    public static let mockedUser: UserResponse = .init(userId: 0,
+                                                       nickname: "Test nickname",
+                                                       password: "test password",
+                                                       createdAt: "2021-08-15T10:34:33.998Z")
     
     public static let mockedJWT: JWTResponse = .init(accessToken: "asdas;dka;sld;akdkasd;laskld;al",
                                                      expirationDate: "2021-08-15T11:34:33.998Z")
@@ -44,19 +41,16 @@ struct Constants_For_Tests {
     public static let mockedJWTForUpdate: JWTResponse = .init(accessToken: "updated asdas;dka;sld;akdkasd;laskld;al",
                                                               expirationDate: "2021-08-15T13:34:33.998Z")
     
-    public static let mockedLanguages: [LanguageEntity] = [.init(languageId: 0,
-                                                                 languageName: "English",
-                                                                 createdAt: "2021-08-15T13:34:33.998Z"),
-                                                           .init(languageId: 1,
-                                                                 languageName: "Spanish",
-                                                                 createdAt: "2021-08-15T13:34:33.999Z")
+    public static let mockedLanguages: [LanguageResponse] = [.init(languageId: 0,
+                                                                   languageName: "English"),
+                                                             .init(languageId: 1,
+                                                                   languageName: "Spanish")
     ]
     
-    public static let mockedCourse: CourseEntity = .init(userId: 0,
-                                                         courseId: 0,
-                                                         languageId: 0,
-                                                         languageName: "English",
-                                                         createdAt: "2021-08-16T13:35:33.999Z",
-                                                         updatedAt: "2021-08-16T13:35:33.999Z")
+    public static let mockedCourse: CourseResponse = .init(userId: 0,
+                                                           courseId: 0,
+                                                           languageId: 0,
+                                                           languageName: "English",
+                                                           createdAt: "2021-08-16T13:35:33.999Z")
     
 }

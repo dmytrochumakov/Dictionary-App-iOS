@@ -46,7 +46,7 @@ extension MDUserCoreDataStorage_Tests {
                 XCTAssertTrue(createdUser.nickname == Constants_For_Tests.mockedUser.nickname)
                 XCTAssertTrue(createdUser.password == Constants_For_Tests.mockedUser.password)
                 XCTAssertTrue(createdUser.createdAt == Constants_For_Tests.mockedUser.createdAt)
-                XCTAssertTrue(createdUser.updatedAt == Constants_For_Tests.mockedUser.updatedAt)
+                
                 expectation.fulfill()
                 
             case .failure:
@@ -79,7 +79,7 @@ extension MDUserCoreDataStorage_Tests {
                         XCTAssertTrue(createdUser.nickname == readUser.nickname)
                         XCTAssertTrue(createdUser.password == readUser.password)
                         XCTAssertTrue(createdUser.createdAt == readUser.createdAt)
-                        XCTAssertTrue(createdUser.updatedAt == readUser.updatedAt)
+                        
                         expectation.fulfill()
                         
                     case .failure:
