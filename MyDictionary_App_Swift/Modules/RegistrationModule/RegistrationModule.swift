@@ -38,8 +38,7 @@ extension RegistrationModule {
         
         let authManager: MDAuthManagerProtocol = MDAuthManager.init(apiAuth: apiAuth,
                                                                     userStorage: Constants.AppDependencies.dependencies.userStorage,
-                                                                    jwtStorage: Constants.AppDependencies.dependencies.jwtStorage,
-                                                                    keychainService: Constants.AppDependencies.dependencies.keychainService,
+                                                                    jwtStorage: Constants.AppDependencies.dependencies.jwtStorage,                                                                    
                                                                     appSettings: Constants.AppDependencies.dependencies.appSettings)
         
         let interactor: RegistrationInteractorProtocol = RegistrationInteractor.init(dataManager: dataManager,

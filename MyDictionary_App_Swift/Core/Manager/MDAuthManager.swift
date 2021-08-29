@@ -17,19 +17,16 @@ final class MDAuthManager: MDAuthManagerProtocol {
     fileprivate let apiAuth: MDAPIAuthProtocol
     fileprivate let userStorage: MDUserStorageProtocol
     fileprivate let jwtStorage: MDJWTStorageProtocol
-    fileprivate let keychainService: KeychainService
     fileprivate let appSettings: AppSettingsProtocol
     
     init(apiAuth: MDAPIAuthProtocol,
          userStorage: MDUserStorageProtocol,
          jwtStorage: MDJWTStorageProtocol,
-         keychainService: KeychainService,
          appSettings: AppSettingsProtocol) {
         
         self.apiAuth = apiAuth
         self.userStorage = userStorage
         self.jwtStorage = jwtStorage
-        self.keychainService = keychainService
         self.appSettings = appSettings
         
     }
@@ -127,10 +124,7 @@ fileprivate extension MDAuthManager {
         }
         
         // Pass Result
-        dispatchGroup.notify(queue: .main) {
-            // Save Password In Keychain
-            self.savePassword(authRequest: authRequest)
-            //
+        dispatchGroup.notify(queue: .main) {            
             // Set Is Logged In Into True
             self.setIsLoggedInIntoTrue()
             //
@@ -193,16 +187,7 @@ fileprivate extension MDAuthManager {
         }
         
     }
-    
-    func savePassword(authRequest: AuthRequest) {
         
-        keychainService.deletePassword(for: authRequest.nickname)
-        
-        keychainService.savePassword(authRequest.password,
-                                     for: authRequest.nickname)
-        
-    }
-    
     func setIsLoggedInIntoTrue() {
         appSettings.setIsLoggedIn(true)
     }

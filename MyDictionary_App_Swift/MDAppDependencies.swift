@@ -16,7 +16,6 @@ protocol MDAppDependenciesProtocol {
     var operationQueue: OperationQueue! { get }
     var operationQueueService: OperationQueueServiceProtocol! { get }
     var coreDataStack: CoreDataStack! { get }
-    var keychainService: KeychainService! { get }
     
     // Storage //
     var wordStorage: MDWordStorageProtocol! { get }
@@ -36,7 +35,7 @@ final class MDAppDependencies: NSObject,
     var operationQueue: OperationQueue!
     var operationQueueService: OperationQueueServiceProtocol!
     var coreDataStack: CoreDataStack!
-    var keychainService: KeychainService!
+    
     // Storage //
     var wordStorage: MDWordStorageProtocol!
     var userStorage: MDUserStorageProtocol!
@@ -70,10 +69,7 @@ extension MDAppDependencies {
         self.operationQueueService = operationQueueService
         //
         let coreDataStack: CoreDataStack = .init()
-        self.coreDataStack = coreDataStack
-        //
-        let keychainService: KeychainService = .init()
-        self.keychainService = keychainService
+        self.coreDataStack = coreDataStack        
         //
         // Storage //
         // Word //

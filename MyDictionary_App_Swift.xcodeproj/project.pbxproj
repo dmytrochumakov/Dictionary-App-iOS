@@ -241,7 +241,6 @@
 		22C5863F26C7AFB80030B12D /* RegistrationDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5863826C7AFB80030B12D /* RegistrationDataProvider.swift */; };
 		22C5864026C7AFB80030B12D /* RegistrationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5863926C7AFB80030B12D /* RegistrationDataManager.swift */; };
 		22C5864226C7B7AE0030B12D /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5864126C7B7AE0030B12D /* UserResponse.swift */; };
-		22C5864C26C7E1040030B12D /* KeychainService_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5864B26C7E1040030B12D /* KeychainService_Tests.swift */; };
 		22CA087D26515E810052D169 /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA087C26515E810052D169 /* WordListViewController.swift */; };
 		22CA087F26515ED90052D169 /* WordListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA087E26515ED90052D169 /* WordListInteractor.swift */; };
 		22CA088126515EEB0052D169 /* WordListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088026515EEB0052D169 /* WordListPresenter.swift */; };
@@ -576,7 +575,6 @@
 		22C5863826C7AFB80030B12D /* RegistrationDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDataProvider.swift; sourceTree = "<group>"; };
 		22C5863926C7AFB80030B12D /* RegistrationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDataManager.swift; sourceTree = "<group>"; };
 		22C5864126C7B7AE0030B12D /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
-		22C5864B26C7E1040030B12D /* KeychainService_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService_Tests.swift; sourceTree = "<group>"; };
 		22CA087C26515E810052D169 /* WordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListViewController.swift; sourceTree = "<group>"; };
 		22CA087E26515ED90052D169 /* WordListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListInteractor.swift; sourceTree = "<group>"; };
 		22CA088026515EEB0052D169 /* WordListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListPresenter.swift; sourceTree = "<group>"; };
@@ -1433,7 +1431,6 @@
 				2294D6C426A2F5DC0066BE77 /* Constants_For_Tests.swift */,
 				22493C3426971726000DA480 /* TestCoreDataStack.swift */,
 				22EF01E0269D97C800FE4435 /* OperationQueueService_Tests.swift */,
-				22C5864B26C7E1040030B12D /* KeychainService_Tests.swift */,
 				228BC453264979FF0030FB30 /* Info.plist */,
 			);
 			path = MyDictionary_App_SwiftTests;
@@ -2543,7 +2540,6 @@
 				22493C5826974F4C000DA480 /* MDWordCoreDataStorage_Tests.swift in Sources */,
 				2258546426CA6A2F00368354 /* MDJWTStorage_Tests.swift in Sources */,
 				220FFEB326C91F6600702CCE /* MDUserCoreDataStorage_Tests.swift in Sources */,
-				22C5864C26C7E1040030B12D /* KeychainService_Tests.swift in Sources */,
 				2258921F26CA393F00AD6F18 /* MDJWTCoreDataStorage_Tests.swift in Sources */,
 				22493C3526971726000DA480 /* TestCoreDataStack.swift in Sources */,
 				22B8E6B726D3917C001CCCA8 /* MDLanguageMemoryStorage_Tests.swift in Sources */,
