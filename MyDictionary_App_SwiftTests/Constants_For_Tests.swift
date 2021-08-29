@@ -32,8 +32,9 @@ struct Constants_For_Tests {
     
     public static let mockedUser: UserResponse = .init(userId: 0,
                                                        nickname: "Test nickname",
-                                                       password: "test password",
                                                        createdAt: "2021-08-15T10:34:33.998Z")
+    
+    public static let mockedUserPassword: String = "mockedUserPassword"
     
     public static let mockedJWT: JWTResponse = .init(accessToken: "asdas;dka;sld;akdkasd;laskld;al",
                                                      expirationDate: "2021-08-15T11:34:33.998Z")

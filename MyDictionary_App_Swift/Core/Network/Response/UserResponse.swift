@@ -12,7 +12,7 @@ struct UserResponse {
     
     let userId: Int64
     let nickname: String
-    let password: String
+    var password: String?
     // Date Format: - "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
     let createdAt: String
     
@@ -28,8 +28,10 @@ struct UserResponse {
 
 extension UserResponse {
     
-    func cdUserResponseEntity(insertIntoManagedObjectContext: NSManagedObjectContext) -> CDUserResponseEntity {
+    func cdUserResponseEntity(password: String,
+                              insertIntoManagedObjectContext: NSManagedObjectContext) -> CDUserResponseEntity {
         return .init(userResponse: self,
+                     password: password,
                      insertIntoManagedObjectContext: insertIntoManagedObjectContext)
     }
     
@@ -40,7 +42,6 @@ extension UserResponse: Decodable {
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
         case nickname = "nickname"
-        case password = "password"
         case createdAt = "created_at"
     }
     
@@ -48,7 +49,6 @@ extension UserResponse: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.userId = try container.decode(Int64.self, forKey: .userId)
         self.nickname = try container.decode(String.self, forKey: .nickname)
-        self.password = try container.decode(String.self, forKey: .password)
         self.createdAt = try container.decode(String.self, forKey: .createdAt)
     }
     

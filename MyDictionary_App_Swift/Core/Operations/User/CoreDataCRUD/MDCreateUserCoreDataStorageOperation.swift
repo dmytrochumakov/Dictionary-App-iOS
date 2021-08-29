@@ -12,16 +12,19 @@ final class MDCreateUserCoreDataStorageOperation: MDOperation {
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDUserCoreDataStorage
     fileprivate let userEntity: UserResponse
+    fileprivate let password: String
     fileprivate let result: MDEntityResult<UserResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDUserCoreDataStorage,
          userEntity: UserResponse,
+         password: String,
          result: MDEntityResult<UserResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage
         self.userEntity = userEntity
+        self.password = password
         self.result = result
         
         super.init()
@@ -30,6 +33,7 @@ final class MDCreateUserCoreDataStorageOperation: MDOperation {
     override func main() {
         
         let newUser = CDUserResponseEntity.init(userResponse: self.userEntity,
+                                                password: password,
                                                 insertIntoManagedObjectContext: self.managedObjectContext)
         
         self.coreDataStorage.save(userId: newUser.userId) { [weak self] result in

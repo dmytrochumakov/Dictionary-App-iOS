@@ -10,21 +10,25 @@ import Foundation
 final class MDCreateUserMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDUserMemoryStorage
-    fileprivate let userEntity: UserResponse
+    fileprivate var userEntity: UserResponse
+    fileprivate let password: String
     fileprivate let result: MDEntityResult<UserResponse>?
     
     init(memoryStorage: MDUserMemoryStorage,
          userEntity: UserResponse,
+         password: String,
          result: MDEntityResult<UserResponse>?) {
         
         self.memoryStorage = memoryStorage
         self.userEntity = userEntity
+        self.password = password
         self.result = result
         
         super.init()
     }
     
     override func main() {
+        self.userEntity.password = self.password
         self.memoryStorage.userEntity = self.userEntity
         self.result?(.success(self.userEntity))
         self.finish()

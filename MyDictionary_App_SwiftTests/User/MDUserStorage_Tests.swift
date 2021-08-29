@@ -47,7 +47,9 @@ extension MDUserStorage_Tests {
         
         var resultCount: Int = .zero
         
-        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { createResults in
+        userStorage.createUser(Constants_For_Tests.mockedUser,
+                               password: Constants_For_Tests.mockedUserPassword,
+                               storageType: storageType) { createResults in
             
             createResults.forEach { createResult in
                 
@@ -59,7 +61,7 @@ extension MDUserStorage_Tests {
                     
                     XCTAssertTrue(createdUser.userId == Constants_For_Tests.mockedUser.userId)
                     XCTAssertTrue(createdUser.nickname == Constants_For_Tests.mockedUser.nickname)
-                    XCTAssertTrue(createdUser.password == Constants_For_Tests.mockedUser.password)
+                    XCTAssertTrue(createdUser.password == Constants_For_Tests.mockedUserPassword)
                     XCTAssertTrue(createdUser.createdAt == Constants_For_Tests.mockedUser.createdAt)
                     
                     if (resultCount == createResults.count) {
@@ -85,7 +87,9 @@ extension MDUserStorage_Tests {
         
         var resultCount: Int = .zero
         
-        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] createResults in
+        userStorage.createUser(Constants_For_Tests.mockedUser,
+                               password: Constants_For_Tests.mockedUserPassword,
+                               storageType: storageType) { [unowned self] createResults in
             
             switch createResults.first!.result {
             
@@ -135,7 +139,9 @@ extension MDUserStorage_Tests {
         
         var resultCount: Int = .zero
         
-        userStorage.createUser(Constants_For_Tests.mockedUser, storageType: storageType) { [unowned self] createResults in
+        userStorage.createUser(Constants_For_Tests.mockedUser,
+                               password: Constants_For_Tests.mockedUserPassword,
+                               storageType: storageType) { [unowned self] createResults in
             
             switch createResults.first!.result {
             

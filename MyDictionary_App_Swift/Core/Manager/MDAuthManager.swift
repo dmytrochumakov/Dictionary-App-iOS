@@ -92,7 +92,8 @@ fileprivate extension MDAuthManager {
         
         // Save User
         dispatchGroup.enter()
-        self.saveUser(userEntity: authResponse.userEntity) { (saveUserResult) in
+        self.saveUser(userEntity: authResponse.userEntity,
+                      password: authRequest.password) { (saveUserResult) in
             
             switch saveUserResult {
             
@@ -133,11 +134,15 @@ fileprivate extension MDAuthManager {
         
     }
     
-    func saveUser(userEntity: UserResponse, completionHandler: @escaping(MDUserResultWithCompletion)) {
+    func saveUser(userEntity: UserResponse,
+                  password: String,
+                  completionHandler: @escaping(MDUserResultWithCompletion)) {
         
         var userResults: [MDStorageType : UserResponse] = [ : ]
         
-        self.userStorage.createUser(userEntity, storageType: .all) { (createUserResults) in
+        self.userStorage.createUser(userEntity,
+                                    password: password,
+                                    storageType: .all) { (createUserResults) in
             
             createUserResults.forEach { createUserResult in
                 
@@ -187,7 +192,7 @@ fileprivate extension MDAuthManager {
         }
         
     }
-        
+    
     func setIsLoggedInIntoTrue() {
         appSettings.setIsLoggedIn(true)
     }

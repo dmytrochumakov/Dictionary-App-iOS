@@ -66,10 +66,13 @@ extension MDUserCoreDataStorage {
 // MARK: - Create
 extension MDUserCoreDataStorage {
     
-    func createUser(_ userEntity: UserResponse, _ completionHandler: @escaping (MDEntityResult<UserResponse>)) {
+    func createUser(_ userEntity: UserResponse,
+                    password: String,
+                    _ completionHandler: @escaping(MDEntityResult<UserResponse>)) {
         let operation = MDCreateUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                   coreDataStorage: self,
-                                                                  userEntity: userEntity) { result in
+                                                                  userEntity: userEntity,
+                                                                  password: password) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
@@ -80,7 +83,8 @@ extension MDUserCoreDataStorage {
 // MARK: - Read
 extension MDUserCoreDataStorage {
     
-    func readUser(fromUserID userId: Int64, _ completionHandler: @escaping (MDEntityResult<UserResponse>)) {
+    func readUser(fromUserID userId: Int64,
+                  _ completionHandler: @escaping(MDEntityResult<UserResponse>)) {
         let operation = MDReadUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                 coreDataStorage: self,
                                                                 userId: userId) { result in
@@ -89,7 +93,7 @@ extension MDUserCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readAllUsers(_ completionHandler: @escaping (MDEntitiesResult<UserResponse>)) {
+    func readAllUsers(_ completionHandler: @escaping(MDEntitiesResult<UserResponse>)) {
         let operation = MDReadUsersCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                  coreDataStorage: self) { result in
             completionHandler(result)
@@ -108,7 +112,8 @@ extension MDUserCoreDataStorage {
 // MARK: - Delete
 extension MDUserCoreDataStorage {
     
-    func deleteUser(_ userEntity: UserResponse, _ completionHandler: @escaping (MDEntityResult<UserResponse>)) {
+    func deleteUser(_ userEntity: UserResponse,
+                    _ completionHandler: @escaping(MDEntityResult<UserResponse>)) {
         let operation = MDDeleteUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                   coreDataStorage: self,
                                                                   userEntity: userEntity) { result in

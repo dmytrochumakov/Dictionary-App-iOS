@@ -10,6 +10,7 @@ import Foundation
 protocol MDUserStorageProtocol: MDStorageProtocol {
     
     func createUser(_ userEntity: UserResponse,
+                    password: String,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>))
     
@@ -48,19 +49,22 @@ final class MDUserStorage: MDStorage, MDUserStorageProtocol {
 // MARK: - CRUD
 extension MDUserStorage {
     
-    func createUser(_ userEntity: UserResponse, storageType: MDStorageType, _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
+    func createUser(_ userEntity: UserResponse,
+                    password: String,
+                    storageType: MDStorageType,
+                    _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
         
         switch storageType {
         
         case .memory:
             
-            memoryStorage.createUser(userEntity) { (result) in
+            memoryStorage.createUser(userEntity, password: password) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .coreData:
             
-            coreDataStorage.createUser(userEntity) { (result) in
+            coreDataStorage.createUser(userEntity, password: password) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
@@ -75,7 +79,7 @@ extension MDUserStorage {
             // Create in Memory
             // Dispatch Group Enter
             dispatchGroup.enter()
-            memoryStorage.createUser(userEntity) { result in
+            memoryStorage.createUser(userEntity, password: password) { result in
                 
                 // Append Result
                 finalResult.append(.init(storageType: .memory, result: result))
@@ -87,7 +91,7 @@ extension MDUserStorage {
             // Create in Core Data
             // Dispatch Group Enter
             dispatchGroup.enter()
-            coreDataStorage.createUser(userEntity) { result in
+            coreDataStorage.createUser(userEntity, password: password) { result in
                 
                 // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))
@@ -104,7 +108,9 @@ extension MDUserStorage {
         }
     }
     
-    func readUser(fromUserID userId: Int64, storageType: MDStorageType, _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
+    func readUser(fromUserID userId: Int64,
+                  storageType: MDStorageType,
+                  _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
         
         switch storageType {
         
@@ -161,7 +167,9 @@ extension MDUserStorage {
         
     }
     
-    func deleteUser(_ userEntity: UserResponse, storageType: MDStorageType, _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
+    func deleteUser(_ userEntity: UserResponse,
+                    storageType: MDStorageType,
+                    _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
         
         switch storageType {
         

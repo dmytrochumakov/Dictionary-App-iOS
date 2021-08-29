@@ -36,7 +36,8 @@ extension MDUserCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Create User Expectation")
         
-        userCoreDataStorage.createUser(Constants_For_Tests.mockedUser) { result in
+        userCoreDataStorage.createUser(Constants_For_Tests.mockedUser,
+                                       password: Constants_For_Tests.mockedUserPassword) { result in
             
             switch result {
             
@@ -44,7 +45,7 @@ extension MDUserCoreDataStorage_Tests {
                 
                 XCTAssertTrue(createdUser.userId == Constants_For_Tests.mockedUser.userId)
                 XCTAssertTrue(createdUser.nickname == Constants_For_Tests.mockedUser.nickname)
-                XCTAssertTrue(createdUser.password == Constants_For_Tests.mockedUser.password)
+                XCTAssertTrue(createdUser.password == Constants_For_Tests.mockedUserPassword)
                 XCTAssertTrue(createdUser.createdAt == Constants_For_Tests.mockedUser.createdAt)
                 
                 expectation.fulfill()
@@ -63,7 +64,8 @@ extension MDUserCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Read User Expectation")
         
-        userCoreDataStorage.createUser(Constants_For_Tests.mockedUser) { [unowned self] createResult in
+        userCoreDataStorage.createUser(Constants_For_Tests.mockedUser,
+                                       password: Constants_For_Tests.mockedUserPassword) { [unowned self] createResult in
             
             switch createResult {
             
@@ -101,7 +103,8 @@ extension MDUserCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Delete User Expectation")
         
-        userCoreDataStorage.createUser(Constants_For_Tests.mockedUser) { [unowned self] createResult in
+        userCoreDataStorage.createUser(Constants_For_Tests.mockedUser,
+                                       password: Constants_For_Tests.mockedUserPassword) { [unowned self] createResult in
             
             switch createResult {
             

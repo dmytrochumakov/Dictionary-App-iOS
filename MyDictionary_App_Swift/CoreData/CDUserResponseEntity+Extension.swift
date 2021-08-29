@@ -10,6 +10,7 @@ import CoreData
 extension CDUserResponseEntity {
     
     convenience init(userResponse: UserResponse,
+                     password: String,
                      insertIntoManagedObjectContext context: NSManagedObjectContext!) {
         
         let entity = NSEntityDescription.entity(forEntityName: CoreDataEntityName.CDUserResponseEntity, in: context)!
@@ -17,7 +18,7 @@ extension CDUserResponseEntity {
         
         self.userId = userResponse.userId
         self.nickname = userResponse.nickname
-        self.password = userResponse.password
+        self.password = password
         self.createdAt = userResponse.createdAt
         
     }
