@@ -10,7 +10,7 @@ import Foundation
 protocol MDLanguageStorageProtocol: MDStorageProtocol {
     
     func createLanguages(storageType: MDStorageType,
-                         languageEntities: [LanguageEntity],
+                         languageEntities: [LanguageResponse],
                          _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDLanguageResultsWithoutCompletion>))
     
     func readAllLanguages(storageType: MDStorageType,
@@ -47,7 +47,7 @@ final class MDLanguageStorage: MDStorage, MDLanguageStorageProtocol {
 extension MDLanguageStorage {       
     
     func createLanguages(storageType: MDStorageType,
-                         languageEntities: [LanguageEntity],
+                         languageEntities: [LanguageResponse],
                          _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDLanguageResultsWithoutCompletion>)) {
         
         switch storageType {

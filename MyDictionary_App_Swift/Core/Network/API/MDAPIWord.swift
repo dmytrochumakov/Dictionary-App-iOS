@@ -181,7 +181,7 @@ extension MDAPIWord {
                 debugPrint(#function, Self.self, "dataCount: ", data.count)
                 
                 do {
-                    completionHandler(.success(try JSONDecoder.init().decode(WordEntity.self, from: data)))
+                    completionHandler(.success(try JSONDecoder.init().decode(WordResponse.self, from: data)))
                 } catch (_) {
                     completionHandler(.failure(MDAPIError.parseError))
                 }
@@ -218,7 +218,7 @@ extension MDAPIWord {
                 debugPrint(#function, Self.self, "dataCount: ", data.count)
                 
                 do {
-                    completionHandler(.success(try JSONDecoder.init().decode([WordEntity].self, from: data)))
+                    completionHandler(.success(try JSONDecoder.init().decode([WordResponse].self, from: data)))
                 } catch (_) {
                     completionHandler(.failure(MDAPIError.parseError))
                 }
@@ -257,7 +257,7 @@ extension MDAPIWord {
                 debugPrint(#function, Self.self, "dataCount: ", data.count)
                 
                 do {
-                    completionHandler(.success(try JSONDecoder.init().decode(WordEntity.self, from: data)))
+                    completionHandler(.success(try JSONDecoder.init().decode(WordResponse.self, from: data)))
                 } catch (_) {
                     completionHandler(.failure(MDAPIError.parseError))
                 }

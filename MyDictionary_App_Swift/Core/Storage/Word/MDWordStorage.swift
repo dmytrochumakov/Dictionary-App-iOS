@@ -9,7 +9,7 @@ import Foundation
 
 protocol MDWordStorageProtocol: MDStorageProtocol {
     
-    func createWord(_ wordModel: WordEntity,
+    func createWord(_ wordModel: WordResponse,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
     
@@ -23,7 +23,7 @@ protocol MDWordStorageProtocol: MDStorageProtocol {
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
     
-    func deleteWord(_ word: WordEntity,
+    func deleteWord(_ word: WordResponse,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
     
@@ -57,7 +57,7 @@ final class MDWordStorage: MDStorage, MDWordStorageProtocol {
 // MARK: - CRUD
 extension MDWordStorage {
     
-    func createWord(_ wordModel: WordEntity,
+    func createWord(_ wordModel: WordResponse,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>)) {
         
@@ -246,7 +246,7 @@ extension MDWordStorage {
         
     }
     
-    func deleteWord(_ word: WordEntity,
+    func deleteWord(_ word: WordResponse,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>)) {
         

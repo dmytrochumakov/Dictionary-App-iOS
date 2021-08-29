@@ -7,4 +7,4 @@
 
 import Foundation
 
-typealias MDWordsResultWithoutCompletion = (Result<[WordEntity], Error>)
+typealias MDWordsResultWithoutCompletion = (Result<[WordResponse], Error>)

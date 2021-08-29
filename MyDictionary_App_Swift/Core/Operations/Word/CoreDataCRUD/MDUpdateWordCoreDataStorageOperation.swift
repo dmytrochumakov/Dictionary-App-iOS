@@ -15,14 +15,14 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
     fileprivate let wordId: Int64
     fileprivate let newWordText: String
     fileprivate let newWordDescription: String
-    fileprivate let result: MDEntityResult<WordEntity>?
+    fileprivate let result: MDEntityResult<WordResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
          wordId: Int64,
          newWordText: String,
          newWordDescription: String,
-         result: MDEntityResult<WordEntity>?) {
+         result: MDEntityResult<WordResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.wordStorage = wordStorage
@@ -36,13 +36,13 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        let batchUpdateRequest = NSBatchUpdateRequest(entityName: CoreDataEntityName.CDWordEntity)
+        let batchUpdateRequest = NSBatchUpdateRequest(entityName: CoreDataEntityName.CDWordResponseEntity)
         
-        batchUpdateRequest.propertiesToUpdate = [CDWordEntityAttributeName.wordText : self.newWordText,
-                                                 CDWordEntityAttributeName.wordDescription : self.newWordDescription
+        batchUpdateRequest.propertiesToUpdate = [CDWordResponseEntityAttributeName.wordText : self.newWordText,
+                                                 CDWordResponseEntityAttributeName.wordDescription : self.newWordDescription
         ]
         
-        batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.wordId) == %i", self.wordId)
+        batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordResponseEntityAttributeName.wordId) == %i", self.wordId)
         
         do {
             

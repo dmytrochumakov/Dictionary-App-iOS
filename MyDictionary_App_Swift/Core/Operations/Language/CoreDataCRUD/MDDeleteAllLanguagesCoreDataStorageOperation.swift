@@ -26,7 +26,7 @@ final class MDDeleteAllLanguagesCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDLanguageEntity)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDLanguageResponseEntity)
         
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         

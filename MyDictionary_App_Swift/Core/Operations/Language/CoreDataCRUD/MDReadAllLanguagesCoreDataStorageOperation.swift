@@ -11,11 +11,11 @@ final class MDReadAllLanguagesCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDLanguageCoreDataStorage
-    fileprivate let result: MDEntitiesResult<LanguageEntity>?
+    fileprivate let result: MDEntitiesResult<LanguageResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDLanguageCoreDataStorage,
-         result: MDEntitiesResult<LanguageEntity>?) {
+         result: MDEntitiesResult<LanguageResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage
@@ -26,13 +26,13 @@ final class MDReadAllLanguagesCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        let fetchRequest = NSFetchRequest<CDLanguageEntity>(entityName: CoreDataEntityName.CDLanguageEntity)
+        let fetchRequest = NSFetchRequest<CDLanguageResponseEntity>(entityName: CoreDataEntityName.CDLanguageResponseEntity)
         
         let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
             
             if let finalResult = asynchronousFetchResult.finalResult {
                 DispatchQueue.main.async {
-                    self?.result?(.success(finalResult.map({ $0.languageEntity })))
+                    self?.result?(.success(finalResult.map({ $0.languageResponse })))
                     self?.finish()
                 }
             } else {

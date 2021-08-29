@@ -12,13 +12,13 @@ final class MDDeleteWordCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let wordStorage: MDWordCoreDataStorage
-    fileprivate let word: WordEntity
-    fileprivate let result: MDEntityResult<WordEntity>?
+    fileprivate let word: WordResponse
+    fileprivate let result: MDEntityResult<WordResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
-         word: WordEntity,
-         result: MDEntityResult<WordEntity>?) {
+         word: WordResponse,
+         result: MDEntityResult<WordResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.wordStorage = wordStorage
@@ -30,9 +30,9 @@ final class MDDeleteWordCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDWordEntity)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDWordResponseEntity)
         
-        fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.wordId) == %i", word.wordId)
+        fetchRequest.predicate = NSPredicate(format: "\(CDWordResponseEntityAttributeName.wordId) == %i", word.wordId)
         
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         

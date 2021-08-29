@@ -7,4 +7,4 @@
 
 import Foundation
 
-typealias MDUserResultWithoutCompletion = (Result<UserEntity, Error>)
+typealias MDUserResultWithoutCompletion = (Result<UserResponse, Error>)

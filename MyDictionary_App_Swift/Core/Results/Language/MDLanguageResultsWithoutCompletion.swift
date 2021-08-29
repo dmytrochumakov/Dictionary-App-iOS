@@ -7,4 +7,4 @@
 
 import Foundation
 
-typealias MDLanguageResultsWithoutCompletion = (Result<[LanguageEntity], Error>)
+typealias MDLanguageResultsWithoutCompletion = (Result<[LanguageResponse], Error>)

@@ -139,9 +139,9 @@ fileprivate extension MDAuthManager {
         
     }
     
-    func saveUser(userEntity: UserEntity, completionHandler: @escaping(MDUserResultWithCompletion)) {
+    func saveUser(userEntity: UserResponse, completionHandler: @escaping(MDUserResultWithCompletion)) {
         
-        var userResults: [MDStorageType : UserEntity] = [ : ]
+        var userResults: [MDStorageType : UserResponse] = [ : ]
         
         self.userStorage.createUser(userEntity, storageType: .all) { (createUserResults) in
             

@@ -11,11 +11,11 @@ final class MDReadUsersCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDUserCoreDataStorage
-    fileprivate let result: MDEntitiesResult<UserEntity>?
+    fileprivate let result: MDEntitiesResult<UserResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDUserCoreDataStorage,
-         result: MDEntitiesResult<UserEntity>?) {
+         result: MDEntitiesResult<UserResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage
@@ -26,13 +26,13 @@ final class MDReadUsersCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        let fetchRequest = NSFetchRequest<CDUserEntity>(entityName: CoreDataEntityName.CDUserEntity)
+        let fetchRequest = NSFetchRequest<CDUserResponseEntity>(entityName: CoreDataEntityName.CDUserResponseEntity)
         
         let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
             
             if let result = asynchronousFetchResult.finalResult {
                 DispatchQueue.main.async {
-                    self?.result?(.success(result.map({ $0.userEntity })))
+                    self?.result?(.success(result.map({ $0.userResponse })))
                     self?.finish()
                 }
             } else {

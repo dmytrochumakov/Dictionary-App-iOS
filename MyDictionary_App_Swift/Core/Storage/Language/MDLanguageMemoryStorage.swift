@@ -16,10 +16,10 @@ final class MDLanguageMemoryStorage: MDLanguageMemoryStorageProtocol {
     
     fileprivate let operationQueueService: OperationQueueServiceProtocol
     
-    var array: [LanguageEntity]
+    var array: [LanguageResponse]
     
     init(operationQueueService: OperationQueueServiceProtocol,
-         array: [LanguageEntity]) {
+         array: [LanguageResponse]) {
         
         self.operationQueueService = operationQueueService
         self.array = array
@@ -62,7 +62,7 @@ extension MDLanguageMemoryStorage {
 // MARK: - CRUD
 extension MDLanguageMemoryStorage {
     
-    func createLanguages(_ languageEntities: [LanguageEntity], _ completionHandler: @escaping (MDEntityResult<[LanguageEntity]>)) {
+    func createLanguages(_ languageEntities: [LanguageResponse], _ completionHandler: @escaping (MDEntityResult<[LanguageResponse]>)) {
         let operation: MDCreateLanguagesMemoryStorageOperation = .init(memoryStorage: self,
                                                                        languageEntities: languageEntities) { result in
             completionHandler(result)
@@ -70,7 +70,7 @@ extension MDLanguageMemoryStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readAllLanguages(_ completionHandler: @escaping (MDEntityResult<[LanguageEntity]>)) {
+    func readAllLanguages(_ completionHandler: @escaping (MDEntityResult<[LanguageResponse]>)) {
         let operation: MDReadAllLanguagesMemoryStorageOperation = .init(memoryStorage: self) { result in
             completionHandler(result)
         }

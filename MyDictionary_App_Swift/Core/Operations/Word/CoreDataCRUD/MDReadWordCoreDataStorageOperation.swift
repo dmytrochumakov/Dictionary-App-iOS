@@ -13,12 +13,12 @@ final class MDReadWordCoreDataStorageOperation: MDOperation {
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let wordStorage: MDWordCoreDataStorage
     fileprivate let wordId: Int64
-    fileprivate let result: MDEntityResult<WordEntity>?
+    fileprivate let result: MDEntityResult<WordResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
          wordId: Int64,
-         result: MDEntityResult<WordEntity>?) {
+         result: MDEntityResult<WordResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.wordStorage = wordStorage
@@ -30,12 +30,12 @@ final class MDReadWordCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: CoreDataEntityName.CDWordEntity)
-        fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.wordId) == %i", wordId)
+        let fetchRequest = NSFetchRequest<CDWordResponseEntity>(entityName: CoreDataEntityName.CDWordResponseEntity)
+        fetchRequest.predicate = NSPredicate(format: "\(CDWordResponseEntityAttributeName.wordId) == %i", wordId)
         let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
             
             if let result = asynchronousFetchResult.finalResult {
-                if let word = result.map({ $0.wordEntity }).first {
+                if let word = result.map({ $0.wordResponse }).first {
                     DispatchQueue.main.async {
                         self?.result?(.success(word))
                         self?.finish()
@@ -77,13 +77,13 @@ final class MDReadWordsCoreDataStorageOperation: MDOperation {
     fileprivate let wordStorage: MDWordCoreDataStorage
     fileprivate let fetchLimit: Int
     fileprivate let fetchOffset: Int
-    fileprivate let result: MDEntitiesResult<WordEntity>?
+    fileprivate let result: MDEntitiesResult<WordResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
          fetchLimit: Int,
          fetchOffset: Int,
-         result: MDEntitiesResult<WordEntity>?) {
+         result: MDEntitiesResult<WordResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.wordStorage = wordStorage
@@ -96,7 +96,7 @@ final class MDReadWordsCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: CoreDataEntityName.CDWordEntity)
+        let fetchRequest = NSFetchRequest<CDWordResponseEntity>(entityName: CoreDataEntityName.CDWordResponseEntity)
         
         fetchRequest.fetchLimit = self.fetchLimit
         fetchRequest.fetchOffset = self.fetchOffset
@@ -105,7 +105,7 @@ final class MDReadWordsCoreDataStorageOperation: MDOperation {
             
             if let result = asynchronousFetchResult.finalResult {
                 DispatchQueue.main.async {
-                    self?.result?(.success(result.map({ $0.wordEntity })))
+                    self?.result?(.success(result.map({ $0.wordResponse })))
                     self?.finish()
                 }
             } else {

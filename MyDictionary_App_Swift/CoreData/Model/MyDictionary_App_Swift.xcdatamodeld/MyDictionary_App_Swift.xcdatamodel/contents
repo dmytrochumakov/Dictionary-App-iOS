@@ -1,45 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="CDCourseEntity" representedClassName="CDCourseEntity" syncable="YES" codeGenerationType="class">
+    <entity name="CDCourseResponseEntity" representedClassName="CDCourseResponseEntity" syncable="YES" codeGenerationType="class">
         <attribute name="courseId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="createdAt" attributeType="String"/>
         <attribute name="languageId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="languageName" attributeType="String"/>
-        <attribute name="updatedAt" attributeType="String"/>
         <attribute name="userId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="CDJWTResponseEntity" representedClassName="CDJWTResponseEntity" syncable="YES" codeGenerationType="class">
         <attribute name="accessToken" attributeType="String"/>
         <attribute name="expirationDate" attributeType="String"/>
     </entity>
-    <entity name="CDLanguageEntity" representedClassName="CDLanguageEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="createdAt" attributeType="String"/>
+    <entity name="CDLanguageResponseEntity" representedClassName="CDLanguageResponseEntity" syncable="YES" codeGenerationType="class">
         <attribute name="languageId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="languageName" attributeType="String"/>
     </entity>
-    <entity name="CDUserEntity" representedClassName="CDUserEntity" syncable="YES" codeGenerationType="class">
+    <entity name="CDUserResponseEntity" representedClassName="CDUserResponseEntity" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" attributeType="String"/>
         <attribute name="nickname" attributeType="String"/>
         <attribute name="password" attributeType="String"/>
-        <attribute name="updatedAt" attributeType="String"/>
         <attribute name="userId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="CDWordEntity" representedClassName="CDWordEntity" syncable="YES" codeGenerationType="class">
+    <entity name="CDWordResponseEntity" representedClassName="CDWordResponseEntity" syncable="YES" codeGenerationType="class">
         <attribute name="courseId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="createdAt" attributeType="String"/>
         <attribute name="languageId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="languageName" attributeType="String"/>
-        <attribute name="updatedAt" attributeType="String"/>
         <attribute name="userId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="wordDescription" attributeType="String"/>
         <attribute name="wordId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="wordText" attributeType="String"/>
     </entity>
     <elements>
+        <element name="CDCourseResponseEntity" positionX="-54" positionY="54" width="128" height="104"/>
         <element name="CDJWTResponseEntity" positionX="-63" positionY="36" width="128" height="59"/>
-        <element name="CDUserEntity" positionX="-63" positionY="27" width="128" height="104"/>
-        <element name="CDWordEntity" positionX="-63" positionY="-18" width="128" height="164"/>
-        <element name="CDLanguageEntity" positionX="-63" positionY="45" width="128" height="74"/>
-        <element name="CDCourseEntity" positionX="-54" positionY="54" width="128" height="119"/>
+        <element name="CDLanguageResponseEntity" positionX="-63" positionY="45" width="128" height="59"/>
+        <element name="CDUserResponseEntity" positionX="-63" positionY="27" width="128" height="89"/>
+        <element name="CDWordResponseEntity" positionX="-63" positionY="-18" width="128" height="149"/>
     </elements>
 </model>

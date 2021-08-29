@@ -8,9 +8,9 @@
 import Foundation
 
 struct CoreDataEntityName {
-    static let CDWordEntity = "CDWordEntity"
-    static let CDUserEntity = "CDUserEntity"
+    static let CDWordResponseEntity = "CDWordResponseEntity"
+    static let CDUserResponseEntity = "CDUserResponseEntity"
     static let CDJWTResponseEntity = "CDJWTResponseEntity"
-    static let CDLanguageEntity = "CDLanguageEntity"
-    static let CDCourseEntity = "CDCourseEntity"
+    static let CDLanguageResponseEntity = "CDLanguageResponseEntity"
+    static let CDCourseResponseEntity = "CDCourseResponseEntity"
 }

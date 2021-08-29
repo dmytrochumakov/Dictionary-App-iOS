@@ -16,10 +16,10 @@ final class MDUserMemoryStorage: MDUserMemoryStorageProtocol {
     
     fileprivate let operationQueueService: OperationQueueServiceProtocol
     
-    var userEntity: UserEntity?
+    var userEntity: UserResponse?
     
     init(operationQueueService: OperationQueueServiceProtocol,
-         userEntity: UserEntity?) {
+         userEntity: UserResponse?) {
         
         self.operationQueueService = operationQueueService
         self.userEntity = userEntity
@@ -54,7 +54,7 @@ extension MDUserMemoryStorage {
 
 extension MDUserMemoryStorage {
     
-    func createUser(_ userEntity: UserEntity, _ completionHandler: @escaping (MDEntityResult<UserEntity>)) {
+    func createUser(_ userEntity: UserResponse, _ completionHandler: @escaping (MDEntityResult<UserResponse>)) {
         let operation = MDCreateUserMemoryStorageOperation.init(memoryStorage: self,
                                                                 userEntity: userEntity) { result in
             completionHandler(result)
@@ -62,7 +62,7 @@ extension MDUserMemoryStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readUser(fromUserID userId: Int64, _ completionHandler: @escaping (MDEntityResult<UserEntity>)) {
+    func readUser(fromUserID userId: Int64, _ completionHandler: @escaping (MDEntityResult<UserResponse>)) {
         let operation = MDReadUserMemoryStorageOperation.init(memoryStorage: self,
                                                               userId: userId) { result in
             completionHandler(result)
@@ -70,7 +70,7 @@ extension MDUserMemoryStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func deleteUser(_ userEntity: UserEntity, _ completionHandler: @escaping (MDEntityResult<UserEntity>)) {
+    func deleteUser(_ userEntity: UserResponse, _ completionHandler: @escaping (MDEntityResult<UserResponse>)) {
         let operation = MDDeleteUserMemoryStorageOperation.init(memoryStorage: self,
                                                                 userEntity: userEntity) { result in
             completionHandler(result)

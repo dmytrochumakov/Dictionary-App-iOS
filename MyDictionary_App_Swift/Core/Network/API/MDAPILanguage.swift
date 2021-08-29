@@ -100,7 +100,7 @@ extension MDAPILanguage {
                 debugPrint(#function, Self.self, "dataCount: ", data.count)
                 
                 do {
-                    completionHandler(.success(try JSONDecoder.init().decode([LanguageEntity].self, from: data)))
+                    completionHandler(.success(try JSONDecoder.init().decode([LanguageResponse].self, from: data)))
                 } catch (_) {
                     completionHandler(.failure(MDAPIError.parseError))
                 }

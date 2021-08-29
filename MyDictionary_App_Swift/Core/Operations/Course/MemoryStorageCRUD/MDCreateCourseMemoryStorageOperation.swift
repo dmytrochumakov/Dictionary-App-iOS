@@ -10,12 +10,12 @@ import Foundation
 final class MDCreateCourseMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDCourseMemoryStorage
-    fileprivate let courseEntity: CourseEntity
-    fileprivate let result: MDEntityResult<CourseEntity>?
+    fileprivate let courseEntity: CourseResponse
+    fileprivate let result: MDEntityResult<CourseResponse>?
     
     init(memoryStorage: MDCourseMemoryStorage,
-         courseEntity: CourseEntity,
-         result: MDEntityResult<CourseEntity>?) {
+         courseEntity: CourseResponse,
+         result: MDEntityResult<CourseResponse>?) {
         
         self.memoryStorage = memoryStorage
         self.courseEntity = courseEntity

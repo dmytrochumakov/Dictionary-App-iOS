@@ -11,13 +11,13 @@ final class MDCreateUserCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDUserCoreDataStorage
-    fileprivate let userEntity: UserEntity
-    fileprivate let result: MDEntityResult<UserEntity>?
+    fileprivate let userEntity: UserResponse
+    fileprivate let result: MDEntityResult<UserResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDUserCoreDataStorage,
-         userEntity: UserEntity,
-         result: MDEntityResult<UserEntity>?) {
+         userEntity: UserResponse,
+         result: MDEntityResult<UserResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage
@@ -29,8 +29,8 @@ final class MDCreateUserCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        let newUser = CDUserEntity.init(userEntity: self.userEntity,
-                                        insertIntoManagedObjectContext: self.managedObjectContext)
+        let newUser = CDUserResponseEntity.init(userResponse: self.userEntity,
+                                                insertIntoManagedObjectContext: self.managedObjectContext)
         
         self.coreDataStorage.save(userId: newUser.userId) { [weak self] result in
             DispatchQueue.main.async {

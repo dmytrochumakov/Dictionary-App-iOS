@@ -11,13 +11,13 @@ final class MDDeleteUserCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDUserCoreDataStorage
-    fileprivate let userEntity: UserEntity
-    fileprivate let result: MDEntityResult<UserEntity>?
+    fileprivate let userEntity: UserResponse
+    fileprivate let result: MDEntityResult<UserResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDUserCoreDataStorage,
-         userEntity: UserEntity,
-         result: MDEntityResult<UserEntity>?) {
+         userEntity: UserResponse,
+         result: MDEntityResult<UserResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage
@@ -30,8 +30,8 @@ final class MDDeleteUserCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDUserEntity)
-        fetchRequest.predicate = NSPredicate(format: "\(CDUserEntityAttributeName.userId) == %i", userEntity.userId)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDUserResponseEntity)
+        fetchRequest.predicate = NSPredicate(format: "\(CDUserResponseEntityAttributeName.userId) == %i", userEntity.userId)
         
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         

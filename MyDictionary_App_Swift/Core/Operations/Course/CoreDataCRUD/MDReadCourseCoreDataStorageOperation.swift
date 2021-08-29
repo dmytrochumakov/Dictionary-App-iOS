@@ -12,12 +12,12 @@ final class MDReadCourseCoreDataStorageOperation: MDOperation {
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDCourseCoreDataStorage
     fileprivate let courseId: Int64
-    fileprivate let result: MDEntityResult<CourseEntity>?
+    fileprivate let result: MDEntityResult<CourseResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDCourseCoreDataStorage,
          courseId: Int64,
-         result: MDEntityResult<CourseEntity>?) {
+         result: MDEntityResult<CourseResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage
@@ -30,13 +30,13 @@ final class MDReadCourseCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        let fetchRequest = NSFetchRequest<CDCourseEntity>(entityName: CoreDataEntityName.CDCourseEntity)
-        fetchRequest.predicate = NSPredicate(format: "\(CDCourseEntityAttributeName.courseId) == %i", self.courseId)
+        let fetchRequest = NSFetchRequest<CDCourseResponseEntity>(entityName: CoreDataEntityName.CDCourseResponseEntity)
+        fetchRequest.predicate = NSPredicate(format: "\(CDCourseResponseEntityAttributeName.courseId) == %i", self.courseId)
         
         let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
             
             if let result = asynchronousFetchResult.finalResult {
-                if let courseEntity = result.map({ $0.courseEntity }).first {
+                if let courseEntity = result.map({ $0.courseResponse }).first {
                     DispatchQueue.main.async {
                         self?.result?(.success(courseEntity))
                         self?.finish()

@@ -106,7 +106,7 @@ extension MDAPIUser {
                 debugPrint(#function, Self.self, "dataCount: ", data.count)
                 
                 do {
-                    completionHandler(.success(try JSONDecoder.init().decode(UserEntity.self, from: data)))
+                    completionHandler(.success(try JSONDecoder.init().decode(UserResponse.self, from: data)))
                 } catch (_) {
                     completionHandler(.failure(MDAPIError.parseError))
                 }

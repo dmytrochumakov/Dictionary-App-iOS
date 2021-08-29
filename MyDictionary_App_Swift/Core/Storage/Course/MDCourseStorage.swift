@@ -10,7 +10,7 @@ import Foundation
 protocol MDCourseStorageProtocol: MDStorageProtocol {
     
     func createCourse(storageType: MDStorageType,
-                      courseEntity: CourseEntity,
+                      courseEntity: CourseResponse,
                       _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDCourseResultWithoutCompletion>))
     
     func readCourse(storageType: MDStorageType,
@@ -54,7 +54,7 @@ final class MDCourseStorage: MDStorage, MDCourseStorageProtocol {
 extension MDCourseStorage {
     
     func createCourse(storageType: MDStorageType,
-                      courseEntity: CourseEntity,
+                      courseEntity: CourseResponse,
                       _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDCourseResultWithoutCompletion>)) {
         
         switch storageType {

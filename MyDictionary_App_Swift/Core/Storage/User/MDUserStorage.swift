@@ -9,7 +9,7 @@ import Foundation
 
 protocol MDUserStorageProtocol: MDStorageProtocol {
     
-    func createUser(_ userEntity: UserEntity,
+    func createUser(_ userEntity: UserResponse,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>))
     
@@ -17,7 +17,7 @@ protocol MDUserStorageProtocol: MDStorageProtocol {
                   storageType: MDStorageType,
                   _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>))
     
-    func deleteUser(_ userEntity: UserEntity,
+    func deleteUser(_ userEntity: UserResponse,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>))
     
@@ -48,7 +48,7 @@ final class MDUserStorage: MDStorage, MDUserStorageProtocol {
 // MARK: - CRUD
 extension MDUserStorage {
     
-    func createUser(_ userEntity: UserEntity, storageType: MDStorageType, _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
+    func createUser(_ userEntity: UserResponse, storageType: MDStorageType, _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
         
         switch storageType {
         
@@ -161,7 +161,7 @@ extension MDUserStorage {
         
     }
     
-    func deleteUser(_ userEntity: UserEntity, storageType: MDStorageType, _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
+    func deleteUser(_ userEntity: UserResponse, storageType: MDStorageType, _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
         
         switch storageType {
         

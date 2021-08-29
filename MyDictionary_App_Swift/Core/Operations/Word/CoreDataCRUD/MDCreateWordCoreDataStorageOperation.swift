@@ -12,13 +12,13 @@ final class MDCreateWordCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let wordStorage: MDWordCoreDataStorage
-    fileprivate let word: WordEntity
-    fileprivate let result: MDEntityResult<WordEntity>?
+    fileprivate let word: WordResponse
+    fileprivate let result: MDEntityResult<WordResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
-         word: WordEntity,
-         result: MDEntityResult<WordEntity>?) {
+         word: WordResponse,
+         result: MDEntityResult<WordResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.wordStorage = wordStorage
@@ -30,8 +30,8 @@ final class MDCreateWordCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        let newWord = CDWordEntity.init(wordEntity: self.word,
-                                        insertIntoManagedObjectContext: self.managedObjectContext)
+        let newWord = CDWordResponseEntity.init(wordResponse: self.word,
+                                                insertIntoManagedObjectContext: self.managedObjectContext)
         
         self.wordStorage.save(wordId: newWord.wordId) { [weak self] result in
             DispatchQueue.main.async {

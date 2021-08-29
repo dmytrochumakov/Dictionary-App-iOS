@@ -16,10 +16,10 @@ final class MDCourseMemoryStorage: MDCourseMemoryStorageProtocol {
     
     fileprivate let operationQueueService: OperationQueueServiceProtocol
     
-    var array: [CourseEntity]
+    var array: [CourseResponse]
     
     init(operationQueueService: OperationQueueServiceProtocol,
-         array: [CourseEntity]) {
+         array: [CourseResponse]) {
         
         self.operationQueueService = operationQueueService
         self.array = array
@@ -62,7 +62,7 @@ extension MDCourseMemoryStorage {
 // MARK: - CRUD
 extension MDCourseMemoryStorage {
     
-    func createCourse(_ courseEntity: CourseEntity, _ completionHandler: @escaping (MDEntityResult<CourseEntity>)) {
+    func createCourse(_ courseEntity: CourseResponse, _ completionHandler: @escaping (MDEntityResult<CourseResponse>)) {
         let operation: MDCreateCourseMemoryStorageOperation = .init(memoryStorage: self,
                                                                     courseEntity: courseEntity) { result in
             completionHandler(result)
@@ -70,7 +70,7 @@ extension MDCourseMemoryStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDEntityResult<CourseEntity>)) {
+    func readCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDEntityResult<CourseResponse>)) {
         let operation: MDReadCourseMemoryStorageOperation = .init(memoryStorage: self,
                                                                   courseId: courseId) { result in
             completionHandler(result)
@@ -78,7 +78,7 @@ extension MDCourseMemoryStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readAllCourses(_ completionHandler: @escaping (MDEntityResult<[CourseEntity]>)) {
+    func readAllCourses(_ completionHandler: @escaping (MDEntityResult<[CourseResponse]>)) {
         let operation: MDReadAllCoursesMemoryStorageOperation = .init(memoryStorage: self) { result in
             completionHandler(result)
         }

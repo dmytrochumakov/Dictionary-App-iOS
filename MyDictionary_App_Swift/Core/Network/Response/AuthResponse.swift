@@ -9,7 +9,7 @@ import Foundation
 
 struct AuthResponse {
     
-    let userEntity: UserEntity
+    let userEntity: UserResponse
     let jwtResponse: JWTResponse
     
 }
@@ -23,7 +23,7 @@ extension AuthResponse: Decodable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.userEntity = try container.decode(UserEntity.self, forKey: .userEntity)
+        self.userEntity = try container.decode(UserResponse.self, forKey: .userEntity)
         self.jwtResponse = try container.decode(JWTResponse.self, forKey: .jwtResponse)
     }
     

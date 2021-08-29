@@ -65,7 +65,8 @@ extension MDWordCoreDataStorage {
 // MARK: - Create
 extension MDWordCoreDataStorage {
     
-    func createWord(_ wordModel: WordEntity, _ completionHandler: @escaping (MDEntityResult<WordEntity>)) {
+    func createWord(_ wordModel: WordResponse,
+                    _ completionHandler: @escaping (MDEntityResult<WordResponse>)) {
         let operation = MDCreateWordCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                   wordStorage: self,
                                                                   word: wordModel) { result in
@@ -79,7 +80,8 @@ extension MDWordCoreDataStorage {
 // MARK: - Read
 extension MDWordCoreDataStorage {
     
-    func readWord(fromWordID wordId: Int64, _ completionHandler: @escaping (MDEntityResult<WordEntity>)) {
+    func readWord(fromWordID wordId: Int64,
+                  _ completionHandler: @escaping (MDEntityResult<WordResponse>)) {
         let operation = MDReadWordCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                 wordStorage: self,
                                                                 wordId: wordId) { result in
@@ -88,7 +90,9 @@ extension MDWordCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readWords(fetchLimit: Int, fetchOffset: Int, _ completionHandler: @escaping (MDEntitiesResult<WordEntity>)) {
+    func readWords(fetchLimit: Int,
+                   fetchOffset: Int,
+                   _ completionHandler: @escaping (MDEntitiesResult<WordResponse>)) {
         let operation = MDReadWordsCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                  wordStorage: self,
                                                                  fetchLimit: fetchLimit,
@@ -98,7 +102,7 @@ extension MDWordCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readAllWords(_ completionHandler: @escaping (MDEntitiesResult<WordEntity>)) {
+    func readAllWords(_ completionHandler: @escaping (MDEntitiesResult<WordResponse>)) {
         let operation = MDReadWordsCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                  wordStorage: self,
                                                                  fetchLimit: .zero,
@@ -113,7 +117,10 @@ extension MDWordCoreDataStorage {
 // MARK: - Update
 extension MDWordCoreDataStorage {
     
-    func updateWord(byWordID wordId: Int64, newWordText: String, newWordDescription: String, _ completionHandler: @escaping (MDEntityResult<WordEntity>)) {
+    func updateWord(byWordID wordId: Int64,
+                    newWordText: String,
+                    newWordDescription: String,
+                    _ completionHandler: @escaping (MDEntityResult<WordResponse>)) {
         let operation = MDUpdateWordCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                   wordStorage: self,
                                                                   wordId: wordId,
@@ -129,7 +136,8 @@ extension MDWordCoreDataStorage {
 // MARK: - Delete
 extension MDWordCoreDataStorage {
     
-    func deleteWord(_ word: WordEntity, _ completionHandler: @escaping (MDEntityResult<WordEntity>)) {
+    func deleteWord(_ word: WordResponse,
+                    _ completionHandler: @escaping (MDEntityResult<WordResponse>)) {
         let operation = MDDeleteWordCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                   wordStorage: self,
                                                                   word: word) { result in
@@ -155,7 +163,7 @@ extension MDWordCoreDataStorage {
         coreDataStack.savePerform(completionHandler: completionHandler)
     }
     
-    func savePerform(wordId: Int64, completionHandler: @escaping MDEntityResult<WordEntity>) {
+    func savePerform(wordId: Int64, completionHandler: @escaping MDEntityResult<WordResponse>) {
         coreDataStack.savePerform() { [unowned self] (result) in
             switch result {
             case .success:
@@ -173,7 +181,7 @@ extension MDWordCoreDataStorage {
         }
     }
     
-    func save(wordId: Int64, completionHandler: @escaping MDEntityResult<WordEntity>) {
+    func save(wordId: Int64, completionHandler: @escaping MDEntityResult<WordResponse>) {
         coreDataStack.savePerformAndWait() { [unowned self] (result) in
             switch result {
             case .success:

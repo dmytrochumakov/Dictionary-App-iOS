@@ -10,12 +10,12 @@ import Foundation
 final class MDCreateLanguagesMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDLanguageMemoryStorage
-    fileprivate let languageEntities: [LanguageEntity]
-    fileprivate let result: MDEntityResult<[LanguageEntity]>?
+    fileprivate let languageEntities: [LanguageResponse]
+    fileprivate let result: MDEntityResult<[LanguageResponse]>?
     
     init(memoryStorage: MDLanguageMemoryStorage,
-         languageEntities: [LanguageEntity],
-         result: MDEntityResult<[LanguageEntity]>?) {
+         languageEntities: [LanguageResponse],
+         result: MDEntityResult<[LanguageResponse]>?) {
         
         self.memoryStorage = memoryStorage
         self.languageEntities = languageEntities

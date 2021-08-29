@@ -143,7 +143,7 @@ extension MDAPICourse {
                 debugPrint(#function, Self.self, "dataCount: ", data.count)
                 
                 do {
-                    completionHandler(.success(try JSONDecoder.init().decode(CourseEntity.self, from: data)))
+                    completionHandler(.success(try JSONDecoder.init().decode(CourseResponse.self, from: data)))
                 } catch (_) {
                     completionHandler(.failure(MDAPIError.parseError))
                 }
@@ -183,7 +183,7 @@ extension MDAPICourse {
                 debugPrint(#function, Self.self, "dataCount: ", data.count)
                 
                 do {
-                    completionHandler(.success(try JSONDecoder.init().decode([CourseEntity].self, from: data)))
+                    completionHandler(.success(try JSONDecoder.init().decode([CourseResponse].self, from: data)))
                 } catch (_) {
                     completionHandler(.failure(MDAPIError.parseError))
                 }

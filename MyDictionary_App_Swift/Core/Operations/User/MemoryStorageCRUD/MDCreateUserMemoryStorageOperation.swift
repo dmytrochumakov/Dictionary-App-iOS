@@ -10,12 +10,12 @@ import Foundation
 final class MDCreateUserMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDUserMemoryStorage
-    fileprivate let userEntity: UserEntity
-    fileprivate let result: MDEntityResult<UserEntity>?
+    fileprivate let userEntity: UserResponse
+    fileprivate let result: MDEntityResult<UserResponse>?
     
     init(memoryStorage: MDUserMemoryStorage,
-         userEntity: UserEntity,
-         result: MDEntityResult<UserEntity>?) {
+         userEntity: UserResponse,
+         result: MDEntityResult<UserResponse>?) {
         
         self.memoryStorage = memoryStorage
         self.userEntity = userEntity

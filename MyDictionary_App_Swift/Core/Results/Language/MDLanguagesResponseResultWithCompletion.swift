@@ -7,4 +7,4 @@
 
 import Foundation
 
-typealias MDLanguagesResponseResultWithCompletion = ((Result<[LanguageEntity], Error>) -> Void)
+typealias MDLanguagesResponseResultWithCompletion = ((Result<[LanguageResponse], Error>) -> Void)

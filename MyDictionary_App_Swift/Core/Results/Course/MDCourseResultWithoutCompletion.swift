@@ -7,4 +7,4 @@
 
 import Foundation
 
-typealias MDCourseResultWithoutCompletion = (Result<CourseEntity, Error>)
+typealias MDCourseResultWithoutCompletion = (Result<CourseResponse, Error>)

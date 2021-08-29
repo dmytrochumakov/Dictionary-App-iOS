@@ -11,13 +11,13 @@ final class MDCreateCourseCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDCourseCoreDataStorage
-    fileprivate let courseEntity: CourseEntity
-    fileprivate let result: MDEntityResult<CourseEntity>?
+    fileprivate let courseEntity: CourseResponse
+    fileprivate let result: MDEntityResult<CourseResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDCourseCoreDataStorage,
-         courseEntity: CourseEntity,
-         result: MDEntityResult<CourseEntity>?) {
+         courseEntity: CourseResponse,
+         result: MDEntityResult<CourseResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage
@@ -29,8 +29,8 @@ final class MDCreateCourseCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        let newCourseEntity = CDCourseEntity.init(courseEntity: self.courseEntity,
-                                                  insertIntoManagedObjectContext: self.managedObjectContext)
+        let newCourseEntity = CDCourseResponseEntity.init(courseResponse: self.courseEntity,
+                                                          insertIntoManagedObjectContext: self.managedObjectContext)
         
         self.coreDataStorage.save(courseID: newCourseEntity.courseId) { [weak self] result in
             DispatchQueue.main.async {

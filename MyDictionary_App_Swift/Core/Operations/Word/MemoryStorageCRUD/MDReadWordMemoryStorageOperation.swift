@@ -11,11 +11,11 @@ final class MDReadWordMemoryStorageOperation: MDOperation {
     
     fileprivate let wordStorage: MDWordMemoryStorage
     fileprivate let wordId: Int64
-    fileprivate let result: MDEntityResult<WordEntity>?
+    fileprivate let result: MDEntityResult<WordResponse>?
     
     init(wordStorage: MDWordMemoryStorage,
          wordId: Int64,
-         result: MDEntityResult<WordEntity>?) {
+         result: MDEntityResult<WordResponse>?) {
         
         self.wordStorage = wordStorage
         self.wordId = wordId

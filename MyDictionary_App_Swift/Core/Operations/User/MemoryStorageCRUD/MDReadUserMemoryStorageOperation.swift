@@ -11,11 +11,11 @@ final class MDReadUserMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDUserMemoryStorage
     fileprivate let userId: Int64
-    fileprivate let result: MDEntityResult<UserEntity>?
+    fileprivate let result: MDEntityResult<UserResponse>?
     
     init(memoryStorage: MDUserMemoryStorage,
          userId: Int64,
-         result: MDEntityResult<UserEntity>?) {
+         result: MDEntityResult<UserResponse>?) {
         
         self.memoryStorage = memoryStorage
         self.userId = userId
