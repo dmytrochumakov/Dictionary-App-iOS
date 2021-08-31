@@ -65,6 +65,29 @@ extension MDWordMemoryStorage_Tests {
         
     }
     
+    func test_Create_Words_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Create Words Expectation")
+        
+        wordMemoryStorage.createWords(Constants_For_Tests.mockedWords) { result in
+            
+            switch result {
+            
+            case .success(let createdWords):
+                                
+                XCTAssertTrue(createdWords.count == Constants_For_Tests.mockedWords.count)
+                expectation.fulfill()
+                
+            case .failure:
+                XCTExpectFailure()
+                expectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
+    
     func test_Read_One_Created_Word_Functionality() {
         
         let expectation = XCTestExpectation(description: "Read One Created Word Expectation")

@@ -78,6 +78,41 @@ extension MDWordStorage_Tests {
         
     }
     
+    func test_Create_Words_In_All_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Create Words In All Expectation")
+        let storageType: MDStorageType = .all
+        
+        var resultCount: Int = .zero
+        
+        wordStorage.createWords(Constants_For_Tests.mockedWords, storageType: storageType) { createResults in
+            
+            createResults.forEach { createResult in
+                
+                switch createResult.result {
+                case .success(let createdWords):
+                    
+                    resultCount += 1
+                    
+                    XCTAssertTrue(createdWords.count == Constants_For_Tests.mockedWords.count)                    
+                    
+                    if (resultCount == createResults.count) {
+                        expectation.fulfill()
+                    }
+                    
+                case .failure:
+                    XCTExpectFailure()
+                    expectation.fulfill()
+                }
+                
+            }
+            
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
+    
     func test_Read_One_Word_From_All_Functionality() {
         
         let expectation = XCTestExpectation(description: "Read One Word From All Expectation")

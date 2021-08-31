@@ -21,6 +21,15 @@ struct Constants_For_Tests {
                                                         languageName: "English",
                                                         createdAt: .init())
     
+    public static let mockedWords: [WordResponse] = [mockedWord0, .init(userId: .init(),
+                                                                        wordId: .init(),
+                                                                        courseId: .init(),
+                                                                        languageId: .init(),
+                                                                        wordText: "MOSF",
+                                                                        wordDescription: "metal–oxide–semiconductor-field",
+                                                                        languageName: "Spanish",
+                                                                        createdAt: .init())]
+    
     public static let mockedWordForUpdate: WordResponse = .init(userId: .init(),
                                                                 wordId: .init(),
                                                                 courseId: .init(),
