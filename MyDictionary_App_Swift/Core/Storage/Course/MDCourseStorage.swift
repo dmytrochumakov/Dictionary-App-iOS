@@ -13,6 +13,10 @@ protocol MDCourseStorageProtocol: MDStorageProtocol {
                       courseEntity: CourseResponse,
                       _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<CourseResponse>>))
     
+    func createCourses(storageType: MDStorageType,
+                       courseEntities: [CourseResponse],
+                       _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<CourseResponse>>))
+    
     func readCourse(storageType: MDStorageType,
                     fromCourseId courseId: Int64,
                     _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<CourseResponse>>))
@@ -95,6 +99,65 @@ extension MDCourseStorage {
             // Dispatch Group Enter
             dispatchGroup.enter()
             coreDataStorage.createCourse(courseEntity) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
+            }
+            
+        }
+        
+    }
+    
+    func createCourses(storageType: MDStorageType,
+                       courseEntities: [CourseResponse],
+                       _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<CourseResponse>>)) {
+        
+        switch storageType {
+        
+        case .memory:
+            
+            memoryStorage.createCourses(courseEntities) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .coreData:
+            
+            coreDataStorage.createCourses(courseEntities) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<CourseResponse>> = []
+            
+            // Create in Memory
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.createCourses(courseEntities) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Create in Core Data
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.createCourses(courseEntities) { result in
                 
                 // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))

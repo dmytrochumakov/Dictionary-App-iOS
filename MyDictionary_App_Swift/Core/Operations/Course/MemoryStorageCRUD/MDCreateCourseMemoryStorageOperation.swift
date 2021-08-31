@@ -36,3 +36,33 @@ final class MDCreateCourseMemoryStorageOperation: MDOperation {
     }
     
 }
+
+final class MDCreateCoursesMemoryStorageOperation: MDOperation {
+    
+    fileprivate let memoryStorage: MDCourseMemoryStorage
+    fileprivate let courseEntities: [CourseResponse]
+    fileprivate let result: MDOperationsResultWithCompletion<CourseResponse>?
+    
+    init(memoryStorage: MDCourseMemoryStorage,
+         courseEntities: [CourseResponse],
+         result: MDOperationsResultWithCompletion<CourseResponse>?) {
+        
+        self.memoryStorage = memoryStorage
+        self.courseEntities = courseEntities
+        self.result = result
+        
+        super.init()
+    }
+    
+    override func main() {
+        self.memoryStorage.array = self.courseEntities
+        self.result?(.success(self.memoryStorage.array))
+        self.finish()
+    }
+    
+    deinit {
+        debugPrint(#function, Self.self)
+        self.finish()
+    }
+    
+}

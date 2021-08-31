@@ -53,3 +53,62 @@ final class MDCreateCourseCoreDataStorageOperation: MDOperation {
     }
     
 }
+
+final class MDCreateCoursesCoreDataStorageOperation: MDOperation {
+    
+    fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let coreDataStorage: MDCourseCoreDataStorage
+    fileprivate let courseEntities: [CourseResponse]
+    fileprivate let result: MDOperationsResultWithCompletion<CourseResponse>?
+    
+    init(managedObjectContext: NSManagedObjectContext,
+         coreDataStorage: MDCourseCoreDataStorage,
+         courseEntities: [CourseResponse],
+         result: MDOperationsResultWithCompletion<CourseResponse>?) {
+        
+        self.managedObjectContext = managedObjectContext
+        self.coreDataStorage = coreDataStorage
+        self.courseEntities = courseEntities
+        self.result = result
+        
+        super.init()
+    }
+    
+    override func main() {
+        
+        var resultCount: Int = .zero
+        
+        self.courseEntities.forEach { courseEntity in
+            
+            let newCourseEntity = CDCourseResponseEntity.init(courseResponse: courseEntity,
+                                                              insertIntoManagedObjectContext: self.managedObjectContext)
+            
+            self.coreDataStorage.save(courseID: newCourseEntity.courseId) { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success:
+                        
+                        resultCount += 1
+                        
+                        if (resultCount == self?.courseEntities.count) {
+                            self?.result?(.success(self?.courseEntities ?? []))
+                            self?.finish()
+                        }
+                        
+                    case .failure(let error):
+                        self?.result?(.failure(error))
+                        self?.finish()
+                    }
+                }
+            }
+            
+        }
+        
+    }
+    
+    deinit {
+        debugPrint(#function, Self.self)
+        self.finish()
+    }
+    
+}

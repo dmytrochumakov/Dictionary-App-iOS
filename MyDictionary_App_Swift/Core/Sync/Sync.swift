@@ -56,7 +56,7 @@ extension Sync {
         // Get And Save Langauges
         apiGetAndSaveLanguages(withSyncItem: item) { result in
             // Append Sync Result
-            syncResults.append(.init(syncType: .langauge,
+            syncResults.append(.init(syncType: .language,
                                      result: result))
             // Dispatch Group Leave
             dispatchGroup.leave()
@@ -140,7 +140,7 @@ extension Sync {
                             
                             countResult += 1
                             
-                            if (countResult == createCourseResult.count) {
+                            if (countResult == createCourseResults.count) {
                                 completionHandler(.success(()))
                                 break
                             }
@@ -170,7 +170,7 @@ final class MemorySync {
 }
 
 enum SyncType {
-    case langauge
+    case language
 }
 
 struct SyncResult {
