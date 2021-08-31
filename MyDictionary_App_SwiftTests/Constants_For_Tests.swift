@@ -54,4 +54,10 @@ struct Constants_For_Tests {
                                                            languageName: "English",
                                                            createdAt: "2021-08-16T13:35:33.999Z")
     
+    public static let mockedCourses: [CourseResponse] = [mockedCourse, .init(userId: 1,
+                                                                             courseId: 1,
+                                                                             languageId: 1,
+                                                                             languageName: "Spanish",
+                                                                             createdAt: "2021-08-16T13:36:33.999Z")]
+    
 }

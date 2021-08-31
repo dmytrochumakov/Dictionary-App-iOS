@@ -80,6 +80,42 @@ extension MDCourseStorage_Tests {
         
     }
     
+    func test_Create_Courses_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Create Courses In All Expectation")
+        let storageType: MDStorageType = .all
+        
+        var resultCount: Int = .zero
+        
+        courseStorage.createCourses(storageType: storageType,
+                                    courseEntities: Constants_For_Tests.mockedCourses) { createResults in
+            
+            createResults.forEach { createResult in
+                
+                switch createResult.result {
+                case .success(let createdCourseEntities):
+                    
+                    resultCount += 1
+                    
+                    XCTAssertTrue(createdCourseEntities.count == Constants_For_Tests.mockedCourses.count)
+                    
+                    if (resultCount == createResults.count) {
+                        expectation.fulfill()
+                    }
+                    
+                case .failure:
+                    XCTExpectFailure()
+                    expectation.fulfill()
+                }
+                
+            }
+            
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
+    
     func test_Read_Course_From_All_Functionality() {
         
         let expectation = XCTestExpectation(description: "Read Course From All Expectation")
