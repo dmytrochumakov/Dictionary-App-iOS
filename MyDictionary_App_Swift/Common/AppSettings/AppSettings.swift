@@ -13,8 +13,7 @@ protocol AppSettingsProtocol {
 }
 
 final class AppSettings: AppSettingsProtocol {
-    
-    fileprivate let isLoggedInKey: String = "Is_Logged_In_Key"
+        
     fileprivate let userDefaults: UserDefaults
     
     init(userDefaults: UserDefaults) {
@@ -26,11 +25,11 @@ final class AppSettings: AppSettingsProtocol {
 extension AppSettings {
     
     var isLoggedIn: Bool {
-        return userDefaults.bool(forKey: isLoggedInKey)
+        return userDefaults.bool(forKey: #function)
     }
     
     func setIsLoggedIn(_ newValue: Bool) {
-        userDefaults.set(newValue, forKey: isLoggedInKey)
+        userDefaults.set(newValue, forKey: #function)
     }
     
 }
