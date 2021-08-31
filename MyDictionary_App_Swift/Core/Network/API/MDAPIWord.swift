@@ -11,20 +11,20 @@ protocol MDAPIWordProtocol {
     
     func createWord(accessToken: String,
                     createWordRequest: CreateWordRequest,
-                    completionHandler: @escaping(MDWordResultWithCompletion))
+                    completionHandler: @escaping(MDOperationResultWithCompletion<WordResponse>))
     
     func readAllWords(accessToken: String,
-                      completionHandler: @escaping(MDWordsResultWithCompletion))
+                      completionHandler: @escaping(MDOperationsResultWithCompletion<WordResponse>))
     
     func updateWord(accessToken: String,
                     updateWordRequest: UpdateWordRequest,
-                    completionHandler: @escaping(MDWordResultWithCompletion))
+                    completionHandler: @escaping(MDOperationResultWithCompletion<WordResponse>))
     
     func deleteWord(accessToken: String,
                     userId: Int64,
                     courseId: Int64,
                     wordId: Int64,
-                    completionHandler: @escaping(MDDeleteEntityResultWithCompletion))
+                    completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
     
 }
 
@@ -167,7 +167,7 @@ extension MDAPIWord {
     
     func createWord(accessToken: String,
                     createWordRequest: CreateWordRequest,
-                    completionHandler: @escaping (MDWordResultWithCompletion)) {
+                    completionHandler: @escaping (MDOperationResultWithCompletion<WordResponse>)) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
                                               endpoint: MDAPIWordEndpoint.createWord(accessToken: accessToken,
@@ -205,7 +205,7 @@ extension MDAPIWord {
     }
     
     func readAllWords(accessToken: String,
-                      completionHandler: @escaping (MDWordsResultWithCompletion)) {
+                      completionHandler: @escaping (MDOperationsResultWithCompletion<WordResponse>)) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
                                               endpoint: MDAPIWordEndpoint.readAllWords(accessToken: accessToken)) { result in
@@ -243,7 +243,7 @@ extension MDAPIWord {
     
     func updateWord(accessToken: String,
                     updateWordRequest: UpdateWordRequest,
-                    completionHandler: @escaping (MDWordResultWithCompletion)) {
+                    completionHandler: @escaping (MDOperationResultWithCompletion<WordResponse>)) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
                                               endpoint: MDAPIWordEndpoint.updateWord(accessToken: accessToken,
@@ -284,7 +284,7 @@ extension MDAPIWord {
                     userId: Int64,
                     courseId: Int64,
                     wordId: Int64,
-                    completionHandler: @escaping (MDDeleteEntityResultWithCompletion)) {
+                    completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
                                               endpoint: MDAPIWordEndpoint.deleteWord(accessToken: accessToken,

@@ -10,10 +10,10 @@ import Foundation
 final class MDReadFirstJWTMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDJWTMemoryStorage
-    fileprivate let result: MDEntityResult<JWTResponse>?
+    fileprivate let result: MDOperationResultWithCompletion<JWTResponse>?
     
     init(memoryStorage: MDJWTMemoryStorage,
-         result: MDEntityResult<JWTResponse>?) {
+         result: MDOperationResultWithCompletion<JWTResponse>?) {
         
         self.memoryStorage = memoryStorage
         self.result = result

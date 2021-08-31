@@ -8,8 +8,8 @@
 import Foundation
 
 protocol MDAuthManagerProtocol {
-    func login(authRequest: AuthRequest, completionHandler: @escaping(MDAuthResultWithCompletion))
-    func register(authRequest: AuthRequest, completionHandler: @escaping(MDAuthResultWithCompletion))
+    func login(authRequest: AuthRequest, completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    func register(authRequest: AuthRequest, completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
 }
 
 final class MDAuthManager: MDAuthManagerProtocol {
@@ -39,7 +39,7 @@ final class MDAuthManager: MDAuthManagerProtocol {
 
 extension MDAuthManager {
     
-    func login(authRequest: AuthRequest, completionHandler: @escaping(MDAuthResultWithCompletion)) {
+    func login(authRequest: AuthRequest, completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
         apiAuth.login(authRequest: authRequest) { [weak self] loginResult in
             
@@ -59,7 +59,7 @@ extension MDAuthManager {
         
     }
     
-    func register(authRequest: AuthRequest, completionHandler: @escaping(MDAuthResultWithCompletion)) {
+    func register(authRequest: AuthRequest, completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
         apiAuth.register(authRequest: authRequest) { [weak self] registerResult in
             
@@ -86,7 +86,7 @@ fileprivate extension MDAuthManager {
     
     func saveUserAndJWTAndUserPassword(authRequest: AuthRequest,
                                        authResponse: AuthResponse,
-                                       completionHandler: @escaping(MDAuthResultWithCompletion)) {
+                                       completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
         let dispatchGroup: DispatchGroup = .init()
         
@@ -136,7 +136,7 @@ fileprivate extension MDAuthManager {
     
     func saveUser(userEntity: UserResponse,
                   password: String,
-                  completionHandler: @escaping(MDUserResultWithCompletion)) {
+                  completionHandler: @escaping(MDOperationResultWithCompletion<UserResponse>)) {
         
         var userResults: [MDStorageType : UserResponse] = [ : ]
         
@@ -165,7 +165,7 @@ fileprivate extension MDAuthManager {
         }
     }
     
-    func saveJWT(jwtResponse: JWTResponse, completionHandler: @escaping(MDJWTResultWithCompletion)) {
+    func saveJWT(jwtResponse: JWTResponse, completionHandler: @escaping(MDOperationResultWithCompletion<JWTResponse>)) {
         
         var jwtResults: [MDStorageType : JWTResponse] = [ : ]
         

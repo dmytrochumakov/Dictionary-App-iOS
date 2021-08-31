@@ -11,11 +11,11 @@ final class MDCreateJWTMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDJWTMemoryStorage
     fileprivate let jwtResponse: JWTResponse
-    fileprivate let result: MDEntityResult<JWTResponse>?
+    fileprivate let result: MDOperationResultWithCompletion<JWTResponse>?
     
     init(memoryStorage: MDJWTMemoryStorage,
          jwtResponse: JWTResponse,
-         result: MDEntityResult<JWTResponse>?) {
+         result: MDOperationResultWithCompletion<JWTResponse>?) {
         
         self.memoryStorage = memoryStorage
         self.jwtResponse = jwtResponse

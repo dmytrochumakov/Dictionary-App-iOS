@@ -12,12 +12,12 @@ final class MDCreateLanguagesCoreDataStorageOperation: MDOperation {
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDLanguageCoreDataStorage
     fileprivate let languageEntities: [LanguageResponse]
-    fileprivate let result: MDEntitiesResult<LanguageResponse>?
+    fileprivate let result: MDOperationsResultWithCompletion<LanguageResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDLanguageCoreDataStorage,
          languageEntities: [LanguageResponse],
-         result: MDEntitiesResult<LanguageResponse>?) {
+         result: MDOperationsResultWithCompletion<LanguageResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage

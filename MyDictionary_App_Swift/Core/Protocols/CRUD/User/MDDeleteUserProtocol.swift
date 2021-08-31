@@ -9,5 +9,5 @@ import Foundation
 
 protocol MDDeleteUserProtocol {
     func deleteUser(_ userEntity: UserResponse,
-                    _ completionHandler: @escaping(MDEntityResult<UserResponse>))
+                    _ completionHandler: @escaping(MDOperationResultWithCompletion<UserResponse>))
 }

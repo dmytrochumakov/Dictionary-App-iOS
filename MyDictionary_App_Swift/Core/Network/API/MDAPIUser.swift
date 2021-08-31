@@ -10,7 +10,7 @@ import Foundation
 protocol MDAPIUserProtocol {
     func getUser(accessToken: String,
                  byUserId userId: Int64,
-                 completionHandler: @escaping(MDUserResultWithCompletion))
+                 completionHandler: @escaping(MDOperationResultWithCompletion<UserResponse>))
 }
 
 final class MDAPIUser: MDAPIUserProtocol {
@@ -91,7 +91,7 @@ extension MDAPIUser {
     
     func getUser(accessToken: String,
                  byUserId userId: Int64,
-                 completionHandler: @escaping(MDUserResultWithCompletion)) {
+                 completionHandler: @escaping(MDOperationResultWithCompletion<UserResponse>)) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
                                               endpoint: MDAPIUserEndpoint.getUser(accessToken: accessToken,

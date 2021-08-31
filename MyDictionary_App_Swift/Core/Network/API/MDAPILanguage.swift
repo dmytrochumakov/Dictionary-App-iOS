@@ -9,7 +9,7 @@ import Foundation
 
 protocol MDAPILanguageProtocol {
     func getLanguages(accessToken: String,
-                      _ completionHandler: @escaping(MDLanguagesResponseResultWithCompletion))
+                      _ completionHandler: @escaping(MDOperationsResultWithCompletion<LanguageResponse>))
 }
 
 final class MDAPILanguage: MDAPILanguageProtocol {
@@ -86,7 +86,7 @@ extension MDAPILanguage {
 extension MDAPILanguage {
     
     func getLanguages(accessToken: String,
-                      _ completionHandler: @escaping(MDLanguagesResponseResultWithCompletion)) {
+                      _ completionHandler: @escaping(MDOperationsResultWithCompletion<LanguageResponse>)) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
                                               endpoint: MDAPILanguageEndpoint.getLanguages(accessToken: accessToken)) { result in

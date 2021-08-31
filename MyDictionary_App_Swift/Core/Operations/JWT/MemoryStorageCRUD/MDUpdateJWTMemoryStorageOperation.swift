@@ -12,12 +12,12 @@ final class MDUpdateJWTMemoryStorageOperation: MDOperation {
     fileprivate let memoryStorage: MDJWTMemoryStorage
     fileprivate let oldAccessToken: String
     fileprivate let newJWTResponse: JWTResponse
-    fileprivate let result: MDEntityResult<JWTResponse>?
+    fileprivate let result: MDOperationResultWithCompletion<JWTResponse>?
 
     init(memoryStorage: MDJWTMemoryStorage,
          oldAccessToken: String,
          newJWTResponse: JWTResponse,
-         result: MDEntityResult<JWTResponse>?) {
+         result: MDOperationResultWithCompletion<JWTResponse>?) {
 
         self.memoryStorage = memoryStorage
         self.oldAccessToken = oldAccessToken

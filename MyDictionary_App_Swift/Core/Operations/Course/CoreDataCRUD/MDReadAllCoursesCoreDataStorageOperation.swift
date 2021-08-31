@@ -11,11 +11,11 @@ final class MDReadAllCoursesCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDCourseCoreDataStorage
-    fileprivate let result: MDEntitiesResult<CourseResponse>?
+    fileprivate let result: MDOperationsResultWithCompletion<CourseResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDCourseCoreDataStorage,
-         result: MDEntitiesResult<CourseResponse>?) {
+         result: MDOperationsResultWithCompletion<CourseResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage

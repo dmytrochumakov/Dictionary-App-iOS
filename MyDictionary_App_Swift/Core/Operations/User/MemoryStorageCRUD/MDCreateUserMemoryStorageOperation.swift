@@ -12,12 +12,12 @@ final class MDCreateUserMemoryStorageOperation: MDOperation {
     fileprivate let memoryStorage: MDUserMemoryStorage
     fileprivate var userEntity: UserResponse
     fileprivate let password: String
-    fileprivate let result: MDEntityResult<UserResponse>?
+    fileprivate let result: MDOperationResultWithCompletion<UserResponse>?
     
     init(memoryStorage: MDUserMemoryStorage,
          userEntity: UserResponse,
          password: String,
-         result: MDEntityResult<UserResponse>?) {
+         result: MDOperationResultWithCompletion<UserResponse>?) {
         
         self.memoryStorage = memoryStorage
         self.userEntity = userEntity

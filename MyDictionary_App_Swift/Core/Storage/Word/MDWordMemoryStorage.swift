@@ -61,7 +61,7 @@ extension MDWordMemoryStorage {
 // MARK: - CRUD
 extension MDWordMemoryStorage {
     
-    func createWord(_ wordModel: WordResponse, _ completionHandler: @escaping(MDEntityResult<WordResponse>)) {
+    func createWord(_ wordModel: WordResponse, _ completionHandler: @escaping(MDOperationResultWithCompletion<WordResponse>)) {
         let operation = MDCreateWordMemoryStorageOperation.init(wordStorage: self,
                                                                 word: wordModel) { result in
             completionHandler(result)
@@ -69,22 +69,22 @@ extension MDWordMemoryStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readWord(fromWordID wordId: Int64, _ completionHandler: @escaping(MDEntityResult<WordResponse>)) {
+    func readWord(fromWordID wordId: Int64, _ completionHandler: @escaping(MDOperationResultWithCompletion<WordResponse>)) {
         let operation = MDReadWordMemoryStorageOperation.init(wordStorage: self, wordId: wordId) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
     }
     
-    func readWords(fetchLimit: Int, fetchOffset: Int, _ completionHandler: @escaping (MDEntitiesResult<WordResponse>)) {
+    func readWords(fetchLimit: Int, fetchOffset: Int, _ completionHandler: @escaping (MDOperationsResultWithCompletion<WordResponse>)) {
         completionHandler(.failure(MDEntityOperationError.cantFindEntity))
     }
     
-    func readAllWords(_ completionHandler: @escaping (MDEntitiesResult<WordResponse>)) {
+    func readAllWords(_ completionHandler: @escaping (MDOperationsResultWithCompletion<WordResponse>)) {
         completionHandler(.success(self.arrayWords))
     }
     
-    func updateWord(byWordID wordId: Int64, newWordText: String, newWordDescription: String, _ completionHandler: @escaping(MDEntityResult<WordResponse>)) {
+    func updateWord(byWordID wordId: Int64, newWordText: String, newWordDescription: String, _ completionHandler: @escaping(MDOperationResultWithCompletion<WordResponse>)) {
         let operation = MDUpdateWordMemoryStorageOperation.init(wordStorage: self,
                                                                 wordId: wordId,
                                                                 newWordText: newWordText,
@@ -94,14 +94,14 @@ extension MDWordMemoryStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func deleteWord(_ word: WordResponse, _ completionHandler: @escaping(MDEntityResult<WordResponse>)) {
+    func deleteWord(_ word: WordResponse, _ completionHandler: @escaping(MDOperationResultWithCompletion<WordResponse>)) {
         let operation = MDDeleteWordMemoryStorageOperation.init(wordStorage: self, word: word) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
     }
     
-    func deleteAllWords(_ completionHandler: @escaping (MDEntityResult<Void>)) {
+    func deleteAllWords(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         let operation: MDDeleteAllWordsMemoryStorageOperation = .init(wordStorage: self) { result in
             completionHandler(result)
         }

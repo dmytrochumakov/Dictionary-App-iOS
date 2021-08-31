@@ -8,5 +8,5 @@
 import Foundation
 
 protocol MDCreateLanguageProtocol {
-    func createLanguages(_ languageEntities: [LanguageResponse], _ completionHandler: @escaping(MDEntityResult<[LanguageResponse]>))
+    func createLanguages(_ languageEntities: [LanguageResponse], _ completionHandler: @escaping(MDOperationResultWithCompletion<[LanguageResponse]>))
 }

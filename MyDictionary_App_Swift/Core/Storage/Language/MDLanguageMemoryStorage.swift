@@ -62,7 +62,7 @@ extension MDLanguageMemoryStorage {
 // MARK: - CRUD
 extension MDLanguageMemoryStorage {
     
-    func createLanguages(_ languageEntities: [LanguageResponse], _ completionHandler: @escaping (MDEntityResult<[LanguageResponse]>)) {
+    func createLanguages(_ languageEntities: [LanguageResponse], _ completionHandler: @escaping (MDOperationResultWithCompletion<[LanguageResponse]>)) {
         let operation: MDCreateLanguagesMemoryStorageOperation = .init(memoryStorage: self,
                                                                        languageEntities: languageEntities) { result in
             completionHandler(result)
@@ -70,14 +70,14 @@ extension MDLanguageMemoryStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readAllLanguages(_ completionHandler: @escaping (MDEntityResult<[LanguageResponse]>)) {
+    func readAllLanguages(_ completionHandler: @escaping (MDOperationResultWithCompletion<[LanguageResponse]>)) {
         let operation: MDReadAllLanguagesMemoryStorageOperation = .init(memoryStorage: self) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
     }
     
-    func deleteAllLanguages(_ completionHandler: @escaping (MDEntityResult<Void>)) {
+    func deleteAllLanguages(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         let operation: MDDeleteAllLanguagesMemoryStorageOperation = .init(memoryStorage: self) { result in
             completionHandler(result)
         }

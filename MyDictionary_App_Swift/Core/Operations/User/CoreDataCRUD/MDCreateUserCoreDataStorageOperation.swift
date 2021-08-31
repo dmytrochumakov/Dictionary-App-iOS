@@ -13,13 +13,13 @@ final class MDCreateUserCoreDataStorageOperation: MDOperation {
     fileprivate let coreDataStorage: MDUserCoreDataStorage
     fileprivate let userEntity: UserResponse
     fileprivate let password: String
-    fileprivate let result: MDEntityResult<UserResponse>?
+    fileprivate let result: MDOperationResultWithCompletion<UserResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDUserCoreDataStorage,
          userEntity: UserResponse,
          password: String,
-         result: MDEntityResult<UserResponse>?) {
+         result: MDOperationResultWithCompletion<UserResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage

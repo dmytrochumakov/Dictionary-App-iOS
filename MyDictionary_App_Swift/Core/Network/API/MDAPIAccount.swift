@@ -11,7 +11,7 @@ protocol MDAPIAccountProtocol {
     
     func deleteAccount(accessToken: String,
                        userId: Int64,
-                       completionHandler: @escaping(MDDeleteAccountResultWithCompletion))
+                       completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
     
 }
 
@@ -94,7 +94,7 @@ extension MDAPIAccount {
     
     func deleteAccount(accessToken: String,
                        userId: Int64,
-                       completionHandler: @escaping (MDDeleteAccountResultWithCompletion)) {
+                       completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
                                               endpoint: MDAPIAccountEndpoint.deleteAccount(accessToken: accessToken,

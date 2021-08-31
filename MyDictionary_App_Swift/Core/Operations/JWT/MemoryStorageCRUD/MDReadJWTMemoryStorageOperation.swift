@@ -11,11 +11,11 @@ final class MDReadJWTMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDJWTMemoryStorage
     fileprivate let accessToken: String
-    fileprivate let result: MDEntityResult<JWTResponse>?
+    fileprivate let result: MDOperationResultWithCompletion<JWTResponse>?
     
     init(memoryStorage: MDJWTMemoryStorage,
          accessToken: String,
-         result: MDEntityResult<JWTResponse>?) {
+         result: MDOperationResultWithCompletion<JWTResponse>?) {
         
         self.memoryStorage = memoryStorage
         self.accessToken = accessToken

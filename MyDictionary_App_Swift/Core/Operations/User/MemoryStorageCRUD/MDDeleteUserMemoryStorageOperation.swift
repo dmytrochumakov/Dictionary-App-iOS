@@ -11,11 +11,11 @@ final class MDDeleteUserMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDUserMemoryStorage
     fileprivate let userEntity: UserResponse
-    fileprivate let result: MDEntityResult<UserResponse>?
+    fileprivate let result: MDOperationResultWithCompletion<UserResponse>?
     
     init(memoryStorage: MDUserMemoryStorage,
          userEntity: UserResponse,
-         result: MDEntityResult<UserResponse>?) {
+         result: MDOperationResultWithCompletion<UserResponse>?) {
         
         self.memoryStorage = memoryStorage
         self.userEntity = userEntity

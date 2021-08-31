@@ -9,5 +9,5 @@ import Foundation
 
 protocol MDReadUserProtocol {
     func readUser(fromUserID userId: Int64,
-                  _ completionHandler: @escaping(MDEntityResult<UserResponse>))
+                  _ completionHandler: @escaping(MDOperationResultWithCompletion<UserResponse>))
 }

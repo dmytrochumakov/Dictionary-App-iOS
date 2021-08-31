@@ -12,15 +12,15 @@ protocol MDUserStorageProtocol: MDStorageProtocol {
     func createUser(_ userEntity: UserResponse,
                     password: String,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>))
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<UserResponse>>))
     
     func readUser(fromUserID userId: Int64,
                   storageType: MDStorageType,
-                  _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>))
+                  _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<UserResponse>>))
     
     func deleteUser(_ userEntity: UserResponse,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>))
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<UserResponse>>))
     
 }
 
@@ -52,7 +52,7 @@ extension MDUserStorage {
     func createUser(_ userEntity: UserResponse,
                     password: String,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
+                    _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<UserResponse>>)) {
         
         switch storageType {
         
@@ -74,7 +74,7 @@ extension MDUserStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDUserResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<UserResponse>> = []
             
             // Create in Memory
             // Dispatch Group Enter
@@ -110,7 +110,7 @@ extension MDUserStorage {
     
     func readUser(fromUserID userId: Int64,
                   storageType: MDStorageType,
-                  _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
+                  _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<UserResponse>>)) {
         
         switch storageType {
         
@@ -132,7 +132,7 @@ extension MDUserStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDUserResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<UserResponse>> = []
             
             // Read From Memory
             // Dispatch Group Enter
@@ -169,7 +169,7 @@ extension MDUserStorage {
     
     func deleteUser(_ userEntity: UserResponse,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
+                    _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<UserResponse>>)) {
         
         switch storageType {
         
@@ -191,7 +191,7 @@ extension MDUserStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDUserResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<UserResponse>> = []
             
             // Delete From Memory
             // Dispatch Group Enter
