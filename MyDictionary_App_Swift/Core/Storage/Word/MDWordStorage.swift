@@ -13,6 +13,10 @@ protocol MDWordStorageProtocol: MDStorageProtocol {
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>))
     
+    func createWords(_ wordModels: [WordResponse],
+                     storageType: MDStorageType,
+                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>))
+    
     func readWord(fromWordID wordId: Int64,
                   storageType: MDStorageType,
                   _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>))
@@ -99,6 +103,65 @@ extension MDWordStorage {
             // Dispatch Group Enter
             dispatchGroup.enter()
             coreDataStorage.createWord(wordModel) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
+            }
+            
+        }
+        
+    }
+    
+    func createWords(_ wordModels: [WordResponse],
+                     storageType: MDStorageType,
+                     _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>)) {
+        
+        switch storageType {
+        
+        case .memory:
+            
+            memoryStorage.createWords(wordModels) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .coreData:
+            
+            coreDataStorage.createWords(wordModels) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<WordResponse>> = []
+            
+            // Create in Memory
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.createWords(wordModels) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Create in Core Data
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.createWords(wordModels) { result in
                 
                 // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))

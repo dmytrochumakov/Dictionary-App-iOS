@@ -55,7 +55,11 @@ final class MDCreateCoursesMemoryStorageOperation: MDOperation {
     }
     
     override func main() {
-        self.memoryStorage.array = self.courseEntities
+        
+        self.courseEntities.forEach { courseEntity in
+            self.memoryStorage.array.append(courseEntity)
+        }
+        
         self.result?(.success(self.memoryStorage.array))
         self.finish()
     }

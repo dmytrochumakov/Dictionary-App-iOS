@@ -41,3 +41,29 @@ final class MDReadWordMemoryStorageOperation: MDOperation {
     }
     
 }
+
+final class MDReadAllWordsMemoryStorageOperation: MDOperation {
+    
+    fileprivate let memoryStorage: MDWordMemoryStorage
+    fileprivate let result: MDOperationsResultWithCompletion<WordResponse>?
+    
+    init(memoryStorage: MDWordMemoryStorage,
+         result: MDOperationsResultWithCompletion<WordResponse>?) {
+        
+        self.memoryStorage = memoryStorage
+        self.result = result
+        
+        super.init()
+    }
+    
+    override func main() {
+        self.result?(.success(self.memoryStorage.arrayWords))
+        self.finish()
+    }
+    
+    deinit {
+        debugPrint(#function, Self.self)
+        self.finish()
+    }
+    
+}

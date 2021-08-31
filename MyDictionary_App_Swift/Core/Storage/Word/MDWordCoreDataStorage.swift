@@ -75,6 +75,16 @@ extension MDWordCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
+    func createWords(_ wordModels: [WordResponse],
+                     _ completionHandler: @escaping (MDOperationsResultWithCompletion<WordResponse>)) {
+        let operation = MDCreateWordsCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                   coreDataStorage: self,
+                                                                   words: wordModels) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
+    }
+    
 }
 
 // MARK: - Read
