@@ -17,21 +17,27 @@ final class Sync: SyncProtocol {
         let accessToken: String
         let userId: Int64
     }
-        
+    
     fileprivate let apiLanguage: MDAPILanguageProtocol
     fileprivate let languageStorage: MDLanguageStorageProtocol
     fileprivate let apiCourse: MDAPICourseProtocol
     fileprivate let courseStorage: MDCourseStorageProtocol
-        
+    fileprivate let apiWord: MDAPIWordProtocol
+    fileprivate let wordStorage: MDWordStorageProtocol
+    
     init(apiLanguage: MDAPILanguageProtocol,
          languageStorage: MDLanguageStorageProtocol,
          apiCourse: MDAPICourseProtocol,
-         courseStorage: MDCourseStorageProtocol) {
+         courseStorage: MDCourseStorageProtocol,
+         apiWord: MDAPIWordProtocol,
+         wordStorage: MDWordStorageProtocol) {
         
         self.apiLanguage = apiLanguage
         self.languageStorage = languageStorage
         self.apiCourse = apiCourse
         self.courseStorage = courseStorage
+        self.apiWord = apiWord
+        self.wordStorage = wordStorage
         
     }
     
@@ -86,17 +92,17 @@ extension Sync {
             case .success(let languages):
                 
                 self?.languageStorage.createLanguages(storageType: .all,
-                                                      languageEntities: languages) { createLanguageResults in
+                                                      languageEntities: languages) { createLanguagesResults in
                     
-                    createLanguageResults.forEach { createLanguageResult in
+                    createLanguagesResults.forEach { createLanguagesResult in
                         
-                        switch createLanguageResult.result {
+                        switch createLanguagesResult.result {
                         
                         case .success:
                             
                             countResult += 1
                             
-                            if (countResult == createLanguageResults.count) {
+                            if (countResult == createLanguagesResults.count) {
                                 completionHandler(.success(()))
                                 break
                             }
@@ -130,17 +136,61 @@ extension Sync {
             
             case .success(let courses):
                 
-                self?.courseStorage.createCourses(storageType: .all, courseEntities: courses) { createCourseResults in
+                self?.courseStorage.createCourses(storageType: .all, courseEntities: courses) { createCoursesResults in
                     
-                    createCourseResults.forEach { createCourseResult in
+                    createCoursesResults.forEach { createCoursesResult in
                         
-                        switch createCourseResult.result {
+                        switch createCoursesResult.result {
                         
                         case .success:
                             
                             countResult += 1
                             
-                            if (countResult == createCourseResults.count) {
+                            if (countResult == createCoursesResults.count) {
+                                completionHandler(.success(()))
+                                break
+                            }
+                            
+                        case .failure(let error):
+                            completionHandler(.failure(error))
+                            break
+                        }
+                        
+                    }
+                    
+                }
+                
+            case .failure(let error):
+                completionHandler(.failure(error))
+                break
+            }
+            
+        }
+        
+    }
+    
+    // Word
+    func apiGetAndSaveWords(withSyncItem item: SyncItem, completionHandler: @escaping(SyncResultWithCompletion)) {
+        
+        var countResult: Int = .zero
+        
+        apiWord.getWords(accessToken: item.accessToken, byUserId: item.userId) { [weak self] wordsResult in
+            
+            switch wordsResult {
+            
+            case .success(let words):
+                
+                self?.wordStorage.createWords(words, storageType: .all) { createWordsResults in
+                    
+                    createWordsResults.forEach { createWordsResult in
+                        
+                        switch createWordsResult.result {
+                        
+                        case .success:
+                            
+                            countResult += 1
+                            
+                            if (countResult == createWordsResults.count) {
                                 completionHandler(.success(()))
                                 break
                             }
