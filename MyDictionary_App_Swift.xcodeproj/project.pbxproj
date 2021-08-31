@@ -61,6 +61,7 @@
 		2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8B626512F5B004F2FE9 /* AppLanguageType.swift */; };
 		2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */; };
 		2223F8BC26512FFD004F2FE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2223F8BE26512FFD004F2FE9 /* Localizable.strings */; };
+		223648EA26DE38970071F271 /* Sync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223648E926DE38970071F271 /* Sync.swift */; };
 		22493C2E26971413000DA480 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C2D26971413000DA480 /* CoreDataStack.swift */; };
 		22493C312697159E000DA480 /* CDResultSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C302697159E000DA480 /* CDResultSaved.swift */; };
 		22493C33269715A9000DA480 /* CDResultSavedEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C32269715A9000DA480 /* CDResultSavedEnum.swift */; };
@@ -389,6 +390,7 @@
 		2223F8B626512F5B004F2FE9 /* AppLanguageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageType.swift; sourceTree = "<group>"; };
 		2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageService.swift; sourceTree = "<group>"; };
 		2223F8BD26512FFD004F2FE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		223648E926DE38970071F271 /* Sync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sync.swift; sourceTree = "<group>"; };
 		22493C2D26971413000DA480 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		22493C302697159E000DA480 /* CDResultSaved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDResultSaved.swift; sourceTree = "<group>"; };
 		22493C32269715A9000DA480 /* CDResultSavedEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDResultSavedEnum.swift; sourceTree = "<group>"; };
@@ -1049,6 +1051,14 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		223648E826DE38050071F271 /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				223648E926DE38970071F271 /* Sync.swift */,
+			);
+			path = Sync;
+			sourceTree = "<group>";
+		};
 		22493C3F26972687000DA480 /* AttributeName */ = {
 			isa = PBXGroup;
 			children = (
@@ -1277,6 +1287,7 @@
 		2289CEB62678CC34007254C3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				223648E826DE38050071F271 /* Sync */,
 				228722CF26D0F16E00C9D1BC /* Manager */,
 				220FFE7826C9060100702CCE /* Storage */,
 				22EF01E6269DA6D400FE4435 /* Network */,
@@ -2458,6 +2469,7 @@
 				22B8E6EC26D3C9B7001CCCA8 /* MDReadCourseMemoryStorageOperation.swift in Sources */,
 				228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */,
 				22DE582A26C9549B0032A94C /* MDCreateJWTProtocol.swift in Sources */,
+				223648EA26DE38970071F271 /* Sync.swift in Sources */,
 				22EF01E5269D9EBC00FE4435 /* MDEntitiesIsEmptyResultWithCompletion.swift in Sources */,
 				22C5863B26C7AFB80030B12D /* RegistrationPresenter.swift in Sources */,
 				2294D6C326A2F1B60066BE77 /* CDUserResponseEntity+Extension.swift in Sources */,
