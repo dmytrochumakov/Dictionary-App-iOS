@@ -59,12 +59,26 @@ extension Sync {
         
         // Dispatch Group Enter
         dispatchGroup.enter()
-        // Get And Save Langauges
+        // Get API And Save Languages
         apiGetAndSaveLanguages(withSyncItem: item) { result in
             // Append Sync Result
             syncResults.append(.init(syncType: .language,
                                      result: result))
             // Dispatch Group Leave
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        apiGetAndSaveCourses(withSyncItem: item) { result in
+            syncResults.append(.init(syncType: .course,
+                                     result: result))
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        apiGetAndSaveWords(withSyncItem: item) { result in
+            syncResults.append(.init(syncType: .word,
+                                     result: result))
             dispatchGroup.leave()
         }
         
@@ -221,6 +235,8 @@ final class MemorySync {
 
 enum SyncType {
     case language
+    case course
+    case word
 }
 
 struct SyncResult {
