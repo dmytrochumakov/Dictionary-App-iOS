@@ -100,7 +100,7 @@ extension MDAPIJWT {
                 debugPrint(#function, Self.self, "dataCount: ", data.count)
                 
                 do {
-                    completionHandler(.success(try JSONDecoder.init().decode(AuthResponse.self, from: data).jwtResponse))
+                    completionHandler(.success(try JSONDecoder.init().decode(JWTResponse.self, from: data)))
                 } catch (_) {
                     completionHandler(.failure(MDAPIError.parseError))
                 }
