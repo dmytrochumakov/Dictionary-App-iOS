@@ -15,9 +15,12 @@ final class Sync: SyncProtocol {
     
     public struct SyncItem {
         let accessToken: String
+        let password: String
         let userId: Int64
     }
     
+    fileprivate let apiUser: MDAPIUserProtocol
+    fileprivate let userStorage: MDUserStorageProtocol
     fileprivate let apiLanguage: MDAPILanguageProtocol
     fileprivate let languageStorage: MDLanguageStorageProtocol
     fileprivate let apiCourse: MDAPICourseProtocol
@@ -25,13 +28,17 @@ final class Sync: SyncProtocol {
     fileprivate let apiWord: MDAPIWordProtocol
     fileprivate let wordStorage: MDWordStorageProtocol
     
-    init(apiLanguage: MDAPILanguageProtocol,
+    init(apiUser: MDAPIUserProtocol,
+         userStorage: MDUserStorageProtocol,
+         apiLanguage: MDAPILanguageProtocol,
          languageStorage: MDLanguageStorageProtocol,
          apiCourse: MDAPICourseProtocol,
          courseStorage: MDCourseStorageProtocol,
          apiWord: MDAPIWordProtocol,
          wordStorage: MDWordStorageProtocol) {
         
+        self.apiUser = apiUser
+        self.userStorage = userStorage
         self.apiLanguage = apiLanguage
         self.languageStorage = languageStorage
         self.apiCourse = apiCourse
@@ -59,26 +66,39 @@ extension Sync {
         
         // Dispatch Group Enter
         dispatchGroup.enter()
-        // Get API And Save Languages
-        apiGetAndSaveLanguages(withSyncItem: item) { result in
+        // Get API And Save User
+        apiGetAndSaveUser(withSyncItem: item) { result in
             // Append Sync Result
-            syncResults.append(.init(syncType: .language,
-                                     result: result))
+            syncResults.append(result)
             // Dispatch Group Leave
             dispatchGroup.leave()
         }
         
+        // Dispatch Group Enter
         dispatchGroup.enter()
-        apiGetAndSaveCourses(withSyncItem: item) { result in
-            syncResults.append(.init(syncType: .course,
-                                     result: result))
+        // Get API And Save Languages
+        apiGetAndSaveLanguages(withSyncItem: item) { result in
+            // Append Sync Result
+            syncResults.append(result)
+            // Dispatch Group Leave
             dispatchGroup.leave()
         }
         
+        // Dispatch Group Enter
         dispatchGroup.enter()
+        // Get API And Save Courses
+        apiGetAndSaveCourses(withSyncItem: item) { result in
+            // Append Sync Result
+            syncResults.append(result)
+            // Dispatch Group Leave
+            dispatchGroup.leave()
+        }
+        
+        // Dispatch Group Enter
+        dispatchGroup.enter()
+        // Get API And Save Words
         apiGetAndSaveWords(withSyncItem: item) { result in
-            syncResults.append(.init(syncType: .word,
-                                     result: result))
+            syncResults.append(result)
             dispatchGroup.leave()
         }
         
@@ -94,9 +114,59 @@ extension Sync {
 // MARK: - API
 extension Sync {
     
+    // User
+    func apiGetAndSaveUser(withSyncItem item: SyncItem, completionHandler: @escaping(SyncResultWithCompletion)) {
+     
+        let syncStep: SyncStep = .user
+        var countResult: Int = .zero
+        
+        apiUser.getUser(accessToken: item.accessToken,
+                        byUserId: item.userId) { [weak self] userResult in
+            
+            switch userResult {
+            
+            case .success(let user):
+                
+                self?.userStorage.createUser(user,
+                                             password: item.password,
+                                             storageType: .all) { createUserResults in
+                    
+                    createUserResults.forEach { createUserResult in
+                        
+                        switch createUserResult.result {
+                        
+                        case .success:
+                            
+                            countResult += 1
+                            
+                            if (countResult == createUserResults.count) {
+                                completionHandler(.init(syncStep: syncStep, result: .success(())))
+                                break
+                            }
+                            
+                        case .failure(let error):
+                            completionHandler(.init(syncStep: syncStep, result: .failure(error)))
+                            break
+                        }
+                        
+                    }
+                    
+                }
+                
+            case .failure(let error):
+                completionHandler(.init(syncStep: syncStep, result: .failure(error)))
+                break
+                
+            }
+            
+        }
+        
+    }
+    
     // Language
     func apiGetAndSaveLanguages(withSyncItem item: SyncItem, completionHandler: @escaping(SyncResultWithCompletion)) {
         
+        let syncStep: SyncStep = .language
         var countResult: Int = .zero
         
         apiLanguage.getLanguages(accessToken: item.accessToken) { [weak self] languagesResult in
@@ -117,12 +187,12 @@ extension Sync {
                             countResult += 1
                             
                             if (countResult == createLanguagesResults.count) {
-                                completionHandler(.success(()))
+                                completionHandler(.init(syncStep: syncStep, result: .success(())))
                                 break
                             }
                             
                         case .failure(let error):
-                            completionHandler(.failure(error))
+                            completionHandler(.init(syncStep: syncStep, result: .failure(error)))
                             break
                         }
                         
@@ -131,7 +201,7 @@ extension Sync {
                 }
                 
             case .failure(let error):
-                completionHandler(.failure(error))
+                completionHandler(.init(syncStep: syncStep, result: .failure(error)))
                 break
             }
             
@@ -142,6 +212,7 @@ extension Sync {
     // Course
     func apiGetAndSaveCourses(withSyncItem item: SyncItem, completionHandler: @escaping(SyncResultWithCompletion)) {
         
+        let syncStep: SyncStep = .course
         var countResult: Int = .zero
         
         apiCourse.getCourses(accessToken: item.accessToken, byUserId: item.userId) { [weak self] coursesResult in
@@ -161,12 +232,12 @@ extension Sync {
                             countResult += 1
                             
                             if (countResult == createCoursesResults.count) {
-                                completionHandler(.success(()))
+                                completionHandler(.init(syncStep: syncStep, result: .success(())))
                                 break
                             }
                             
                         case .failure(let error):
-                            completionHandler(.failure(error))
+                            completionHandler(.init(syncStep: syncStep, result: .failure(error)))
                             break
                         }
                         
@@ -175,7 +246,7 @@ extension Sync {
                 }
                 
             case .failure(let error):
-                completionHandler(.failure(error))
+                completionHandler(.init(syncStep: syncStep, result: .failure(error)))
                 break
             }
             
@@ -186,6 +257,7 @@ extension Sync {
     // Word
     func apiGetAndSaveWords(withSyncItem item: SyncItem, completionHandler: @escaping(SyncResultWithCompletion)) {
         
+        let syncStep: SyncStep = .word
         var countResult: Int = .zero
         
         apiWord.getWords(accessToken: item.accessToken, byUserId: item.userId) { [weak self] wordsResult in
@@ -205,12 +277,12 @@ extension Sync {
                             countResult += 1
                             
                             if (countResult == createWordsResults.count) {
-                                completionHandler(.success(()))
+                                completionHandler(.init(syncStep: syncStep, result: .success(())))
                                 break
                             }
                             
                         case .failure(let error):
-                            completionHandler(.failure(error))
+                            completionHandler(.init(syncStep: syncStep, result: .failure(error)))
                             break
                         }
                         
@@ -219,7 +291,7 @@ extension Sync {
                 }
                 
             case .failure(let error):
-                completionHandler(.failure(error))
+                completionHandler(.init(syncStep: syncStep, result: .failure(error)))
                 break
             }
             
@@ -233,16 +305,17 @@ final class MemorySync {
     
 }
 
-enum SyncType {
+enum SyncStep {
+    case user
     case language
     case course
     case word
 }
 
 struct SyncResult {
-    let syncType: SyncType
+    let syncStep: SyncStep
     let result: SyncResultWithoutCompletion
 }
 
 typealias SyncResultWithoutCompletion = (Result<Void, Error>)
-typealias SyncResultWithCompletion = ((SyncResultWithoutCompletion) -> Void)
+typealias SyncResultWithCompletion = ((SyncResult) -> Void)
