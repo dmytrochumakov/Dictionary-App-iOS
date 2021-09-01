@@ -47,7 +47,11 @@ extension MDAuthManager {
                 syncManager.start(withSyncItem: .init(accessToken: authResponse.jwtResponse.accessToken,
                                                       password: authRequest.password,
                                                       userId: authResponse.userResponse.userId,
-                                                      nickname: authRequest.nickname)) { [unowned self] (syncResult) in
+                                                      nickname: authRequest.nickname)) { progress in
+                    
+                    debugPrint(#function, Self.self, "progress: ", progress)
+                    
+                } completionHandler: { [unowned self] (syncResult) in
                     
                     switch syncResult {
                     

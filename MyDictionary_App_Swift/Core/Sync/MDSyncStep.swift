@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MDSyncStep {
+enum MDSyncStep: Int, CaseIterable {
     case jwt
     case user
     case language
