@@ -43,14 +43,65 @@ final class MDDeleteUserCoreDataStorageOperation: MDOperation {
                 DispatchQueue.main.async {
                     switch result {
                     case .success:
-                        guard let self = self
-                        else {
-                            self?.result?(.failure(MDEntityOperationError.objectRemovedFromMemory));
-                            self?.finish() ;
-                            return
-                        }
-                        self.result?(.success(()))
-                        self.finish()
+                        self?.result?(.success(()))
+                        self?.finish()
+                    case .failure(let error):
+                        self?.result?(.failure(error))
+                        self?.finish()
+                    }
+                }
+            }
+            
+        } catch let error {
+            DispatchQueue.main.async {
+                self.result?(.failure(error))
+                self.finish()
+            }
+        }
+        
+    }
+    
+    deinit {
+        debugPrint(#function, Self.self)
+        self.finish()
+    }
+    
+}
+
+final class MDDeleteAllUsersCoreDataStorageOperation: MDOperation {
+    
+    fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let coreDataStorage: MDUserCoreDataStorage
+    fileprivate let result: MDOperationResultWithCompletion<Void>?
+    
+    init(managedObjectContext: NSManagedObjectContext,
+         coreDataStorage: MDUserCoreDataStorage,
+         result: MDOperationResultWithCompletion<Void>?) {
+        
+        self.managedObjectContext = managedObjectContext
+        self.coreDataStorage = coreDataStorage
+        self.result = result
+        
+        super.init()
+        
+    }
+    
+    override func main() {
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDUserResponseEntity)
+        
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            
+            try managedObjectContext.execute(batchDeleteRequest)
+            
+            self.coreDataStorage.savePerform { [weak self] (result) in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success:
+                        self?.result?(.success(()))
+                        self?.finish()
                     case .failure(let error):
                         self?.result?(.failure(error))
                         self?.finish()

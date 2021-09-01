@@ -17,10 +17,20 @@ protocol MDAppDependenciesProtocol {
     var operationQueueService: OperationQueueServiceProtocol! { get }
     var coreDataStack: CoreDataStack! { get }
     
+    // API //
+    var apiJWT: MDAPIJWTProtocol! { get }
+    var apiUser: MDAPIUserProtocol! { get }
+    var apiLanguage: MDAPILanguageProtocol! { get }
+    var apiCourse: MDAPICourseProtocol! { get }
+    var apiWord: MDAPIWordProtocol! { get }
+    // End API //
+    
     // Storage //
-    var wordStorage: MDWordStorageProtocol! { get }
-    var userStorage: MDUserStorageProtocol! { get }
     var jwtStorage: MDJWTStorageProtocol! { get }
+    var userStorage: MDUserStorageProtocol! { get }
+    var languageStorage: MDLanguageStorageProtocol! { get }
+    var courseStorage: MDCourseStorageProtocol! { get }
+    var wordStorage: MDWordStorageProtocol! { get }
     // End Storage
     
     var appSettings: AppSettingsProtocol! { get }
@@ -36,10 +46,20 @@ final class MDAppDependencies: NSObject,
     var operationQueueService: OperationQueueServiceProtocol!
     var coreDataStack: CoreDataStack!
     
+    // API //
+    var apiJWT: MDAPIJWTProtocol!
+    var apiUser: MDAPIUserProtocol!
+    var apiLanguage: MDAPILanguageProtocol!
+    var apiCourse: MDAPICourseProtocol!
+    var apiWord: MDAPIWordProtocol!
+    // End API //
+    
     // Storage //
-    var wordStorage: MDWordStorageProtocol!
-    var userStorage: MDUserStorageProtocol!
     var jwtStorage: MDJWTStorageProtocol!
+    var userStorage: MDUserStorageProtocol!
+    var languageStorage: MDLanguageStorageProtocol!
+    var courseStorage: MDCourseStorageProtocol!
+    var wordStorage: MDWordStorageProtocol!
     // End Storage //
     
     var appSettings: AppSettingsProtocol!
@@ -71,20 +91,48 @@ extension MDAppDependencies {
         let coreDataStack: CoreDataStack = .init()
         self.coreDataStack = coreDataStack        
         //
+        let requestDispatcher: MDRequestDispatcherProtocol = Constants.RequestDispatcher.defaultRequestDispatcher(reachability: reachability)
+        //
+        
+        
+        // API //
+        let apiJWT: MDAPIJWTProtocol = MDAPIJWT.init(requestDispatcher: requestDispatcher,
+                                                     operationQueueService: operationQueueService)
+        self.apiJWT = apiJWT
+        //
+        let apiUser: MDAPIUserProtocol = MDAPIUser.init(requestDispatcher: requestDispatcher,
+                                                        operationQueueService: operationQueueService)
+        self.apiUser = apiUser
+        //
+        let apiLanguage: MDAPILanguageProtocol = MDAPILanguage.init(requestDispatcher: requestDispatcher,
+                                                                    operationQueueService: operationQueueService)
+        self.apiLanguage = apiLanguage
+        //
+        let apiCourse: MDAPICourseProtocol = MDAPICourse.init(requestDispatcher: requestDispatcher,
+                                                              operationQueueService: operationQueueService)
+        self.apiCourse = apiCourse
+        //
+        let apiWord: MDAPIWordProtocol = MDAPIWord.init(requestDispatcher: requestDispatcher,
+                                                        operationQueueService: operationQueueService)
+        self.apiWord = apiWord
+        //
+        // END API //
+        
+        
         // Storage //
-        // Word //
-        let wordMemoryStorage: MDWordMemoryStorageProtocol = MDWordMemoryStorage.init(operationQueueService: operationQueueService,
-                                                                                      arrayWords: [])
+        // JWT //
+        let jwtMemoryStorage: MDJWTMemoryStorageProtocol = MDJWTMemoryStorage.init(operationQueueService: operationQueueService,
+                                                                                   array: .init())
         
-        let wordCoreDataStorage: MDWordCoreDataStorageProtocol = MDWordCoreDataStorage.init(operationQueueService: operationQueueService,
-                                                                                            managedObjectContext: coreDataStack.privateContext,
-                                                                                            coreDataStack: coreDataStack)
+        let jwtCoreDataStorage: MDJWTCoreDataStorageProtocol = MDJWTCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                                         managedObjectContext: coreDataStack.privateContext,
+                                                                                         coreDataStack: coreDataStack)
         
-        let wordStorage: MDWordStorageProtocol = MDWordStorage.init(memoryStorage: wordMemoryStorage,
-                                                                    coreDataStorage: wordCoreDataStorage)
+        let jwtStorage: MDJWTStorageProtocol = MDJWTStorage.init(memoryStorage: jwtMemoryStorage,
+                                                                 coreDataStorage: jwtCoreDataStorage)
         
-        self.wordStorage = wordStorage
-        // End Word //
+        self.jwtStorage = jwtStorage
+        // End JWT //
         
         // User //
         let userMemoryStorage: MDUserMemoryStorageProtocol = MDUserMemoryStorage.init(operationQueueService: operationQueueService,
@@ -100,19 +148,47 @@ extension MDAppDependencies {
         self.userStorage = userStorage
         // End User //
         
-        // JWT //
-        let jwtMemoryStorage: MDJWTMemoryStorageProtocol = MDJWTMemoryStorage.init(operationQueueService: operationQueueService,
-                                                                                   array: .init())
+        // Language //
+        let languageMemoryStorage: MDLanguageMemoryStorageProtocol = MDLanguageMemoryStorage.init(operationQueueService: operationQueueService,
+                                                                                                  array: .init())
         
-        let jwtCoreDataStorage: MDJWTCoreDataStorageProtocol = MDJWTCoreDataStorage.init(operationQueueService: operationQueueService,
-                                                                                         managedObjectContext: coreDataStack.privateContext,
-                                                                                         coreDataStack: coreDataStack)
+        let languageCoreDataStorage: MDLanguageCoreDataStorageProtocol = MDLanguageCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                                                        managedObjectContext: coreDataStack.privateContext,
+                                                                                                        coreDataStack: coreDataStack)
         
-        let jwtStorage: MDJWTStorageProtocol = MDJWTStorage.init(memoryStorage: jwtMemoryStorage,
-                                                                 coreDataStorage: jwtCoreDataStorage)
+        let languageStorage: MDLanguageStorageProtocol = MDLanguageStorage.init(memoryStorage: languageMemoryStorage,
+                                                                                coreDataStorage: languageCoreDataStorage)
         
-        self.jwtStorage = jwtStorage
-        // End JWT //
+        self.languageStorage = languageStorage
+        // End Language //
+        
+        // Language //
+        let courseMemoryStorage: MDCourseMemoryStorageProtocol = MDCourseMemoryStorage.init(operationQueueService: operationQueueService,
+                                                                                            array: .init())
+        
+        let courseCoreDataStorage: MDCourseCoreDataStorageProtocol = MDCourseCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                                                  managedObjectContext: coreDataStack.privateContext,
+                                                                                                  coreDataStack: coreDataStack)
+        
+        let courseStorage: MDCourseStorageProtocol = MDCourseStorage.init(memoryStorage: courseMemoryStorage,
+                                                                          coreDataStorage: courseCoreDataStorage)
+        
+        self.courseStorage = courseStorage
+        // End Language //
+        
+        // Word //
+        let wordMemoryStorage: MDWordMemoryStorageProtocol = MDWordMemoryStorage.init(operationQueueService: operationQueueService,
+                                                                                      arrayWords: .init())
+        
+        let wordCoreDataStorage: MDWordCoreDataStorageProtocol = MDWordCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                                            managedObjectContext: coreDataStack.privateContext,
+                                                                                            coreDataStack: coreDataStack)
+        
+        let wordStorage: MDWordStorageProtocol = MDWordStorage.init(memoryStorage: wordMemoryStorage,
+                                                                    coreDataStorage: wordCoreDataStorage)
+        
+        self.wordStorage = wordStorage
+        // End Word //
         // End Storage //        
         
         let userDefaults: UserDefaults = .standard

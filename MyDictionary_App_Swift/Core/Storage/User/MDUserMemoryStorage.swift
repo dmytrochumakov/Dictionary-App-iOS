@@ -96,4 +96,11 @@ extension MDUserMemoryStorage {
         operationQueueService.enqueue(operation)
     }
     
+    func deleteAllUsers(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+        let operation = MDDeleteAllUsersMemoryStorageOperation.init(memoryStorage: self) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
+    }
+    
 }

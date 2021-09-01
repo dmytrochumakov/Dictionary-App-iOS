@@ -22,6 +22,9 @@ protocol MDUserStorageProtocol: MDStorageProtocol {
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
     
+    func deleteAllUsers(storageType: MDStorageType,
+                        _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
+    
 }
 
 final class MDUserStorage: MDStorage, MDUserStorageProtocol {
@@ -209,6 +212,64 @@ extension MDUserStorage {
             // Dispatch Group Enter
             dispatchGroup.enter()
             coreDataStorage.deleteUser(userId) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
+            }
+            
+        }
+        
+    }
+    
+    func deleteAllUsers(storageType: MDStorageType,
+                        _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
+        
+        switch storageType {
+        
+        case .memory:
+            
+            memoryStorage.deleteAllUsers { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .coreData:
+            
+            coreDataStorage.deleteAllUsers { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
+            
+            // Delete From Memory
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.deleteAllUsers { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Delete From Core Data
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.deleteAllUsers { result in
                 
                 // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))

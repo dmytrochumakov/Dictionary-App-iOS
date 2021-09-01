@@ -122,6 +122,14 @@ extension MDUserCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
+    func deleteAllUsers(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+        let operation = MDDeleteAllUsersCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                      coreDataStorage: self) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
+    }
+    
 }
 
 // MARK: - Save

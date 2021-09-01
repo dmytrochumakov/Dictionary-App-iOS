@@ -43,3 +43,31 @@ final class MDDeleteUserMemoryStorageOperation: MDOperation {
     }
     
 }
+
+final class MDDeleteAllUsersMemoryStorageOperation: MDOperation {
+    
+    fileprivate let memoryStorage: MDUserMemoryStorage
+    fileprivate let result: MDOperationResultWithCompletion<Void>?
+    
+    init(memoryStorage: MDUserMemoryStorage,
+         result: MDOperationResultWithCompletion<Void>?) {
+        
+        self.memoryStorage = memoryStorage
+        self.result = result
+        
+        super.init()
+        
+    }
+    
+    override func main() {
+        self.memoryStorage.array.removeAll()
+        self.result?(.success(()))
+        self.finish()
+    }
+    
+    deinit {
+        debugPrint(#function, Self.self)
+        self.finish()
+    }
+    
+}
