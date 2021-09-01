@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SyncProtocol {
-    func start(withSyncItem item: Sync.SyncItem, completionHandler: @escaping(([SyncResult]) -> Void))
+    func start(completionHandler: @escaping(([SyncResult]) -> Void))
 }
 
 final class Sync: SyncProtocol {
@@ -19,6 +19,7 @@ final class Sync: SyncProtocol {
         let userId: Int64
     }
     
+    fileprivate let syncItem: SyncItem
     fileprivate let apiUser: MDAPIUserProtocol
     fileprivate let userStorage: MDUserStorageProtocol
     fileprivate let apiLanguage: MDAPILanguageProtocol
@@ -28,7 +29,8 @@ final class Sync: SyncProtocol {
     fileprivate let apiWord: MDAPIWordProtocol
     fileprivate let wordStorage: MDWordStorageProtocol
     
-    init(apiUser: MDAPIUserProtocol,
+    init(syncItem: SyncItem,
+         apiUser: MDAPIUserProtocol,
          userStorage: MDUserStorageProtocol,
          apiLanguage: MDAPILanguageProtocol,
          languageStorage: MDLanguageStorageProtocol,
@@ -37,6 +39,7 @@ final class Sync: SyncProtocol {
          apiWord: MDAPIWordProtocol,
          wordStorage: MDWordStorageProtocol) {
         
+        self.syncItem = syncItem
         self.apiUser = apiUser
         self.userStorage = userStorage
         self.apiLanguage = apiLanguage
@@ -56,7 +59,7 @@ final class Sync: SyncProtocol {
 
 extension Sync {
     
-    func start(withSyncItem item: SyncItem, completionHandler: @escaping(([SyncResult]) -> Void)) {
+    func start(completionHandler: @escaping(([SyncResult]) -> Void)) {
         
         // Initialize Sync Results
         var syncResults: [SyncResult] = []
@@ -67,7 +70,7 @@ extension Sync {
         // Dispatch Group Enter
         dispatchGroup.enter()
         // Get API And Save User
-        apiGetAndSaveUser(withSyncItem: item) { result in
+        apiGetAndSaveUser(withSyncItem: self.syncItem) { result in
             // Append Sync Result
             syncResults.append(result)
             // Dispatch Group Leave
@@ -77,7 +80,7 @@ extension Sync {
         // Dispatch Group Enter
         dispatchGroup.enter()
         // Get API And Save Languages
-        apiGetAndSaveLanguages(withSyncItem: item) { result in
+        apiGetAndSaveLanguages(withSyncItem: self.syncItem) { result in
             // Append Sync Result
             syncResults.append(result)
             // Dispatch Group Leave
@@ -87,7 +90,7 @@ extension Sync {
         // Dispatch Group Enter
         dispatchGroup.enter()
         // Get API And Save Courses
-        apiGetAndSaveCourses(withSyncItem: item) { result in
+        apiGetAndSaveCourses(withSyncItem: self.syncItem) { result in
             // Append Sync Result
             syncResults.append(result)
             // Dispatch Group Leave
@@ -97,8 +100,10 @@ extension Sync {
         // Dispatch Group Enter
         dispatchGroup.enter()
         // Get API And Save Words
-        apiGetAndSaveWords(withSyncItem: item) { result in
+        apiGetAndSaveWords(withSyncItem: self.syncItem) { result in
+            // Append Sync Result
             syncResults.append(result)
+            // Dispatch Group Leave
             dispatchGroup.leave()
         }
         
@@ -116,7 +121,7 @@ extension Sync {
     
     // User
     func apiGetAndSaveUser(withSyncItem item: SyncItem, completionHandler: @escaping(SyncResultWithCompletion)) {
-     
+        
         let syncStep: SyncStep = .user
         var countResult: Int = .zero
         
