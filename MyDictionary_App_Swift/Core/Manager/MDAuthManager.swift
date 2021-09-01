@@ -16,11 +16,11 @@ final class MDAuthManager: MDAuthManagerProtocol {
     
     fileprivate let apiAuth: MDAPIAuthProtocol
     fileprivate let appSettings: AppSettingsProtocol
-    fileprivate let syncManager: SyncManagerProtocol
+    fileprivate let syncManager: MDSyncManagerProtocol
     
     init(apiAuth: MDAPIAuthProtocol,
          appSettings: AppSettingsProtocol,
-         syncManager: SyncManagerProtocol) {
+         syncManager: MDSyncManagerProtocol) {
         
         self.apiAuth = apiAuth
         self.appSettings = appSettings
@@ -47,10 +47,35 @@ extension MDAuthManager {
                 syncManager.start(withSyncItem: .init(accessToken: authResponse.jwtResponse.accessToken,
                                                       password: authRequest.password,
                                                       userId: authResponse.userResponse.userId,
-                                                      nickname: authRequest.nickname))
+                                                      nickname: authRequest.nickname)) { [unowned self] (syncResult) in
+                    
+                    switch syncResult {
+                    
+                    case .success:
+                        
+                        //
+                        setIsLoggedInIntoTrue()
+                        //
+                        completionHandler(.success(()))
+                        //
+                        break
+                    //
+                    case .failure(let error):
+                        //
+                        completionHandler(.failure(error))
+                        //
+                        break
+                    //
+                    }
+                    
+                }
                 
             case .failure(let error):
+                //
                 completionHandler(.failure(error))
+                //
+                break
+            //
             }
             
         }
@@ -64,11 +89,16 @@ extension MDAuthManager {
             switch registerResult {
             
             case .success(let authResponse):
-                                
-                break
                 
+                //
+                break
+            //
             case .failure(let error):
+                //
                 completionHandler(.failure(error))
+                //
+                break
+            //
             }
             
         }

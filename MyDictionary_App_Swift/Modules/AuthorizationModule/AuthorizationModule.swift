@@ -36,18 +36,18 @@ extension AuthorizationModule {
         let apiAuth: MDAPIAuthProtocol = MDAPIAuth.init(requestDispatcher: Constants.RequestDispatcher.defaultRequestDispatcher(reachability: Constants.AppDependencies.dependencies.reachability),
                                                         operationQueueService: Constants.AppDependencies.dependencies.operationQueueService)
         
-        let sync: SyncProtocol = Sync.init(apiJWT: Constants.AppDependencies.dependencies.apiJWT,
-                                           jwtStorage: Constants.AppDependencies.dependencies.jwtStorage,
-                                           apiUser: Constants.AppDependencies.dependencies.apiUser,
-                                           userStorage: Constants.AppDependencies.dependencies.userStorage,
-                                           apiLanguage: Constants.AppDependencies.dependencies.apiLanguage,
-                                           languageStorage: Constants.AppDependencies.dependencies.languageStorage,
-                                           apiCourse: Constants.AppDependencies.dependencies.apiCourse,
-                                           courseStorage: Constants.AppDependencies.dependencies.courseStorage,
-                                           apiWord: Constants.AppDependencies.dependencies.apiWord,
-                                           wordStorage: Constants.AppDependencies.dependencies.wordStorage)
+        let sync: MDSyncProtocol = MDSync.init(apiJWT: Constants.AppDependencies.dependencies.apiJWT,
+                                               jwtStorage: Constants.AppDependencies.dependencies.jwtStorage,
+                                               apiUser: Constants.AppDependencies.dependencies.apiUser,
+                                               userStorage: Constants.AppDependencies.dependencies.userStorage,
+                                               apiLanguage: Constants.AppDependencies.dependencies.apiLanguage,
+                                               languageStorage: Constants.AppDependencies.dependencies.languageStorage,
+                                               apiCourse: Constants.AppDependencies.dependencies.apiCourse,
+                                               courseStorage: Constants.AppDependencies.dependencies.courseStorage,
+                                               apiWord: Constants.AppDependencies.dependencies.apiWord,
+                                               wordStorage: Constants.AppDependencies.dependencies.wordStorage)
         
-        let syncManager: SyncManagerProtocol = SyncManager.init(sync: sync)
+        let syncManager: MDSyncManagerProtocol = MDSyncManager.init(sync: sync)
         let authManager: MDAuthManagerProtocol = MDAuthManager.init(apiAuth: apiAuth,
                                                                     appSettings: Constants.AppDependencies.dependencies.appSettings,
                                                                     syncManager: syncManager)

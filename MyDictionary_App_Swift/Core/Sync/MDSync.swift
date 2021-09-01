@@ -1,5 +1,5 @@
 //
-//  Sync.swift
+//  MDSync.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 31.08.2021.
@@ -7,112 +7,11 @@
 
 import Foundation
 
-protocol SyncManagerProtocol {
-    var isRunning: Bool { get }
-    func start(withSyncItem item: Sync.Item)
-    func retry(withSyncItem item: Sync.Item)
+protocol MDSyncProtocol {
+    func startWitDeleteAllData(withSyncItem item: MDSync.Item, completionHandler: @escaping(([MDSyncResult]) -> Void))
 }
 
-final class SyncManager: SyncManagerProtocol {
-    
-    fileprivate let sync: SyncProtocol
-    
-    // Default is false
-    fileprivate var internalIsRunning: Bool
-    
-    public var isRunning: Bool {
-        return self.internalIsRunning
-    }
-    
-    init(sync: SyncProtocol) {
-        self.internalIsRunning = false
-        self.sync = sync
-    }
-    
-    deinit {
-        debugPrint(#function, Self.self)
-    }
-    
-    func start(withSyncItem item: Sync.Item) {
-        
-        // Check Is Sync Not Running
-        guard !isRunning else { return }
-        
-        // Set In Running
-        setInternalIsRunningTrue()
-        
-        // Start Sync
-        sync.start(withSyncItem: item) { results in
-            
-            results.forEach { result in
-                
-                debugPrint(#function, Self.self, "step: ", result.syncStep)
-                
-                switch result.result {
-                
-                case .success:
-                    
-                    debugPrint(#function, Self.self, "step: ", result.syncStep, "Success")
-                    
-                case .failure(let error):
-                    debugPrint(#function, Self.self, "step: ", result.syncStep, "Failure: ", error)
-                }
-            }
-            
-        }
-        
-    }
-    
-    func retry(withSyncItem item: Sync.Item) {
-        
-        // Check Is Sync Not Running
-        guard !isRunning else { return }
-        
-        // Set In Running
-        setInternalIsRunningTrue()
-        
-        // Retry
-        sync.retry(withSyncItem: item) { results in
-            
-            results.forEach { result in
-                
-                debugPrint(#function, Self.self, "step: ", result.syncStep)
-                
-                switch result.result {
-                
-                case .success:
-                    
-                    debugPrint(#function, Self.self, "step: ", result.syncStep, "Success")
-                    
-                case .failure(let error):
-                    debugPrint(#function, Self.self, "step: ", result.syncStep, "Failure: ", error)
-                }
-            }
-            
-        }
-        
-    }
-    
-    func setInternalIsRunning(_ newValue: Bool) {
-        self.internalIsRunning = newValue
-    }
-    
-    func setInternalIsRunningTrue() {
-        self.setInternalIsRunning(true)
-    }
-    
-    func setInternalIsRunningFalse() {
-        self.setInternalIsRunning(false)
-    }
-    
-}
-
-protocol SyncProtocol {
-    func start(withSyncItem item: Sync.Item, completionHandler: @escaping(([SyncResult]) -> Void))
-    func retry(withSyncItem item: Sync.Item, completionHandler: @escaping(([SyncResult]) -> Void))
-}
-
-final class Sync: SyncProtocol {
+final class MDSync: MDSyncProtocol {
     
     public struct Item {
         let accessToken: String
@@ -162,12 +61,28 @@ final class Sync: SyncProtocol {
     
 }
 
-extension Sync {
+extension MDSync {
     
-    func start(withSyncItem item: Sync.Item, completionHandler: @escaping(([SyncResult]) -> Void)) {
+    func startWitDeleteAllData(withSyncItem item: MDSync.Item, completionHandler: @escaping(([MDSyncResult]) -> Void)) {
+        
+        deleteAllData { [unowned self] deleteAllDataResults in
+            
+            start(withSyncItem: item) { syncResults in
+                completionHandler(deleteAllDataResults + syncResults)
+            }
+            
+        }
+        
+    }
+    
+}
+
+fileprivate extension MDSync {
+    
+    private func start(withSyncItem item: MDSync.Item, completionHandler: @escaping(([MDSyncResult]) -> Void)) {
         
         // Initialize Sync Results
-        var syncResults: [SyncResult] = []
+        var syncResults: [MDSyncResult] = []
         
         // Initialize Dispatch Group
         let dispatchGroup: DispatchGroup = .init()
@@ -229,22 +144,10 @@ extension Sync {
         
     }
     
-    func retry(withSyncItem item: Sync.Item, completionHandler: @escaping(([SyncResult]) -> Void)) {
-        
-        deleteAllData { [unowned self] deleteAllDataResults in
-            
-            start(withSyncItem: item) { syncResults in
-                completionHandler(deleteAllDataResults + syncResults)
-            }
-            
-        }
-        
-    }
-    
-    func deleteAllData(completionHandler: @escaping(([SyncResult]) -> Void)) {
+    private func deleteAllData(completionHandler: @escaping(([MDSyncResult]) -> Void)) {
         
         // Initialize Sync Results
-        var syncResults: [SyncResult] = []
+        var syncResults: [MDSyncResult] = []
         
         // Initialize Dispatch Group
         let dispatchGroup: DispatchGroup = .init()
@@ -309,11 +212,11 @@ extension Sync {
 }
 
 // MARK: - Delete Data
-extension Sync {
+fileprivate extension MDSync {
     
-    func deleteAllJWT(completionHandler: @escaping(SyncResultWithCompletion)) {
+    func deleteAllJWT(completionHandler: @escaping(MDSyncResultWithCompletion)) {
         
-        let syncStep: SyncStep = .jwt
+        let syncStep: MDSyncStep = .jwt
         var countResult: Int = .zero
         
         jwtStorage.deleteAllJWT(storageType: .all) { deleteJWTsResults in
@@ -340,9 +243,9 @@ extension Sync {
         
     }
     
-    func deleteAllUsers(completionHandler: @escaping(SyncResultWithCompletion)) {
+    func deleteAllUsers(completionHandler: @escaping(MDSyncResultWithCompletion)) {
         
-        let syncStep: SyncStep = .user
+        let syncStep: MDSyncStep = .user
         var countResult: Int = .zero
         
         userStorage.deleteAllUsers(storageType: .all) { deleteUsersResults in
@@ -369,9 +272,9 @@ extension Sync {
         
     }
     
-    func deleteAllLanguages(completionHandler: @escaping(SyncResultWithCompletion)) {
+    func deleteAllLanguages(completionHandler: @escaping(MDSyncResultWithCompletion)) {
         
-        let syncStep: SyncStep = .language
+        let syncStep: MDSyncStep = .language
         var countResult: Int = .zero
         
         languageStorage.deleteAllLanguages(storageType: .all) { deleteLanguagesResults in
@@ -398,9 +301,9 @@ extension Sync {
         
     }
     
-    func deleteAllCourses(completionHandler: @escaping(SyncResultWithCompletion)) {
+    func deleteAllCourses(completionHandler: @escaping(MDSyncResultWithCompletion)) {
         
-        let syncStep: SyncStep = .course
+        let syncStep: MDSyncStep = .course
         var countResult: Int = .zero
         
         courseStorage.deleteAllCourses(storageType: .all) { deleteCoursesResults in
@@ -427,9 +330,9 @@ extension Sync {
         
     }
     
-    func deleteAllWords(completionHandler: @escaping(SyncResultWithCompletion)) {
+    func deleteAllWords(completionHandler: @escaping(MDSyncResultWithCompletion)) {
         
-        let syncStep: SyncStep = .word
+        let syncStep: MDSyncStep = .word
         var countResult: Int = .zero
         
         wordStorage.deleteAllWords(storageType: .all) { deleteWordsResults in
@@ -459,12 +362,12 @@ extension Sync {
 }
 
 // MARK: - API
-extension Sync {
+fileprivate extension MDSync {
     
     // JWT
-    func apiGetAndSaveJWT(withSyncItem item: Sync.Item, completionHandler: @escaping(SyncResultWithCompletion)) {
+    func apiGetAndSaveJWT(withSyncItem item: MDSync.Item, completionHandler: @escaping(MDSyncResultWithCompletion)) {
         
-        let syncStep: SyncStep = .jwt
+        let syncStep: MDSyncStep = .jwt
         var countResult: Int = .zero
         
         apiJWT.accessToken(jwtApiRequest: .init(nickname: item.nickname,
@@ -512,9 +415,9 @@ extension Sync {
     }
     
     // User
-    func apiGetAndSaveUser(withSyncItem item: Sync.Item, completionHandler: @escaping(SyncResultWithCompletion)) {
+    func apiGetAndSaveUser(withSyncItem item: MDSync.Item, completionHandler: @escaping(MDSyncResultWithCompletion)) {
         
-        let syncStep: SyncStep = .user
+        let syncStep: MDSyncStep = .user
         var countResult: Int = .zero
         
         apiUser.getUser(accessToken: item.accessToken,
@@ -561,9 +464,9 @@ extension Sync {
     }
     
     // Language
-    func apiGetAndSaveLanguages(withSyncItem item: Sync.Item, completionHandler: @escaping(SyncResultWithCompletion)) {
+    func apiGetAndSaveLanguages(withSyncItem item: MDSync.Item, completionHandler: @escaping(MDSyncResultWithCompletion)) {
         
-        let syncStep: SyncStep = .language
+        let syncStep: MDSyncStep = .language
         var countResult: Int = .zero
         
         apiLanguage.getLanguages(accessToken: item.accessToken) { [unowned self] languagesResult in
@@ -607,9 +510,9 @@ extension Sync {
     }
     
     // Course
-    func apiGetAndSaveCourses(withSyncItem item: Sync.Item, completionHandler: @escaping(SyncResultWithCompletion)) {
+    func apiGetAndSaveCourses(withSyncItem item: MDSync.Item, completionHandler: @escaping(MDSyncResultWithCompletion)) {
         
-        let syncStep: SyncStep = .course
+        let syncStep: MDSyncStep = .course
         var countResult: Int = .zero
         
         apiCourse.getCourses(accessToken: item.accessToken, byUserId: item.userId) { [unowned self] coursesResult in
@@ -652,9 +555,9 @@ extension Sync {
     }
     
     // Word
-    func apiGetAndSaveWords(withSyncItem item: Sync.Item, completionHandler: @escaping(SyncResultWithCompletion)) {
+    func apiGetAndSaveWords(withSyncItem item: MDSync.Item, completionHandler: @escaping(MDSyncResultWithCompletion)) {
         
-        let syncStep: SyncStep = .word
+        let syncStep: MDSyncStep = .word
         var countResult: Int = .zero
         
         apiWord.getWords(accessToken: item.accessToken, byUserId: item.userId) { [unowned self] wordsResult in
@@ -697,22 +600,3 @@ extension Sync {
     }
     
 }
-
-final class MemorySync {
-    
-}
-
-enum SyncStep {
-    case jwt
-    case user
-    case language
-    case course
-    case word
-}
-
-struct SyncResult {
-    let syncStep: SyncStep
-    let result: MDOperationResultWithoutCompletion<Void>
-}
-
-typealias SyncResultWithCompletion = ((SyncResult) -> Void)

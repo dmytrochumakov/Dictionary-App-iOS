@@ -58,7 +58,7 @@
 		2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8B626512F5B004F2FE9 /* AppLanguageType.swift */; };
 		2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */; };
 		2223F8BC26512FFD004F2FE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2223F8BE26512FFD004F2FE9 /* Localizable.strings */; };
-		223648EA26DE38970071F271 /* Sync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223648E926DE38970071F271 /* Sync.swift */; };
+		223648EA26DE38970071F271 /* MDSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223648E926DE38970071F271 /* MDSync.swift */; };
 		22493C2E26971413000DA480 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C2D26971413000DA480 /* CoreDataStack.swift */; };
 		22493C312697159E000DA480 /* CDResultSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C302697159E000DA480 /* CDResultSaved.swift */; };
 		22493C33269715A9000DA480 /* CDResultSavedEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C32269715A9000DA480 /* CDResultSavedEnum.swift */; };
@@ -152,6 +152,10 @@
 		228BC444264979FE0030FB30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228BC443264979FE0030FB30 /* Assets.xcassets */; };
 		228BC447264979FE0030FB30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228BC445264979FE0030FB30 /* LaunchScreen.storyboard */; };
 		228BC45D264979FF0030FB30 /* MyDictionary_App_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BC45C264979FF0030FB30 /* MyDictionary_App_SwiftUITests.swift */; };
+		2294323026DF9A2A0073048C /* MDSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294322F26DF9A2A0073048C /* MDSyncManager.swift */; };
+		2294323226DF9A460073048C /* MDSyncStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294323126DF9A460073048C /* MDSyncStep.swift */; };
+		2294323426DF9A520073048C /* MDSyncResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294323326DF9A520073048C /* MDSyncResult.swift */; };
+		2294323626DF9A5D0073048C /* MDSyncResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294323526DF9A5D0073048C /* MDSyncResultWithCompletion.swift */; };
 		2294D6C326A2F1B60066BE77 /* CDUserResponseEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294D6C226A2F1B60066BE77 /* CDUserResponseEntity+Extension.swift */; };
 		2294D6C526A2F5DC0066BE77 /* Constants_For_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294D6C426A2F5DC0066BE77 /* Constants_For_Tests.swift */; };
 		229901682668EC3400D8C74E /* AppearancePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901612668EC3400D8C74E /* AppearancePresenter.swift */; };
@@ -366,7 +370,7 @@
 		2223F8B626512F5B004F2FE9 /* AppLanguageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageType.swift; sourceTree = "<group>"; };
 		2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageService.swift; sourceTree = "<group>"; };
 		2223F8BD26512FFD004F2FE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		223648E926DE38970071F271 /* Sync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sync.swift; sourceTree = "<group>"; };
+		223648E926DE38970071F271 /* MDSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSync.swift; sourceTree = "<group>"; };
 		22493C2D26971413000DA480 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		22493C302697159E000DA480 /* CDResultSaved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDResultSaved.swift; sourceTree = "<group>"; };
 		22493C32269715A9000DA480 /* CDResultSavedEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDResultSavedEnum.swift; sourceTree = "<group>"; };
@@ -466,6 +470,10 @@
 		228BC458264979FF0030FB30 /* MyDictionary_App_SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyDictionary_App_SwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		228BC45C264979FF0030FB30 /* MyDictionary_App_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDictionary_App_SwiftUITests.swift; sourceTree = "<group>"; };
 		228BC45E264979FF0030FB30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2294322F26DF9A2A0073048C /* MDSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncManager.swift; sourceTree = "<group>"; };
+		2294323126DF9A460073048C /* MDSyncStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncStep.swift; sourceTree = "<group>"; };
+		2294323326DF9A520073048C /* MDSyncResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncResult.swift; sourceTree = "<group>"; };
+		2294323526DF9A5D0073048C /* MDSyncResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncResultWithCompletion.swift; sourceTree = "<group>"; };
 		2294D6C226A2F1B60066BE77 /* CDUserResponseEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDUserResponseEntity+Extension.swift"; sourceTree = "<group>"; };
 		2294D6C426A2F5DC0066BE77 /* Constants_For_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants_For_Tests.swift; sourceTree = "<group>"; };
 		229901612668EC3400D8C74E /* AppearancePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePresenter.swift; sourceTree = "<group>"; };
@@ -1004,7 +1012,11 @@
 		223648E826DE38050071F271 /* Sync */ = {
 			isa = PBXGroup;
 			children = (
-				223648E926DE38970071F271 /* Sync.swift */,
+				223648E926DE38970071F271 /* MDSync.swift */,
+				2294322F26DF9A2A0073048C /* MDSyncManager.swift */,
+				2294323126DF9A460073048C /* MDSyncStep.swift */,
+				2294323326DF9A520073048C /* MDSyncResult.swift */,
+				2294323526DF9A5D0073048C /* MDSyncResultWithCompletion.swift */,
 			);
 			path = Sync;
 			sourceTree = "<group>";
@@ -2157,6 +2169,7 @@
 				225C349526D6746800F3BC9A /* JWTApiRequest.swift in Sources */,
 				2220FCB026D50ABF00B22515 /* MDAPICourse.swift in Sources */,
 				2270F3A426D264E6006B46F4 /* CDCourseResponseEntity+Extension.swift in Sources */,
+				2294323226DF9A460073048C /* MDSyncStep.swift in Sources */,
 				22EF01FC269DA90000FE4435 /* MDResponseType.swift in Sources */,
 				229E08C22652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift in Sources */,
 				22CA087D26515E810052D169 /* WordListViewController.swift in Sources */,
@@ -2201,6 +2214,7 @@
 				229901692668EC3400D8C74E /* AppearanceRouter.swift in Sources */,
 				22DB2F7F26C3C3A900C1AADA /* UIColor+Extension.swift in Sources */,
 				22DE582C26C954A70032A94C /* MDReadJWTProtocol.swift in Sources */,
+				2294323626DF9A5D0073048C /* MDSyncResultWithCompletion.swift in Sources */,
 				22561C8C26D4CF6A00A6135B /* MDDeleteCourseCoreDataStorageOperation.swift in Sources */,
 				22DB2F8926C3D3F400C1AADA /* CourseListTableViewDelegate.swift in Sources */,
 				220793C526C66F6A003D434B /* AuthValidationType.swift in Sources */,
@@ -2264,6 +2278,7 @@
 				2299016C2668EC3400D8C74E /* AppearanceDataProvider.swift in Sources */,
 				22E2B4E02664E43B00978E62 /* SettingsInteractor.swift in Sources */,
 				227D8F1526D7A4FA009CB94B /* AppSettings.swift in Sources */,
+				2294323026DF9A2A0073048C /* MDSyncManager.swift in Sources */,
 				22B22693266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift in Sources */,
 				22E2B4EC2664EE1400978E62 /* FillWithModelProtocol.swift in Sources */,
 				220FFE7426C8F83A00702CCE /* MDKeyboardToolbar.swift in Sources */,
@@ -2333,7 +2348,7 @@
 				22B8E6EC26D3C9B7001CCCA8 /* MDReadCourseMemoryStorageOperation.swift in Sources */,
 				228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */,
 				22DE582A26C9549B0032A94C /* MDCreateJWTProtocol.swift in Sources */,
-				223648EA26DE38970071F271 /* Sync.swift in Sources */,
+				223648EA26DE38970071F271 /* MDSync.swift in Sources */,
 				22EF01E5269D9EBC00FE4435 /* MDEntitiesIsEmptyResultWithCompletion.swift in Sources */,
 				22C5863B26C7AFB80030B12D /* RegistrationPresenter.swift in Sources */,
 				2294D6C326A2F1B60066BE77 /* CDUserResponseEntity+Extension.swift in Sources */,
@@ -2380,6 +2395,7 @@
 				221D281F26C54960004BC4F7 /* KeyboardHandler.swift in Sources */,
 				2223F8A826512C1A004F2FE9 /* LocalizableProtocol.swift in Sources */,
 				22DEAE3226C289F100B64B16 /* MDAPIVersion.swift in Sources */,
+				2294323426DF9A520073048C /* MDSyncResult.swift in Sources */,
 				22B8E6BA26D396B0001CCCA8 /* MDCreateLanguagesCoreDataStorageOperation.swift in Sources */,
 				22B8E6DD26D3C54B001CCCA8 /* MDCourseCoreDataStorage.swift in Sources */,
 				22DB2F8B26C3D4D200C1AADA /* TableViewDelegatePropertyProtocol.swift in Sources */,
