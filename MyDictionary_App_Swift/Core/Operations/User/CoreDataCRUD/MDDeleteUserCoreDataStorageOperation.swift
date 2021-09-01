@@ -11,17 +11,17 @@ final class MDDeleteUserCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDUserCoreDataStorage
-    fileprivate let userEntity: UserResponse
-    fileprivate let result: MDOperationResultWithCompletion<UserResponse>?
+    fileprivate let userId: Int64
+    fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDUserCoreDataStorage,
-         userEntity: UserResponse,
-         result: MDOperationResultWithCompletion<UserResponse>?) {
+         userId: Int64,
+         result: MDOperationResultWithCompletion<Void>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage
-        self.userEntity = userEntity
+        self.userId = userId
         self.result = result
         
         super.init()
@@ -31,7 +31,7 @@ final class MDDeleteUserCoreDataStorageOperation: MDOperation {
     override func main() {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDUserResponseEntity)
-        fetchRequest.predicate = NSPredicate(format: "\(CDUserResponseEntityAttributeName.userId) == %i", userEntity.userId)
+        fetchRequest.predicate = NSPredicate(format: "\(CDUserResponseEntityAttributeName.userId) == %i", userId)
         
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
@@ -49,7 +49,7 @@ final class MDDeleteUserCoreDataStorageOperation: MDOperation {
                             self?.finish() ;
                             return
                         }
-                        self.result?(.success(self.userEntity))
+                        self.result?(.success(()))
                         self.finish()
                     case .failure(let error):
                         self?.result?(.failure(error))

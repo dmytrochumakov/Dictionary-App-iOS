@@ -29,7 +29,7 @@ final class MDCreateUserMemoryStorageOperation: MDOperation {
     
     override func main() {
         self.userEntity.password = self.password
-        self.memoryStorage.userEntity = self.userEntity
+        self.memoryStorage.array.append(self.userEntity)
         self.result?(.success(self.userEntity))
         self.finish()
     }

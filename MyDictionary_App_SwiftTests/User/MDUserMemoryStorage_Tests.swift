@@ -19,7 +19,7 @@ final class MDUserMemoryStorage_Tests: XCTestCase {
         let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
         
         let userMemoryStorage: MDUserMemoryStorage = MDUserMemoryStorage.init(operationQueueService: operationQueueService,
-                                                                              userEntity: nil)
+                                                                              array: .init())
         
         self.userMemoryStorage = userMemoryStorage
         
@@ -107,14 +107,12 @@ extension MDUserMemoryStorage_Tests {
             
             case .success(let createdUser):
                 
-                self.userMemoryStorage.deleteUser(createdUser) { deleteResult in
+                self.userMemoryStorage.deleteUser(createdUser.userId) { deleteResult in
                     
                     switch deleteResult {
                     
-                    case .success(let deleteUser):
-                        
-                        XCTAssertTrue(createdUser.userId == deleteUser.userId)
-                        XCTAssertTrue(self.userMemoryStorage.userEntity == nil)
+                    case .success:
+                                                                        
                         expectation.fulfill()
                         
                     case .failure:

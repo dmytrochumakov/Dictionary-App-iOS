@@ -88,7 +88,7 @@ extension MDAppDependencies {
         
         // User //
         let userMemoryStorage: MDUserMemoryStorageProtocol = MDUserMemoryStorage.init(operationQueueService: operationQueueService,
-                                                                                      userEntity: nil)
+                                                                                      array: .init())
         
         let userCoreDataStorage: MDUserCoreDataStorageProtocol = MDUserCoreDataStorage.init(operationQueueService: operationQueueService,
                                                                                             managedObjectContext: coreDataStack.privateContext,
