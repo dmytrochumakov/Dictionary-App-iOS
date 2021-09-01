@@ -28,15 +28,14 @@ final class MDUpdateJWTMemoryStorageOperation: MDOperation {
     }
 
     override func main() {
-        guard let jwtResponse = self.memoryStorage.jwtResponse,
-              jwtResponse.accessToken == self.oldAccessToken
+        guard let index = self.memoryStorage.array.firstIndex(where: { $0.accessToken == self.oldAccessToken })
         else {
             self.result?(.failure(MDEntityOperationError.cantFindEntity));
             self.finish();
             return
         }
-        self.memoryStorage.jwtResponse = self.newJWTResponse
-        self.result?(.success(self.newJWTResponse))
+        self.memoryStorage.array[index] = self.newJWTResponse
+        self.result?(.success(self.memoryStorage.array[index]))
         self.finish()
     }
 

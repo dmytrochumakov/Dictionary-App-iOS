@@ -10,15 +10,15 @@ import Foundation
 final class MDDeleteJWTMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDJWTMemoryStorage
-    fileprivate let jwtResponse: JWTResponse
-    fileprivate let result: MDOperationResultWithCompletion<JWTResponse>?
+    fileprivate let accessToken: String
+    fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(memoryStorage: MDJWTMemoryStorage,
-         jwtResponse: JWTResponse,
-         result: MDOperationResultWithCompletion<JWTResponse>?) {
+         accessToken: String,
+         result: MDOperationResultWithCompletion<Void>?) {
         
         self.memoryStorage = memoryStorage
-        self.jwtResponse = jwtResponse
+        self.accessToken = accessToken
         self.result = result
         
         super.init()
@@ -26,15 +26,14 @@ final class MDDeleteJWTMemoryStorageOperation: MDOperation {
     }
     
     override func main() {
-        guard let jwtResponse = self.memoryStorage.jwtResponse,
-              jwtResponse.accessToken == self.jwtResponse.accessToken
+        guard let index = self.memoryStorage.array.firstIndex(where: { $0.accessToken == self.accessToken })
         else {
             self.result?(.failure(MDEntityOperationError.cantFindEntity));
             self.finish();
             return
         }
-        self.memoryStorage.jwtResponse = nil
-        self.result?(.success(jwtResponse))
+        self.memoryStorage.array.remove(at: index)
+        self.result?(.success(()))
         self.finish()
     }
     

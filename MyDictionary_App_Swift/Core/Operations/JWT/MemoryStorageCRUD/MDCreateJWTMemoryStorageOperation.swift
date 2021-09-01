@@ -25,7 +25,7 @@ final class MDCreateJWTMemoryStorageOperation: MDOperation {
     }
     
     override func main() {
-        self.memoryStorage.jwtResponse = self.jwtResponse
+        self.memoryStorage.array.append(self.jwtResponse) 
         self.result?(.success(self.jwtResponse))
         self.finish()
     }

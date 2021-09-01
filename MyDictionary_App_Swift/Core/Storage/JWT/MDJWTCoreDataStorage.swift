@@ -126,10 +126,10 @@ extension MDJWTCoreDataStorage {
 // MARK: - Delete
 extension MDJWTCoreDataStorage {
     
-    func deleteJWT(_ jwtResponse: JWTResponse, _ completionHandler: @escaping(MDOperationResultWithCompletion<JWTResponse>)) {
+    func deleteJWT(_ byAccessToken: String, _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         let operation = MDDeleteJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                  coreDataStorage: self,
-                                                                 jwtResponse: jwtResponse) { result in
+                                                                 accessToken: byAccessToken) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)

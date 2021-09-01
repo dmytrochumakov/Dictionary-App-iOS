@@ -102,7 +102,7 @@ extension MDAppDependencies {
         
         // JWT //
         let jwtMemoryStorage: MDJWTMemoryStorageProtocol = MDJWTMemoryStorage.init(operationQueueService: operationQueueService,
-                                                                                   jwtResponse: nil)
+                                                                                   array: .init())
         
         let jwtCoreDataStorage: MDJWTCoreDataStorageProtocol = MDJWTCoreDataStorage.init(operationQueueService: operationQueueService,
                                                                                          managedObjectContext: coreDataStack.privateContext,

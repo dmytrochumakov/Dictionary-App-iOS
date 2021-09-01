@@ -22,7 +22,7 @@ final class MDReadFirstJWTMemoryStorageOperation: MDOperation {
     }
     
     override func main() {
-        guard let jwtResponse = self.memoryStorage.jwtResponse
+        guard let jwtResponse = self.memoryStorage.array.first
         else {
             self.result?(.failure(MDEntityOperationError.cantFindEntity));
             self.finish();

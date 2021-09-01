@@ -26,8 +26,8 @@ protocol MDJWTStorageProtocol: MDStorageProtocol {
                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<JWTResponse>>))
     
     func deleteJWT(storageType: MDStorageType,
-                   jwtResponse: JWTResponse,
-                   _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<JWTResponse>>))
+                   accessToken: String,
+                   _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
     
     func deleteAllJWT(storageType: MDStorageType,
                       _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
@@ -299,20 +299,20 @@ extension MDJWTStorage {
     }
     
     func deleteJWT(storageType: MDStorageType,
-                   jwtResponse: JWTResponse,
-                   _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<JWTResponse>>)) {
+                   accessToken: String,
+                   _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
         
         case .memory:
             
-            memoryStorage.deleteJWT(jwtResponse) { result in
+            memoryStorage.deleteJWT(accessToken) { result in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .coreData:
             
-            coreDataStorage.deleteJWT(jwtResponse) { result in
+            coreDataStorage.deleteJWT(accessToken) { result in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
@@ -322,12 +322,12 @@ extension MDJWTStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<JWTResponse>> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
             
             // Delete From Memory
             // Dispatch Group Enter
             dispatchGroup.enter()
-            memoryStorage.deleteJWT(jwtResponse) { result in
+            memoryStorage.deleteJWT(accessToken) { result in
                 
                 // Append Result
                 finalResult.append(.init(storageType: .memory, result: result))
@@ -339,7 +339,7 @@ extension MDJWTStorage {
             // Delete From Core Data
             // Dispatch Group Enter
             dispatchGroup.enter()
-            coreDataStorage.deleteJWT(jwtResponse) { result in
+            coreDataStorage.deleteJWT(accessToken) { result in
                 
                 // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))

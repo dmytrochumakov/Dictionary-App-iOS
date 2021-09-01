@@ -23,13 +23,7 @@ final class MDDeleteAllJWTMemoryStorageOperation: MDOperation {
     }
     
     override func main() {
-        guard let _ = self.memoryStorage.jwtResponse
-        else {
-            self.result?(.failure(MDEntityOperationError.cantFindEntity));
-            self.finish();
-            return
-        }
-        self.memoryStorage.jwtResponse = nil
+        self.memoryStorage.array.removeAll()
         self.result?(.success(()))
         self.finish()
     }
