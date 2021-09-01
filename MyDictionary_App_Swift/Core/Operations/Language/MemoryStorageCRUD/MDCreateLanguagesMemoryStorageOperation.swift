@@ -26,12 +26,20 @@ final class MDCreateLanguagesMemoryStorageOperation: MDOperation {
     
     override func main() {
         
-        self.languageEntities.forEach { languageEntity in
-            self.memoryStorage.array.append(languageEntity)
+        if (self.languageEntities.isEmpty) {
+            self.result?(.success(self.memoryStorage.array))
+            self.finish()
+        } else {
+            
+            self.languageEntities.forEach { languageEntity in
+                self.memoryStorage.array.append(languageEntity)
+            }
+            
+            self.result?(.success(self.memoryStorage.array))
+            self.finish()
+            
         }
         
-        self.result?(.success(self.memoryStorage.array))
-        self.finish()
     }
     
     deinit {

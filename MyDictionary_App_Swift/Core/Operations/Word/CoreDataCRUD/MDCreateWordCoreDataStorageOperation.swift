@@ -78,32 +78,39 @@ final class MDCreateWordsCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        var resultCount: Int = .zero
-        
-        self.words.forEach { word in
+        if (self.words.isEmpty) {
+            self.result?(.success(self.words))
+            self.finish()
+        } else {
             
-            let newWord = CDWordResponseEntity.init(wordResponse: word,
-                                                    insertIntoManagedObjectContext: self.managedObjectContext)
+            var resultCount: Int = .zero
             
-            self.coreDataStorage.save(wordId: newWord.wordId) { [weak self] result in
+            self.words.forEach { word in
                 
-                DispatchQueue.main.async {
-                    switch result {
+                let newWord = CDWordResponseEntity.init(wordResponse: word,
+                                                        insertIntoManagedObjectContext: self.managedObjectContext)
+                
+                self.coreDataStorage.save(wordId: newWord.wordId) { [weak self] result in
                     
-                    case .success:
+                    DispatchQueue.main.async {
+                        switch result {
                         
-                        resultCount += 1
-                        
-                        if (resultCount == self?.words.count) {
-                            self?.result?(.success(self?.words ?? []))
+                        case .success:
+                            
+                            resultCount += 1
+                            
+                            if (resultCount == self?.words.count) {
+                                self?.result?(.success(self?.words ?? []))
+                                self?.finish()
+                            }
+                            
+                        case .failure(let error):
+                            self?.result?(.failure(error))
                             self?.finish()
                         }
-                        
-                    case .failure(let error):
-                        self?.result?(.failure(error))
-                        self?.finish()
                     }
                 }
+                
             }
             
         }

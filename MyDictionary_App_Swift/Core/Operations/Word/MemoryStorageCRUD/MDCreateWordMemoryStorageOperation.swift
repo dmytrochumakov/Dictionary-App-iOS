@@ -56,12 +56,20 @@ final class MDCreateWordsMemoryStorageOperation: MDOperation {
     
     override func main() {
         
-        self.words.forEach { word in
-            self.memoryStorage.arrayWords.append(word)
+        if (self.words.isEmpty) {
+            self.result?(.success(self.memoryStorage.arrayWords))
+            self.finish()
+        } else {
+            
+            self.words.forEach { word in
+                self.memoryStorage.arrayWords.append(word)
+            }
+            
+            self.result?(.success(self.memoryStorage.arrayWords))
+            self.finish()
+            
         }
-         
-        self.result?(.success(self.memoryStorage.arrayWords))
-        self.finish()
+        
     }
     
     deinit {
