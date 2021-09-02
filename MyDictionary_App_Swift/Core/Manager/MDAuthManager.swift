@@ -15,7 +15,7 @@ protocol MDAuthManagerProtocol {
 final class MDAuthManager: MDAuthManagerProtocol {
     
     fileprivate let apiAuth: MDAPIAuthProtocol
-    fileprivate let appSettings: AppSettingsProtocol
+    fileprivate var appSettings: AppSettingsProtocol
     fileprivate let syncManager: MDSyncManagerProtocol
     
     init(apiAuth: MDAPIAuthProtocol,
@@ -137,7 +137,7 @@ extension MDAuthManager {
 fileprivate extension MDAuthManager {
     
     func setIsLoggedInIntoTrue() {
-        appSettings.setIsLoggedIn(true)
+        appSettings.isLoggedIn = true
     }
     
 }
