@@ -1,5 +1,5 @@
 //
-//  CourseListTableViewDelegate.swift
+//  CourseListCollectionViewDelegate.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 11.08.2021.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol CourseListTableViewDelegateProtocol: TableViewDelegate {
+protocol CourseListCollectionViewDelegateProtocol: CollectionViewDelegateFlowLayout {
     
 }
 
-final class CourseListTableViewDelegate: NSObject, CourseListTableViewDelegateProtocol {
+final class CourseListCollectionViewDelegate: NSObject, CourseListCollectionViewDelegateProtocol {
  
     fileprivate let dataProvider: CourseListDataProviderProtocol
     
@@ -21,6 +21,6 @@ final class CourseListTableViewDelegate: NSObject, CourseListTableViewDelegatePr
     
 }
 
-extension CourseListTableViewDelegate {            
+extension CourseListCollectionViewDelegate {            
     
 }

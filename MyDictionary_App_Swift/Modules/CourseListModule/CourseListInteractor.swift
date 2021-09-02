@@ -7,8 +7,8 @@
 import UIKit
 
 protocol CourseListInteractorInputProtocol {
-    var tableViewDelegate: CourseListTableViewDelegateProtocol { get }
-    var tableViewDataSource: CourseListTableViewDataSourceProtocol { get }
+    var collectionViewDelegate: CourseListCollectionViewDelegateProtocol { get }
+    var collectionViewDataSource: CourseListCollectionViewDataSourceProtocol { get }
 }
 
 protocol CourseListInteractorOutputProtocol: AnyObject,
@@ -25,17 +25,17 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
 
     fileprivate let dataManager: CourseListDataManagerInputProtocol
     
-    internal var tableViewDelegate: CourseListTableViewDelegateProtocol
-    internal var tableViewDataSource: CourseListTableViewDataSourceProtocol
+    internal var collectionViewDelegate: CourseListCollectionViewDelegateProtocol
+    internal var collectionViewDataSource: CourseListCollectionViewDataSourceProtocol
     internal weak var interactorOutput: CourseListInteractorOutputProtocol?
     
     init(dataManager: CourseListDataManagerInputProtocol,
-         tableViewDelegate: CourseListTableViewDelegateProtocol,
-         tableViewDataSource: CourseListTableViewDataSourceProtocol) {
+         collectionViewDelegate: CourseListCollectionViewDelegateProtocol,
+         collectionViewDataSource: CourseListCollectionViewDataSourceProtocol) {
         
         self.dataManager = dataManager
-        self.tableViewDelegate = tableViewDelegate
-        self.tableViewDataSource = tableViewDataSource
+        self.collectionViewDelegate = collectionViewDelegate
+        self.collectionViewDataSource = collectionViewDataSource
         
         super.init()
         subscribe()        
