@@ -248,8 +248,6 @@
 		22DB2F7D26C3BE7900C1AADA /* CourseListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7626C3BE7900C1AADA /* CourseListDataManager.swift */; };
 		22DB2F7F26C3C3A900C1AADA /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7E26C3C3A800C1AADA /* UIColor+Extension.swift */; };
 		22DB2F8326C3D28900C1AADA /* CourseListCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F8226C3D28900C1AADA /* CourseListCollectionViewDataSource.swift */; };
-		22DB2F8526C3D2B800C1AADA /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F8426C3D2B800C1AADA /* TableViewDataSource.swift */; };
-		22DB2F8726C3D2D400C1AADA /* TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F8626C3D2D400C1AADA /* TableViewDelegate.swift */; };
 		22DB2F8926C3D3F400C1AADA /* CourseListCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F8826C3D3F400C1AADA /* CourseListCollectionViewDelegate.swift */; };
 		22DB2F8B26C3D4D200C1AADA /* TableViewDelegatePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F8A26C3D4D200C1AADA /* TableViewDelegatePropertyProtocol.swift */; };
 		22DB2F8D26C3D51500C1AADA /* TableViewDataSourcePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F8C26C3D51500C1AADA /* TableViewDataSourcePropertyProtocol.swift */; };
@@ -569,8 +567,6 @@
 		22DB2F7626C3BE7900C1AADA /* CourseListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListDataManager.swift; sourceTree = "<group>"; };
 		22DB2F7E26C3C3A800C1AADA /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		22DB2F8226C3D28900C1AADA /* CourseListCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListCollectionViewDataSource.swift; sourceTree = "<group>"; };
-		22DB2F8426C3D2B800C1AADA /* TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDataSource.swift; sourceTree = "<group>"; };
-		22DB2F8626C3D2D400C1AADA /* TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDelegate.swift; sourceTree = "<group>"; };
 		22DB2F8826C3D3F400C1AADA /* CourseListCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		22DB2F8A26C3D4D200C1AADA /* TableViewDelegatePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDelegatePropertyProtocol.swift; sourceTree = "<group>"; };
 		22DB2F8C26C3D51500C1AADA /* TableViewDataSourcePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDataSourcePropertyProtocol.swift; sourceTree = "<group>"; };
@@ -1776,8 +1772,6 @@
 			children = (
 				22E2B4FD266515D400978E62 /* CollectionViewDelegateFlowLayout.swift */,
 				22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */,
-				22DB2F8426C3D2B800C1AADA /* TableViewDataSource.swift */,
-				22DB2F8626C3D2D400C1AADA /* TableViewDelegate.swift */,
 			);
 			path = Typealias;
 			sourceTree = "<group>";
@@ -2182,7 +2176,6 @@
 				22EF01FC269DA90000FE4435 /* MDResponseType.swift in Sources */,
 				229E08C22652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift in Sources */,
 				22CA087D26515E810052D169 /* WordListViewController.swift in Sources */,
-				22DB2F8526C3D2B800C1AADA /* TableViewDataSource.swift in Sources */,
 				22B8E6A326D381EF001CCCA8 /* MDLanguageCoreDataStorage.swift in Sources */,
 				22B22691266CF866007AB292 /* UIViewController+Extension.swift in Sources */,
 				229901712668EE5300D8C74E /* MDAppDelegate.swift in Sources */,
@@ -2343,7 +2336,6 @@
 				22EF0202269DA9E300FE4435 /* MDResponseOperationResult.swift in Sources */,
 				22BBA15B26E0B366002955A6 /* MDSyncError.swift in Sources */,
 				22B8E6CC26D3B398001CCCA8 /* MDDeleteAllJWTCoreDataStorageOperation.swift in Sources */,
-				22DB2F8726C3D2D400C1AADA /* TableViewDelegate.swift in Sources */,
 				220793BF26C65BF4003D434B /* AuthValidation.swift in Sources */,
 				22EF0205269DACC300FE4435 /* MDAPIOperation.swift in Sources */,
 				22DB2F7826C3BE7900C1AADA /* CourseListPresenter.swift in Sources */,
