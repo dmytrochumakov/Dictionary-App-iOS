@@ -45,9 +45,9 @@ extension MDAuthManager {
             case .success(let authResponse):
                 
                 syncManager.startFullSync(withSyncItem: .init(accessToken: authResponse.jwtResponse.accessToken,
-                                                      password: authRequest.password,
-                                                      userId: authResponse.userResponse.userId,
-                                                      nickname: authRequest.nickname)) { progress in
+                                                              password: authRequest.password,
+                                                              userId: authResponse.userResponse.userId,
+                                                              nickname: authRequest.nickname)) { progress in
                     
                     debugPrint(#function, Self.self, "progress: ", progress)
                     
@@ -56,8 +56,7 @@ extension MDAuthManager {
                     switch syncResult {
                     
                     case .success:
-                        
-                        //
+                        // Set Is Logged In
                         setIsLoggedInIntoTrue()
                         //
                         completionHandler(.success(()))
@@ -93,7 +92,31 @@ extension MDAuthManager {
             switch registerResult {
             
             case .success(let authResponse):
-                
+                //
+                syncManager.startLanguageSync(withSyncItem: .init(accessToken: authResponse.jwtResponse.accessToken,
+                                                                  password: authRequest.password,
+                                                                  userId: authResponse.userResponse.userId,
+                                                                  nickname: authRequest.nickname)) { syncResult in
+                    
+                    switch syncResult {
+                    
+                    case .success:
+                        // Set Is Logged In
+                        setIsLoggedInIntoTrue()
+                        //
+                        completionHandler(.success(()))
+                        //
+                        break
+                    //
+                    case .failure(let error):
+                        //
+                        completionHandler(.failure(error))
+                        //
+                        break
+                    //
+                    }
+                    
+                }
                 //
                 break
             //
