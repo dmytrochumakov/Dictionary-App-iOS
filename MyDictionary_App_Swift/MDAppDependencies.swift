@@ -35,6 +35,8 @@ protocol MDAppDependenciesProtocol {
     
     var appSettings: AppSettingsProtocol! { get }
     
+    var fillMemoryService: MDFillMemoryServiceProtocol! { get }
+    
 }
 
 final class MDAppDependencies: NSObject,
@@ -63,6 +65,8 @@ final class MDAppDependencies: NSObject,
     // End Storage //
     
     var appSettings: AppSettingsProtocol!
+    
+    var fillMemoryService: MDFillMemoryServiceProtocol!
     
     override init() {
         super.init()
@@ -205,6 +209,8 @@ extension MDAppDependencies {
                                                                                       wordStorage: wordStorage)
         // Fill Memory If Needed
         fillMemoryService.fillMemoryFromCoreDataIfNeeded()
+        //
+        self.fillMemoryService = fillMemoryService
         //
         
         // Configure FirebaseApp
