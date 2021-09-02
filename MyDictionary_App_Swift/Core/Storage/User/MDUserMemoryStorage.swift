@@ -80,6 +80,13 @@ extension MDUserMemoryStorage {
         operationQueueService.enqueue(operation)
     }
     
+    func readFirstUser(_ completionHandler: @escaping (MDOperationResultWithCompletion<UserResponse>)) {
+        let operation = MDReadFirstUserMemoryStorageOperation.init(memoryStorage: self) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
+    }
+    
     func readAllUsers(_ completionHandler: @escaping (MDOperationsResultWithCompletion<UserResponse>)) {
         let operation = MDReadAllUsersMemoryStorageOperation.init(memoryStorage: self) { result in
             completionHandler(result)

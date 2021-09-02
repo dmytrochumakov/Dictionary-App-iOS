@@ -93,6 +93,14 @@ extension MDUserCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
+    func readFirstUser(_ completionHandler: @escaping (MDOperationResultWithCompletion<UserResponse>)) {
+        let operation = MDReadFirstUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                     coreDataStorage: self) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
+    }
+    
     func readAllUsers(_ completionHandler: @escaping(MDOperationsResultWithCompletion<UserResponse>)) {
         let operation = MDReadUsersCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                  coreDataStorage: self) { result in

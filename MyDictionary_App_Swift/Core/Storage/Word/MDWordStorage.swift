@@ -21,6 +21,9 @@ protocol MDWordStorageProtocol: MDStorageProtocol {
                   storageType: MDStorageType,
                   _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>))
     
+    func readAllWords(storageType: MDStorageType,
+                      _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>))
+    
     func updateWord(byWordID wordId: Int64,
                     newWordText: String,
                     newWordDescription: String,
@@ -222,6 +225,65 @@ extension MDWordStorage {
             // Dispatch Group Enter
             dispatchGroup.enter()
             coreDataStorage.readWord(fromWordID: wordId) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
+            }
+            
+        }
+        
+    }
+    
+    func readAllWords(storageType: MDStorageType,
+                      _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>)) {
+        
+        switch storageType {
+        
+        case .memory:
+            
+            memoryStorage.readAllWords { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .coreData:
+            
+            coreDataStorage.readAllWords { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<WordResponse>> = []
+            
+            // Read From Memory
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.readAllWords { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+                
+            }
+            
+            // Read From Core Data
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.readAllWords { result in
                 
                 // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))

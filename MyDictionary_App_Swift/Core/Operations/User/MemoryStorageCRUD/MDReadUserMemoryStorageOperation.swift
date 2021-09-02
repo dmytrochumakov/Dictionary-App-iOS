@@ -42,6 +42,38 @@ final class MDReadUserMemoryStorageOperation: MDOperation {
     
 }
 
+final class MDReadFirstUserMemoryStorageOperation: MDOperation {
+    
+    fileprivate let memoryStorage: MDUserMemoryStorage
+    fileprivate let result: MDOperationResultWithCompletion<UserResponse>?
+    
+    init(memoryStorage: MDUserMemoryStorage,
+         result: MDOperationResultWithCompletion<UserResponse>?) {
+        
+        self.memoryStorage = memoryStorage
+        self.result = result
+        
+        super.init()
+    }
+    
+    override func main() {
+        guard let userEntity = self.memoryStorage.array.first
+        else {
+            self.result?(.failure(MDEntityOperationError.cantFindEntity));
+            self.finish();
+            return
+        }
+        self.result?(.success(userEntity))
+        self.finish()
+    }
+    
+    deinit {
+        debugPrint(#function, Self.self)
+        self.finish()
+    }
+    
+}
+
 final class MDReadAllUsersMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDUserMemoryStorage
