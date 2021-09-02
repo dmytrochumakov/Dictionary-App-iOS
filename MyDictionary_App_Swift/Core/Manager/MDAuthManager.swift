@@ -44,7 +44,7 @@ extension MDAuthManager {
             
             case .success(let authResponse):
                 
-                syncManager.start(withSyncItem: .init(accessToken: authResponse.jwtResponse.accessToken,
+                syncManager.startFullSync(withSyncItem: .init(accessToken: authResponse.jwtResponse.accessToken,
                                                       password: authRequest.password,
                                                       userId: authResponse.userResponse.userId,
                                                       nickname: authRequest.nickname)) { progress in

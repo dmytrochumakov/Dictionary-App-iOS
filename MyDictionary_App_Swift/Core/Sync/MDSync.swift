@@ -8,9 +8,11 @@
 import Foundation
 
 protocol MDSyncProtocol {
-    func startWitDeleteAllData(withSyncItem item: MDSync.Item,
-                               progressCompletionHandler: @escaping((Float) -> Void),
-                               completionHandler: @escaping(([MDSyncResult]) -> Void))
+    
+    func startFullSyncWithDeleteAllData(withSyncItem item: MDSync.Item,
+                                        progressCompletionHandler: @escaping((Float) -> Void),
+                                        completionHandler: @escaping(([MDSyncResult]) -> Void))
+    
 }
 
 final class MDSync: MDSyncProtocol {
@@ -65,9 +67,9 @@ final class MDSync: MDSyncProtocol {
 
 extension MDSync {
     
-    func startWitDeleteAllData(withSyncItem item: MDSync.Item,
-                               progressCompletionHandler: @escaping((Float) -> Void),
-                               completionHandler: @escaping(([MDSyncResult]) -> Void)) {
+    func startFullSyncWithDeleteAllData(withSyncItem item: MDSync.Item,
+                                        progressCompletionHandler: @escaping((Float) -> Void),
+                                        completionHandler: @escaping(([MDSyncResult]) -> Void)) {
         
         deleteAllData { [unowned self] deleteAllDataResults in
             
@@ -86,8 +88,8 @@ extension MDSync {
 fileprivate extension MDSync {
     
     func start(withSyncItem item: MDSync.Item,
-                       progressCompletionHandler: @escaping((Float) -> Void),
-                       completionHandler: @escaping(([MDSyncResult]) -> Void)) {
+               progressCompletionHandler: @escaping((Float) -> Void),
+               completionHandler: @escaping(([MDSyncResult]) -> Void)) {
         
         // Initialize Sync Results
         var syncResults: [MDSyncResult] = []

@@ -9,9 +9,9 @@ import Foundation
 
 protocol MDSyncManagerProtocol {
     var isRunning: Bool { get }
-    func start(withSyncItem item: MDSync.Item,
-               progressCompletionHandler: @escaping((Float) -> Void),
-               completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    func startFullSync(withSyncItem item: MDSync.Item,
+                       progressCompletionHandler: @escaping((Float) -> Void),
+                       completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
 }
 
 final class MDSyncManager: MDSyncManagerProtocol {
@@ -38,9 +38,9 @@ final class MDSyncManager: MDSyncManagerProtocol {
 
 extension MDSyncManager {
     
-    func start(withSyncItem item: MDSync.Item,
-               progressCompletionHandler: @escaping((Float) -> Void),
-               completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
+    func startFullSync(withSyncItem item: MDSync.Item,
+                       progressCompletionHandler: @escaping((Float) -> Void),
+                       completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
         // Check Is Sync Not Running
         guard !isRunning else { completionHandler(.failure(MDSyncError.syncIsRunning)) ; return }
@@ -52,7 +52,7 @@ extension MDSyncManager {
         var countResult: Int = .zero
         
         // Start Sync
-        sync.startWitDeleteAllData(withSyncItem: item) { progress in
+        sync.startFullSyncWithDeleteAllData(withSyncItem: item) { progress in
             progressCompletionHandler(progress)
         } completionHandler: { [unowned self] results in
             
