@@ -8,10 +8,16 @@
 import Foundation
 
 protocol MDSyncManagerProtocol {
+    
     var isRunning: Bool { get }
+    
     func startFullSync(withSyncItem item: MDSync.Item,
                        progressCompletionHandler: @escaping((Float) -> Void),
                        completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    
+    func startLanguageSync(withSyncItem item: MDSync.Item,
+                           completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    
 }
 
 final class MDSyncManager: MDSyncManagerProtocol {
@@ -88,6 +94,45 @@ extension MDSyncManager {
                     //
                     return
                 }
+            }
+            
+        }
+        
+    }
+    
+    func startLanguageSync(withSyncItem item: MDSync.Item,
+                           completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+        
+        // Check Is Sync Not Running
+        guard !isRunning else { completionHandler(.failure(MDSyncError.syncIsRunning)) ; return }
+        
+        // Set In Running
+        setInternalIsRunningTrue()
+        
+        // Start Sync
+        sync.startLanguageSync(withSyncItem: item) { [unowned self] syncResult in
+            
+            switch syncResult.result {
+            
+            case .success:
+                //
+                debugPrint(#function, Self.self, "Success")
+                //
+                setInternalIsRunningFalse()
+                //
+                completionHandler(.success(()))
+                //
+                break
+            //
+            case .failure(let error):
+                //
+                debugPrint(#function, Self.self, "Failure: ", error)
+                //
+                setInternalIsRunningFalse()
+                //
+                completionHandler(.failure(error))
+                //
+                return
             }
             
         }

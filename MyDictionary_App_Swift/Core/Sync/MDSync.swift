@@ -13,6 +13,9 @@ protocol MDSyncProtocol {
                                         progressCompletionHandler: @escaping((Float) -> Void),
                                         completionHandler: @escaping(([MDSyncResult]) -> Void))
     
+    func startLanguageSync(withSyncItem item: MDSync.Item,
+                           completionHandler: @escaping((MDSyncResult) -> Void))
+    
 }
 
 final class MDSync: MDSyncProtocol {
@@ -73,7 +76,7 @@ extension MDSync {
         
         deleteAllData { [unowned self] deleteAllDataResults in
             
-            start(withSyncItem: item) { progress in
+            startFullSync(withSyncItem: item) { progress in
                 progressCompletionHandler(progress)
             } completionHandler: { syncResults in
                 completionHandler(deleteAllDataResults + syncResults)
@@ -83,13 +86,22 @@ extension MDSync {
         
     }
     
+    func startLanguageSync(withSyncItem item: Item,
+                           completionHandler: @escaping ((MDSyncResult) -> Void)) {
+        
+        // Get API And Save Languages
+        apiGetAndSaveLanguages(withSyncItem: item,
+                               completionHandler: completionHandler)
+        
+    }
+    
 }
 
 fileprivate extension MDSync {
     
-    func start(withSyncItem item: MDSync.Item,
-               progressCompletionHandler: @escaping((Float) -> Void),
-               completionHandler: @escaping(([MDSyncResult]) -> Void)) {
+    func startFullSync(withSyncItem item: MDSync.Item,
+                       progressCompletionHandler: @escaping((Float) -> Void),
+                       completionHandler: @escaping(([MDSyncResult]) -> Void)) {
         
         // Initialize Sync Results
         var syncResults: [MDSyncResult] = []
@@ -103,7 +115,7 @@ fileprivate extension MDSync {
         apiGetAndSaveJWT(withSyncItem: item) { [unowned self] result in
             // Append Sync Result
             syncResults.append(result)
-            // Pass Progress
+            // Compute And Pass Progress
             progressCompletionHandler(computeProgress(finishedOperationsCount: syncResults.count))
             // Dispatch Group Leave
             dispatchGroup.leave()
@@ -115,7 +127,7 @@ fileprivate extension MDSync {
         apiGetAndSaveUser(withSyncItem: item) { [unowned self] result in
             // Append Sync Result
             syncResults.append(result)
-            // Pass Progress
+            // Compute And Pass Progress
             progressCompletionHandler(computeProgress(finishedOperationsCount: syncResults.count))
             // Dispatch Group Leave
             dispatchGroup.leave()
@@ -127,7 +139,7 @@ fileprivate extension MDSync {
         apiGetAndSaveLanguages(withSyncItem: item) { [unowned self] result in
             // Append Sync Result
             syncResults.append(result)
-            // Pass Progress
+            // Compute And Pass Progress
             progressCompletionHandler(computeProgress(finishedOperationsCount: syncResults.count))
             // Dispatch Group Leave
             dispatchGroup.leave()
@@ -139,7 +151,7 @@ fileprivate extension MDSync {
         apiGetAndSaveCourses(withSyncItem: item) { [unowned self] result in
             // Append Sync Result
             syncResults.append(result)
-            // Pass Progress
+            // Compute And Pass Progress
             progressCompletionHandler(computeProgress(finishedOperationsCount: syncResults.count))
             // Dispatch Group Leave
             dispatchGroup.leave()
@@ -151,7 +163,7 @@ fileprivate extension MDSync {
         apiGetAndSaveWords(withSyncItem: item) { [unowned self] result in
             // Append Sync Result
             syncResults.append(result)
-            // Pass Progress
+            // Compute And Pass Progress
             progressCompletionHandler(computeProgress(finishedOperationsCount: syncResults.count))
             // Dispatch Group Leave
             dispatchGroup.leave()
@@ -167,6 +179,11 @@ fileprivate extension MDSync {
     func computeProgress(finishedOperationsCount: Int) -> Float {
         return Float(finishedOperationsCount) / Float(MDSyncStep.allCases.count)
     }
+    
+}
+
+// MARK: - Delete Data
+fileprivate extension MDSync {
     
     func deleteAllData(completionHandler: @escaping(([MDSyncResult]) -> Void)) {
         
@@ -232,11 +249,6 @@ fileprivate extension MDSync {
         }
         
     }
-    
-}
-
-// MARK: - Delete Data
-fileprivate extension MDSync {
     
     func deleteAllJWT(completionHandler: @escaping(MDSyncResultWithCompletion)) {
         
