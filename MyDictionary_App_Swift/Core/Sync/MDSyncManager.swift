@@ -12,11 +12,12 @@ protocol MDSyncManagerProtocol {
     var isRunning: Bool { get }
     
     func startFullSync(withSyncItem item: MDSync.Item,
-                       progressCompletionHandler: @escaping((Float) -> Void),
+                       progressCompletionHandler: @escaping(MDProgressWithCompletion),
                        completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
     
-    func startLanguageSync(withSyncItem item: MDSync.Item,
-                           completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    func startWithJWTAndUserAndLanguageSync(withSyncItem item: MDSync.Item,
+                                            progressCompletionHandler: @escaping(MDProgressWithCompletion),
+                                            completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
     
 }
 
@@ -45,7 +46,7 @@ final class MDSyncManager: MDSyncManagerProtocol {
 extension MDSyncManager {
     
     func startFullSync(withSyncItem item: MDSync.Item,
-                       progressCompletionHandler: @escaping((Float) -> Void),
+                       progressCompletionHandler: @escaping(MDProgressWithCompletion),
                        completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
         // Check Is Sync Not Running
@@ -100,8 +101,9 @@ extension MDSyncManager {
         
     }
     
-    func startLanguageSync(withSyncItem item: MDSync.Item,
-                           completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+    func startWithJWTAndUserAndLanguageSync(withSyncItem item: MDSync.Item,
+                                            progressCompletionHandler: @escaping(MDProgressWithCompletion),
+                                            completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         // Check Is Sync Not Running
         guard !isRunning else { completionHandler(.failure(MDSyncError.syncIsRunning)) ; return }
@@ -109,30 +111,49 @@ extension MDSyncManager {
         // Set In Running
         setInternalIsRunningTrue()
         
+        // Initialize Count Result
+        var countResult: Int = .zero
+        
         // Start Sync
-        sync.startLanguageSync(withSyncItem: item) { [unowned self] syncResult in
+        sync.startWithJWTAndUserAndLanguageSync(withSyncItem: item) { progress in
             
-            switch syncResult.result {
+            // Pass Progress
+            progressCompletionHandler(progress)
             
-            case .success:
+        } completionHandler: { [unowned self] (results) in
+            
+            results.forEach { result in
+                
+                debugPrint(#function, Self.self, "step: ", result.syncStep)
+                
+                switch result.result {
+                
+                case .success:
+                    //
+                    debugPrint(#function, Self.self, "step: ", result.syncStep, "Success")
+                    // Increment count Result
+                    countResult += 1
+                    //
+                    if (countResult == results.count) {
+                        //
+                        setInternalIsRunningFalse()
+                        //
+                        completionHandler(.success(()))
+                        //
+                        break
+                        //
+                    }
                 //
-                debugPrint(#function, Self.self, "Success")
-                //
-                setInternalIsRunningFalse()
-                //
-                completionHandler(.success(()))
-                //
-                break
-            //
-            case .failure(let error):
-                //
-                debugPrint(#function, Self.self, "Failure: ", error)
-                //
-                setInternalIsRunningFalse()
-                //
-                completionHandler(.failure(error))
-                //
-                return
+                case .failure(let error):
+                    //
+                    debugPrint(#function, Self.self, "step: ", result.syncStep, "Failure: ", error)
+                    //
+                    setInternalIsRunningFalse()
+                    //
+                    completionHandler(.failure(error))
+                    //
+                    return
+                }
             }
             
         }

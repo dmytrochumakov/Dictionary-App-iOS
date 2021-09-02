@@ -120,7 +120,11 @@ fileprivate extension AuthorizationInteractor {
         if (authValidation.isValid) {
             
             authManager.login(authRequest: .init(nickname: dataManager.getNickname()!,
-                                                 password: dataManager.getPassword()!)) { [weak self] (result) in
+                                                 password: dataManager.getPassword()!)) { [weak self] progress in
+                
+                debugPrint(#function, Self.self, "progress: ", progress)
+                
+            } completionHandler: { [weak self] (result) in
                 
                 switch result {
                 case .success:

@@ -8,8 +8,15 @@
 import Foundation
 
 protocol MDAuthManagerProtocol {
-    func login(authRequest: AuthRequest, completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
-    func register(authRequest: AuthRequest, completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    
+    func login(authRequest: AuthRequest,
+               progressCompletionHandler: @escaping(MDProgressWithCompletion),
+               completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    
+    func register(authRequest: AuthRequest,
+                  progressCompletionHandler: @escaping(MDProgressWithCompletion),
+                  completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    
 }
 
 final class MDAuthManager: MDAuthManagerProtocol {
@@ -36,7 +43,9 @@ final class MDAuthManager: MDAuthManagerProtocol {
 
 extension MDAuthManager {
     
-    func login(authRequest: AuthRequest, completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
+    func login(authRequest: AuthRequest,
+               progressCompletionHandler: @escaping(MDProgressWithCompletion),
+               completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
         apiAuth.login(authRequest: authRequest) { [unowned self] loginResult in
             
@@ -48,8 +57,8 @@ extension MDAuthManager {
                                                               password: authRequest.password,
                                                               userId: authResponse.userResponse.userId,
                                                               nickname: authRequest.nickname)) { progress in
-                    
-                    debugPrint(#function, Self.self, "progress: ", progress)
+                    // Pass progress
+                    progressCompletionHandler(progress)
                     
                 } completionHandler: { [unowned self] (syncResult) in
                     
@@ -85,7 +94,9 @@ extension MDAuthManager {
         
     }
     
-    func register(authRequest: AuthRequest, completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
+    func register(authRequest: AuthRequest,
+                  progressCompletionHandler: @escaping(MDProgressWithCompletion),
+                  completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
         apiAuth.register(authRequest: authRequest) { [unowned self] registerResult in
             
@@ -93,10 +104,14 @@ extension MDAuthManager {
             
             case .success(let authResponse):
                 //
-                syncManager.startLanguageSync(withSyncItem: .init(accessToken: authResponse.jwtResponse.accessToken,
-                                                                  password: authRequest.password,
-                                                                  userId: authResponse.userResponse.userId,
-                                                                  nickname: authRequest.nickname)) { syncResult in
+                syncManager.startWithJWTAndUserAndLanguageSync(withSyncItem: .init(accessToken: authResponse.jwtResponse.accessToken,
+                                                                                   password: authRequest.password,
+                                                                                   userId: authResponse.userResponse.userId,
+                                                                                   nickname: authRequest.nickname)) { progress in
+                    // Pass progress
+                    progressCompletionHandler(progress)
+                    
+                } completionHandler: { [unowned self] (syncResult) in
                     
                     switch syncResult {
                     

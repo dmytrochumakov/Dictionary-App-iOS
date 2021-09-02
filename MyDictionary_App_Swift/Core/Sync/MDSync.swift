@@ -13,8 +13,9 @@ protocol MDSyncProtocol {
                                         progressCompletionHandler: @escaping((Float) -> Void),
                                         completionHandler: @escaping(([MDSyncResult]) -> Void))
     
-    func startLanguageSync(withSyncItem item: MDSync.Item,
-                           completionHandler: @escaping((MDSyncResult) -> Void))
+    func startWithJWTAndUserAndLanguageSync(withSyncItem item: MDSync.Item,
+                                            progressCompletionHandler: @escaping((Float) -> Void),
+                                            completionHandler: @escaping(([MDSyncResult]) -> Void))
     
 }
 
@@ -86,12 +87,13 @@ extension MDSync {
         
     }
     
-    func startLanguageSync(withSyncItem item: Item,
-                           completionHandler: @escaping ((MDSyncResult) -> Void)) {
+    func startWithJWTAndUserAndLanguageSync(withSyncItem item: Item,
+                                            progressCompletionHandler: @escaping((Float) -> Void),
+                                            completionHandler: @escaping (([MDSyncResult]) -> Void)) {
         
-        // Get API And Save Languages
-        apiGetAndSaveLanguages(withSyncItem: item,
-                               completionHandler: completionHandler)
+        jwtAndUserAndLanguageSync(withSyncItem: item,
+                                  progressCompletionHandler: progressCompletionHandler,
+                                  completionHandler: completionHandler)
         
     }
     
@@ -161,6 +163,59 @@ fileprivate extension MDSync {
         dispatchGroup.enter()
         // Get API And Save Words
         apiGetAndSaveWords(withSyncItem: item) { [unowned self] result in
+            // Append Sync Result
+            syncResults.append(result)
+            // Compute And Pass Progress
+            progressCompletionHandler(computeProgress(finishedOperationsCount: syncResults.count))
+            // Dispatch Group Leave
+            dispatchGroup.leave()
+        }
+        
+        // Notify And Pass Final Result
+        dispatchGroup.notify(queue: .main) {
+            completionHandler(syncResults)
+        }
+        
+    }
+    
+    func jwtAndUserAndLanguageSync(withSyncItem item: Item,
+                                   progressCompletionHandler: @escaping((Float) -> Void),
+                                   completionHandler: @escaping (([MDSyncResult]) -> Void)) {
+        
+        // Initialize Sync Results
+        var syncResults: [MDSyncResult] = []
+        
+        // Initialize Dispatch Group
+        let dispatchGroup: DispatchGroup = .init()
+        
+        // Dispatch Group Enter
+        dispatchGroup.enter()
+        // Get API And Save JWT
+        apiGetAndSaveJWT(withSyncItem: item) { [unowned self] result in
+            // Append Sync Result
+            syncResults.append(result)
+            // Compute And Pass Progress
+            progressCompletionHandler(computeProgress(finishedOperationsCount: syncResults.count))
+            // Dispatch Group Leave
+            dispatchGroup.leave()
+        }
+        
+        // Dispatch Group Enter
+        dispatchGroup.enter()
+        // Get API And Save User
+        apiGetAndSaveUser(withSyncItem: item) { [unowned self] result in
+            // Append Sync Result
+            syncResults.append(result)
+            // Compute And Pass Progress
+            progressCompletionHandler(computeProgress(finishedOperationsCount: syncResults.count))
+            // Dispatch Group Leave
+            dispatchGroup.leave()
+        }
+        
+        // Dispatch Group Enter
+        dispatchGroup.enter()
+        // Get API And Save Languages
+        apiGetAndSaveLanguages(withSyncItem: item) { [unowned self] result in
             // Append Sync Result
             syncResults.append(result)
             // Compute And Pass Progress
