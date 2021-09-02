@@ -34,12 +34,16 @@ final class MDSyncManager: MDSyncManagerProtocol {
         debugPrint(#function, Self.self)
     }
     
+}
+
+extension MDSyncManager {
+    
     func start(withSyncItem item: MDSync.Item,
                progressCompletionHandler: @escaping((Float) -> Void),
                completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
         // Check Is Sync Not Running
-        guard !isRunning else { return }
+        guard !isRunning else { completionHandler(.failure(MDSyncError.syncIsRunning)) ; return }
         
         // Set In Running
         setInternalIsRunningTrue()
@@ -90,15 +94,19 @@ final class MDSyncManager: MDSyncManagerProtocol {
         
     }
     
-    fileprivate func setInternalIsRunning(_ newValue: Bool) {
+}
+
+fileprivate extension MDSyncManager {
+    
+    func setInternalIsRunning(_ newValue: Bool) {
         self.internalIsRunning = newValue
     }
     
-    fileprivate func setInternalIsRunningTrue() {
+    func setInternalIsRunningTrue() {
         self.setInternalIsRunning(true)
     }
     
-    fileprivate func setInternalIsRunningFalse() {
+    func setInternalIsRunningFalse() {
         self.setInternalIsRunning(false)
     }
     
