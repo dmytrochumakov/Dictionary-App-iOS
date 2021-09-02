@@ -8,11 +8,12 @@
 import Foundation
 
 protocol MDFillMemoryServiceProtocol {
-    func fillMemoryFromCoreData()
+    func fillMemoryFromCoreDataIfNeeded()
 }
 
 final class MDFillMemoryService: MDFillMemoryServiceProtocol {
     
+    fileprivate let isLoggedIn: Bool
     fileprivate let jwtStorage: MDJWTStorageProtocol
     fileprivate let userStorage: MDUserStorageProtocol
     fileprivate let languageStorage: MDLanguageStorageProtocol
@@ -24,12 +25,14 @@ final class MDFillMemoryService: MDFillMemoryServiceProtocol {
     // Default is .memory
     fileprivate let toMemory: MDStorageType = .memory
     
-    init(jwtStorage: MDJWTStorageProtocol,
+    init(isLoggedIn: Bool,
+         jwtStorage: MDJWTStorageProtocol,
          userStorage: MDUserStorageProtocol,
          languageStorage: MDLanguageStorageProtocol,
          courseStorage: MDCourseStorageProtocol,
          wordStorage: MDWordStorageProtocol) {
         
+        self.isLoggedIn = isLoggedIn
         self.jwtStorage = jwtStorage
         self.userStorage = userStorage
         self.languageStorage = languageStorage
@@ -46,22 +49,29 @@ final class MDFillMemoryService: MDFillMemoryServiceProtocol {
 
 extension MDFillMemoryService {
     
-    func fillMemoryFromCoreData() {
-        fillJWTMemoryFromCoreData()
-        fillUserMemoryFromCoreData()
-        fillLanguageMemoryFromCoreData()
-        fillCourseMemoryFromCoreData()
-        fillWordMemoryFromCoreData()
+    func fillMemoryFromCoreDataIfNeeded() {
+        
+        if (isLoggedIn) {
+            fillJWTMemoryFromCoreData()
+            fillUserMemoryFromCoreData()
+            fillLanguageMemoryFromCoreData()
+            fillCourseMemoryFromCoreData()
+            fillWordMemoryFromCoreData()
+        } else {
+            return
+        }
+        
     }
     
 }
 
+// MARK: - Fill
 fileprivate extension MDFillMemoryService {
     
     func fillJWTMemoryFromCoreData() {
         
         jwtStorage.readFirstJWT(storageType: fromCoreData) { [unowned self] readResults in
-        
+            
             switch readResults.first!.result {
             
             case .success(let jwt):
@@ -94,7 +104,7 @@ fileprivate extension MDFillMemoryService {
     func fillUserMemoryFromCoreData() {
         
         userStorage.readFirstUser(storageType: fromCoreData) { [unowned self] readResults in
-        
+            
             switch readResults.first!.result {
             
             case .success(let user):
@@ -128,7 +138,7 @@ fileprivate extension MDFillMemoryService {
     func fillLanguageMemoryFromCoreData() {
         
         languageStorage.readAllLanguages(storageType: fromCoreData) { [unowned self] readResults in
-        
+            
             switch readResults.first!.result {
             
             case .success(let languages):
@@ -161,7 +171,7 @@ fileprivate extension MDFillMemoryService {
     func fillCourseMemoryFromCoreData() {
         
         courseStorage.readAllCourses(storageType: fromCoreData) { [unowned self] readResults in
-        
+            
             switch readResults.first!.result {
             
             case .success(let courses):
@@ -194,7 +204,7 @@ fileprivate extension MDFillMemoryService {
     func fillWordMemoryFromCoreData() {
         
         wordStorage.readAllWords(storageType: fromCoreData) { [unowned self] readResults in
-        
+            
             switch readResults.first!.result {
             
             case .success(let words):

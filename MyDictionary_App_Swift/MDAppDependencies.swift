@@ -195,6 +195,18 @@ extension MDAppDependencies {
         let appSettings: AppSettingsProtocol = AppSettings.init(userDefaults:userDefaults )
         self.appSettings = appSettings
         
+        //
+        // Fill Memory Service
+        let fillMemoryService: MDFillMemoryServiceProtocol = MDFillMemoryService.init(isLoggedIn: appSettings.isLoggedIn,
+                                                                                      jwtStorage: jwtStorage,
+                                                                                      userStorage: userStorage,
+                                                                                      languageStorage: languageStorage,
+                                                                                      courseStorage: courseStorage,
+                                                                                      wordStorage: wordStorage)
+        // Fill Memory If Needed
+        fillMemoryService.fillMemoryFromCoreDataIfNeeded()
+        //
+        
         // Configure FirebaseApp
         FirebaseApp.configure()
         
