@@ -33,31 +33,14 @@ final class MDReadCourseCoreDataStorageOperation: MDOperation {
         let fetchRequest = NSFetchRequest<CDCourseResponseEntity>(entityName: CoreDataEntityName.CDCourseResponseEntity)
         fetchRequest.predicate = NSPredicate(format: "\(CDCourseResponseEntityAttributeName.courseId) == %i", self.courseId)
         
-        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
-            
-            if let result = asynchronousFetchResult.finalResult {
-                if let courseEntity = result.map({ $0.courseResponse }).first {
-                    DispatchQueue.main.async {
-                        self?.result?(.success(courseEntity))
-                        self?.finish()
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self?.result?(.failure(MDEntityOperationError.cantFindEntity))
-                        self?.finish()
-                    }
-                }
+        do {            
+            if let courseEntity = try managedObjectContext.fetch(fetchRequest).map({ $0.courseResponse }).first {
+                self.result?(.success(courseEntity))
+                self.finish()
             } else {
-                DispatchQueue.main.async {
-                    self?.result?(.failure(MDEntityOperationError.cantFindEntity))
-                    self?.finish()
-                }
+                self.result?(.failure(MDEntityOperationError.cantFindEntity))
+                self.finish()
             }
-            
-        }
-        
-        do {
-            try managedObjectContext.execute(asynchronousFetchRequest)
         } catch let error {
             self.result?(.failure(error))
             self.finish()

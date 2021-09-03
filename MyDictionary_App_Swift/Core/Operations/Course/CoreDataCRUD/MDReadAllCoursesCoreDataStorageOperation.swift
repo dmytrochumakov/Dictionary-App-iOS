@@ -29,24 +29,9 @@ final class MDReadAllCoursesCoreDataStorageOperation: MDOperation {
         
         let fetchRequest = NSFetchRequest<CDCourseResponseEntity>(entityName: CoreDataEntityName.CDCourseResponseEntity)
         
-        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
-            
-            if let finalResult = asynchronousFetchResult.finalResult {
-                DispatchQueue.main.async {
-                    self?.result?(.success(finalResult.map({ $0.courseResponse })))
-                    self?.finish()
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self?.result?(.failure(MDEntityOperationError.cantFindEntity))
-                    self?.finish()
-                }
-            }
-            
-        }
-        
         do {
-            try managedObjectContext.execute(asynchronousFetchRequest)
+            self.result?(.success(try managedObjectContext.fetch(fetchRequest).map({ $0.courseResponse })))
+            self.finish()
         } catch let error {
             self.result?(.failure(error))
             self.finish()
