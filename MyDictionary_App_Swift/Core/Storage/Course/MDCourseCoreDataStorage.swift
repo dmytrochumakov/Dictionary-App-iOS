@@ -67,6 +67,7 @@ extension MDCourseCoreDataStorage {
     
     func createCourse(_ courseEntity: CourseResponse, _ completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
         let operation: MDCreateCourseCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                      coreDataStack: self.coreDataStack,
                                                                       coreDataStorage: self,
                                                                       courseEntity: courseEntity) { result in
             completionHandler(result)
@@ -76,6 +77,7 @@ extension MDCourseCoreDataStorage {
     
     func createCourses(_ courseEntities: [CourseResponse], _ completionHandler: @escaping (MDOperationsResultWithCompletion<CourseResponse>)) {
         let operation: MDCreateCoursesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                       coreDataStack: self.coreDataStack,
                                                                        coreDataStorage: self,
                                                                        courseEntities: courseEntities) { result in
             completionHandler(result)
@@ -102,6 +104,7 @@ extension MDCourseCoreDataStorage {
     
     func deleteCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         let operation: MDDeleteCourseCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                      coreDataStack: self.coreDataStack,
                                                                       coreDataStorage: self,
                                                                       courseId: courseId) { result in
             completionHandler(result)
@@ -111,55 +114,11 @@ extension MDCourseCoreDataStorage {
     
     func deleteAllCourses(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         let operation: MDDeleteAllCoursesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                          coreDataStack: self.coreDataStack,
                                                                           coreDataStorage: self) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
-    }
-    
-}
-
-// MARK: - Save
-extension MDCourseCoreDataStorage {
-    
-    func savePerform(completionHandler: @escaping CDResultSaved) {
-        coreDataStack.savePerform(completionHandler: completionHandler)
-    }
-    
-    func savePerform(courseID: Int64, completionHandler: @escaping(MDOperationResultWithCompletion<CourseResponse>)) {
-        coreDataStack.savePerform() { [unowned self] (result) in
-            switch result {
-            case .success:
-                self.readCourse(fromCourseId: courseID) { (result) in
-                    switch result {
-                    case .success(let courseEntity):
-                        completionHandler(.success(courseEntity))
-                    case .failure(let error):
-                        completionHandler(.failure(error))
-                    }
-                }
-            case .failure(let error):
-                completionHandler(.failure(error))
-            }
-        }
-    }
-    
-    func save(courseID: Int64, completionHandler: @escaping(MDOperationResultWithCompletion<CourseResponse>)) {
-        coreDataStack.savePerformAndWait() { [unowned self] (result) in
-            switch result {
-            case .success:
-                self.readCourse(fromCourseId: courseID) { (result) in
-                    switch result {
-                    case .success(let courseEntity):
-                        completionHandler(.success(courseEntity))
-                    case .failure(let error):
-                        completionHandler(.failure(error))
-                    }
-                }
-            case .failure(let error):
-                completionHandler(.failure(error))
-            }
-        }
     }
     
 }

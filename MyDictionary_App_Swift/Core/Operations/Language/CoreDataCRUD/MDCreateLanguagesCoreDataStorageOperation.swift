@@ -10,16 +10,19 @@ import CoreData
 final class MDCreateLanguagesCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let coreDataStack: CoreDataStack
     fileprivate let coreDataStorage: MDLanguageCoreDataStorage
     fileprivate let languageEntities: [LanguageResponse]
     fileprivate let result: MDOperationsResultWithCompletion<LanguageResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
+         coreDataStack: CoreDataStack,
          coreDataStorage: MDLanguageCoreDataStorage,
          languageEntities: [LanguageResponse],
          result: MDOperationsResultWithCompletion<LanguageResponse>?) {
         
         self.managedObjectContext = managedObjectContext
+        self.coreDataStack = coreDataStack
         self.coreDataStorage = coreDataStorage
         self.languageEntities = languageEntities
         self.result = result
@@ -33,26 +36,23 @@ final class MDCreateLanguagesCoreDataStorageOperation: MDOperation {
         
         languageEntities.forEach { languageEntity in
             
-            let newLanguage = CDLanguageResponseEntity.init(languageResponse: languageEntity,
-                                                            insertIntoManagedObjectContext: self.managedObjectContext)
+            let _ = CDLanguageResponseEntity.init(languageResponse: languageEntity,
+                                                  insertIntoManagedObjectContext: self.managedObjectContext)
             
-            self.coreDataStorage.save(languageID: newLanguage.languageId) { [weak self] saveResult in
-                DispatchQueue.main.async {
-                    switch saveResult {
-                    case .success:
-                        
-                        resultCount += 1
-                        
-                        if (resultCount == self?.languageEntities.count) {
-                            self?.result?(.success(self?.languageEntities ?? []))
-                            self?.finish()
-                        }
-                        
-                    case .failure(let error):
-                        self?.result?(.failure(error))
-                        self?.finish()
-                    }
+            do {
+                
+                try coreDataStack.save()
+                
+                resultCount += 1
+                
+                if (resultCount == self.languageEntities.count) {
+                    self.result?(.success(self.languageEntities))
+                    self.finish()                    
                 }
+                
+            } catch let error {
+                self.result?(.failure(error))
+                self.finish()
             }
             
         }

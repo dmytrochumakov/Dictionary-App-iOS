@@ -11,20 +11,23 @@ import CoreData
 final class MDUpdateWordCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let coreDataStack: CoreDataStack
     fileprivate let wordStorage: MDWordCoreDataStorage
     fileprivate let wordId: Int64
     fileprivate let newWordText: String
     fileprivate let newWordDescription: String
-    fileprivate let result: MDOperationResultWithCompletion<WordResponse>?
+    fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
+         coreDataStack: CoreDataStack,
          wordId: Int64,
          newWordText: String,
          newWordDescription: String,
-         result: MDOperationResultWithCompletion<WordResponse>?) {
+         result: MDOperationResultWithCompletion<Void>?) {
         
         self.managedObjectContext = managedObjectContext
+        self.coreDataStack = coreDataStack
         self.wordStorage = wordStorage
         self.wordId = wordId
         self.newWordText = newWordText
@@ -48,24 +51,14 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchUpdateRequest)
             
-            self.wordStorage.savePerform(wordId: self.wordId) { [weak self] (result) in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let updatedWord):
-                        self?.result?(.success(updatedWord))
-                        self?.finish()
-                    case .failure(let error):
-                        self?.result?(.failure(error))
-                        self?.finish()
-                    }
-                }
-            }
+            try coreDataStack.save()
+            
+            self.result?(.success(()))
+            self.finish()
             
         } catch let error {
-            DispatchQueue.main.async {
-                self.result?(.failure(error))
-                self.finish()
-            }
+            self.result?(.failure(error))
+            self.finish()            
         }
         
     }

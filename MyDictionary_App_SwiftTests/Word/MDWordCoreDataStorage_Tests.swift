@@ -150,15 +150,28 @@ extension MDWordCoreDataStorage_Tests {
                 
                 self.wordCoreDataStorage.updateWord(byWordID: createdWord.wordId,
                                                     newWordText: Constants_For_Tests.mockedWordForUpdate.wordText,
-                                                    newWordDescription: Constants_For_Tests.mockedWordForUpdate.wordDescription) { updateResult in
+                                                    newWordDescription: Constants_For_Tests.mockedWordForUpdate.wordDescription) { [unowned self] updateResult in
                     
                     switch updateResult {
                     
-                    case .success(let updatedWord):
+                    case .success:
                         
-                        XCTAssertTrue(updatedWord.wordText == Constants_For_Tests.mockedWordForUpdate.wordText)
-                        XCTAssertTrue(updatedWord.wordDescription == Constants_For_Tests.mockedWordForUpdate.wordDescription)
-                        expectation.fulfill()
+                        wordCoreDataStorage.readWord(fromWordID: createdWord.wordId) { readResult in
+                            
+                            switch readResult {
+                            
+                            case .success(let readWord):
+                                
+                                XCTAssertTrue(readWord.wordText == Constants_For_Tests.mockedWordForUpdate.wordText)
+                                XCTAssertTrue(readWord.wordDescription == Constants_For_Tests.mockedWordForUpdate.wordDescription)
+                                expectation.fulfill()
+                                
+                            case .failure:
+                                XCTExpectFailure()
+                                expectation.fulfill()
+                            }
+                            
+                        }
                         
                     case .failure:
                         XCTExpectFailure()
@@ -190,7 +203,7 @@ extension MDWordCoreDataStorage_Tests {
             
             case .success(let createdWord):
                 
-                self.wordCoreDataStorage.deleteWord(createdWord, { [unowned self] deleteResult in
+                self.wordCoreDataStorage.deleteWord(byWordId: createdWord.wordId) { [unowned self] deleteResult in
                     
                     switch deleteResult {
                     
@@ -214,7 +227,7 @@ extension MDWordCoreDataStorage_Tests {
                         XCTExpectFailure()
                         expectation.fulfill()
                     }
-                })
+                }
             case .failure:
                 XCTExpectFailure()
                 expectation.fulfill()

@@ -33,31 +33,14 @@ final class MDReadUserCoreDataStorageOperation: MDOperation {
         let fetchRequest = NSFetchRequest<CDUserResponseEntity>(entityName: CoreDataEntityName.CDUserResponseEntity)
         fetchRequest.predicate = NSPredicate(format: "\(CDUserResponseEntityAttributeName.userId) == %i", userId)
         
-        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
-            
-            if let result = asynchronousFetchResult.finalResult {
-                if let user = result.map({ $0.userResponse }).first {
-                    DispatchQueue.main.async {
-                        self?.result?(.success(user))
-                        self?.finish()
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self?.result?(.failure(MDEntityOperationError.cantFindEntity))
-                        self?.finish()
-                    }
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self?.result?(.failure(MDEntityOperationError.cantFindEntity))
-                    self?.finish()
-                }
-            }
-            
-        }
-        
         do {
-            try managedObjectContext.execute(asynchronousFetchRequest)
+            if let result = try managedObjectContext.fetch(fetchRequest).map({ $0.userResponse }).first {
+                self.result?(.success(result))
+                self.finish()
+            } else {
+                self.result?(.failure(MDEntityOperationError.cantFindEntity))
+                self.finish()
+            }
         } catch let error {
             self.result?(.failure(error))
             self.finish()
@@ -94,31 +77,14 @@ final class MDReadFirstUserCoreDataStorageOperation: MDOperation {
         
         let fetchRequest = NSFetchRequest<CDUserResponseEntity>(entityName: CoreDataEntityName.CDUserResponseEntity)
         
-        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
-            
-            if let result = asynchronousFetchResult.finalResult {
-                if let user = result.map({ $0.userResponse }).first {
-                    DispatchQueue.main.async {
-                        self?.result?(.success(user))
-                        self?.finish()
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self?.result?(.failure(MDEntityOperationError.cantFindEntity))
-                        self?.finish()
-                    }
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self?.result?(.failure(MDEntityOperationError.cantFindEntity))
-                    self?.finish()
-                }
-            }
-            
-        }
-        
         do {
-            try managedObjectContext.execute(asynchronousFetchRequest)
+            if let result = try managedObjectContext.fetch(fetchRequest).map({ $0.userResponse }).first {
+                self.result?(.success(result))
+                self.finish()
+            } else {
+                self.result?(.failure(MDEntityOperationError.cantFindEntity))
+                self.finish()
+            }
         } catch let error {
             self.result?(.failure(error))
             self.finish()

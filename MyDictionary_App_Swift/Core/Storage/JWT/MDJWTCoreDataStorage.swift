@@ -68,6 +68,7 @@ extension MDJWTCoreDataStorage {
     
     func createJWT(_ jwtResponse: JWTResponse, _ completionHandler: @escaping(MDOperationResultWithCompletion<JWTResponse>)) {
         let operation = MDCreateJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                 coreDataStack: self.coreDataStack,
                                                                  coreDataStorage: self,
                                                                  jwtResponse: jwtResponse) { result in
             completionHandler(result)
@@ -111,14 +112,20 @@ extension MDJWTCoreDataStorage {
 // MARK: - Update
 extension MDJWTCoreDataStorage {
     
-    func updateJWT(oldAccessToken accessToken: String, newJWTResponse jwtResponse: JWTResponse, _ completionHandler: @escaping (MDOperationResultWithCompletion<JWTResponse>)) {
+    func updateJWT(oldAccessToken accessToken: String,
+                   newJWTResponse jwtResponse: JWTResponse,
+                   _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+        
         let operation = MDUpdateJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                 coreDataStack: self.coreDataStack,
                                                                  coreDataStorage: self,
                                                                  oldAccessToken: accessToken,
                                                                  newJWTResponse: jwtResponse) { result in
             completionHandler(result)
         }
+        
         operationQueueService.enqueue(operation)
+        
     }
     
 }
@@ -128,6 +135,7 @@ extension MDJWTCoreDataStorage {
     
     func deleteJWT(_ byAccessToken: String, _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         let operation = MDDeleteJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                 coreDataStack: self.coreDataStack,
                                                                  coreDataStorage: self,
                                                                  accessToken: byAccessToken) { result in
             completionHandler(result)
@@ -137,55 +145,11 @@ extension MDJWTCoreDataStorage {
     
     func deleteAllJWT(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         let operation: MDDeleteAllJWTCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                      coreDataStack: self.coreDataStack,
                                                                       coreDataStorage: self) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
-    }
-    
-}
-
-// MARK: - Save
-extension MDJWTCoreDataStorage {
-    
-    func savePerform(completionHandler: @escaping CDResultSaved) {
-        coreDataStack.savePerform(completionHandler: completionHandler)
-    }
-    
-    func savePerform(accessToken: String, completionHandler: @escaping(MDOperationResultWithCompletion<JWTResponse>)) {
-        coreDataStack.savePerform() { [unowned self] (result) in
-            switch result {
-            case .success:
-                self.readJWT(fromAccessToken: accessToken) { (result) in
-                    switch result {
-                    case .success(let authResponse):
-                        completionHandler(.success(authResponse))
-                    case .failure(let error):
-                        completionHandler(.failure(error))
-                    }
-                }
-            case .failure(let error):
-                completionHandler(.failure(error))
-            }
-        }
-    }
-    
-    func save(accessToken: String, completionHandler: @escaping(MDOperationResultWithCompletion<JWTResponse>)) {
-        coreDataStack.savePerformAndWait() { [unowned self] (result) in
-            switch result {
-            case .success:
-                self.readJWT(fromAccessToken: accessToken) { (result) in
-                    switch result {
-                    case .success(let authResponse):
-                        completionHandler(.success(authResponse))
-                    case .failure(let error):
-                        completionHandler(.failure(error))
-                    }
-                }
-            case .failure(let error):
-                completionHandler(.failure(error))
-            }
-        }
     }
     
 }

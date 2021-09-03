@@ -67,6 +67,7 @@ extension MDLanguageCoreDataStorage {
     
     func createLanguages(_ languageEntities: [LanguageResponse], _ completionHandler: @escaping(MDOperationResultWithCompletion<[LanguageResponse]>)) {
         let operation: MDCreateLanguagesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                         coreDataStack: self.coreDataStack,
                                                                          coreDataStorage: self,
                                                                          languageEntities: languageEntities) { result in
             completionHandler(result)
@@ -93,55 +94,11 @@ extension MDLanguageCoreDataStorage {
     
     func deleteAllLanguages(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         let operation: MDDeleteAllLanguagesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                            coreDataStack: self.coreDataStack,
                                                                             coreDataStorage: self) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
-    }
-    
-}
-
-// MARK: - Save
-extension MDLanguageCoreDataStorage {
-    
-    func savePerform(completionHandler: @escaping CDResultSaved) {
-        coreDataStack.savePerform(completionHandler: completionHandler)
-    }
-    
-    func savePerform(languageID: Int64, completionHandler: @escaping(MDOperationResultWithCompletion<LanguageResponse>)) {
-        coreDataStack.savePerform() { [unowned self] (result) in
-            switch result {
-            case .success:
-                self.readLanguage(fromLanguageID: languageID) { (result) in
-                    switch result {
-                    case .success(let languageEntity):
-                        completionHandler(.success(languageEntity))
-                    case .failure(let error):
-                        completionHandler(.failure(error))
-                    }
-                }
-            case .failure(let error):
-                completionHandler(.failure(error))
-            }
-        }
-    }
-    
-    func save(languageID: Int64, completionHandler: @escaping(MDOperationResultWithCompletion<LanguageResponse>)) {
-        coreDataStack.savePerformAndWait() { [unowned self] (result) in
-            switch result {
-            case .success:
-                self.readLanguage(fromLanguageID: languageID) { (result) in
-                    switch result {
-                    case .success(let languageEntity):
-                        completionHandler(.success(languageEntity))
-                    case .failure(let error):
-                        completionHandler(.failure(error))
-                    }
-                }
-            case .failure(let error):
-                completionHandler(.failure(error))
-            }
-        }
     }
     
 }

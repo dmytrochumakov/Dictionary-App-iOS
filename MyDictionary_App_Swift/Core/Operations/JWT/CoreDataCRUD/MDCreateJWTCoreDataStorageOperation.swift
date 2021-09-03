@@ -11,16 +11,19 @@ import CoreData
 final class MDCreateJWTCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let coreDataStack: CoreDataStack
     fileprivate let coreDataStorage: MDJWTCoreDataStorage
     fileprivate let jwtResponse: JWTResponse
     fileprivate let result: MDOperationResultWithCompletion<JWTResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
+         coreDataStack: CoreDataStack,
          coreDataStorage: MDJWTCoreDataStorage,
          jwtResponse: JWTResponse,
          result: MDOperationResultWithCompletion<JWTResponse>?) {
         
         self.managedObjectContext = managedObjectContext
+        self.coreDataStack = coreDataStack
         self.coreDataStorage = coreDataStorage
         self.jwtResponse = jwtResponse
         self.result = result
@@ -31,19 +34,18 @@ final class MDCreateJWTCoreDataStorageOperation: MDOperation {
     override func main() {
         
         let newAuthResponse = CDJWTResponseEntity.init(jwtResponse: self.jwtResponse,
-                                                        insertIntoManagedObjectContext: self.managedObjectContext)
+                                                       insertIntoManagedObjectContext: self.managedObjectContext)
         
-        self.coreDataStorage.save(accessToken: newAuthResponse.accessToken!) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let createdJWT):
-                    self?.result?(.success(createdJWT))
-                    self?.finish()
-                case .failure(let error):
-                    self?.result?(.failure(error))
-                    self?.finish()
-                }
-            }
+        do {
+            
+            try coreDataStack.save()
+            
+            self.result?(.success(newAuthResponse.jwtResponse))
+            self.finish()            
+            
+        } catch {
+            self.result?(.failure(error))
+            self.finish()
         }
         
     }

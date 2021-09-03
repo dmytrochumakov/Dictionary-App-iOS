@@ -10,14 +10,17 @@ import CoreData
 final class MDDeleteAllLanguagesCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let coreDataStack: CoreDataStack
     fileprivate let coreDataStorage: MDLanguageCoreDataStorage
     fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
+         coreDataStack: CoreDataStack,
          coreDataStorage: MDLanguageCoreDataStorage,
          result: MDOperationResultWithCompletion<Void>?) {
         
         self.managedObjectContext = managedObjectContext
+        self.coreDataStack = coreDataStack
         self.coreDataStorage = coreDataStorage
         self.result = result
         
@@ -34,32 +37,14 @@ final class MDDeleteAllLanguagesCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            self.coreDataStorage.savePerform { [weak self] (result) in
-                
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success:
-                        guard let self = self
-                        else {
-                            self?.result?(.failure(MDEntityOperationError.objectRemovedFromMemory));
-                            self?.finish() ;
-                            return
-                        }
-                        self.result?(.success(()))
-                        self.finish()
-                    case .failure(let error):
-                        self?.result?(.failure(error))
-                        self?.finish()
-                    }
-                }
-                
-            }
+            try coreDataStack.save()
+            
+            self.result?(.success(()))
+            self.finish()            
             
         } catch let error {
-            DispatchQueue.main.async {
-                self.result?(.failure(error))
-                self.finish()
-            }
+            self.result?(.failure(error))
+            self.finish()
         }
         
     }

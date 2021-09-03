@@ -28,30 +28,14 @@ final class MDReadFirstJWTCoreDataStorageOperation: MDOperation {
         
         let fetchRequest = NSFetchRequest<CDJWTResponseEntity>(entityName: CoreDataEntityName.CDJWTResponseEntity)
         
-        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
-            
-            if let result = asynchronousFetchResult.finalResult {
-                DispatchQueue.main.async {
-                    
-                    guard let firstResult = result.first else {
-                        self?.result?(.failure(MDEntityOperationError.cantFindEntity))
-                        return
-                    }
-                    
-                    self?.result?(.success(firstResult.jwtResponse))
-                    self?.finish()
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self?.result?(.failure(MDEntityOperationError.cantFindEntity))
-                    self?.finish()
-                }
-            }
-            
-        }
-        
         do {
-            try managedObjectContext.execute(asynchronousFetchRequest)
+            if let result = try managedObjectContext.fetch(fetchRequest).map({ $0.jwtResponse }).first {
+                self.result?(.success(result))
+                self.finish()
+            } else {
+                self.result?(.failure(MDEntityOperationError.cantFindEntity))
+                self.finish()
+            }
         } catch let error {
             DispatchQueue.main.async {
                 self.result?(.failure(error))

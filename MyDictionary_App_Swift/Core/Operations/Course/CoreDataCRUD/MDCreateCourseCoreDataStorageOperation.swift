@@ -10,16 +10,19 @@ import CoreData
 final class MDCreateCourseCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let coreDataStack: CoreDataStack
     fileprivate let coreDataStorage: MDCourseCoreDataStorage
     fileprivate let courseEntity: CourseResponse
     fileprivate let result: MDOperationResultWithCompletion<CourseResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
+         coreDataStack: CoreDataStack,
          coreDataStorage: MDCourseCoreDataStorage,
          courseEntity: CourseResponse,
          result: MDOperationResultWithCompletion<CourseResponse>?) {
         
         self.managedObjectContext = managedObjectContext
+        self.coreDataStack = coreDataStack
         self.coreDataStorage = coreDataStorage
         self.courseEntity = courseEntity
         self.result = result
@@ -32,17 +35,16 @@ final class MDCreateCourseCoreDataStorageOperation: MDOperation {
         let newCourseEntity = CDCourseResponseEntity.init(courseResponse: self.courseEntity,
                                                           insertIntoManagedObjectContext: self.managedObjectContext)
         
-        self.coreDataStorage.save(courseID: newCourseEntity.courseId) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let createdCourse):
-                    self?.result?(.success(createdCourse))
-                    self?.finish()
-                case .failure(let error):
-                    self?.result?(.failure(error))
-                    self?.finish()
-                }
-            }
+        do {
+            
+            try coreDataStack.save()
+            
+            self.result?(.success((newCourseEntity.courseResponse)))
+            self.finish()
+            
+        } catch {
+            self.result?(.failure(error))
+            self.finish()
         }
         
     }
@@ -57,16 +59,19 @@ final class MDCreateCourseCoreDataStorageOperation: MDOperation {
 final class MDCreateCoursesCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let coreDataStack: CoreDataStack
     fileprivate let coreDataStorage: MDCourseCoreDataStorage
     fileprivate let courseEntities: [CourseResponse]
     fileprivate let result: MDOperationsResultWithCompletion<CourseResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
+         coreDataStack: CoreDataStack,
          coreDataStorage: MDCourseCoreDataStorage,
          courseEntities: [CourseResponse],
          result: MDOperationsResultWithCompletion<CourseResponse>?) {
         
         self.managedObjectContext = managedObjectContext
+        self.coreDataStack = coreDataStack
         self.coreDataStorage = coreDataStorage
         self.courseEntities = courseEntities
         self.result = result
@@ -80,31 +85,29 @@ final class MDCreateCoursesCoreDataStorageOperation: MDOperation {
             self.result?(.success(self.courseEntities))
             self.finish()
         } else {
-         
+            
             var resultCount: Int = .zero
             
             self.courseEntities.forEach { courseEntity in
                 
-                let newCourseEntity = CDCourseResponseEntity.init(courseResponse: courseEntity,
-                                                                  insertIntoManagedObjectContext: self.managedObjectContext)
+                let _ = CDCourseResponseEntity.init(courseResponse: courseEntity,
+                                                    insertIntoManagedObjectContext: self.managedObjectContext)
                 
-                self.coreDataStorage.save(courseID: newCourseEntity.courseId) { [weak self] result in
-                    DispatchQueue.main.async {
-                        switch result {
-                        case .success:
-                            
-                            resultCount += 1
-                            
-                            if (resultCount == self?.courseEntities.count) {
-                                self?.result?(.success(self?.courseEntities ?? []))
-                                self?.finish()
-                            }
-                            
-                        case .failure(let error):
-                            self?.result?(.failure(error))
-                            self?.finish()
-                        }
+                
+                do {
+                    
+                    try coreDataStack.save()
+                    
+                    resultCount += 1
+                    
+                    if (resultCount == self.courseEntities.count) {
+                        self.result?(.success(self.courseEntities))
+                        self.finish()                        
                     }
+                    
+                } catch {
+                    self.result?(.failure(error))
+                    self.finish()
                 }
                 
             }

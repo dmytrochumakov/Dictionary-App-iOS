@@ -28,11 +28,11 @@ protocol MDWordStorageProtocol: MDStorageProtocol {
                     newWordText: String,
                     newWordDescription: String,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>))
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
     
-    func deleteWord(_ word: WordResponse,
+    func deleteWord(byWordId wordId: Int64,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>))
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
     
     func deleteAllWords(storageType: MDStorageType,
                         _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
@@ -305,7 +305,7 @@ extension MDWordStorage {
                     newWordText: String,
                     newWordDescription: String,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>)) {
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
         
@@ -331,7 +331,7 @@ extension MDWordStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<WordResponse>> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
             
             // Update In Memory
             // Dispatch Group Enter
@@ -371,21 +371,21 @@ extension MDWordStorage {
         
     }
     
-    func deleteWord(_ word: WordResponse,
+    func deleteWord(byWordId wordId: Int64,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>)) {
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
         
         case .memory:
             
-            memoryStorage.deleteWord(word) { result in
+            memoryStorage.deleteWord(byWordId: wordId) { result in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .coreData:
             
-            coreDataStorage.deleteWord(word) { result in
+            coreDataStorage.deleteWord(byWordId: wordId) { result in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
@@ -395,12 +395,12 @@ extension MDWordStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<WordResponse>> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
             
             // Delete From Memory
             // Dispatch Group Enter
             dispatchGroup.enter()
-            memoryStorage.deleteWord(word) { result in
+            memoryStorage.deleteWord(byWordId: wordId) { result in
                 
                 // Append Result
                 finalResult.append(.init(storageType: .memory, result: result))
@@ -412,7 +412,7 @@ extension MDWordStorage {
             // Delete From Core Data
             // Dispatch Group Enter
             dispatchGroup.enter()
-            coreDataStorage.deleteWord(word) { result in
+            coreDataStorage.deleteWord(byWordId: wordId) { result in
                 
                 // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))

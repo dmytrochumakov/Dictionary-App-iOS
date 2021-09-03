@@ -10,29 +10,29 @@ import Foundation
 final class MDDeleteWordMemoryStorageOperation: MDOperation {
     
     fileprivate let wordStorage: MDWordMemoryStorage
-    fileprivate let word: WordResponse
-    fileprivate let result: MDOperationResultWithCompletion<WordResponse>?
+    fileprivate let wordId: Int64
+    fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(wordStorage: MDWordMemoryStorage,
-         word: WordResponse,
-         result: MDOperationResultWithCompletion<WordResponse>?) {
+         wordId: Int64,
+         result: MDOperationResultWithCompletion<Void>?) {
         
         self.wordStorage = wordStorage
-        self.word = word
+        self.wordId = wordId
         self.result = result
         
         super.init()
     }
     
     override func main() {
-        guard let index = self.wordStorage.arrayWords.firstIndex(where: { $0.wordId == self.word.wordId })
+        guard let index = self.wordStorage.arrayWords.firstIndex(where: { $0.wordId == wordId })
         else {
             self.result?(.failure(MDEntityOperationError.cantFindEntity));
             self.finish();
             return
         }
         self.wordStorage.arrayWords.remove(at: index)
-        self.result?(.success(self.word))
+        self.result?(.success(()))
         self.finish()
     }
     

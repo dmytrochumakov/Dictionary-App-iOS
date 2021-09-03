@@ -28,24 +28,9 @@ final class MDReadAllLanguagesCoreDataStorageOperation: MDOperation {
         
         let fetchRequest = NSFetchRequest<CDLanguageResponseEntity>(entityName: CoreDataEntityName.CDLanguageResponseEntity)
         
-        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
-            
-            if let finalResult = asynchronousFetchResult.finalResult {
-                DispatchQueue.main.async {
-                    self?.result?(.success(finalResult.map({ $0.languageResponse })))
-                    self?.finish()
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self?.result?(.failure(MDEntityOperationError.cantFindEntity))
-                    self?.finish()
-                }
-            }
-            
-        }
-        
         do {
-            try managedObjectContext.execute(asynchronousFetchRequest)
+            self.result?(.success(try managedObjectContext.fetch(fetchRequest).map({ $0.languageResponse })))
+            self.finish()
         } catch let error {
             DispatchQueue.main.async {
                 self.result?(.failure(error))

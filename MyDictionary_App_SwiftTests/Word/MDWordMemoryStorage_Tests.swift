@@ -74,7 +74,7 @@ extension MDWordMemoryStorage_Tests {
             switch result {
             
             case .success(let createdWords):
-                                
+                
                 XCTAssertTrue(createdWords.count == Constants_For_Tests.mockedWords.count)
                 expectation.fulfill()
                 
@@ -149,15 +149,28 @@ extension MDWordMemoryStorage_Tests {
                 
                 self.wordMemoryStorage.updateWord(byWordID: createdWord.wordId,
                                                   newWordText: Constants_For_Tests.mockedWordForUpdate.wordText,
-                                                  newWordDescription: Constants_For_Tests.mockedWordForUpdate.wordDescription) { updateResult in
+                                                  newWordDescription: Constants_For_Tests.mockedWordForUpdate.wordDescription) { [unowned self] updateResult in
                     
                     switch updateResult {
                     
-                    case .success(let updatedWord):
+                    case .success:
                         
-                        XCTAssertTrue(updatedWord.wordText == Constants_For_Tests.mockedWordForUpdate.wordText)
-                        XCTAssertTrue(updatedWord.wordDescription == Constants_For_Tests.mockedWordForUpdate.wordDescription)
-                        expectation.fulfill()
+                        wordMemoryStorage.readWord(fromWordID: createdWord.wordId) { readResult in
+                            
+                            switch readResult {
+                            
+                            case .success(let readWord):
+                                
+                                XCTAssertTrue(readWord.wordText == Constants_For_Tests.mockedWordForUpdate.wordText)
+                                XCTAssertTrue(readWord.wordDescription == Constants_For_Tests.mockedWordForUpdate.wordDescription)
+                                expectation.fulfill()
+                                
+                            case .failure:
+                                XCTExpectFailure()
+                                expectation.fulfill()
+                            }
+                            
+                        }
                         
                     case .failure:
                         XCTExpectFailure()
@@ -184,7 +197,7 @@ extension MDWordMemoryStorage_Tests {
             
             case .success(let createdWord):
                 
-                self.wordMemoryStorage.deleteWord(createdWord) { [unowned self] deleteResult in
+                self.wordMemoryStorage.deleteWord(byWordId: createdWord.wordId) { [unowned self] deleteResult in
                     
                     switch deleteResult {
                     
