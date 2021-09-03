@@ -17,7 +17,7 @@ final class MDCourseCoreDataStorage: MDCourseCoreDataStorageProtocol {
     
     fileprivate let operationQueueService: OperationQueueServiceProtocol
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    let coreDataStack: CoreDataStack
     
     init(operationQueueService: OperationQueueServiceProtocol,
          managedObjectContext: NSManagedObjectContext,
@@ -115,51 +115,6 @@ extension MDCourseCoreDataStorage {
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
-    }
-    
-}
-
-// MARK: - Save
-extension MDCourseCoreDataStorage {
-    
-    func savePerform(completionHandler: @escaping CDResultSaved) {
-        coreDataStack.savePerform(completionHandler: completionHandler)
-    }
-    
-    func savePerform(courseID: Int64, completionHandler: @escaping(MDOperationResultWithCompletion<CourseResponse>)) {
-        coreDataStack.savePerform() { [unowned self] (result) in
-            switch result {
-            case .success:
-                self.readCourse(fromCourseId: courseID) { (result) in
-                    switch result {
-                    case .success(let courseEntity):
-                        completionHandler(.success(courseEntity))
-                    case .failure(let error):
-                        completionHandler(.failure(error))
-                    }
-                }
-            case .failure(let error):
-                completionHandler(.failure(error))
-            }
-        }
-    }
-    
-    func save(courseID: Int64, completionHandler: @escaping(MDOperationResultWithCompletion<CourseResponse>)) {
-        coreDataStack.savePerformAndWait() { [unowned self] (result) in
-            switch result {
-            case .success:
-                self.readCourse(fromCourseId: courseID) { (result) in
-                    switch result {
-                    case .success(let courseEntity):
-                        completionHandler(.success(courseEntity))
-                    case .failure(let error):
-                        completionHandler(.failure(error))
-                    }
-                }
-            case .failure(let error):
-                completionHandler(.failure(error))
-            }
-        }
     }
     
 }
