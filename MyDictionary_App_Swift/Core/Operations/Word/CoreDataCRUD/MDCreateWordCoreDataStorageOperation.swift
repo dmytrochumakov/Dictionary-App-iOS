@@ -104,19 +104,12 @@ final class MDCreateWordsCoreDataStorageOperation: MDOperation {
                     resultCount += 1
                     
                     if (resultCount == self.words.count) {
-                        
-                        DispatchQueue.main.async {
-                            self.result?(.success(self.words))
-                        }
-                        
+                        self.result?(.success(self.words))
                         self.finish()
-                        
                     }
                     
                 } catch {
-                    DispatchQueue.main.async {
-                        self.result?(.failure(error))
-                    }
+                    self.result?(.failure(error))                    
                     self.finish()
                 }
                 

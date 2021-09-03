@@ -53,16 +53,12 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
             
             try coreDataStack.save()
             
-            DispatchQueue.main.async {
-                self.result?(.success(()))
-                self.finish()
-            }
+            self.result?(.success(()))
+            self.finish()
             
         } catch let error {
-            DispatchQueue.main.async {
-                self.result?(.failure(error))
-                self.finish()
-            }
+            self.result?(.failure(error))
+            self.finish()            
         }
         
     }

@@ -43,11 +43,9 @@ final class MDCreateUserCoreDataStorageOperation: MDOperation {
             
             try coreDataStack.save()
             
-            DispatchQueue.main.async {
-                self.result?(.success(newUser.userResponse))
-                self.finish()
-            }
-            
+            self.result?(.success(newUser.userResponse))
+            self.finish()
+                        
         } catch {
             self.result?(.failure(error))
             self.finish()

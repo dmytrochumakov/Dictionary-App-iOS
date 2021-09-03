@@ -40,16 +40,12 @@ final class MDCreateJWTCoreDataStorageOperation: MDOperation {
             
             try coreDataStack.save()
             
-            DispatchQueue.main.async {
-                self.result?(.success(newAuthResponse.jwtResponse))
-                self.finish()
-            }
+            self.result?(.success(newAuthResponse.jwtResponse))
+            self.finish()            
             
         } catch {
-            DispatchQueue.main.async {
-                self.result?(.failure(error))
-                self.finish()
-            }
+            self.result?(.failure(error))
+            self.finish()
         }
         
     }

@@ -40,16 +40,11 @@ final class MDDeleteAllCoursesCoreDataStorageOperation: MDOperation {
             
             try coreDataStack.save()
             
-            DispatchQueue.main.async {
-                self.result?(.success(()))
-            }
-            
+            self.result?(.success(()))
             self.finish()
             
         } catch let error {
-            DispatchQueue.main.async {
-                self.result?(.failure(error))                
-            }
+            self.result?(.failure(error))                            
             self.finish()
         }
         

@@ -46,19 +46,12 @@ final class MDCreateLanguagesCoreDataStorageOperation: MDOperation {
                 resultCount += 1
                 
                 if (resultCount == self.languageEntities.count) {
-                    
-                    DispatchQueue.main.async {
-                        self.result?(.success(self.languageEntities))
-                    }
-                    
-                    self.finish()
-                    
+                    self.result?(.success(self.languageEntities))
+                    self.finish()                    
                 }
                 
-            } catch let error {                
-                DispatchQueue.main.async {
-                    self.result?(.failure(error))
-                }
+            } catch let error {
+                self.result?(.failure(error))
                 self.finish()
             }
             

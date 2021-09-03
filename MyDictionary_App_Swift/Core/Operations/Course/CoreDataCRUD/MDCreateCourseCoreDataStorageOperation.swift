@@ -39,10 +39,8 @@ final class MDCreateCourseCoreDataStorageOperation: MDOperation {
             
             try coreDataStack.save()
             
-            DispatchQueue.main.async {
-                self.result?(.success((newCourseEntity.courseResponse)))
-                self.finish()
-            }
+            self.result?(.success((newCourseEntity.courseResponse)))
+            self.finish()
             
         } catch {
             self.result?(.failure(error))
@@ -101,21 +99,14 @@ final class MDCreateCoursesCoreDataStorageOperation: MDOperation {
                     try coreDataStack.save()
                     
                     resultCount += 1
-                                        
+                    
                     if (resultCount == self.courseEntities.count) {
-                        
-                        DispatchQueue.main.async {
-                            self.result?(.success(self.courseEntities))
-                        }
-                        
-                        self.finish()
-                        
+                        self.result?(.success(self.courseEntities))
+                        self.finish()                        
                     }
                     
                 } catch {
-                    DispatchQueue.main.async {
-                        self.result?(.failure(error))
-                    }
+                    self.result?(.failure(error))
                     self.finish()
                 }
                 
