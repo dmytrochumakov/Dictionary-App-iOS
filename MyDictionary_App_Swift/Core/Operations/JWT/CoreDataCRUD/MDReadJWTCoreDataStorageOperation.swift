@@ -32,32 +32,15 @@ final class MDReadJWTCoreDataStorageOperation: MDOperation {
         
         let fetchRequest = NSFetchRequest<CDJWTResponseEntity>(entityName: CoreDataEntityName.CDJWTResponseEntity)
         fetchRequest.predicate = NSPredicate(format: "\(CDJWTResponseEntityAttributeName.accessToken) == %@", accessToken)
-        
-        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
-            
-            if let result = asynchronousFetchResult.finalResult {
-                if let authResponse = result.map({ $0.jwtResponse }).first {
-                    DispatchQueue.main.async {
-                        self?.result?(.success(authResponse))
-                        self?.finish()
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self?.result?(.failure(MDEntityOperationError.cantFindEntity))
-                        self?.finish()
-                    }
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self?.result?(.failure(MDEntityOperationError.cantFindEntity))
-                    self?.finish()
-                }
-            }
-            
-        }
-        
+                
         do {
-            try managedObjectContext.execute(asynchronousFetchRequest)
+            if let result = try managedObjectContext.fetch(fetchRequest).map({ $0.jwtResponse }).first {
+                self.result?(.success(result))
+                self.finish()
+            } else {
+                self.result?(.failure(MDEntityOperationError.cantFindEntity))
+                self.finish()
+            }
         } catch let error {
             self.result?(.failure(error))
             self.finish()
