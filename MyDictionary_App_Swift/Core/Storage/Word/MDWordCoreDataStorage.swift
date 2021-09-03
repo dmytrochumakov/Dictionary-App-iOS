@@ -146,11 +146,11 @@ extension MDWordCoreDataStorage {
 // MARK: - Delete
 extension MDWordCoreDataStorage {
     
-    func deleteWord(_ word: WordResponse,
-                    _ completionHandler: @escaping (MDOperationResultWithCompletion<WordResponse>)) {
+    func deleteWord(byWordId wordId: Int64,
+                    _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         let operation = MDDeleteWordCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                   wordStorage: self,
-                                                                  word: word) { result in
+                                                                  wordId: wordId) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
