@@ -43,20 +43,10 @@ final class MDDeleteWordCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            coreDataStack.savePerform { [weak self] (result) in
-                
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success:
-                        self?.result?(.success(()))
-                        self?.finish()
-                    case .failure(let error):
-                        self?.result?(.failure(error))
-                        self?.finish()
-                    }
-                }
-                
-            }
+            try coreDataStack.save()
+            
+            self.result?(.success(()))
+            self.finish()
             
         } catch let error {
             DispatchQueue.main.async {

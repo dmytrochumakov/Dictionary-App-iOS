@@ -41,43 +41,12 @@ open class CoreDataStack {
     
 }
 
-// MARK: - Save Context
+// MARK: - Save
 extension CoreDataStack {
     
-    public func savePerformAndWait(completionHandler: @escaping CDResultSaved) {
-        savePerformAndWaitContext(privateContext, completionHandler: completionHandler)
-        savePerformAndWaitContext(mainContext, completionHandler: completionHandler)
+    public func save() throws {
+        try privateContext.save()
+        try mainContext.save()
     }
-    
-    public func savePerform(completionHandler: @escaping CDResultSaved) {
-        savePerformContext(privateContext, completionHandler: completionHandler)
-        savePerformContext(mainContext, completionHandler: completionHandler)
-    }
-    
-    private func savePerformAndWaitContext(_ context: NSManagedObjectContext, completionHandler: @escaping CDResultSaved) {
-        context.performAndWait {
-            do {
-                try context.save()
-                completionHandler(.success)
-            } catch {
-                let nsError = error as NSError
-                debugPrint(#function, "Unresolved error \(nsError), \(nsError.userInfo)")
-                completionHandler(.failure(error))
-            }
-        }
-    }
-    
-    private func savePerformContext(_ context: NSManagedObjectContext, completionHandler: @escaping CDResultSaved) {
-        context.perform {
-            do {
-                try context.save()
-                completionHandler(.success)
-            } catch {
-                let nsError = error as NSError
-                debugPrint(#function, "Unresolved error \(nsError), \(nsError.userInfo)")
-                completionHandler(.failure(error))
-            }
-        }
-    }
-    
+          
 }

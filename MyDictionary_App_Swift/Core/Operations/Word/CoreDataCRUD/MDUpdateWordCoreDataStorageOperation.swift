@@ -51,17 +51,11 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchUpdateRequest)
             
-            coreDataStack.savePerform { [weak self] (result) in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success:
-                        self?.result?(.success(()))
-                        self?.finish()
-                    case .failure(let error):
-                        self?.result?(.failure(error))
-                        self?.finish()
-                    }
-                }
+            try coreDataStack.save()
+            
+            DispatchQueue.main.async {
+                self.result?(.success(()))
+                self.finish()
             }
             
         } catch let error {

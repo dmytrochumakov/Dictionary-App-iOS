@@ -36,17 +36,18 @@ final class MDCreateWordCoreDataStorageOperation: MDOperation {
         let newWord = CDWordResponseEntity.init(wordResponse: self.word,
                                                 insertIntoManagedObjectContext: self.managedObjectContext)
         
-        coreDataStack.savePerformAndWait { [weak self] result in
+        do {
+            
+            try coreDataStack.save()
+            
             DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    self?.result?(.success(newWord.wordResponse))
-                    self?.finish()
-                case .failure(let error):
-                    self?.result?(.failure(error))
-                    self?.finish()
-                }
+                self.result?(.success((newWord.wordResponse)))
+                self.finish()
             }
+            
+        } catch {
+            self.result?(.failure(error))
+            self.finish()
         }
         
     }
@@ -96,25 +97,27 @@ final class MDCreateWordsCoreDataStorageOperation: MDOperation {
                 let _ = CDWordResponseEntity.init(wordResponse: word,
                                                   insertIntoManagedObjectContext: self.managedObjectContext)
                 
-                coreDataStack.savePerformAndWait { [weak self] result in
+                do {
                     
-                    DispatchQueue.main.async {
-                        switch result {
+                    try coreDataStack.save()
+                    
+                    resultCount += 1
+                    
+                    if (resultCount == self.words.count) {
                         
-                        case .success:
-                            
-                            resultCount += 1
-                            
-                            if (resultCount == self?.words.count) {
-                                self?.result?(.success(self?.words ?? []))
-                                self?.finish()
-                            }
-                            
-                        case .failure(let error):
-                            self?.result?(.failure(error))
-                            self?.finish()
+                        DispatchQueue.main.async {
+                            self.result?(.success(self.words))
                         }
+                        
+                        self.finish()
+                        
                     }
+                    
+                } catch {
+                    DispatchQueue.main.async {
+                        self.result?(.failure(error))
+                    }
+                    self.finish()
                 }
                 
             }

@@ -39,23 +39,27 @@ final class MDCreateLanguagesCoreDataStorageOperation: MDOperation {
             let _ = CDLanguageResponseEntity.init(languageResponse: languageEntity,
                                                   insertIntoManagedObjectContext: self.managedObjectContext)
             
-            coreDataStack.savePerformAndWait { [weak self] saveResult in
-                DispatchQueue.main.async {
-                    switch saveResult {
-                    case .success:
-                        
-                        resultCount += 1
-                        
-                        if (resultCount == self?.languageEntities.count) {
-                            self?.result?(.success(self?.languageEntities ?? []))
-                            self?.finish()
-                        }
-                        
-                    case .failure(let error):
-                        self?.result?(.failure(error))
-                        self?.finish()
+            do {
+                
+                try coreDataStack.save()
+                
+                resultCount += 1
+                
+                if (resultCount == self.languageEntities.count) {
+                    
+                    DispatchQueue.main.async {
+                        self.result?(.success(self.languageEntities))
                     }
+                    
+                    self.finish()
+                    
                 }
+                
+            } catch let error {                
+                DispatchQueue.main.async {
+                    self.result?(.failure(error))
+                }
+                self.finish()
             }
             
         }

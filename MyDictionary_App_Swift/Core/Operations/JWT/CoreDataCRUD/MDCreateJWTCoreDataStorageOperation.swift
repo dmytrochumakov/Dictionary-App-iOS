@@ -36,16 +36,19 @@ final class MDCreateJWTCoreDataStorageOperation: MDOperation {
         let newAuthResponse = CDJWTResponseEntity.init(jwtResponse: self.jwtResponse,
                                                        insertIntoManagedObjectContext: self.managedObjectContext)
         
-        coreDataStack.savePerformAndWait { [weak self] result in
+        do {
+            
+            try coreDataStack.save()
+            
             DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    self?.result?(.success(newAuthResponse.jwtResponse))
-                    self?.finish()
-                case .failure(let error):
-                    self?.result?(.failure(error))
-                    self?.finish()
-                }
+                self.result?(.success(newAuthResponse.jwtResponse))
+                self.finish()
+            }
+            
+        } catch {
+            DispatchQueue.main.async {
+                self.result?(.failure(error))
+                self.finish()
             }
         }
         
