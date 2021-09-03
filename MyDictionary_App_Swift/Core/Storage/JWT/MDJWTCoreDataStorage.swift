@@ -18,7 +18,7 @@ final class MDJWTCoreDataStorage: NSObject,
     
     fileprivate let operationQueueService: OperationQueueServiceProtocol
     fileprivate let managedObjectContext: NSManagedObjectContext
-    let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: CoreDataStack
     
     init(operationQueueService: OperationQueueServiceProtocol,
          managedObjectContext: NSManagedObjectContext,
@@ -68,6 +68,7 @@ extension MDJWTCoreDataStorage {
     
     func createJWT(_ jwtResponse: JWTResponse, _ completionHandler: @escaping(MDOperationResultWithCompletion<JWTResponse>)) {
         let operation = MDCreateJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                 coreDataStack: self.coreDataStack,
                                                                  coreDataStorage: self,
                                                                  jwtResponse: jwtResponse) { result in
             completionHandler(result)
@@ -116,6 +117,7 @@ extension MDJWTCoreDataStorage {
                    _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         let operation = MDUpdateJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                 coreDataStack: self.coreDataStack,
                                                                  coreDataStorage: self,
                                                                  oldAccessToken: accessToken,
                                                                  newJWTResponse: jwtResponse) { result in
@@ -133,6 +135,7 @@ extension MDJWTCoreDataStorage {
     
     func deleteJWT(_ byAccessToken: String, _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         let operation = MDDeleteJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                 coreDataStack: self.coreDataStack,
                                                                  coreDataStorage: self,
                                                                  accessToken: byAccessToken) { result in
             completionHandler(result)
@@ -142,6 +145,7 @@ extension MDJWTCoreDataStorage {
     
     func deleteAllJWT(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         let operation: MDDeleteAllJWTCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                      coreDataStack: self.coreDataStack,
                                                                       coreDataStorage: self) { result in
             completionHandler(result)
         }

@@ -10,14 +10,17 @@ import CoreData
 final class MDDeleteAllJWTCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let coreDataStack: CoreDataStack
     fileprivate let coreDataStorage: MDJWTCoreDataStorage
     fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
+         coreDataStack: CoreDataStack,
          coreDataStorage: MDJWTCoreDataStorage,
          result: MDOperationResultWithCompletion<Void>?) {
         
         self.managedObjectContext = managedObjectContext
+        self.coreDataStack = coreDataStack
         self.coreDataStorage = coreDataStorage
         self.result = result
         
@@ -35,7 +38,7 @@ final class MDDeleteAllJWTCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            CoreDataStack.savePerform(coreDataStack: coreDataStorage.coreDataStack) { [weak self] (result) in
+            coreDataStack.savePerform { [weak self] (result) in
                 DispatchQueue.main.async {
                     switch result {
                     case .success:

@@ -11,16 +11,19 @@ import CoreData
 final class MDCreateWordCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let coreDataStack: CoreDataStack
     fileprivate let wordStorage: MDWordCoreDataStorage
     fileprivate let word: WordResponse
     fileprivate let result: MDOperationResultWithCompletion<WordResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
+         coreDataStack: CoreDataStack,
          wordStorage: MDWordCoreDataStorage,
          word: WordResponse,
          result: MDOperationResultWithCompletion<WordResponse>?) {
         
         self.managedObjectContext = managedObjectContext
+        self.coreDataStack = coreDataStack
         self.wordStorage = wordStorage
         self.word = word
         self.result = result
@@ -33,7 +36,7 @@ final class MDCreateWordCoreDataStorageOperation: MDOperation {
         let newWord = CDWordResponseEntity.init(wordResponse: self.word,
                                                 insertIntoManagedObjectContext: self.managedObjectContext)
         
-        CoreDataStack.savePerformAndWait(coreDataStack: wordStorage.coreDataStack) { [weak self] result in
+        coreDataStack.savePerformAndWait { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
@@ -59,16 +62,19 @@ final class MDCreateWordCoreDataStorageOperation: MDOperation {
 final class MDCreateWordsCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let coreDataStack: CoreDataStack
     fileprivate let coreDataStorage: MDWordCoreDataStorage
     fileprivate let words: [WordResponse]
     fileprivate let result: MDOperationsResultWithCompletion<WordResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
+         coreDataStack: CoreDataStack,
          coreDataStorage: MDWordCoreDataStorage,
          words: [WordResponse],
          result: MDOperationsResultWithCompletion<WordResponse>?) {
         
         self.managedObjectContext = managedObjectContext
+        self.coreDataStack = coreDataStack
         self.coreDataStorage = coreDataStorage
         self.words = words
         self.result = result
@@ -90,7 +96,7 @@ final class MDCreateWordsCoreDataStorageOperation: MDOperation {
                 let _ = CDWordResponseEntity.init(wordResponse: word,
                                                   insertIntoManagedObjectContext: self.managedObjectContext)
                 
-                CoreDataStack.savePerformAndWait(coreDataStack: coreDataStorage.coreDataStack) { [weak self] result in
+                coreDataStack.savePerformAndWait { [weak self] result in
                     
                     DispatchQueue.main.async {
                         switch result {

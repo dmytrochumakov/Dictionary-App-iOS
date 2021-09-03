@@ -11,16 +11,19 @@ import CoreData
 final class MDCreateJWTCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let coreDataStack: CoreDataStack
     fileprivate let coreDataStorage: MDJWTCoreDataStorage
     fileprivate let jwtResponse: JWTResponse
     fileprivate let result: MDOperationResultWithCompletion<JWTResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
+         coreDataStack: CoreDataStack,
          coreDataStorage: MDJWTCoreDataStorage,
          jwtResponse: JWTResponse,
          result: MDOperationResultWithCompletion<JWTResponse>?) {
         
         self.managedObjectContext = managedObjectContext
+        self.coreDataStack = coreDataStack
         self.coreDataStorage = coreDataStorage
         self.jwtResponse = jwtResponse
         self.result = result
@@ -33,7 +36,7 @@ final class MDCreateJWTCoreDataStorageOperation: MDOperation {
         let newAuthResponse = CDJWTResponseEntity.init(jwtResponse: self.jwtResponse,
                                                        insertIntoManagedObjectContext: self.managedObjectContext)
         
-        CoreDataStack.savePerformAndWait(coreDataStack: coreDataStorage.coreDataStack) { [weak self] result in
+        coreDataStack.savePerformAndWait { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:

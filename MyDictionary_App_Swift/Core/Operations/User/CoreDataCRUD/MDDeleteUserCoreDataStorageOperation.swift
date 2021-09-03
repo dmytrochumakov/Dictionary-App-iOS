@@ -10,16 +10,19 @@ import CoreData
 final class MDDeleteUserCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let coreDataStack: CoreDataStack
     fileprivate let coreDataStorage: MDUserCoreDataStorage
     fileprivate let userId: Int64
     fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
+         coreDataStack: CoreDataStack,
          coreDataStorage: MDUserCoreDataStorage,
          userId: Int64,
          result: MDOperationResultWithCompletion<Void>?) {
         
         self.managedObjectContext = managedObjectContext
+        self.coreDataStack = coreDataStack
         self.coreDataStorage = coreDataStorage
         self.userId = userId
         self.result = result
@@ -39,7 +42,7 @@ final class MDDeleteUserCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            CoreDataStack.savePerform(coreDataStack: coreDataStorage.coreDataStack) { [weak self] (result) in
+            coreDataStack.savePerform { [weak self] (result) in
                 DispatchQueue.main.async {
                     switch result {
                     case .success:
@@ -71,14 +74,17 @@ final class MDDeleteUserCoreDataStorageOperation: MDOperation {
 final class MDDeleteAllUsersCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let coreDataStack: CoreDataStack
     fileprivate let coreDataStorage: MDUserCoreDataStorage
     fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
+         coreDataStack: CoreDataStack,
          coreDataStorage: MDUserCoreDataStorage,
          result: MDOperationResultWithCompletion<Void>?) {
         
         self.managedObjectContext = managedObjectContext
+        self.coreDataStack = coreDataStack
         self.coreDataStorage = coreDataStorage
         self.result = result
         
@@ -96,7 +102,7 @@ final class MDDeleteAllUsersCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            CoreDataStack.savePerform(coreDataStack: coreDataStorage.coreDataStack) { [weak self] (result) in
+            coreDataStack.savePerform { [weak self] (result) in
                 DispatchQueue.main.async {
                     switch result {
                     case .success:

@@ -11,6 +11,7 @@ import CoreData
 final class MDUpdateWordCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let coreDataStack: CoreDataStack
     fileprivate let wordStorage: MDWordCoreDataStorage
     fileprivate let wordId: Int64
     fileprivate let newWordText: String
@@ -19,12 +20,14 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
+         coreDataStack: CoreDataStack,
          wordId: Int64,
          newWordText: String,
          newWordDescription: String,
          result: MDOperationResultWithCompletion<Void>?) {
         
         self.managedObjectContext = managedObjectContext
+        self.coreDataStack = coreDataStack
         self.wordStorage = wordStorage
         self.wordId = wordId
         self.newWordText = newWordText
@@ -48,7 +51,7 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchUpdateRequest)
             
-            CoreDataStack.savePerform(coreDataStack: wordStorage.coreDataStack) { [weak self] (result) in
+            coreDataStack.savePerform { [weak self] (result) in
                 DispatchQueue.main.async {
                     switch result {
                     case .success:

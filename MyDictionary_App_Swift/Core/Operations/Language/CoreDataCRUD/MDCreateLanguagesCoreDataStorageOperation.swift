@@ -10,16 +10,19 @@ import CoreData
 final class MDCreateLanguagesCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let coreDataStack: CoreDataStack
     fileprivate let coreDataStorage: MDLanguageCoreDataStorage
     fileprivate let languageEntities: [LanguageResponse]
     fileprivate let result: MDOperationsResultWithCompletion<LanguageResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
+         coreDataStack: CoreDataStack,
          coreDataStorage: MDLanguageCoreDataStorage,
          languageEntities: [LanguageResponse],
          result: MDOperationsResultWithCompletion<LanguageResponse>?) {
         
         self.managedObjectContext = managedObjectContext
+        self.coreDataStack = coreDataStack
         self.coreDataStorage = coreDataStorage
         self.languageEntities = languageEntities
         self.result = result
@@ -36,7 +39,7 @@ final class MDCreateLanguagesCoreDataStorageOperation: MDOperation {
             let _ = CDLanguageResponseEntity.init(languageResponse: languageEntity,
                                                   insertIntoManagedObjectContext: self.managedObjectContext)
             
-            CoreDataStack.savePerformAndWait(coreDataStack: coreDataStorage.coreDataStack) { [weak self] saveResult in
+            coreDataStack.savePerformAndWait { [weak self] saveResult in
                 DispatchQueue.main.async {
                     switch saveResult {
                     case .success:

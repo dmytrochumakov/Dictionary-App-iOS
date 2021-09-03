@@ -17,7 +17,7 @@ final class MDCourseCoreDataStorage: MDCourseCoreDataStorageProtocol {
     
     fileprivate let operationQueueService: OperationQueueServiceProtocol
     fileprivate let managedObjectContext: NSManagedObjectContext
-    let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: CoreDataStack
     
     init(operationQueueService: OperationQueueServiceProtocol,
          managedObjectContext: NSManagedObjectContext,
@@ -67,6 +67,7 @@ extension MDCourseCoreDataStorage {
     
     func createCourse(_ courseEntity: CourseResponse, _ completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
         let operation: MDCreateCourseCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                      coreDataStack: self.coreDataStack,
                                                                       coreDataStorage: self,
                                                                       courseEntity: courseEntity) { result in
             completionHandler(result)
@@ -76,6 +77,7 @@ extension MDCourseCoreDataStorage {
     
     func createCourses(_ courseEntities: [CourseResponse], _ completionHandler: @escaping (MDOperationsResultWithCompletion<CourseResponse>)) {
         let operation: MDCreateCoursesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                       coreDataStack: self.coreDataStack,
                                                                        coreDataStorage: self,
                                                                        courseEntities: courseEntities) { result in
             completionHandler(result)
@@ -102,6 +104,7 @@ extension MDCourseCoreDataStorage {
     
     func deleteCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         let operation: MDDeleteCourseCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                      coreDataStack: self.coreDataStack,
                                                                       coreDataStorage: self,
                                                                       courseId: courseId) { result in
             completionHandler(result)
@@ -111,6 +114,7 @@ extension MDCourseCoreDataStorage {
     
     func deleteAllCourses(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         let operation: MDDeleteAllCoursesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                          coreDataStack: self.coreDataStack,
                                                                           coreDataStorage: self) { result in
             completionHandler(result)
         }

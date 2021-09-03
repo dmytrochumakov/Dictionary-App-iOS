@@ -18,7 +18,7 @@ final class MDUserCoreDataStorage: NSObject,
     
     fileprivate let operationQueueService: OperationQueueServiceProtocol
     fileprivate let managedObjectContext: NSManagedObjectContext
-    let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: CoreDataStack
     
     init(operationQueueService: OperationQueueServiceProtocol,
          managedObjectContext: NSManagedObjectContext,
@@ -70,6 +70,7 @@ extension MDUserCoreDataStorage {
                     password: String,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<UserResponse>)) {
         let operation = MDCreateUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                  coreDataStack: self.coreDataStack,
                                                                   coreDataStorage: self,
                                                                   userEntity: userEntity,
                                                                   password: password) { result in
@@ -123,6 +124,7 @@ extension MDUserCoreDataStorage {
     func deleteUser(_ userId: Int64,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         let operation = MDDeleteUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                  coreDataStack: self.coreDataStack,
                                                                   coreDataStorage: self,
                                                                   userId: userId) { result in
             completionHandler(result)
@@ -132,6 +134,7 @@ extension MDUserCoreDataStorage {
     
     func deleteAllUsers(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         let operation = MDDeleteAllUsersCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                      coreDataStack: self.coreDataStack,
                                                                       coreDataStorage: self) { result in
             completionHandler(result)
         }

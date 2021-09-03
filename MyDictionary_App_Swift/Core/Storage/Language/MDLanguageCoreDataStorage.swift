@@ -17,7 +17,7 @@ final class MDLanguageCoreDataStorage: MDLanguageCoreDataStorageProtocol {
     
     fileprivate let operationQueueService: OperationQueueServiceProtocol
     fileprivate let managedObjectContext: NSManagedObjectContext
-    let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: CoreDataStack
     
     init(operationQueueService: OperationQueueServiceProtocol,
          managedObjectContext: NSManagedObjectContext,
@@ -67,6 +67,7 @@ extension MDLanguageCoreDataStorage {
     
     func createLanguages(_ languageEntities: [LanguageResponse], _ completionHandler: @escaping(MDOperationResultWithCompletion<[LanguageResponse]>)) {
         let operation: MDCreateLanguagesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                         coreDataStack: self.coreDataStack,
                                                                          coreDataStorage: self,
                                                                          languageEntities: languageEntities) { result in
             completionHandler(result)
@@ -93,6 +94,7 @@ extension MDLanguageCoreDataStorage {
     
     func deleteAllLanguages(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         let operation: MDDeleteAllLanguagesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                            coreDataStack: self.coreDataStack,
                                                                             coreDataStorage: self) { result in
             completionHandler(result)
         }

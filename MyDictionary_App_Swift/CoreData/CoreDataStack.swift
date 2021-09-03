@@ -81,22 +81,3 @@ extension CoreDataStack {
     }
     
 }
-
-// MARK: - Static Save Context
-extension CoreDataStack {
-    
-    static func savePerform(coreDataStack: CoreDataStack,
-                            completionHandler: @escaping CDResultSaved) {
-        
-        coreDataStack.savePerform(completionHandler: completionHandler)
-        
-    }
-    
-    static func savePerformAndWait(coreDataStack: CoreDataStack,
-                                   completionHandler: @escaping CDResultSaved) {
-        
-        coreDataStack.savePerformAndWait(completionHandler: completionHandler)
-        
-    }
-    
-}

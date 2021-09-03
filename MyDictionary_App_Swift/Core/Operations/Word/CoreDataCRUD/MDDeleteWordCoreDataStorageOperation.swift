@@ -11,16 +11,19 @@ import CoreData
 final class MDDeleteWordCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let coreDataStack: CoreDataStack
     fileprivate let wordStorage: MDWordCoreDataStorage
     fileprivate let wordId: Int64
     fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
+         coreDataStack: CoreDataStack,
          wordStorage: MDWordCoreDataStorage,
          wordId: Int64,
          result: MDOperationResultWithCompletion<Void>?) {
         
         self.managedObjectContext = managedObjectContext
+        self.coreDataStack = coreDataStack
         self.wordStorage = wordStorage
         self.wordId = wordId
         self.result = result
@@ -40,7 +43,7 @@ final class MDDeleteWordCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            CoreDataStack.savePerform(coreDataStack: wordStorage.coreDataStack) { [weak self] (result) in
+            coreDataStack.savePerform { [weak self] (result) in
                 
                 DispatchQueue.main.async {
                     switch result {
