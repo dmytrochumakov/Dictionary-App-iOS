@@ -117,7 +117,7 @@ extension MDWordMemoryStorage {
     func updateWord(byWordID wordId: Int64,
                     newWordText: String,
                     newWordDescription: String,
-                    _ completionHandler: @escaping(MDOperationResultWithCompletion<WordResponse>)) {
+                    _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
         let operation = MDUpdateWordMemoryStorageOperation.init(wordStorage: self,
                                                                 wordId: wordId,

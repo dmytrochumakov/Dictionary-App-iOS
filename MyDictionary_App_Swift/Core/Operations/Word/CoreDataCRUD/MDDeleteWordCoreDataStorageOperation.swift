@@ -40,7 +40,7 @@ final class MDDeleteWordCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            self.wordStorage.savePerform { [unowned self] (result) in
+            CoreDataStack.savePerform(coreDataStack: wordStorage.coreDataStack) { [unowned self] (result) in
                 
                 DispatchQueue.main.async {
                     switch result {

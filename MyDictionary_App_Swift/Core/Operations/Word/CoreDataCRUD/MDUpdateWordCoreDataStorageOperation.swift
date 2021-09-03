@@ -15,14 +15,14 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
     fileprivate let wordId: Int64
     fileprivate let newWordText: String
     fileprivate let newWordDescription: String
-    fileprivate let result: MDOperationResultWithCompletion<WordResponse>?
+    fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
          wordId: Int64,
          newWordText: String,
          newWordDescription: String,
-         result: MDOperationResultWithCompletion<WordResponse>?) {
+         result: MDOperationResultWithCompletion<Void>?) {
         
         self.managedObjectContext = managedObjectContext
         self.wordStorage = wordStorage
@@ -48,11 +48,11 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchUpdateRequest)
             
-            self.wordStorage.savePerform(wordId: self.wordId) { [weak self] (result) in
+            CoreDataStack.savePerform(coreDataStack: wordStorage.coreDataStack) { [weak self] (result) in
                 DispatchQueue.main.async {
                     switch result {
-                    case .success(let updatedWord):
-                        self?.result?(.success(updatedWord))
+                    case .success:
+                        self?.result?(.success(()))
                         self?.finish()
                     case .failure(let error):
                         self?.result?(.failure(error))

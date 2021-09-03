@@ -33,11 +33,11 @@ final class MDCreateWordCoreDataStorageOperation: MDOperation {
         let newWord = CDWordResponseEntity.init(wordResponse: self.word,
                                                 insertIntoManagedObjectContext: self.managedObjectContext)
         
-        self.wordStorage.save(wordId: newWord.wordId) { [weak self] result in
+        CoreDataStack.savePerformAndWait(coreDataStack: wordStorage.coreDataStack) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let createdWord):
-                    self?.result?(.success(createdWord))
+                case .success:
+                    self?.result?(.success(newWord.wordResponse))
                     self?.finish()
                 case .failure(let error):
                     self?.result?(.failure(error))
@@ -87,10 +87,10 @@ final class MDCreateWordsCoreDataStorageOperation: MDOperation {
             
             self.words.forEach { word in
                 
-                let newWord = CDWordResponseEntity.init(wordResponse: word,
-                                                        insertIntoManagedObjectContext: self.managedObjectContext)
+                let _ = CDWordResponseEntity.init(wordResponse: word,
+                                                  insertIntoManagedObjectContext: self.managedObjectContext)
                 
-                self.coreDataStorage.save(wordId: newWord.wordId) { [weak self] result in
+                CoreDataStack.savePerformAndWait(coreDataStack: coreDataStorage.coreDataStack) { [weak self] result in
                     
                     DispatchQueue.main.async {
                         switch result {
@@ -121,5 +121,5 @@ final class MDCreateWordsCoreDataStorageOperation: MDOperation {
         debugPrint(#function, Self.self)
         self.finish()
     }
-        
+    
 }

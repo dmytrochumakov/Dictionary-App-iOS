@@ -28,7 +28,7 @@ protocol MDWordStorageProtocol: MDStorageProtocol {
                     newWordText: String,
                     newWordDescription: String,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>))
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
     
     func deleteWord(byWordId wordId: Int64,
                     storageType: MDStorageType,
@@ -305,7 +305,7 @@ extension MDWordStorage {
                     newWordText: String,
                     newWordDescription: String,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>)) {
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
         
@@ -331,7 +331,7 @@ extension MDWordStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<WordResponse>> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
             
             // Update In Memory
             // Dispatch Group Enter

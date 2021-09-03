@@ -18,7 +18,7 @@ final class MDWordCoreDataStorage: NSObject,
     
     fileprivate let operationQueueService: OperationQueueServiceProtocol
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    let coreDataStack: CoreDataStack
     
     init(operationQueueService: OperationQueueServiceProtocol,
          managedObjectContext: NSManagedObjectContext,
@@ -130,7 +130,8 @@ extension MDWordCoreDataStorage {
     func updateWord(byWordID wordId: Int64,
                     newWordText: String,
                     newWordDescription: String,
-                    _ completionHandler: @escaping (MDOperationResultWithCompletion<WordResponse>)) {
+                    _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+        
         let operation = MDUpdateWordCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                   wordStorage: self,
                                                                   wordId: wordId,
@@ -138,7 +139,9 @@ extension MDWordCoreDataStorage {
                                                                   newWordDescription: newWordDescription) { result in
             completionHandler(result)
         }
+        
         operationQueueService.enqueue(operation)
+        
     }
     
 }
@@ -162,51 +165,6 @@ extension MDWordCoreDataStorage {
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
-    }
-    
-}
-
-// MARK: - Save
-extension MDWordCoreDataStorage {
-    
-    func savePerform(completionHandler: @escaping CDResultSaved) {
-        coreDataStack.savePerform(completionHandler: completionHandler)
-    }
-    
-    func savePerform(wordId: Int64, completionHandler: @escaping MDOperationResultWithCompletion<WordResponse>) {
-        coreDataStack.savePerform() { [unowned self] (result) in
-            switch result {
-            case .success:
-                self.readWord(fromWordID: wordId) { (result) in
-                    switch result {
-                    case .success(let wordModel):
-                        completionHandler(.success(wordModel))
-                    case .failure(let error):
-                        completionHandler(.failure(error))
-                    }
-                }
-            case .failure(let error):
-                completionHandler(.failure(error))
-            }
-        }
-    }
-    
-    func save(wordId: Int64, completionHandler: @escaping MDOperationResultWithCompletion<WordResponse>) {
-        coreDataStack.savePerformAndWait() { [unowned self] (result) in
-            switch result {
-            case .success:
-                self.readWord(fromWordID: wordId) { (result) in
-                    switch result {
-                    case .success(let wordModel):
-                        completionHandler(.success(wordModel))
-                    case .failure(let error):
-                        completionHandler(.failure(error))
-                    }
-                }
-            case .failure(let error):
-                completionHandler(.failure(error))
-            }
-        }
     }
     
 }
