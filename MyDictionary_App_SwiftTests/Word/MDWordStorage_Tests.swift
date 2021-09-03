@@ -186,15 +186,29 @@ extension MDWordStorage_Tests {
                     updateResults.forEach { updateResult in
                         
                         switch updateResult.result {
-                        case .success(let updatedWord):
+                        case .success:
                             
-                            resultCount += 1
-                            
-                            XCTAssertTrue(updatedWord.wordText == Constants_For_Tests.mockedWordForUpdate.wordText)
-                            XCTAssertTrue(updatedWord.wordDescription == Constants_For_Tests.mockedWordForUpdate.wordDescription)
-                            
-                            if (resultCount == updateResults.count) {
-                                expectation.fulfill()
+                            self.wordStorage.readWord(fromWordID: createdWord.wordId,
+                                                      storageType: updateResult.storageType) { readResults in
+                                
+                                switch readResults.first!.result {
+                                
+                                case .success(let readWord):
+                                    
+                                    resultCount += 1
+                                    
+                                    XCTAssertTrue(readWord.wordText == Constants_For_Tests.mockedWordForUpdate.wordText)
+                                    XCTAssertTrue(readWord.wordDescription == Constants_For_Tests.mockedWordForUpdate.wordDescription)
+                                    
+                                    if (resultCount == updateResults.count) {
+                                        expectation.fulfill()
+                                    }
+                                    
+                                case .failure:
+                                    XCTExpectFailure()
+                                    expectation.fulfill()
+                                }
+                                
                             }
                             
                         case .failure:
@@ -229,15 +243,14 @@ extension MDWordStorage_Tests {
             
             case .success(let createdWord):
                 
-                self.wordStorage.deleteWord(createdWord, storageType: storageType) { [unowned self] deleteResults in
+                self.wordStorage.deleteWord(byWordId: createdWord.wordId,
+                                            storageType: storageType) { [unowned self] deleteResults in
                     
                     deleteResults.forEach { deleteResult in
                         
                         switch deleteResult.result {
                         
-                        case .success(let deleteWord):
-                            
-                            XCTAssertTrue(createdWord.wordId == deleteWord.wordId)
+                        case .success:
                             
                             self.wordStorage.entitiesIsEmpty(storageType: deleteResult.storageType) { entitiesIsEmptyResults in
                                 

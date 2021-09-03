@@ -32,15 +32,15 @@ final class MDCreateCourseCoreDataStorageOperation: MDOperation {
         let newCourseEntity = CDCourseResponseEntity.init(courseResponse: self.courseEntity,
                                                           insertIntoManagedObjectContext: self.managedObjectContext)
         
-        CoreDataStack.savePerformAndWait(coreDataStack: coreDataStorage.coreDataStack) { [unowned self] result in
+        CoreDataStack.savePerformAndWait(coreDataStack: coreDataStorage.coreDataStack) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self.result?(.success(newCourseEntity.courseResponse))
-                    self.finish()
+                    self?.result?(.success(newCourseEntity.courseResponse))
+                    self?.finish()
                 case .failure(let error):
-                    self.result?(.failure(error))
-                    self.finish()
+                    self?.result?(.failure(error))
+                    self?.finish()
                 }
             }
         }
@@ -88,21 +88,21 @@ final class MDCreateCoursesCoreDataStorageOperation: MDOperation {
                 let _ = CDCourseResponseEntity.init(courseResponse: courseEntity,
                                                     insertIntoManagedObjectContext: self.managedObjectContext)
                 
-                CoreDataStack.savePerformAndWait(coreDataStack: coreDataStorage.coreDataStack) { [unowned self] result in
+                CoreDataStack.savePerformAndWait(coreDataStack: coreDataStorage.coreDataStack) { [weak self] result in
                     DispatchQueue.main.async {
                         switch result {
                         case .success:
                             
                             resultCount += 1
                             
-                            if (resultCount == self.courseEntities.count) {
-                                self.result?(.success(self.courseEntities))
-                                self.finish()
+                            if (resultCount == self?.courseEntities.count) {
+                                self?.result?(.success(self?.courseEntities ?? .init()))
+                                self?.finish()
                             }
                             
                         case .failure(let error):
-                            self.result?(.failure(error))
-                            self.finish()
+                            self?.result?(.failure(error))
+                            self?.finish()
                         }
                     }
                 }

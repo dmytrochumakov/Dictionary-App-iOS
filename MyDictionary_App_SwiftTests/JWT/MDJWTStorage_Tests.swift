@@ -140,20 +140,35 @@ extension MDJWTStorage_Tests {
                 
                 self.jwtStorage.updateJWT(storageType: storageType,
                                           oldAccessToken: createdJWT.accessToken,
-                                          newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { updateResults in
+                                          newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { [unowned self] updateResults in
                     
                     updateResults.forEach { updateResult in
                         
                         switch updateResult.result {
-                        case .success(let updatedJWT):
+                        
+                        case .success:
                             
-                            resultCount += 1
-                            
-                            XCTAssertTrue(updatedJWT.accessToken == Constants_For_Tests.mockedJWTForUpdate.accessToken)
-                            XCTAssertTrue(updatedJWT.expirationDate == Constants_For_Tests.mockedJWTForUpdate.expirationDate)
-                            
-                            if (resultCount == updateResults.count) {
-                                expectation.fulfill()
+                            jwtStorage.readJWT(storageType: updateResult.storageType,
+                                               fromAccessToken: Constants_For_Tests.mockedJWTForUpdate.accessToken) { readResults in
+                                
+                                switch readResults.first!.result {
+                                
+                                case .success(let readJWT):
+                                    
+                                    resultCount += 1
+                                    
+                                    XCTAssertTrue(readJWT.accessToken == Constants_For_Tests.mockedJWTForUpdate.accessToken)
+                                    XCTAssertTrue(readJWT.expirationDate == Constants_For_Tests.mockedJWTForUpdate.expirationDate)
+                                    
+                                    if (resultCount == updateResults.count) {
+                                        expectation.fulfill()
+                                    }
+                                    
+                                case .failure:
+                                    XCTExpectFailure()
+                                    expectation.fulfill()
+                                }
+                                
                             }
                             
                         case .failure:

@@ -43,15 +43,15 @@ final class MDUpdateJWTCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchUpdateRequest)
             
-            CoreDataStack.savePerform(coreDataStack: coreDataStorage.coreDataStack) { [unowned self] (result) in
+            CoreDataStack.savePerform(coreDataStack: coreDataStorage.coreDataStack) { [weak self] (result) in
                 DispatchQueue.main.async {
                     switch result {
                     case .success:
-                        self.result?(.success(()))
-                        self.finish()
+                        self?.result?(.success(()))
+                        self?.finish()
                     case .failure(let error):
-                        self.result?(.failure(error))
-                        self.finish()
+                        self?.result?(.failure(error))
+                        self?.finish()
                     }
                 }
             }

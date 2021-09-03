@@ -101,15 +101,30 @@ extension MDJWTMemoryStorage_Tests {
                 XCTAssertTrue(createdJWT.accessToken == Constants_For_Tests.mockedJWT.accessToken)
                 
                 jwtMemoryStorage.updateJWT(oldAccessToken: createdJWT.accessToken,
-                                           newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { updatedResult in
+                                           newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { [unowned self] updatedResult in
                     
                     switch updatedResult {
                     
-                    case .success(let updatedJWT):
+                    case .success:
                         
-                        XCTAssertTrue(updatedJWT.accessToken == Constants_For_Tests.mockedJWTForUpdate.accessToken)
-                        XCTAssertTrue(updatedJWT.expirationDate == Constants_For_Tests.mockedJWTForUpdate.expirationDate)
-                        expectation.fulfill()
+                        jwtMemoryStorage.readJWT(fromAccessToken: Constants_For_Tests.mockedJWTForUpdate.accessToken) { readResult in
+                            
+                            switch readResult {
+                            
+                            case .success(let readJWT):
+                                
+                                XCTAssertTrue(readJWT.accessToken == Constants_For_Tests.mockedJWTForUpdate.accessToken)
+                                XCTAssertTrue(readJWT.expirationDate == Constants_For_Tests.mockedJWTForUpdate.expirationDate)
+                                expectation.fulfill()
+                                
+                            case .failure:
+                                XCTExpectFailure()
+                                expectation.fulfill()
+                            }
+                            
+                        }
+                        
+                        
                         
                     case .failure:
                         XCTExpectFailure()
