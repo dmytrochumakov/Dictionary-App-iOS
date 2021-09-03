@@ -32,31 +32,15 @@ final class MDReadWordCoreDataStorageOperation: MDOperation {
         
         let fetchRequest = NSFetchRequest<CDWordResponseEntity>(entityName: CoreDataEntityName.CDWordResponseEntity)
         fetchRequest.predicate = NSPredicate(format: "\(CDWordResponseEntityAttributeName.wordId) == %i", wordId)
-        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
-            
-            if let result = asynchronousFetchResult.finalResult {
-                if let word = result.map({ $0.wordResponse }).first {
-                    DispatchQueue.main.async {
-                        self?.result?(.success(word))
-                        self?.finish()
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self?.result?(.failure(MDEntityOperationError.cantFindEntity))
-                        self?.finish()
-                    }
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self?.result?(.failure(MDEntityOperationError.cantFindEntity))
-                    self?.finish()
-                }
-            }
-            
-        }
         
         do {
-            try managedObjectContext.execute(asynchronousFetchRequest)
+            if let result = try managedObjectContext.fetch(fetchRequest).map({ $0.wordResponse }).first {
+                self.result?(.success(result))
+                self.finish()
+            } else {
+                self.result?(.failure(MDEntityOperationError.cantFindEntity))
+                self.finish()
+            }
         } catch let error {
             self.result?(.failure(error))
             self.finish()
@@ -99,26 +83,11 @@ final class MDReadWordsCoreDataStorageOperation: MDOperation {
         let fetchRequest = NSFetchRequest<CDWordResponseEntity>(entityName: CoreDataEntityName.CDWordResponseEntity)
         
         fetchRequest.fetchLimit = self.fetchLimit
-        fetchRequest.fetchOffset = self.fetchOffset
-        
-        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
-            
-            if let result = asynchronousFetchResult.finalResult {
-                DispatchQueue.main.async {
-                    self?.result?(.success(result.map({ $0.wordResponse })))
-                    self?.finish()
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self?.result?(.failure(MDEntityOperationError.cantFindEntity))
-                    self?.finish()
-                }
-            }
-            
-        }
+        fetchRequest.fetchOffset = self.fetchOffset               
         
         do {
-            try managedObjectContext.execute(asynchronousFetchRequest)
+            self.result?(.success(try managedObjectContext.fetch(fetchRequest).map({ $0.wordResponse })))
+            self.finish()
         } catch let error {
             DispatchQueue.main.async {
                 self.result?(.failure(error))
