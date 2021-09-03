@@ -34,22 +34,16 @@ final class MDDeleteAllLanguagesCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            CoreDataStack.savePerform(coreDataStack: coreDataStorage.coreDataStack) { [weak self] (result) in
+            CoreDataStack.savePerform(coreDataStack: coreDataStorage.coreDataStack) { [unowned self] (result) in
                 
                 DispatchQueue.main.async {
                     switch result {
                     case .success:
-                        guard let self = self
-                        else {
-                            self?.result?(.failure(MDEntityOperationError.objectRemovedFromMemory));
-                            self?.finish() ;
-                            return
-                        }
                         self.result?(.success(()))
                         self.finish()
                     case .failure(let error):
-                        self?.result?(.failure(error))
-                        self?.finish()
+                        self.result?(.failure(error))
+                        self.finish()
                     }
                 }
                 

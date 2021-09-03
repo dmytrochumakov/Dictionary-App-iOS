@@ -8,6 +8,5 @@
 import Foundation
 
 enum MDEntityOperationError: Error {
-    case cantFindEntity
-    case objectRemovedFromMemory
+    case cantFindEntity    
 }

@@ -13,12 +13,12 @@ final class MDDeleteWordCoreDataStorageOperation: MDOperation {
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let wordStorage: MDWordCoreDataStorage
     fileprivate let word: WordResponse
-    fileprivate let result: MDOperationResultWithCompletion<WordResponse>?
+    fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
          word: WordResponse,
-         result: MDOperationResultWithCompletion<WordResponse>?) {
+         result: MDOperationResultWithCompletion<Void>?) {
         
         self.managedObjectContext = managedObjectContext
         self.wordStorage = wordStorage
@@ -40,22 +40,16 @@ final class MDDeleteWordCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            self.wordStorage.savePerform { [weak self] (result) in
+            self.wordStorage.savePerform { [unowned self] (result) in
                 
                 DispatchQueue.main.async {
                     switch result {
                     case .success:
-                        guard let self = self
-                        else {
-                            self?.result?(.failure(MDEntityOperationError.objectRemovedFromMemory));
-                            self?.finish() ;
-                            return
-                        }
-                        self.result?(.success(self.word))
+                        self.result?(.success(()))
                         self.finish()
                     case .failure(let error):
-                        self?.result?(.failure(error))
-                        self?.finish()
+                        self.result?(.failure(error))
+                        self.finish()
                     }
                 }
                 
