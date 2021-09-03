@@ -18,7 +18,7 @@ final class MDUserCoreDataStorage: NSObject,
     
     fileprivate let operationQueueService: OperationQueueServiceProtocol
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    let coreDataStack: CoreDataStack
     
     init(operationQueueService: OperationQueueServiceProtocol,
          managedObjectContext: NSManagedObjectContext,
@@ -136,51 +136,6 @@ extension MDUserCoreDataStorage {
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
-    }
-    
-}
-
-// MARK: - Save
-extension MDUserCoreDataStorage {
-    
-    func savePerform(completionHandler: @escaping CDResultSaved) {
-        coreDataStack.savePerform(completionHandler: completionHandler)
-    }
-    
-    func savePerform(userId: Int64, completionHandler: @escaping MDOperationResultWithCompletion<UserResponse>) {
-        coreDataStack.savePerform() { [unowned self] (result) in
-            switch result {
-            case .success:
-                self.readUser(fromUserID: userId) { (result) in
-                    switch result {
-                    case .success(let userEntity):
-                        completionHandler(.success(userEntity))
-                    case .failure(let error):
-                        completionHandler(.failure(error))
-                    }
-                }
-            case .failure(let error):
-                completionHandler(.failure(error))
-            }
-        }
-    }
-    
-    func save(userId: Int64, completionHandler: @escaping MDOperationResultWithCompletion<UserResponse>) {
-        coreDataStack.savePerformAndWait() { [unowned self] (result) in
-            switch result {
-            case .success:
-                self.readUser(fromUserID: userId) { (result) in
-                    switch result {
-                    case .success(let userEntity):
-                        completionHandler(.success(userEntity))
-                    case .failure(let error):
-                        completionHandler(.failure(error))
-                    }
-                }
-            case .failure(let error):
-                completionHandler(.failure(error))
-            }
-        }
     }
     
 }

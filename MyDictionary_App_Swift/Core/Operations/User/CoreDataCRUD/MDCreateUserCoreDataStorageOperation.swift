@@ -36,15 +36,15 @@ final class MDCreateUserCoreDataStorageOperation: MDOperation {
                                                 password: password,
                                                 insertIntoManagedObjectContext: self.managedObjectContext)
         
-        self.coreDataStorage.save(userId: newUser.userId) { [weak self] result in
+        CoreDataStack.savePerformAndWait(coreDataStack: coreDataStorage.coreDataStack) { [unowned self] result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let createdWord):
-                    self?.result?(.success(createdWord))
-                    self?.finish()
+                case .success:
+                    self.result?(.success(newUser.userResponse))
+                    self.finish()
                 case .failure(let error):
-                    self?.result?(.failure(error))
-                    self?.finish()
+                    self.result?(.failure(error))
+                    self.finish()
                 }
             }
         }
