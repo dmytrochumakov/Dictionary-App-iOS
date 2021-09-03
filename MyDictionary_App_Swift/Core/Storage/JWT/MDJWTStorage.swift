@@ -23,7 +23,7 @@ protocol MDJWTStorageProtocol: MDStorageProtocol {
     func updateJWT(storageType: MDStorageType,
                    oldAccessToken accessToken: String,
                    newJWTResponse jwtResponse: JWTResponse,
-                   _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<JWTResponse>>))
+                   _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
     
     func deleteJWT(storageType: MDStorageType,
                    accessToken: String,
@@ -238,7 +238,7 @@ extension MDJWTStorage {
     func updateJWT(storageType: MDStorageType,
                    oldAccessToken accessToken: String,
                    newJWTResponse jwtResponse: JWTResponse,
-                   _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<JWTResponse>>)) {
+                   _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
         
@@ -261,7 +261,7 @@ extension MDJWTStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<JWTResponse>> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
             
             // Update In Memory
             // Dispatch Group Enter

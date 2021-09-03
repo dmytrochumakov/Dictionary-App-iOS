@@ -39,7 +39,7 @@ final class MDDeleteJWTCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            self.coreDataStorage.savePerform { [unowned self] (result) in
+            CoreDataStack.savePerform(coreDataStack: coreDataStorage.coreDataStack) { [unowned self] (result) in
                 DispatchQueue.main.async {
                     switch result {
                     case .success:                        

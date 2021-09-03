@@ -31,13 +31,13 @@ final class MDCreateJWTCoreDataStorageOperation: MDOperation {
     override func main() {
         
         let newAuthResponse = CDJWTResponseEntity.init(jwtResponse: self.jwtResponse,
-                                                        insertIntoManagedObjectContext: self.managedObjectContext)
+                                                       insertIntoManagedObjectContext: self.managedObjectContext)
         
-        self.coreDataStorage.save(accessToken: newAuthResponse.accessToken!) { [weak self] result in
+        CoreDataStack.savePerformAndWait(coreDataStack: coreDataStorage.coreDataStack) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let createdJWT):
-                    self?.result?(.success(createdJWT))
+                case .success:
+                    self?.result?(.success(newAuthResponse.jwtResponse))
                     self?.finish()
                 case .failure(let error):
                     self?.result?(.failure(error))

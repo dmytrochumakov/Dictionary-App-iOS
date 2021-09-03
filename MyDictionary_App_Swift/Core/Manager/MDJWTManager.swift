@@ -54,9 +54,9 @@ extension MDJWTManager {
                                 
                                 switch updatedResult.first!.result {
                                 
-                                case .success(let updatedJWTResponse):
+                                case .success:
                                     
-                                    completionHandler(.success(updatedJWTResponse))
+                                    completionHandler(.success(fetchedJWTResponse))
                                     
                                 case .failure(let error):
                                     completionHandler(.failure(error))
