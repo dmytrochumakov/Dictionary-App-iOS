@@ -33,10 +33,10 @@ final class MDCreateLanguagesCoreDataStorageOperation: MDOperation {
         
         languageEntities.forEach { languageEntity in
             
-            let newLanguage = CDLanguageResponseEntity.init(languageResponse: languageEntity,
-                                                            insertIntoManagedObjectContext: self.managedObjectContext)
+            let _ = CDLanguageResponseEntity.init(languageResponse: languageEntity,
+                                                  insertIntoManagedObjectContext: self.managedObjectContext)
             
-            self.coreDataStorage.save(languageID: newLanguage.languageId) { [weak self] saveResult in
+            CoreDataStack.savePerformAndWait(coreDataStack: coreDataStorage.coreDataStack) { [weak self] saveResult in
                 DispatchQueue.main.async {
                     switch saveResult {
                     case .success:

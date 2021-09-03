@@ -17,7 +17,7 @@ final class MDLanguageCoreDataStorage: MDLanguageCoreDataStorageProtocol {
     
     fileprivate let operationQueueService: OperationQueueServiceProtocol
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    let coreDataStack: CoreDataStack
     
     init(operationQueueService: OperationQueueServiceProtocol,
          managedObjectContext: NSManagedObjectContext,
@@ -97,51 +97,6 @@ extension MDLanguageCoreDataStorage {
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
-    }
-    
-}
-
-// MARK: - Save
-extension MDLanguageCoreDataStorage {
-    
-    func savePerform(completionHandler: @escaping CDResultSaved) {
-        coreDataStack.savePerform(completionHandler: completionHandler)
-    }
-    
-    func savePerform(languageID: Int64, completionHandler: @escaping(MDOperationResultWithCompletion<LanguageResponse>)) {
-        coreDataStack.savePerform() { [unowned self] (result) in
-            switch result {
-            case .success:
-                self.readLanguage(fromLanguageID: languageID) { (result) in
-                    switch result {
-                    case .success(let languageEntity):
-                        completionHandler(.success(languageEntity))
-                    case .failure(let error):
-                        completionHandler(.failure(error))
-                    }
-                }
-            case .failure(let error):
-                completionHandler(.failure(error))
-            }
-        }
-    }
-    
-    func save(languageID: Int64, completionHandler: @escaping(MDOperationResultWithCompletion<LanguageResponse>)) {
-        coreDataStack.savePerformAndWait() { [unowned self] (result) in
-            switch result {
-            case .success:
-                self.readLanguage(fromLanguageID: languageID) { (result) in
-                    switch result {
-                    case .success(let languageEntity):
-                        completionHandler(.success(languageEntity))
-                    case .failure(let error):
-                        completionHandler(.failure(error))
-                    }
-                }
-            case .failure(let error):
-                completionHandler(.failure(error))
-            }
-        }
     }
     
 }
