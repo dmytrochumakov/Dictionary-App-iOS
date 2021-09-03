@@ -27,25 +27,10 @@ final class MDReadUsersCoreDataStorageOperation: MDOperation {
     override func main() {
         
         let fetchRequest = NSFetchRequest<CDUserResponseEntity>(entityName: CoreDataEntityName.CDUserResponseEntity)
-        
-        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { [weak self] asynchronousFetchResult in
-            
-            if let result = asynchronousFetchResult.finalResult {
-                DispatchQueue.main.async {
-                    self?.result?(.success(result.map({ $0.userResponse })))
-                    self?.finish()
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self?.result?(.failure(MDEntityOperationError.cantFindEntity))
-                    self?.finish()
-                }
-            }
-            
-        }
-        
+                
         do {
-            try managedObjectContext.execute(asynchronousFetchRequest)
+            self.result?(.success(try managedObjectContext.fetch(fetchRequest).map({ $0.userResponse })))
+            self.finish()
         } catch let error {
             DispatchQueue.main.async {
                 self.result?(.failure(error))
