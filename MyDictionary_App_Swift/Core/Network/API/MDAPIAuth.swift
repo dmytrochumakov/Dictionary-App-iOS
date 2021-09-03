@@ -8,8 +8,8 @@
 import Foundation
 
 protocol MDAPIAuthProtocol {
-    func login(authRequest: AuthRequest, completionHandler: @escaping MDAuthResponseResult)
-    func register(authRequest: AuthRequest, completionHandler: @escaping MDAuthResponseResult)
+    func login(authRequest: AuthRequest, completionHandler: @escaping MDOperationResultWithCompletion<AuthResponse>)
+    func register(authRequest: AuthRequest, completionHandler: @escaping MDOperationResultWithCompletion<AuthResponse>)
 }
 
 final class MDAPIAuth: MDAPIAuthProtocol {
@@ -91,7 +91,7 @@ extension MDAPIAuth {
 // MARK: - Auth
 extension MDAPIAuth {
     
-    func login(authRequest: AuthRequest, completionHandler: @escaping MDAuthResponseResult) {
+    func login(authRequest: AuthRequest, completionHandler: @escaping MDOperationResultWithCompletion<AuthResponse>) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
                                               endpoint: MDAPIAuthEndpoint.login(authRequest: authRequest)) { result in
@@ -132,7 +132,7 @@ extension MDAPIAuth {
     }
     
     
-    func register(authRequest: AuthRequest, completionHandler: @escaping MDAuthResponseResult) {
+    func register(authRequest: AuthRequest, completionHandler: @escaping MDOperationResultWithCompletion<AuthResponse>) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
                                               endpoint: MDAPIAuthEndpoint.register(authRequest: authRequest)) { result in

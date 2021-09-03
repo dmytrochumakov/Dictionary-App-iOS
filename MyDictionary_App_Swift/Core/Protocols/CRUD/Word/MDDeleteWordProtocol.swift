@@ -10,8 +10,8 @@ import Foundation
 protocol MDDeleteWordProtocol {
     
     func deleteWord(_ word: WordResponse,
-                    _ completionHandler: @escaping(MDEntityResult<WordResponse>))
+                    _ completionHandler: @escaping(MDOperationResultWithCompletion<WordResponse>))
     
-    func deleteAllWords(_ completionHandler: @escaping(MDEntityResult<Void>))
+    func deleteAllWords(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
     
 }

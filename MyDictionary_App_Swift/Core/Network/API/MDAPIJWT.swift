@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MDAPIJWTProtocol {
-    func accessToken(jwtApiRequest: JWTApiRequest, completionHandler: @escaping MDJWTResponseResult)
+    func accessToken(jwtApiRequest: JWTApiRequest, completionHandler: @escaping MDOperationResultWithCompletion<JWTResponse>)
 }
 
 final class MDAPIJWT: MDAPIJWTProtocol {
@@ -86,7 +86,7 @@ extension MDAPIJWT {
 // MARK: - Access Token
 extension MDAPIJWT {
     
-    func accessToken(jwtApiRequest: JWTApiRequest, completionHandler: @escaping MDJWTResponseResult) {
+    func accessToken(jwtApiRequest: JWTApiRequest, completionHandler: @escaping MDOperationResultWithCompletion<JWTResponse>) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
                                               endpoint: MDAPIJWTEndpoint.accessToken(jwtApiRequest: jwtApiRequest)) { result in
@@ -100,7 +100,7 @@ extension MDAPIJWT {
                 debugPrint(#function, Self.self, "dataCount: ", data.count)
                 
                 do {
-                    completionHandler(.success(try JSONDecoder.init().decode(AuthResponse.self, from: data).jwtResponse))
+                    completionHandler(.success(try JSONDecoder.init().decode(JWTResponse.self, from: data)))
                 } catch (_) {
                     completionHandler(.failure(MDAPIError.parseError))
                 }

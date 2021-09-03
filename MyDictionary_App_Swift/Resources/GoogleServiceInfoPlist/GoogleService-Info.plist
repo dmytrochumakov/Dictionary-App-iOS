@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>627518177807-090iv2el4mrg6ohmqsllr0kmjall27v3.apps.googleusercontent.com</string>
+	<string>241203024129-j34730at1najj3lno67jfeim17akm3nn.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.627518177807-090iv2el4mrg6ohmqsllr0kmjall27v3</string>
+	<string>com.googleusercontent.apps.241203024129-j34730at1najj3lno67jfeim17akm3nn</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDSlLSYcEjq8VfCN4q-PYbYpX3VufdtMH0</string>
+	<string>AIzaSyDBfhvGvyvoBGg-alJ69H3tCZeNIDmTB7k</string>
 	<key>GCM_SENDER_ID</key>
-	<string>627518177807</string>
+	<string>241203024129</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.dcteam.MyDictionary-App-Swift</string>
 	<key>PROJECT_ID</key>
-	<string>mydictionary-92406</string>
+	<string>my-dictionary-app-swift</string>
 	<key>STORAGE_BUCKET</key>
-	<string>mydictionary-92406.appspot.com</string>
+	<string>my-dictionary-app-swift.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:627518177807:ios:fd6f9c03a0b0b4c651d97a</string>
+	<string>1:241203024129:ios:2894aea43f865f9ebecb00</string>
 </dict>
 </plist>

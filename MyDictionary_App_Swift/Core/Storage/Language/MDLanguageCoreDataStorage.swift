@@ -65,7 +65,7 @@ extension MDLanguageCoreDataStorage {
 // MARK: - CRUD
 extension MDLanguageCoreDataStorage {
     
-    func createLanguages(_ languageEntities: [LanguageResponse], _ completionHandler: @escaping(MDEntityResult<[LanguageResponse]>)) {
+    func createLanguages(_ languageEntities: [LanguageResponse], _ completionHandler: @escaping(MDOperationResultWithCompletion<[LanguageResponse]>)) {
         let operation: MDCreateLanguagesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
                                                                          coreDataStorage: self,
                                                                          languageEntities: languageEntities) { result in
@@ -74,7 +74,7 @@ extension MDLanguageCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readLanguage(fromLanguageID languageID: Int64, _ completionHandler: @escaping(MDEntityResult<LanguageResponse>)) {
+    func readLanguage(fromLanguageID languageID: Int64, _ completionHandler: @escaping(MDOperationResultWithCompletion<LanguageResponse>)) {
         let operation: MDReadLanguageCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
                                                                       coreDataStorage: self,
                                                                       languageId: languageID) { result in
@@ -83,7 +83,7 @@ extension MDLanguageCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readAllLanguages(_ completionHandler: @escaping(MDEntityResult<[LanguageResponse]>)) {
+    func readAllLanguages(_ completionHandler: @escaping(MDOperationResultWithCompletion<[LanguageResponse]>)) {
         let operation: MDReadAllLanguagesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
                                                                           coreDataStorage: self) { result in
             completionHandler(result)
@@ -91,7 +91,7 @@ extension MDLanguageCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func deleteAllLanguages(_ completionHandler: @escaping(MDEntityResult<Void>)) {
+    func deleteAllLanguages(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         let operation: MDDeleteAllLanguagesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
                                                                             coreDataStorage: self) { result in
             completionHandler(result)
@@ -108,7 +108,7 @@ extension MDLanguageCoreDataStorage {
         coreDataStack.savePerform(completionHandler: completionHandler)
     }
     
-    func savePerform(languageID: Int64, completionHandler: @escaping(MDEntityResult<LanguageResponse>)) {
+    func savePerform(languageID: Int64, completionHandler: @escaping(MDOperationResultWithCompletion<LanguageResponse>)) {
         coreDataStack.savePerform() { [unowned self] (result) in
             switch result {
             case .success:
@@ -126,7 +126,7 @@ extension MDLanguageCoreDataStorage {
         }
     }
     
-    func save(languageID: Int64, completionHandler: @escaping(MDEntityResult<LanguageResponse>)) {
+    func save(languageID: Int64, completionHandler: @escaping(MDOperationResultWithCompletion<LanguageResponse>)) {
         coreDataStack.savePerformAndWait() { [unowned self] (result) in
             switch result {
             case .success:

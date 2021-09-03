@@ -10,15 +10,15 @@ import Foundation
 final class MDDeleteUserMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDUserMemoryStorage
-    fileprivate let userEntity: UserResponse
-    fileprivate let result: MDEntityResult<UserResponse>?
+    fileprivate let userId: Int64
+    fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(memoryStorage: MDUserMemoryStorage,
-         userEntity: UserResponse,
-         result: MDEntityResult<UserResponse>?) {
+         userId: Int64,
+         result: MDOperationResultWithCompletion<Void>?) {
         
         self.memoryStorage = memoryStorage
-        self.userEntity = userEntity
+        self.userId = userId
         self.result = result
         
         super.init()
@@ -26,15 +26,42 @@ final class MDDeleteUserMemoryStorageOperation: MDOperation {
     }
     
     override func main() {
-        guard let userEntity = self.memoryStorage.userEntity,
-              userEntity.userId == self.userEntity.userId
+        guard let index = self.memoryStorage.array.firstIndex(where: { $0.userId == self.userId })
         else {
             self.result?(.failure(MDEntityOperationError.cantFindEntity));
             self.finish();
             return
         }
-        self.memoryStorage.userEntity = nil
-        self.result?(.success(userEntity))
+        self.memoryStorage.array.remove(at: index)
+        self.result?(.success(()))
+        self.finish()
+    }
+    
+    deinit {
+        debugPrint(#function, Self.self)
+        self.finish()
+    }
+    
+}
+
+final class MDDeleteAllUsersMemoryStorageOperation: MDOperation {
+    
+    fileprivate let memoryStorage: MDUserMemoryStorage
+    fileprivate let result: MDOperationResultWithCompletion<Void>?
+    
+    init(memoryStorage: MDUserMemoryStorage,
+         result: MDOperationResultWithCompletion<Void>?) {
+        
+        self.memoryStorage = memoryStorage
+        self.result = result
+        
+        super.init()
+        
+    }
+    
+    override func main() {
+        self.memoryStorage.array.removeAll()
+        self.result?(.success(()))
         self.finish()
     }
     

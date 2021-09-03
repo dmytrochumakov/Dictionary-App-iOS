@@ -13,12 +13,12 @@ final class MDReadWordCoreDataStorageOperation: MDOperation {
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let wordStorage: MDWordCoreDataStorage
     fileprivate let wordId: Int64
-    fileprivate let result: MDEntityResult<WordResponse>?
+    fileprivate let result: MDOperationResultWithCompletion<WordResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
          wordId: Int64,
-         result: MDEntityResult<WordResponse>?) {
+         result: MDOperationResultWithCompletion<WordResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.wordStorage = wordStorage
@@ -77,13 +77,13 @@ final class MDReadWordsCoreDataStorageOperation: MDOperation {
     fileprivate let wordStorage: MDWordCoreDataStorage
     fileprivate let fetchLimit: Int
     fileprivate let fetchOffset: Int
-    fileprivate let result: MDEntitiesResult<WordResponse>?
+    fileprivate let result: MDOperationsResultWithCompletion<WordResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
          fetchLimit: Int,
          fetchOffset: Int,
-         result: MDEntitiesResult<WordResponse>?) {
+         result: MDOperationsResultWithCompletion<WordResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.wordStorage = wordStorage

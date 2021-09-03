@@ -12,15 +12,21 @@ protocol MDUserStorageProtocol: MDStorageProtocol {
     func createUser(_ userEntity: UserResponse,
                     password: String,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>))
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<UserResponse>>))
     
     func readUser(fromUserID userId: Int64,
                   storageType: MDStorageType,
-                  _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>))
+                  _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<UserResponse>>))
     
-    func deleteUser(_ userEntity: UserResponse,
+    func readFirstUser(storageType: MDStorageType,
+                       _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<UserResponse>>))
+    
+    func deleteUser(_ userId: Int64,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>))
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
+    
+    func deleteAllUsers(storageType: MDStorageType,
+                        _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
     
 }
 
@@ -52,7 +58,7 @@ extension MDUserStorage {
     func createUser(_ userEntity: UserResponse,
                     password: String,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
+                    _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<UserResponse>>)) {
         
         switch storageType {
         
@@ -74,7 +80,7 @@ extension MDUserStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDUserResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<UserResponse>> = []
             
             // Create in Memory
             // Dispatch Group Enter
@@ -110,7 +116,7 @@ extension MDUserStorage {
     
     func readUser(fromUserID userId: Int64,
                   storageType: MDStorageType,
-                  _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
+                  _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<UserResponse>>)) {
         
         switch storageType {
         
@@ -132,7 +138,7 @@ extension MDUserStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDUserResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<UserResponse>> = []
             
             // Read From Memory
             // Dispatch Group Enter
@@ -167,21 +173,20 @@ extension MDUserStorage {
         
     }
     
-    func deleteUser(_ userEntity: UserResponse,
-                    storageType: MDStorageType,
-                    _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDUserResultWithoutCompletion>)) {
+    func readFirstUser(storageType: MDStorageType,
+                       _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<UserResponse>>)) {
         
         switch storageType {
         
         case .memory:
             
-            memoryStorage.deleteUser(userEntity) { (result) in
+            memoryStorage.readFirstUser { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
         case .coreData:
             
-            coreDataStorage.deleteUser(userEntity) { (result) in
+            coreDataStorage.readFirstUser { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             
@@ -191,12 +196,71 @@ extension MDUserStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDUserResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<UserResponse>> = []
+            
+            // Read From Memory
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.readFirstUser { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Read From Core Data
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.readFirstUser { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
+            }
+            
+        }
+        
+    }
+    
+    func deleteUser(_ userId: Int64,
+                    storageType: MDStorageType,
+                    _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
+        
+        switch storageType {
+        
+        case .memory:
+            
+            memoryStorage.deleteUser(userId) { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .coreData:
+            
+            coreDataStorage.deleteUser(userId) { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
             
             // Delete From Memory
             // Dispatch Group Enter
             dispatchGroup.enter()
-            memoryStorage.deleteUser(userEntity) { result in
+            memoryStorage.deleteUser(userId) { result in
                 
                 // Append Result
                 finalResult.append(.init(storageType: .memory, result: result))
@@ -208,7 +272,65 @@ extension MDUserStorage {
             // Delete From Core Data
             // Dispatch Group Enter
             dispatchGroup.enter()
-            coreDataStorage.deleteUser(userEntity) { result in
+            coreDataStorage.deleteUser(userId) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
+            }
+            
+        }
+        
+    }
+    
+    func deleteAllUsers(storageType: MDStorageType,
+                        _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
+        
+        switch storageType {
+        
+        case .memory:
+            
+            memoryStorage.deleteAllUsers { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .coreData:
+            
+            coreDataStorage.deleteAllUsers { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
+            
+            // Delete From Memory
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.deleteAllUsers { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Delete From Core Data
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.deleteAllUsers { result in
                 
                 // Append Result
                 finalResult.append(.init(storageType: .coreData, result: result))

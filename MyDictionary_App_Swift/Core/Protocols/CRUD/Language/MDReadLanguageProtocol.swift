@@ -8,5 +8,5 @@
 import Foundation
 
 protocol MDReadLanguageProtocol {
-    func readAllLanguages(_ completionHandler: @escaping(MDEntityResult<[LanguageResponse]>))
+    func readAllLanguages(_ completionHandler: @escaping(MDOperationResultWithCompletion<[LanguageResponse]>))
 }

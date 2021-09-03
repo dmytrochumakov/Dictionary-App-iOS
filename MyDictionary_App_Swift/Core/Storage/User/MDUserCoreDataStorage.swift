@@ -68,7 +68,7 @@ extension MDUserCoreDataStorage {
     
     func createUser(_ userEntity: UserResponse,
                     password: String,
-                    _ completionHandler: @escaping(MDEntityResult<UserResponse>)) {
+                    _ completionHandler: @escaping(MDOperationResultWithCompletion<UserResponse>)) {
         let operation = MDCreateUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                   coreDataStorage: self,
                                                                   userEntity: userEntity,
@@ -84,7 +84,7 @@ extension MDUserCoreDataStorage {
 extension MDUserCoreDataStorage {
     
     func readUser(fromUserID userId: Int64,
-                  _ completionHandler: @escaping(MDEntityResult<UserResponse>)) {
+                  _ completionHandler: @escaping(MDOperationResultWithCompletion<UserResponse>)) {
         let operation = MDReadUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                 coreDataStorage: self,
                                                                 userId: userId) { result in
@@ -93,7 +93,15 @@ extension MDUserCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readAllUsers(_ completionHandler: @escaping(MDEntitiesResult<UserResponse>)) {
+    func readFirstUser(_ completionHandler: @escaping (MDOperationResultWithCompletion<UserResponse>)) {
+        let operation = MDReadFirstUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                     coreDataStorage: self) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
+    }
+    
+    func readAllUsers(_ completionHandler: @escaping(MDOperationsResultWithCompletion<UserResponse>)) {
         let operation = MDReadUsersCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                  coreDataStorage: self) { result in
             completionHandler(result)
@@ -112,11 +120,19 @@ extension MDUserCoreDataStorage {
 // MARK: - Delete
 extension MDUserCoreDataStorage {
     
-    func deleteUser(_ userEntity: UserResponse,
-                    _ completionHandler: @escaping(MDEntityResult<UserResponse>)) {
+    func deleteUser(_ userId: Int64,
+                    _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         let operation = MDDeleteUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                   coreDataStorage: self,
-                                                                  userEntity: userEntity) { result in
+                                                                  userId: userId) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
+    }
+    
+    func deleteAllUsers(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+        let operation = MDDeleteAllUsersCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                      coreDataStorage: self) { result in
             completionHandler(result)
         }
         operationQueueService.enqueue(operation)
@@ -131,7 +147,7 @@ extension MDUserCoreDataStorage {
         coreDataStack.savePerform(completionHandler: completionHandler)
     }
     
-    func savePerform(userId: Int64, completionHandler: @escaping MDEntityResult<UserResponse>) {
+    func savePerform(userId: Int64, completionHandler: @escaping MDOperationResultWithCompletion<UserResponse>) {
         coreDataStack.savePerform() { [unowned self] (result) in
             switch result {
             case .success:
@@ -149,7 +165,7 @@ extension MDUserCoreDataStorage {
         }
     }
     
-    func save(userId: Int64, completionHandler: @escaping MDEntityResult<UserResponse>) {
+    func save(userId: Int64, completionHandler: @escaping MDOperationResultWithCompletion<UserResponse>) {
         coreDataStack.savePerformAndWait() { [unowned self] (result) in
             switch result {
             case .success:

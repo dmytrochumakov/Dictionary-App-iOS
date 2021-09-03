@@ -8,5 +8,5 @@
 import Foundation
 
 protocol MDCreateJWTProtocol {
-    func createJWT(_ jwtResponse: JWTResponse, _ completionHandler: @escaping(MDEntityResult<JWTResponse>))
+    func createJWT(_ jwtResponse: JWTResponse, _ completionHandler: @escaping(MDOperationResultWithCompletion<JWTResponse>))
 }

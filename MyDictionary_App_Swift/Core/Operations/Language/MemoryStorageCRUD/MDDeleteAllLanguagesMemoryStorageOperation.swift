@@ -10,10 +10,10 @@ import Foundation
 final class MDDeleteAllLanguagesMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDLanguageMemoryStorage
-    fileprivate let result: MDEntityResult<Void>?
+    fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(memoryStorage: MDLanguageMemoryStorage,
-         result: MDEntityResult<Void>?) {
+         result: MDOperationResultWithCompletion<Void>?) {
         
         self.memoryStorage = memoryStorage
         self.result = result

@@ -10,10 +10,10 @@ import Foundation
 final class MDReadFirstJWTMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDJWTMemoryStorage
-    fileprivate let result: MDEntityResult<JWTResponse>?
+    fileprivate let result: MDOperationResultWithCompletion<JWTResponse>?
     
     init(memoryStorage: MDJWTMemoryStorage,
-         result: MDEntityResult<JWTResponse>?) {
+         result: MDOperationResultWithCompletion<JWTResponse>?) {
         
         self.memoryStorage = memoryStorage
         self.result = result
@@ -22,7 +22,7 @@ final class MDReadFirstJWTMemoryStorageOperation: MDOperation {
     }
     
     override func main() {
-        guard let jwtResponse = self.memoryStorage.jwtResponse
+        guard let jwtResponse = self.memoryStorage.array.first
         else {
             self.result?(.failure(MDEntityOperationError.cantFindEntity));
             self.finish();

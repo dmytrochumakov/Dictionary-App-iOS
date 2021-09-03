@@ -137,13 +137,11 @@ extension MDJWTCoreDataStorage_Tests {
             
             case .success(let createdJWT):
                 
-                self.jwtCoreDataStorage.deleteJWT(createdJWT) { deleteResult in
+                self.jwtCoreDataStorage.deleteJWT(createdJWT.accessToken) { deleteResult in
                     
                     switch deleteResult {
                     
-                    case .success(let deleteJWT):
-                        
-                        XCTAssertTrue(createdJWT.accessToken == deleteJWT.accessToken)
+                    case .success:                                                
                         
                         self.jwtCoreDataStorage.entitiesIsEmpty { entitiesIsEmptyResult in
                             

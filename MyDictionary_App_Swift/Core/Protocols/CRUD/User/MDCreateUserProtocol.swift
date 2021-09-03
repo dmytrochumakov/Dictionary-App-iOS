@@ -10,5 +10,5 @@ import Foundation
 protocol MDCreateUserProtocol {
     func createUser(_ userEntity: UserResponse,
                     password: String,
-                    _ completionHandler: @escaping(MDEntityResult<UserResponse>))
+                    _ completionHandler: @escaping(MDOperationResultWithCompletion<UserResponse>))
 }

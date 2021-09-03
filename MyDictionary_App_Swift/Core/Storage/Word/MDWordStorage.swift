@@ -11,24 +11,31 @@ protocol MDWordStorageProtocol: MDStorageProtocol {
     
     func createWord(_ wordModel: WordResponse,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>))
+    
+    func createWords(_ wordModels: [WordResponse],
+                     storageType: MDStorageType,
+                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>))
     
     func readWord(fromWordID wordId: Int64,
                   storageType: MDStorageType,
-                  _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
+                  _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>))
+    
+    func readAllWords(storageType: MDStorageType,
+                      _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>))
     
     func updateWord(byWordID wordId: Int64,
                     newWordText: String,
                     newWordDescription: String,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>))
     
     func deleteWord(_ word: WordResponse,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>))
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>))
     
     func deleteAllWords(storageType: MDStorageType,
-                        _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDDeleteEntityResultWithoutCompletion>))
+                        _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
     
 }
 
@@ -59,7 +66,7 @@ extension MDWordStorage {
     
     func createWord(_ wordModel: WordResponse,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>)) {
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>)) {
         
         switch storageType {
         
@@ -81,7 +88,7 @@ extension MDWordStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDWordResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<WordResponse>> = []
             
             // Create in Memory
             // Dispatch Group Enter
@@ -116,9 +123,68 @@ extension MDWordStorage {
         
     }
     
+    func createWords(_ wordModels: [WordResponse],
+                     storageType: MDStorageType,
+                     _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>)) {
+        
+        switch storageType {
+        
+        case .memory:
+            
+            memoryStorage.createWords(wordModels) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .coreData:
+            
+            coreDataStorage.createWords(wordModels) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<WordResponse>> = []
+            
+            // Create in Memory
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.createWords(wordModels) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Create in Core Data
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.createWords(wordModels) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
+            }
+            
+        }
+        
+    }
+    
     func readWord(fromWordID wordId: Int64,
                   storageType: MDStorageType,
-                  _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>)) {
+                  _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>)) {
         
         switch storageType {
         
@@ -140,7 +206,7 @@ extension MDWordStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDWordResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<WordResponse>> = []
             
             // Read From Memory
             // Dispatch Group Enter
@@ -176,11 +242,70 @@ extension MDWordStorage {
         
     }
     
+    func readAllWords(storageType: MDStorageType,
+                      _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>)) {
+        
+        switch storageType {
+        
+        case .memory:
+            
+            memoryStorage.readAllWords { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .coreData:
+            
+            coreDataStorage.readAllWords { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<WordResponse>> = []
+            
+            // Read From Memory
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.readAllWords { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+                
+            }
+            
+            // Read From Core Data
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.readAllWords { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
+            }
+            
+        }
+        
+    }
+    
     func updateWord(byWordID wordId: Int64,
                     newWordText: String,
                     newWordDescription: String,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>)) {
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>)) {
         
         switch storageType {
         
@@ -206,7 +331,7 @@ extension MDWordStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDWordResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<WordResponse>> = []
             
             // Update In Memory
             // Dispatch Group Enter
@@ -248,7 +373,7 @@ extension MDWordStorage {
     
     func deleteWord(_ word: WordResponse,
                     storageType: MDStorageType,
-                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDWordResultWithoutCompletion>)) {
+                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>)) {
         
         switch storageType {
         
@@ -270,7 +395,7 @@ extension MDWordStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDWordResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<WordResponse>> = []
             
             // Delete From Memory
             // Dispatch Group Enter
@@ -305,7 +430,7 @@ extension MDWordStorage {
     }
     
     func deleteAllWords(storageType: MDStorageType,
-                        _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDDeleteEntityResultWithoutCompletion>)) {
+                        _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
         
@@ -327,7 +452,7 @@ extension MDWordStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDDeleteEntityResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
             
             // Delete From Memory
             // Dispatch Group Enter

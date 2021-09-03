@@ -110,13 +110,11 @@ extension MDUserCoreDataStorage_Tests {
             
             case .success(let createdUser):
                 
-                self.userCoreDataStorage.deleteUser(createdUser) { deleteResult in
+                self.userCoreDataStorage.deleteUser(createdUser.userId) { deleteResult in
                     
                     switch deleteResult {
                     
-                    case .success(let deleteUser):
-                        
-                        XCTAssertTrue(createdUser.userId == deleteUser.userId)
+                    case .success:
                         
                         self.userCoreDataStorage.entitiesIsEmpty { entitiesIsEmptyResult in
                             

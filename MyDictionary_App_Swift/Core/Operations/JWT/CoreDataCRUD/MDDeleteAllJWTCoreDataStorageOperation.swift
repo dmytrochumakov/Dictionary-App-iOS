@@ -11,11 +11,11 @@ final class MDDeleteAllJWTCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDJWTCoreDataStorage
-    fileprivate let result: MDEntityResult<Void>?
+    fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDJWTCoreDataStorage,
-         result: MDEntityResult<Void>?) {
+         result: MDOperationResultWithCompletion<Void>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage

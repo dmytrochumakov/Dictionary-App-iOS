@@ -19,7 +19,7 @@ final class MDJWTMemoryStorage_Tests: XCTestCase {
         let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
         
         let jwtMemoryStorage: MDJWTMemoryStorageProtocol = MDJWTMemoryStorage.init(operationQueueService: operationQueueService,
-                                                                                   jwtResponse: nil)
+                                                                                   array: .init())
         
         self.jwtMemoryStorage = jwtMemoryStorage
         
@@ -136,13 +136,11 @@ extension MDJWTMemoryStorage_Tests {
             
             case .success(let createdJWT):
                 
-                self.jwtMemoryStorage.deleteJWT(createdJWT) { deleteResult in
+                self.jwtMemoryStorage.deleteJWT(createdJWT.accessToken) { deleteResult in
                     
                     switch deleteResult {
                     
-                    case .success(let deleteJWT):
-                        
-                        XCTAssertTrue(createdJWT.accessToken == deleteJWT.accessToken)
+                    case .success:
                         
                         self.jwtMemoryStorage.entitiesIsEmpty { (entitiesIsEmptyResult) in
                             

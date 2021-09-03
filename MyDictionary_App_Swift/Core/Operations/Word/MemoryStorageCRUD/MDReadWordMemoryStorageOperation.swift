@@ -11,11 +11,11 @@ final class MDReadWordMemoryStorageOperation: MDOperation {
     
     fileprivate let wordStorage: MDWordMemoryStorage
     fileprivate let wordId: Int64
-    fileprivate let result: MDEntityResult<WordResponse>?
+    fileprivate let result: MDOperationResultWithCompletion<WordResponse>?
     
     init(wordStorage: MDWordMemoryStorage,
          wordId: Int64,
-         result: MDEntityResult<WordResponse>?) {
+         result: MDOperationResultWithCompletion<WordResponse>?) {
         
         self.wordStorage = wordStorage
         self.wordId = wordId
@@ -32,6 +32,32 @@ final class MDReadWordMemoryStorageOperation: MDOperation {
             return
         }
         self.result?(.success(word))
+        self.finish()
+    }
+    
+    deinit {
+        debugPrint(#function, Self.self)
+        self.finish()
+    }
+    
+}
+
+final class MDReadAllWordsMemoryStorageOperation: MDOperation {
+    
+    fileprivate let memoryStorage: MDWordMemoryStorage
+    fileprivate let result: MDOperationsResultWithCompletion<WordResponse>?
+    
+    init(memoryStorage: MDWordMemoryStorage,
+         result: MDOperationsResultWithCompletion<WordResponse>?) {
+        
+        self.memoryStorage = memoryStorage
+        self.result = result
+        
+        super.init()
+    }
+    
+    override func main() {
+        self.result?(.success(self.memoryStorage.arrayWords))
         self.finish()
     }
     

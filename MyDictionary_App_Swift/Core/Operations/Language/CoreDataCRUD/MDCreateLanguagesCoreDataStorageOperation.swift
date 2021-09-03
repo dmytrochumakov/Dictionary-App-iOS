@@ -12,12 +12,12 @@ final class MDCreateLanguagesCoreDataStorageOperation: MDOperation {
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDLanguageCoreDataStorage
     fileprivate let languageEntities: [LanguageResponse]
-    fileprivate let result: MDEntitiesResult<LanguageResponse>?
+    fileprivate let result: MDOperationsResultWithCompletion<LanguageResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDLanguageCoreDataStorage,
          languageEntities: [LanguageResponse],
-         result: MDEntitiesResult<LanguageResponse>?) {
+         result: MDOperationsResultWithCompletion<LanguageResponse>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage
@@ -29,7 +29,7 @@ final class MDCreateLanguagesCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        var result: [LanguageResponse] = []
+        var resultCount: Int = .zero
         
         languageEntities.forEach { languageEntity in
             
@@ -39,12 +39,12 @@ final class MDCreateLanguagesCoreDataStorageOperation: MDOperation {
             self.coreDataStorage.save(languageID: newLanguage.languageId) { [weak self] saveResult in
                 DispatchQueue.main.async {
                     switch saveResult {
-                    case .success(let createdLanguage):
+                    case .success:
                         
-                        result.append(createdLanguage)
+                        resultCount += 1
                         
-                        if (result.count == self?.languageEntities.count) {
-                            self?.result?(.success(result))
+                        if (resultCount == self?.languageEntities.count) {
+                            self?.result?(.success(self?.languageEntities ?? []))
                             self?.finish()
                         }
                         

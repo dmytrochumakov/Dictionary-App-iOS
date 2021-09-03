@@ -58,6 +58,31 @@ extension MDCourseMemoryStorage_Tests {
         
     }
     
+    func test_Create_Courses_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Create Courses Expectation")
+        
+        courseMemoryStorage.createCourses(Constants_For_Tests.mockedCourses) { createResult in
+            
+            switch createResult {
+            
+            case .success(let courseEntities):
+                
+                XCTAssertTrue(courseEntities.count == Constants_For_Tests.mockedCourses.count)                
+                
+                expectation.fulfill()
+                
+            case .failure:
+                XCTExpectFailure()
+                expectation.fulfill()
+            }
+            
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
+    
     func test_Read_Course_Functionality() {
         
         let expectation = XCTestExpectation(description: "Read Course Expectation")

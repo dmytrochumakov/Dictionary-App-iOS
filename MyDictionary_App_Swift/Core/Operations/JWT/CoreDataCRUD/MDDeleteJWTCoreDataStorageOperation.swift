@@ -11,17 +11,17 @@ final class MDDeleteJWTCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDJWTCoreDataStorage
-    fileprivate let jwtResponse: JWTResponse
-    fileprivate let result: MDEntityResult<JWTResponse>?
+    fileprivate let accessToken: String
+    fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDJWTCoreDataStorage,
-         jwtResponse: JWTResponse,
-         result: MDEntityResult<JWTResponse>?) {
+         accessToken: String,
+         result: MDOperationResultWithCompletion<Void>?) {
         
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage
-        self.jwtResponse = jwtResponse
+        self.accessToken = accessToken
         self.result = result
         
         super.init()
@@ -31,7 +31,7 @@ final class MDDeleteJWTCoreDataStorageOperation: MDOperation {
     override func main() {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDJWTResponseEntity)
-        fetchRequest.predicate = NSPredicate(format: "\(CDJWTResponseEntityAttributeName.accessToken) == %@", jwtResponse.accessToken)
+        fetchRequest.predicate = NSPredicate(format: "\(CDJWTResponseEntityAttributeName.accessToken) == %@", accessToken)
         
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
@@ -49,7 +49,7 @@ final class MDDeleteJWTCoreDataStorageOperation: MDOperation {
                             self?.finish() ;
                             return
                         }
-                        self.result?(.success(self.jwtResponse))
+                        self.result?(.success(()))
                         self.finish()
                     case .failure(let error):
                         self?.result?(.failure(error))

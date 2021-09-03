@@ -8,26 +8,30 @@
 import Foundation
 
 protocol MDAuthManagerProtocol {
-    func login(authRequest: AuthRequest, completionHandler: @escaping(MDAuthResultWithCompletion))
-    func register(authRequest: AuthRequest, completionHandler: @escaping(MDAuthResultWithCompletion))
+    
+    func login(authRequest: AuthRequest,
+               progressCompletionHandler: @escaping(MDProgressWithCompletion),
+               completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    
+    func register(authRequest: AuthRequest,
+                  progressCompletionHandler: @escaping(MDProgressWithCompletion),
+                  completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    
 }
 
 final class MDAuthManager: MDAuthManagerProtocol {
     
     fileprivate let apiAuth: MDAPIAuthProtocol
-    fileprivate let userStorage: MDUserStorageProtocol
-    fileprivate let jwtStorage: MDJWTStorageProtocol
-    fileprivate let appSettings: AppSettingsProtocol
+    fileprivate var appSettings: AppSettingsProtocol
+    fileprivate let syncManager: MDSyncManagerProtocol
     
     init(apiAuth: MDAPIAuthProtocol,
-         userStorage: MDUserStorageProtocol,
-         jwtStorage: MDJWTStorageProtocol,
-         appSettings: AppSettingsProtocol) {
+         appSettings: AppSettingsProtocol,
+         syncManager: MDSyncManagerProtocol) {
         
         self.apiAuth = apiAuth
-        self.userStorage = userStorage
-        self.jwtStorage = jwtStorage
         self.appSettings = appSettings
+        self.syncManager = syncManager
         
     }
     
@@ -39,40 +43,104 @@ final class MDAuthManager: MDAuthManagerProtocol {
 
 extension MDAuthManager {
     
-    func login(authRequest: AuthRequest, completionHandler: @escaping(MDAuthResultWithCompletion)) {
+    func login(authRequest: AuthRequest,
+               progressCompletionHandler: @escaping(MDProgressWithCompletion),
+               completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
-        apiAuth.login(authRequest: authRequest) { [weak self] loginResult in
+        apiAuth.login(authRequest: authRequest) { [unowned self] loginResult in
             
             switch loginResult {
             
             case .success(let authResponse):
                 
-                self?.saveUserAndJWTAndUserPassword(authRequest: authRequest,
-                                                    authResponse: authResponse,
-                                                    completionHandler: completionHandler)
+                syncManager.startFullSync(withSyncItem: .init(accessToken: authResponse.jwtResponse.accessToken,
+                                                              password: authRequest.password,
+                                                              userId: authResponse.userResponse.userId,
+                                                              nickname: authRequest.nickname)) { progress in
+                    // Pass progress
+                    progressCompletionHandler(progress)
+                    
+                } completionHandler: { [unowned self] (syncResult) in
+                    
+                    switch syncResult {
+                    
+                    case .success:
+                        // Set Is Logged In
+                        setIsLoggedInIntoTrue()
+                        //
+                        completionHandler(.success(()))
+                        //
+                        break
+                    //
+                    case .failure(let error):
+                        //
+                        completionHandler(.failure(error))
+                        //
+                        break
+                    //
+                    }
+                    
+                }
                 
             case .failure(let error):
+                //
                 completionHandler(.failure(error))
+                //
+                break
+            //
             }
             
         }
         
     }
     
-    func register(authRequest: AuthRequest, completionHandler: @escaping(MDAuthResultWithCompletion)) {
+    func register(authRequest: AuthRequest,
+                  progressCompletionHandler: @escaping(MDProgressWithCompletion),
+                  completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
-        apiAuth.register(authRequest: authRequest) { [weak self] registerResult in
+        apiAuth.register(authRequest: authRequest) { [unowned self] registerResult in
             
             switch registerResult {
             
             case .success(let authResponse):
-                
-                self?.saveUserAndJWTAndUserPassword(authRequest: authRequest,
-                                                    authResponse: authResponse,
-                                                    completionHandler: completionHandler)
-                
+                //
+                syncManager.startWithJWTAndUserAndLanguageSync(withSyncItem: .init(accessToken: authResponse.jwtResponse.accessToken,
+                                                                                   password: authRequest.password,
+                                                                                   userId: authResponse.userResponse.userId,
+                                                                                   nickname: authRequest.nickname)) { progress in
+                    // Pass progress
+                    progressCompletionHandler(progress)
+                    
+                } completionHandler: { [unowned self] (syncResult) in
+                    
+                    switch syncResult {
+                    
+                    case .success:
+                        // Set Is Logged In
+                        setIsLoggedInIntoTrue()
+                        //
+                        completionHandler(.success(()))
+                        //
+                        break
+                    //
+                    case .failure(let error):
+                        //
+                        completionHandler(.failure(error))
+                        //
+                        break
+                    //
+                    }
+                    
+                }
+                //
+                break
+            //
             case .failure(let error):
+                //
                 completionHandler(.failure(error))
+                //
+                break
+            //
             }
             
         }
@@ -81,120 +149,10 @@ extension MDAuthManager {
     
 }
 
-// MARK: - Save
 fileprivate extension MDAuthManager {
     
-    func saveUserAndJWTAndUserPassword(authRequest: AuthRequest,
-                                       authResponse: AuthResponse,
-                                       completionHandler: @escaping(MDAuthResultWithCompletion)) {
-        
-        let dispatchGroup: DispatchGroup = .init()
-        
-        // Save User
-        dispatchGroup.enter()
-        self.saveUser(userEntity: authResponse.userEntity,
-                      password: authRequest.password) { (saveUserResult) in
-            
-            switch saveUserResult {
-            
-            case .success:
-                
-                dispatchGroup.leave()
-                
-            case .failure(let error):
-                dispatchGroup.leave()
-                completionHandler(.failure(error))
-            }
-            
-        }
-        
-        // Save JWT
-        dispatchGroup.enter()
-        self.saveJWT(jwtResponse: authResponse.jwtResponse) { (saveJWTResult) in
-            switch saveJWTResult {
-            
-            case .success:
-                
-                dispatchGroup.leave()
-                
-            case .failure(let error):
-                dispatchGroup.leave()
-                completionHandler(.failure(error))
-            }
-            
-        }
-        
-        // Pass Result
-        dispatchGroup.notify(queue: .main) {            
-            // Set Is Logged In Into True
-            self.setIsLoggedInIntoTrue()
-            //
-            completionHandler(.success(()))
-        }
-        
-    }
-    
-    func saveUser(userEntity: UserResponse,
-                  password: String,
-                  completionHandler: @escaping(MDUserResultWithCompletion)) {
-        
-        var userResults: [MDStorageType : UserResponse] = [ : ]
-        
-        self.userStorage.createUser(userEntity,
-                                    password: password,
-                                    storageType: .all) { (createUserResults) in
-            
-            createUserResults.forEach { createUserResult in
-                
-                switch createUserResult.result {
-                
-                case .success(let userEntity):
-                    
-                    userResults.updateValue(userEntity, forKey: createUserResult.storageType)
-                    
-                    if (userResults.count == createUserResults.count) {
-                        completionHandler(.success(userResults.first!.value))
-                    }
-                    
-                case .failure(let error):
-                    completionHandler(.failure(error))
-                }
-                
-            }
-            
-        }
-    }
-    
-    func saveJWT(jwtResponse: JWTResponse, completionHandler: @escaping(MDJWTResultWithCompletion)) {
-        
-        var jwtResults: [MDStorageType : JWTResponse] = [ : ]
-        
-        self.jwtStorage.createJWT(storageType: .all, jwtResponse: jwtResponse) { (createJWTResults) in
-            
-            createJWTResults.forEach { createJWTResult in
-                
-                switch createJWTResult.result {
-                
-                case .success(let jwtEntity):
-                    
-                    jwtResults.updateValue(jwtEntity, forKey: createJWTResult.storageType)
-                    
-                    if (jwtResults.count == createJWTResults.count) {
-                        completionHandler(.success(jwtResults.first!.value))
-                    }
-                    
-                case .failure(let error):
-                    completionHandler(.failure(error))
-                }
-                
-            }
-            
-        }
-        
-    }
-    
     func setIsLoggedInIntoTrue() {
-        appSettings.setIsLoggedIn(true)
+        appSettings.isLoggedIn = true
     }
     
 }

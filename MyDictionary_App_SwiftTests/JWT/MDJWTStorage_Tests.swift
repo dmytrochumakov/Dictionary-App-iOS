@@ -20,7 +20,7 @@ final class MDJWTStorage_Tests: XCTestCase {
         let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
         
         let memoryStorage: MDJWTMemoryStorageProtocol = MDJWTMemoryStorage.init(operationQueueService: operationQueueService,
-                                                                                jwtResponse: nil)
+                                                                                array: .init())
         
         let coreDataStack: CoreDataStack = TestCoreDataStack.init()
         
@@ -187,15 +187,13 @@ extension MDJWTStorage_Tests {
             switch createResults.first!.result {
             case .success(let createdJWT):
                 
-                self.jwtStorage.deleteJWT(storageType: storageType, jwtResponse: createdJWT) { [unowned self] deleteResults in
+                self.jwtStorage.deleteJWT(storageType: storageType, accessToken: createdJWT.accessToken) { [unowned self] deleteResults in
                     
                     deleteResults.forEach { deleteResult in
                         
                         switch deleteResult.result {
                         
-                        case .success(let deleteJWT):
-                            
-                            XCTAssertTrue(createdJWT.accessToken == deleteJWT.accessToken)
+                        case .success:                                                        
                             
                             self.jwtStorage.entitiesIsEmpty(storageType: deleteResult.storageType) { entitiesIsEmptyResults in
                                 

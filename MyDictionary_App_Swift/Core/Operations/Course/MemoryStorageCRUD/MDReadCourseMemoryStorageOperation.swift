@@ -11,11 +11,11 @@ final class MDReadCourseMemoryStorageOperation: MDOperation {
     
     fileprivate let memoryStorage: MDCourseMemoryStorage
     fileprivate let courseId: Int64
-    fileprivate let result: MDEntityResult<CourseResponse>?
+    fileprivate let result: MDOperationResultWithCompletion<CourseResponse>?
     
     init(memoryStorage: MDCourseMemoryStorage,
          courseId: Int64,
-         result: MDEntityResult<CourseResponse>?) {
+         result: MDOperationResultWithCompletion<CourseResponse>?) {
         
         self.memoryStorage = memoryStorage
         self.courseId = courseId

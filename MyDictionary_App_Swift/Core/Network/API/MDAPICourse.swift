@@ -11,16 +11,16 @@ protocol MDAPICourseProtocol {
     
     func createCourse(accessToken: String,
                       createCourseRequest: CreateCourseRequest,
-                      completionHandler: @escaping(MDCourseResultWithCompletion))
+                      completionHandler: @escaping(MDOperationResultWithCompletion<CourseResponse>))
     
     func getCourses(accessToken: String,
                     byUserId userId: Int64,
-                    completionHandler: @escaping(MDCoursesResultWithCompletion))
+                    completionHandler: @escaping(MDOperationsResultWithCompletion<CourseResponse>))
     
     func deleteCourse(accessToken: String,
                       userId: Int64,
                       courseId: Int64,
-                      completionHandler: @escaping(MDDeleteEntityResultWithCompletion))
+                      completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
     
 }
 
@@ -128,7 +128,7 @@ extension MDAPICourse {
     
     func createCourse(accessToken: String,
                       createCourseRequest: CreateCourseRequest,
-                      completionHandler: @escaping (MDCourseResultWithCompletion)) {
+                      completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
                                               endpoint: MDAPICourseEndpoint.createCourse(accessToken: accessToken,
@@ -168,7 +168,7 @@ extension MDAPICourse {
     
     func getCourses(accessToken: String,
                     byUserId userId: Int64,
-                    completionHandler: @escaping(MDCoursesResultWithCompletion)) {
+                    completionHandler: @escaping(MDOperationsResultWithCompletion<CourseResponse>)) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
                                               endpoint: MDAPICourseEndpoint.getCourses(accessToken: accessToken,
@@ -209,7 +209,7 @@ extension MDAPICourse {
     func deleteCourse(accessToken: String,
                       userId: Int64,
                       courseId: Int64,
-                      completionHandler: @escaping (MDDeleteEntityResultWithCompletion)) {
+                      completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         let operation: MDAPIOperation = .init(requestDispatcher: self.requestDispatcher,
                                               endpoint: MDAPICourseEndpoint.deleteCourse(accessToken: accessToken,

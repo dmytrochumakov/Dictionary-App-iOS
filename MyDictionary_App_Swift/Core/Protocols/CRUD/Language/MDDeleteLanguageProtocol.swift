@@ -8,5 +8,5 @@
 import Foundation
 
 protocol MDDeleteLanguageProtocol {
-    func deleteAllLanguages(_ completionHandler: @escaping(MDEntityResult<Void>))
+    func deleteAllLanguages(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
 }

@@ -21,6 +21,15 @@ struct Constants_For_Tests {
                                                         languageName: "English",
                                                         createdAt: .init())
     
+    public static let mockedWords: [WordResponse] = [mockedWord0, .init(userId: .init(),
+                                                                        wordId: .init(),
+                                                                        courseId: .init(),
+                                                                        languageId: .init(),
+                                                                        wordText: "MOSF",
+                                                                        wordDescription: "metal–oxide–semiconductor-field",
+                                                                        languageName: "Spanish",
+                                                                        createdAt: .init())]
+    
     public static let mockedWordForUpdate: WordResponse = .init(userId: .init(),
                                                                 wordId: .init(),
                                                                 courseId: .init(),
@@ -53,5 +62,11 @@ struct Constants_For_Tests {
                                                            languageId: 0,
                                                            languageName: "English",
                                                            createdAt: "2021-08-16T13:35:33.999Z")
+    
+    public static let mockedCourses: [CourseResponse] = [mockedCourse, .init(userId: 1,
+                                                                             courseId: 1,
+                                                                             languageId: 1,
+                                                                             languageName: "Spanish",
+                                                                             createdAt: "2021-08-16T13:36:33.999Z")]
     
 }

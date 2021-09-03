@@ -115,9 +115,13 @@ fileprivate extension RegistrationInteractor {
             let authRequest: AuthRequest = .init(nickname: dataManager.getNickname()!,
                                                  password: dataManager.getPassword()!)
             
-            apiManager.register(authRequest: authRequest) { [weak self] (registerResult) in
+            apiManager.register(authRequest: authRequest) { [weak self] progress in
                 
-                switch registerResult {
+                debugPrint(#function, Self.self, "progress: ", progress)
+                
+            } completionHandler: { [weak self] (result) in
+                
+                switch result {
                 
                 case .success:
                     

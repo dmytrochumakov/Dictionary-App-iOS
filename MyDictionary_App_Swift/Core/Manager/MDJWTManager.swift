@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MDJWTManagerProtocol {
-    func fetchJWT(jwtApiRequest: JWTApiRequest, completionHandler: @escaping MDJWTResponseResult)
+    func fetchJWT(jwtApiRequest: JWTApiRequest, completionHandler: @escaping MDOperationResultWithCompletion<JWTResponse>)
 }
 
 final class MDJWTManager: MDJWTManagerProtocol {
@@ -32,7 +32,7 @@ final class MDJWTManager: MDJWTManagerProtocol {
 
 extension MDJWTManager {
     
-    func fetchJWT(jwtApiRequest: JWTApiRequest, completionHandler: @escaping MDJWTResponseResult) {
+    func fetchJWT(jwtApiRequest: JWTApiRequest, completionHandler: @escaping MDOperationResultWithCompletion<JWTResponse>) {
         
         jwtStorage.readFirstJWT(storageType: .memory) { [unowned self] readResults in
             

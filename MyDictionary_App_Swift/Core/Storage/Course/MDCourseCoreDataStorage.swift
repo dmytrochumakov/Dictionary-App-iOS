@@ -65,7 +65,7 @@ extension MDCourseCoreDataStorage {
 // MARK: - CRUD
 extension MDCourseCoreDataStorage {
     
-    func createCourse(_ courseEntity: CourseResponse, _ completionHandler: @escaping (MDEntityResult<CourseResponse>)) {
+    func createCourse(_ courseEntity: CourseResponse, _ completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
         let operation: MDCreateCourseCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
                                                                       coreDataStorage: self,
                                                                       courseEntity: courseEntity) { result in
@@ -74,7 +74,16 @@ extension MDCourseCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDEntityResult<CourseResponse>)) {
+    func createCourses(_ courseEntities: [CourseResponse], _ completionHandler: @escaping (MDOperationsResultWithCompletion<CourseResponse>)) {
+        let operation: MDCreateCoursesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                       coreDataStorage: self,
+                                                                       courseEntities: courseEntities) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
+    }
+    
+    func readCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
         let operation: MDReadCourseCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
                                                                     coreDataStorage: self,
                                                                     courseId: courseId) { result in
@@ -83,7 +92,7 @@ extension MDCourseCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func readAllCourses(_ completionHandler: @escaping (MDEntityResult<[CourseResponse]>)) {
+    func readAllCourses(_ completionHandler: @escaping (MDOperationResultWithCompletion<[CourseResponse]>)) {
         let operation: MDReadAllCoursesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
                                                                         coreDataStorage: self) { result in
             completionHandler(result)
@@ -91,7 +100,7 @@ extension MDCourseCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func deleteCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDEntityResult<Void>)) {
+    func deleteCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         let operation: MDDeleteCourseCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
                                                                       coreDataStorage: self,
                                                                       courseId: courseId) { result in
@@ -100,7 +109,7 @@ extension MDCourseCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
-    func deleteAllCourses(_ completionHandler: @escaping (MDEntityResult<Void>)) {
+    func deleteAllCourses(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         let operation: MDDeleteAllCoursesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
                                                                           coreDataStorage: self) { result in
             completionHandler(result)
@@ -117,7 +126,7 @@ extension MDCourseCoreDataStorage {
         coreDataStack.savePerform(completionHandler: completionHandler)
     }
     
-    func savePerform(courseID: Int64, completionHandler: @escaping(MDEntityResult<CourseResponse>)) {
+    func savePerform(courseID: Int64, completionHandler: @escaping(MDOperationResultWithCompletion<CourseResponse>)) {
         coreDataStack.savePerform() { [unowned self] (result) in
             switch result {
             case .success:
@@ -135,7 +144,7 @@ extension MDCourseCoreDataStorage {
         }
     }
     
-    func save(courseID: Int64, completionHandler: @escaping(MDEntityResult<CourseResponse>)) {
+    func save(courseID: Int64, completionHandler: @escaping(MDOperationResultWithCompletion<CourseResponse>)) {
         coreDataStack.savePerformAndWait() { [unowned self] (result) in
             switch result {
             case .success:

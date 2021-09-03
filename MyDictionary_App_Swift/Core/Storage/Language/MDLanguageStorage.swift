@@ -11,13 +11,13 @@ protocol MDLanguageStorageProtocol: MDStorageProtocol {
     
     func createLanguages(storageType: MDStorageType,
                          languageEntities: [LanguageResponse],
-                         _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDLanguageResultsWithoutCompletion>))
+                         _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>>))
     
     func readAllLanguages(storageType: MDStorageType,
-                          _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDLanguageResultsWithoutCompletion>))
+                          _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>>))
     
     func deleteAllLanguages(storageType: MDStorageType,
-                            _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDDeleteEntityResultWithoutCompletion>))
+                            _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
     
 }
 
@@ -48,7 +48,7 @@ extension MDLanguageStorage {
     
     func createLanguages(storageType: MDStorageType,
                          languageEntities: [LanguageResponse],
-                         _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDLanguageResultsWithoutCompletion>)) {
+                         _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>>)) {
         
         switch storageType {
         
@@ -70,7 +70,7 @@ extension MDLanguageStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDLanguageResultsWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>> = []
             
             // Create in Memory
             // Dispatch Group Enter
@@ -106,7 +106,7 @@ extension MDLanguageStorage {
     }
     
     func readAllLanguages(storageType: MDStorageType,
-                          _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDLanguageResultsWithoutCompletion>)) {
+                          _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>>)) {
         
         switch storageType {
         
@@ -129,7 +129,7 @@ extension MDLanguageStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDLanguageResultsWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>> = []
             
             // Read From Memory
             // Dispatch Group Enter
@@ -165,7 +165,7 @@ extension MDLanguageStorage {
     }
     
     func deleteAllLanguages(storageType: MDStorageType,
-                            _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDDeleteEntityResultWithoutCompletion>)) {
+                            _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
         
@@ -187,7 +187,7 @@ extension MDLanguageStorage {
             let dispatchGroup: DispatchGroup = .init()
             
             // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDDeleteEntityResultWithoutCompletion> = []
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
             
             // Delete From Memory
             // Dispatch Group Enter

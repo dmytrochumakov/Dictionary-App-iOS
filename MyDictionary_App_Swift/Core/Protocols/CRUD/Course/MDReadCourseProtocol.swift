@@ -8,6 +8,6 @@
 import Foundation
 
 protocol MDReadCourseProtocol {
-    func readCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping(MDEntityResult<CourseResponse>))
-    func readAllCourses(_ completionHandler: @escaping(MDEntityResult<[CourseResponse]>))
+    func readCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping(MDOperationResultWithCompletion<CourseResponse>))
+    func readAllCourses(_ completionHandler: @escaping(MDOperationResultWithCompletion<[CourseResponse]>))
 }

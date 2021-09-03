@@ -10,12 +10,14 @@ final class CourseListViewController: UIViewController {
     
     fileprivate let presenter: CourseListPresenterInputProtocol
     
-    fileprivate let tableView: UITableView = {
-        let tableView = UITableView.init()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
+    fileprivate let collectionView: UICollectionView = {
+        let flowLayout: UICollectionViewFlowLayout = .init()
+        let collectionView: UICollectionView = .init(frame: .zero,
+                                                     collectionViewLayout: flowLayout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
     }()
-            
+    
     fileprivate let settingsButton: UIButton = {
         let button: UIButton = .init()
         button.setTitle(KeysForTranslate.settings.localized, for: .normal)
@@ -67,7 +69,7 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     
     func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
         configureAppearance(fromAppearanceType: newValue,
-                            tableView: tableView)
+                            collectionView: collectionView)
     }
     
 }
@@ -76,11 +78,11 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
 fileprivate extension CourseListViewController {
     
     func addViews() {
-        addTableView()
+        addCollectionView()
     }
     
-    func addTableView() {
-        view.addSubview(tableView)
+    func addCollectionView() {
+        view.addSubview(collectionView)
     }
     
     func addLeftNavigationButton() {
@@ -103,7 +105,7 @@ fileprivate extension CourseListViewController {
     }
     
     func addTableViewConstraints() {
-        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.tableView,
+        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.collectionView,
                                                          toItem: self.view)
     }
     
@@ -114,7 +116,7 @@ fileprivate extension CourseListViewController {
     
     func configureUI() {
         configureView()
-        configureTableView()
+        configureCollectionView()
         configureNavigationBarAppearance(fromAppearanceType: Appearance.current.appearanceType)
         configureNavigationItemLeftAndRightButtons()
     }
@@ -124,11 +126,11 @@ fileprivate extension CourseListViewController {
         self.title = KeysForTranslate.courses.localized
     }
     
-    func configureTableView() {
-        self.tableView.delegate = self.presenter.tableViewDelegate
-        self.tableView.dataSource = self.presenter.tableViewDataSource
-        self.configureTableViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType,
-                                               tableView: tableView)
+    func configureCollectionView() {
+        self.collectionView.delegate = self.presenter.collectionViewDelegate
+        self.collectionView.dataSource = self.presenter.collectionViewDataSource
+        self.configureCollectionViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType,
+                                                    collectionView: collectionView)
     }
     
     func configureNavigationItemLeftAndRightButtons() {

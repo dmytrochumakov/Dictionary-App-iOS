@@ -10,10 +10,10 @@ import Foundation
 final class MDDeleteAllWordsMemoryStorageOperation: MDOperation {
     
     fileprivate let wordStorage: MDWordMemoryStorage
-    fileprivate let result: MDEntityResult<Void>?
+    fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(wordStorage: MDWordMemoryStorage,
-         result: MDEntityResult<Void>?) {
+         result: MDOperationResultWithCompletion<Void>?) {
         
         self.wordStorage = wordStorage
         self.result = result

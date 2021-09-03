@@ -13,13 +13,13 @@ final class MDUpdateJWTCoreDataStorageOperation: MDOperation {
     fileprivate let coreDataStorage: MDJWTCoreDataStorage
     fileprivate let oldAccessToken: String
     fileprivate let newJWTResponse: JWTResponse
-    fileprivate let result: MDEntityResult<JWTResponse>?
+    fileprivate let result: MDOperationResultWithCompletion<JWTResponse>?
 
     init(managedObjectContext: NSManagedObjectContext,
          coreDataStorage: MDJWTCoreDataStorage,
          oldAccessToken: String,
          newJWTResponse: JWTResponse,
-         result: MDEntityResult<JWTResponse>?) {
+         result: MDOperationResultWithCompletion<JWTResponse>?) {
 
         self.managedObjectContext = managedObjectContext
         self.coreDataStorage = coreDataStorage

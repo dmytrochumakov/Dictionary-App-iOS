@@ -9,7 +9,7 @@ import Foundation
 
 struct AuthResponse {
     
-    let userEntity: UserResponse
+    let userResponse: UserResponse
     let jwtResponse: JWTResponse
     
 }
@@ -17,13 +17,13 @@ struct AuthResponse {
 extension AuthResponse: Decodable {
     
     enum CodingKeys: String, CodingKey {
-        case userEntity = "user_entity"
+        case userResponse = "user_response"
         case jwtResponse = "jwt"
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.userEntity = try container.decode(UserResponse.self, forKey: .userEntity)
+        self.userResponse = try container.decode(UserResponse.self, forKey: .userResponse)
         self.jwtResponse = try container.decode(JWTResponse.self, forKey: .jwtResponse)
     }
     
