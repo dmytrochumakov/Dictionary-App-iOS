@@ -16,10 +16,6 @@ jobs:
 
     # Run on latest supported macOS version
     runs-on: macos-latest
-    # Strategy
-    strategy:
-        matrix:
-          destination: ['platform=iOS Simulator,OS=10.0,name=iPhone SE (1st generation)']
     
     steps:
 
@@ -33,12 +29,12 @@ jobs:
       
     # Build
     - name: Build
-        run: xcodebuild clean build -workspace MyDictionary_App_Swift.xcworkspace -scheme       MyDictionary_App_Swift -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+        run: xcodebuild clean build -workspace MyDictionary_App_Swift.xcworkspace -scheme       MyDictionary_App_Swift -destination platform=iOS Simulator,OS=10.0,name=iPhone SE (1st generation) CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
         env:
          destination: ${{ matrix.destination }}
 
     # Run the unit tests via xcodebuild
     - name: Run Xcode Unit Tests
-      run: xcodebuild clean test -workspace MyDictionary_App_Swift.xcworkspace -scheme MyDictionary_App_SwiftTests -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+      run: xcodebuild clean test -workspace MyDictionary_App_Swift.xcworkspace -scheme MyDictionary_App_SwiftTests -destination platform=iOS Simulator,OS=10.0,name=iPhone SE (1st generation) CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
         env:
          destination: ${{ matrix.destination }}
