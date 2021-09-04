@@ -15,8 +15,12 @@ jobs:
     name: 'Run Unit Tests'
 
     # Run on latest supported macOS version
-    runs-on: macOS-11
-
+    runs-on: macos-latest
+    # Strategy
+    strategy:
+        matrix:
+          destination: ['platform=iOS Simulator,OS=10.0,name=iPhone SE (1st generation)']
+    
     steps:
 
     # Check-out the repo
@@ -26,7 +30,17 @@ jobs:
     # Install the bundle dependencies
     - name: Install dependencies
       run: bundle install && bundle exec pod install
+      
+    # Build
+    - name: Build
+        run: |
+          xcodebuild clean build -workspace MyDictionary_App_Swift.xcworkspace -scheme MyDictionary_App_Swift -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+        env:
+         destination: ${{ matrix.destination }}
 
     # Run the unit tests via xcodebuild
     - name: Run Xcode Unit Tests
-      run: xcodebuild -workspace MyDictionary_App_Swift.xcworkspace -scheme MyDictionary_App_SwiftTests test
+      run: |
+          xcodebuild clean test -workspace MyDictionary_App_Swift.xcworkspace -scheme MyDictionary_App_SwiftTests -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+        env:
+         destination: ${{ matrix.destination }}
