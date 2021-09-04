@@ -37,7 +37,7 @@ DerivedData/
 *.dSYM
 
 ## Mobileprovision
-.mobileprovision
+AppStore_com.dcteam.MyDictionary-App-Swift.mobileprovision
 
 # CocoaPods
 #
