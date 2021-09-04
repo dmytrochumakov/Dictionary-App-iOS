@@ -11,8 +11,9 @@ on:
     - main
 
 jobs:
-  build:
 
+  unitTests:
+    
     # Run on latest supported macOS version
     runs-on: macos-latest
 
@@ -28,4 +29,4 @@ jobs:
       
     # Run Unit Tests
     - name: Run Unit Tests
-      run: bundle exec fastlane test
+      run: bundle exec fastlane unitTestLane
