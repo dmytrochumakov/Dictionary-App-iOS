@@ -33,14 +33,12 @@ jobs:
       
     # Build
     - name: Build
-        run: |
-          xcodebuild clean build -workspace MyDictionary_App_Swift.xcworkspace -scheme MyDictionary_App_Swift -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+        run: xcodebuild clean build -workspace MyDictionary_App_Swift.xcworkspace -scheme       MyDictionary_App_Swift -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
         env:
          destination: ${{ matrix.destination }}
 
     # Run the unit tests via xcodebuild
     - name: Run Xcode Unit Tests
-      run: |
-          xcodebuild clean test -workspace MyDictionary_App_Swift.xcworkspace -scheme MyDictionary_App_SwiftTests -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+      run: xcodebuild clean test -workspace MyDictionary_App_Swift.xcworkspace -scheme MyDictionary_App_SwiftTests -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
         env:
          destination: ${{ matrix.destination }}
