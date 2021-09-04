@@ -1,8 +1,3 @@
-# Idea
-#
-
-.idea/
-
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
@@ -34,25 +29,6 @@ DerivedData/
 *.ipa
 *.dSYM.zip
 *.dSYM
-*.cer
-
-## Playgrounds
-timeline.xctimeline
-playground.xcworkspace
-
-# Swift Package Manager
-#
-# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
-# Packages/
-# Package.pins
-# Package.resolved
-# *.xcodeproj
-#
-# Xcode automatically generates this directory with a .xcworkspacedata file and xcuserdata
-# hence it is not needed unless you have added a package configuration file to your project
-# .swiftpm
-
-.build/
 
 # CocoaPods
 #
@@ -63,7 +39,7 @@ playground.xcworkspace
 Pods/
 #
 # Add this line if you want to avoid checking in source code from the Xcode workspace
-*.xcworkspace
+# *.xcworkspace
 
 # Carthage
 #
@@ -71,10 +47,6 @@ Pods/
 # Carthage/Checkouts
 
 Carthage/Build/
-
-# Accio dependency management
-Dependencies/
-.accio/
 
 # fastlane
 #
@@ -87,6 +59,8 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+fastlane/swift
+fastlane/FastlaneRunner
 
 # Code Injection
 #
