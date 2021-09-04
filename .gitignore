@@ -37,7 +37,7 @@ DerivedData/
 *.dSYM
 
 ## Mobileprovision
-#.mobileprovision
+*.mobileprovision
 
 # CocoaPods
 #
