@@ -22,7 +22,7 @@ import Foundation
 
 class Fastfile: LaneFile {
     
-    func test() {
+    func unitTestLane() {
         desc("Runs the unit tests to ensure the build is working")
         // Run the unit tests
         runTests()
