@@ -1,46 +1,28 @@
 # Installs pod dependencies and then runs the unit test suite
 name: CI
 
-# Trigger CI when pushing to master, or opening PRs to master
-on:
-  push:
-    branches:
-    - main
-  pull_request:
-    branches:
-    - main
+# Trigger CI when pushing
+on: [push]
 
 jobs:
   test:
     name: 'Run Unit Tests'
-
+    
     # Run on latest supported macOS version
     runs-on: macos-latest
-    # Strategy
-    strategy:
-        matrix:
-          destination: ['platform=iOS Simulator,OS=10.0,name=iPhone SE (1st generation)']
-    
-    steps:
 
+    steps:
+    
     # Check-out the repo
     - name: Check out Repository
       uses: actions/checkout@v2
-
+      
     # Install the bundle dependencies
     - name: Install dependencies
       run: bundle install && bundle exec pod install
       
-    # Build
-    - name: Build
-        run: |
-          xcodebuild clean build -workspace MyDictionary_App_Swift.xcworkspace -scheme MyDictionary_App_Swift -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-        env:
-         destination: ${{ matrix.destination }}
-
-    # Run the unit tests via xcodebuild
-    - name: Run Xcode Unit Tests
-      run: |
-          xcodebuild clean test -workspace MyDictionary_App_Swift.xcworkspace -scheme MyDictionary_App_SwiftTests -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-        env:
-         destination: ${{ matrix.destination }}
+    # Run Xcode Unit Tests
+    - name: Run Unit Tests
+      run: bundle exec fastlane unitTests
+      env:
+        TEST_SCHEME: MyDictionary_App_SwiftTests
