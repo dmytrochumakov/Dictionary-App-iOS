@@ -10,6 +10,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Run a one-line script
-      run: 'bundle install && bundle exec fastlane test'
+      run: 'bundle install && && bundle exec pod install && bundle exec fastlane test'
       env:
         TEST_SCHEME: "MyDictionary_App_Swift"
