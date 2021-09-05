@@ -48,7 +48,7 @@ fileprivate extension Appearance {
     }
     
     static func getSavedAppearanceType() -> AppearanceType {
-        guard let appearanceType: AppearanceType = .init(rawValue: UserDefaults.standard.integer(forKey: Constants.appearanceTypeKey)) else { return .automatic }
+        guard let appearanceType = AppearanceType.init(rawValue: UserDefaults.standard.integer(forKey: Constants.appearanceTypeKey)) else { return .automatic }        
         return appearanceType
     }
     
