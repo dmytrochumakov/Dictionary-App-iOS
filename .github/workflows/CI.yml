@@ -1,28 +1,15 @@
-# Installs pod dependencies and then runs the unit test suite
 name: CI
 
-# Trigger CI when pushing
 on: [push]
 
 jobs:
-  test:
-    name: 'Run Unit Tests'
-    
-    # Run on latest supported macOS version
+  build:
+
     runs-on: macos-latest
 
     steps:
-    
-    # Check-out the repo
-    - name: Check out Repository
-      uses: actions/checkout@v2
-      
-    # Install the bundle dependencies
-    - name: Install dependencies
-      run: bundle install && bundle exec pod install
-      
-    # Run Xcode Unit Tests
-    - name: Run Unit Tests
-      run: bundle exec fastlane unitTests
+    - uses: actions/checkout@v1
+    - name: Run a one-line script
+      run: 'bundle install && bundle exec fastlane test'
       env:
-        TEST_SCHEME: MyDictionary_App_SwiftTests
+        TEST_SCHEME: "MyDictionary_App_SwiftTests"
