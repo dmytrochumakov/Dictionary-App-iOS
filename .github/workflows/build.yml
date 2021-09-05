@@ -8,10 +8,8 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Install Dependences
-      run: |
-        pod repo update
-        pod install
-    - name: Build
-      run: xcodebuild -workspace MyDictionary_App_Swift.xcworkspace -scheme MyDictionary_App_Swift
+    - uses: actions/checkout@v1
+    - name: Run a one-line script
+      run: 'bundle install && bundle exec fastlane test'
+      env:
+        TEST_SCHEME: "MyDictionary_App_Swift"
