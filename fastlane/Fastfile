@@ -2,9 +2,9 @@ default_platform(:ios)
 
 platform :ios do
 
-  desc "Runs the unit tests to ensure the build is working"
-  lane :test do
-    scan(scheme: ENV["TEST_SCHEME"], devices: ["iPhone SE"], clean: true)
+  desc "Build And Test"
+  lane :buildAndTest do
+    scan(scheme: "MyDictionary_App_Swift", devices: ["iPhone SE"], clean: true)
   end
 
 end
