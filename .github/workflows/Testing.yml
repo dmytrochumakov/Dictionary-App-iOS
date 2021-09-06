@@ -1,19 +1,35 @@
-name: Testing
+name: MyDictionary CI
 
 on: [push]
 
 jobs:
-  test:
-    name: Testing iOS app
-    runs-on: macOS-11
+  
+  iOS:
+    name: Unit Test iOS
+    runs-on: macos-11
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_12.5.1.app
+      WORKSPACE_NAME: MyDictionary_App_Swift.xcworkspace
+      SCHEME_NAME: MyDictionary_App_Swift
+    strategy:
+      matrix:
+        destination: ["name=iPhone 12 Pro"]
     steps:
-    
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v2
-        
-      - name: CocoaPods Install
-        run: pod install
-        
-      - name: Testing iOS app
-        run: exec sh ./.github/scripts/test_app.sh
 
+      - name: Cache RubyGems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Install ruby gems.
+        run: bundle install
+
+      - name: iOS - ${{ matrix.destination }}
+        run: |
+          set -o pipefail
+          xcodebuild build build-for-testing -workspace "${{ env.WORKSPACE_NAME }}" -scheme "${{ env.SCHEME_NAME }}" -destination "${{ matrix.destination }}" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES ONLY_ACTIVE_ARCH=YES | bundle exec xcpretty -c
+          xcodebuild analyze test-without-building -workspace "${{ env.WORKSPACE_NAME }}" -scheme "${{ env.SCHEME_NAME }}" -destination "${{ matrix.destination }}" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES ONLY_ACTIVE_ARCH=YES | bundle exec xcpretty -c
