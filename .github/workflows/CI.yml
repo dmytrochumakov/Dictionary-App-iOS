@@ -25,8 +25,12 @@ jobs:
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
+            
       - name: Install ruby gems.
         run: bundle install
+        
+      - name: Install CocoaPod
+        run: pod install
 
       - name: iOS - ${{ matrix.destination }}
         run: |
