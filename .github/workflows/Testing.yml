@@ -7,8 +7,16 @@ jobs:
     name: Testing iOS app
     runs-on: macOS-latest
     steps:
+    
       - name: Checkout repository
         uses: actions/checkout@v2
+        
+      - name: List available Xcode versions
+        run: ls /Applications | grep Xcode
+        
+      - name: Select Xcode
+        run: sudo xcode-select -switch /Applications/Xcode_12.5.1.app && /usr/bin/xcodebuild -version
+        
       - name: Testing iOS app
         run: exec sh ./.github/scripts/test_app.sh
 
