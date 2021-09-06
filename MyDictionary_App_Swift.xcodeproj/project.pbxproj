@@ -151,7 +151,6 @@
 		228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 228BC440264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld */; };
 		228BC444264979FE0030FB30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228BC443264979FE0030FB30 /* Assets.xcassets */; };
 		228BC447264979FE0030FB30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228BC445264979FE0030FB30 /* LaunchScreen.storyboard */; };
-		228BC45D264979FF0030FB30 /* MyDictionary_App_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BC45C264979FF0030FB30 /* MyDictionary_App_SwiftUITests.swift */; };
 		2294323026DF9A2A0073048C /* MDSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294322F26DF9A2A0073048C /* MDSyncManager.swift */; };
 		2294323226DF9A460073048C /* MDSyncStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294323126DF9A460073048C /* MDSyncStep.swift */; };
 		2294323426DF9A520073048C /* MDSyncResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294323326DF9A520073048C /* MDSyncResult.swift */; };
@@ -297,20 +296,12 @@
 		22EF0205269DACC300FE4435 /* MDAPIOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF0204269DACC300FE4435 /* MDAPIOperation.swift */; };
 		22EF020A269DAE9800FE4435 /* MDAPIWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF0209269DAE9800FE4435 /* MDAPIWord.swift */; };
 		22EF020D269DAFC000FE4435 /* MDAPIEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF020C269DAFC000FE4435 /* MDAPIEnvironment.swift */; };
-		46561D030AC311CA946748A6 /* Pods_MyDictionary_App_Swift_MyDictionary_App_SwiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4B0BF159DE3EBE29729603 /* Pods_MyDictionary_App_Swift_MyDictionary_App_SwiftUITests.framework */; };
 		7A771243375B4E6638E8E88F /* Pods_MyDictionary_App_SwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 923590696D157738A81B976A /* Pods_MyDictionary_App_SwiftTests.framework */; };
 		92BD34416DA19CCBAB62E984 /* Pods_MyDictionary_App_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57FDC8E17FB8BBA5CC00A3A /* Pods_MyDictionary_App_Swift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		228BC44E264979FF0030FB30 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 228BC42C264979FD0030FB30 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 228BC433264979FD0030FB30;
-			remoteInfo = MyDictionary_App_Swift;
-		};
-		228BC459264979FF0030FB30 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 228BC42C264979FD0030FB30 /* Project object */;
 			proxyType = 1;
@@ -468,9 +459,6 @@
 		228BC448264979FE0030FB30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		228BC44D264979FF0030FB30 /* MyDictionary_App_SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyDictionary_App_SwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		228BC453264979FF0030FB30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		228BC458264979FF0030FB30 /* MyDictionary_App_SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyDictionary_App_SwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		228BC45C264979FF0030FB30 /* MyDictionary_App_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDictionary_App_SwiftUITests.swift; sourceTree = "<group>"; };
-		228BC45E264979FF0030FB30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2294322F26DF9A2A0073048C /* MDSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncManager.swift; sourceTree = "<group>"; };
 		2294323126DF9A460073048C /* MDSyncStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncStep.swift; sourceTree = "<group>"; };
 		2294323326DF9A520073048C /* MDSyncResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncResult.swift; sourceTree = "<group>"; };
@@ -616,15 +604,12 @@
 		22EF0204269DACC300FE4435 /* MDAPIOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIOperation.swift; sourceTree = "<group>"; };
 		22EF0209269DAE9800FE4435 /* MDAPIWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIWord.swift; sourceTree = "<group>"; };
 		22EF020C269DAFC000FE4435 /* MDAPIEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIEnvironment.swift; sourceTree = "<group>"; };
-		3C4B0BF159DE3EBE29729603 /* Pods_MyDictionary_App_Swift_MyDictionary_App_SwiftUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyDictionary_App_Swift_MyDictionary_App_SwiftUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4335EFB67AD7EAAA399679A0 /* Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests.release.xcconfig"; path = "Target Support Files/Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests/Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5228B1539E4176ACE29F7FA6 /* Pods-MyDictionary_App_SwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyDictionary_App_SwiftTests.release.xcconfig"; path = "Target Support Files/Pods-MyDictionary_App_SwiftTests/Pods-MyDictionary_App_SwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		923590696D157738A81B976A /* Pods_MyDictionary_App_SwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyDictionary_App_SwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A57FDC8E17FB8BBA5CC00A3A /* Pods_MyDictionary_App_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyDictionary_App_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9D4C11CDBCC89F563FDDBAC /* Pods-MyDictionary_App_Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyDictionary_App_Swift.debug.xcconfig"; path = "Target Support Files/Pods-MyDictionary_App_Swift/Pods-MyDictionary_App_Swift.debug.xcconfig"; sourceTree = "<group>"; };
 		E29E1C484B630D8C90EAEEE2 /* Pods-MyDictionary_App_Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyDictionary_App_Swift.release.xcconfig"; path = "Target Support Files/Pods-MyDictionary_App_Swift/Pods-MyDictionary_App_Swift.release.xcconfig"; sourceTree = "<group>"; };
 		EA50F381BA70D246B3CB0605 /* Pods-MyDictionary_App_SwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyDictionary_App_SwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-MyDictionary_App_SwiftTests/Pods-MyDictionary_App_SwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
-		FCFA8DF9D384853C0C6EC4CF /* Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests/Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -641,14 +626,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A771243375B4E6638E8E88F /* Pods_MyDictionary_App_SwiftTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		228BC455264979FF0030FB30 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				46561D030AC311CA946748A6 /* Pods_MyDictionary_App_Swift_MyDictionary_App_SwiftUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1295,7 +1272,6 @@
 			children = (
 				228BC436264979FD0030FB30 /* MyDictionary_App_Swift */,
 				228BC450264979FF0030FB30 /* MyDictionary_App_SwiftTests */,
-				228BC45B264979FF0030FB30 /* MyDictionary_App_SwiftUITests */,
 				228BC435264979FD0030FB30 /* Products */,
 				C238218AA96EAA1EF14ACB19 /* Pods */,
 				603AFA7670EF47B899DDA737 /* Frameworks */,
@@ -1307,7 +1283,6 @@
 			children = (
 				228BC434264979FD0030FB30 /* MyDictionary_App_Swift.app */,
 				228BC44D264979FF0030FB30 /* MyDictionary_App_SwiftTests.xctest */,
-				228BC458264979FF0030FB30 /* MyDictionary_App_SwiftUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1343,15 +1318,6 @@
 				228BC453264979FF0030FB30 /* Info.plist */,
 			);
 			path = MyDictionary_App_SwiftTests;
-			sourceTree = "<group>";
-		};
-		228BC45B264979FF0030FB30 /* MyDictionary_App_SwiftUITests */ = {
-			isa = PBXGroup;
-			children = (
-				228BC45C264979FF0030FB30 /* MyDictionary_App_SwiftUITests.swift */,
-				228BC45E264979FF0030FB30 /* Info.plist */,
-			);
-			path = MyDictionary_App_SwiftUITests;
 			sourceTree = "<group>";
 		};
 		228BC46A26497AEC0030FB30 /* Resources */ = {
@@ -1867,7 +1833,6 @@
 			isa = PBXGroup;
 			children = (
 				A57FDC8E17FB8BBA5CC00A3A /* Pods_MyDictionary_App_Swift.framework */,
-				3C4B0BF159DE3EBE29729603 /* Pods_MyDictionary_App_Swift_MyDictionary_App_SwiftUITests.framework */,
 				923590696D157738A81B976A /* Pods_MyDictionary_App_SwiftTests.framework */,
 			);
 			name = Frameworks;
@@ -1878,8 +1843,6 @@
 			children = (
 				B9D4C11CDBCC89F563FDDBAC /* Pods-MyDictionary_App_Swift.debug.xcconfig */,
 				E29E1C484B630D8C90EAEEE2 /* Pods-MyDictionary_App_Swift.release.xcconfig */,
-				FCFA8DF9D384853C0C6EC4CF /* Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests.debug.xcconfig */,
-				4335EFB67AD7EAAA399679A0 /* Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests.release.xcconfig */,
 				EA50F381BA70D246B3CB0605 /* Pods-MyDictionary_App_SwiftTests.debug.xcconfig */,
 				5228B1539E4176ACE29F7FA6 /* Pods-MyDictionary_App_SwiftTests.release.xcconfig */,
 			);
@@ -1928,26 +1891,6 @@
 			productReference = 228BC44D264979FF0030FB30 /* MyDictionary_App_SwiftTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		228BC457264979FF0030FB30 /* MyDictionary_App_SwiftUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 228BC467264979FF0030FB30 /* Build configuration list for PBXNativeTarget "MyDictionary_App_SwiftUITests" */;
-			buildPhases = (
-				296E6743DFEC50CF67F5DF46 /* [CP] Check Pods Manifest.lock */,
-				228BC454264979FF0030FB30 /* Sources */,
-				228BC455264979FF0030FB30 /* Frameworks */,
-				228BC456264979FF0030FB30 /* Resources */,
-				33FF7799CFD193C9C25A37DF /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				228BC45A264979FF0030FB30 /* PBXTargetDependency */,
-			);
-			name = MyDictionary_App_SwiftUITests;
-			productName = MyDictionary_App_SwiftUITests;
-			productReference = 228BC458264979FF0030FB30 /* MyDictionary_App_SwiftUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1963,10 +1906,6 @@
 					228BC44C264979FF0030FB30 = {
 						CreatedOnToolsVersion = 12.5;
 						LastSwiftMigration = 1250;
-						TestTargetID = 228BC433264979FD0030FB30;
-					};
-					228BC457264979FF0030FB30 = {
-						CreatedOnToolsVersion = 12.5;
 						TestTargetID = 228BC433264979FD0030FB30;
 					};
 				};
@@ -1986,7 +1925,6 @@
 			targets = (
 				228BC433264979FD0030FB30 /* MyDictionary_App_Swift */,
 				228BC44C264979FF0030FB30 /* MyDictionary_App_SwiftTests */,
-				228BC457264979FF0030FB30 /* MyDictionary_App_SwiftUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -2004,13 +1942,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		228BC44B264979FF0030FB30 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		228BC456264979FF0030FB30 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2038,45 +1969,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
-		};
-		296E6743DFEC50CF67F5DF46 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		33FF7799CFD193C9C25A37DF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests/Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests/Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests/Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		3BE90A895D40F5D9FEA1779B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2441,14 +2333,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		228BC454264979FF0030FB30 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				228BC45D264979FF0030FB30 /* MyDictionary_App_SwiftUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2456,11 +2340,6 @@
 			isa = PBXTargetDependency;
 			target = 228BC433264979FD0030FB30 /* MyDictionary_App_Swift */;
 			targetProxy = 228BC44E264979FF0030FB30 /* PBXContainerItemProxy */;
-		};
-		228BC45A264979FF0030FB30 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 228BC433264979FD0030FB30 /* MyDictionary_App_Swift */;
-			targetProxy = 228BC459264979FF0030FB30 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2702,48 +2581,6 @@
 			};
 			name = Release;
 		};
-		228BC468264979FF0030FB30 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FCFA8DF9D384853C0C6EC4CF /* Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CXRA2S6SCR;
-				INFOPLIST_FILE = MyDictionary_App_SwiftUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dcteam.MyDictionary-App-SwiftUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MyDictionary_App_Swift;
-			};
-			name = Debug;
-		};
-		228BC469264979FF0030FB30 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4335EFB67AD7EAAA399679A0 /* Pods-MyDictionary_App_Swift-MyDictionary_App_SwiftUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CXRA2S6SCR;
-				INFOPLIST_FILE = MyDictionary_App_SwiftUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dcteam.MyDictionary-App-SwiftUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MyDictionary_App_Swift;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2770,15 +2607,6 @@
 			buildConfigurations = (
 				228BC465264979FF0030FB30 /* Debug */,
 				228BC466264979FF0030FB30 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		228BC467264979FF0030FB30 /* Build configuration list for PBXNativeTarget "MyDictionary_App_SwiftUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				228BC468264979FF0030FB30 /* Debug */,
-				228BC469264979FF0030FB30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

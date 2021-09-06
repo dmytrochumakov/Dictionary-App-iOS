@@ -17,8 +17,4 @@ target 'MyDictionary_App_Swift' do
     # Pods for testing
   end
 
-  target 'MyDictionary_App_SwiftUITests' do
-    # Pods for testing
-  end
-
 end
