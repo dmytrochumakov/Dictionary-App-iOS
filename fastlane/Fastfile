@@ -2,9 +2,9 @@ default_platform(:ios)
 
 platform :ios do
 
-  desc "Build And Test"
-  lane :buildAndTest do
-    scan(scheme: "MyDictionary_App_Swift", devices: ["iPhone SE"], clean: true)
+  desc "Run tests"
+  lane :tests do
+    run_tests(scheme: "iOS")
   end
 
 end
