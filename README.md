@@ -2,9 +2,11 @@
     My Dictionary
 </p>
 
-<p align="center">   
-[![CI](https://github.com/dchprojects/Dictionary_App_Swift/actions/workflows/CI.yml/badge.svg)](https://github.com/dchprojects/Dictionary_App_Swift/actions/workflows/CI.yml)    
-</p>
+<span align="center">
+
+[![CI](https://github.com/dchprojects/Dictionary_App_Swift/actions/workflows/CI.yml/badge.svg)](https://github.com/dchprojects/Dictionary_App_Swift/actions/workflows/CI.yml)
+
+</span>
 
 ----------------
 
