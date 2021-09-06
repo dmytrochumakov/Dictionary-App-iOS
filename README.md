@@ -1,17 +1,14 @@
 <p align="center">
-    My Dictionary App
+    My Dictionary
 </p>
 
-<p align="center">    
-    <a href="https://coveralls.io/github/dchprojects/Dictionary_App_Swift?branch=main">
-      <img src="https://coveralls.io/repos/github/dchprojects/Dictionary_App_Swift/badge.svg?branch=main"
-           alt="Coverage Status" />
-    </a>
+<p align="center">   
+[![CI](https://github.com/dchprojects/Dictionary_App_Swift/actions/workflows/CI.yml/badge.svg)](https://github.com/dchprojects/Dictionary_App_Swift/actions/workflows/CI.yml)    
 </p>
 
 ----------------
 
-A simple iOS app to save a word and description for that word.
+A simple iOS application for saving words and descriptions.
 
 ## Architecture 
 - Viper 
