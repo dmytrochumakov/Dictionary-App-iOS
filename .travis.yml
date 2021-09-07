@@ -1,0 +1,47 @@
+language: swift
+osx_image: xcode10.2
+gemfile: Gemfile
+
+branches:
+  only:
+    - main
+    - add_test_coverage_badge
+
+cache:
+  - cocoapods
+  - bundler
+  - $HOME/Library/Caches/Homebrew
+
+env:
+   global:
+   - LANG=en_US.UTF-8
+
+   - IOS_SCHEME="MyDictionary_App_Swift"
+
+   - IOS_SDK=iphonesimulator12.2
+
+   # iOS Destinations
+   - IOS_DESTINATION_12="OS=12.2,name=iPhone Xʀ"
+
+before_install:
+  # Bundler 2.0
+  - gem update --system
+  - gem install bundler
+
+jobs:
+  include:
+    
+    # Unit Tests
+    - &unit-tests
+      stage: tests
+      name: "Tests: iOS 12.2"
+      env: DESTINATION="$IOS_DESTINATION_12" WORKSPACE="MyDictionary_App_Swift.xcworkspace" SDK="$IOS_SDK" SCHEME="$IOS_SCHEME"
+      script:
+        - set -o pipefail
+        - xcodebuild build build-for-testing -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES ONLY_ACTIVE_ARCH=YES | bundle exec xcpretty -c;
+        - xcodebuild analyze test-without-building -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES ONLY_ACTIVE_ARCH=YES | bundle exec xcpretty -c;
+      after_success:
+        - bundle exec slather
+
+stages:
+  - tests
