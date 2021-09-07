@@ -1,8 +1,11 @@
-# Idea
+# Jetbrains
 #
 
 .idea/
 
+# Bundler
+.bundle
+vendor
 
 # Xcode
 #
