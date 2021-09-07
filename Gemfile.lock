@@ -103,9 +103,9 @@ PLATFORMS
   universal-darwin-20
 
 DEPENDENCIES
-  cocoapods
-  slather
-  xcpretty
+  cocoapods (~> 1.11.0)
+  slather (~> 2.7.1)
+  xcpretty (~> 0.3.0)
 
 BUNDLED WITH
    2.2.27
