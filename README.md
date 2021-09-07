@@ -4,7 +4,7 @@
 
 <span align="center">
 
-[![CI](https://github.com/dchprojects/Dictionary_App_Swift/actions/workflows/CI.yml/badge.svg)](https://github.com/dchprojects/Dictionary_App_Swift/actions/workflows/CI.yml) [![iOS](https://img.shields.io/badge/platform-ios-blueviolet)](https://github.com/dchprojects/Dictionary_App_Swift/releases) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/dchprojects/Dictionary_App_Swift/main/LICENSE) [![Latest Release](https://img.shields.io/github/v/release/dchprojects/Dictionary_App_Swift?color=yellow)](https://github.com/dchprojects/Dictionary_App_Swift/releases) [![Coverage Status](https://img.shields.io/coveralls/github/dchprojects/Dictionary_App_Swift/main)](https://github.com/dchprojects/Dictionary_App_Swift/releases)
+[![CI](https://github.com/dchprojects/Dictionary_App_Swift/actions/workflows/CI.yml/badge.svg)](https://github.com/dchprojects/Dictionary_App_Swift/actions/workflows/CI.yml) [![iOS](https://img.shields.io/badge/platform-ios-blueviolet)](https://github.com/dchprojects/Dictionary_App_Swift/releases) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/dchprojects/Dictionary_App_Swift/main/LICENSE) [![Latest Release](https://img.shields.io/github/v/release/dchprojects/Dictionary_App_Swift?color=yellow)](https://github.com/dchprojects/Dictionary_App_Swift/releases) [![codecov](https://codecov.io/gh/dchprojects/Dictionary_App_Swift/branch/main/graph/badge.svg)](https://codecov.io/gh/dchprojects/Dictionary_App_Swift)
 
 </span>
 
