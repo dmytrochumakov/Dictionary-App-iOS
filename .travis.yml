@@ -1,0 +1,43 @@
+language: swift
+osx_image: xcode12.5.1
+gemfile: Gemfile
+
+branches:
+  only:
+    - main    
+
+cache:
+  - cocoapods
+  - bundler
+  - $HOME/Library/Caches/Homebrew
+
+env:
+   global:
+   - LANG=en_US.UTF-8
+
+   - IOS_SCHEME="MyDictionary_App_Swift"
+
+   - IOS_SDK=iphonesimulator14.5
+   
+   # iOS Destinations
+   - IOS_DESTINATION_14_5="OS=14.5,name=iPhone 12"
+
+before_install:
+  # Bundler 2.0
+  - gem update --system
+  - gem install bundler -v 2.2.27
+
+jobs:
+  include:
+
+    # Unit Tests
+    - &unit-tests
+      stage: tests
+      name: "Tests: iOS 14.5"
+      env: DESTINATION="$IOS_DESTINATION_14_5" WORKSPACE="MyDictionary_App_Swift.xcworkspace" SDK="$IOS_SDK" SCHEME="$IOS_SCHEME"
+      script:
+        - set -o pipefail
+        - xcodebuild build build-for-testing -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES ONLY_ACTIVE_ARCH=YES | bundle exec xcpretty -c;
+
+stages:
+  - tests
