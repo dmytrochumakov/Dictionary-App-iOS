@@ -4,8 +4,7 @@ gemfile: Gemfile
 
 branches:
   only:
-    - main
-    - add_test_coverage_badge
+    - main    
 
 cache:
   - cocoapods
