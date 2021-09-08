@@ -28,7 +28,7 @@ env:
 before_install:
   # Bundler 2.0
   - gem update --system
-  - gem install bundler -v 2.2.21
+  - gem install bundler -v 2.2.27
 
 jobs:
   include:
