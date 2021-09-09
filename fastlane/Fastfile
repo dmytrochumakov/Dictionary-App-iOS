@@ -12,7 +12,7 @@ platform :ios do
   desc "Incrementing Build Number"  
   lane :increment_build_num do    
     version = get_version_number(xcodeproj: ENV["XCODEPROJ"])
-    build_number = increment_build_number(build_number: 1)
+    build_number = increment_build_number(build_number: "1")
     commit_version_bump(
       xcodeproj: ENV["XCODEPROJ"],
       message: "[ver++] v#{version} (#{build_number})"
