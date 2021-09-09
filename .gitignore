@@ -41,6 +41,7 @@ DerivedData/
 
 ## Mobileprovision
 AppStore_com.dcteam.MyDictionary-App-Swift.mobileprovision
+comdcteamMyDictionaryAppSwift_AppStore.mobileprovision
 
 # CocoaPods
 #
@@ -72,6 +73,7 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 fastlane/swift
+fastlane/.env
 fastlane/FastlaneRunner
 
 # Code Injection
