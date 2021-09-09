@@ -40,7 +40,7 @@ Distribute via pilot
 ```
 fastlane ios release_app_to_testflight
 ```
-Releae App to TestFlight
+Release App to TestFlight
 
 ----
 
