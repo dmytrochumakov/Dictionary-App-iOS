@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -17,19 +17,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="App_Icon" translatesAutoresizingMaskIntoConstraints="NO" id="oru-2D-yJd">
-                                <rect key="frame" x="143" y="389" width="128" height="128"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch_Screen" translatesAutoresizingMaskIntoConstraints="NO" id="oru-2D-yJd">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_dictionary" translatesAutoresizingMaskIntoConstraints="NO" id="6dg-sb-TFj">
+                                <rect key="frame" x="125" y="384" width="164" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="Qcb-Cg-e6k"/>
-                                    <constraint firstAttribute="width" constant="128" id="y0c-76-3l3"/>
+                                    <constraint firstAttribute="height" constant="64" id="5u6-e4-MRH"/>
+                                    <constraint firstAttribute="width" constant="164" id="dLj-CB-SuE"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="oru-2D-yJd" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="pkV-ZE-Dap"/>
-                            <constraint firstItem="oru-2D-yJd" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="wGh-Fs-IaL"/>
+                            <constraint firstItem="oru-2D-yJd" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="8Eg-Tk-je9"/>
+                            <constraint firstItem="oru-2D-yJd" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="8Fh-g1-EWB"/>
+                            <constraint firstAttribute="trailing" secondItem="oru-2D-yJd" secondAttribute="trailing" id="8yS-qp-Mzh"/>
+                            <constraint firstItem="6dg-sb-TFj" firstAttribute="centerY" secondItem="oru-2D-yJd" secondAttribute="centerY" constant="-32" id="9Q6-3U-ca1"/>
+                            <constraint firstAttribute="bottom" secondItem="oru-2D-yJd" secondAttribute="bottom" id="DeK-99-ky2"/>
+                            <constraint firstItem="6dg-sb-TFj" firstAttribute="centerX" secondItem="oru-2D-yJd" secondAttribute="centerX" id="P1A-wv-6hO"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -39,7 +46,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="App_Icon" width="1024" height="1024"/>
+        <image name="Launch_Screen" width="320" height="568"/>
+        <image name="my_dictionary" width="163" height="61"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
