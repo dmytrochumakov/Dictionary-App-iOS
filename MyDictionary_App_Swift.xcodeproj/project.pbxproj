@@ -164,6 +164,13 @@
 		2299016C2668EC3400D8C74E /* AppearanceDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901652668EC3400D8C74E /* AppearanceDataProvider.swift */; };
 		2299016D2668EC3400D8C74E /* AppearanceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901662668EC3400D8C74E /* AppearanceDataManager.swift */; };
 		229901712668EE5300D8C74E /* MDAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901702668EE5300D8C74E /* MDAppDelegate.swift */; };
+		229D2D4326EB53A60047B518 /* ChoiceAuthenticationOrRegistrationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D3C26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationModule.swift */; };
+		229D2D4426EB53A60047B518 /* ChoiceAuthenticationOrRegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D3D26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationPresenter.swift */; };
+		229D2D4526EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D3E26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift */; };
+		229D2D4626EB53A60047B518 /* ChoiceAuthenticationOrRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D3F26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationViewController.swift */; };
+		229D2D4726EB53A60047B518 /* ChoiceAuthenticationOrRegistrationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D4026EB53A60047B518 /* ChoiceAuthenticationOrRegistrationInteractor.swift */; };
+		229D2D4826EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D4126EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataProvider.swift */; };
+		229D2D4926EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D4226EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataManager.swift */; };
 		229E08BC2652C41400DA56C4 /* ReuseIdentifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BB2652C41400DA56C4 /* ReuseIdentifierProtocol.swift */; };
 		229E08BE2652C8E600DA56C4 /* SectionTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BD2652C8E600DA56C4 /* SectionTypeProtocol.swift */; };
 		229E08C02652C9E700DA56C4 /* RowTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BF2652C9E700DA56C4 /* RowTypeProtocol.swift */; };
@@ -471,6 +478,13 @@
 		229901652668EC3400D8C74E /* AppearanceDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceDataProvider.swift; sourceTree = "<group>"; };
 		229901662668EC3400D8C74E /* AppearanceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceDataManager.swift; sourceTree = "<group>"; };
 		229901702668EE5300D8C74E /* MDAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppDelegate.swift; sourceTree = "<group>"; };
+		229D2D3C26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationModule.swift; sourceTree = "<group>"; };
+		229D2D3D26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationPresenter.swift; sourceTree = "<group>"; };
+		229D2D3E26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationRouter.swift; sourceTree = "<group>"; };
+		229D2D3F26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationViewController.swift; sourceTree = "<group>"; };
+		229D2D4026EB53A60047B518 /* ChoiceAuthenticationOrRegistrationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationInteractor.swift; sourceTree = "<group>"; };
+		229D2D4126EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationDataProvider.swift; sourceTree = "<group>"; };
+		229D2D4226EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationDataManager.swift; sourceTree = "<group>"; };
 		229E08BB2652C41400DA56C4 /* ReuseIdentifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifierProtocol.swift; sourceTree = "<group>"; };
 		229E08BD2652C8E600DA56C4 /* SectionTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTypeProtocol.swift; sourceTree = "<group>"; };
 		229E08BF2652C9E700DA56C4 /* RowTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowTypeProtocol.swift; sourceTree = "<group>"; };
@@ -1405,6 +1419,20 @@
 			path = CollectionViewDelegate;
 			sourceTree = "<group>";
 		};
+		229D2D2D26EB52D90047B518 /* ChoiceAuthenticationOrRegistrationModule */ = {
+			isa = PBXGroup;
+			children = (
+				229D2D3C26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationModule.swift */,
+				229D2D3D26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationPresenter.swift */,
+				229D2D3E26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift */,
+				229D2D3F26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationViewController.swift */,
+				229D2D4026EB53A60047B518 /* ChoiceAuthenticationOrRegistrationInteractor.swift */,
+				229D2D4126EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataProvider.swift */,
+				229D2D4226EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataManager.swift */,
+			);
+			path = ChoiceAuthenticationOrRegistrationModule;
+			sourceTree = "<group>";
+		};
 		229E08C52652CB6900DA56C4 /* CollectionViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -1566,6 +1594,7 @@
 		22CA086F26515D240052D169 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				229D2D2D26EB52D90047B518 /* ChoiceAuthenticationOrRegistrationModule */,
 				22C5863226C7AFAC0030B12D /* RegistrationModule */,
 				221D280626C5062A004BC4F7 /* AuthorizationModule */,
 				22DB2F6F26C3BE3C00C1AADA /* CourseListModule */,
@@ -2042,6 +2071,7 @@
 				22493C312697159E000DA480 /* CDResultSaved.swift in Sources */,
 				22EF01F2269DA75E00FE4435 /* HTTPParameters.swift in Sources */,
 				22B8E6CE26D3B472001CCCA8 /* MDDeleteAllJWTMemoryStorageOperation.swift in Sources */,
+				229D2D4526EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift in Sources */,
 				22493C52269741FF000DA480 /* MDDeleteWordCoreDataStorageOperation.swift in Sources */,
 				2258921D26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift in Sources */,
 				22E2B4F02664EF3200978E62 /* UICollectionView+Extension.swift in Sources */,
@@ -2056,11 +2086,13 @@
 				22BD99AB266A67A60063FEFC /* AppearanceType.swift in Sources */,
 				22493C2E26971413000DA480 /* CoreDataStack.swift in Sources */,
 				22561C8A26D4CEBA00A6135B /* MDReadAllCoursesCoreDataStorageOperation.swift in Sources */,
+				229D2D4826EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataProvider.swift in Sources */,
 				226FEE7D266B65080044A5F9 /* AppearanceCell.swift in Sources */,
 				22B22689266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift in Sources */,
 				225C349526D6746800F3BC9A /* JWTApiRequest.swift in Sources */,
 				2220FCB026D50ABF00B22515 /* MDAPICourse.swift in Sources */,
 				2270F3A426D264E6006B46F4 /* CDCourseResponseEntity+Extension.swift in Sources */,
+				229D2D4626EB53A60047B518 /* ChoiceAuthenticationOrRegistrationViewController.swift in Sources */,
 				2294323226DF9A460073048C /* MDSyncStep.swift in Sources */,
 				22EF01FC269DA90000FE4435 /* MDResponseType.swift in Sources */,
 				229E08C22652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift in Sources */,
@@ -2144,6 +2176,7 @@
 				22B8E6E426D3C7B7001CCCA8 /* MDReadCourseProtocol.swift in Sources */,
 				228722CC26D0DDC500C9D1BC /* MDUpdateJWTCoreDataStorageOperation.swift in Sources */,
 				2289CEDF2678CC34007254C3 /* MDStorageType.swift in Sources */,
+				229D2D4726EB53A60047B518 /* ChoiceAuthenticationOrRegistrationInteractor.swift in Sources */,
 				220FFEAD26C91C3000702CCE /* MDCreateUserCoreDataStorageOperation.swift in Sources */,
 				22B22681266CC033007AB292 /* Observable.swift in Sources */,
 				22B8E6E026D3C774001CCCA8 /* MDCRUDCourseProtocol.swift in Sources */,
@@ -2155,6 +2188,7 @@
 				22C5863E26C7AFB80030B12D /* RegistrationInteractor.swift in Sources */,
 				2289CEFA2678CC34007254C3 /* MDOperation.swift in Sources */,
 				22EF01F4269DA7C000FE4435 /* MDNetworkSession.swift in Sources */,
+				229D2D4926EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataManager.swift in Sources */,
 				22E2B4E42664EB6900978E62 /* SettingsCollectionViewDataSource.swift in Sources */,
 				220FFE8C26C90B1F00702CCE /* MDReadUserProtocol.swift in Sources */,
 				2289CEF92678CC34007254C3 /* OperationQueueService.swift in Sources */,
@@ -2203,6 +2237,7 @@
 				220FFE8E26C90B2A00702CCE /* MDUpdateUserProtocol.swift in Sources */,
 				227D8F0826D77594009CB94B /* CreateWordRequest.swift in Sources */,
 				22EF01F0269DA74000FE4435 /* HTTPMethod.swift in Sources */,
+				229D2D4426EB53A60047B518 /* ChoiceAuthenticationOrRegistrationPresenter.swift in Sources */,
 				22CA088C265165460052D169 /* AppStyling.swift in Sources */,
 				22DB2F7D26C3BE7900C1AADA /* CourseListDataManager.swift in Sources */,
 				220FFEB126C91EF000702CCE /* MDDeleteUserCoreDataStorageOperation.swift in Sources */,
@@ -2301,6 +2336,7 @@
 				22B8E6E226D3C782001CCCA8 /* MDCreateCourseProtocol.swift in Sources */,
 				22493C33269715A9000DA480 /* CDResultSavedEnum.swift in Sources */,
 				225C349726D6774500F3BC9A /* MDAPIAccount.swift in Sources */,
+				229D2D4326EB53A60047B518 /* ChoiceAuthenticationOrRegistrationModule.swift in Sources */,
 				22EF020D269DAFC000FE4435 /* MDAPIEnvironment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
