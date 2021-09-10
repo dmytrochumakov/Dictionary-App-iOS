@@ -24,11 +24,7 @@ final class MDNavigationController: UINavigationController {
 fileprivate extension MDNavigationController {
     
     func configureUI() {
-        hideNavigationBar()
-    }
-    
-    func hideNavigationBar() {
-        self.navigationBar.isHidden = true
-    }
+        
+    }        
     
 }

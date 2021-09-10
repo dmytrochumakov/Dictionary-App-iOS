@@ -90,13 +90,13 @@ struct MDAppStyling {
     
     enum Image: String {
         
-        case typography0 = "typography_0"
+        case background_navigation_bar_0
         
-        func image() -> UIImage {
+        var image: UIImage {
             
             switch self {
             
-            case .typography0:
+            case .background_navigation_bar_0:
                 return configuredImage(fromName: self.rawValue)
                 
             }
