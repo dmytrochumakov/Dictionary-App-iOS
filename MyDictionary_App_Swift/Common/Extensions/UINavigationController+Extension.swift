@@ -9,7 +9,7 @@ import UIKit
 
 extension UINavigationController {
     
-    func setBackgroundImage(_ image: UIImage) {
+    func setNavigationBarBackgroundImage(_ image: UIImage) {
         
         navigationBar.isTranslucent = false
         

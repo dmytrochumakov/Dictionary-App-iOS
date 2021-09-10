@@ -77,12 +77,9 @@ fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
     
     func configureUI() {
         configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
-        } else {
-            // Fallback on earlier versions
-        }
-        self.navigationController?.setBackgroundImage(MDAppStyling.Image.background_navigation_bar_0.image)
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = true        
+        self.navigationController?.setNavigationBarBackgroundImage(MDAppStyling.Image.background_navigation_bar_0.image)
     }
     
 }
