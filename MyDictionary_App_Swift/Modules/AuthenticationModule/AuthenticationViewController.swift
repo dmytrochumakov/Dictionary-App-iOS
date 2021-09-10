@@ -1,17 +1,17 @@
 //
-//  AuthorizationViewController.swift
+//  AuthenticationViewController.swift
 //  MyDictionary_App_Swift
 //
 //  Created Dmytro Chumakov on 12.08.2021.
 
 import UIKit
 
-final class AuthorizationViewController: UIViewController {
+final class AuthenticationViewController: UIViewController {
     
-    fileprivate let presenter: AuthorizationPresenterInputProtocol
+    fileprivate let presenter: AuthenticationPresenterInputProtocol
     
     fileprivate let defaultLineViewHeight: CGFloat = 0.5
-      
+    
     fileprivate let nicknameTextFieldHeight: CGFloat = 40
     fileprivate let nicknameTextFieldTopOffset: CGFloat = 56
     fileprivate let nicknameTextField: MDTextFieldWithToolBar = {        
@@ -82,7 +82,7 @@ final class AuthorizationViewController: UIViewController {
         return button
     }()
     
-    init(presenter: AuthorizationPresenterInputProtocol) {
+    init(presenter: AuthenticationPresenterInputProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
@@ -112,8 +112,8 @@ final class AuthorizationViewController: UIViewController {
     
 }
 
-// MARK: - AuthorizationPresenterOutputProtocol
-extension AuthorizationViewController: AuthorizationPresenterOutputProtocol {
+// MARK: - AuthenticationPresenterOutputProtocol
+extension AuthenticationViewController: AuthenticationPresenterOutputProtocol {
     
     func makePasswordFieldActive() {
         self.passwordTextField.becomeFirstResponder()
@@ -132,7 +132,7 @@ extension AuthorizationViewController: AuthorizationPresenterOutputProtocol {
 }
 
 // MARK: - Add Views
-fileprivate extension AuthorizationViewController {
+fileprivate extension AuthenticationViewController {
     
     func addViews() {
         addNicknameTextField()
@@ -176,7 +176,7 @@ fileprivate extension AuthorizationViewController {
 }
 
 // MARK: - Add Constraints
-fileprivate extension AuthorizationViewController {
+fileprivate extension AuthenticationViewController {
     
     func addConstraints() {
         addNicknameTextFieldConstraints()
@@ -284,8 +284,8 @@ fileprivate extension AuthorizationViewController {
     
     func addRegisterButtonConstraints() {
         NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.registerButton,
-                                                             toItem: self.view,
-                                                             constant: 0)
+                                                              toItem: self.view,
+                                                              constant: 0)
         
         NSLayoutConstraint.addEqualConstraintAndActivate(item: self.registerButton,
                                                          attribute: .left,
@@ -304,7 +304,7 @@ fileprivate extension AuthorizationViewController {
 }
 
 // MARK: - Configure UI
-fileprivate extension AuthorizationViewController {
+fileprivate extension AuthenticationViewController {
     
     func configureUI() {
         configureTitle()
@@ -314,11 +314,11 @@ fileprivate extension AuthorizationViewController {
     func configureTitle() {
         self.title = KeysForTranslate.authorization.localized
     }
-     
+    
 }
 
 // MARK: - Actions
-fileprivate extension AuthorizationViewController {
+fileprivate extension AuthenticationViewController {
     
     @objc func loginButtonAction() {
         presenter.loginButtonClicked()
@@ -339,7 +339,7 @@ fileprivate extension AuthorizationViewController {
 }
 
 // MARK: - Hide Keyboard
-fileprivate extension AuthorizationViewController {
+fileprivate extension AuthenticationViewController {
     
     func hideKeyboardFunc() {
         self.view.endEditing(true)

@@ -1,12 +1,12 @@
 //
-//  AuthorizationInteractor.swift
+//  AuthenticationInteractor.swift
 //  MyDictionary_App_Swift
 //
 //  Created Dmytro Chumakov on 12.08.2021.
 
 import UIKit
 
-protocol AuthorizationInteractorInputProtocol {
+protocol AuthenticationInteractorInputProtocol {
     var textFieldDelegate: AuthTextFieldDelegateProtocol { get }
     func nicknameTextFieldEditingDidChangeAction(_ text: String?)
     func passwordTextFieldEditingDidChangeAction(_ text: String?)
@@ -14,7 +14,7 @@ protocol AuthorizationInteractorInputProtocol {
     func registerButtonClicked()
 }
 
-protocol AuthorizationInteractorOutputProtocol: AnyObject {
+protocol AuthenticationInteractorOutputProtocol: AnyObject {
     func makePasswordFieldActive()
     func hideKeyboard()
     func showCourseList()
@@ -22,22 +22,22 @@ protocol AuthorizationInteractorOutputProtocol: AnyObject {
     func showValidationError(_ error: Error)
 }
 
-protocol AuthorizationInteractorProtocol: AuthorizationInteractorInputProtocol,
-                                          AuthorizationDataManagerOutputProtocol {
-    var interactorOutput: AuthorizationInteractorOutputProtocol? { get set }
+protocol AuthenticationInteractorProtocol: AuthenticationInteractorInputProtocol,
+                                           AuthenticationDataManagerOutputProtocol {
+    var interactorOutput: AuthenticationInteractorOutputProtocol? { get set }
 }
 
-final class AuthorizationInteractor: NSObject, AuthorizationInteractorProtocol {
+final class AuthenticationInteractor: NSObject, AuthenticationInteractorProtocol {
     
-    fileprivate let dataManager: AuthorizationDataManagerInputProtocol
+    fileprivate let dataManager: AuthenticationDataManagerInputProtocol
     fileprivate let authValidation: AuthValidationProtocol
     fileprivate let authManager: MDAuthManagerProtocol
     
-    internal weak var interactorOutput: AuthorizationInteractorOutputProtocol?
+    internal weak var interactorOutput: AuthenticationInteractorOutputProtocol?
     
     internal var textFieldDelegate: AuthTextFieldDelegateProtocol
     
-    init(dataManager: AuthorizationDataManagerInputProtocol,
+    init(dataManager: AuthenticationDataManagerInputProtocol,
          authValidation: AuthValidationProtocol,
          textFieldDelegate: AuthTextFieldDelegateProtocol,
          authManager: MDAuthManagerProtocol) {
@@ -58,13 +58,13 @@ final class AuthorizationInteractor: NSObject, AuthorizationInteractorProtocol {
     
 }
 
-// MARK: - AuthorizationDataManagerOutputProtocol
-extension AuthorizationInteractor {
+// MARK: - AuthenticationDataManagerOutputProtocol
+extension AuthenticationInteractor {
     
 }
 
-// MARK: - AuthorizationInteractorInputProtocol
-extension AuthorizationInteractor {
+// MARK: - AuthenticationInteractorInputProtocol
+extension AuthenticationInteractor {
     
     // Actions //
     
@@ -90,7 +90,7 @@ extension AuthorizationInteractor {
 }
 
 // MARK: - Subscribe
-fileprivate extension AuthorizationInteractor {
+fileprivate extension AuthenticationInteractor {
     
     func subscribe() {
         nicknameTextFieldShouldReturnActionSubscribe()
@@ -113,7 +113,7 @@ fileprivate extension AuthorizationInteractor {
 }
 
 // MARK: - Auth Validation And Routing
-fileprivate extension AuthorizationInteractor {
+fileprivate extension AuthenticationInteractor {
     
     func authValidationAndRouting() {
         

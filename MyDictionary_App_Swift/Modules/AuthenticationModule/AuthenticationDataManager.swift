@@ -1,33 +1,33 @@
 //
-//  AuthorizationDataManager.swift
+//  AuthenticationDataManager.swift
 //  MyDictionary_App_Swift
 //
 //  Created Dmytro Chumakov on 12.08.2021.
 
 import Foundation
 
-protocol AuthorizationDataManagerInputProtocol {
+protocol AuthenticationDataManagerInputProtocol {
     func getNickname() -> String?
     func getPassword() -> String?
     func setNickname(_ text: String?)
     func setPassword(_ text: String?)
 }
 
-protocol AuthorizationDataManagerOutputProtocol: AnyObject {
+protocol AuthenticationDataManagerOutputProtocol: AnyObject {
     
 }
 
-protocol AuthorizationDataManagerProtocol: AuthorizationDataManagerInputProtocol {
-    var dataProvider: AuthorizationDataProviderProtocol { get }
-    var dataManagerOutput: AuthorizationDataManagerOutputProtocol? { get set }
+protocol AuthenticationDataManagerProtocol: AuthenticationDataManagerInputProtocol {
+    var dataProvider: AuthenticationDataProviderProtocol { get }
+    var dataManagerOutput: AuthenticationDataManagerOutputProtocol? { get set }
 }
 
-final class AuthorizationDataManager: AuthorizationDataManagerProtocol {
+final class AuthenticationDataManager: AuthenticationDataManagerProtocol {
     
-    internal var dataProvider: AuthorizationDataProviderProtocol
-    internal weak var dataManagerOutput: AuthorizationDataManagerOutputProtocol?
+    internal var dataProvider: AuthenticationDataProviderProtocol
+    internal weak var dataManagerOutput: AuthenticationDataManagerOutputProtocol?
     
-    init(dataProvider: AuthorizationDataProviderProtocol) {
+    init(dataProvider: AuthenticationDataProviderProtocol) {
         self.dataProvider = dataProvider
     }
     
@@ -37,7 +37,7 @@ final class AuthorizationDataManager: AuthorizationDataManagerProtocol {
     
 }
 
-extension AuthorizationDataManager {
+extension AuthenticationDataManager {
     
     func getNickname() -> String? {
         return dataProvider.nickname

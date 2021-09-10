@@ -1,12 +1,12 @@
 //
-//  AuthorizationModule.swift
+//  AuthenticationModule.swift
 //  MyDictionary_App_Swift
 //
 //  Created Dmytro Chumakov on 12.08.2021.
 
 import UIKit
 
-final class AuthorizationModule {
+final class AuthenticationModule {
     
     let sender: Any?
     
@@ -20,12 +20,12 @@ final class AuthorizationModule {
     
 }
 
-extension AuthorizationModule {
+extension AuthenticationModule {
     
     var module: UIViewController {
         
-        let dataProvider: AuthorizationDataProviderProtocol = AuthorizationDataProvider.init()
-        var dataManager: AuthorizationDataManagerProtocol = AuthorizationDataManager.init(dataProvider: dataProvider)
+        let dataProvider: AuthenticationDataProviderProtocol = AuthenticationDataProvider.init()
+        var dataManager: AuthenticationDataManagerProtocol = AuthenticationDataManager.init(dataProvider: dataProvider)
         
         let textFieldDelegate: AuthTextFieldDelegateProtocol = AuthTextFieldDelegate.init()
         
@@ -52,14 +52,14 @@ extension AuthorizationModule {
                                                                     appSettings: Constants.AppDependencies.dependencies.appSettings,
                                                                     syncManager: syncManager)
         
-        let interactor: AuthorizationInteractorProtocol = AuthorizationInteractor.init(dataManager: dataManager,
-                                                                                       authValidation: authValidation,
-                                                                                       textFieldDelegate: textFieldDelegate,
-                                                                                       authManager: authManager)
+        let interactor: AuthenticationInteractorProtocol = AuthenticationInteractor.init(dataManager: dataManager,
+                                                                                         authValidation: authValidation,
+                                                                                         textFieldDelegate: textFieldDelegate,
+                                                                                         authManager: authManager)
         
-        var router: AuthorizationRouterProtocol = AuthorizationRouter.init()
-        let presenter: AuthorizationPresenterProtocol = AuthorizationPresenter.init(interactor: interactor, router: router)
-        let vc = AuthorizationViewController.init(presenter: presenter)
+        var router: AuthenticationRouterProtocol = AuthenticationRouter.init()
+        let presenter: AuthenticationPresenterProtocol = AuthenticationPresenter.init(interactor: interactor, router: router)
+        let vc = AuthenticationViewController.init(presenter: presenter)
         
         presenter.presenterOutput = vc
         interactor.interactorOutput = presenter
