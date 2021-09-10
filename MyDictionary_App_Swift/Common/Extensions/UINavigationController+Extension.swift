@@ -9,14 +9,22 @@ import UIKit
 
 extension UINavigationController {
     
-    func setNavigationBarBackgroundImage(_ image: UIImage) {
+    /// - Parameter isTranslucent: false
+    /// - Parameter contentMode: UIView.ContentMode.scaleToFill
+    /// - Parameter clipsToBounds: true
+    func setNavigationBarBackgroundImage(_ image: UIImage,
+                                         isTranslucent: Bool = false,
+                                         contentMode: UIView.ContentMode = .scaleToFill,
+                                         clipsToBounds: Bool = true,
+                                         logoImageViewBackgroundColor: UIColor) {
         
-        navigationBar.isTranslucent = false
+        navigationBar.isTranslucent = isTranslucent
         
         let logoImageView = UIImageView(image: image)
-        logoImageView.contentMode = .scaleToFill
-        logoImageView.clipsToBounds = true
+        logoImageView.contentMode = contentMode
+        logoImageView.clipsToBounds = clipsToBounds
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        logoImageView.backgroundColor = logoImageViewBackgroundColor
         
         view.insertSubview(logoImageView, aboveSubview: navigationBar)
         
