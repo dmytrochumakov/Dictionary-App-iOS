@@ -22,7 +22,7 @@ final class CourseListViewController: UIViewController {
         let button: UIButton = .init()
         button.setTitle(KeysForTranslate.settings.localized, for: .normal)
         button.setTitleColor(ConfigurationAppearanceController.buttonTextColor(), for: .normal)
-        button.titleLabel?.font = AppStyling.Font.systemFont.font(ofSize: 17)
+        button.titleLabel?.font = MDAppStyling.Font.systemFont.font(ofSize: 17)
         return button
     }()
     
@@ -30,7 +30,7 @@ final class CourseListViewController: UIViewController {
         let button: UIButton = .init()
         button.setTitle(KeysForTranslate.add.localized, for: .normal)
         button.setTitleColor(ConfigurationAppearanceController.buttonTextColor(), for: .normal)
-        button.titleLabel?.font = AppStyling.Font.systemFont.font(ofSize: 17)
+        button.titleLabel?.font = MDAppStyling.Font.systemFont.font(ofSize: 17)
         return button
     }()
     

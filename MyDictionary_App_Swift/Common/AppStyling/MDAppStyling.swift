@@ -1,5 +1,5 @@
 //
-//  AppStyling.swift
+//  MDAppStyling.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 16.05.2021.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-struct AppStyling {
+struct MDAppStyling {
     
     enum Color {
-                
+        
         // Light
         case md_White_0_Light_Appearence
         case md_Black_0_Light_Appearence
@@ -84,6 +84,36 @@ struct AppStyling {
         /// Font size: 17.0 by default
         static var `default`: UIFont {
             return Font.systemFont.font(ofSize: 17)
+        }
+        
+    }
+    
+    enum Image: String {
+        
+        case typography0 = "typography_0"
+        
+        func image() -> UIImage {
+            
+            switch self {
+            
+            case .typography0:
+                return configuredImage(fromName: self.rawValue)
+                
+            }
+            
+        }
+        
+        private func configuredImage(fromName name: String) -> UIImage {
+            return imageWithAlwaysOriginalMode(image(fromName: name))
+        }
+        
+        private func image(fromName name: String) -> UIImage {
+            guard let image = UIImage.init(named: name) else { fatalError("\(Self.self), \(#function), Cannot find image with name: \(name)") }
+            return image
+        }
+        
+        private func imageWithAlwaysOriginalMode(_ image: UIImage) -> UIImage {
+            return image.withRenderingMode(.alwaysOriginal)
         }
         
     }

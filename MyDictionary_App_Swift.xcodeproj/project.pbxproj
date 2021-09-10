@@ -243,7 +243,7 @@
 		22CA088326515F020052D169 /* WordListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088226515F020052D169 /* WordListRouter.swift */; };
 		22CA088726515F6A0052D169 /* WordListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088626515F6A0052D169 /* WordListDataManager.swift */; };
 		22CA08892651603A0052D169 /* WordListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA08882651603A0052D169 /* WordListDataProvider.swift */; };
-		22CA088C265165460052D169 /* AppStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088B265165460052D169 /* AppStyling.swift */; };
+		22CA088C265165460052D169 /* MDAppStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088B265165460052D169 /* MDAppStyling.swift */; };
 		22CA088E265167620052D169 /* ReloadDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088D265167620052D169 /* ReloadDataProtocol.swift */; };
 		22DB2F7726C3BE7900C1AADA /* CourseListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7026C3BE7900C1AADA /* CourseListModule.swift */; };
 		22DB2F7826C3BE7900C1AADA /* CourseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7126C3BE7900C1AADA /* CourseListPresenter.swift */; };
@@ -557,7 +557,7 @@
 		22CA088226515F020052D169 /* WordListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListRouter.swift; sourceTree = "<group>"; };
 		22CA088626515F6A0052D169 /* WordListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListDataManager.swift; sourceTree = "<group>"; };
 		22CA08882651603A0052D169 /* WordListDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListDataProvider.swift; sourceTree = "<group>"; };
-		22CA088B265165460052D169 /* AppStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyling.swift; sourceTree = "<group>"; };
+		22CA088B265165460052D169 /* MDAppStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppStyling.swift; sourceTree = "<group>"; };
 		22CA088D265167620052D169 /* ReloadDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadDataProtocol.swift; sourceTree = "<group>"; };
 		22DB2F7026C3BE7900C1AADA /* CourseListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListModule.swift; sourceTree = "<group>"; };
 		22DB2F7126C3BE7900C1AADA /* CourseListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListPresenter.swift; sourceTree = "<group>"; };
@@ -1664,7 +1664,7 @@
 		22CA088A265165370052D169 /* AppStyling */ = {
 			isa = PBXGroup;
 			children = (
-				22CA088B265165460052D169 /* AppStyling.swift */,
+				22CA088B265165460052D169 /* MDAppStyling.swift */,
 			);
 			path = AppStyling;
 			sourceTree = "<group>";
@@ -2238,7 +2238,7 @@
 				227D8F0826D77594009CB94B /* CreateWordRequest.swift in Sources */,
 				22EF01F0269DA74000FE4435 /* HTTPMethod.swift in Sources */,
 				229D2D4426EB53A60047B518 /* ChoiceAuthenticationOrRegistrationPresenter.swift in Sources */,
-				22CA088C265165460052D169 /* AppStyling.swift in Sources */,
+				22CA088C265165460052D169 /* MDAppStyling.swift in Sources */,
 				22DB2F7D26C3BE7900C1AADA /* CourseListDataManager.swift in Sources */,
 				220FFEB126C91EF000702CCE /* MDDeleteUserCoreDataStorageOperation.swift in Sources */,
 				22E2B4EA2664EDA200978E62 /* SettingsCell.swift in Sources */,
