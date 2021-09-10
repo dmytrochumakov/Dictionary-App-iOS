@@ -219,6 +219,7 @@
 		22B8E6E626D3C7C3001CCCA8 /* MDDeleteCourseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6E526D3C7C3001CCCA8 /* MDDeleteCourseProtocol.swift */; };
 		22B8E6EA26D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6E926D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift */; };
 		22B8E6EC26D3C9B7001CCCA8 /* MDReadCourseMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6EB26D3C9B7001CCCA8 /* MDReadCourseMemoryStorageOperation.swift */; };
+		22B9080926EB7DD6003848D6 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9080826EB7DD6003848D6 /* UIView+Extension.swift */; };
 		22BBA15B26E0B366002955A6 /* MDSyncError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BBA15A26E0B366002955A6 /* MDSyncError.swift */; };
 		22BBA15D26E0C0F0002955A6 /* MDProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BBA15C26E0C0F0002955A6 /* MDProgress.swift */; };
 		22BBA15F26E0DFC9002955A6 /* MDFillMemoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BBA15E26E0DFC9002955A6 /* MDFillMemoryService.swift */; };
@@ -535,6 +536,7 @@
 		22B8E6E526D3C7C3001CCCA8 /* MDDeleteCourseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteCourseProtocol.swift; sourceTree = "<group>"; };
 		22B8E6E926D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateCourseMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		22B8E6EB26D3C9B7001CCCA8 /* MDReadCourseMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadCourseMemoryStorageOperation.swift; sourceTree = "<group>"; };
+		22B9080826EB7DD6003848D6 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		22BBA15A26E0B366002955A6 /* MDSyncError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncError.swift; sourceTree = "<group>"; };
 		22BBA15C26E0C0F0002955A6 /* MDProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDProgress.swift; sourceTree = "<group>"; };
 		22BBA15E26E0DFC9002955A6 /* MDFillMemoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDFillMemoryService.swift; sourceTree = "<group>"; };
@@ -945,6 +947,7 @@
 				220793CA26C67432003D434B /* UIAlertController+Extension.swift */,
 				220793D226C6B303003D434B /* Encodable+Extension.swift */,
 				229D2D4D26EB706E0047B518 /* UINavigationController+Extension.swift */,
+				22B9080826EB7DD6003848D6 /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2110,6 +2113,7 @@
 				2294323226DF9A460073048C /* MDSyncStep.swift in Sources */,
 				22EF01FC269DA90000FE4435 /* MDResponseType.swift in Sources */,
 				229E08C22652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift in Sources */,
+				22B9080926EB7DD6003848D6 /* UIView+Extension.swift in Sources */,
 				22CA087D26515E810052D169 /* WordListViewController.swift in Sources */,
 				22B8E6A326D381EF001CCCA8 /* MDLanguageCoreDataStorage.swift in Sources */,
 				22B22691266CF866007AB292 /* UIViewController+Extension.swift in Sources */,
