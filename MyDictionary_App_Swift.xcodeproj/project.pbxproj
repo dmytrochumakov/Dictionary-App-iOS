@@ -171,6 +171,7 @@
 		229D2D4726EB53A60047B518 /* ChoiceAuthenticationOrRegistrationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D4026EB53A60047B518 /* ChoiceAuthenticationOrRegistrationInteractor.swift */; };
 		229D2D4826EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D4126EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataProvider.swift */; };
 		229D2D4926EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D4226EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataManager.swift */; };
+		229D2D4C26EB68420047B518 /* MDNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D4B26EB68420047B518 /* MDNavigationController.swift */; };
 		229E08BC2652C41400DA56C4 /* ReuseIdentifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BB2652C41400DA56C4 /* ReuseIdentifierProtocol.swift */; };
 		229E08BE2652C8E600DA56C4 /* SectionTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BD2652C8E600DA56C4 /* SectionTypeProtocol.swift */; };
 		229E08C02652C9E700DA56C4 /* RowTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BF2652C9E700DA56C4 /* RowTypeProtocol.swift */; };
@@ -485,6 +486,7 @@
 		229D2D4026EB53A60047B518 /* ChoiceAuthenticationOrRegistrationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationInteractor.swift; sourceTree = "<group>"; };
 		229D2D4126EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationDataProvider.swift; sourceTree = "<group>"; };
 		229D2D4226EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationDataManager.swift; sourceTree = "<group>"; };
+		229D2D4B26EB68420047B518 /* MDNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDNavigationController.swift; sourceTree = "<group>"; };
 		229E08BB2652C41400DA56C4 /* ReuseIdentifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifierProtocol.swift; sourceTree = "<group>"; };
 		229E08BD2652C8E600DA56C4 /* SectionTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTypeProtocol.swift; sourceTree = "<group>"; };
 		229E08BF2652C9E700DA56C4 /* RowTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowTypeProtocol.swift; sourceTree = "<group>"; };
@@ -1116,6 +1118,7 @@
 		226FEE7E266B735B0044A5F9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				229D2D4A26EB68340047B518 /* NavigationController */,
 				227D8F1326D7A099009CB94B /* AppSettings */,
 				2223F8A926512C48004F2FE9 /* Extensions */,
 				22B2267F266CC02B007AB292 /* Observable */,
@@ -1431,6 +1434,14 @@
 				229D2D4226EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataManager.swift */,
 			);
 			path = ChoiceAuthenticationOrRegistrationModule;
+			sourceTree = "<group>";
+		};
+		229D2D4A26EB68340047B518 /* NavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				229D2D4B26EB68420047B518 /* MDNavigationController.swift */,
+			);
+			path = NavigationController;
 			sourceTree = "<group>";
 		};
 		229E08C52652CB6900DA56C4 /* CollectionViewDataSource */ = {
@@ -2118,6 +2129,7 @@
 				22B8E6A726D38327001CCCA8 /* MDCreateLanguagesMemoryStorageOperation.swift in Sources */,
 				22E2B4F32665085E00978E62 /* SettingsRowType.swift in Sources */,
 				22B8E6C026D39DAF001CCCA8 /* MDDeleteAllLanguagesCoreDataStorageOperation.swift in Sources */,
+				229D2D4C26EB68420047B518 /* MDNavigationController.swift in Sources */,
 				22561C8E26D4D02D00A6135B /* MDDeleteAllCoursesCoreDataStorageOperation.swift in Sources */,
 				22EF01FF269DA99800FE4435 /* MDAPIError.swift in Sources */,
 				2270F3A626D2663F006B46F4 /* CDCourseResponseEntityAttributeName.swift in Sources */,
