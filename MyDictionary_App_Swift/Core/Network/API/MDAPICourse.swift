@@ -86,7 +86,7 @@ extension MDAPICourse {
             case .getCourses(let accessToken, _),
                  .createCourse(let accessToken, _ ),
                  .deleteCourse(let accessToken, _, _):
-                return Constants
+                return MDConstants
                     .HTTPHeaderConstants
                     .authorizationHeaders(accessToken: accessToken)
             }

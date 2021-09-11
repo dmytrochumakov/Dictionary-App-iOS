@@ -22,7 +22,7 @@ extension LocalizableProtocol where Self: RawRepresentable, Self.RawValue == Str
     /// - Parameter tableName: Constants.StaticText.defaultTableName
     var localized: String {
         return rawValue.localized(lang: MYAppLanguageService.shared.appLanguage.rawValue,
-                                  tableName: Constants.StaticText.defaultTableName)
+                                  tableName: MDConstants.StaticText.defaultTableName)
     }
     
 }

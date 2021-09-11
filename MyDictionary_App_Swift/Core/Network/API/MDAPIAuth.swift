@@ -58,7 +58,7 @@ extension MDAPIAuth {
         var httpHeaders: HTTPHeader {
             switch self {
             case .login, .register:
-                return Constants.HTTPHeaderConstants.defaultHeaders()
+                return MDConstants.HTTPHeaderConstants.defaultHeaders()
             }
         }
         

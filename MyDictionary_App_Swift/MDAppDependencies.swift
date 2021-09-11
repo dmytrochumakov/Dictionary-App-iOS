@@ -95,7 +95,7 @@ extension MDAppDependencies {
         let coreDataStack: CoreDataStack = .init()
         self.coreDataStack = coreDataStack        
         //
-        let requestDispatcher: MDRequestDispatcherProtocol = Constants.RequestDispatcher.defaultRequestDispatcher(reachability: reachability)
+        let requestDispatcher: MDRequestDispatcherProtocol = MDConstants.RequestDispatcher.defaultRequestDispatcher(reachability: reachability)
         //
         
         

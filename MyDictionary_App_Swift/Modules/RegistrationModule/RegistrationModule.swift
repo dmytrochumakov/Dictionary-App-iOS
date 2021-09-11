@@ -33,23 +33,23 @@ extension RegistrationModule {
         let authValidation: AuthValidationProtocol = AuthValidation.init(dataProvider: dataProvider,
                                                                          validationTypes: validationTypes)                
         
-        let apiAuth: MDAPIAuthProtocol = MDAPIAuth.init(requestDispatcher: Constants.RequestDispatcher.defaultRequestDispatcher(reachability: Constants.AppDependencies.dependencies.reachability),
-                                                        operationQueueService: Constants.AppDependencies.dependencies.operationQueueService)
+        let apiAuth: MDAPIAuthProtocol = MDAPIAuth.init(requestDispatcher: MDConstants.RequestDispatcher.defaultRequestDispatcher(reachability: MDConstants.AppDependencies.dependencies.reachability),
+                                                        operationQueueService: MDConstants.AppDependencies.dependencies.operationQueueService)
         
-        let sync: MDSyncProtocol = MDSync.init(apiJWT: Constants.AppDependencies.dependencies.apiJWT,
-                                               jwtStorage: Constants.AppDependencies.dependencies.jwtStorage,
-                                               apiUser: Constants.AppDependencies.dependencies.apiUser,
-                                               userStorage: Constants.AppDependencies.dependencies.userStorage,
-                                               apiLanguage: Constants.AppDependencies.dependencies.apiLanguage,
-                                               languageStorage: Constants.AppDependencies.dependencies.languageStorage,
-                                               apiCourse: Constants.AppDependencies.dependencies.apiCourse,
-                                               courseStorage: Constants.AppDependencies.dependencies.courseStorage,
-                                               apiWord: Constants.AppDependencies.dependencies.apiWord,
-                                               wordStorage: Constants.AppDependencies.dependencies.wordStorage)
+        let sync: MDSyncProtocol = MDSync.init(apiJWT: MDConstants.AppDependencies.dependencies.apiJWT,
+                                               jwtStorage: MDConstants.AppDependencies.dependencies.jwtStorage,
+                                               apiUser: MDConstants.AppDependencies.dependencies.apiUser,
+                                               userStorage: MDConstants.AppDependencies.dependencies.userStorage,
+                                               apiLanguage: MDConstants.AppDependencies.dependencies.apiLanguage,
+                                               languageStorage: MDConstants.AppDependencies.dependencies.languageStorage,
+                                               apiCourse: MDConstants.AppDependencies.dependencies.apiCourse,
+                                               courseStorage: MDConstants.AppDependencies.dependencies.courseStorage,
+                                               apiWord: MDConstants.AppDependencies.dependencies.apiWord,
+                                               wordStorage: MDConstants.AppDependencies.dependencies.wordStorage)
         
         let syncManager: MDSyncManagerProtocol = MDSyncManager.init(sync: sync)
         let authManager: MDAuthManagerProtocol = MDAuthManager.init(apiAuth: apiAuth,
-                                                                    appSettings: Constants.AppDependencies.dependencies.appSettings,
+                                                                    appSettings: MDConstants.AppDependencies.dependencies.appSettings,
                                                                     syncManager: syncManager)
         
         let interactor: RegistrationInteractorProtocol = RegistrationInteractor.init(dataManager: dataManager,

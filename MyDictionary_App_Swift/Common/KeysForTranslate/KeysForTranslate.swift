@@ -60,7 +60,7 @@ extension KeysForTranslate: LocalizableProtocol {
     
     /// Default is Constants.StaticText.defaultTableName
     var tableName: String {
-        return Constants.StaticText.defaultTableName
+        return MDConstants.StaticText.defaultTableName
     }
     
 }

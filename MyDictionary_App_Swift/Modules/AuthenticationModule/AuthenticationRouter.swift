@@ -25,7 +25,7 @@ final class AuthenticationRouter: AuthenticationRouterProtocol {
 extension AuthenticationRouter {
     
     func showCourseList() {        
-        Constants.AppDependencies.dependencies.rootWindow.rootViewController = UINavigationController.init(rootViewController: CourseListModule.init(sender: nil).module)
+        MDConstants.AppDependencies.dependencies.rootWindow.rootViewController = UINavigationController.init(rootViewController: CourseListModule.init(sender: nil).module)
     }
     
     func showRegistration() {

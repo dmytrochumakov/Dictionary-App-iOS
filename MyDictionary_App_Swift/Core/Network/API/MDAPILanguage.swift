@@ -54,7 +54,7 @@ extension MDAPILanguage {
         var httpHeaders: HTTPHeader {
             switch self {
             case .getLanguages(let accessToken):
-                return Constants.HTTPHeaderConstants.authorizationHeaders(accessToken: accessToken)
+                return MDConstants.HTTPHeaderConstants.authorizationHeaders(accessToken: accessToken)
             }
         }
         

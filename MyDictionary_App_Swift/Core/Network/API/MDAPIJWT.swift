@@ -54,7 +54,7 @@ extension MDAPIJWT {
         var httpHeaders: HTTPHeader {
             switch self {
             case .accessToken:
-                return Constants.HTTPHeaderConstants.defaultHeaders()
+                return MDConstants.HTTPHeaderConstants.defaultHeaders()
             }
         }
         

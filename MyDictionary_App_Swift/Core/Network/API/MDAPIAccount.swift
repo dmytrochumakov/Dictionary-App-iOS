@@ -59,7 +59,7 @@ extension MDAPIAccount {
         var httpHeaders: HTTPHeader {
             switch self {
             case .deleteAccount(let accessToken, _):
-                return Constants
+                return MDConstants
                     .HTTPHeaderConstants
                     .authorizationHeaders(accessToken: accessToken)
             }
