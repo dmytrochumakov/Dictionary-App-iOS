@@ -345,11 +345,11 @@ fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
 fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
     
     @objc func loginButtonAction() {
-        debugPrint(#function, Self.self)
+        presenter.loginButtonClicked()
     }
     
     @objc func registrationButtonAction() {
-        debugPrint(#function, Self.self)
+        presenter.registrationButtonClicked()
     }
     
 }

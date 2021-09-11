@@ -7,7 +7,8 @@
 import UIKit
 
 protocol ChoiceAuthenticationOrRegistrationPresenterInputProtocol {
-    
+    func loginButtonClicked()
+    func registrationButtonClicked()
 }
 
 protocol ChoiceAuthenticationOrRegistrationPresenterOutputProtocol: AnyObject {
@@ -19,7 +20,8 @@ ChoiceAuthenticationOrRegistrationInteractorOutputProtocol {
     var presenterOutput: ChoiceAuthenticationOrRegistrationPresenterOutputProtocol? { get set }
 }
 
-final class ChoiceAuthenticationOrRegistrationPresenter: NSObject, ChoiceAuthenticationOrRegistrationPresenterProtocol {
+final class ChoiceAuthenticationOrRegistrationPresenter: NSObject,
+                                                         ChoiceAuthenticationOrRegistrationPresenterProtocol {
     
     fileprivate let interactor: ChoiceAuthenticationOrRegistrationInteractorInputProtocol
     fileprivate let router: ChoiceAuthenticationOrRegistrationRouterProtocol
@@ -41,5 +43,26 @@ final class ChoiceAuthenticationOrRegistrationPresenter: NSObject, ChoiceAuthent
 
 // MARK: - ChoiceAuthenticationOrRegistrationInteractorOutputProtocol
 extension ChoiceAuthenticationOrRegistrationPresenter {
+    
+    func showAuthentication() {
+        router.showAuthentication()
+    }
+    
+    func showRegistration() {
+        router.showRegistration()
+    }
+    
+}
+
+// MARK: - ChoiceAuthenticationOrRegistrationPresenterInputProtocol
+extension ChoiceAuthenticationOrRegistrationPresenter {
+    
+    func loginButtonClicked() {
+        interactor.loginButtonClicked()
+    }
+    
+    func registrationButtonClicked() {
+        interactor.registrationButtonClicked()
+    }
     
 }

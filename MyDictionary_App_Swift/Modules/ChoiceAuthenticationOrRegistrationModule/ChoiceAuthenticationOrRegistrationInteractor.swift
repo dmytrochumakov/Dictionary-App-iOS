@@ -7,11 +7,13 @@
 import UIKit
 
 protocol ChoiceAuthenticationOrRegistrationInteractorInputProtocol {
-    
+    func loginButtonClicked()
+    func registrationButtonClicked()
 }
 
 protocol ChoiceAuthenticationOrRegistrationInteractorOutputProtocol: AnyObject {
-    
+    func showAuthentication()
+    func showRegistration()
 }
 
 protocol ChoiceAuthenticationOrRegistrationInteractorProtocol: ChoiceAuthenticationOrRegistrationInteractorInputProtocol, ChoiceAuthenticationOrRegistrationDataManagerOutputProtocol {
@@ -35,5 +37,18 @@ final class ChoiceAuthenticationOrRegistrationInteractor: ChoiceAuthenticationOr
 
 // MARK: - ChoiceAuthenticationOrRegistrationDataManagerOutputProtocol
 extension ChoiceAuthenticationOrRegistrationInteractor {
+    
+}
+
+// MARK: - ChoiceAuthenticationOrRegistrationInteractorInputProtocol
+extension ChoiceAuthenticationOrRegistrationInteractor {
+    
+    func loginButtonClicked() {
+        interactorOutput?.showAuthentication()
+    }
+        
+    func registrationButtonClicked() {
+        interactorOutput?.showRegistration()
+    }
     
 }

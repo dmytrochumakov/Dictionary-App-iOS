@@ -8,6 +8,8 @@ import UIKit
 
 protocol ChoiceAuthenticationOrRegistrationRouterProtocol {
     var presenter: UIViewController? { get set }
+    func showAuthentication()
+    func showRegistration()
 }
 
 final class ChoiceAuthenticationOrRegistrationRouter: ChoiceAuthenticationOrRegistrationRouterProtocol {
@@ -16,6 +18,18 @@ final class ChoiceAuthenticationOrRegistrationRouter: ChoiceAuthenticationOrRegi
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension ChoiceAuthenticationOrRegistrationRouter {
+    
+    func showAuthentication() {
+        presenter?.show(AuthenticationModule.init(sender: nil).module, sender: nil)
+    }
+    
+    func showRegistration() {
+        presenter?.show(RegistrationModule.init(sender: nil).module, sender: nil)
     }
     
 }
