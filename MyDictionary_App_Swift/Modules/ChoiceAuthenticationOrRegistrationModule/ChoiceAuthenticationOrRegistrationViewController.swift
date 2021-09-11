@@ -57,7 +57,7 @@ final class ChoiceAuthenticationOrRegistrationViewController: UIViewController {
         button.backgroundColor = MDAppStyling.Color.md_Blue_1_Light_Appearence.color()
         button.setTitle(KeysForTranslate.login.localized, for: .normal)
         button.setTitleColor(MDAppStyling.Color.md_White_0_Light_Appearence.color(), for: .normal)
-        button.titleLabel?.font = MDAppStyling.Font.default
+        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
         return button
     }()
     
