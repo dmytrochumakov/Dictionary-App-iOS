@@ -74,6 +74,12 @@ struct MDAppStyling {
         case systemFont
         case boldSystemFont
         
+        // MyriadPro
+        case MyriadProBold
+        case MyriadProSemiBold
+        case MyriadProItalic
+        case MyriadProRegular
+        
         /// - Parameter ofSize: 14.0 by default
         func font(ofSize size: CGFloat = 14.0) -> UIFont {
             switch self {
@@ -81,6 +87,14 @@ struct MDAppStyling {
                 return .systemFont(ofSize: size)
             case .boldSystemFont:
                 return .boldSystemFont(ofSize: size)
+            case .MyriadProBold:
+                return UIFont.init(name: "MyriadProBold", size: size)!
+            case .MyriadProSemiBold:
+                return UIFont.init(name: "MyriadProSemiBold", size: size)!
+            case .MyriadProItalic:
+                return UIFont.init(name: "MyriadProItalic", size: size)!
+            case .MyriadProRegular:
+                return UIFont.init(name: "MyriadProRegular", size: size)!
             }
         }
         
