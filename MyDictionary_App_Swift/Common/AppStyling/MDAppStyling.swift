@@ -16,8 +16,7 @@ struct MDAppStyling {
         case md_Black_0_Light_Appearence
         case md_Light_Gray_0_Light_Appearence
         case md_Blue_0_Light_Appearence
-        case md_Blue_1_Light_Appearence
-        case md_Shadow_0_Light_Appearence
+        case md_Blue_1_Light_Appearence        
         
         // Dark
         case md_White_0_Dark_Appearence
@@ -47,8 +46,6 @@ struct MDAppStyling {
                 return UIColor.init(rgb: 0x007AFF, alpha: alpha)
                 
             case .md_Blue_1_Light_Appearence:
-                return UIColor.init(rgb: 0x4400D4, alpha: alpha)
-            case .md_Shadow_0_Light_Appearence:
                 return UIColor.init(rgb: 0x4400D4, alpha: alpha)
                 
             // Dark
