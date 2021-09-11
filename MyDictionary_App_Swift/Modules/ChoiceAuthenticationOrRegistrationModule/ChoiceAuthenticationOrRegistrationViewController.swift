@@ -127,6 +127,7 @@ fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
     }
     
     func addLoginButton() {
+        loginButton.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
         view.addSubview(loginButton)
     }
     
@@ -286,5 +287,9 @@ fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
 
 // MARK: - Actions
 fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
+    
+    @objc func loginButtonAction() {
+        debugPrint(#function, Self.self)
+    }
     
 }
