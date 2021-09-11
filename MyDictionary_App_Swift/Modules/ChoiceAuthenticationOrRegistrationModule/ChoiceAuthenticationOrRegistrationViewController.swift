@@ -25,6 +25,15 @@ final class ChoiceAuthenticationOrRegistrationViewController: UIViewController {
         return imageView
     }()
     
+    fileprivate static let iconNavigationBarImageViewSize: CGSize = .init(width: 189, height: 71)
+    fileprivate let iconNavigationBarImageView: UIImageView = {
+        let imageView: UIImageView = .init()
+        imageView.image = MDAppStyling.Image.my_dictionary.image
+        imageView.contentMode = .scaleToFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     fileprivate let backgroundImageView: UIImageView = {
         let imageView: UIImageView = .init(frame: .init(origin: .init(x: .zero,
                                                                       y: defaultNavigationBarViewHeight),
@@ -79,6 +88,7 @@ fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
         addNavigationBarView()
         addBackgroundImageView()
         addNavigationBarBackgroundImageView()
+        addIconNavigationBarImageView()
     }
     
     func addNavigationBarView() {
@@ -93,6 +103,10 @@ fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
         view.addSubview(navigationBarBackgroundImageView)
     }
     
+    func addIconNavigationBarImageView() {
+        view.addSubview(iconNavigationBarImageView)
+    }
+    
 }
 
 // MARK: - Add Constraints
@@ -100,12 +114,35 @@ fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
     
     func addConstraints() {
         addNavigationBarBackgroundImageViewConstraints()
+        addIconNavigationBarImageViewConstraints()
     }
     
     func addNavigationBarBackgroundImageViewConstraints() {
         
         NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.navigationBarBackgroundImageView,
                                                          toItem: self.navigationBarView)
+        
+    }
+    
+    func addIconNavigationBarImageViewConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.iconNavigationBarImageView,
+                                                         attribute: .left,
+                                                         toItem: self.navigationBarView,
+                                                         attribute: .left,
+                                                         constant: 20)
+        
+        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.iconNavigationBarImageView,
+                                                         attribute: .bottom,
+                                                         toItem: self.navigationBarView,
+                                                         attribute: .bottom,
+                                                         constant: -8)
+        
+        NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.iconNavigationBarImageView,
+                                                               constant: Self.iconNavigationBarImageViewSize.height)
+        
+        NSLayoutConstraint.addEqualWidthConstraintAndActivate(item: self.iconNavigationBarImageView,
+                                                              constant: Self.iconNavigationBarImageViewSize.width)
         
     }
     
