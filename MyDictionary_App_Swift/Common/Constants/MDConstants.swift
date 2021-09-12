@@ -1,5 +1,5 @@
 //
-//  Constants.swift
+//  MDConstants.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 16.05.2021.
@@ -8,7 +8,7 @@
 import UIKit
 import Reachability
 
-struct Constants {
+struct MDConstants {
     
     struct StaticText {
         static let emptyString: String = ""
@@ -113,6 +113,29 @@ struct Constants {
             return MDRequestDispatcher.init(reachability: reachability,
                                             environment: APIEnvironment.current,
                                             networkSession: NetworkSession.defaultNetworkSession)
+        }
+        
+    }
+    
+    struct Screen {
+        static let size: CGSize = UIScreen.main.bounds.size
+        static let width: CGFloat = size.width
+        static let height: CGFloat = size.height
+    }
+ 
+    struct StatusBar {
+        static let size: CGSize = UIApplication.shared.statusBarFrame.size
+        static let height: CGFloat = size.height
+    }
+    
+    struct NavigationBar {
+        
+        static func height(fromNavigationController navigationController: UINavigationController?) -> CGFloat {
+            return navigationController?.navigationBar.bounds.height ?? .zero
+        }
+        
+        static func heightPlusStatusBarHeight(fromNavigationController navigationController: UINavigationController?) -> CGFloat {
+            return height(fromNavigationController: navigationController) + StatusBar.height
         }
         
     }

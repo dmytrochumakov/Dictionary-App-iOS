@@ -21,7 +21,7 @@ final class RegistrationViewController: UIViewController {
         textField.autocorrectionType = .no
         textField.textAlignment = .center
         textField.clearButtonMode = .whileEditing
-        textField.font = AppStyling.Font.default
+        textField.font = MDAppStyling.Font.default
         textField.textColor = ConfigurationAppearanceController.labelTextColor()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.returnKeyType = .next
@@ -32,7 +32,7 @@ final class RegistrationViewController: UIViewController {
     fileprivate let nicknameTextFieldBottomLineView: UIView = {
         let view: UIView = .init()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = AppStyling.Color.light_Gray_0.color()
+        view.backgroundColor = MDAppStyling.Color.light_Gray_0.color()
         return view
     }()
     
@@ -45,7 +45,7 @@ final class RegistrationViewController: UIViewController {
         textField.autocorrectionType = .no
         textField.textAlignment = .center
         textField.clearButtonMode = .whileEditing
-        textField.font = AppStyling.Font.default
+        textField.font = MDAppStyling.Font.default
         textField.textColor = ConfigurationAppearanceController.labelTextColor()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.returnKeyType = .go
@@ -56,7 +56,7 @@ final class RegistrationViewController: UIViewController {
     fileprivate let passwordTextFieldBottomLineView: UIView = {
         let view: UIView = .init()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = AppStyling.Color.light_Gray_0.color()
+        view.backgroundColor = MDAppStyling.Color.light_Gray_0.color()
         return view
     }()
     
@@ -66,7 +66,7 @@ final class RegistrationViewController: UIViewController {
         button.backgroundColor = ConfigurationAppearanceController.buttonBackgroundColor()
         button.setTitle(KeysForTranslate.register.localized, for: .normal)
         button.setTitleColor(ConfigurationAppearanceController.buttonTextColor(), for: .normal)
-        button.titleLabel?.font = AppStyling.Font.default
+        button.titleLabel?.font = MDAppStyling.Font.default
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

@@ -1,12 +1,12 @@
 //
-//  AuthorizationPresenter.swift
+//  AuthenticationPresenter.swift
 //  MyDictionary_App_Swift
 //
 //  Created Dmytro Chumakov on 12.08.2021.
 
 import UIKit
 
-protocol AuthorizationPresenterInputProtocol {
+protocol AuthenticationPresenterInputProtocol {
     var textFieldDelegate: UITextFieldDelegate { get }
     func loginButtonClicked()
     func registerButtonClicked()
@@ -14,26 +14,26 @@ protocol AuthorizationPresenterInputProtocol {
     func passwordTextFieldEditingDidChangeAction(_ text: String?)
 }
 
-protocol AuthorizationPresenterOutputProtocol: AnyObject {
+protocol AuthenticationPresenterOutputProtocol: AnyObject {
     func makePasswordFieldActive()
     func hideKeyboard()
     func showValidationError(_ error: Error)
 }
 
-protocol AuthorizationPresenterProtocol: AuthorizationPresenterInputProtocol,
-                                         AuthorizationInteractorOutputProtocol {
-    var presenterOutput: AuthorizationPresenterOutputProtocol? { get set }
+protocol AuthenticationPresenterProtocol: AuthenticationPresenterInputProtocol,
+                                          AuthenticationInteractorOutputProtocol {
+    var presenterOutput: AuthenticationPresenterOutputProtocol? { get set }
 }
 
-final class AuthorizationPresenter: NSObject, AuthorizationPresenterProtocol {
+final class AuthenticationPresenter: NSObject, AuthenticationPresenterProtocol {
     
-    fileprivate let interactor: AuthorizationInteractorInputProtocol
-    fileprivate let router: AuthorizationRouterProtocol
+    fileprivate let interactor: AuthenticationInteractorInputProtocol
+    fileprivate let router: AuthenticationRouterProtocol
     
-    internal weak var presenterOutput: AuthorizationPresenterOutputProtocol?
+    internal weak var presenterOutput: AuthenticationPresenterOutputProtocol?
     
-    init(interactor: AuthorizationInteractorInputProtocol,
-         router: AuthorizationRouterProtocol) {
+    init(interactor: AuthenticationInteractorInputProtocol,
+         router: AuthenticationRouterProtocol) {
         
         self.interactor = interactor
         self.router = router
@@ -48,8 +48,8 @@ final class AuthorizationPresenter: NSObject, AuthorizationPresenterProtocol {
     
 }
 
-// MARK: - AuthorizationInteractorOutputProtocol
-extension AuthorizationPresenter {
+// MARK: - AuthenticationInteractorOutputProtocol
+extension AuthenticationPresenter {
     
     func makePasswordFieldActive() {
         presenterOutput?.makePasswordFieldActive()
@@ -73,8 +73,8 @@ extension AuthorizationPresenter {
     
 }
 
-// MARK: - AuthorizationPresenterInputProtocol
-extension AuthorizationPresenter {
+// MARK: - AuthenticationPresenterInputProtocol
+extension AuthenticationPresenter {
     
     var textFieldDelegate: UITextFieldDelegate {
         return interactor.textFieldDelegate

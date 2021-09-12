@@ -56,7 +56,7 @@ extension MDAPIUser {
         var httpHeaders: HTTPHeader {
             switch self {
             case .getUser(let accessToken, _):
-                return Constants
+                return MDConstants
                     .HTTPHeaderConstants
                     .authorizationHeaders(accessToken: accessToken)
             }

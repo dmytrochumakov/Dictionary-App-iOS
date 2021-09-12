@@ -107,7 +107,7 @@ extension MDAPIWord {
                  .updateWord(let accessToken, _),
                  .deleteWord(let accessToken, _, _, _):
                 
-                return Constants
+                return MDConstants
                     .HTTPHeaderConstants
                     .authorizationHeaders(accessToken: accessToken)
                 

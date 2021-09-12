@@ -1,12 +1,12 @@
 //
-//  RegistrationModule.swift
+//  AuthenticationModule.swift
 //  MyDictionary_App_Swift
 //
-//  Created Dmytro Chumakov on 14.08.2021.
+//  Created Dmytro Chumakov on 12.08.2021.
 
 import UIKit
 
-final class RegistrationModule {
+final class AuthenticationModule {
     
     let sender: Any?
     
@@ -20,12 +20,12 @@ final class RegistrationModule {
     
 }
 
-extension RegistrationModule {
+extension AuthenticationModule {
     
     var module: UIViewController {
         
-        let dataProvider: RegistrationDataProviderProtocol = RegistrationDataProvider.init()
-        var dataManager: RegistrationDataManagerProtocol = RegistrationDataManager.init(dataProvider: dataProvider)
+        let dataProvider: AuthenticationDataProviderProtocol = AuthenticationDataProvider.init()
+        var dataManager: AuthenticationDataManagerProtocol = AuthenticationDataManager.init(dataProvider: dataProvider)
         
         let textFieldDelegate: AuthTextFieldDelegateProtocol = AuthTextFieldDelegate.init()
         
@@ -52,14 +52,14 @@ extension RegistrationModule {
                                                                     appSettings: MDConstants.AppDependencies.dependencies.appSettings,
                                                                     syncManager: syncManager)
         
-        let interactor: RegistrationInteractorProtocol = RegistrationInteractor.init(dataManager: dataManager,
-                                                                                     authValidation: authValidation,
-                                                                                     textFieldDelegate: textFieldDelegate,
-                                                                                     apiManager: authManager)
+        let interactor: AuthenticationInteractorProtocol = AuthenticationInteractor.init(dataManager: dataManager,
+                                                                                         authValidation: authValidation,
+                                                                                         textFieldDelegate: textFieldDelegate,
+                                                                                         authManager: authManager)
         
-        var router: RegistrationRouterProtocol = RegistrationRouter.init()
-        let presenter: RegistrationPresenterProtocol = RegistrationPresenter.init(interactor: interactor, router: router)
-        let vc = RegistrationViewController.init(presenter: presenter)
+        var router: AuthenticationRouterProtocol = AuthenticationRouter.init()
+        let presenter: AuthenticationPresenterProtocol = AuthenticationPresenter.init(interactor: interactor, router: router)
+        let vc = AuthenticationViewController.init(presenter: presenter)
         
         presenter.presenterOutput = vc
         interactor.interactorOutput = presenter

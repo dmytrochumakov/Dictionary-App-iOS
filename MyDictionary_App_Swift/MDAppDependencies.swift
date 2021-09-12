@@ -33,7 +33,7 @@ protocol MDAppDependenciesProtocol {
     var wordStorage: MDWordStorageProtocol! { get }
     // End Storage
     
-    var appSettings: AppSettingsProtocol! { get }
+    var appSettings: MDAppSettingsProtocol! { get }
     
     var fillMemoryService: MDFillMemoryServiceProtocol! { get }
     
@@ -64,7 +64,7 @@ final class MDAppDependencies: NSObject,
     var wordStorage: MDWordStorageProtocol!
     // End Storage //
     
-    var appSettings: AppSettingsProtocol!
+    var appSettings: MDAppSettingsProtocol!
     
     var fillMemoryService: MDFillMemoryServiceProtocol!
     
@@ -95,7 +95,7 @@ extension MDAppDependencies {
         let coreDataStack: CoreDataStack = .init()
         self.coreDataStack = coreDataStack        
         //
-        let requestDispatcher: MDRequestDispatcherProtocol = Constants.RequestDispatcher.defaultRequestDispatcher(reachability: reachability)
+        let requestDispatcher: MDRequestDispatcherProtocol = MDConstants.RequestDispatcher.defaultRequestDispatcher(reachability: reachability)
         //
         
         
@@ -196,7 +196,7 @@ extension MDAppDependencies {
         // End Storage //        
         
         let userDefaults: UserDefaults = .standard
-        let appSettings: AppSettingsProtocol = AppSettings.init(userDefaults:userDefaults )
+        let appSettings: MDAppSettingsProtocol = MDAppSettings.init(userDefaults:userDefaults )
         self.appSettings = appSettings
         
         //

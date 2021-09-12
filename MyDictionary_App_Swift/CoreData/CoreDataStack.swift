@@ -10,8 +10,8 @@ import CoreData
 open class CoreDataStack {
     
     public static let model: NSManagedObjectModel = {
-        let modelURL = Bundle.main.url(forResource: Constants.StaticText.appName,
-                                       withExtension: Constants.StaticText.momdExtension)!
+        let modelURL = Bundle.main.url(forResource: MDConstants.StaticText.appName,
+                                       withExtension: MDConstants.StaticText.momdExtension)!
         return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     
@@ -29,7 +29,7 @@ open class CoreDataStack {
     }()
     
     public lazy var storeContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: Constants.StaticText.appName,
+        let container = NSPersistentContainer(name: MDConstants.StaticText.appName,
                                               managedObjectModel: CoreDataStack.model)
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {

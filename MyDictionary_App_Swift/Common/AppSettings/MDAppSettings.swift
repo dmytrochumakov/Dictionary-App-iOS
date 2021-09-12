@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol AppSettingsProtocol {
+protocol MDAppSettingsProtocol {
     var isLoggedIn: Bool { get set }
 }
 
-final class AppSettings: AppSettingsProtocol {
+final class MDAppSettings: MDAppSettingsProtocol {
     
     fileprivate let userDefaults: UserDefaults
     
@@ -21,7 +21,7 @@ final class AppSettings: AppSettingsProtocol {
     
 }
 
-extension AppSettings {
+extension MDAppSettings {
     
     var isLoggedIn: Bool {
         get {

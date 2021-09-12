@@ -18,7 +18,7 @@ final class TestCoreDataStack: CoreDataStack {
         persistentStoreDescription.type = NSSQLiteStoreType
         
         let container = NSPersistentContainer(
-            name: Constants.StaticText.appName,
+            name: MDConstants.StaticText.appName,
             managedObjectModel: CoreDataStack.model)
         container.persistentStoreDescriptions = [persistentStoreDescription]
         

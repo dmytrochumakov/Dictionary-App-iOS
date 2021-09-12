@@ -97,7 +97,7 @@ fileprivate extension SettingsCell {
     }
     
     func configureTitleLabel() {
-        self.titleLabel.font = AppStyling.Font.systemFont.font()
+        self.titleLabel.font = MDAppStyling.Font.systemFont.font()
         self.titleLabel.textColor = ConfigurationAppearanceController.labelTextColor()
         self.titleLabel.textAlignment = .left
         self.titleLabel.numberOfLines = .zero

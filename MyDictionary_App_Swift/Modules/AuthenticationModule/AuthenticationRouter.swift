@@ -1,18 +1,18 @@
 //
-//  AuthorizationRouter.swift
+//  AuthenticationRouter.swift
 //  MyDictionary_App_Swift
 //
 //  Created Dmytro Chumakov on 12.08.2021.
 
 import UIKit
 
-protocol AuthorizationRouterProtocol {
+protocol AuthenticationRouterProtocol {
     var presenter: UIViewController? { get set }
     func showCourseList()
     func showRegistration()
 }
 
-final class AuthorizationRouter: AuthorizationRouterProtocol {
+final class AuthenticationRouter: AuthenticationRouterProtocol {
     
     internal weak var presenter: UIViewController?
     
@@ -22,10 +22,10 @@ final class AuthorizationRouter: AuthorizationRouterProtocol {
     
 }
 
-extension AuthorizationRouter {
+extension AuthenticationRouter {
     
     func showCourseList() {        
-        Constants.AppDependencies.dependencies.rootWindow.rootViewController = UINavigationController.init(rootViewController: CourseListModule.init(sender: nil).module)
+        MDConstants.AppDependencies.dependencies.rootWindow.rootViewController = UINavigationController.init(rootViewController: CourseListModule.init(sender: nil).module)
     }
     
     func showRegistration() {

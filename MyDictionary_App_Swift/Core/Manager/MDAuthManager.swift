@@ -22,11 +22,11 @@ protocol MDAuthManagerProtocol {
 final class MDAuthManager: MDAuthManagerProtocol {
     
     fileprivate let apiAuth: MDAPIAuthProtocol
-    fileprivate var appSettings: AppSettingsProtocol
+    fileprivate var appSettings: MDAppSettingsProtocol
     fileprivate let syncManager: MDSyncManagerProtocol
     
     init(apiAuth: MDAPIAuthProtocol,
-         appSettings: AppSettingsProtocol,
+         appSettings: MDAppSettingsProtocol,
          syncManager: MDSyncManagerProtocol) {
         
         self.apiAuth = apiAuth
