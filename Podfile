@@ -10,7 +10,6 @@ target 'MyDictionary_App_Swift' do
 	pod 'Firebase/Analytics'	
 	pod 'Firebase/Crashlytics'
 	pod 'ReachabilitySwift'
-	pod 'JVFloatLabeledTextField'
 
 
   target 'MyDictionary_App_SwiftTests' do

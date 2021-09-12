@@ -84,7 +84,6 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.5.2):
     - GoogleUtilities/Logger
-  - JVFloatLabeledTextField (1.2.2)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -96,7 +95,6 @@ PODS:
 DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Crashlytics
-  - JVFloatLabeledTextField
   - ReachabilitySwift
 
 SPEC REPOS:
@@ -110,7 +108,6 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
-    - JVFloatLabeledTextField
     - nanopb
     - PromisesObjC
     - ReachabilitySwift
@@ -125,11 +122,10 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 2be61ce546ad074dbe4dd545f222ac6033bb1d9e
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleUtilities: 8de2a97a17e15b6b98e38e8770e2d129a57c0040
-  JVFloatLabeledTextField: df48598472ee015701d509f43e59492a0d4ca208
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
 
-PODFILE CHECKSUM: 566cae285445122dad017f924fc9bc3df6677872
+PODFILE CHECKSUM: 2624831e13d1c45221d6366f7367eac23ea08838
 
 COCOAPODS: 1.11.0
