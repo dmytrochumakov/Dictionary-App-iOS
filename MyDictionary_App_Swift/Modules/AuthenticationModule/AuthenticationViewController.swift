@@ -48,6 +48,26 @@ final class AuthenticationViewController: BaseAuthViewController {
         return textField
     }()
     
+    fileprivate static let passwordTextFieldHeight: CGFloat = 48
+    fileprivate static let passwordTextFieldTopOffset: CGFloat = 16
+    fileprivate static let passwordTextFieldLeftOffset: CGFloat = 16
+    fileprivate static let passwordTextFieldRightOffset: CGFloat = 16
+    fileprivate let passwordTextField: MDTextFieldWithToolBar = {
+        let textField: MDTextFieldWithToolBar = .init(frame: newFrameForPasswordTextField(navBarHeight: defaultNavigationBarViewHeight),
+                                                      rectInset: MDConstants.Rect.inset,
+                                                      keyboardToolbar: .init())
+        textField.placeholder = KeysForTranslate.password.localized
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
+        textField.textAlignment = .left
+        textField.font = MDAppStyling.Font.MyriadProItalic.font(ofSize: 17)
+        textField.textColor = MDAppStyling.Color.md_Black_1_Light_Appearence.color()
+        textField.returnKeyType = .go
+        textField.tag = AuthTextFieldTag.password.rawValue
+        textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
+        return textField
+    }()
+    
     init(presenter: AuthenticationPresenterInputProtocol) {
         self.presenter = presenter
         super.init()
@@ -84,7 +104,7 @@ final class AuthenticationViewController: BaseAuthViewController {
 extension AuthenticationViewController: AuthenticationPresenterOutputProtocol {
     
     func makePasswordFieldActive() {
-        
+        self.passwordTextField.becomeFirstResponder()
     }
     
     func hideKeyboard() {
@@ -106,6 +126,7 @@ fileprivate extension AuthenticationViewController {
         addLoginLabel()
         addBackButton()
         addNicknameTextField()
+        addPasswordTextField()
     }
     
     func addLoginLabel() {
@@ -121,6 +142,12 @@ fileprivate extension AuthenticationViewController {
         nicknameTextField.delegate = presenter.textFieldDelegate
         nicknameTextField.addTarget(self, action: #selector(nicknameTextFieldEditingDidChangeAction), for: .editingChanged)
         view.addSubview(nicknameTextField)
+    }
+    
+    func addPasswordTextField() {
+        passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingDidChangeAction), for: .editingChanged)
+        passwordTextField.delegate = presenter.textFieldDelegate
+        view.addSubview(passwordTextField)
     }
     
 }
@@ -181,11 +208,20 @@ fileprivate extension AuthenticationViewController {
     
     func updateFrame() {
         updateNicknameTextFieldFrame()
+        updatePasswordTextFieldFrame()
     }
     
     func updateNicknameTextFieldFrame() {
         UIView.animate(withDuration: .zero) {
             self.nicknameTextField.frame = Self.newFrameForNicknameTextField(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
+            self.view.layoutSubviews()
+            self.viewDidLayoutSubviews()
+        }
+    }
+    
+    func updatePasswordTextFieldFrame() {
+        UIView.animate(withDuration: .zero) {
+            self.passwordTextField.frame = Self.newFrameForPasswordTextField(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
             self.view.layoutSubviews()
             self.viewDidLayoutSubviews()
         }
@@ -198,10 +234,17 @@ fileprivate extension AuthenticationViewController {
     
     func dropShadow() {
         dropShadowNicknameTextField()
+        dropShadowPasswordTextField()
     }
     
     func dropShadowNicknameTextField() {
         nicknameTextField.dropShadow(color: MDAppStyling.Color.md_Shadow_0_Light_Appearence.color(0.5),
+                                     offSet: .init(width: 2, height: 4),
+                                     radius: 15)
+    }
+    
+    func dropShadowPasswordTextField() {
+        passwordTextField.dropShadow(color: MDAppStyling.Color.md_Shadow_0_Light_Appearence.color(0.5),
                                      offSet: .init(width: 2, height: 4),
                                      radius: 15)
     }
@@ -213,10 +256,15 @@ fileprivate extension AuthenticationViewController {
     
     func roundOffEdges() {
         nicknameTextFieldRoundOffEdges()
+        passwordTextFieldRoundOffEdges()
     }
     
     func nicknameTextFieldRoundOffEdges() {
         nicknameTextField.layer.cornerRadius = 10
+    }
+    
+    func passwordTextFieldRoundOffEdges() {
+        passwordTextField.layer.cornerRadius = 10
     }
     
 }
@@ -230,6 +278,10 @@ fileprivate extension AuthenticationViewController {
     
     @objc func nicknameTextFieldEditingDidChangeAction() {
         presenter.nicknameTextFieldEditingDidChangeAction(nicknameTextField.text)
+    }
+    
+    @objc func passwordTextFieldEditingDidChangeAction() {
+        presenter.passwordTextFieldEditingDidChangeAction(passwordTextField.text)
     }
     
 }
@@ -251,6 +303,13 @@ fileprivate extension AuthenticationViewController {
                                    y: navBarHeight + nicknameTextFieldTopOffset),
                      size: .init(width: MDConstants.Screen.width - (nicknameTextFieldLeftOffset + nicknameTextFieldRightOffset),
                                  height: nicknameTextFieldHeight))
+    }
+    
+    static func newFrameForPasswordTextField(navBarHeight: CGFloat) -> CGRect {
+        return .init(origin: .init(x: passwordTextFieldLeftOffset,
+                                   y: newFrameForNicknameTextField(navBarHeight: navBarHeight).maxY + passwordTextFieldTopOffset),
+                     size: .init(width: MDConstants.Screen.width - (passwordTextFieldLeftOffset + passwordTextFieldRightOffset),
+                                 height: passwordTextFieldHeight))
     }
     
 }
