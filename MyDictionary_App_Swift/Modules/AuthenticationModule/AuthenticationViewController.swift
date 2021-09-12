@@ -33,6 +33,7 @@ final class AuthenticationViewController: BaseAuthViewController {
     fileprivate static let nicknameTextFieldRightOffset: CGFloat = 16
     fileprivate let nicknameTextField: MDTextFieldWithToolBar = {
         let textField: MDTextFieldWithToolBar = .init(frame: newFrameForNicknameTextField(navBarHeight: defaultNavigationBarViewHeight),
+                                                      rectInset: MDConstants.Rect.inset,
                                                       keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.nickname.localized
         textField.autocapitalizationType = .none
