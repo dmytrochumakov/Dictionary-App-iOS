@@ -112,6 +112,9 @@ struct MDAppStyling {
         case background_typography_0
         case my_dictionary
         case background_typography_1
+        case back_white_arrow
+        case eye_closed
+        case eye_open
         
         var image: UIImage {
             
@@ -120,7 +123,10 @@ struct MDAppStyling {
             case .background_navigation_bar_0,
                  .background_typography_0,
                  .my_dictionary,
-                 .background_typography_1:
+                 .background_typography_1,
+                 .eye_open,
+                 .eye_closed,
+                 .back_white_arrow:
                 
                 return configuredImage(fromName: self.rawValue)
                 
