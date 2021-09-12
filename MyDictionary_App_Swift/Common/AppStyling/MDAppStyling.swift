@@ -14,9 +14,11 @@ struct MDAppStyling {
         // Light
         case md_White_0_Light_Appearence
         case md_Black_0_Light_Appearence
+        case md_Black_1_Light_Appearence
         case md_Light_Gray_0_Light_Appearence
         case md_Blue_0_Light_Appearence
-        case md_Blue_1_Light_Appearence        
+        case md_Blue_1_Light_Appearence
+        case md_Shadow_0_Light_Appearence
         
         // Dark
         case md_White_0_Dark_Appearence
@@ -39,6 +41,9 @@ struct MDAppStyling {
             case .md_Black_0_Light_Appearence:
                 return UIColor.init(rgb: 0x101010, alpha: alpha)
                 
+            case .md_Black_1_Light_Appearence:
+                return UIColor.init(rgb: 0x3C3C3C, alpha: alpha)
+                
             case .md_Light_Gray_0_Light_Appearence:
                 return UIColor.init(rgb: 0xF8F8F8, alpha: alpha)
                 
@@ -47,6 +52,10 @@ struct MDAppStyling {
                 
             case .md_Blue_1_Light_Appearence:
                 return UIColor.init(rgb: 0x4400D4, alpha: alpha)
+                
+            case .md_Shadow_0_Light_Appearence:
+                return UIColor.init(rgb: 0x5200FF, alpha: alpha)
+                
                 
             // Dark
             case .md_White_0_Dark_Appearence:
@@ -79,7 +88,7 @@ struct MDAppStyling {
         case MyriadProSemiBold
         case MyriadProItalic
         case MyriadProRegular
-                
+        
         /// - Parameter ofSize: 14.0 by default
         func font(ofSize size: CGFloat = 14.0) -> UIFont {
             switch self {
@@ -111,6 +120,10 @@ struct MDAppStyling {
         case background_navigation_bar_0
         case background_typography_0
         case my_dictionary
+        case background_typography_1
+        case back_white_arrow
+        case eye_closed
+        case eye_open
         
         var image: UIImage {
             
@@ -118,7 +131,12 @@ struct MDAppStyling {
             
             case .background_navigation_bar_0,
                  .background_typography_0,
-                 .my_dictionary:
+                 .my_dictionary,
+                 .background_typography_1,
+                 .eye_open,
+                 .eye_closed,
+                 .back_white_arrow:
+                
                 return configuredImage(fromName: self.rawValue)
                 
             }

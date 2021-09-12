@@ -122,7 +122,7 @@ struct MDConstants {
         static let width: CGFloat = size.width
         static let height: CGFloat = size.height
     }
- 
+    
     struct StatusBar {
         static let size: CGSize = UIApplication.shared.statusBarFrame.size
         static let height: CGFloat = size.height
@@ -138,6 +138,18 @@ struct MDConstants {
             return height(fromNavigationController: navigationController) + StatusBar.height
         }
         
+    }
+    
+    struct Rect {
+        static let defaultInset: UIEdgeInsets = .init(top: .zero,
+                                                      left: 16,
+                                                      bottom: .zero,
+                                                      right: 28)
+        
+        static let passwordInset: UIEdgeInsets = .init(top: .zero,
+                                                       left: 16,
+                                                       bottom: .zero,
+                                                       right: 38)
     }
     
 }

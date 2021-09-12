@@ -86,7 +86,9 @@ fileprivate extension MDRequestDispatcher {
     func handleJsonTaskResponse(data: Data?, urlResponse: URLResponse?, error: Error?, completion: @escaping (MDResponseOperationResult) -> Void) {
         // Check if the response is valid.
         guard let urlResponse = urlResponse as? HTTPURLResponse else {
-            completion(MDResponseOperationResult.error(MDAPIError.invalidResponse, nil))
+            DispatchQueue.main.async {
+                completion(MDResponseOperationResult.error(MDAPIError.invalidResponse, nil))
+            }
             return
         }
         // Verify the HTTP status code.

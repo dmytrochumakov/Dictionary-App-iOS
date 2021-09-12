@@ -1,13 +1,13 @@
 //
-//  MDTextFieldWithToolBar.swift
+//  MDPasswordTextFieldWithToolBar.swift
 //  MyDictionary_App_Swift
 //
-//  Created by Dmytro Chumakov on 15.08.2021.
+//  Created by Dmytro Chumakov on 12.09.2021.
 //
 
 import UIKit
 
-final class MDTextFieldWithToolBar: UITextField {
+final class MDPasswordTextFieldWithToolBar: HideShowPasswordTextField {
     
     fileprivate let keyboardToolbar: MDKeyboardToolbar
     fileprivate let rectInset: UIEdgeInsets
@@ -39,7 +39,7 @@ final class MDTextFieldWithToolBar: UITextField {
 }
 
 // MARK: - Configure UI
-fileprivate extension MDTextFieldWithToolBar {
+fileprivate extension MDPasswordTextFieldWithToolBar {
     
     func configureUI() {
         keyboardToolbar.configureWithDoneButton(textField: self,
@@ -50,7 +50,7 @@ fileprivate extension MDTextFieldWithToolBar {
 }
 
 // MARK: - Actions
-fileprivate extension MDTextFieldWithToolBar {
+fileprivate extension MDPasswordTextFieldWithToolBar {
     
     @objc func toolBarDoneButtonAction() {
         self.resignFirstResponder()
