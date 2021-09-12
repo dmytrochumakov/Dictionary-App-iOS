@@ -159,6 +159,15 @@ extension BaseAuthViewController {
     
 }
 
+// MARK: - Update Background Image
+extension BaseAuthViewController {
+    
+    func updateBackgroundImage(_ newImage: UIImage) {
+        backgroundImageView.image = newImage
+    }
+    
+}
+
 // MARK: - Add Views
 fileprivate extension BaseAuthViewController {
     

@@ -79,7 +79,7 @@ struct MDAppStyling {
         case MyriadProSemiBold
         case MyriadProItalic
         case MyriadProRegular
-                
+        
         /// - Parameter ofSize: 14.0 by default
         func font(ofSize size: CGFloat = 14.0) -> UIFont {
             switch self {
@@ -111,6 +111,7 @@ struct MDAppStyling {
         case background_navigation_bar_0
         case background_typography_0
         case my_dictionary
+        case background_typography_1
         
         var image: UIImage {
             
@@ -118,7 +119,9 @@ struct MDAppStyling {
             
             case .background_navigation_bar_0,
                  .background_typography_0,
-                 .my_dictionary:
+                 .my_dictionary,
+                 .background_typography_1:
+                
                 return configuredImage(fromName: self.rawValue)
                 
             }
