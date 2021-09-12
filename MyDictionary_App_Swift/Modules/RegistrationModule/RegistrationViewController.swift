@@ -6,13 +6,14 @@
 
 import UIKit
 
-final class RegistrationViewController: UIViewController {
+final class RegistrationViewController: BaseAuthViewController {
     
     fileprivate let presenter: RegistrationPresenterInputProtocol
     
     init(presenter: RegistrationPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
+        super.init()
+        updateBackgroundImage(MDAppStyling.Image.background_typography_2.image)
     }
     
     deinit {
