@@ -69,6 +69,19 @@ final class AuthenticationViewController: BaseAuthViewController {
         return textField
     }()
     
+    fileprivate static let loginButtonHeight: CGFloat = 48
+    fileprivate static let loginButtonTopOffset: CGFloat = 16
+    fileprivate static let loginButtonLeftOffset: CGFloat = 16
+    fileprivate static let loginButtonRightOffset: CGFloat = 16
+    fileprivate let loginButton: UIButton = {
+        let button: UIButton = .init(frame: newFrameForLoginButton(navBarHeight: defaultNavigationBarViewHeight))
+        button.backgroundColor = MDAppStyling.Color.md_Blue_1_Light_Appearence.color()
+        button.setTitle(KeysForTranslate.login.localized, for: .normal)
+        button.setTitleColor(MDAppStyling.Color.md_White_0_Light_Appearence.color(), for: .normal)
+        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        return button
+    }()
+    
     init(presenter: AuthenticationPresenterInputProtocol) {
         self.presenter = presenter
         super.init()
@@ -128,6 +141,7 @@ fileprivate extension AuthenticationViewController {
         addBackButton()
         addNicknameTextField()
         addPasswordTextField()
+        addLoginButton()
     }
     
     func addLoginLabel() {
@@ -149,6 +163,11 @@ fileprivate extension AuthenticationViewController {
         passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingDidChangeAction), for: .editingChanged)
         passwordTextField.delegate = presenter.textFieldDelegate
         view.addSubview(passwordTextField)
+    }
+    
+    func addLoginButton() {
+        loginButton.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
+        view.addSubview(loginButton)
     }
     
 }
@@ -210,6 +229,7 @@ fileprivate extension AuthenticationViewController {
     func updateFrame() {
         updateNicknameTextFieldFrame()
         updatePasswordTextFieldFrame()
+        updateLoginButtonFrame()
     }
     
     func updateNicknameTextFieldFrame() {
@@ -228,6 +248,14 @@ fileprivate extension AuthenticationViewController {
         }
     }
     
+    func updateLoginButtonFrame() {
+        UIView.animate(withDuration: .zero) {
+            self.loginButton.frame = Self.newFrameForLoginButton(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
+            self.view.layoutSubviews()
+            self.viewDidLayoutSubviews()
+        }
+    }
+    
 }
 
 // MARK: - Drop Shadow
@@ -236,6 +264,7 @@ fileprivate extension AuthenticationViewController {
     func dropShadow() {
         dropShadowNicknameTextField()
         dropShadowPasswordTextField()
+        dropShadowLoginButtonView()
     }
     
     func dropShadowNicknameTextField() {
@@ -250,6 +279,13 @@ fileprivate extension AuthenticationViewController {
                                      radius: 15)
     }
     
+    func dropShadowLoginButtonView() {
+        loginButton.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.7),
+                               offSet: .init(width: 0,
+                                             height: 4),
+                               radius: 20)
+    }
+    
 }
 
 // MARK: - Round Off Edges
@@ -258,6 +294,7 @@ fileprivate extension AuthenticationViewController {
     func roundOffEdges() {
         nicknameTextFieldRoundOffEdges()
         passwordTextFieldRoundOffEdges()
+        loginButtonRoundOffEdges()
     }
     
     func nicknameTextFieldRoundOffEdges() {
@@ -268,6 +305,10 @@ fileprivate extension AuthenticationViewController {
         passwordTextField.layer.cornerRadius = 10
     }
     
+    func loginButtonRoundOffEdges() {
+        loginButton.layer.cornerRadius = 10
+    }
+    
 }
 
 // MARK: - Actions
@@ -275,6 +316,10 @@ fileprivate extension AuthenticationViewController {
     
     @objc func backButtonAction() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func loginButtonAction() {
+        presenter.loginButtonClicked()
     }
     
     @objc func nicknameTextFieldEditingDidChangeAction() {
@@ -311,6 +356,13 @@ fileprivate extension AuthenticationViewController {
                                    y: newFrameForNicknameTextField(navBarHeight: navBarHeight).maxY + passwordTextFieldTopOffset),
                      size: .init(width: MDConstants.Screen.width - (passwordTextFieldLeftOffset + passwordTextFieldRightOffset),
                                  height: passwordTextFieldHeight))
+    }
+    
+    static func newFrameForLoginButton(navBarHeight: CGFloat) -> CGRect {
+        return .init(origin: .init(x: loginButtonLeftOffset,
+                                   y: newFrameForPasswordTextField(navBarHeight: navBarHeight).maxY + loginButtonTopOffset),
+                     size: .init(width: MDConstants.Screen.width - (loginButtonLeftOffset + loginButtonRightOffset),
+                                 height: loginButtonHeight))
     }
     
 }

@@ -196,7 +196,7 @@ fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
     func updateFrame() {
         updateLoginButtonFrame()
         updateRegistrationButtonFrame()
-    }        
+    }
     
     func updateLoginButtonFrame() {
         
