@@ -27,6 +27,26 @@ final class AuthenticationViewController: BaseAuthViewController {
         return label
     }()
     
+    fileprivate static let nicknameTextFieldHeight: CGFloat = 48
+    fileprivate static let nicknameTextFieldTopOffset: CGFloat = 24
+    fileprivate static let nicknameTextFieldLeftOffset: CGFloat = 16
+    fileprivate static let nicknameTextFieldRightOffset: CGFloat = 16
+    fileprivate let nicknameTextField: MDTextFieldWithToolBar = {
+        let textField: MDTextFieldWithToolBar = .init(frame: newFrameForNicknameTextField(navBarHeight: defaultNavigationBarViewHeight),
+                                                      keyboardToolbar: .init())
+        textField.placeholder = KeysForTranslate.nickname.localized
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
+        textField.textAlignment = .left
+        textField.clearButtonMode = .whileEditing
+        textField.font = MDAppStyling.Font.MyriadProItalic.font(ofSize: 17)
+        textField.textColor = MDAppStyling.Color.md_Black_1_Light_Appearence.color()
+        textField.returnKeyType = .next
+        textField.tag = AuthTextFieldTag.nickname.rawValue
+        textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
+        return textField
+    }()
+    
     init(presenter: AuthenticationPresenterInputProtocol) {
         self.presenter = presenter
         super.init()
@@ -54,6 +74,7 @@ final class AuthenticationViewController: BaseAuthViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         addConstraints()
+        roundOffEdges()
     }
     
 }
@@ -83,6 +104,7 @@ fileprivate extension AuthenticationViewController {
     func addViews() {
         addLoginLabel()
         addBackButton()
+        addNicknameTextField()
     }
     
     func addLoginLabel() {
@@ -92,6 +114,12 @@ fileprivate extension AuthenticationViewController {
     func addBackButton() {
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
         view.addSubview(backButton)
+    }
+    
+    func addNicknameTextField() {
+        nicknameTextField.delegate = presenter.textFieldDelegate
+        nicknameTextField.addTarget(self, action: #selector(nicknameTextFieldEditingDidChangeAction), for: .editingChanged)
+        view.addSubview(nicknameTextField)
     }
     
 }
@@ -141,6 +169,53 @@ fileprivate extension AuthenticationViewController {
     
     func configureUI() {
         configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
+        updateFrame()
+        dropShadow()
+    }
+    
+}
+
+// MARK: - Update Frame
+fileprivate extension AuthenticationViewController {
+    
+    func updateFrame() {
+        updateNicknameTextFieldFrame()
+    }
+    
+    func updateNicknameTextFieldFrame() {
+        UIView.animate(withDuration: .zero) {
+            self.nicknameTextField.frame = Self.newFrameForNicknameTextField(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
+            self.view.layoutSubviews()
+            self.viewDidLayoutSubviews()
+        }
+    }
+    
+}
+
+// MARK: - Drop Shadow
+fileprivate extension AuthenticationViewController {
+    
+    func dropShadow() {
+        dropShadowNicknameTextField()
+    }
+    
+    func dropShadowNicknameTextField() {
+        nicknameTextField.dropShadow(color: MDAppStyling.Color.md_Shadow_0_Light_Appearence.color(0.5),
+                                     offSet: .init(width: 2, height: 4),
+                                     radius: 15)
+    }
+    
+}
+
+// MARK: - Round Off Edges
+fileprivate extension AuthenticationViewController {
+    
+    func roundOffEdges() {
+        nicknameTextFieldRoundOffEdges()
+    }
+    
+    func nicknameTextFieldRoundOffEdges() {
+        nicknameTextField.layer.cornerRadius = 10
     }
     
 }
@@ -152,6 +227,10 @@ fileprivate extension AuthenticationViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    @objc func nicknameTextFieldEditingDidChangeAction() {
+        presenter.nicknameTextFieldEditingDidChangeAction(nicknameTextField.text)
+    }
+    
 }
 
 // MARK: - Hide Keyboard
@@ -159,6 +238,18 @@ fileprivate extension AuthenticationViewController {
     
     func hideKeyboardFunc() {
         self.view.endEditing(true)
+    }
+    
+}
+
+// MARK: - New Frame
+fileprivate extension AuthenticationViewController {
+    
+    static func newFrameForNicknameTextField(navBarHeight: CGFloat) -> CGRect {
+        return .init(origin: .init(x: nicknameTextFieldLeftOffset,
+                                   y: navBarHeight + nicknameTextFieldTopOffset),
+                     size: .init(width: MDConstants.Screen.width - (nicknameTextFieldLeftOffset + nicknameTextFieldRightOffset),
+                                 height: nicknameTextFieldHeight))
     }
     
 }
