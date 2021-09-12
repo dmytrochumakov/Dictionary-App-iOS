@@ -33,7 +33,7 @@ final class AuthenticationViewController: BaseAuthViewController {
     fileprivate static let nicknameTextFieldRightOffset: CGFloat = 16
     fileprivate let nicknameTextField: MDTextFieldWithToolBar = {
         let textField: MDTextFieldWithToolBar = .init(frame: newFrameForNicknameTextField(navBarHeight: defaultNavigationBarViewHeight),
-                                                      rectInset: MDConstants.Rect.inset,
+                                                      rectInset: MDConstants.Rect.defaultInset,
                                                       keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.nickname.localized
         textField.autocapitalizationType = .none
@@ -52,10 +52,10 @@ final class AuthenticationViewController: BaseAuthViewController {
     fileprivate static let passwordTextFieldTopOffset: CGFloat = 16
     fileprivate static let passwordTextFieldLeftOffset: CGFloat = 16
     fileprivate static let passwordTextFieldRightOffset: CGFloat = 16
-    fileprivate let passwordTextField: MDTextFieldWithToolBar = {
-        let textField: MDTextFieldWithToolBar = .init(frame: newFrameForPasswordTextField(navBarHeight: defaultNavigationBarViewHeight),
-                                                      rectInset: MDConstants.Rect.inset,
-                                                      keyboardToolbar: .init())
+    fileprivate let passwordTextField: MDPasswordTextFieldWithToolBar = {
+        let textField: MDPasswordTextFieldWithToolBar = .init(frame: newFrameForPasswordTextField(navBarHeight: defaultNavigationBarViewHeight),
+                                                              rectInset: MDConstants.Rect.passwordInset,
+                                                              keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.password.localized
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
@@ -63,6 +63,7 @@ final class AuthenticationViewController: BaseAuthViewController {
         textField.font = MDAppStyling.Font.MyriadProItalic.font(ofSize: 17)
         textField.textColor = MDAppStyling.Color.md_Black_1_Light_Appearence.color()
         textField.returnKeyType = .go
+        textField.isSecureTextEntry = true
         textField.tag = AuthTextFieldTag.password.rawValue
         textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
         return textField

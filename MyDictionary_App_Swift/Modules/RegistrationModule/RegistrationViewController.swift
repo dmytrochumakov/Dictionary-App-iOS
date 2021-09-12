@@ -15,7 +15,7 @@ final class RegistrationViewController: UIViewController {
     fileprivate let nicknameTextFieldHeight: CGFloat = 40
     fileprivate let nicknameTextFieldTopOffset: CGFloat = 56
     fileprivate let nicknameTextField: MDTextFieldWithToolBar = {
-        let textField: MDTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.inset,
+        let textField: MDTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.defaultInset,
                                                       keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.nickname.localized
         textField.autocapitalizationType = .none
@@ -40,7 +40,7 @@ final class RegistrationViewController: UIViewController {
     fileprivate let passwordTextFieldHeight: CGFloat = 40
     fileprivate let passwordTextFieldTopOffset: CGFloat = 16
     fileprivate let passwordTextField: MDTextFieldWithToolBar = {
-        let textField: MDTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.inset,
+        let textField: MDTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.defaultInset,
                                                       keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.password.localized
         textField.autocapitalizationType = .none

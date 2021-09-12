@@ -141,10 +141,15 @@ struct MDConstants {
     }
     
     struct Rect {
-        static let inset: UIEdgeInsets = .init(top: .zero,
-                                               left: 16,
-                                               bottom: .zero,
-                                               right: 28)
+        static let defaultInset: UIEdgeInsets = .init(top: .zero,
+                                                      left: 16,
+                                                      bottom: .zero,
+                                                      right: 28)
+        
+        static let passwordInset: UIEdgeInsets = .init(top: .zero,
+                                                       left: 16,
+                                                       bottom: .zero,
+                                                       right: 38)
     }
     
 }

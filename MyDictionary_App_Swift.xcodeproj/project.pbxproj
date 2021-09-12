@@ -149,6 +149,9 @@
 		2289CEFA2678CC34007254C3 /* MDOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEDD2678CC34007254C3 /* MDOperation.swift */; };
 		2289CEFC2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEFB2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift */; };
 		228AE05626EDDFC20088B4CF /* BaseAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228AE05526EDDFC20088B4CF /* BaseAuthViewController.swift */; };
+		228AE05926EE05120088B4CF /* HideShowPasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228AE05826EE05120088B4CF /* HideShowPasswordTextField.swift */; };
+		228AE05B26EE053D0088B4CF /* PasswordToggleVisibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228AE05A26EE053D0088B4CF /* PasswordToggleVisibilityView.swift */; };
+		228AE05D26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228AE05C26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift */; };
 		228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 228BC440264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld */; };
 		228BC444264979FE0030FB30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228BC443264979FE0030FB30 /* Assets.xcassets */; };
 		228BC447264979FE0030FB30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228BC445264979FE0030FB30 /* LaunchScreen.storyboard */; };
@@ -467,6 +470,9 @@
 		2289CEDD2678CC34007254C3 /* MDOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDOperation.swift; sourceTree = "<group>"; };
 		2289CEFB2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordMemoryStorage_Tests.swift; sourceTree = "<group>"; };
 		228AE05526EDDFC20088B4CF /* BaseAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAuthViewController.swift; sourceTree = "<group>"; };
+		228AE05826EE05120088B4CF /* HideShowPasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideShowPasswordTextField.swift; sourceTree = "<group>"; };
+		228AE05A26EE053D0088B4CF /* PasswordToggleVisibilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordToggleVisibilityView.swift; sourceTree = "<group>"; };
+		228AE05C26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDPasswordTextFieldWithToolBar.swift; sourceTree = "<group>"; };
 		228BC434264979FD0030FB30 /* MyDictionary_App_Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyDictionary_App_Swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		228BC441264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyDictionary_App_Swift.xcdatamodel; sourceTree = "<group>"; };
 		228BC443264979FE0030FB30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -911,6 +917,7 @@
 		2223F8A526512BE8004F2FE9 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
+				228AE05726EE05000088B4CF /* HideShowPasswordTextField */,
 				228AE05426EDDFAF0088B4CF /* BaseAuthViewController */,
 				220FFE7526C9031200702CCE /* MDTextFieldWithToolBar */,
 				220FFE7226C8F82D00702CCE /* KeyboardToolbar */,
@@ -1305,6 +1312,16 @@
 				228AE05526EDDFC20088B4CF /* BaseAuthViewController.swift */,
 			);
 			path = BaseAuthViewController;
+			sourceTree = "<group>";
+		};
+		228AE05726EE05000088B4CF /* HideShowPasswordTextField */ = {
+			isa = PBXGroup;
+			children = (
+				228AE05826EE05120088B4CF /* HideShowPasswordTextField.swift */,
+				228AE05A26EE053D0088B4CF /* PasswordToggleVisibilityView.swift */,
+				228AE05C26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift */,
+			);
+			path = HideShowPasswordTextField;
 			sourceTree = "<group>";
 		};
 		228BC42B264979FD0030FB30 = {
@@ -2144,6 +2161,7 @@
 				225C349526D6746800F3BC9A /* JWTApiRequest.swift in Sources */,
 				2220FCB026D50ABF00B22515 /* MDAPICourse.swift in Sources */,
 				2270F3A426D264E6006B46F4 /* CDCourseResponseEntity+Extension.swift in Sources */,
+				228AE05926EE05120088B4CF /* HideShowPasswordTextField.swift in Sources */,
 				229D2D4626EB53A60047B518 /* ChoiceAuthenticationOrRegistrationViewController.swift in Sources */,
 				2294323226DF9A460073048C /* MDSyncStep.swift in Sources */,
 				22EF01FC269DA90000FE4435 /* MDResponseType.swift in Sources */,
@@ -2198,6 +2216,7 @@
 				220793C526C66F6A003D434B /* AuthValidationType.swift in Sources */,
 				22DE583026C954C00032A94C /* MDDeleteJWTProtocol.swift in Sources */,
 				220FFEB526C9298200702CCE /* MDReadUsersCoreDataStorageOperation.swift in Sources */,
+				228AE05D26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift in Sources */,
 				22A2521426CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift in Sources */,
 				22E2B4F7266509B900978E62 /* SettingsSectionModel.swift in Sources */,
 				220793DA26C6BF58003D434B /* AuthResponse.swift in Sources */,
@@ -2380,6 +2399,7 @@
 				2223F8A826512C1A004F2FE9 /* LocalizableProtocol.swift in Sources */,
 				22DEAE3226C289F100B64B16 /* MDAPIVersion.swift in Sources */,
 				2294323426DF9A520073048C /* MDSyncResult.swift in Sources */,
+				228AE05B26EE053D0088B4CF /* PasswordToggleVisibilityView.swift in Sources */,
 				22B8E6BA26D396B0001CCCA8 /* MDCreateLanguagesCoreDataStorageOperation.swift in Sources */,
 				22B8E6DD26D3C54B001CCCA8 /* MDCourseCoreDataStorage.swift in Sources */,
 				22DB2F8B26C3D4D200C1AADA /* TableViewDelegatePropertyProtocol.swift in Sources */,
