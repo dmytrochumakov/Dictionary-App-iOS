@@ -674,7 +674,6 @@
 			isa = PBXGroup;
 			children = (
 				221D281826C53356004BC4F7 /* AuthenticationTextFieldTag.swift */,
-				227B91D126EF51430086B9AA /* RegistrationTextFieldTag.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1195,6 +1194,14 @@
 			path = SettingsModule;
 			sourceTree = "<group>";
 		};
+		227B91D426EF5AEA0086B9AA /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				227B91D126EF51430086B9AA /* RegistrationTextFieldTag.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		227D8F1326D7A099009CB94B /* AppSettings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1651,6 +1658,7 @@
 		22C5863226C7AFAC0030B12D /* RegistrationModule */ = {
 			isa = PBXGroup;
 			children = (
+				227B91D426EF5AEA0086B9AA /* Enums */,
 				22C5863326C7AFB80030B12D /* RegistrationModule.swift */,
 				22C5863426C7AFB80030B12D /* RegistrationPresenter.swift */,
 				22C5863526C7AFB80030B12D /* RegistrationRouter.swift */,

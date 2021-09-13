@@ -73,6 +73,19 @@ final class RegistrationViewController: BaseDetailAuthViewController {
         return textField
     }()
     
+    fileprivate static let registerButtonHeight: CGFloat = 48
+    fileprivate static let registerButtonLeftOffset: CGFloat = 16
+    fileprivate static let registerButtonRightOffset: CGFloat = 16
+    fileprivate static let registerButtonTopOffset: CGFloat = 16
+    fileprivate let registerButton: UIButton = {
+        let button: UIButton = .init(frame: newFrameForRegisterButton(navBarHeight: defaultNavigationBarViewHeight))
+        button.backgroundColor = MDAppStyling.Color.md_Blue_1_Light_Appearence.color()
+        button.setTitle(KeysForTranslate.register.localized, for: .normal)
+        button.setTitleColor(MDAppStyling.Color.md_White_0_Light_Appearence.color(), for: .normal)
+        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        return button
+    }()
+    
     init(presenter: RegistrationPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: KeysForTranslate.registration.localized)
@@ -130,6 +143,7 @@ fileprivate extension RegistrationViewController {
         addNicknameTextField()
         addPasswordTextField()
         addConfirmPasswordTextField()
+        addRegisterButton()
     }
     
     func addNicknameTextField() {
@@ -148,6 +162,11 @@ fileprivate extension RegistrationViewController {
         confirmPasswordTextField.addTarget(self, action: #selector(confirmPasswordTextFieldEditingDidChangeAction), for: .editingChanged)
         confirmPasswordTextField.delegate = presenter.textFieldDelegate
         view.addSubview(confirmPasswordTextField)
+    }
+    
+    func addRegisterButton() {
+        registerButton.addTarget(self, action: #selector(registerButtonAction), for: .touchUpInside)
+        view.addSubview(registerButton)
     }
     
 }
@@ -170,6 +189,7 @@ fileprivate extension RegistrationViewController {
         updateNicknameTextFieldFrame()
         updatePasswordTextFieldFrame()
         updateConfirmPasswordTextFieldFrame()
+        updateRegisterButtonFrame()
     }
     
     func updateNicknameTextFieldFrame() {
@@ -196,6 +216,16 @@ fileprivate extension RegistrationViewController {
         }
     }
     
+    func updateRegisterButtonFrame() {
+        
+        UIView.animate(withDuration: .zero) {
+            self.registerButton.frame = Self.newFrameForRegisterButton(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
+            self.view.layoutSubviews()
+            self.viewDidLayoutSubviews()
+        }
+        
+    }
+    
 }
 
 // MARK: - Drop Shadow
@@ -205,6 +235,7 @@ fileprivate extension RegistrationViewController {
         dropShadowNicknameTextField()
         dropShadowPasswordTextField()
         dropShadowConfirmPasswordTextField()
+        dropShadowRegisterButton()
     }
     
     func dropShadowNicknameTextField() {
@@ -225,6 +256,13 @@ fileprivate extension RegistrationViewController {
                                             radius: 15)
     }
     
+    func dropShadowRegisterButton() {
+        registerButton.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.7),
+                                  offSet: .init(width: 0,
+                                                height: 4),
+                                  radius: 20)
+    }
+    
 }
 
 // MARK: - Round Off Edges
@@ -234,6 +272,7 @@ fileprivate extension RegistrationViewController {
         nicknameTextFieldRoundOffEdges()
         passwordTextFieldRoundOffEdges()
         confirmPasswordTextFieldRoundOffEdges()
+        registerButtonRoundOffEdges()
     }
     
     func nicknameTextFieldRoundOffEdges() {
@@ -246,6 +285,10 @@ fileprivate extension RegistrationViewController {
     
     func confirmPasswordTextFieldRoundOffEdges() {
         confirmPasswordTextField.layer.cornerRadius = 10
+    }
+    
+    func registerButtonRoundOffEdges() {
+        registerButton.layer.cornerRadius = 10
     }
     
 }
@@ -263,6 +306,10 @@ fileprivate extension RegistrationViewController {
     
     @objc func confirmPasswordTextFieldEditingDidChangeAction() {
         //        presenter.confirmPasswordTextFieldEditingDidChangeAction(confirmPasswordTextField.text)
+    }
+    
+    @objc func registerButtonAction() {
+        
     }
     
 }
@@ -298,6 +345,13 @@ fileprivate extension RegistrationViewController {
                                    y: newFrameForPasswordTextField(navBarHeight: navBarHeight).maxY + confirmPasswordTextFieldTopOffset),
                      size: .init(width: MDConstants.Screen.width - (confirmPasswordTextFieldLeftOffset + confirmPasswordTextFieldRightOffset),
                                  height: confirmPasswordTextFieldHeight))
+    }
+    
+    static func newFrameForRegisterButton(navBarHeight: CGFloat) -> CGRect {
+        return .init(origin: .init(x: registerButtonLeftOffset,
+                                   y: newFrameForConfirmPasswordTextField(navBarHeight: navBarHeight).maxY + registerButtonTopOffset),
+                     size: .init(width: MDConstants.Screen.width - (registerButtonLeftOffset + registerButtonRightOffset),
+                                 height: registerButtonHeight))
     }
     
 }
