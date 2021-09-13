@@ -24,6 +24,7 @@ enum KeysForTranslate: String {
     case nickname
     case login
     case password
+    case confirmPassword = "confirm_password"
     case nicknameIsEmpty = "nickname_Is_Empty"
     case passwordIsEmpty = "password_Is_Empty"
     case ok

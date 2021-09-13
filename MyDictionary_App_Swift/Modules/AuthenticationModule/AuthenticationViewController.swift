@@ -26,7 +26,7 @@ final class AuthenticationViewController: BaseDetailAuthViewController {
         textField.font = MDAppStyling.Font.MyriadProItalic.font(ofSize: 17)
         textField.textColor = MDAppStyling.Color.md_Black_1_Light_Appearence.color()
         textField.returnKeyType = .next
-        textField.tag = AuthTextFieldTag.nickname.rawValue
+        textField.tag = AuthenticationTextFieldTag.nickname.rawValue
         textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
         return textField
     }()
@@ -47,7 +47,7 @@ final class AuthenticationViewController: BaseDetailAuthViewController {
         textField.textColor = MDAppStyling.Color.md_Black_1_Light_Appearence.color()
         textField.returnKeyType = .go
         textField.isSecureTextEntry = true
-        textField.tag = AuthTextFieldTag.password.rawValue
+        textField.tag = AuthenticationTextFieldTag.password.rawValue
         textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
         return textField
     }()

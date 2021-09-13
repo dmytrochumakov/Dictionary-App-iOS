@@ -46,7 +46,7 @@
 		221D281226C5064A004BC4F7 /* AuthenticationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280B26C5064A004BC4F7 /* AuthenticationInteractor.swift */; };
 		221D281326C5064A004BC4F7 /* AuthenticationDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280C26C5064A004BC4F7 /* AuthenticationDataProvider.swift */; };
 		221D281426C5064A004BC4F7 /* AuthenticationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280D26C5064A004BC4F7 /* AuthenticationDataManager.swift */; };
-		221D281926C53356004BC4F7 /* AuthTextFieldTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D281826C53356004BC4F7 /* AuthTextFieldTag.swift */; };
+		221D281926C53356004BC4F7 /* AuthenticationTextFieldTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D281826C53356004BC4F7 /* AuthenticationTextFieldTag.swift */; };
 		221D281C26C533AF004BC4F7 /* AuthTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D281B26C533AF004BC4F7 /* AuthTextFieldDelegate.swift */; };
 		221D281F26C54960004BC4F7 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D281E26C54960004BC4F7 /* KeyboardHandler.swift */; };
 		2220FCB026D50ABF00B22515 /* MDAPICourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220FCAF26D50ABF00B22515 /* MDAPICourse.swift */; };
@@ -120,6 +120,7 @@
 		2270F3A626D2663F006B46F4 /* CDCourseResponseEntityAttributeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A526D2663F006B46F4 /* CDCourseResponseEntityAttributeName.swift */; };
 		2270F3A926D27606006B46F4 /* MDAPILanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A826D27606006B46F4 /* MDAPILanguage.swift */; };
 		227B91D026EF4A1E0086B9AA /* BaseDetailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91CF26EF4A1E0086B9AA /* BaseDetailAuthViewController.swift */; };
+		227B91D226EF51430086B9AA /* RegistrationTextFieldTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91D126EF51430086B9AA /* RegistrationTextFieldTag.swift */; };
 		227D5E642652584700B54524 /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E632652584700B54524 /* NSLayoutConstraint+Extension.swift */; };
 		227D5E672652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E652652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift */; };
 		227D5E6A2652586F00B54524 /* WordListCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E692652586F00B54524 /* WordListCollectionViewDelegate.swift */; };
@@ -368,7 +369,7 @@
 		221D280B26C5064A004BC4F7 /* AuthenticationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationInteractor.swift; sourceTree = "<group>"; };
 		221D280C26C5064A004BC4F7 /* AuthenticationDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationDataProvider.swift; sourceTree = "<group>"; };
 		221D280D26C5064A004BC4F7 /* AuthenticationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationDataManager.swift; sourceTree = "<group>"; };
-		221D281826C53356004BC4F7 /* AuthTextFieldTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextFieldTag.swift; sourceTree = "<group>"; };
+		221D281826C53356004BC4F7 /* AuthenticationTextFieldTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationTextFieldTag.swift; sourceTree = "<group>"; };
 		221D281B26C533AF004BC4F7 /* AuthTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextFieldDelegate.swift; sourceTree = "<group>"; };
 		221D281E26C54960004BC4F7 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
 		2220FCAF26D50ABF00B22515 /* MDAPICourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPICourse.swift; sourceTree = "<group>"; };
@@ -442,6 +443,7 @@
 		2270F3A526D2663F006B46F4 /* CDCourseResponseEntityAttributeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDCourseResponseEntityAttributeName.swift; sourceTree = "<group>"; };
 		2270F3A826D27606006B46F4 /* MDAPILanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPILanguage.swift; sourceTree = "<group>"; };
 		227B91CF26EF4A1E0086B9AA /* BaseDetailAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDetailAuthViewController.swift; sourceTree = "<group>"; };
+		227B91D126EF51430086B9AA /* RegistrationTextFieldTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTextFieldTag.swift; sourceTree = "<group>"; };
 		227D5E632652584700B54524 /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
 		227D5E652652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegateFlowLayoutPropertyProtocol.swift; sourceTree = "<group>"; };
 		227D5E692652586F00B54524 /* WordListCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordListCollectionViewDelegate.swift; sourceTree = "<group>"; };
@@ -671,7 +673,8 @@
 		220793BC26C65BB0003D434B /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				221D281826C53356004BC4F7 /* AuthTextFieldTag.swift */,
+				221D281826C53356004BC4F7 /* AuthenticationTextFieldTag.swift */,
+				227B91D126EF51430086B9AA /* RegistrationTextFieldTag.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -2157,6 +2160,7 @@
 				22B8E6BC26D39840001CCCA8 /* MDReadLanguageCoreDataStorageOperation.swift in Sources */,
 				22BD99AB266A67A60063FEFC /* AppearanceType.swift in Sources */,
 				22493C2E26971413000DA480 /* CoreDataStack.swift in Sources */,
+				227B91D226EF51430086B9AA /* RegistrationTextFieldTag.swift in Sources */,
 				22561C8A26D4CEBA00A6135B /* MDReadAllCoursesCoreDataStorageOperation.swift in Sources */,
 				229D2D4826EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataProvider.swift in Sources */,
 				226FEE7D266B65080044A5F9 /* AppearanceCell.swift in Sources */,
@@ -2330,7 +2334,7 @@
 				22DB2F8D26C3D51500C1AADA /* TableViewDataSourcePropertyProtocol.swift in Sources */,
 				227B91D026EF4A1E0086B9AA /* BaseDetailAuthViewController.swift in Sources */,
 				2223F8B426512F01004F2FE9 /* KeysForTranslate.swift in Sources */,
-				221D281926C53356004BC4F7 /* AuthTextFieldTag.swift in Sources */,
+				221D281926C53356004BC4F7 /* AuthenticationTextFieldTag.swift in Sources */,
 				2289CEEC2678CC34007254C3 /* MDOperationResultWithCompletion.swift in Sources */,
 				2223F8AE26512DEB004F2FE9 /* MDConstants.swift in Sources */,
 				2299016B2668EC3400D8C74E /* AppearanceInteractor.swift in Sources */,

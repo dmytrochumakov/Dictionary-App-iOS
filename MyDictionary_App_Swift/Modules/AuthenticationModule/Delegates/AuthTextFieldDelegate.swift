@@ -41,11 +41,11 @@ extension AuthTextFieldDelegate {
 fileprivate extension AuthTextFieldDelegate {
     
     func isNicknameTextField(_ textField: UITextField) -> Bool {
-        return (textField.tag == AuthTextFieldTag.nickname.rawValue)
+        return (textField.tag == AuthenticationTextFieldTag.nickname.rawValue)
     }
     
     func isPasswordTextField(_ textField: UITextField) -> Bool {
-        return (textField.tag == AuthTextFieldTag.password.rawValue)
+        return (textField.tag == AuthenticationTextFieldTag.password.rawValue)
     }
     
 }
