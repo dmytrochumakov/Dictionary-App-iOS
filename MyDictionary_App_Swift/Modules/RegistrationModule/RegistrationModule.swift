@@ -27,11 +27,11 @@ extension RegistrationModule {
         let dataProvider: RegistrationDataProviderProtocol = RegistrationDataProvider.init()
         var dataManager: RegistrationDataManagerProtocol = RegistrationDataManager.init(dataProvider: dataProvider)
         
-        let textFieldDelegate: AuthTextFieldDelegateProtocol = AuthTextFieldDelegate.init()
+        let textFieldDelegate: RegisterTextFieldDelegateProtocol = RegisterTextFieldDelegate.init()
         
-        let validationTypes: [AuthValidationType] = [.nickname, .password]
-        let authValidation: AuthValidationProtocol = AuthValidation.init(dataProvider: dataProvider,
-                                                                         validationTypes: validationTypes)                
+        let validationTypes: [RegisterValidationType] = [.nickname, .password, .confirmPassword]
+        let registerValidation: RegisterValidationProtocol = RegisterValidation.init(dataProvider: dataProvider,
+                                                                                     validationTypes: validationTypes)
         
         let apiAuth: MDAPIAuthProtocol = MDAPIAuth.init(requestDispatcher: MDConstants.RequestDispatcher.defaultRequestDispatcher(reachability: MDConstants.AppDependencies.dependencies.reachability),
                                                         operationQueueService: MDConstants.AppDependencies.dependencies.operationQueueService)
@@ -53,7 +53,7 @@ extension RegistrationModule {
                                                                     syncManager: syncManager)
         
         let interactor: RegistrationInteractorProtocol = RegistrationInteractor.init(dataManager: dataManager,
-                                                                                     authValidation: authValidation,
+                                                                                     registerValidation: registerValidation,
                                                                                      textFieldDelegate: textFieldDelegate,
                                                                                      apiManager: authManager)
         

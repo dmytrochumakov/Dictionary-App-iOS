@@ -27,6 +27,8 @@ enum KeysForTranslate: String {
     case confirmPassword = "confirm_password"
     case nicknameIsEmpty = "nickname_Is_Empty"
     case passwordIsEmpty = "password_Is_Empty"
+    case confirmPasswordIsEmpty = "confirm_password_Is_Empty"
+    case confirmPasswordAndPasswordDoNotMatch = "confirm_password_and_password_do_not_match"
     case ok
     
     // Api Errors //

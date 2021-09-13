@@ -11,10 +11,12 @@ protocol RegistrationPresenterInputProtocol {
     func registerButtonClicked()
     func nicknameTextFieldEditingDidChangeAction(_ text: String?)
     func passwordTextFieldEditingDidChangeAction(_ text: String?)
+    func confirmPasswordTextFieldEditingDidChangeAction(_ text: String?)
 }
 
 protocol RegistrationPresenterOutputProtocol: AnyObject {
     func makePasswordFieldActive()
+    func makeConfirmPasswordFieldActive()
     func hideKeyboard()
     func showValidationError(_ error: Error)
 }
@@ -54,6 +56,10 @@ extension RegistrationPresenter {
         presenterOutput?.makePasswordFieldActive()
     }
     
+    func makeConfirmPasswordFieldActive() {
+        presenterOutput?.makeConfirmPasswordFieldActive()
+    }
+    
     func hideKeyboard() {
         presenterOutput?.hideKeyboard()
     }
@@ -86,6 +92,10 @@ extension RegistrationPresenter {
     
     func passwordTextFieldEditingDidChangeAction(_ text: String?) {
         interactor.passwordTextFieldEditingDidChangeAction(text)
+    }
+    
+    func confirmPasswordTextFieldEditingDidChangeAction(_ text: String?) {
+        interactor.confirmPasswordTextFieldEditingDidChangeAction(text)
     }
     // End Actions //
     

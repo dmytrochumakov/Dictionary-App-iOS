@@ -124,6 +124,10 @@ extension RegistrationViewController: RegistrationPresenterOutputProtocol {
         passwordTextField.becomeFirstResponder()
     }
     
+    func makeConfirmPasswordFieldActive() {
+        confirmPasswordTextField.becomeFirstResponder()
+    }
+    
     func hideKeyboard() {
         self.hideKeyboardFunc()
     }
@@ -305,11 +309,11 @@ fileprivate extension RegistrationViewController {
     }
     
     @objc func confirmPasswordTextFieldEditingDidChangeAction() {
-        //        presenter.confirmPasswordTextFieldEditingDidChangeAction(confirmPasswordTextField.text)
+        presenter.confirmPasswordTextFieldEditingDidChangeAction(confirmPasswordTextField.text)
     }
     
     @objc func registerButtonAction() {
-        
+        presenter.registerButtonClicked()
     }
     
 }
