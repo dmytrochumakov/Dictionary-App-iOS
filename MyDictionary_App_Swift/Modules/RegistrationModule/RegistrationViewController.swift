@@ -31,6 +31,27 @@ final class RegistrationViewController: BaseDetailAuthViewController {
         return textField
     }()
     
+    fileprivate static let passwordTextFieldHeight: CGFloat = 48
+    fileprivate static let passwordTextFieldTopOffset: CGFloat = 16
+    fileprivate static let passwordTextFieldLeftOffset: CGFloat = 16
+    fileprivate static let passwordTextFieldRightOffset: CGFloat = 16
+    fileprivate let passwordTextField: MDPasswordTextFieldWithToolBar = {
+        let textField: MDPasswordTextFieldWithToolBar = .init(frame: newFrameForPasswordTextField(navBarHeight: defaultNavigationBarViewHeight),
+                                                              rectInset: MDConstants.Rect.passwordInset,
+                                                              keyboardToolbar: .init())
+        textField.placeholder = KeysForTranslate.password.localized
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
+        textField.textAlignment = .left
+        textField.font = MDAppStyling.Font.MyriadProItalic.font(ofSize: 17)
+        textField.textColor = MDAppStyling.Color.md_Black_1_Light_Appearence.color()
+        textField.returnKeyType = .go
+        textField.isSecureTextEntry = true
+        textField.tag = AuthTextFieldTag.password.rawValue
+        textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
+        return textField
+    }()
+    
     init(presenter: RegistrationPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: KeysForTranslate.registration.localized)
@@ -66,7 +87,7 @@ final class RegistrationViewController: BaseDetailAuthViewController {
 extension RegistrationViewController: RegistrationPresenterOutputProtocol {
     
     func makePasswordFieldActive() {
-        
+        passwordTextField.becomeFirstResponder()
     }
     
     func hideKeyboard() {
@@ -86,12 +107,19 @@ fileprivate extension RegistrationViewController {
     
     func addViews() {
         addNicknameTextField()
+        addPasswordTextField()
     }
     
     func addNicknameTextField() {
         nicknameTextField.delegate = presenter.textFieldDelegate
         nicknameTextField.addTarget(self, action: #selector(nicknameTextFieldEditingDidChangeAction), for: .editingChanged)
         view.addSubview(nicknameTextField)
+    }
+    
+    func addPasswordTextField() {
+        passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingDidChangeAction), for: .editingChanged)
+        passwordTextField.delegate = presenter.textFieldDelegate
+        view.addSubview(passwordTextField)
     }
     
 }
@@ -111,12 +139,21 @@ fileprivate extension RegistrationViewController {
 fileprivate extension RegistrationViewController {
     
     func updateFrame() {
-        updateNicknameTextFieldFrame()        
+        updateNicknameTextFieldFrame()
+        updatePasswordTextFieldFrame()
     }
     
     func updateNicknameTextFieldFrame() {
         UIView.animate(withDuration: .zero) {
             self.nicknameTextField.frame = Self.newFrameForNicknameTextField(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
+            self.view.layoutSubviews()
+            self.viewDidLayoutSubviews()
+        }
+    }
+    
+    func updatePasswordTextFieldFrame() {
+        UIView.animate(withDuration: .zero) {
+            self.passwordTextField.frame = Self.newFrameForPasswordTextField(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
             self.view.layoutSubviews()
             self.viewDidLayoutSubviews()
         }
@@ -129,12 +166,37 @@ fileprivate extension RegistrationViewController {
     
     func dropShadow() {
         dropShadowNicknameTextField()
+        dropShadowPasswordTextField()
     }
     
     func dropShadowNicknameTextField() {
         nicknameTextField.dropShadow(color: MDAppStyling.Color.md_Shadow_0_Light_Appearence.color(0.5),
                                      offSet: .init(width: 2, height: 4),
                                      radius: 15)
+    }
+    
+    func dropShadowPasswordTextField() {
+        passwordTextField.dropShadow(color: MDAppStyling.Color.md_Shadow_0_Light_Appearence.color(0.5),
+                                     offSet: .init(width: 2, height: 4),
+                                     radius: 15)
+    }
+    
+}
+
+// MARK: - Round Off Edges
+fileprivate extension RegistrationViewController {
+    
+    func roundOffEdges() {
+        nicknameTextFieldRoundOffEdges()
+        passwordTextFieldRoundOffEdges()
+    }
+    
+    func nicknameTextFieldRoundOffEdges() {
+        nicknameTextField.layer.cornerRadius = 10
+    }
+    
+    func passwordTextFieldRoundOffEdges() {
+        passwordTextField.layer.cornerRadius = 10
     }
     
 }
@@ -146,17 +208,8 @@ fileprivate extension RegistrationViewController {
         presenter.nicknameTextFieldEditingDidChangeAction(nicknameTextField.text)
     }
     
-}
-
-// MARK: - Round Off Edges
-fileprivate extension RegistrationViewController {
-    
-    func roundOffEdges() {
-        nicknameTextFieldRoundOffEdges()
-    }
-    
-    func nicknameTextFieldRoundOffEdges() {
-        nicknameTextField.layer.cornerRadius = 10
+    @objc func passwordTextFieldEditingDidChangeAction() {
+        presenter.passwordTextFieldEditingDidChangeAction(passwordTextField.text)
     }
     
 }
@@ -178,6 +231,13 @@ fileprivate extension RegistrationViewController {
                                    y: navBarHeight + nicknameTextFieldTopOffset),
                      size: .init(width: MDConstants.Screen.width - (nicknameTextFieldLeftOffset + nicknameTextFieldRightOffset),
                                  height: nicknameTextFieldHeight))
+    }
+    
+    static func newFrameForPasswordTextField(navBarHeight: CGFloat) -> CGRect {
+        return .init(origin: .init(x: passwordTextFieldLeftOffset,
+                                   y: newFrameForNicknameTextField(navBarHeight: navBarHeight).maxY + passwordTextFieldTopOffset),
+                     size: .init(width: MDConstants.Screen.width - (passwordTextFieldLeftOffset + passwordTextFieldRightOffset),
+                                 height: passwordTextFieldHeight))
     }
     
 }
