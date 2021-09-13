@@ -10,6 +10,27 @@ final class RegistrationViewController: BaseDetailAuthViewController {
     
     fileprivate let presenter: RegistrationPresenterInputProtocol
     
+    fileprivate static let nicknameTextFieldHeight: CGFloat = 48
+    fileprivate static let nicknameTextFieldTopOffset: CGFloat = 24
+    fileprivate static let nicknameTextFieldLeftOffset: CGFloat = 16
+    fileprivate static let nicknameTextFieldRightOffset: CGFloat = 16
+    fileprivate let nicknameTextField: MDTextFieldWithToolBar = {
+        let textField: MDTextFieldWithToolBar = .init(frame: newFrameForNicknameTextField(navBarHeight: defaultNavigationBarViewHeight),
+                                                      rectInset: MDConstants.Rect.defaultInset,
+                                                      keyboardToolbar: .init())
+        textField.placeholder = KeysForTranslate.nickname.localized
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
+        textField.textAlignment = .left
+        textField.clearButtonMode = .whileEditing
+        textField.font = MDAppStyling.Font.MyriadProItalic.font(ofSize: 17)
+        textField.textColor = MDAppStyling.Color.md_Black_1_Light_Appearence.color()
+        textField.returnKeyType = .next
+        textField.tag = AuthTextFieldTag.nickname.rawValue
+        textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
+        return textField
+    }()
+    
     init(presenter: RegistrationPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: KeysForTranslate.registration.localized)
@@ -36,7 +57,7 @@ final class RegistrationViewController: BaseDetailAuthViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        addConstraints()
+        roundOffEdges()
     }
     
 }
@@ -64,16 +85,13 @@ extension RegistrationViewController: RegistrationPresenterOutputProtocol {
 fileprivate extension RegistrationViewController {
     
     func addViews() {
-        
+        addNicknameTextField()
     }
     
-}
-
-// MARK: - Add Constraints
-fileprivate extension RegistrationViewController {
-    
-    func addConstraints() {
-        
+    func addNicknameTextField() {
+        nicknameTextField.delegate = presenter.textFieldDelegate
+        nicknameTextField.addTarget(self, action: #selector(nicknameTextFieldEditingDidChangeAction), for: .editingChanged)
+        view.addSubview(nicknameTextField)
     }
     
 }
@@ -83,12 +101,63 @@ fileprivate extension RegistrationViewController {
     
     func configureUI() {
         configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
+        updateFrame()
+        dropShadow()
+    }
+    
+}
+
+// MARK: - Update Frame
+fileprivate extension RegistrationViewController {
+    
+    func updateFrame() {
+        updateNicknameTextFieldFrame()        
+    }
+    
+    func updateNicknameTextFieldFrame() {
+        UIView.animate(withDuration: .zero) {
+            self.nicknameTextField.frame = Self.newFrameForNicknameTextField(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
+            self.view.layoutSubviews()
+            self.viewDidLayoutSubviews()
+        }
+    }
+    
+}
+
+// MARK: - Drop Shadow
+fileprivate extension RegistrationViewController {
+    
+    func dropShadow() {
+        dropShadowNicknameTextField()
+    }
+    
+    func dropShadowNicknameTextField() {
+        nicknameTextField.dropShadow(color: MDAppStyling.Color.md_Shadow_0_Light_Appearence.color(0.5),
+                                     offSet: .init(width: 2, height: 4),
+                                     radius: 15)
     }
     
 }
 
 // MARK: - Actions
 fileprivate extension RegistrationViewController {
+    
+    @objc func nicknameTextFieldEditingDidChangeAction() {
+        presenter.nicknameTextFieldEditingDidChangeAction(nicknameTextField.text)
+    }
+    
+}
+
+// MARK: - Round Off Edges
+fileprivate extension RegistrationViewController {
+    
+    func roundOffEdges() {
+        nicknameTextFieldRoundOffEdges()
+    }
+    
+    func nicknameTextFieldRoundOffEdges() {
+        nicknameTextField.layer.cornerRadius = 10
+    }
     
 }
 
@@ -97,6 +166,18 @@ fileprivate extension RegistrationViewController {
     
     func hideKeyboardFunc() {
         self.view.endEditing(true)
+    }
+    
+}
+
+// MARK: - New Frame
+fileprivate extension RegistrationViewController {
+    
+    static func newFrameForNicknameTextField(navBarHeight: CGFloat) -> CGRect {
+        return .init(origin: .init(x: nicknameTextFieldLeftOffset,
+                                   y: navBarHeight + nicknameTextFieldTopOffset),
+                     size: .init(width: MDConstants.Screen.width - (nicknameTextFieldLeftOffset + nicknameTextFieldRightOffset),
+                                 height: nicknameTextFieldHeight))
     }
     
 }

@@ -90,7 +90,7 @@ final class AuthenticationViewController: BaseDetailAuthViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()        
+        super.viewDidLayoutSubviews()
         roundOffEdges()
     }
     
@@ -244,10 +244,6 @@ fileprivate extension AuthenticationViewController {
 
 // MARK: - Actions
 fileprivate extension AuthenticationViewController {
-    
-    @objc func backButtonAction() {
-        navigationController?.popViewController(animated: true)
-    }
     
     @objc func loginButtonAction() {
         presenter.loginButtonClicked()
