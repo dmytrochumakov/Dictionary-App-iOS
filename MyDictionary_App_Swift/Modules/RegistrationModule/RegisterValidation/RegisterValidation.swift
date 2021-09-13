@@ -50,16 +50,12 @@ final class RegisterValidation: NSObject, RegisterValidationProtocol {
             case .nickname:
                 result.append(RegisterValidationLogic.textIsEmpty(validationType: type,
                                                                   text: dataProvider.nickname))
-            case .password:
+            case .password,
+                 .confirmPassword:
                 
                 result.append(RegisterValidationLogic.confirmPasswordIsEqualPassword(validationType: type,
                                                                                      confirmPassword: dataProvider.confirmPassword,
-                                                                                     password: dataProvider.password))
-            case .confirmPassword:
-                
-                result.append(RegisterValidationLogic.confirmPasswordIsEqualPassword(validationType: type,
-                                                                                     confirmPassword: dataProvider.confirmPassword,
-                                                                                     password: dataProvider.password))
+                                                                                     password: dataProvider.password))            
             }
         }
         return result
