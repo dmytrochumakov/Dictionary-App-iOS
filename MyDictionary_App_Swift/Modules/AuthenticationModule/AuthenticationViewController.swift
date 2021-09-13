@@ -6,26 +6,9 @@
 
 import UIKit
 
-final class AuthenticationViewController: BaseAuthViewController {
+final class AuthenticationViewController: BaseDetailAuthViewController {
     
     fileprivate let presenter: AuthenticationPresenterInputProtocol
-    
-    fileprivate let backButtonSize: CGSize = .init(width: 40, height: 40)
-    fileprivate let backButton: UIButton = {
-        let button: UIButton = .init()
-        button.setImage(MDAppStyling.Image.back_white_arrow.image, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    fileprivate let loginLabel: UILabel = {
-        let label: UILabel = .init()
-        label.font = MDAppStyling.Font.MyriadProSemiBold.font(ofSize: 34)
-        label.text = KeysForTranslate.login.localized
-        label.textColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
     
     fileprivate static let nicknameTextFieldHeight: CGFloat = 48
     fileprivate static let nicknameTextFieldTopOffset: CGFloat = 24
@@ -84,7 +67,7 @@ final class AuthenticationViewController: BaseAuthViewController {
     
     init(presenter: AuthenticationPresenterInputProtocol) {
         self.presenter = presenter
-        super.init()
+        super.init(title: KeysForTranslate.login.localized)
         updateBackgroundImage(MDAppStyling.Image.background_typography_1.image)
     }
     
@@ -107,8 +90,7 @@ final class AuthenticationViewController: BaseAuthViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        addConstraints()
+        super.viewDidLayoutSubviews()        
         roundOffEdges()
     }
     
@@ -137,20 +119,9 @@ extension AuthenticationViewController: AuthenticationPresenterOutputProtocol {
 fileprivate extension AuthenticationViewController {
     
     func addViews() {
-        addLoginLabel()
-        addBackButton()
         addNicknameTextField()
         addPasswordTextField()
         addLoginButton()
-    }
-    
-    func addLoginLabel() {
-        view.addSubview(loginLabel)
-    }
-    
-    func addBackButton() {
-        backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-        view.addSubview(backButton)
     }
     
     func addNicknameTextField() {
@@ -168,46 +139,6 @@ fileprivate extension AuthenticationViewController {
     func addLoginButton() {
         loginButton.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
         view.addSubview(loginButton)
-    }
-    
-}
-
-// MARK: - Add Constraints
-fileprivate extension AuthenticationViewController {
-    
-    func addConstraints() {
-        addLoginLabelConstraints()
-        addBackButtonConstraints()
-    }
-    
-    func addLoginLabelConstraints() {
-        
-        NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.loginLabel,
-                                                             toItem: self.navigationBarView,
-                                                             constant: 16)
-        
-        NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.loginLabel,
-                                                              toItem: self.navigationBarView,
-                                                              constant: -16)
-        
-        NSLayoutConstraint.addEqualBottomConstraintAndActivate(item: self.loginLabel,
-                                                               toItem: self.navigationBarView,
-                                                               constant: -16)
-        
-    }
-    
-    func addBackButtonConstraints() {
-        
-        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.backButton,
-                                                         attribute: .bottom,
-                                                         toItem: self.loginLabel,
-                                                         attribute: .top,
-                                                         constant: -16)
-        
-        NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.backButton,
-                                                             toItem: self.navigationBarView,
-                                                             constant: 18)
-        
     }
     
 }

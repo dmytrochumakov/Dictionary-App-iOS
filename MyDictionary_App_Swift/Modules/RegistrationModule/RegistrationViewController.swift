@@ -6,13 +6,13 @@
 
 import UIKit
 
-final class RegistrationViewController: BaseAuthViewController {
+final class RegistrationViewController: BaseDetailAuthViewController {
     
     fileprivate let presenter: RegistrationPresenterInputProtocol
     
     init(presenter: RegistrationPresenterInputProtocol) {
         self.presenter = presenter
-        super.init()
+        super.init(title: KeysForTranslate.registration.localized)
         updateBackgroundImage(MDAppStyling.Image.background_typography_2.image)
     }
     
