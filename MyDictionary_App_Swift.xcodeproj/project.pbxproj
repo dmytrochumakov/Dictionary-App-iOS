@@ -264,6 +264,8 @@
 		22CA08892651603A0052D169 /* WordListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA08882651603A0052D169 /* WordListDataProvider.swift */; };
 		22CA088C265165460052D169 /* MDAppStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088B265165460052D169 /* MDAppStyling.swift */; };
 		22CA088E265167620052D169 /* ReloadDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088D265167620052D169 /* ReloadDataProtocol.swift */; };
+		22CD45F026F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */; };
+		22CD45F226F090F20060978D /* MDCounterTextFieldWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */; };
 		22DB2F7726C3BE7900C1AADA /* CourseListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7026C3BE7900C1AADA /* CourseListModule.swift */; };
 		22DB2F7826C3BE7900C1AADA /* CourseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7126C3BE7900C1AADA /* CourseListPresenter.swift */; };
 		22DB2F7926C3BE7900C1AADA /* CourseListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7226C3BE7900C1AADA /* CourseListRouter.swift */; };
@@ -597,6 +599,8 @@
 		22CA08882651603A0052D169 /* WordListDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListDataProvider.swift; sourceTree = "<group>"; };
 		22CA088B265165460052D169 /* MDAppStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppStyling.swift; sourceTree = "<group>"; };
 		22CA088D265167620052D169 /* ReloadDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadDataProtocol.swift; sourceTree = "<group>"; };
+		22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCounterPasswordTextFieldWithToolBar.swift; sourceTree = "<group>"; };
+		22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCounterTextFieldWithToolBar.swift; sourceTree = "<group>"; };
 		22DB2F7026C3BE7900C1AADA /* CourseListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListModule.swift; sourceTree = "<group>"; };
 		22DB2F7126C3BE7900C1AADA /* CourseListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListPresenter.swift; sourceTree = "<group>"; };
 		22DB2F7226C3BE7900C1AADA /* CourseListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListRouter.swift; sourceTree = "<group>"; };
@@ -933,6 +937,7 @@
 		2223F8A526512BE8004F2FE9 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
+				22CD45EE26F090BD0060978D /* CounterTextField */,
 				228AE05726EE05000088B4CF /* HideShowPasswordTextField */,
 				228AE05426EDDFAF0088B4CF /* BaseViewControllers */,
 				220FFE7526C9031200702CCE /* MDTextFieldWithToolBar */,
@@ -1798,6 +1803,15 @@
 			path = AppStyling;
 			sourceTree = "<group>";
 		};
+		22CD45EE26F090BD0060978D /* CounterTextField */ = {
+			isa = PBXGroup;
+			children = (
+				22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */,
+				22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */,
+			);
+			path = CounterTextField;
+			sourceTree = "<group>";
+		};
 		22DB2F6F26C3BE3C00C1AADA /* CourseListModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -2292,6 +2306,7 @@
 				22493C3726972232000DA480 /* MDWordCoreDataStorage.swift in Sources */,
 				2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */,
 				2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */,
+				22CD45F226F090F20060978D /* MDCounterTextFieldWithToolBar.swift in Sources */,
 				22BD99A0266A4AB10063FEFC /* WordListModule.swift in Sources */,
 				22EF01EC269DA70300FE4435 /* Endpoint.swift in Sources */,
 				220793D326C6B303003D434B /* Encodable+Extension.swift in Sources */,
@@ -2465,6 +2480,7 @@
 				22B8E6B226D38D6D001CCCA8 /* MDReadAllLanguagesMemoryStorageOperation.swift in Sources */,
 				22C5863A26C7AFB80030B12D /* RegistrationModule.swift in Sources */,
 				22C5863126C7A5690030B12D /* MDAPIAuthError.swift in Sources */,
+				22CD45F026F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift in Sources */,
 				22B8E6B426D38F5C001CCCA8 /* MDDeleteAllLanguagesMemoryStorageOperation.swift in Sources */,
 				22E2B4E62664EB8000978E62 /* SettingsCollectionViewDelegate.swift in Sources */,
 				221D281F26C54960004BC4F7 /* KeyboardHandler.swift in Sources */,

@@ -11,13 +11,13 @@ final class RegistrationViewController: BaseDetailAuthViewController {
     fileprivate let presenter: RegistrationPresenterInputProtocol
     
     fileprivate static let nicknameTextFieldHeight: CGFloat = 48
-    fileprivate static let nicknameTextFieldTopOffset: CGFloat = 24
+    fileprivate static let nicknameTextFieldTopOffset: CGFloat = 28
     fileprivate static let nicknameTextFieldLeftOffset: CGFloat = 16
     fileprivate static let nicknameTextFieldRightOffset: CGFloat = 16
-    fileprivate let nicknameTextField: MDTextFieldWithToolBar = {
-        let textField: MDTextFieldWithToolBar = .init(frame: newFrameForNicknameTextField(navBarHeight: defaultNavigationBarViewHeight),
-                                                      rectInset: MDConstants.Rect.defaultInset,
-                                                      keyboardToolbar: .init())
+    fileprivate let nicknameTextField: MDCounterTextFieldWithToolBar = {
+        let textField: MDCounterTextFieldWithToolBar = .init(frame: newFrameForNicknameTextField(navBarHeight: defaultNavigationBarViewHeight),
+                                                             rectInset: MDConstants.Rect.defaultInset,
+                                                             keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.nickname.localized
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
@@ -28,17 +28,19 @@ final class RegistrationViewController: BaseDetailAuthViewController {
         textField.returnKeyType = .next
         textField.tag = RegistrationTextFieldTag.nickname.rawValue
         textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
+        textField.updateCounter(currentCount: .zero,
+                                maxCount: MDConstants.Text.MaxCountCharacters.nicknameTextField)
         return textField
     }()
     
     fileprivate static let passwordTextFieldHeight: CGFloat = 48
-    fileprivate static let passwordTextFieldTopOffset: CGFloat = 16
+    fileprivate static let passwordTextFieldTopOffset: CGFloat = 20
     fileprivate static let passwordTextFieldLeftOffset: CGFloat = 16
     fileprivate static let passwordTextFieldRightOffset: CGFloat = 16
-    fileprivate let passwordTextField: MDPasswordTextFieldWithToolBar = {
-        let textField: MDPasswordTextFieldWithToolBar = .init(frame: newFrameForPasswordTextField(navBarHeight: defaultNavigationBarViewHeight),
-                                                              rectInset: MDConstants.Rect.passwordInset,
-                                                              keyboardToolbar: .init())
+    fileprivate let passwordTextField: MDCounterPasswordTextFieldWithToolBar = {
+        let textField: MDCounterPasswordTextFieldWithToolBar = .init(frame: newFrameForPasswordTextField(navBarHeight: defaultNavigationBarViewHeight),
+                                                                     rectInset: MDConstants.Rect.passwordInset,
+                                                                     keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.password.localized
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
@@ -49,17 +51,19 @@ final class RegistrationViewController: BaseDetailAuthViewController {
         textField.isSecureTextEntry = true
         textField.tag = RegistrationTextFieldTag.password.rawValue
         textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
+        textField.updateCounter(currentCount: .zero,
+                                maxCount: MDConstants.Text.MaxCountCharacters.passwordTextField)
         return textField
     }()
     
     fileprivate static let confirmPasswordTextFieldHeight: CGFloat = 48
-    fileprivate static let confirmPasswordTextFieldTopOffset: CGFloat = 16
+    fileprivate static let confirmPasswordTextFieldTopOffset: CGFloat = 20
     fileprivate static let confirmPasswordTextFieldLeftOffset: CGFloat = 16
     fileprivate static let confirmPasswordTextFieldRightOffset: CGFloat = 16
-    fileprivate let confirmPasswordTextField: MDPasswordTextFieldWithToolBar = {
-        let textField: MDPasswordTextFieldWithToolBar = .init(frame: newFrameForConfirmPasswordTextField(navBarHeight: defaultNavigationBarViewHeight),
-                                                              rectInset: MDConstants.Rect.passwordInset,
-                                                              keyboardToolbar: .init())
+    fileprivate let confirmPasswordTextField: MDCounterPasswordTextFieldWithToolBar = {
+        let textField: MDCounterPasswordTextFieldWithToolBar = .init(frame: newFrameForConfirmPasswordTextField(navBarHeight: defaultNavigationBarViewHeight),
+                                                                     rectInset: MDConstants.Rect.passwordInset,
+                                                                     keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.confirmPassword.localized
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
@@ -70,13 +74,15 @@ final class RegistrationViewController: BaseDetailAuthViewController {
         textField.isSecureTextEntry = true
         textField.tag = RegistrationTextFieldTag.confirmPassword.rawValue
         textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
+        textField.updateCounter(currentCount: .zero,
+                                maxCount: MDConstants.Text.MaxCountCharacters.passwordTextField)
         return textField
     }()
     
     fileprivate static let registerButtonHeight: CGFloat = 48
+    fileprivate static let registerButtonTopOffset: CGFloat = 20
     fileprivate static let registerButtonLeftOffset: CGFloat = 16
     fileprivate static let registerButtonRightOffset: CGFloat = 16
-    fileprivate static let registerButtonTopOffset: CGFloat = 16
     fileprivate let registerButton: UIButton = {
         let button: UIButton = .init(frame: newFrameForRegisterButton(navBarHeight: defaultNavigationBarViewHeight))
         button.backgroundColor = MDAppStyling.Color.md_Blue_1_Light_Appearence.color()

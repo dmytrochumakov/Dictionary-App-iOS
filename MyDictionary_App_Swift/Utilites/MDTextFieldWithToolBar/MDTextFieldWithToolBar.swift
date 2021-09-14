@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MDTextFieldWithToolBar: UITextField {
+open class MDTextFieldWithToolBar: UITextField {
     
     fileprivate let keyboardToolbar: MDKeyboardToolbar
     fileprivate let rectInset: UIEdgeInsets
@@ -24,15 +24,15 @@ final class MDTextFieldWithToolBar: UITextField {
         
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
+    open override func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: rectInset)
     }
     
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+    open override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: rectInset)
     }
     

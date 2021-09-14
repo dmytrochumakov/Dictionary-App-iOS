@@ -20,6 +20,7 @@ struct MDConstants {
         static let momExtension: String = "mom"
         static let sqliteExtension: String = "sqlite"
         static let spaceString: String = " "
+        static let forwardSlash: String = "/"
     }
     
     struct HTTPHeaderConstants {
@@ -164,7 +165,7 @@ struct MDConstants {
         
         struct MaxCountCharacters {
             static let nicknameTextField: Int = 255
-            static let passwordTextField: Int = 255            
+            static let passwordTextField: Int = 255
         }
         
     }
