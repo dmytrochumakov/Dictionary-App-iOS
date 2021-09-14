@@ -131,6 +131,11 @@ extension RegistrationViewController: RegistrationPresenterOutputProtocol {
                                         maxCount: MDConstants.Text.MaxCountCharacters.nicknameTextField)
     }
     
+    func updatePasswordFieldCounter(_ count: Int) {
+        passwordTextField.updateCounter(currentCount: count,
+                                        maxCount: MDConstants.Text.MaxCountCharacters.passwordTextField)
+    }
+    
     func makePasswordFieldActive() {
         passwordTextField.becomeFirstResponder()
     }

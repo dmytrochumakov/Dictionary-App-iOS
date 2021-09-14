@@ -7,20 +7,30 @@
 import UIKit
 
 protocol RegistrationInteractorInputProtocol {
+    
     var textFieldDelegate: RegisterTextFieldDelegateProtocol { get }
+    
     func nicknameTextFieldEditingDidChangeAction(_ text: String?)
     func passwordTextFieldEditingDidChangeAction(_ text: String?)
     func confirmPasswordTextFieldEditingDidChangeAction(_ text: String?)
+    
     func registerButtonClicked()
+    
 }
 
 protocol RegistrationInteractorOutputProtocol: AnyObject {
+    
     func makePasswordFieldActive()
     func makeConfirmPasswordFieldActive()
+    
     func updateNicknameFieldCounter(_ count: Int)
+    func updatePasswordFieldCounter(_ count: Int)
+    
     func hideKeyboard()
+    
     func showValidationError(_ error: Error)
     func showCourseList()
+    
 }
 
 protocol RegistrationInteractorProtocol: RegistrationInteractorInputProtocol,
@@ -76,6 +86,7 @@ extension RegistrationInteractor {
     
     func passwordTextFieldEditingDidChangeAction(_ text: String?) {
         dataManager.setPassword(text)
+        interactorOutput?.updatePasswordFieldCounter(text?.count ?? .zero)
     }
     
     func confirmPasswordTextFieldEditingDidChangeAction(_ text: String?) {

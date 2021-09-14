@@ -7,19 +7,29 @@
 import UIKit
 
 protocol RegistrationPresenterInputProtocol {
-    var textFieldDelegate: UITextFieldDelegate { get }    
+    
+    var textFieldDelegate: UITextFieldDelegate { get }
+    
     func registerButtonClicked()
+    
     func nicknameTextFieldEditingDidChangeAction(_ text: String?)
     func passwordTextFieldEditingDidChangeAction(_ text: String?)
     func confirmPasswordTextFieldEditingDidChangeAction(_ text: String?)
+    
 }
 
 protocol RegistrationPresenterOutputProtocol: AnyObject {
+    
     func updateNicknameFieldCounter(_ count: Int)
+    func updatePasswordFieldCounter(_ count: Int)
+    
     func makePasswordFieldActive()
     func makeConfirmPasswordFieldActive()
+    
     func hideKeyboard()
+    
     func showValidationError(_ error: Error)
+    
 }
 
 protocol RegistrationPresenterProtocol: RegistrationPresenterInputProtocol,
@@ -55,6 +65,10 @@ extension RegistrationPresenter {
     
     func updateNicknameFieldCounter(_ count: Int) {
         presenterOutput?.updateNicknameFieldCounter(count)
+    }
+    
+    func updatePasswordFieldCounter(_ count: Int) {
+        presenterOutput?.updatePasswordFieldCounter(count)
     }
     
     func makePasswordFieldActive() {
