@@ -79,15 +79,15 @@ fileprivate extension BaseDetailAuthViewController {
     
     func addTitleLabelConstraints() {
         
-        NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.titleLabel,
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.titleLabel,
                                                              toItem: self.navigationBarView,
                                                              constant: 16)
         
-        NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.titleLabel,
+        NSLayoutConstraint.addEqualRightConstraint(item: self.titleLabel,
                                                               toItem: self.navigationBarView,
                                                               constant: -16)
         
-        NSLayoutConstraint.addEqualBottomConstraintAndActivate(item: self.titleLabel,
+        NSLayoutConstraint.addEqualBottomConstraint(item: self.titleLabel,
                                                                toItem: self.navigationBarView,
                                                                constant: -16)
         
@@ -95,13 +95,13 @@ fileprivate extension BaseDetailAuthViewController {
     
     func addBackButtonConstraints() {
         
-        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.backButton,
+        NSLayoutConstraint.addEqualConstraint(item: self.backButton,
                                                          attribute: .bottom,
                                                          toItem: self.titleLabel,
                                                          attribute: .top,
                                                          constant: -16)
         
-        NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.backButton,
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.backButton,
                                                              toItem: self.navigationBarView,
                                                              constant: 18)
         

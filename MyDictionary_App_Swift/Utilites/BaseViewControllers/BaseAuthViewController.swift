@@ -85,40 +85,40 @@ extension BaseAuthViewController {
     
     func addNavigationBarViewConstraints() {
         
-        NSLayoutConstraint.addEqualTopConstraintAndActivate(item: self.navigationBarView,
+        NSLayoutConstraint.addEqualTopConstraint(item: self.navigationBarView,
                                                             toItem: self.view,
                                                             constant: .zero)
         
-        NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.navigationBarView,
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.navigationBarView,
                                                              toItem: self.view,
                                                              constant: .zero)
         
-        NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.navigationBarView,
+        NSLayoutConstraint.addEqualRightConstraint(item: self.navigationBarView,
                                                               toItem: self.view,
                                                               constant: .zero)
         
-        NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.navigationBarView,
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.navigationBarView,
                                                                constant: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
         
     }
     
     func addBackgroundImageViewConstraints() {
         
-        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.backgroundImageView,
+        NSLayoutConstraint.addEqualConstraint(item: self.backgroundImageView,
                                                          attribute: .top,
                                                          toItem: self.navigationBarView,
                                                          attribute: .bottom,
                                                          constant: .zero)
         
-        NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.backgroundImageView,
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.backgroundImageView,
                                                              toItem: self.view,
                                                              constant: .zero)
         
-        NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.backgroundImageView,
+        NSLayoutConstraint.addEqualRightConstraint(item: self.backgroundImageView,
                                                               toItem: self.view,
                                                               constant: .zero)
         
-        NSLayoutConstraint.addEqualBottomConstraintAndActivate(item: self.backgroundImageView,
+        NSLayoutConstraint.addEqualBottomConstraint(item: self.backgroundImageView,
                                                                toItem: self.view,
                                                                constant: .zero)
         

@@ -68,16 +68,16 @@ fileprivate extension SettingsCell {
     }
     
     func addTitleLabelConstraints() {
-        NSLayoutConstraint.addEqualTopConstraintAndActivate(item: titleLabel,
+        NSLayoutConstraint.addEqualTopConstraint(item: titleLabel,
                                                             toItem: self,
                                                             constant: .zero)
-        NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: titleLabel,
+        NSLayoutConstraint.addEqualLeftConstraint(item: titleLabel,
                                                              toItem: self,
                                                              constant: 16)
-        NSLayoutConstraint.addEqualRightConstraintAndActivate(item: titleLabel,
+        NSLayoutConstraint.addEqualRightConstraint(item: titleLabel,
                                                               toItem: self,
                                                               constant: .zero)
-        NSLayoutConstraint.addEqualBottomConstraintAndActivate(item: titleLabel,
+        NSLayoutConstraint.addEqualBottomConstraint(item: titleLabel,
                                                                toItem: self,
                                                                constant: .zero)
     }

@@ -12,21 +12,21 @@ extension NSLayoutConstraint {
     static func addItemEqualToItemAndActivate(item view1: Any, toItem view2: Any?) {
         let constant: CGFloat = .zero
         
-        Self.addEqualTopConstraintAndActivate(item: view1,
-                                              toItem: view2,
-                                              constant: constant)
+        Self.addEqualTopConstraint(item: view1,
+                                   toItem: view2,
+                                   constant: constant)
         
-        Self.addEqualLeftConstraintAndActivate(item: view1,
-                                               toItem: view2,
-                                               constant: constant)
+        Self.addEqualLeftConstraint(item: view1,
+                                    toItem: view2,
+                                    constant: constant)
         
-        Self.addEqualRightConstraintAndActivate(item: view1,
-                                                toItem: view2,
-                                                constant: constant)
+        Self.addEqualRightConstraint(item: view1,
+                                     toItem: view2,
+                                     constant: constant)
         
-        Self.addEqualBottomConstraintAndActivate(item: view1,
-                                                 toItem: view2,
-                                                 constant: constant)
+        Self.addEqualBottomConstraint(item: view1,
+                                      toItem: view2,
+                                      constant: constant)
         
     }
     
@@ -35,13 +35,15 @@ extension NSLayoutConstraint {
 extension NSLayoutConstraint {
     
     /// - Parameter multiplier: 1
+    /// - Parameter isActive: false
     @discardableResult
-    static func addEqualConstraintAndActivate(item view1: Any,
-                                              attribute attribute1: NSLayoutConstraint.Attribute,
-                                              toItem view2: Any?,
-                                              attribute attribute2: NSLayoutConstraint.Attribute,
-                                              multiplier: CGFloat = 1,
-                                              constant: CGFloat) -> NSLayoutConstraint {
+    static func addEqualConstraint(item view1: Any,
+                                   attribute attribute1: NSLayoutConstraint.Attribute,
+                                   toItem view2: Any?,
+                                   attribute attribute2: NSLayoutConstraint.Attribute,
+                                   multiplier: CGFloat = 1,
+                                   constant: CGFloat,
+                                   isActive: Bool = false) -> NSLayoutConstraint {
         
         let constraint: NSLayoutConstraint = .init(item: view1,
                                                    attribute: attribute1,
@@ -51,18 +53,20 @@ extension NSLayoutConstraint {
                                                    multiplier: multiplier,
                                                    constant: constant)
         
-        constraint.isActive = true
+        constraint.isActive = isActive
         
         return constraint
         
     }
     
     /// - Parameter multiplier: 1
+    /// - Parameter isActive: false
     @discardableResult
-    static func addEqualTopConstraintAndActivate(item view1: Any,
-                                                 toItem view2: Any?,
-                                                 multiplier: CGFloat = 1,
-                                                 constant: CGFloat) -> NSLayoutConstraint {
+    static func addEqualTopConstraint(item view1: Any,
+                                      toItem view2: Any?,
+                                      multiplier: CGFloat = 1,
+                                      constant: CGFloat,
+                                      isActive: Bool = false) -> NSLayoutConstraint {
         
         let constraint: NSLayoutConstraint = .init(item: view1,
                                                    attribute: .top,
@@ -72,18 +76,20 @@ extension NSLayoutConstraint {
                                                    multiplier: multiplier,
                                                    constant: constant)
         
-        constraint.isActive = true
+        constraint.isActive = isActive
         
         return constraint
         
     }
     
     /// - Parameter multiplier: 1
+    /// - Parameter isActive: false
     @discardableResult
-    static func addEqualLeftConstraintAndActivate(item view1: Any,
-                                                  toItem view2: Any?,
-                                                  multiplier: CGFloat = 1,
-                                                  constant: CGFloat) -> NSLayoutConstraint {
+    static func addEqualLeftConstraint(item view1: Any,
+                                       toItem view2: Any?,
+                                       multiplier: CGFloat = 1,
+                                       constant: CGFloat,
+                                       isActive: Bool = false) -> NSLayoutConstraint {
         
         let constraint: NSLayoutConstraint = .init(item: view1,
                                                    attribute: .left,
@@ -93,18 +99,20 @@ extension NSLayoutConstraint {
                                                    multiplier: multiplier,
                                                    constant: constant)
         
-        constraint.isActive = true
+        constraint.isActive = isActive
         
         return constraint
         
     }
     
     /// - Parameter multiplier: 1
+    /// - Parameter isActive: false
     @discardableResult
-    static func addEqualRightConstraintAndActivate(item view1: Any,
-                                                   toItem view2: Any?,
-                                                   multiplier: CGFloat = 1,
-                                                   constant: CGFloat) -> NSLayoutConstraint {
+    static func addEqualRightConstraint(item view1: Any,
+                                        toItem view2: Any?,
+                                        multiplier: CGFloat = 1,
+                                        constant: CGFloat,
+                                        isActive: Bool = false) -> NSLayoutConstraint {
         
         let constraint: NSLayoutConstraint = .init(item: view1,
                                                    attribute: .right,
@@ -114,18 +122,20 @@ extension NSLayoutConstraint {
                                                    multiplier: multiplier,
                                                    constant: constant)
         
-        constraint.isActive = true
+        constraint.isActive = isActive
         
         return constraint
         
     }
     
     /// - Parameter multiplier: 1
+    /// - Parameter isActive: false
     @discardableResult
-    static func addEqualBottomConstraintAndActivate(item view1: Any,
-                                                    toItem view2: Any?,
-                                                    multiplier: CGFloat = 1,
-                                                    constant: CGFloat) -> NSLayoutConstraint {
+    static func addEqualBottomConstraint(item view1: Any,
+                                         toItem view2: Any?,
+                                         multiplier: CGFloat = 1,
+                                         constant: CGFloat,
+                                         isActive: Bool = false) -> NSLayoutConstraint {
         
         let constraint: NSLayoutConstraint = .init(item: view1,
                                                    attribute: .bottom,
@@ -134,18 +144,20 @@ extension NSLayoutConstraint {
                                                    attribute: .bottom,
                                                    multiplier: multiplier,
                                                    constant: constant)
-        constraint.isActive = true
+        constraint.isActive = isActive
         
         return constraint
         
     }
     
     /// - Parameter multiplier: 1
+    /// - Parameter isActive: false
     @discardableResult
-    static func addEqualCenterXConstraintAndActivate(item view1: Any,
-                                                     toItem view2: Any?,
-                                                     multiplier: CGFloat = 1,
-                                                     constant: CGFloat) -> NSLayoutConstraint {
+    static func addEqualCenterXConstraint(item view1: Any,
+                                          toItem view2: Any?,
+                                          multiplier: CGFloat = 1,
+                                          constant: CGFloat,
+                                          isActive: Bool = false) -> NSLayoutConstraint {
         
         let constraint: NSLayoutConstraint = .init(item: view1,
                                                    attribute: .centerX,
@@ -155,18 +167,20 @@ extension NSLayoutConstraint {
                                                    multiplier: multiplier,
                                                    constant: constant)
         
-        constraint.isActive = true
+        constraint.isActive = isActive
         
         return constraint
         
     }
     
     /// - Parameter multiplier: 1
+    /// - Parameter isActive: false
     @discardableResult
-    static func addEqualCenterYConstraintAndActivate(item view1: Any,
-                                                     toItem view2: Any?,
-                                                     multiplier: CGFloat = 1,
-                                                     constant: CGFloat) -> NSLayoutConstraint {
+    static func addEqualCenterYConstraint(item view1: Any,
+                                          toItem view2: Any?,
+                                          multiplier: CGFloat = 1,
+                                          constant: CGFloat,
+                                          isActive: Bool = false) -> NSLayoutConstraint {
         
         let constraint: NSLayoutConstraint = .init(item: view1,
                                                    attribute: .centerY,
@@ -176,17 +190,19 @@ extension NSLayoutConstraint {
                                                    multiplier: multiplier,
                                                    constant: constant)
         
-        constraint.isActive = true
+        constraint.isActive = isActive
         
         return constraint
         
     }
     
     /// - Parameter multiplier: 1
+    /// - Parameter isActive: false
     @discardableResult
-    static func addEqualHeightConstraintAndActivate(item view1: Any,
-                                                    multiplier: CGFloat = 1,
-                                                    constant: CGFloat) -> NSLayoutConstraint {
+    static func addEqualHeightConstraint(item view1: Any,
+                                         multiplier: CGFloat = 1,
+                                         constant: CGFloat,
+                                         isActive: Bool = false) -> NSLayoutConstraint {
         
         let constraint: NSLayoutConstraint = .init(item: view1,
                                                    attribute: .height,
@@ -196,17 +212,19 @@ extension NSLayoutConstraint {
                                                    multiplier: multiplier,
                                                    constant: constant)
         
-        constraint.isActive = true
+        constraint.isActive = isActive
         
         return constraint
         
     }
     
     /// - Parameter multiplier: 1
+    /// - Parameter isActive: false
     @discardableResult
-    static func addEqualWidthConstraintAndActivate(item view1: Any,
-                                                   multiplier: CGFloat = 1,
-                                                   constant: CGFloat) -> NSLayoutConstraint {
+    static func addEqualWidthConstraint(item view1: Any,
+                                        multiplier: CGFloat = 1,
+                                        constant: CGFloat,
+                                        isActive: Bool = false) -> NSLayoutConstraint {
         
         let constraint: NSLayoutConstraint = .init(item: view1,
                                                    attribute: .width,
@@ -216,7 +234,7 @@ extension NSLayoutConstraint {
                                                    multiplier: multiplier,
                                                    constant: constant)
         
-        constraint.isActive = true
+        constraint.isActive = isActive
         
         return constraint
         

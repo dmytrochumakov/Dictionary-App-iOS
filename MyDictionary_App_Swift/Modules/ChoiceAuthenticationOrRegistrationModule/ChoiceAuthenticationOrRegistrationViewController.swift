@@ -115,22 +115,22 @@ fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
     
     func addIconNavigationBarImageViewConstraints() {
         
-        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.iconNavigationBarImageView,
+        NSLayoutConstraint.addEqualConstraint(item: self.iconNavigationBarImageView,
                                                          attribute: .left,
                                                          toItem: self.navigationBarView,
                                                          attribute: .left,
                                                          constant: 20)
         
-        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.iconNavigationBarImageView,
+        NSLayoutConstraint.addEqualConstraint(item: self.iconNavigationBarImageView,
                                                          attribute: .bottom,
                                                          toItem: self.navigationBarView,
                                                          attribute: .bottom,
                                                          constant: -8)
         
-        NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.iconNavigationBarImageView,
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.iconNavigationBarImageView,
                                                                constant: Self.iconNavigationBarImageViewSize.height)
         
-        NSLayoutConstraint.addEqualWidthConstraintAndActivate(item: self.iconNavigationBarImageView,
+        NSLayoutConstraint.addEqualWidthConstraint(item: self.iconNavigationBarImageView,
                                                               constant: Self.iconNavigationBarImageViewSize.width)
         
     }

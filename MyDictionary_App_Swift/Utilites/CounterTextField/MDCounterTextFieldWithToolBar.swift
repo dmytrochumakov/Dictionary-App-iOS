@@ -72,17 +72,17 @@ fileprivate extension MDCounterTextFieldWithToolBar {
     
     func addCounterLabelConstraints() {
         
-        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.counterLabel,
+        NSLayoutConstraint.addEqualConstraint(item: self.counterLabel,
                                                          attribute: .top,
                                                          toItem: self,
                                                          attribute: .bottom,
                                                          constant: 4)
         
-        NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.counterLabel,
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.counterLabel,
                                                              toItem: self,
                                                              constant: .zero)
         
-        NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.counterLabel,
+        NSLayoutConstraint.addEqualRightConstraint(item: self.counterLabel,
                                                               toItem: self,
                                                               constant: -4)
         
