@@ -162,6 +162,11 @@ struct MDConstants {
             }
         }
         
+        struct MaxCountCharacters {
+            static let nicknameTextField: Int = 255
+            static let passwordTextField: Int = 255            
+        }
+        
     }
     
 }
