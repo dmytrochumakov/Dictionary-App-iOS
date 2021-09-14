@@ -8,13 +8,16 @@
 import UIKit
 
 protocol RegisterTextFieldDelegateProtocol: UITextFieldDelegate {
+    
     var nicknameTextFieldShouldReturnAction: (() -> Void)? { get set }
     var passwordTextFieldShouldReturnAction: (() -> Void)? { get set }
     var confirmPasswordTextFieldShouldReturnAction: (() -> Void)? { get set }
     
-    var updateNicknameFieldCounterAction: ((Int) -> Void)? { get set }
-    var updatePasswordFieldCounterAction: ((Int) -> Void)? { get set }
-    var updateConfirmPasswordFieldCounterAction: ((Int) -> Void)? { get set }
+    var updateNicknameTextFieldCounterAction: ((Int) -> Void)? { get set }
+    var updatePasswordTextFieldCounterAction: ((Int) -> Void)? { get set }
+    var updateConfirmPasswordTextFieldCounterAction: ((Int) -> Void)? { get set }
+    
+    var nicknameTextFieldShouldClearAction: (() -> Void)? { get set }
     
 }
 
@@ -24,9 +27,11 @@ final class RegisterTextFieldDelegate: NSObject, RegisterTextFieldDelegateProtoc
     internal var passwordTextFieldShouldReturnAction: (() -> Void)?
     internal var confirmPasswordTextFieldShouldReturnAction: (() -> Void)?
     
-    internal var updateNicknameFieldCounterAction: ((Int) -> Void)?
-    internal var updatePasswordFieldCounterAction: ((Int) -> Void)?
-    internal var updateConfirmPasswordFieldCounterAction: ((Int) -> Void)?
+    internal var updateNicknameTextFieldCounterAction: ((Int) -> Void)?
+    internal var updatePasswordTextFieldCounterAction: ((Int) -> Void)?
+    internal var updateConfirmPasswordTextFieldCounterAction: ((Int) -> Void)?
+    
+    internal var nicknameTextFieldShouldClearAction: (() -> Void)?
     
     deinit {
         debugPrint(#function, Self.self)
@@ -35,6 +40,15 @@ final class RegisterTextFieldDelegate: NSObject, RegisterTextFieldDelegateProtoc
 }
 
 extension RegisterTextFieldDelegate {
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        if (isNicknameTextField(textField)) {
+            nicknameTextFieldShouldClearAction?()
+            return true
+        } else {
+            return true
+        }
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if (isNicknameTextField(textField)) {
@@ -53,49 +67,46 @@ extension RegisterTextFieldDelegate {
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
         
-        guard let tag = RegistrationTextFieldTag.init(rawValue: textField.tag) else { return false }
-        
-        switch tag {
-        case .nickname:
-            
+        if (isNicknameTextField(textField)) {
             let result = result(textFieldText: textField.text,
                                 rangeLength: range.length,
                                 string: string,
                                 maxCountCharacters: MDConstants.Text.MaxCountCharacters.nicknameTextField)
             
             if (result.success) {
-                updateNicknameFieldCounterAction?(result.count)
+                updateNicknameTextFieldCounterAction?(result.count)
             }
             
             return result.success
-            
-        case .password:
-            
-            let result = result(textFieldText: textField.text,
-                                rangeLength: range.length,
-                                string: string,
-                                maxCountCharacters: MDConstants.Text.MaxCountCharacters.passwordTextField)
-            
-            if (result.success) {
-                updatePasswordFieldCounterAction?(result.count)
-            }
-            
-            return result.success
-            
-        case .confirmPassword:
-            
-            let result = result(textFieldText: textField.text,
-                                rangeLength: range.length,
-                                string: string,
-                                maxCountCharacters: MDConstants.Text.MaxCountCharacters.passwordTextField)
-            
-            if (result.success) {
-                updateConfirmPasswordFieldCounterAction?(result.count)
-            }
-            
-            return result.success
-            
         }
+        
+        if (isPasswordTextField(textField)) {
+            let result = result(textFieldText: textField.text,
+                                rangeLength: range.length,
+                                string: string,
+                                maxCountCharacters: MDConstants.Text.MaxCountCharacters.passwordTextField)
+            
+            if (result.success) {
+                updatePasswordTextFieldCounterAction?(result.count)
+            }
+            
+            return result.success
+        }
+        
+        if (isConfirmPasswordTextField(textField)) {
+            let result = result(textFieldText: textField.text,
+                                rangeLength: range.length,
+                                string: string,
+                                maxCountCharacters: MDConstants.Text.MaxCountCharacters.passwordTextField)
+            
+            if (result.success) {
+                updateConfirmPasswordTextFieldCounterAction?(result.count)
+            }
+            
+            return result.success
+        }
+        
+        return true
         
     }
     

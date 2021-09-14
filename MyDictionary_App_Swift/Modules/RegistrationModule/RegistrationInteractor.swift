@@ -27,6 +27,8 @@ protocol RegistrationInteractorOutputProtocol: AnyObject {
     func updatePasswordFieldCounter(_ count: Int)
     func updateConfirmPasswordFieldCounter(_ count: Int)
     
+    func nicknameTextFieldShouldClearAction()
+    
     func hideKeyboard()
     
     func showValidationError(_ error: Error)
@@ -109,9 +111,11 @@ fileprivate extension RegistrationInteractor {
         passwordTextFieldShouldReturnActionSubscribe()
         confirmPasswordTextFieldShouldReturnActionSubscribe()
         
-        updateNicknameFieldCounterActionSubscribe()
-        updatePasswordFieldCounterActionSubscribe()
-        updateConfirmPasswordFieldCounterActionSubscribe()
+        updateNicknameTextFieldCounterActionSubscribe()
+        updatePasswordTextFieldCounterActionSubscribe()
+        updateConfirmPasswordTextFieldCounterActionSubscribe()
+        
+        nicknameTextFieldShouldClearActionSubscribe()
         
     }
     
@@ -134,21 +138,27 @@ fileprivate extension RegistrationInteractor {
         }
     }
     
-    func updateNicknameFieldCounterActionSubscribe() {
-        textFieldDelegate.updateNicknameFieldCounterAction = { [weak self] (count) in
+    func updateNicknameTextFieldCounterActionSubscribe() {
+        textFieldDelegate.updateNicknameTextFieldCounterAction = { [weak self] (count) in
             self?.interactorOutput?.updateNicknameFieldCounter(count)
         }
     }
     
-    func updatePasswordFieldCounterActionSubscribe() {
-        textFieldDelegate.updatePasswordFieldCounterAction = { [weak self] (count) in
+    func updatePasswordTextFieldCounterActionSubscribe() {
+        textFieldDelegate.updatePasswordTextFieldCounterAction = { [weak self] (count) in
             self?.interactorOutput?.updatePasswordFieldCounter(count)
         }
     }
     
-    func updateConfirmPasswordFieldCounterActionSubscribe() {
-        textFieldDelegate.updateConfirmPasswordFieldCounterAction = { [weak self] (count) in
+    func updateConfirmPasswordTextFieldCounterActionSubscribe() {
+        textFieldDelegate.updateConfirmPasswordTextFieldCounterAction = { [weak self] (count) in
             self?.interactorOutput?.updateConfirmPasswordFieldCounter(count)
+        }
+    }
+    
+    func nicknameTextFieldShouldClearActionSubscribe() {
+        textFieldDelegate.nicknameTextFieldShouldClearAction = { [weak self] in
+            self?.interactorOutput?.nicknameTextFieldShouldClearAction()
         }
     }
     

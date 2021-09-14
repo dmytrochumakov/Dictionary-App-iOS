@@ -24,6 +24,8 @@ protocol RegistrationPresenterOutputProtocol: AnyObject {
     func updatePasswordFieldCounter(_ count: Int)
     func updateConfirmPasswordFieldCounter(_ count: Int)
     
+    func nicknameTextFieldShouldClearAction()
+    
     func makePasswordFieldActive()
     func makeConfirmPasswordFieldActive()
     
@@ -74,6 +76,10 @@ extension RegistrationPresenter {
     
     func updateConfirmPasswordFieldCounter(_ count: Int) {
         presenterOutput?.updateConfirmPasswordFieldCounter(count)
+    }
+    
+    func nicknameTextFieldShouldClearAction() {
+        presenterOutput?.nicknameTextFieldShouldClearAction()
     }
     
     func makePasswordFieldActive() {
