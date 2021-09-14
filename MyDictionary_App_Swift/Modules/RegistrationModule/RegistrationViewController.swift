@@ -126,6 +126,11 @@ final class RegistrationViewController: BaseDetailAuthViewController {
 // MARK: - RegistrationPresenterOutputProtocol
 extension RegistrationViewController: RegistrationPresenterOutputProtocol {
     
+    func updateNicknameFieldCounter(_ count: Int) {
+        nicknameTextField.updateCounter(currentCount: count,
+                                        maxCount: MDConstants.Text.MaxCountCharacters.nicknameTextField)
+    }
+    
     func makePasswordFieldActive() {
         passwordTextField.becomeFirstResponder()
     }

@@ -15,6 +15,7 @@ protocol RegistrationPresenterInputProtocol {
 }
 
 protocol RegistrationPresenterOutputProtocol: AnyObject {
+    func updateNicknameFieldCounter(_ count: Int)
     func makePasswordFieldActive()
     func makeConfirmPasswordFieldActive()
     func hideKeyboard()
@@ -51,6 +52,10 @@ final class RegistrationPresenter: NSObject, RegistrationPresenterProtocol {
 
 // MARK: - RegistrationInteractorOutputProtocol
 extension RegistrationPresenter {
+    
+    func updateNicknameFieldCounter(_ count: Int) {
+        presenterOutput?.updateNicknameFieldCounter(count)
+    }
     
     func makePasswordFieldActive() {
         presenterOutput?.makePasswordFieldActive()
