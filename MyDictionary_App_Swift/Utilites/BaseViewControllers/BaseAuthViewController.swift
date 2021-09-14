@@ -141,7 +141,7 @@ extension BaseAuthViewController {
 extension BaseAuthViewController {
     
     func dropShadowNavigationBarView() {
-        navigationBarView.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.7),
+        navigationBarView.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.5),
                                      offSet: .init(width: 0,
                                                    height: 4),
                                      radius: 20)
