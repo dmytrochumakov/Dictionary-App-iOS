@@ -25,6 +25,7 @@ protocol RegistrationInteractorOutputProtocol: AnyObject {
     
     func updateNicknameFieldCounter(_ count: Int)
     func updatePasswordFieldCounter(_ count: Int)
+    func updateConfirmPasswordFieldCounter(_ count: Int)
     
     func hideKeyboard()
     
@@ -91,6 +92,7 @@ extension RegistrationInteractor {
     
     func confirmPasswordTextFieldEditingDidChangeAction(_ text: String?) {
         dataManager.setConfirmPassword(text)
+        interactorOutput?.updateConfirmPasswordFieldCounter(text?.count ?? .zero)
     }
     
     func registerButtonClicked() {
