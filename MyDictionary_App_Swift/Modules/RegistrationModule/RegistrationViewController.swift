@@ -15,8 +15,7 @@ final class RegistrationViewController: BaseDetailAuthViewController {
     fileprivate static let nicknameTextFieldLeftOffset: CGFloat = 16
     fileprivate static let nicknameTextFieldRightOffset: CGFloat = 16
     fileprivate let nicknameTextField: MDCounterTextFieldWithToolBar = {
-        let textField: MDCounterTextFieldWithToolBar = .init(frame: newFrameForNicknameTextField(navBarHeight: defaultNavigationBarViewHeight),
-                                                             rectInset: MDConstants.Rect.defaultInset,
+        let textField: MDCounterTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.defaultInset,
                                                              keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.nickname.localized
         textField.autocapitalizationType = .none
@@ -30,6 +29,7 @@ final class RegistrationViewController: BaseDetailAuthViewController {
         textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
         textField.updateCounter(currentCount: .zero,
                                 maxCount: MDConstants.Text.MaxCountCharacters.nicknameTextField)
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -38,8 +38,7 @@ final class RegistrationViewController: BaseDetailAuthViewController {
     fileprivate static let passwordTextFieldLeftOffset: CGFloat = 16
     fileprivate static let passwordTextFieldRightOffset: CGFloat = 16
     fileprivate let passwordTextField: MDCounterPasswordTextFieldWithToolBar = {
-        let textField: MDCounterPasswordTextFieldWithToolBar = .init(frame: newFrameForPasswordTextField(navBarHeight: defaultNavigationBarViewHeight),
-                                                                     rectInset: MDConstants.Rect.passwordInset,
+        let textField: MDCounterPasswordTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.passwordInset,
                                                                      keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.password.localized
         textField.autocapitalizationType = .none
@@ -53,6 +52,7 @@ final class RegistrationViewController: BaseDetailAuthViewController {
         textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
         textField.updateCounter(currentCount: .zero,
                                 maxCount: MDConstants.Text.MaxCountCharacters.passwordTextField)
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -61,8 +61,7 @@ final class RegistrationViewController: BaseDetailAuthViewController {
     fileprivate static let confirmPasswordTextFieldLeftOffset: CGFloat = 16
     fileprivate static let confirmPasswordTextFieldRightOffset: CGFloat = 16
     fileprivate let confirmPasswordTextField: MDCounterPasswordTextFieldWithToolBar = {
-        let textField: MDCounterPasswordTextFieldWithToolBar = .init(frame: newFrameForConfirmPasswordTextField(navBarHeight: defaultNavigationBarViewHeight),
-                                                                     rectInset: MDConstants.Rect.passwordInset,
+        let textField: MDCounterPasswordTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.passwordInset,
                                                                      keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.confirmPassword.localized
         textField.autocapitalizationType = .none
@@ -76,6 +75,7 @@ final class RegistrationViewController: BaseDetailAuthViewController {
         textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
         textField.updateCounter(currentCount: .zero,
                                 maxCount: MDConstants.Text.MaxCountCharacters.passwordTextField)
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -84,11 +84,12 @@ final class RegistrationViewController: BaseDetailAuthViewController {
     fileprivate static let registerButtonLeftOffset: CGFloat = 16
     fileprivate static let registerButtonRightOffset: CGFloat = 16
     fileprivate let registerButton: UIButton = {
-        let button: UIButton = .init(frame: newFrameForRegisterButton(navBarHeight: defaultNavigationBarViewHeight))
+        let button: UIButton = .init()
         button.backgroundColor = MDAppStyling.Color.md_Blue_1_Light_Appearence.color()
         button.setTitle(KeysForTranslate.register.localized, for: .normal)
         button.setTitleColor(MDAppStyling.Color.md_White_0_Light_Appearence.color(), for: .normal)
         button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -118,7 +119,9 @@ final class RegistrationViewController: BaseDetailAuthViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        addConstraints()
         roundOffEdges()
+        dropShadow()
     }
     
 }
@@ -201,59 +204,107 @@ fileprivate extension RegistrationViewController {
     
 }
 
+// MARK: - Add Constraints
+fileprivate extension RegistrationViewController {
+    
+    func addConstraints() {
+        addNicknameTextFieldConstraints()
+        addPasswordTextFieldConstraints()
+        addConfirmPasswordTextFieldConstraints()
+        addRegisterButtonConstraints()
+    }
+    
+    func addNicknameTextFieldConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.nicknameTextField,
+                                              attribute: .top,
+                                              toItem: self.navigationBarView,
+                                              attribute: .bottom,
+                                              constant: Self.nicknameTextFieldTopOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.nicknameTextField,
+                                                  toItem: self.backgroundImageView,
+                                                  constant: Self.nicknameTextFieldLeftOffset)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.nicknameTextField,
+                                                   toItem: self.backgroundImageView,
+                                                   constant: -Self.nicknameTextFieldRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.nicknameTextField,
+                                                    constant: Self.nicknameTextFieldHeight)
+        
+    }
+    
+    func addPasswordTextFieldConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.passwordTextField,
+                                              attribute: .top,
+                                              toItem: self.nicknameTextField,
+                                              attribute: .bottom,
+                                              constant: Self.passwordTextFieldTopOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.passwordTextField,
+                                                  toItem: self.backgroundImageView,
+                                                  constant: Self.passwordTextFieldLeftOffset)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.passwordTextField,
+                                                   toItem: self.backgroundImageView,
+                                                   constant: -Self.passwordTextFieldRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.passwordTextField,
+                                                    constant: Self.passwordTextFieldHeight)
+        
+    }
+    
+    func addConfirmPasswordTextFieldConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.confirmPasswordTextField,
+                                              attribute: .top,
+                                              toItem: self.passwordTextField,
+                                              attribute: .bottom,
+                                              constant: Self.confirmPasswordTextFieldTopOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.confirmPasswordTextField,
+                                                  toItem: self.backgroundImageView,
+                                                  constant: Self.confirmPasswordTextFieldLeftOffset)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.confirmPasswordTextField,
+                                                   toItem: self.backgroundImageView,
+                                                   constant: -Self.confirmPasswordTextFieldRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.confirmPasswordTextField,
+                                                    constant: Self.confirmPasswordTextFieldHeight)
+        
+    }
+    
+    func addRegisterButtonConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.registerButton,
+                                              attribute: .top,
+                                              toItem: self.confirmPasswordTextField,
+                                              attribute: .bottom,
+                                              constant: Self.registerButtonTopOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.registerButton,
+                                                  toItem: self.backgroundImageView,
+                                                  constant: Self.registerButtonLeftOffset)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.registerButton,
+                                                   toItem: self.backgroundImageView,
+                                                   constant: -Self.registerButtonRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.registerButton,
+                                                    constant: Self.registerButtonHeight)
+        
+    }
+    
+}
+
 // MARK: - Configure UI
 fileprivate extension RegistrationViewController {
     
     func configureUI() {
         configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
-        updateFrame()
-        dropShadow()
-    }
-    
-}
-
-// MARK: - Update Frame
-fileprivate extension RegistrationViewController {
-    
-    func updateFrame() {
-        updateNicknameTextFieldFrame()
-        updatePasswordTextFieldFrame()
-        updateConfirmPasswordTextFieldFrame()
-        updateRegisterButtonFrame()
-    }
-    
-    func updateNicknameTextFieldFrame() {
-        UIView.animate(withDuration: .zero) {
-            self.nicknameTextField.frame = Self.newFrameForNicknameTextField(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
-            self.view.layoutSubviews()
-            self.viewDidLayoutSubviews()
-        }
-    }
-    
-    func updatePasswordTextFieldFrame() {
-        UIView.animate(withDuration: .zero) {
-            self.passwordTextField.frame = Self.newFrameForPasswordTextField(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
-            self.view.layoutSubviews()
-            self.viewDidLayoutSubviews()
-        }
-    }
-    
-    func updateConfirmPasswordTextFieldFrame() {
-        UIView.animate(withDuration: .zero) {
-            self.confirmPasswordTextField.frame = Self.newFrameForConfirmPasswordTextField(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
-            self.view.layoutSubviews()
-            self.viewDidLayoutSubviews()
-        }
-    }
-    
-    func updateRegisterButtonFrame() {
-        
-        UIView.animate(withDuration: .zero) {
-            self.registerButton.frame = Self.newFrameForRegisterButton(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
-            self.view.layoutSubviews()
-            self.viewDidLayoutSubviews()
-        }
-        
     }
     
 }
@@ -349,39 +400,6 @@ fileprivate extension RegistrationViewController {
     
     func hideKeyboardFunc() {
         self.view.endEditing(true)
-    }
-    
-}
-
-// MARK: - New Frame
-fileprivate extension RegistrationViewController {
-    
-    static func newFrameForNicknameTextField(navBarHeight: CGFloat) -> CGRect {
-        return .init(origin: .init(x: nicknameTextFieldLeftOffset,
-                                   y: navBarHeight + nicknameTextFieldTopOffset),
-                     size: .init(width: MDConstants.Screen.width - (nicknameTextFieldLeftOffset + nicknameTextFieldRightOffset),
-                                 height: nicknameTextFieldHeight))
-    }
-    
-    static func newFrameForPasswordTextField(navBarHeight: CGFloat) -> CGRect {
-        return .init(origin: .init(x: passwordTextFieldLeftOffset,
-                                   y: newFrameForNicknameTextField(navBarHeight: navBarHeight).maxY + passwordTextFieldTopOffset),
-                     size: .init(width: MDConstants.Screen.width - (passwordTextFieldLeftOffset + passwordTextFieldRightOffset),
-                                 height: passwordTextFieldHeight))
-    }
-    
-    static func newFrameForConfirmPasswordTextField(navBarHeight: CGFloat) -> CGRect {
-        return .init(origin: .init(x: confirmPasswordTextFieldLeftOffset,
-                                   y: newFrameForPasswordTextField(navBarHeight: navBarHeight).maxY + confirmPasswordTextFieldTopOffset),
-                     size: .init(width: MDConstants.Screen.width - (confirmPasswordTextFieldLeftOffset + confirmPasswordTextFieldRightOffset),
-                                 height: confirmPasswordTextFieldHeight))
-    }
-    
-    static func newFrameForRegisterButton(navBarHeight: CGFloat) -> CGRect {
-        return .init(origin: .init(x: registerButtonLeftOffset,
-                                   y: newFrameForConfirmPasswordTextField(navBarHeight: navBarHeight).maxY + registerButtonTopOffset),
-                     size: .init(width: MDConstants.Screen.width - (registerButtonLeftOffset + registerButtonRightOffset),
-                                 height: registerButtonHeight))
     }
     
 }

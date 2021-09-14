@@ -8,8 +8,7 @@
 import UIKit
 
 open class BaseAuthViewController: UIViewController {
-    
-    internal static let defaultNavigationBarViewHeight: CGFloat = 120
+        
     internal let navigationBarView: UIView = {
         let view: UIView = .init()
         view.backgroundColor = MDAppStyling.Color.md_Blue_1_Light_Appearence.color()
