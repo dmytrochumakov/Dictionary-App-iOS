@@ -40,6 +40,34 @@ extension RegisterTextFieldDelegate {
         return true
     }
     
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        
+        guard let tag = RegistrationTextFieldTag.init(rawValue: textField.tag) else { return false }
+        
+        switch tag {
+        case .nickname:
+            return computeCount(textFieldText: textField.text,
+                                rangeLength: range.length,
+                                string: string) <= MDConstants.Text.MaxCountCharacters.nicknameTextField
+        case .password,
+             .confirmPassword:
+            return computeCount(textFieldText: textField.text,
+                                rangeLength: range.length,
+                                string: string) <= MDConstants.Text.MaxCountCharacters.passwordTextField
+        }
+        
+    }
+    
+    private func computeCount(textFieldText: String?,
+                              rangeLength: Int,
+                              string: String) -> Int {
+        
+        return (textFieldText?.count ?? .zero) + (string.count - rangeLength)
+        
+    }
+    
 }
 
 // MARK: - Check Text Field Type By Tag
