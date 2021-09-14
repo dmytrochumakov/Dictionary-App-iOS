@@ -82,17 +82,14 @@ extension RegistrationInteractor {
     
     func nicknameTextFieldEditingDidChangeAction(_ text: String?) {
         dataManager.setNickname(text)
-        interactorOutput?.updateNicknameFieldCounter(text?.count ?? .zero)
     }
     
     func passwordTextFieldEditingDidChangeAction(_ text: String?) {
         dataManager.setPassword(text)
-        interactorOutput?.updatePasswordFieldCounter(text?.count ?? .zero)
     }
     
     func confirmPasswordTextFieldEditingDidChangeAction(_ text: String?) {
-        dataManager.setConfirmPassword(text)
-        interactorOutput?.updateConfirmPasswordFieldCounter(text?.count ?? .zero)
+        dataManager.setConfirmPassword(text)        
     }
     
     func registerButtonClicked() {
@@ -107,9 +104,15 @@ extension RegistrationInteractor {
 fileprivate extension RegistrationInteractor {
     
     func subscribe() {
+        
         nicknameTextFieldShouldReturnActionSubscribe()
         passwordTextFieldShouldReturnActionSubscribe()
         confirmPasswordTextFieldShouldReturnActionSubscribe()
+        
+        updateNicknameFieldCounterActionSubscribe()
+        updatePasswordFieldCounterActionSubscribe()
+        updateConfirmPasswordFieldCounterActionSubscribe()
+        
     }
     
     func nicknameTextFieldShouldReturnActionSubscribe() {
@@ -128,6 +131,24 @@ fileprivate extension RegistrationInteractor {
         textFieldDelegate.confirmPasswordTextFieldShouldReturnAction = { [weak self] in
             self?.interactorOutput?.hideKeyboard()
             self?.authValidationAndRouting()
+        }
+    }
+    
+    func updateNicknameFieldCounterActionSubscribe() {
+        textFieldDelegate.updateNicknameFieldCounterAction = { [weak self] (count) in
+            self?.interactorOutput?.updateNicknameFieldCounter(count)
+        }
+    }
+    
+    func updatePasswordFieldCounterActionSubscribe() {
+        textFieldDelegate.updatePasswordFieldCounterAction = { [weak self] (count) in
+            self?.interactorOutput?.updatePasswordFieldCounter(count)
+        }
+    }
+    
+    func updateConfirmPasswordFieldCounterActionSubscribe() {
+        textFieldDelegate.updateConfirmPasswordFieldCounterAction = { [weak self] (count) in
+            self?.interactorOutput?.updateConfirmPasswordFieldCounter(count)
         }
     }
     

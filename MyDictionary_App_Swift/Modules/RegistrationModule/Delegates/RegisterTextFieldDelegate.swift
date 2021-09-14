@@ -11,6 +11,11 @@ protocol RegisterTextFieldDelegateProtocol: UITextFieldDelegate {
     var nicknameTextFieldShouldReturnAction: (() -> Void)? { get set }
     var passwordTextFieldShouldReturnAction: (() -> Void)? { get set }
     var confirmPasswordTextFieldShouldReturnAction: (() -> Void)? { get set }
+    
+    var updateNicknameFieldCounterAction: ((Int) -> Void)? { get set }
+    var updatePasswordFieldCounterAction: ((Int) -> Void)? { get set }
+    var updateConfirmPasswordFieldCounterAction: ((Int) -> Void)? { get set }
+    
 }
 
 final class RegisterTextFieldDelegate: NSObject, RegisterTextFieldDelegateProtocol {
@@ -18,6 +23,10 @@ final class RegisterTextFieldDelegate: NSObject, RegisterTextFieldDelegateProtoc
     internal var nicknameTextFieldShouldReturnAction: (() -> Void)?
     internal var passwordTextFieldShouldReturnAction: (() -> Void)?
     internal var confirmPasswordTextFieldShouldReturnAction: (() -> Void)?
+    
+    internal var updateNicknameFieldCounterAction: ((Int) -> Void)?
+    internal var updatePasswordFieldCounterAction: ((Int) -> Void)?
+    internal var updateConfirmPasswordFieldCounterAction: ((Int) -> Void)?
     
     deinit {
         debugPrint(#function, Self.self)
@@ -48,15 +57,58 @@ extension RegisterTextFieldDelegate {
         
         switch tag {
         case .nickname:
-            return computeCount(textFieldText: textField.text,
+            
+            let result = result(textFieldText: textField.text,
                                 rangeLength: range.length,
-                                string: string) <= MDConstants.Text.MaxCountCharacters.nicknameTextField
-        case .password,
-             .confirmPassword:
-            return computeCount(textFieldText: textField.text,
+                                string: string,
+                                maxCountCharacters: MDConstants.Text.MaxCountCharacters.nicknameTextField)
+            
+            if (result.success) {
+                updateNicknameFieldCounterAction?(result.count)
+            }
+            
+            return result.success
+            
+        case .password:
+            
+            let result = result(textFieldText: textField.text,
                                 rangeLength: range.length,
-                                string: string) <= MDConstants.Text.MaxCountCharacters.passwordTextField
+                                string: string,
+                                maxCountCharacters: MDConstants.Text.MaxCountCharacters.passwordTextField)
+            
+            if (result.success) {
+                updatePasswordFieldCounterAction?(result.count)
+            }
+            
+            return result.success
+            
+        case .confirmPassword:
+            
+            let result = result(textFieldText: textField.text,
+                                rangeLength: range.length,
+                                string: string,
+                                maxCountCharacters: MDConstants.Text.MaxCountCharacters.passwordTextField)
+            
+            if (result.success) {
+                updateConfirmPasswordFieldCounterAction?(result.count)
+            }
+            
+            return result.success
+            
         }
+        
+    }
+    
+    private func result(textFieldText: String?,
+                        rangeLength: Int,
+                        string: String,
+                        maxCountCharacters: Int) -> (count: Int, success: Bool) {
+        
+        let count: Int = computeCount(textFieldText: textFieldText,
+                                      rangeLength: rangeLength,
+                                      string: string)
+        
+        return (count, (count <= maxCountCharacters))
         
     }
     
