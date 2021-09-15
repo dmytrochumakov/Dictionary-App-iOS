@@ -189,6 +189,13 @@ fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
     
     func configureUI() {
         configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
+        updateLayoutSubviews()
+    }
+    
+    func updateLayoutSubviews() {
+        DispatchQueue.main.async {
+            self.viewDidLayoutSubviews()
+        }
     }
     
 }
