@@ -10,6 +10,20 @@ final class RegistrationViewController: BaseDetailAuthViewController {
     
     fileprivate let presenter: RegistrationPresenterInputProtocol
     
+    fileprivate let scrollView: UIScrollView = {
+        let scrollView: UIScrollView = .init()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    fileprivate let contentView: UIView = {
+        let view: UIView = .init()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    fileprivate var keyboardHandler: KeyboardHandler!
+    
     fileprivate static let nicknameTextFieldHeight: CGFloat = 48
     fileprivate static let nicknameTextFieldTopOffset: CGFloat = 28
     fileprivate static let nicknameTextFieldLeftOffset: CGFloat = 16
@@ -173,33 +187,48 @@ extension RegistrationViewController: RegistrationPresenterOutputProtocol {
 fileprivate extension RegistrationViewController {
     
     func addViews() {
+        addScrollView()
+        addContentView()
+        createKeyboardHandler()
         addNicknameTextField()
         addPasswordTextField()
         addConfirmPasswordTextField()
         addRegisterButton()
     }
     
+    func addScrollView() {
+        view.addSubview(scrollView)
+    }
+    
+    func addContentView() {
+        scrollView.addSubview(contentView)
+    }
+    
+    func createKeyboardHandler() {
+        self.keyboardHandler = KeyboardHandler.createKeyboardHandler(scrollView: self.scrollView)
+    }
+    
     func addNicknameTextField() {
         nicknameTextField.delegate = presenter.textFieldDelegate
         nicknameTextField.addTarget(self, action: #selector(nicknameTextFieldEditingDidChangeAction), for: .editingChanged)
-        view.addSubview(nicknameTextField)
+        contentView.addSubview(nicknameTextField)
     }
     
     func addPasswordTextField() {
         passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingDidChangeAction), for: .editingChanged)
         passwordTextField.delegate = presenter.textFieldDelegate
-        view.addSubview(passwordTextField)
+        contentView.addSubview(passwordTextField)
     }
     
     func addConfirmPasswordTextField() {
         confirmPasswordTextField.addTarget(self, action: #selector(confirmPasswordTextFieldEditingDidChangeAction), for: .editingChanged)
         confirmPasswordTextField.delegate = presenter.textFieldDelegate
-        view.addSubview(confirmPasswordTextField)
+        contentView.addSubview(confirmPasswordTextField)
     }
     
     func addRegisterButton() {
         registerButton.addTarget(self, action: #selector(registerButtonAction), for: .touchUpInside)
-        view.addSubview(registerButton)
+        contentView.addSubview(registerButton)
     }
     
 }
@@ -208,19 +237,43 @@ fileprivate extension RegistrationViewController {
 fileprivate extension RegistrationViewController {
     
     func addConstraints() {
+        addScrollViewConstraints()
+        addContentViewConstraints()
         addNicknameTextFieldConstraints()
         addPasswordTextFieldConstraints()
         addConfirmPasswordTextFieldConstraints()
         addRegisterButtonConstraints()
     }
     
+    func addScrollViewConstraints() {
+        
+        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.scrollView,
+                                                         toItem: self.view)
+        
+    }
+    
+    func addContentViewConstraints() {
+        
+        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.contentView,
+                                                         toItem: self.scrollView)
+        
+        NSLayoutConstraint.addEqualCenterXConstraint(item: self.contentView,
+                                                     toItem: self.scrollView,
+                                                     constant: .zero)
+        
+        NSLayoutConstraint.addEqualCenterYConstraint(item: self.contentView,
+                                                     toItem: self.scrollView,
+                                                     constant: .zero)
+        
+    }
+    
     func addNicknameTextFieldConstraints() {
         
         NSLayoutConstraint.addEqualConstraint(item: self.nicknameTextField,
                                               attribute: .top,
-                                              toItem: self.navigationBarView,
-                                              attribute: .bottom,
-                                              constant: Self.nicknameTextFieldTopOffset)
+                                              toItem: self.contentView,
+                                              attribute: .top,
+                                              constant: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController) + Self.nicknameTextFieldTopOffset)
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.nicknameTextField,
                                                   toItem: self.backgroundImageView,

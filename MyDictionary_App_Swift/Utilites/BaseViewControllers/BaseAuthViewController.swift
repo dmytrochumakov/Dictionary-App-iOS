@@ -144,12 +144,20 @@ extension BaseAuthViewController {
     
 }
 
-// MARK: - Hide Nav Bar
+// MARK: - Setup Navigation Bar
 extension BaseAuthViewController {
     
+    func setupNavigationBar() {
+        navigationBarPrefersLargeTitles()
+        hideNavigationBar()
+    }
+    
     func hideNavigationBar() {
-        self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    func navigationBarPrefersLargeTitles() {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
 }
@@ -190,7 +198,7 @@ fileprivate extension BaseAuthViewController {
     
     func configureUI() {
         configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
-        hideNavigationBar()
+        setupNavigationBar()
     }
     
 }
