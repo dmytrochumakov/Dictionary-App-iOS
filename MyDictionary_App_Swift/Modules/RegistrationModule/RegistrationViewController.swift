@@ -189,11 +189,19 @@ fileprivate extension RegistrationViewController {
     func addViews() {
         addScrollView()
         addContentView()
+        bringSubviewsToFront()
         createKeyboardHandler()
         addNicknameTextField()
         addPasswordTextField()
         addConfirmPasswordTextField()
         addRegisterButton()
+    }
+    
+    func bringSubviewsToFront() {
+        view.bringSubviewToFront(navigationBarView)
+        view.bringSubviewToFront(navigationBarBackgroundImageView)
+        view.bringSubviewToFront(backButton)
+        view.bringSubviewToFront(titleLabel)
     }
     
     func addScrollView() {
