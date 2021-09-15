@@ -7,16 +7,32 @@
 import UIKit
 
 protocol RegistrationPresenterInputProtocol {
-    var textFieldDelegate: UITextFieldDelegate { get }    
+    
+    var textFieldDelegate: UITextFieldDelegate { get }
+    
     func registerButtonClicked()
+    
     func nicknameTextFieldEditingDidChangeAction(_ text: String?)
     func passwordTextFieldEditingDidChangeAction(_ text: String?)
+    func confirmPasswordTextFieldEditingDidChangeAction(_ text: String?)
+    
 }
 
 protocol RegistrationPresenterOutputProtocol: AnyObject {
+    
+    func updateNicknameFieldCounter(_ count: Int)
+    func updatePasswordFieldCounter(_ count: Int)
+    func updateConfirmPasswordFieldCounter(_ count: Int)
+    
+    func nicknameTextFieldShouldClearAction()
+    
     func makePasswordFieldActive()
+    func makeConfirmPasswordFieldActive()
+    
     func hideKeyboard()
+    
     func showValidationError(_ error: Error)
+    
 }
 
 protocol RegistrationPresenterProtocol: RegistrationPresenterInputProtocol,
@@ -50,8 +66,28 @@ final class RegistrationPresenter: NSObject, RegistrationPresenterProtocol {
 // MARK: - RegistrationInteractorOutputProtocol
 extension RegistrationPresenter {
     
+    func updateNicknameFieldCounter(_ count: Int) {
+        presenterOutput?.updateNicknameFieldCounter(count)
+    }
+    
+    func updatePasswordFieldCounter(_ count: Int) {
+        presenterOutput?.updatePasswordFieldCounter(count)
+    }
+    
+    func updateConfirmPasswordFieldCounter(_ count: Int) {
+        presenterOutput?.updateConfirmPasswordFieldCounter(count)
+    }
+    
+    func nicknameTextFieldShouldClearAction() {
+        presenterOutput?.nicknameTextFieldShouldClearAction()
+    }
+    
     func makePasswordFieldActive() {
         presenterOutput?.makePasswordFieldActive()
+    }
+    
+    func makeConfirmPasswordFieldActive() {
+        presenterOutput?.makeConfirmPasswordFieldActive()
     }
     
     func hideKeyboard() {
@@ -86,6 +122,10 @@ extension RegistrationPresenter {
     
     func passwordTextFieldEditingDidChangeAction(_ text: String?) {
         interactor.passwordTextFieldEditingDidChangeAction(text)
+    }
+    
+    func confirmPasswordTextFieldEditingDidChangeAction(_ text: String?) {
+        interactor.confirmPasswordTextFieldEditingDidChangeAction(text)
     }
     // End Actions //
     

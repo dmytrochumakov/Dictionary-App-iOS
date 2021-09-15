@@ -16,7 +16,7 @@ struct AuthValidationLogic: AuthValidationLogicProtocol {
     static func textIsEmpty(validationType: AuthValidationType, text: String?) -> AuthValidationResult {
         switch validationType {
         case .nickname:
-            if (textIsEmpty(text)) {
+            if (MDConstants.Text.textIsEmpty(text)) {
                 return .init(validationType: validationType,
                              validationError: .nicknameIsEmpty)
             } else {
@@ -24,21 +24,13 @@ struct AuthValidationLogic: AuthValidationLogicProtocol {
                              validationError: nil)
             }
         case .password:
-            if (textIsEmpty(text)) {
+            if (MDConstants.Text.textIsEmpty(text)) {
                 return .init(validationType: validationType,
                              validationError: .passwordIsEmpty)
             } else {
                 return .init(validationType: validationType,
                              validationError: nil)
             }
-        }
-    }
-    
-    fileprivate static func textIsEmpty(_ text: String?) -> Bool {
-        if (text == nil || text!.isEmpty || text!.trimmingCharacters(in: .whitespaces).isEmpty) {
-            return true
-        } else {
-            return false
         }
     }
     

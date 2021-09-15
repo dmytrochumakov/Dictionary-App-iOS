@@ -6,76 +6,111 @@
 
 import UIKit
 
-final class RegistrationViewController: UIViewController {
-
+final class RegistrationViewController: BaseDetailAuthViewController {
+    
     fileprivate let presenter: RegistrationPresenterInputProtocol
-
-    fileprivate let defaultLineViewHeight: CGFloat = 0.5
-      
-    fileprivate let nicknameTextFieldHeight: CGFloat = 40
-    fileprivate let nicknameTextFieldTopOffset: CGFloat = 56
-    fileprivate let nicknameTextField: MDTextFieldWithToolBar = {
-        let textField: MDTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.defaultInset,
-                                                      keyboardToolbar: .init())
+    
+    fileprivate let scrollView: UIScrollView = {
+        let scrollView: UIScrollView = .init()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    fileprivate let contentView: UIView = {
+        let view: UIView = .init()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    fileprivate var keyboardHandler: KeyboardHandler!
+    
+    fileprivate static let nicknameTextFieldHeight: CGFloat = 48
+    fileprivate static let nicknameTextFieldTopOffset: CGFloat = 28
+    fileprivate static let nicknameTextFieldLeftOffset: CGFloat = 16
+    fileprivate static let nicknameTextFieldRightOffset: CGFloat = 16
+    fileprivate let nicknameTextField: MDCounterTextFieldWithToolBar = {
+        let textField: MDCounterTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.defaultInset,
+                                                             keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.nickname.localized
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
-        textField.textAlignment = .center
+        textField.textAlignment = .left
         textField.clearButtonMode = .whileEditing
-        textField.font = MDAppStyling.Font.default
-        textField.textColor = ConfigurationAppearanceController.labelTextColor()
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.font = MDAppStyling.Font.MyriadProItalic.font(ofSize: 17)
+        textField.textColor = MDAppStyling.Color.md_Black_1_Light_Appearence.color()
         textField.returnKeyType = .next
-        textField.tag = AuthTextFieldTag.nickname.rawValue
+        textField.tag = RegistrationTextFieldTag.nickname.rawValue
+        textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
+        textField.updateCounter(currentCount: .zero,
+                                maxCount: MDConstants.Text.MaxCountCharacters.nicknameTextField)
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
-    fileprivate let nicknameTextFieldBottomLineView: UIView = {
-        let view: UIView = .init()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = MDAppStyling.Color.light_Gray_0.color()
-        return view
-    }()
-    
-    fileprivate let passwordTextFieldHeight: CGFloat = 40
-    fileprivate let passwordTextFieldTopOffset: CGFloat = 16
-    fileprivate let passwordTextField: MDTextFieldWithToolBar = {
-        let textField: MDTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.defaultInset,
-                                                      keyboardToolbar: .init())
+    fileprivate static let passwordTextFieldHeight: CGFloat = 48
+    fileprivate static let passwordTextFieldTopOffset: CGFloat = 20
+    fileprivate static let passwordTextFieldLeftOffset: CGFloat = 16
+    fileprivate static let passwordTextFieldRightOffset: CGFloat = 16
+    fileprivate let passwordTextField: MDCounterPasswordTextFieldWithToolBar = {
+        let textField: MDCounterPasswordTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.passwordInset,
+                                                                     keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.password.localized
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
-        textField.textAlignment = .center
-        textField.clearButtonMode = .whileEditing
-        textField.font = MDAppStyling.Font.default
-        textField.textColor = ConfigurationAppearanceController.labelTextColor()
+        textField.textAlignment = .left
+        textField.font = MDAppStyling.Font.MyriadProItalic.font(ofSize: 17)
+        textField.textColor = MDAppStyling.Color.md_Black_1_Light_Appearence.color()
+        textField.returnKeyType = .next
+        textField.isSecureTextEntry = true
+        textField.tag = RegistrationTextFieldTag.password.rawValue
+        textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
+        textField.updateCounter(currentCount: .zero,
+                                maxCount: MDConstants.Text.MaxCountCharacters.passwordTextField)
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.returnKeyType = .go
-        textField.tag = AuthTextFieldTag.password.rawValue
         return textField
     }()
     
-    fileprivate let passwordTextFieldBottomLineView: UIView = {
-        let view: UIView = .init()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = MDAppStyling.Color.light_Gray_0.color()
-        return view
+    fileprivate static let confirmPasswordTextFieldHeight: CGFloat = 48
+    fileprivate static let confirmPasswordTextFieldTopOffset: CGFloat = 20
+    fileprivate static let confirmPasswordTextFieldLeftOffset: CGFloat = 16
+    fileprivate static let confirmPasswordTextFieldRightOffset: CGFloat = 16
+    fileprivate let confirmPasswordTextField: MDCounterPasswordTextFieldWithToolBar = {
+        let textField: MDCounterPasswordTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.passwordInset,
+                                                                     keyboardToolbar: .init())
+        textField.placeholder = KeysForTranslate.confirmPassword.localized
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
+        textField.textAlignment = .left
+        textField.font = MDAppStyling.Font.MyriadProItalic.font(ofSize: 17)
+        textField.textColor = MDAppStyling.Color.md_Black_1_Light_Appearence.color()
+        textField.returnKeyType = .go
+        textField.isSecureTextEntry = true
+        textField.tag = RegistrationTextFieldTag.confirmPassword.rawValue
+        textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
+        textField.updateCounter(currentCount: .zero,
+                                maxCount: MDConstants.Text.MaxCountCharacters.passwordTextField)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
     }()
     
-    fileprivate let registerButtonHeight: CGFloat = 56
+    fileprivate static let registerButtonHeight: CGFloat = 48
+    fileprivate static let registerButtonTopOffset: CGFloat = 20
+    fileprivate static let registerButtonLeftOffset: CGFloat = 16
+    fileprivate static let registerButtonRightOffset: CGFloat = 16
     fileprivate let registerButton: UIButton = {
         let button: UIButton = .init()
-        button.backgroundColor = ConfigurationAppearanceController.buttonBackgroundColor()
+        button.backgroundColor = MDAppStyling.Color.md_Blue_1_Light_Appearence.color()
         button.setTitle(KeysForTranslate.register.localized, for: .normal)
-        button.setTitleColor(ConfigurationAppearanceController.buttonTextColor(), for: .normal)
-        button.titleLabel?.font = MDAppStyling.Font.default
+        button.setTitleColor(MDAppStyling.Color.md_White_0_Light_Appearence.color(), for: .normal)
+        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     init(presenter: RegistrationPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
+        super.init(title: KeysForTranslate.registration.localized)
+        updateBackgroundImage(MDAppStyling.Image.background_typography_2.image)
     }
     
     deinit {
@@ -99,15 +134,41 @@ final class RegistrationViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         addConstraints()
+        roundOffEdges()
+        dropShadow()
     }
-
+    
 }
 
 // MARK: - RegistrationPresenterOutputProtocol
 extension RegistrationViewController: RegistrationPresenterOutputProtocol {
     
+    func updateNicknameFieldCounter(_ count: Int) {
+        nicknameTextField.updateCounter(currentCount: count,
+                                        maxCount: MDConstants.Text.MaxCountCharacters.nicknameTextField)
+    }
+    
+    func updatePasswordFieldCounter(_ count: Int) {
+        passwordTextField.updateCounter(currentCount: count,
+                                        maxCount: MDConstants.Text.MaxCountCharacters.passwordTextField)
+    }
+    
+    func updateConfirmPasswordFieldCounter(_ count: Int) {
+        confirmPasswordTextField.updateCounter(currentCount: count,
+                                               maxCount: MDConstants.Text.MaxCountCharacters.passwordTextField)
+    }
+    
+    func nicknameTextFieldShouldClearAction() {
+        nicknameTextField.updateCounter(currentCount: .zero,
+                                        maxCount: MDConstants.Text.MaxCountCharacters.nicknameTextField)
+    }
+    
     func makePasswordFieldActive() {
         passwordTextField.becomeFirstResponder()
+    }
+    
+    func makeConfirmPasswordFieldActive() {
+        confirmPasswordTextField.becomeFirstResponder()
     }
     
     func hideKeyboard() {
@@ -119,43 +180,63 @@ extension RegistrationViewController: RegistrationPresenterOutputProtocol {
                                                 message: error.localizedDescription,
                                                 presenter: self)
     }
-       
+    
 }
 
 // MARK: - Add Views
 fileprivate extension RegistrationViewController {
     
     func addViews() {
+        addScrollView()
+        addContentView()
+        bringSubviewsToFront()
+        createKeyboardHandler()
         addNicknameTextField()
-        addNicknameTextFieldBottomLineView()
         addPasswordTextField()
-        addPasswordTextFieldBottomLineView()
+        addConfirmPasswordTextField()
         addRegisterButton()
+    }
+    
+    func bringSubviewsToFront() {
+        view.bringSubviewToFront(navigationBarView)
+        view.bringSubviewToFront(navigationBarBackgroundImageView)
+        view.bringSubviewToFront(backButton)
+        view.bringSubviewToFront(titleLabel)
+    }
+    
+    func addScrollView() {
+        view.addSubview(scrollView)
+    }
+    
+    func addContentView() {
+        scrollView.addSubview(contentView)
+    }
+    
+    func createKeyboardHandler() {
+        self.keyboardHandler = KeyboardHandler.createKeyboardHandler(scrollView: self.scrollView)
     }
     
     func addNicknameTextField() {
         nicknameTextField.delegate = presenter.textFieldDelegate
         nicknameTextField.addTarget(self, action: #selector(nicknameTextFieldEditingDidChangeAction), for: .editingChanged)
-        view.addSubview(nicknameTextField)
-    }
-    
-    func addNicknameTextFieldBottomLineView() {
-        view.addSubview(nicknameTextFieldBottomLineView)
+        contentView.addSubview(nicknameTextField)
     }
     
     func addPasswordTextField() {
         passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingDidChangeAction), for: .editingChanged)
         passwordTextField.delegate = presenter.textFieldDelegate
-        view.addSubview(passwordTextField)
+        contentView.addSubview(passwordTextField)
     }
     
-    func addPasswordTextFieldBottomLineView() {
-        view.addSubview(passwordTextFieldBottomLineView)
+    func addConfirmPasswordTextField() {
+        confirmPasswordTextField.addTarget(self, action: #selector(confirmPasswordTextFieldEditingDidChangeAction), for: .editingChanged)
+        confirmPasswordTextField.delegate = presenter.textFieldDelegate
+        contentView.addSubview(confirmPasswordTextField)
     }
-       
+    
     func addRegisterButton() {
         registerButton.addTarget(self, action: #selector(registerButtonAction), for: .touchUpInside)
-        view.addSubview(registerButton)
+        contentView.addSubview(registerButton)
     }
     
 }
@@ -164,105 +245,118 @@ fileprivate extension RegistrationViewController {
 fileprivate extension RegistrationViewController {
     
     func addConstraints() {
+        addScrollViewConstraints()
+        addContentViewConstraints()
         addNicknameTextFieldConstraints()
-        addNicknameTextFieldBottomLineViewConstraints()
         addPasswordTextFieldConstraints()
-        addPasswordTextFieldBottomLineViewConstraints()
+        addConfirmPasswordTextFieldConstraints()
         addRegisterButtonConstraints()
     }
     
-    func addNicknameTextFieldConstraints() {
-        guard let navigationBar = self.navigationController?.navigationBar else { return }
-        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.nicknameTextField,
-                                                         attribute: .top,
-                                                         toItem: navigationBar,
-                                                         attribute: .bottom,
-                                                         constant: self.nicknameTextFieldTopOffset)
+    func addScrollViewConstraints() {
         
-        NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.nicknameTextField,
-                                                             toItem: self.view,
-                                                             constant: 0)
+        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.scrollView,
+                                                         toItem: self.view)
         
-        NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.nicknameTextField,
-                                                              toItem: self.view,
-                                                              constant: 0)
-        
-        NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.nicknameTextField,
-                                                               constant: self.nicknameTextFieldHeight)
     }
     
-    func addNicknameTextFieldBottomLineViewConstraints() {
-        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.nicknameTextFieldBottomLineView,
-                                                         attribute: .top,
-                                                         toItem: self.nicknameTextField,
-                                                         attribute: .bottom,
-                                                         constant: 0)
+    func addContentViewConstraints() {
         
-        NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.nicknameTextFieldBottomLineView,
-                                                             toItem: self.view,
-                                                             constant: 0)
+        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.contentView,
+                                                         toItem: self.scrollView)
         
-        NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.nicknameTextFieldBottomLineView,
-                                                              toItem: self.view,
-                                                              constant: 0)
+        NSLayoutConstraint.addEqualCenterXConstraint(item: self.contentView,
+                                                     toItem: self.scrollView,
+                                                     constant: .zero)
         
-        NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.nicknameTextFieldBottomLineView,
-                                                               constant: self.defaultLineViewHeight)
+        NSLayoutConstraint.addEqualCenterYConstraint(item: self.contentView,
+                                                     toItem: self.scrollView,
+                                                     constant: .zero)
+        
+    }
+    
+    func addNicknameTextFieldConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.nicknameTextField,
+                                              attribute: .top,
+                                              toItem: self.contentView,
+                                              attribute: .top,
+                                              constant: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController) + Self.nicknameTextFieldTopOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.nicknameTextField,
+                                                  toItem: self.backgroundImageView,
+                                                  constant: Self.nicknameTextFieldLeftOffset)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.nicknameTextField,
+                                                   toItem: self.backgroundImageView,
+                                                   constant: -Self.nicknameTextFieldRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.nicknameTextField,
+                                                    constant: Self.nicknameTextFieldHeight)
+        
     }
     
     func addPasswordTextFieldConstraints() {
-        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.passwordTextField,
-                                                         attribute: .top,
-                                                         toItem: self.nicknameTextField,
-                                                         attribute: .bottom,
-                                                         constant: self.passwordTextFieldTopOffset)
         
-        NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.passwordTextField,
-                                                             toItem: self.view,
-                                                             constant: 0)
+        NSLayoutConstraint.addEqualConstraint(item: self.passwordTextField,
+                                              attribute: .top,
+                                              toItem: self.nicknameTextField,
+                                              attribute: .bottom,
+                                              constant: Self.passwordTextFieldTopOffset)
         
-        NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.passwordTextField,
-                                                              toItem: self.view,
-                                                              constant: 0)
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.passwordTextField,
+                                                  toItem: self.backgroundImageView,
+                                                  constant: Self.passwordTextFieldLeftOffset)
         
-        NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.passwordTextField,
-                                                               constant: self.passwordTextFieldHeight)
+        NSLayoutConstraint.addEqualRightConstraint(item: self.passwordTextField,
+                                                   toItem: self.backgroundImageView,
+                                                   constant: -Self.passwordTextFieldRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.passwordTextField,
+                                                    constant: Self.passwordTextFieldHeight)
+        
     }
     
-    func addPasswordTextFieldBottomLineViewConstraints() {
-        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.passwordTextFieldBottomLineView,
-                                                         attribute: .top,
-                                                         toItem: self.passwordTextField,
-                                                         attribute: .bottom,
-                                                         constant: 0)
+    func addConfirmPasswordTextFieldConstraints() {
         
-        NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.passwordTextFieldBottomLineView,
-                                                             toItem: self.view,
-                                                             constant: 0)
+        NSLayoutConstraint.addEqualConstraint(item: self.confirmPasswordTextField,
+                                              attribute: .top,
+                                              toItem: self.passwordTextField,
+                                              attribute: .bottom,
+                                              constant: Self.confirmPasswordTextFieldTopOffset)
         
-        NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.passwordTextFieldBottomLineView,
-                                                              toItem: self.view,
-                                                              constant: 0)
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.confirmPasswordTextField,
+                                                  toItem: self.backgroundImageView,
+                                                  constant: Self.confirmPasswordTextFieldLeftOffset)
         
-        NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.passwordTextFieldBottomLineView,
-                                                               constant: self.defaultLineViewHeight)
+        NSLayoutConstraint.addEqualRightConstraint(item: self.confirmPasswordTextField,
+                                                   toItem: self.backgroundImageView,
+                                                   constant: -Self.confirmPasswordTextFieldRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.confirmPasswordTextField,
+                                                    constant: Self.confirmPasswordTextFieldHeight)
+        
     }
     
     func addRegisterButtonConstraints() {
-        NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.registerButton,
-                                                             toItem: self.view,
-                                                             constant: 0)
         
-        NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.registerButton,
-                                                             toItem: self.view,
-                                                             constant: 0)
+        NSLayoutConstraint.addEqualConstraint(item: self.registerButton,
+                                              attribute: .top,
+                                              toItem: self.confirmPasswordTextField,
+                                              attribute: .bottom,
+                                              constant: Self.registerButtonTopOffset)
         
-        NSLayoutConstraint.addEqualBottomConstraintAndActivate(item: self.registerButton,
-                                                               toItem: self.view,
-                                                               constant: 0)
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.registerButton,
+                                                  toItem: self.backgroundImageView,
+                                                  constant: Self.registerButtonLeftOffset)
         
-        NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.registerButton,
-                                                               constant: self.registerButtonHeight)
+        NSLayoutConstraint.addEqualRightConstraint(item: self.registerButton,
+                                                   toItem: self.backgroundImageView,
+                                                   constant: -Self.registerButtonRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.registerButton,
+                                                    constant: Self.registerButtonHeight)
+        
     }
     
 }
@@ -271,22 +365,78 @@ fileprivate extension RegistrationViewController {
 fileprivate extension RegistrationViewController {
     
     func configureUI() {
-        configureTitle()
         configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
     }
     
-    func configureTitle() {
-        self.title = KeysForTranslate.registration.localized
+}
+
+// MARK: - Drop Shadow
+fileprivate extension RegistrationViewController {
+    
+    func dropShadow() {
+        dropShadowNicknameTextField()
+        dropShadowPasswordTextField()
+        dropShadowConfirmPasswordTextField()
+        dropShadowRegisterButton()
+    }
+    
+    func dropShadowNicknameTextField() {
+        nicknameTextField.dropShadow(color: MDAppStyling.Color.md_Shadow_0_Light_Appearence.color(0.5),
+                                     offSet: .init(width: 2, height: 4),
+                                     radius: 15)
+    }
+    
+    func dropShadowPasswordTextField() {
+        passwordTextField.dropShadow(color: MDAppStyling.Color.md_Shadow_0_Light_Appearence.color(0.5),
+                                     offSet: .init(width: 2, height: 4),
+                                     radius: 15)
+    }
+    
+    func dropShadowConfirmPasswordTextField() {
+        confirmPasswordTextField.dropShadow(color: MDAppStyling.Color.md_Shadow_0_Light_Appearence.color(0.5),
+                                            offSet: .init(width: 2, height: 4),
+                                            radius: 15)
+    }
+    
+    func dropShadowRegisterButton() {
+        registerButton.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.5),
+                                  offSet: .init(width: 0,
+                                                height: 4),
+                                  radius: 20)
+    }
+    
+}
+
+// MARK: - Round Off Edges
+fileprivate extension RegistrationViewController {
+    
+    func roundOffEdges() {
+        nicknameTextFieldRoundOffEdges()
+        passwordTextFieldRoundOffEdges()
+        confirmPasswordTextFieldRoundOffEdges()
+        registerButtonRoundOffEdges()
+    }
+    
+    func nicknameTextFieldRoundOffEdges() {
+        nicknameTextField.layer.cornerRadius = 10
+    }
+    
+    func passwordTextFieldRoundOffEdges() {
+        passwordTextField.layer.cornerRadius = 10
+    }
+    
+    func confirmPasswordTextFieldRoundOffEdges() {
+        confirmPasswordTextField.layer.cornerRadius = 10
+    }
+    
+    func registerButtonRoundOffEdges() {
+        registerButton.layer.cornerRadius = 10
     }
     
 }
 
 // MARK: - Actions
 fileprivate extension RegistrationViewController {
-       
-    @objc func registerButtonAction() {
-        presenter.registerButtonClicked()
-    }
     
     @objc func nicknameTextFieldEditingDidChangeAction() {
         presenter.nicknameTextFieldEditingDidChangeAction(nicknameTextField.text)
@@ -294,6 +444,14 @@ fileprivate extension RegistrationViewController {
     
     @objc func passwordTextFieldEditingDidChangeAction() {
         presenter.passwordTextFieldEditingDidChangeAction(passwordTextField.text)
+    }
+    
+    @objc func confirmPasswordTextFieldEditingDidChangeAction() {
+        presenter.confirmPasswordTextFieldEditingDidChangeAction(confirmPasswordTextField.text)
+    }
+    
+    @objc func registerButtonAction() {
+        presenter.registerButtonClicked()
     }
     
 }

@@ -20,6 +20,7 @@ struct MDConstants {
         static let momExtension: String = "mom"
         static let sqliteExtension: String = "sqlite"
         static let spaceString: String = " "
+        static let forwardSlash: String = "/"
     }
     
     struct HTTPHeaderConstants {
@@ -150,6 +151,23 @@ struct MDConstants {
                                                        left: 16,
                                                        bottom: .zero,
                                                        right: 38)
+    }
+    
+    struct Text {
+        
+        static func textIsEmpty(_ text: String?) -> Bool {
+            if (text == nil || text!.isEmpty || text!.trimmingCharacters(in: .whitespaces).isEmpty) {
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        struct MaxCountCharacters {
+            static let nicknameTextField: Int = 255
+            static let passwordTextField: Int = 255
+        }
+        
     }
     
 }

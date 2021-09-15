@@ -6,34 +6,16 @@
 
 import UIKit
 
-final class AuthenticationViewController: BaseAuthViewController {
+final class AuthenticationViewController: BaseDetailAuthViewController {
     
     fileprivate let presenter: AuthenticationPresenterInputProtocol
-    
-    fileprivate let backButtonSize: CGSize = .init(width: 40, height: 40)
-    fileprivate let backButton: UIButton = {
-        let button: UIButton = .init()
-        button.setImage(MDAppStyling.Image.back_white_arrow.image, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    fileprivate let loginLabel: UILabel = {
-        let label: UILabel = .init()
-        label.font = MDAppStyling.Font.MyriadProSemiBold.font(ofSize: 34)
-        label.text = KeysForTranslate.login.localized
-        label.textColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
     
     fileprivate static let nicknameTextFieldHeight: CGFloat = 48
     fileprivate static let nicknameTextFieldTopOffset: CGFloat = 24
     fileprivate static let nicknameTextFieldLeftOffset: CGFloat = 16
     fileprivate static let nicknameTextFieldRightOffset: CGFloat = 16
     fileprivate let nicknameTextField: MDTextFieldWithToolBar = {
-        let textField: MDTextFieldWithToolBar = .init(frame: newFrameForNicknameTextField(navBarHeight: defaultNavigationBarViewHeight),
-                                                      rectInset: MDConstants.Rect.defaultInset,
+        let textField: MDTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.defaultInset,
                                                       keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.nickname.localized
         textField.autocapitalizationType = .none
@@ -43,8 +25,9 @@ final class AuthenticationViewController: BaseAuthViewController {
         textField.font = MDAppStyling.Font.MyriadProItalic.font(ofSize: 17)
         textField.textColor = MDAppStyling.Color.md_Black_1_Light_Appearence.color()
         textField.returnKeyType = .next
-        textField.tag = AuthTextFieldTag.nickname.rawValue
+        textField.tag = AuthenticationTextFieldTag.nickname.rawValue
         textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -53,8 +36,7 @@ final class AuthenticationViewController: BaseAuthViewController {
     fileprivate static let passwordTextFieldLeftOffset: CGFloat = 16
     fileprivate static let passwordTextFieldRightOffset: CGFloat = 16
     fileprivate let passwordTextField: MDPasswordTextFieldWithToolBar = {
-        let textField: MDPasswordTextFieldWithToolBar = .init(frame: newFrameForPasswordTextField(navBarHeight: defaultNavigationBarViewHeight),
-                                                              rectInset: MDConstants.Rect.passwordInset,
+        let textField: MDPasswordTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.passwordInset,
                                                               keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.password.localized
         textField.autocapitalizationType = .none
@@ -64,8 +46,9 @@ final class AuthenticationViewController: BaseAuthViewController {
         textField.textColor = MDAppStyling.Color.md_Black_1_Light_Appearence.color()
         textField.returnKeyType = .go
         textField.isSecureTextEntry = true
-        textField.tag = AuthTextFieldTag.password.rawValue
+        textField.tag = AuthenticationTextFieldTag.password.rawValue
         textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -74,17 +57,18 @@ final class AuthenticationViewController: BaseAuthViewController {
     fileprivate static let loginButtonLeftOffset: CGFloat = 16
     fileprivate static let loginButtonRightOffset: CGFloat = 16
     fileprivate let loginButton: UIButton = {
-        let button: UIButton = .init(frame: newFrameForLoginButton(navBarHeight: defaultNavigationBarViewHeight))
+        let button: UIButton = .init()
         button.backgroundColor = MDAppStyling.Color.md_Blue_1_Light_Appearence.color()
         button.setTitle(KeysForTranslate.login.localized, for: .normal)
         button.setTitleColor(MDAppStyling.Color.md_White_0_Light_Appearence.color(), for: .normal)
         button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     init(presenter: AuthenticationPresenterInputProtocol) {
         self.presenter = presenter
-        super.init()
+        super.init(title: KeysForTranslate.login.localized)
         updateBackgroundImage(MDAppStyling.Image.background_typography_1.image)
     }
     
@@ -110,6 +94,7 @@ final class AuthenticationViewController: BaseAuthViewController {
         super.viewDidLayoutSubviews()
         addConstraints()
         roundOffEdges()
+        dropShadow()
     }
     
 }
@@ -137,20 +122,9 @@ extension AuthenticationViewController: AuthenticationPresenterOutputProtocol {
 fileprivate extension AuthenticationViewController {
     
     func addViews() {
-        addLoginLabel()
-        addBackButton()
         addNicknameTextField()
         addPasswordTextField()
         addLoginButton()
-    }
-    
-    func addLoginLabel() {
-        view.addSubview(loginLabel)
-    }
-    
-    func addBackButton() {
-        backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-        view.addSubview(backButton)
     }
     
     func addNicknameTextField() {
@@ -176,37 +150,71 @@ fileprivate extension AuthenticationViewController {
 fileprivate extension AuthenticationViewController {
     
     func addConstraints() {
-        addLoginLabelConstraints()
-        addBackButtonConstraints()
+        addNicknameTextFieldConstraints()
+        addPasswordTextFieldConstraints()
+        addLoginButtonConstraints()
     }
     
-    func addLoginLabelConstraints() {
+    func addNicknameTextFieldConstraints() {
         
-        NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.loginLabel,
-                                                             toItem: self.navigationBarView,
-                                                             constant: 16)
+        NSLayoutConstraint.addEqualConstraint(item: self.nicknameTextField,
+                                              attribute: .top,
+                                              toItem: self.navigationBarView,
+                                              attribute: .bottom,
+                                              constant: Self.nicknameTextFieldTopOffset)
         
-        NSLayoutConstraint.addEqualRightConstraintAndActivate(item: self.loginLabel,
-                                                              toItem: self.navigationBarView,
-                                                              constant: -16)
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.nicknameTextField,
+                                                  toItem: self.backgroundImageView,
+                                                  constant: Self.nicknameTextFieldLeftOffset)
         
-        NSLayoutConstraint.addEqualBottomConstraintAndActivate(item: self.loginLabel,
-                                                               toItem: self.navigationBarView,
-                                                               constant: -16)
+        NSLayoutConstraint.addEqualRightConstraint(item: self.nicknameTextField,
+                                                   toItem: self.backgroundImageView,
+                                                   constant: -Self.nicknameTextFieldRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.nicknameTextField,
+                                                    constant: Self.nicknameTextFieldHeight)
         
     }
     
-    func addBackButtonConstraints() {
+    func addPasswordTextFieldConstraints() {
         
-        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.backButton,
-                                                         attribute: .bottom,
-                                                         toItem: self.loginLabel,
-                                                         attribute: .top,
-                                                         constant: -16)
+        NSLayoutConstraint.addEqualConstraint(item: self.passwordTextField,
+                                              attribute: .top,
+                                              toItem: self.nicknameTextField,
+                                              attribute: .bottom,
+                                              constant: Self.passwordTextFieldTopOffset)
         
-        NSLayoutConstraint.addEqualLeftConstraintAndActivate(item: self.backButton,
-                                                             toItem: self.navigationBarView,
-                                                             constant: 18)
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.passwordTextField,
+                                                  toItem: self.backgroundImageView,
+                                                  constant: Self.passwordTextFieldLeftOffset)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.passwordTextField,
+                                                   toItem: self.backgroundImageView,
+                                                   constant: -Self.passwordTextFieldRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.passwordTextField,
+                                                    constant: Self.passwordTextFieldHeight)
+        
+    }
+    
+    func addLoginButtonConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.loginButton,
+                                              attribute: .top,
+                                              toItem: self.passwordTextField,
+                                              attribute: .bottom,
+                                              constant: Self.loginButtonTopOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.loginButton,
+                                                  toItem: self.backgroundImageView,
+                                                  constant: Self.loginButtonLeftOffset)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.loginButton,
+                                                   toItem: self.backgroundImageView,
+                                                   constant: -Self.loginButtonRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.loginButton,
+                                                    constant: Self.loginButtonHeight)
         
     }
     
@@ -217,43 +225,6 @@ fileprivate extension AuthenticationViewController {
     
     func configureUI() {
         configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
-        updateFrame()
-        dropShadow()
-    }
-    
-}
-
-// MARK: - Update Frame
-fileprivate extension AuthenticationViewController {
-    
-    func updateFrame() {
-        updateNicknameTextFieldFrame()
-        updatePasswordTextFieldFrame()
-        updateLoginButtonFrame()
-    }
-    
-    func updateNicknameTextFieldFrame() {
-        UIView.animate(withDuration: .zero) {
-            self.nicknameTextField.frame = Self.newFrameForNicknameTextField(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
-            self.view.layoutSubviews()
-            self.viewDidLayoutSubviews()
-        }
-    }
-    
-    func updatePasswordTextFieldFrame() {
-        UIView.animate(withDuration: .zero) {
-            self.passwordTextField.frame = Self.newFrameForPasswordTextField(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
-            self.view.layoutSubviews()
-            self.viewDidLayoutSubviews()
-        }
-    }
-    
-    func updateLoginButtonFrame() {
-        UIView.animate(withDuration: .zero) {
-            self.loginButton.frame = Self.newFrameForLoginButton(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
-            self.view.layoutSubviews()
-            self.viewDidLayoutSubviews()
-        }
     }
     
 }
@@ -280,7 +251,7 @@ fileprivate extension AuthenticationViewController {
     }
     
     func dropShadowLoginButtonView() {
-        loginButton.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.7),
+        loginButton.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.5),
                                offSet: .init(width: 0,
                                              height: 4),
                                radius: 20)
@@ -314,10 +285,6 @@ fileprivate extension AuthenticationViewController {
 // MARK: - Actions
 fileprivate extension AuthenticationViewController {
     
-    @objc func backButtonAction() {
-        navigationController?.popViewController(animated: true)
-    }
-    
     @objc func loginButtonAction() {
         presenter.loginButtonClicked()
     }
@@ -337,32 +304,6 @@ fileprivate extension AuthenticationViewController {
     
     func hideKeyboardFunc() {
         self.view.endEditing(true)
-    }
-    
-}
-
-// MARK: - New Frame
-fileprivate extension AuthenticationViewController {
-    
-    static func newFrameForNicknameTextField(navBarHeight: CGFloat) -> CGRect {
-        return .init(origin: .init(x: nicknameTextFieldLeftOffset,
-                                   y: navBarHeight + nicknameTextFieldTopOffset),
-                     size: .init(width: MDConstants.Screen.width - (nicknameTextFieldLeftOffset + nicknameTextFieldRightOffset),
-                                 height: nicknameTextFieldHeight))
-    }
-    
-    static func newFrameForPasswordTextField(navBarHeight: CGFloat) -> CGRect {
-        return .init(origin: .init(x: passwordTextFieldLeftOffset,
-                                   y: newFrameForNicknameTextField(navBarHeight: navBarHeight).maxY + passwordTextFieldTopOffset),
-                     size: .init(width: MDConstants.Screen.width - (passwordTextFieldLeftOffset + passwordTextFieldRightOffset),
-                                 height: passwordTextFieldHeight))
-    }
-    
-    static func newFrameForLoginButton(navBarHeight: CGFloat) -> CGRect {
-        return .init(origin: .init(x: loginButtonLeftOffset,
-                                   y: newFrameForPasswordTextField(navBarHeight: navBarHeight).maxY + loginButtonTopOffset),
-                     size: .init(width: MDConstants.Screen.width - (loginButtonLeftOffset + loginButtonRightOffset),
-                                 height: loginButtonHeight))
     }
     
 }

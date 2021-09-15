@@ -46,7 +46,7 @@
 		221D281226C5064A004BC4F7 /* AuthenticationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280B26C5064A004BC4F7 /* AuthenticationInteractor.swift */; };
 		221D281326C5064A004BC4F7 /* AuthenticationDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280C26C5064A004BC4F7 /* AuthenticationDataProvider.swift */; };
 		221D281426C5064A004BC4F7 /* AuthenticationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280D26C5064A004BC4F7 /* AuthenticationDataManager.swift */; };
-		221D281926C53356004BC4F7 /* AuthTextFieldTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D281826C53356004BC4F7 /* AuthTextFieldTag.swift */; };
+		221D281926C53356004BC4F7 /* AuthenticationTextFieldTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D281826C53356004BC4F7 /* AuthenticationTextFieldTag.swift */; };
 		221D281C26C533AF004BC4F7 /* AuthTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D281B26C533AF004BC4F7 /* AuthTextFieldDelegate.swift */; };
 		221D281F26C54960004BC4F7 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D281E26C54960004BC4F7 /* KeyboardHandler.swift */; };
 		2220FCB026D50ABF00B22515 /* MDAPICourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220FCAF26D50ABF00B22515 /* MDAPICourse.swift */; };
@@ -119,6 +119,14 @@
 		2270F3A426D264E6006B46F4 /* CDCourseResponseEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A326D264E6006B46F4 /* CDCourseResponseEntity+Extension.swift */; };
 		2270F3A626D2663F006B46F4 /* CDCourseResponseEntityAttributeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A526D2663F006B46F4 /* CDCourseResponseEntityAttributeName.swift */; };
 		2270F3A926D27606006B46F4 /* MDAPILanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A826D27606006B46F4 /* MDAPILanguage.swift */; };
+		227B91D026EF4A1E0086B9AA /* BaseDetailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91CF26EF4A1E0086B9AA /* BaseDetailAuthViewController.swift */; };
+		227B91D226EF51430086B9AA /* RegistrationTextFieldTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91D126EF51430086B9AA /* RegistrationTextFieldTag.swift */; };
+		227B91D726EF5F250086B9AA /* RegisterValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91D626EF5F250086B9AA /* RegisterValidation.swift */; };
+		227B91DB26EF5F5E0086B9AA /* RegisterValidationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91DA26EF5F5E0086B9AA /* RegisterValidationType.swift */; };
+		227B91DD26EF5F670086B9AA /* RegisterValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91DC26EF5F670086B9AA /* RegisterValidationError.swift */; };
+		227B91DF26EF60310086B9AA /* RegisterValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91DE26EF60310086B9AA /* RegisterValidationResult.swift */; };
+		227B91E126EF607A0086B9AA /* RegisterValidationLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91E026EF607A0086B9AA /* RegisterValidationLogic.swift */; };
+		227B91E426EF62F80086B9AA /* RegisterTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91E326EF62F80086B9AA /* RegisterTextFieldDelegate.swift */; };
 		227D5E642652584700B54524 /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E632652584700B54524 /* NSLayoutConstraint+Extension.swift */; };
 		227D5E672652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E652652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift */; };
 		227D5E6A2652586F00B54524 /* WordListCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E692652586F00B54524 /* WordListCollectionViewDelegate.swift */; };
@@ -256,6 +264,8 @@
 		22CA08892651603A0052D169 /* WordListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA08882651603A0052D169 /* WordListDataProvider.swift */; };
 		22CA088C265165460052D169 /* MDAppStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088B265165460052D169 /* MDAppStyling.swift */; };
 		22CA088E265167620052D169 /* ReloadDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088D265167620052D169 /* ReloadDataProtocol.swift */; };
+		22CD45F026F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */; };
+		22CD45F226F090F20060978D /* MDCounterTextFieldWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */; };
 		22DB2F7726C3BE7900C1AADA /* CourseListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7026C3BE7900C1AADA /* CourseListModule.swift */; };
 		22DB2F7826C3BE7900C1AADA /* CourseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7126C3BE7900C1AADA /* CourseListPresenter.swift */; };
 		22DB2F7926C3BE7900C1AADA /* CourseListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7226C3BE7900C1AADA /* CourseListRouter.swift */; };
@@ -367,7 +377,7 @@
 		221D280B26C5064A004BC4F7 /* AuthenticationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationInteractor.swift; sourceTree = "<group>"; };
 		221D280C26C5064A004BC4F7 /* AuthenticationDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationDataProvider.swift; sourceTree = "<group>"; };
 		221D280D26C5064A004BC4F7 /* AuthenticationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationDataManager.swift; sourceTree = "<group>"; };
-		221D281826C53356004BC4F7 /* AuthTextFieldTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextFieldTag.swift; sourceTree = "<group>"; };
+		221D281826C53356004BC4F7 /* AuthenticationTextFieldTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationTextFieldTag.swift; sourceTree = "<group>"; };
 		221D281B26C533AF004BC4F7 /* AuthTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextFieldDelegate.swift; sourceTree = "<group>"; };
 		221D281E26C54960004BC4F7 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
 		2220FCAF26D50ABF00B22515 /* MDAPICourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPICourse.swift; sourceTree = "<group>"; };
@@ -440,6 +450,14 @@
 		2270F3A326D264E6006B46F4 /* CDCourseResponseEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCourseResponseEntity+Extension.swift"; sourceTree = "<group>"; };
 		2270F3A526D2663F006B46F4 /* CDCourseResponseEntityAttributeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDCourseResponseEntityAttributeName.swift; sourceTree = "<group>"; };
 		2270F3A826D27606006B46F4 /* MDAPILanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPILanguage.swift; sourceTree = "<group>"; };
+		227B91CF26EF4A1E0086B9AA /* BaseDetailAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDetailAuthViewController.swift; sourceTree = "<group>"; };
+		227B91D126EF51430086B9AA /* RegistrationTextFieldTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTextFieldTag.swift; sourceTree = "<group>"; };
+		227B91D626EF5F250086B9AA /* RegisterValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterValidation.swift; sourceTree = "<group>"; };
+		227B91DA26EF5F5E0086B9AA /* RegisterValidationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterValidationType.swift; sourceTree = "<group>"; };
+		227B91DC26EF5F670086B9AA /* RegisterValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterValidationError.swift; sourceTree = "<group>"; };
+		227B91DE26EF60310086B9AA /* RegisterValidationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterValidationResult.swift; sourceTree = "<group>"; };
+		227B91E026EF607A0086B9AA /* RegisterValidationLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterValidationLogic.swift; sourceTree = "<group>"; };
+		227B91E326EF62F80086B9AA /* RegisterTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTextFieldDelegate.swift; sourceTree = "<group>"; };
 		227D5E632652584700B54524 /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
 		227D5E652652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegateFlowLayoutPropertyProtocol.swift; sourceTree = "<group>"; };
 		227D5E692652586F00B54524 /* WordListCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordListCollectionViewDelegate.swift; sourceTree = "<group>"; };
@@ -581,6 +599,8 @@
 		22CA08882651603A0052D169 /* WordListDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListDataProvider.swift; sourceTree = "<group>"; };
 		22CA088B265165460052D169 /* MDAppStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppStyling.swift; sourceTree = "<group>"; };
 		22CA088D265167620052D169 /* ReloadDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadDataProtocol.swift; sourceTree = "<group>"; };
+		22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCounterPasswordTextFieldWithToolBar.swift; sourceTree = "<group>"; };
+		22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCounterTextFieldWithToolBar.swift; sourceTree = "<group>"; };
 		22DB2F7026C3BE7900C1AADA /* CourseListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListModule.swift; sourceTree = "<group>"; };
 		22DB2F7126C3BE7900C1AADA /* CourseListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListPresenter.swift; sourceTree = "<group>"; };
 		22DB2F7226C3BE7900C1AADA /* CourseListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListRouter.swift; sourceTree = "<group>"; };
@@ -669,7 +689,7 @@
 		220793BC26C65BB0003D434B /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				221D281826C53356004BC4F7 /* AuthTextFieldTag.swift */,
+				221D281826C53356004BC4F7 /* AuthenticationTextFieldTag.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -917,8 +937,9 @@
 		2223F8A526512BE8004F2FE9 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
+				22CD45EE26F090BD0060978D /* CounterTextField */,
 				228AE05726EE05000088B4CF /* HideShowPasswordTextField */,
-				228AE05426EDDFAF0088B4CF /* BaseAuthViewController */,
+				228AE05426EDDFAF0088B4CF /* BaseViewControllers */,
 				220FFE7526C9031200702CCE /* MDTextFieldWithToolBar */,
 				220FFE7226C8F82D00702CCE /* KeyboardToolbar */,
 				221D281D26C54952004BC4F7 /* KeyboardHandler */,
@@ -1190,6 +1211,50 @@
 			path = SettingsModule;
 			sourceTree = "<group>";
 		};
+		227B91D426EF5AEA0086B9AA /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				227B91D126EF51430086B9AA /* RegistrationTextFieldTag.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		227B91D526EF5EFD0086B9AA /* RegisterValidation */ = {
+			isa = PBXGroup;
+			children = (
+				227B91D926EF5F540086B9AA /* Enums */,
+				227B91D826EF5F310086B9AA /* Logic */,
+				227B91DE26EF60310086B9AA /* RegisterValidationResult.swift */,
+				227B91D626EF5F250086B9AA /* RegisterValidation.swift */,
+			);
+			path = RegisterValidation;
+			sourceTree = "<group>";
+		};
+		227B91D826EF5F310086B9AA /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				227B91E026EF607A0086B9AA /* RegisterValidationLogic.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		227B91D926EF5F540086B9AA /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				227B91DA26EF5F5E0086B9AA /* RegisterValidationType.swift */,
+				227B91DC26EF5F670086B9AA /* RegisterValidationError.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		227B91E226EF62E10086B9AA /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				227B91E326EF62F80086B9AA /* RegisterTextFieldDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		227D8F1326D7A099009CB94B /* AppSettings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1306,12 +1371,13 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		228AE05426EDDFAF0088B4CF /* BaseAuthViewController */ = {
+		228AE05426EDDFAF0088B4CF /* BaseViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				228AE05526EDDFC20088B4CF /* BaseAuthViewController.swift */,
+				227B91CF26EF4A1E0086B9AA /* BaseDetailAuthViewController.swift */,
 			);
-			path = BaseAuthViewController;
+			path = BaseViewControllers;
 			sourceTree = "<group>";
 		};
 		228AE05726EE05000088B4CF /* HideShowPasswordTextField */ = {
@@ -1645,6 +1711,9 @@
 		22C5863226C7AFAC0030B12D /* RegistrationModule */ = {
 			isa = PBXGroup;
 			children = (
+				227B91E226EF62E10086B9AA /* Delegates */,
+				227B91D526EF5EFD0086B9AA /* RegisterValidation */,
+				227B91D426EF5AEA0086B9AA /* Enums */,
 				22C5863326C7AFB80030B12D /* RegistrationModule.swift */,
 				22C5863426C7AFB80030B12D /* RegistrationPresenter.swift */,
 				22C5863526C7AFB80030B12D /* RegistrationRouter.swift */,
@@ -1732,6 +1801,15 @@
 				22CA088B265165460052D169 /* MDAppStyling.swift */,
 			);
 			path = AppStyling;
+			sourceTree = "<group>";
+		};
+		22CD45EE26F090BD0060978D /* CounterTextField */ = {
+			isa = PBXGroup;
+			children = (
+				22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */,
+				22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */,
+			);
+			path = CounterTextField;
 			sourceTree = "<group>";
 		};
 		22DB2F6F26C3BE3C00C1AADA /* CourseListModule */ = {
@@ -2154,11 +2232,14 @@
 				22B8E6BC26D39840001CCCA8 /* MDReadLanguageCoreDataStorageOperation.swift in Sources */,
 				22BD99AB266A67A60063FEFC /* AppearanceType.swift in Sources */,
 				22493C2E26971413000DA480 /* CoreDataStack.swift in Sources */,
+				227B91D226EF51430086B9AA /* RegistrationTextFieldTag.swift in Sources */,
 				22561C8A26D4CEBA00A6135B /* MDReadAllCoursesCoreDataStorageOperation.swift in Sources */,
 				229D2D4826EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataProvider.swift in Sources */,
+				227B91DF26EF60310086B9AA /* RegisterValidationResult.swift in Sources */,
 				226FEE7D266B65080044A5F9 /* AppearanceCell.swift in Sources */,
 				22B22689266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift in Sources */,
 				225C349526D6746800F3BC9A /* JWTApiRequest.swift in Sources */,
+				227B91DB26EF5F5E0086B9AA /* RegisterValidationType.swift in Sources */,
 				2220FCB026D50ABF00B22515 /* MDAPICourse.swift in Sources */,
 				2270F3A426D264E6006B46F4 /* CDCourseResponseEntity+Extension.swift in Sources */,
 				228AE05926EE05120088B4CF /* HideShowPasswordTextField.swift in Sources */,
@@ -2204,9 +2285,11 @@
 				22C5863D26C7AFB80030B12D /* RegistrationViewController.swift in Sources */,
 				2270F3A926D27606006B46F4 /* MDAPILanguage.swift in Sources */,
 				22493C4C26972E27000DA480 /* MDEntityOperationError.swift in Sources */,
+				227B91E426EF62F80086B9AA /* RegisterTextFieldDelegate.swift in Sources */,
 				220793D126C6B2D9003D434B /* AuthRequest.swift in Sources */,
 				22557FD326C95D5A00A4FF31 /* MDReadJWTMemoryStorageOperation.swift in Sources */,
 				229901692668EC3400D8C74E /* AppearanceRouter.swift in Sources */,
+				227B91D726EF5F250086B9AA /* RegisterValidation.swift in Sources */,
 				22BBA15D26E0C0F0002955A6 /* MDProgress.swift in Sources */,
 				22DB2F7F26C3C3A900C1AADA /* UIColor+Extension.swift in Sources */,
 				22DE582C26C954A70032A94C /* MDReadJWTProtocol.swift in Sources */,
@@ -2223,6 +2306,7 @@
 				22493C3726972232000DA480 /* MDWordCoreDataStorage.swift in Sources */,
 				2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */,
 				2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */,
+				22CD45F226F090F20060978D /* MDCounterTextFieldWithToolBar.swift in Sources */,
 				22BD99A0266A4AB10063FEFC /* WordListModule.swift in Sources */,
 				22EF01EC269DA70300FE4435 /* Endpoint.swift in Sources */,
 				220793D326C6B303003D434B /* Encodable+Extension.swift in Sources */,
@@ -2325,8 +2409,10 @@
 				229E08C72652CB9000DA56C4 /* WordListCollectionViewDataSource.swift in Sources */,
 				22BD99A2266A4B8D0063FEFC /* AppearanceModule.swift in Sources */,
 				22DB2F8D26C3D51500C1AADA /* TableViewDataSourcePropertyProtocol.swift in Sources */,
+				227B91D026EF4A1E0086B9AA /* BaseDetailAuthViewController.swift in Sources */,
 				2223F8B426512F01004F2FE9 /* KeysForTranslate.swift in Sources */,
-				221D281926C53356004BC4F7 /* AuthTextFieldTag.swift in Sources */,
+				221D281926C53356004BC4F7 /* AuthenticationTextFieldTag.swift in Sources */,
+				227B91DD26EF5F670086B9AA /* RegisterValidationError.swift in Sources */,
 				2289CEEC2678CC34007254C3 /* MDOperationResultWithCompletion.swift in Sources */,
 				2223F8AE26512DEB004F2FE9 /* MDConstants.swift in Sources */,
 				2299016B2668EC3400D8C74E /* AppearanceInteractor.swift in Sources */,
@@ -2373,6 +2459,7 @@
 				22EDF02A26C7E91D00D19DA1 /* CDUserResponseEntityAttributeName.swift in Sources */,
 				22B8E6EA26D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift in Sources */,
 				2270F39E26D26132006B46F4 /* CDLanguageResponseEntityAttributeName.swift in Sources */,
+				227B91E126EF607A0086B9AA /* RegisterValidationLogic.swift in Sources */,
 				227D5E642652584700B54524 /* NSLayoutConstraint+Extension.swift in Sources */,
 				22561C9D26D4DEA800A6135B /* MDStorageInterface.swift in Sources */,
 				22E2B500266515E700978E62 /* CollectionViewDataSource.swift in Sources */,
@@ -2393,6 +2480,7 @@
 				22B8E6B226D38D6D001CCCA8 /* MDReadAllLanguagesMemoryStorageOperation.swift in Sources */,
 				22C5863A26C7AFB80030B12D /* RegistrationModule.swift in Sources */,
 				22C5863126C7A5690030B12D /* MDAPIAuthError.swift in Sources */,
+				22CD45F026F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift in Sources */,
 				22B8E6B426D38F5C001CCCA8 /* MDDeleteAllLanguagesMemoryStorageOperation.swift in Sources */,
 				22E2B4E62664EB8000978E62 /* SettingsCollectionViewDelegate.swift in Sources */,
 				221D281F26C54960004BC4F7 /* KeyboardHandler.swift in Sources */,

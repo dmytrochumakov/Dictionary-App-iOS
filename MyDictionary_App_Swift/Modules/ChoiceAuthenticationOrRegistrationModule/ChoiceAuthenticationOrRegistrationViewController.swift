@@ -22,11 +22,12 @@ final class ChoiceAuthenticationOrRegistrationViewController: BaseAuthViewContro
     fileprivate static let loginButtonRightOffset: CGFloat = 16
     fileprivate static let loginButtonTopOffset: CGFloat = 24
     fileprivate let loginButton: UIButton = {
-        let button: UIButton = .init(frame: newFrameForLoginButton(navBarHeight: defaultNavigationBarViewHeight))
+        let button: UIButton = .init()
         button.backgroundColor = MDAppStyling.Color.md_Blue_1_Light_Appearence.color()
         button.setTitle(KeysForTranslate.login.localized, for: .normal)
         button.setTitleColor(MDAppStyling.Color.md_White_0_Light_Appearence.color(), for: .normal)
         button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -35,11 +36,12 @@ final class ChoiceAuthenticationOrRegistrationViewController: BaseAuthViewContro
     fileprivate static let registrationButtonRightOffset: CGFloat = 16
     fileprivate static let registrationButtonTopOffset: CGFloat = 16
     fileprivate let registrationButton: UIButton = {
-        let button: UIButton = .init(frame: newFrameForRegistrationButton(navBarHeight: defaultNavigationBarViewHeight))
+        let button: UIButton = .init()
         button.backgroundColor = MDAppStyling.Color.md_Blue_1_Light_Appearence.color()
         button.setTitle(KeysForTranslate.registration.localized, for: .normal)
         button.setTitleColor(MDAppStyling.Color.md_White_0_Light_Appearence.color(), for: .normal)
         button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -72,6 +74,7 @@ final class ChoiceAuthenticationOrRegistrationViewController: BaseAuthViewContro
         super.viewDidLayoutSubviews()
         addConstraints()
         roundOffEdges()
+        dropShadow()
     }
     
 }
@@ -111,27 +114,71 @@ fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
     
     func addConstraints() {
         addIconNavigationBarImageViewConstraints()
+        addLoginButtonConstraints()
+        addRegistrationButtonConstraints()
     }
     
     func addIconNavigationBarImageViewConstraints() {
         
-        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.iconNavigationBarImageView,
-                                                         attribute: .left,
-                                                         toItem: self.navigationBarView,
-                                                         attribute: .left,
-                                                         constant: 20)
+        NSLayoutConstraint.addEqualConstraint(item: self.iconNavigationBarImageView,
+                                              attribute: .left,
+                                              toItem: self.navigationBarView,
+                                              attribute: .left,
+                                              constant: 20)
         
-        NSLayoutConstraint.addEqualConstraintAndActivate(item: self.iconNavigationBarImageView,
-                                                         attribute: .bottom,
-                                                         toItem: self.navigationBarView,
-                                                         attribute: .bottom,
-                                                         constant: -8)
+        NSLayoutConstraint.addEqualConstraint(item: self.iconNavigationBarImageView,
+                                              attribute: .bottom,
+                                              toItem: self.navigationBarView,
+                                              attribute: .bottom,
+                                              constant: -8)
         
-        NSLayoutConstraint.addEqualHeightConstraintAndActivate(item: self.iconNavigationBarImageView,
-                                                               constant: Self.iconNavigationBarImageViewSize.height)
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.iconNavigationBarImageView,
+                                                    constant: Self.iconNavigationBarImageViewSize.height)
         
-        NSLayoutConstraint.addEqualWidthConstraintAndActivate(item: self.iconNavigationBarImageView,
-                                                              constant: Self.iconNavigationBarImageViewSize.width)
+        NSLayoutConstraint.addEqualWidthConstraint(item: self.iconNavigationBarImageView,
+                                                   constant: Self.iconNavigationBarImageViewSize.width)
+        
+    }
+    
+    func addLoginButtonConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.loginButton,
+                                              attribute: .top,
+                                              toItem: self.navigationBarView,
+                                              attribute: .bottom,
+                                              constant: Self.loginButtonTopOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.loginButton,
+                                                  toItem: self.backgroundImageView,
+                                                  constant: Self.loginButtonLeftOffset)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.loginButton,
+                                                   toItem: self.backgroundImageView,
+                                                   constant: -Self.loginButtonRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.loginButton,
+                                                    constant: Self.loginButtonHeight)
+        
+    }
+    
+    func addRegistrationButtonConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.registrationButton,
+                                              attribute: .top,
+                                              toItem: self.loginButton,
+                                              attribute: .bottom,
+                                              constant: Self.registrationButtonTopOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.registrationButton,
+                                                  toItem: self.backgroundImageView,
+                                                  constant: Self.registrationButtonLeftOffset)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.registrationButton,
+                                                   toItem: self.backgroundImageView,
+                                                   constant: -Self.registrationButtonRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.registrationButton,
+                                                    constant: Self.registrationButtonHeight)
         
     }
     
@@ -142,8 +189,13 @@ fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
     
     func configureUI() {
         configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
-        updateFrame()
-        dropShadow()
+        updateLayoutSubviews()
+    }
+    
+    func updateLayoutSubviews() {
+        DispatchQueue.main.async {
+            self.viewDidLayoutSubviews()
+        }
     }
     
 }
@@ -157,14 +209,14 @@ fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
     }
     
     func dropShadowLoginButtonView() {
-        loginButton.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.7),
+        loginButton.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.5),
                                offSet: .init(width: 0,
                                              height: 4),
                                radius: 20)
     }
     
     func dropShadowRegistrationButton() {
-        registrationButton.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.7),
+        registrationButton.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.5),
                                       offSet: .init(width: 0,
                                                     height: 4),
                                       radius: 20)
@@ -186,58 +238,6 @@ fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
     
     func registrationButtonRoundOffEdges() {
         registrationButton.layer.cornerRadius = 10
-    }
-    
-}
-
-// MARK: - Update Frame
-fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
-    
-    func updateFrame() {
-        updateLoginButtonFrame()
-        updateRegistrationButtonFrame()
-    }
-    
-    func updateLoginButtonFrame() {
-        
-        UIView.animate(withDuration: .zero) {
-            self.loginButton.frame = Self.newFrameForLoginButton(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
-            self.view.layoutSubviews()
-            self.viewDidLayoutSubviews()
-        }
-        
-    }
-    
-    func updateRegistrationButtonFrame() {
-        
-        UIView.animate(withDuration: .zero) {
-            self.registrationButton.frame = Self.newFrameForRegistrationButton(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
-            self.view.layoutSubviews()
-            self.viewDidLayoutSubviews()
-        }
-        
-    }
-    
-}
-
-// MARK: - New Frame
-fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
-    
-    static func newFrameForLoginButton(navBarHeight: CGFloat) -> CGRect {
-        return .init(origin: .init(x: Self.loginButtonLeftOffset,
-                                   y: navBarHeight + Self.loginButtonTopOffset),
-                     size: .init(width: MDConstants.Screen.width - (Self.loginButtonLeftOffset + Self.loginButtonRightOffset),
-                                 height: Self.loginButtonHeight))
-    }
-    
-    static func newFrameForRegistrationButton(navBarHeight: CGFloat) -> CGRect {
-        return .init(origin: .init(x: registrationButtonLeftOffset,
-                                   y: navBarHeight +
-                                    loginButtonTopOffset +
-                                    loginButtonHeight +
-                                    registrationButtonTopOffset),
-                     size: .init(width: MDConstants.Screen.width - (registrationButtonLeftOffset + registrationButtonRightOffset),
-                                 height: registrationButtonHeight))
     }
     
 }

@@ -7,17 +7,33 @@
 import UIKit
 
 protocol RegistrationInteractorInputProtocol {
-    var textFieldDelegate: AuthTextFieldDelegateProtocol { get }
+    
+    var textFieldDelegate: RegisterTextFieldDelegateProtocol { get }
+    
     func nicknameTextFieldEditingDidChangeAction(_ text: String?)
-    func passwordTextFieldEditingDidChangeAction(_ text: String?)    
+    func passwordTextFieldEditingDidChangeAction(_ text: String?)
+    func confirmPasswordTextFieldEditingDidChangeAction(_ text: String?)
+    
     func registerButtonClicked()
+    
 }
 
 protocol RegistrationInteractorOutputProtocol: AnyObject {
+    
     func makePasswordFieldActive()
-    func hideKeyboard()    
+    func makeConfirmPasswordFieldActive()
+    
+    func updateNicknameFieldCounter(_ count: Int)
+    func updatePasswordFieldCounter(_ count: Int)
+    func updateConfirmPasswordFieldCounter(_ count: Int)
+    
+    func nicknameTextFieldShouldClearAction()
+    
+    func hideKeyboard()
+    
     func showValidationError(_ error: Error)
     func showCourseList()
+    
 }
 
 protocol RegistrationInteractorProtocol: RegistrationInteractorInputProtocol,
@@ -28,20 +44,20 @@ protocol RegistrationInteractorProtocol: RegistrationInteractorInputProtocol,
 final class RegistrationInteractor: NSObject, RegistrationInteractorProtocol {
     
     fileprivate let dataManager: RegistrationDataManagerInputProtocol
-    fileprivate let authValidation: AuthValidationProtocol
+    fileprivate let registerValidation: RegisterValidationProtocol
     fileprivate let apiManager: MDAuthManagerProtocol
     
     internal weak var interactorOutput: RegistrationInteractorOutputProtocol?
     
-    internal var textFieldDelegate: AuthTextFieldDelegateProtocol
+    internal var textFieldDelegate: RegisterTextFieldDelegateProtocol
     
     init(dataManager: RegistrationDataManagerInputProtocol,
-         authValidation: AuthValidationProtocol,
-         textFieldDelegate: AuthTextFieldDelegateProtocol,
+         registerValidation: RegisterValidationProtocol,
+         textFieldDelegate: RegisterTextFieldDelegateProtocol,
          apiManager: MDAuthManagerProtocol) {
         
         self.dataManager = dataManager
-        self.authValidation = authValidation
+        self.registerValidation = registerValidation
         self.textFieldDelegate = textFieldDelegate
         self.apiManager = apiManager
         
@@ -74,6 +90,10 @@ extension RegistrationInteractor {
         dataManager.setPassword(text)
     }
     
+    func confirmPasswordTextFieldEditingDidChangeAction(_ text: String?) {
+        dataManager.setConfirmPassword(text)        
+    }
+    
     func registerButtonClicked() {
         interactorOutput?.hideKeyboard()
         authValidationAndRouting()
@@ -86,8 +106,17 @@ extension RegistrationInteractor {
 fileprivate extension RegistrationInteractor {
     
     func subscribe() {
+        
         nicknameTextFieldShouldReturnActionSubscribe()
         passwordTextFieldShouldReturnActionSubscribe()
+        confirmPasswordTextFieldShouldReturnActionSubscribe()
+        
+        updateNicknameTextFieldCounterActionSubscribe()
+        updatePasswordTextFieldCounterActionSubscribe()
+        updateConfirmPasswordTextFieldCounterActionSubscribe()
+        
+        nicknameTextFieldShouldClearActionSubscribe()
+        
     }
     
     func nicknameTextFieldShouldReturnActionSubscribe() {
@@ -98,8 +127,38 @@ fileprivate extension RegistrationInteractor {
     
     func passwordTextFieldShouldReturnActionSubscribe() {
         textFieldDelegate.passwordTextFieldShouldReturnAction = { [weak self] in
+            self?.interactorOutput?.makeConfirmPasswordFieldActive()
+        }
+    }
+    
+    func confirmPasswordTextFieldShouldReturnActionSubscribe() {
+        textFieldDelegate.confirmPasswordTextFieldShouldReturnAction = { [weak self] in
             self?.interactorOutput?.hideKeyboard()
             self?.authValidationAndRouting()
+        }
+    }
+    
+    func updateNicknameTextFieldCounterActionSubscribe() {
+        textFieldDelegate.updateNicknameTextFieldCounterAction = { [weak self] (count) in
+            self?.interactorOutput?.updateNicknameFieldCounter(count)
+        }
+    }
+    
+    func updatePasswordTextFieldCounterActionSubscribe() {
+        textFieldDelegate.updatePasswordTextFieldCounterAction = { [weak self] (count) in
+            self?.interactorOutput?.updatePasswordFieldCounter(count)
+        }
+    }
+    
+    func updateConfirmPasswordTextFieldCounterActionSubscribe() {
+        textFieldDelegate.updateConfirmPasswordTextFieldCounterAction = { [weak self] (count) in
+            self?.interactorOutput?.updateConfirmPasswordFieldCounter(count)
+        }
+    }
+    
+    func nicknameTextFieldShouldClearActionSubscribe() {
+        textFieldDelegate.nicknameTextFieldShouldClearAction = { [weak self] in
+            self?.interactorOutput?.nicknameTextFieldShouldClearAction()
         }
     }
     
@@ -110,7 +169,7 @@ fileprivate extension RegistrationInteractor {
     
     func authValidationAndRouting() {
         
-        if (authValidation.isValid) {
+        if (registerValidation.isValid) {
             
             let authRequest: AuthRequest = .init(nickname: dataManager.getNickname()!,
                                                  password: dataManager.getPassword()!)
@@ -137,7 +196,7 @@ fileprivate extension RegistrationInteractor {
                 
             }
         } else {
-            interactorOutput?.showValidationError(authValidation.validationErrors.first!)
+            interactorOutput?.showValidationError(registerValidation.validationErrors.first!)
         }
         
     }

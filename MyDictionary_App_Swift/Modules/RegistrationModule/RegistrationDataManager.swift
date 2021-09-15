@@ -9,8 +9,10 @@ import Foundation
 protocol RegistrationDataManagerInputProtocol {
     func getNickname() -> String?
     func getPassword() -> String?
+    func getConfirmPassword() -> String?
     func setNickname(_ text: String?)
     func setPassword(_ text: String?)
+    func setConfirmPassword(_ text: String?)
 }
 
 protocol RegistrationDataManagerOutputProtocol: AnyObject {
@@ -47,12 +49,20 @@ extension RegistrationDataManager {
         return dataProvider.password
     }
     
+    func getConfirmPassword() -> String? {
+        return dataProvider.confirmPassword
+    }
+    
     func setNickname(_ text: String?) {
         dataProvider.nickname = text
     }
     
     func setPassword(_ text: String?) {
         dataProvider.password = text
+    }
+    
+    func setConfirmPassword(_ text: String?) {
+        dataProvider.confirmPassword = text
     }
     
 }

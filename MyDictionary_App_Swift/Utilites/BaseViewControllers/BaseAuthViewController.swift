@@ -8,12 +8,11 @@
 import UIKit
 
 open class BaseAuthViewController: UIViewController {
-    
-    internal static let defaultNavigationBarViewHeight: CGFloat = 120
+        
     internal let navigationBarView: UIView = {
-        let view: UIView = .init(frame: newFrameForNavigationBarView(size: .init(width: MDConstants.Screen.width,
-                                                                                 height: defaultNavigationBarViewHeight)))
+        let view: UIView = .init()
         view.backgroundColor = MDAppStyling.Color.md_Blue_1_Light_Appearence.color()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -26,10 +25,10 @@ open class BaseAuthViewController: UIViewController {
     }()
     
     internal let backgroundImageView: UIImageView = {
-        let imageView: UIImageView = .init(frame: newFrameForBackgroundImageView(navBarHeight: defaultNavigationBarViewHeight,
-                                                                                 width: MDConstants.Screen.width))
+        let imageView: UIImageView = .init()
         imageView.image = MDAppStyling.Image.background_typography_0.image
         imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -58,6 +57,7 @@ open class BaseAuthViewController: UIViewController {
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         addConstraints()
+        dropShadow()
     }
     
 }
@@ -82,6 +82,47 @@ extension BaseAuthViewController {
 // MARK: - Add Constraint
 extension BaseAuthViewController {
     
+    func addNavigationBarViewConstraints() {
+        
+        NSLayoutConstraint.addEqualTopConstraint(item: self.navigationBarView,
+                                                            toItem: self.view,
+                                                            constant: .zero)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.navigationBarView,
+                                                             toItem: self.view,
+                                                             constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.navigationBarView,
+                                                              toItem: self.view,
+                                                              constant: .zero)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.navigationBarView,
+                                                               constant: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
+        
+    }
+    
+    func addBackgroundImageViewConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.backgroundImageView,
+                                                         attribute: .top,
+                                                         toItem: self.navigationBarView,
+                                                         attribute: .bottom,
+                                                         constant: .zero)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.backgroundImageView,
+                                                             toItem: self.view,
+                                                             constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.backgroundImageView,
+                                                              toItem: self.view,
+                                                              constant: .zero)
+        
+        NSLayoutConstraint.addEqualBottomConstraint(item: self.backgroundImageView,
+                                                               toItem: self.view,
+                                                               constant: .zero)
+        
+    }
+    
     func addNavigationBarBackgroundImageViewConstraints() {
         
         NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.navigationBarBackgroundImageView,
@@ -91,57 +132,11 @@ extension BaseAuthViewController {
     
 }
 
-// MARK: - Update Frame
-extension BaseAuthViewController {
-    
-    func updateInternalNavigationBarFrame() {
-        
-        UIView.animate(withDuration: .zero) {
-            self.navigationBarView.frame = Self.newFrameForNavigationBarView(size: .init(width: self.navigationBarView.bounds.width,
-                                                                                         height: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController)))
-            self.view.layoutSubviews()
-            self.viewDidLayoutSubviews()
-        }
-        
-    }
-    
-    func updateBackgroundImageViewFrame() {
-        
-        UIView.animate(withDuration: .zero) {
-            self.backgroundImageView.frame = Self.newFrameForBackgroundImageView(navBarHeight: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController),
-                                                                                 width: self.backgroundImageView.bounds.width)
-            self.view.layoutSubviews()
-            self.viewDidLayoutSubviews()
-        }
-        
-    }
-    
-}
-
-// MARK: - New Frame
-extension BaseAuthViewController {
-    
-    static func newFrameForNavigationBarView(size: CGSize) -> CGRect {
-        return .init(origin: .zero,
-                     size: .init(width: size.width,
-                                 height: size.height))
-    }
-    
-    static func newFrameForBackgroundImageView(navBarHeight: CGFloat,
-                                               width: CGFloat) -> CGRect {
-        return .init(origin: .init(x: .zero,
-                                   y: navBarHeight),
-                     size: .init(width: width,
-                                 height: MDConstants.Screen.height - navBarHeight))
-    }
-    
-}
-
 // MARK: - Drop Shadow
 extension BaseAuthViewController {
     
     func dropShadowNavigationBarView() {
-        navigationBarView.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.7),
+        navigationBarView.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.5),
                                      offSet: .init(width: 0,
                                                    height: 4),
                                      radius: 20)
@@ -149,12 +144,20 @@ extension BaseAuthViewController {
     
 }
 
-// MARK: - Hide Nav Bar
+// MARK: - Setup Navigation Bar
 extension BaseAuthViewController {
     
+    func setupNavigationBar() {
+        navigationBarPrefersLargeTitles()
+        hideNavigationBar()
+    }
+    
     func hideNavigationBar() {
-        self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    func navigationBarPrefersLargeTitles() {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
 }
@@ -183,6 +186,8 @@ fileprivate extension BaseAuthViewController {
 fileprivate extension BaseAuthViewController {
     
     func addConstraints() {
+        addNavigationBarViewConstraints()
+        addBackgroundImageViewConstraints()
         addNavigationBarBackgroundImageViewConstraints()
     }
     
@@ -193,9 +198,7 @@ fileprivate extension BaseAuthViewController {
     
     func configureUI() {
         configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
-        hideNavigationBar()
-        updateFrame()
-        dropShadow()
+        setupNavigationBar()
     }
     
 }
@@ -205,16 +208,6 @@ fileprivate extension BaseAuthViewController {
     
     func dropShadow() {
         dropShadowNavigationBarView()
-    }
-    
-}
-
-// MARK: - Update Frame
-fileprivate extension BaseAuthViewController {
-    
-    func updateFrame() {
-        updateInternalNavigationBarFrame()
-        updateBackgroundImageViewFrame()
     }
     
 }
