@@ -80,6 +80,58 @@ extension MDUserStorage_Tests {
         
     }
     
+    func test_Read_First_User_All_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Read First User From All Expectation")
+        let storageType: MDStorageType = .all
+        
+        var resultCount: Int = .zero
+        
+        userStorage.createUser(Constants_For_Tests.mockedUser,
+                               password: Constants_For_Tests.mockedUserPassword,
+                               storageType: storageType) { [unowned self] createResults in
+            
+            switch createResults.first!.result {
+            
+            case .success(let createdUser):
+                
+                userStorage.readFirstUser(storageType: storageType) { readResults in
+                    
+                    readResults.forEach { readResult in
+                        
+                        switch readResult.result {
+                        
+                        case .success(let readUser):
+                            
+                            resultCount += 1
+                            
+                            XCTAssertTrue(createdUser.userId == readUser.userId)
+                            XCTAssertTrue(createdUser.nickname == readUser.nickname)
+                            XCTAssertTrue(createdUser.password == readUser.password)
+                            XCTAssertTrue(createdUser.createdAt == readUser.createdAt)
+                            
+                            if (resultCount == readResults.count) {
+                                expectation.fulfill()
+                            }
+                            
+                        case .failure:
+                            XCTExpectFailure()
+                            expectation.fulfill()
+                        }
+                    }
+                }
+                
+            case .failure:
+                XCTExpectFailure()
+                expectation.fulfill()
+            }
+            
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
+    
     func test_Read_User_From_All_Functionality() {
         
         let expectation = XCTestExpectation(description: "Read User From All Expectation")
