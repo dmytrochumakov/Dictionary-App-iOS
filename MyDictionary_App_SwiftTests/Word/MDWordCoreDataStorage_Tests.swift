@@ -150,29 +150,13 @@ extension MDWordCoreDataStorage_Tests {
                 
                 self.wordCoreDataStorage.updateWord(byWordID: createdWord.wordId,
                                                     newWordText: Constants_For_Tests.mockedWordForUpdate.wordText,
-                                                    newWordDescription: Constants_For_Tests.mockedWordForUpdate.wordDescription) { [unowned self] updateResult in
+                                                    newWordDescription: Constants_For_Tests.mockedWordForUpdate.wordDescription) { updateResult in
                     
                     switch updateResult {
                     
                     case .success:
-                        
-                        wordCoreDataStorage.readWord(fromWordID: createdWord.wordId) { readResult in
-                            
-                            switch readResult {
-                            
-                            case .success(let readWord):
-                                
-                                XCTAssertTrue(readWord.wordText == Constants_For_Tests.mockedWordForUpdate.wordText)
-                                XCTAssertTrue(readWord.wordDescription == Constants_For_Tests.mockedWordForUpdate.wordDescription)
-                                expectation.fulfill()
-                                
-                            case .failure:
-                                XCTExpectFailure()
-                                expectation.fulfill()
-                            }
-                            
-                        }
-                        
+                        expectation.fulfill()
+                                                
                     case .failure:
                         XCTExpectFailure()
                         expectation.fulfill()
@@ -203,26 +187,14 @@ extension MDWordCoreDataStorage_Tests {
             
             case .success(let createdWord):
                 
-                self.wordCoreDataStorage.deleteWord(byWordId: createdWord.wordId) { [unowned self] deleteResult in
+                self.wordCoreDataStorage.deleteWord(byWordId: createdWord.wordId) { deleteResult in
                     
                     switch deleteResult {
                     
                     case .success:
                         
-                        self.wordCoreDataStorage.entitiesIsEmpty() { entitiesIsEmptyResult in
-                            
-                            switch entitiesIsEmptyResult {
-                            
-                            case .success(let entitiesIsEmpty):
-                                
-                                XCTAssertTrue(entitiesIsEmpty)
-                                expectation.fulfill()
-                                
-                            case .failure:
-                                XCTExpectFailure()
-                                expectation.fulfill()
-                            }
-                        }
+                        expectation.fulfill()
+                        
                     case .failure:
                         XCTExpectFailure()
                         expectation.fulfill()
@@ -248,26 +220,13 @@ extension MDWordCoreDataStorage_Tests {
             
             case .success:
                 
-                self.wordCoreDataStorage.deleteAllWords() { [unowned self] deleteResult in
+                self.wordCoreDataStorage.deleteAllWords() { deleteResult in
                     
                     switch deleteResult {
                     
                     case .success:
                         
-                        self.wordCoreDataStorage.entitiesIsEmpty() { entitiesIsEmptyResult in
-                            
-                            switch entitiesIsEmptyResult {
-                            
-                            case .success(let entitiesIsEmpty):
-                                
-                                XCTAssertTrue(entitiesIsEmpty)
-                                expectation.fulfill()
-                                
-                            case .failure:
-                                XCTExpectFailure()
-                                expectation.fulfill()
-                            }
-                        }
+                        expectation.fulfill()
                         
                     case .failure:
                         XCTExpectFailure()

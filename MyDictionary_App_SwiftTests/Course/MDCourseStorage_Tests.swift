@@ -186,7 +186,7 @@ extension MDCourseStorage_Tests {
             case .success(let createCourseEntity):
                 
                 self.courseStorage.deleteCourse(storageType: storageType,
-                                                fromCourseId: createCourseEntity.courseId) { [unowned self] deleteResults in
+                                                fromCourseId: createCourseEntity.courseId) { deleteResults in
                     
                     deleteResults.forEach { deleteResult in
                         
@@ -194,24 +194,10 @@ extension MDCourseStorage_Tests {
                         
                         case .success:
                             
-                            self.courseStorage.entitiesIsEmpty(storageType: deleteResult.storageType) { entitiesIsEmptyResults in
-                                
-                                switch entitiesIsEmptyResults.first!.result {
-                                
-                                case .success(let entitiesIsEmpty):
-                                    
-                                    resultCount += 1
-                                    
-                                    XCTAssertTrue(entitiesIsEmpty)
-                                    
-                                    if (resultCount == deleteResults.count) {
-                                        expectation.fulfill()
-                                    }
-                                    
-                                case .failure:
-                                    XCTExpectFailure()
-                                    expectation.fulfill()
-                                }
+                            resultCount += 1
+                            
+                            if (resultCount == deleteResults.count) {
+                                expectation.fulfill()
                             }
                             
                         case .failure:
@@ -247,7 +233,7 @@ extension MDCourseStorage_Tests {
             
             case .success:
                 
-                self.courseStorage.deleteAllCourses(storageType: storageType) { [unowned self] deleteResults in
+                self.courseStorage.deleteAllCourses(storageType: storageType) { deleteResults in
                     
                     deleteResults.forEach { deleteResult in
                         
@@ -255,26 +241,12 @@ extension MDCourseStorage_Tests {
                         
                         case .success:
                             
-                            self.courseStorage.entitiesIsEmpty(storageType: deleteResult.storageType) { entitiesIsEmptyResult in
-                                
-                                switch entitiesIsEmptyResult.first!.result {
-                                
-                                case .success(let entitiesIsEmpty):
-                                    
-                                    resultCount += 1
-                                    
-                                    XCTAssertTrue(entitiesIsEmpty)
-                                    
-                                    if (resultCount == deleteResults.count) {
-                                        expectation.fulfill()
-                                    }
-                                    
-                                    
-                                case .failure:
-                                    XCTExpectFailure()
-                                    expectation.fulfill()
-                                }
+                            resultCount += 1
+                            
+                            if (resultCount == deleteResults.count) {
+                                expectation.fulfill()
                             }
+                            
                         case .failure:
                             XCTExpectFailure()
                             expectation.fulfill()

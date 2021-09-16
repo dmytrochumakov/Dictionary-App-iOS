@@ -147,7 +147,7 @@ extension MDUserStorage_Tests {
             
             case .success(let createdUser):
                 
-                self.userStorage.deleteUser(createdUser.userId, storageType: storageType) { [unowned self] deleteResults in
+                self.userStorage.deleteUser(createdUser.userId, storageType: storageType) { deleteResults in
                     
                     deleteResults.forEach { deleteResult in
                         
@@ -155,24 +155,10 @@ extension MDUserStorage_Tests {
                         
                         case .success:
                             
-                            self.userStorage.entitiesIsEmpty(storageType: deleteResult.storageType) { entitiesIsEmptyResults in
-                                
-                                switch entitiesIsEmptyResults.first!.result {
-                                
-                                case .success(let entitiesIsEmpty):
-                                    
-                                    resultCount += 1
-                                    
-                                    XCTAssertTrue(entitiesIsEmpty)
-                                    
-                                    if (resultCount == deleteResults.count) {
-                                        expectation.fulfill()
-                                    }
-                                    
-                                case .failure:
-                                    XCTExpectFailure()
-                                    expectation.fulfill()
-                                }
+                            resultCount += 1
+                            
+                            if (resultCount == deleteResults.count) {
+                                expectation.fulfill()
                             }
                             
                         case .failure:

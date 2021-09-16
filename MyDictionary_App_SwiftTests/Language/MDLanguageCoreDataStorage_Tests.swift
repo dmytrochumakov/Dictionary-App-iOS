@@ -107,26 +107,14 @@ extension MDLanguageCoreDataStorage_Tests {
                 
                 XCTAssertTrue(createLanguages.count == Constants_For_Tests.mockedLanguages.count)
                 
-                self.languageCoreDataStorage.deleteAllLanguages { [unowned self] deleteResult in
+                self.languageCoreDataStorage.deleteAllLanguages { deleteResult in
                     
                     switch deleteResult {
                     
                     case .success:
                         
-                        self.languageCoreDataStorage.entitiesIsEmpty { entitiesIsEmptyResult in
-                            
-                            switch entitiesIsEmptyResult {
-                            
-                            case .success(let entitiesIsEmpty):
-                                
-                                XCTAssertTrue(entitiesIsEmpty)
-                                expectation.fulfill()
-                                
-                            case .failure:
-                                XCTExpectFailure()
-                                expectation.fulfill()
-                            }
-                        }
+                        expectation.fulfill()
+                        
                     case .failure:
                         XCTExpectFailure()
                         expectation.fulfill()

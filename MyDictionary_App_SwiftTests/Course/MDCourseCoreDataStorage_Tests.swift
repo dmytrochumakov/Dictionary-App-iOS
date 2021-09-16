@@ -71,7 +71,7 @@ extension MDCourseCoreDataStorage_Tests {
             
             case .success(let courseEntities):
                 
-                XCTAssertTrue(courseEntities.count == Constants_For_Tests.mockedCourses.count)                
+                XCTAssertTrue(courseEntities.count == Constants_For_Tests.mockedCourses.count)
                 
                 expectation.fulfill()
                 
@@ -137,26 +137,14 @@ extension MDCourseCoreDataStorage_Tests {
             
             case .success(let createCourseEntity):
                 
-                courseCoreDataStorage.deleteCourse(fromCourseId: createCourseEntity.courseId) { [unowned self] deleteResult in
+                courseCoreDataStorage.deleteCourse(fromCourseId: createCourseEntity.courseId) { deleteResult in
                     
                     switch deleteResult {
                     
                     case .success:
                         
-                        self.courseCoreDataStorage.entitiesIsEmpty { entitiesIsEmptyResult in
-                            
-                            switch entitiesIsEmptyResult {
-                            
-                            case .success(let entitiesIsEmpty):
-                                
-                                XCTAssertTrue(entitiesIsEmpty)
-                                expectation.fulfill()
-                                
-                            case .failure:
-                                XCTExpectFailure()
-                                expectation.fulfill()
-                            }
-                        }
+                        expectation.fulfill()
+                        
                     case .failure:
                         XCTExpectFailure()
                         expectation.fulfill()
@@ -184,26 +172,14 @@ extension MDCourseCoreDataStorage_Tests {
             
             case .success:
                 
-                courseCoreDataStorage.deleteAllCourses() { [unowned self] deleteResult in
+                courseCoreDataStorage.deleteAllCourses() { deleteResult in
                     
                     switch deleteResult {
                     
                     case .success:
                         
-                        self.courseCoreDataStorage.entitiesIsEmpty { entitiesIsEmptyResult in
-                            
-                            switch entitiesIsEmptyResult {
-                            
-                            case .success(let entitiesIsEmpty):
-                                
-                                XCTAssertTrue(entitiesIsEmpty)
-                                expectation.fulfill()
-                                
-                            case .failure:
-                                XCTExpectFailure()
-                                expectation.fulfill()
-                            }
-                        }
+                        expectation.fulfill()
+                        
                     case .failure:
                         XCTExpectFailure()
                         expectation.fulfill()

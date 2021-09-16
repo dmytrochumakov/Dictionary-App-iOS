@@ -116,20 +116,8 @@ extension MDUserCoreDataStorage_Tests {
                     
                     case .success:
                         
-                        self.userCoreDataStorage.entitiesIsEmpty { entitiesIsEmptyResult in
-                            
-                            switch entitiesIsEmptyResult {
-                            
-                            case .success(let entitiesIsEmpty):
-                                
-                                XCTAssertTrue(entitiesIsEmpty)
-                                expectation.fulfill()
-                                
-                            case .failure:
-                                XCTExpectFailure()
-                                expectation.fulfill()
-                            }
-                        }
+                        expectation.fulfill()
+                        
                     case .failure:
                         XCTExpectFailure()
                         expectation.fulfill()

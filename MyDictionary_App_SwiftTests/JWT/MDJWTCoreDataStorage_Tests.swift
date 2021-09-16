@@ -102,28 +102,13 @@ extension MDJWTCoreDataStorage_Tests {
             case .success(let createdJWT):
                 
                 self.jwtCoreDataStorage.updateJWT(oldAccessToken: createdJWT.accessToken,
-                                                  newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { [unowned self] updateResult in
+                                                  newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { updateResult in
                     
                     switch updateResult {
                     
                     case .success:
-                        
-                        jwtCoreDataStorage.readJWT(fromAccessToken: Constants_For_Tests.mockedJWTForUpdate.accessToken) { readResult in
-                            
-                            switch readResult {
-                            
-                            case .success(let readJWT):
-                                
-                                XCTAssertTrue(readJWT.accessToken == Constants_For_Tests.mockedJWTForUpdate.accessToken)
-                                XCTAssertTrue(readJWT.expirationDate == Constants_For_Tests.mockedJWTForUpdate.expirationDate)
-                                expectation.fulfill()
-                                
-                            case .failure:
-                                XCTExpectFailure()
-                                expectation.fulfill()
-                            }
-                            
-                        }
+                                                
+                        expectation.fulfill()
                         
                     case .failure:
                         XCTExpectFailure()
@@ -156,20 +141,8 @@ extension MDJWTCoreDataStorage_Tests {
                     
                     case .success:                                                
                         
-                        self.jwtCoreDataStorage.entitiesIsEmpty { entitiesIsEmptyResult in
-                            
-                            switch entitiesIsEmptyResult {
-                            
-                            case .success(let entitiesIsEmpty):
-                                
-                                XCTAssertTrue(entitiesIsEmpty)
-                                expectation.fulfill()
-                                
-                            case .failure:
-                                XCTExpectFailure()
-                                expectation.fulfill()
-                            }
-                        }
+                        expectation.fulfill()
+                        
                     case .failure:
                         XCTExpectFailure()
                         expectation.fulfill()
@@ -195,26 +168,13 @@ extension MDJWTCoreDataStorage_Tests {
             
             case .success:
                 
-                self.jwtCoreDataStorage.deleteAllJWT { [unowned self] deleteResult in
+                self.jwtCoreDataStorage.deleteAllJWT { deleteResult in
                     
                     switch deleteResult {
                     
                     case .success:
                         
-                        self.jwtCoreDataStorage.entitiesIsEmpty { entitiesIsEmptyResult in
-                            
-                            switch entitiesIsEmptyResult {
-                            
-                            case .success(let entitiesIsEmpty):
-                                
-                                XCTAssertTrue(entitiesIsEmpty)
-                                expectation.fulfill()
-                                
-                            case .failure:
-                                XCTExpectFailure()
-                                expectation.fulfill()
-                            }
-                        }
+                        expectation.fulfill()
                         
                     case .failure:
                         XCTExpectFailure()
