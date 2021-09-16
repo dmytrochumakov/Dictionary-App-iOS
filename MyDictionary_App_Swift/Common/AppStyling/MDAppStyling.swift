@@ -125,6 +125,8 @@ struct MDAppStyling {
         case eye_closed
         case eye_open
         case background_typography_2
+        case add
+        case settings
         
         var image: UIImage {
             
@@ -137,7 +139,9 @@ struct MDAppStyling {
                  .eye_open,
                  .eye_closed,
                  .back_white_arrow,
-                 .background_typography_2:
+                 .background_typography_2,
+                 .add,
+                 .settings:
                 
                 return configuredImage(fromName: self.rawValue)
                 
