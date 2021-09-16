@@ -69,4 +69,16 @@ struct Constants_For_Tests {
                                                                              languageName: "Spanish",
                                                                              createdAt: "2021-08-16T13:36:33.999Z")]
     
+    public static let jwtApiRequest: JWTApiRequest = .init(nickname: "a",
+                                                           password: "a",
+                                                           userId: 1,
+                                                           oldJWT: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxLGEsYSIsImlzcyI6ImNvbS5kY2hwcm9qZWN0cy5teWRpY3Rpb25hcnlyZXN0YXBpIiwiaWF0IjoxNjMxNzkwNTI5LCJleHAiOjE2MzE3OTQxMjl9.GyX4FznJMKL2rnXmfE8xwzVSJ_pZ_tkR3eb-pB67D7_Vzu8zaXPxO9UIIOjNGHGpFo8_KzsoTdeYQCYQjRxB8g")
+    
+    public static func syncItem(accessToken: String) -> MDSync.Item {
+        return .init(accessToken: accessToken,
+                     password: jwtApiRequest.password,
+                     userId:   jwtApiRequest.userId,
+                     nickname: jwtApiRequest.nickname)
+    }
+    
 }
