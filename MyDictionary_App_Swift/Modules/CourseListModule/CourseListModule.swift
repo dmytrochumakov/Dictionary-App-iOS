@@ -23,8 +23,11 @@ final class CourseListModule {
 extension CourseListModule {
     
     var module: UIViewController {
-        let dataProvider: CourseListDataProviderProtocol = CourseListDataProvider.init()
-        var dataManager: CourseListDataManagerProtocol = CourseListDataManager.init(dataProvider: dataProvider)
+        
+        let memoryStorage: MDCourseMemoryStorageProtocol = MDConstants.AppDependencies.dependencies.courseStorage.memoryStorage
+        let dataProvider: CourseListDataProviderProtocol = CourseListDataProvider.init(courses: .init())
+        var dataManager: CourseListDataManagerProtocol = CourseListDataManager.init(memoryStorage: memoryStorage,
+                                                                                    dataProvider: dataProvider)
         
         let collectionViewDelegate: CourseListCollectionViewDelegateProtocol = CourseListCollectionViewDelegate.init(dataProvider: dataProvider)
         let collectionViewDataSource: CourseListCollectionViewDataSourceProtocol = CourseListCollectionViewDataSource.init(dataProvider: dataProvider)

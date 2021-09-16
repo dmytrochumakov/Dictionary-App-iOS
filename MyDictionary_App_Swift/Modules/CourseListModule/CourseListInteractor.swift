@@ -14,6 +14,9 @@ protocol CourseListInteractorInputProtocol {
 protocol CourseListInteractorOutputProtocol: AnyObject,
                                              AppearanceHasBeenUpdatedProtocol {
     
+    func showValidationError(_ error: Error)
+    func reloadData()
+    
 }
 
 protocol CourseListInteractorProtocol: CourseListInteractorInputProtocol,
@@ -22,7 +25,7 @@ protocol CourseListInteractorProtocol: CourseListInteractorInputProtocol,
 }
 
 final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
-
+    
     fileprivate let dataManager: CourseListDataManagerInputProtocol
     
     internal var collectionViewDelegate: CourseListCollectionViewDelegateProtocol
@@ -59,6 +62,7 @@ fileprivate extension CourseListInteractor {
     
     func subscribe() {
         didChangeAppearanceObservableSubscribe()
+        readAndAddCoursesToDataProviderActionSubscribe()
     }
     
     func didChangeAppearanceObservableSubscribe() {
@@ -67,8 +71,26 @@ fileprivate extension CourseListInteractor {
             .didChangeAppearanceObservable
             .addObserver(self) { [weak self] (value) in
                 self?.interactorOutput?.appearanceHasBeenUpdated(value)
-                self?.dataManager.appearanceHasBeenUpdated(value)
             }
+    }
+    
+    func readAndAddCoursesToDataProviderActionSubscribe() {
+        
+        dataManager.readAndAddCoursesToDataProvider { [weak self] result in
+            
+            switch result {
+            
+            case .success:
+                self?.interactorOutput?.reloadData()
+                break
+                
+            case .failure(let error):
+                self?.interactorOutput?.showValidationError(error)
+                break
+            }
+            
+        }
+        
     }
     
 }

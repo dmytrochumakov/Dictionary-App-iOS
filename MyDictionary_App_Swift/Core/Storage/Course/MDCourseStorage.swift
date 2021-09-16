@@ -9,6 +9,8 @@ import Foundation
 
 protocol MDCourseStorageProtocol: MDStorageProtocol {
     
+    var memoryStorage: MDCourseMemoryStorageProtocol { get }
+    
     func createCourse(storageType: MDStorageType,
                       courseEntity: CourseResponse,
                       _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<CourseResponse>>))
@@ -34,7 +36,7 @@ protocol MDCourseStorageProtocol: MDStorageProtocol {
 
 final class MDCourseStorage: MDStorage, MDCourseStorageProtocol {
     
-    fileprivate let memoryStorage: MDCourseMemoryStorageProtocol
+    let memoryStorage: MDCourseMemoryStorageProtocol
     fileprivate let coreDataStorage: MDCourseCoreDataStorageProtocol
     
     init(memoryStorage: MDCourseMemoryStorageProtocol,

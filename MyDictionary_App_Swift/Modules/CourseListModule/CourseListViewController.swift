@@ -15,6 +15,7 @@ final class CourseListViewController: UIViewController {
         let collectionView: UICollectionView = .init(frame: .zero,
                                                      collectionViewLayout: flowLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(CourseListCell.self)
         return collectionView
     }()
     
@@ -66,6 +67,16 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
         configureAppearance(fromAppearanceType: newValue,
                             collectionView: collectionView)
+    }
+    
+    func showValidationError(_ error: Error) {
+        UIAlertController.showAlertWithOkAction(title: KeysForTranslate.error.localized,
+                                                message: error.localizedDescription,
+                                                presenter: self)
+    }
+    
+    func reloadData() {
+        collectionView.reloadData()
     }
     
 }
@@ -139,7 +150,7 @@ fileprivate extension CourseListViewController {
                                                                              NSAttributedString.Key.font : MDAppStyling.Font.MyriadProSemiBold.font(ofSize: 34)]
         //
         self.navigationController?.setNavigationBarBackgroundImage(MDAppStyling.Image.background_navigation_bar_1.image,
-                                                                   logoImageViewBackgroundColor: MDAppStyling.Color.md_Blue_1_Light_Appearence.color())                
+                                                                   logoImageViewBackgroundColor: MDAppStyling.Color.md_Blue_1_Light_Appearence.color())
         //
         configureNavigationItemLeftAndRightButtons()
         //

@@ -6,8 +6,8 @@
 
 import Foundation
 
-protocol CourseListDataManagerInputProtocol: AppearanceHasBeenUpdatedProtocol {
-    
+protocol CourseListDataManagerInputProtocol {
+    func readAndAddCoursesToDataProvider(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
 }
 
 protocol CourseListDataManagerOutputProtocol: AnyObject {
@@ -21,11 +21,16 @@ protocol CourseListDataManagerProtocol: CourseListDataManagerInputProtocol {
 
 final class CourseListDataManager: CourseListDataManagerProtocol {
     
-    internal let dataProvider: CourseListDataProviderProtocol
+    fileprivate let memoryStorage: MDCourseMemoryStorageProtocol
+    internal var dataProvider: CourseListDataProviderProtocol
     internal weak var dataManagerOutput: CourseListDataManagerOutputProtocol?
     
-    init(dataProvider: CourseListDataProviderProtocol) {
+    init(memoryStorage: MDCourseMemoryStorageProtocol,
+         dataProvider: CourseListDataProviderProtocol) {
+        
+        self.memoryStorage = memoryStorage
         self.dataProvider = dataProvider
+        
     }
     
     deinit {
@@ -34,9 +39,23 @@ final class CourseListDataManager: CourseListDataManagerProtocol {
     
 }
 
+// MARK: - CourseListDataManagerInputProtocol
 extension CourseListDataManager {
-    
-    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
+ 
+    func readAndAddCoursesToDataProvider(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
+        
+        memoryStorage.readAllCourses { [weak self] readResult in
+            
+            switch readResult {
+            
+            case .success(let readCourses):
+                self?.dataProvider.courses = readCourses
+                completionHandler(.success(()))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+            
+        }
         
     }
     
