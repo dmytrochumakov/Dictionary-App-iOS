@@ -26,7 +26,7 @@ extension UINavigationController {
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.backgroundColor = logoImageViewBackgroundColor
         
-        view.insertSubview(logoImageView, aboveSubview: navigationBar)
+        view.insertSubview(logoImageView, belowSubview: navigationBar)        
         
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.topAnchor),

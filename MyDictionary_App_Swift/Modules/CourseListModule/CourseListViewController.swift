@@ -20,17 +20,13 @@ final class CourseListViewController: UIViewController {
     
     fileprivate let settingsButton: UIButton = {
         let button: UIButton = .init()
-        button.setTitle(KeysForTranslate.settings.localized, for: .normal)
-        button.setTitleColor(ConfigurationAppearanceController.buttonTextColor(), for: .normal)
-        button.titleLabel?.font = MDAppStyling.Font.systemFont.font(ofSize: 17)
+        button.setImage(MDAppStyling.Image.settings.image, for: .normal)
         return button
     }()
     
     fileprivate let addNewCourseButton: UIButton = {
         let button: UIButton = .init()
-        button.setTitle(KeysForTranslate.add.localized, for: .normal)
-        button.setTitleColor(ConfigurationAppearanceController.buttonTextColor(), for: .normal)
-        button.titleLabel?.font = MDAppStyling.Font.systemFont.font(ofSize: 17)
+        button.setImage(MDAppStyling.Image.add.image, for: .normal)
         return button
     }()
     
@@ -117,8 +113,7 @@ fileprivate extension CourseListViewController {
     func configureUI() {
         configureView()
         configureCollectionView()
-        configureNavigationBarAppearance(fromAppearanceType: Appearance.current.appearanceType)
-        configureNavigationItemLeftAndRightButtons()
+        configureNavigationBar()
     }
     
     func configureView() {
@@ -131,6 +126,23 @@ fileprivate extension CourseListViewController {
         self.collectionView.dataSource = self.presenter.collectionViewDataSource
         self.configureCollectionViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType,
                                                     collectionView: collectionView)
+    }
+    
+    func configureNavigationBar() {
+        //
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        //
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : MDAppStyling.Color.md_White_0_Light_Appearence.color(),
+                                                                        NSAttributedString.Key.font : MDAppStyling.Font.MyriadProSemiBold.font(ofSize: 17)]
+        //
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : MDAppStyling.Color.md_White_0_Light_Appearence.color(),
+                                                                             NSAttributedString.Key.font : MDAppStyling.Font.MyriadProSemiBold.font(ofSize: 34)]
+        //
+        self.navigationController?.setNavigationBarBackgroundImage(MDAppStyling.Image.background_navigation_bar_1.image,
+                                                                   logoImageViewBackgroundColor: MDAppStyling.Color.md_Blue_1_Light_Appearence.color())                
+        //
+        configureNavigationItemLeftAndRightButtons()
+        //
     }
     
     func configureNavigationItemLeftAndRightButtons() {

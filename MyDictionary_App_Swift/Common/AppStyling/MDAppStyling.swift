@@ -127,6 +127,7 @@ struct MDAppStyling {
         case background_typography_2
         case add
         case settings
+        case background_navigation_bar_1
         
         var image: UIImage {
             
@@ -141,7 +142,8 @@ struct MDAppStyling {
                  .back_white_arrow,
                  .background_typography_2,
                  .add,
-                 .settings:
+                 .settings,
+                 .background_navigation_bar_1:
                 
                 return configuredImage(fromName: self.rawValue)
                 
