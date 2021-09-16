@@ -182,6 +182,7 @@
 		229901712668EE5300D8C74E /* MDAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901702668EE5300D8C74E /* MDAppDelegate.swift */; };
 		2299E47B26F37C2A00C6E287 /* MDAPILanguage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299E47A26F37C2A00C6E287 /* MDAPILanguage_Tests.swift */; };
 		2299E47D26F3823400C6E287 /* MDAPIAuth_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299E47C26F3823400C6E287 /* MDAPIAuth_Tests.swift */; };
+		2299E47F26F3841700C6E287 /* MDAPIUser_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299E47E26F3841700C6E287 /* MDAPIUser_Tests.swift */; };
 		229D2D4326EB53A60047B518 /* ChoiceAuthenticationOrRegistrationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D3C26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationModule.swift */; };
 		229D2D4426EB53A60047B518 /* ChoiceAuthenticationOrRegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D3D26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationPresenter.swift */; };
 		229D2D4526EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D3E26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift */; };
@@ -523,6 +524,7 @@
 		229901702668EE5300D8C74E /* MDAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppDelegate.swift; sourceTree = "<group>"; };
 		2299E47A26F37C2A00C6E287 /* MDAPILanguage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPILanguage_Tests.swift; sourceTree = "<group>"; };
 		2299E47C26F3823400C6E287 /* MDAPIAuth_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIAuth_Tests.swift; sourceTree = "<group>"; };
+		2299E47E26F3841700C6E287 /* MDAPIUser_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIUser_Tests.swift; sourceTree = "<group>"; };
 		229D2D3C26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationModule.swift; sourceTree = "<group>"; };
 		229D2D3D26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationPresenter.swift; sourceTree = "<group>"; };
 		229D2D3E26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationRouter.swift; sourceTree = "<group>"; };
@@ -1103,6 +1105,7 @@
 				224375B426F360D2006B90EB /* MDAPIJWT_Tests.swift */,
 				2299E47A26F37C2A00C6E287 /* MDAPILanguage_Tests.swift */,
 				2299E47C26F3823400C6E287 /* MDAPIAuth_Tests.swift */,
+				2299E47E26F3841700C6E287 /* MDAPIUser_Tests.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -2569,6 +2572,7 @@
 				220FFEA826C9168700702CCE /* MDUserMemoryStorage_Tests.swift in Sources */,
 				22B8E6CA26D3A53E001CCCA8 /* MDLanguageStorage_Tests.swift in Sources */,
 				224375B226F3509D006B90EB /* MDSyncManager_Tests.swift in Sources */,
+				2299E47F26F3841700C6E287 /* MDAPIUser_Tests.swift in Sources */,
 				22557FCF26C95A5100A4FF31 /* MDJWTMemoryStorage_Tests.swift in Sources */,
 				2289CEFC2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift in Sources */,
 				2294D6C526A2F5DC0066BE77 /* Constants_For_Tests.swift in Sources */,
