@@ -45,14 +45,12 @@ open class CoreDataStack {
 extension CoreDataStack {
     
     public func save() throws {
-        DispatchQueue.main.async {
-            do {
-                try self.privateContext.save()
-                try self.mainContext.save()
-            } catch {
-                fatalError("\(#function)" + "\(Self.self)" + "error: " + "\(error)")
-            }
+        self.privateContext.perform {
+            debugPrint(#function, Self.self)
+        }
+        self.mainContext.perform {
+            debugPrint(#function, Self.self)
         }
     }
-          
+    
 }
