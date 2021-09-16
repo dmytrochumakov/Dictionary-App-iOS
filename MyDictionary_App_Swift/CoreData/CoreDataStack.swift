@@ -45,8 +45,14 @@ open class CoreDataStack {
 extension CoreDataStack {
     
     public func save() throws {
-        try privateContext.save()
-        try mainContext.save()
+        DispatchQueue.main.async {
+            do {
+                try self.privateContext.save()
+                try self.mainContext.save()
+            } catch {
+                fatalError("\(#function)" + "\(Self.self)" + "error: " + "\(error)")
+            }
+        }
     }
           
 }
