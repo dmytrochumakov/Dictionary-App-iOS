@@ -180,6 +180,7 @@
 		2299016C2668EC3400D8C74E /* AppearanceDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901652668EC3400D8C74E /* AppearanceDataProvider.swift */; };
 		2299016D2668EC3400D8C74E /* AppearanceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901662668EC3400D8C74E /* AppearanceDataManager.swift */; };
 		229901712668EE5300D8C74E /* MDAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901702668EE5300D8C74E /* MDAppDelegate.swift */; };
+		2299E47B26F37C2A00C6E287 /* MDAPILanguage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299E47A26F37C2A00C6E287 /* MDAPILanguage_Tests.swift */; };
 		229D2D4326EB53A60047B518 /* ChoiceAuthenticationOrRegistrationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D3C26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationModule.swift */; };
 		229D2D4426EB53A60047B518 /* ChoiceAuthenticationOrRegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D3D26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationPresenter.swift */; };
 		229D2D4526EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D3E26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift */; };
@@ -519,6 +520,7 @@
 		229901652668EC3400D8C74E /* AppearanceDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceDataProvider.swift; sourceTree = "<group>"; };
 		229901662668EC3400D8C74E /* AppearanceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceDataManager.swift; sourceTree = "<group>"; };
 		229901702668EE5300D8C74E /* MDAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppDelegate.swift; sourceTree = "<group>"; };
+		2299E47A26F37C2A00C6E287 /* MDAPILanguage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPILanguage_Tests.swift; sourceTree = "<group>"; };
 		229D2D3C26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationModule.swift; sourceTree = "<group>"; };
 		229D2D3D26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationPresenter.swift; sourceTree = "<group>"; };
 		229D2D3E26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationRouter.swift; sourceTree = "<group>"; };
@@ -1097,6 +1099,7 @@
 			isa = PBXGroup;
 			children = (
 				224375B426F360D2006B90EB /* MDAPIJWT_Tests.swift */,
+				2299E47A26F37C2A00C6E287 /* MDAPILanguage_Tests.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -2556,6 +2559,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22561C9026D4D12D00A6135B /* MDCourseCoreDataStorage_Tests.swift in Sources */,
+				2299E47B26F37C2A00C6E287 /* MDAPILanguage_Tests.swift in Sources */,
 				220FFEBA26C93A0000702CCE /* MDUserStorage_Tests.swift in Sources */,
 				22EF01DF269D8EC600FE4435 /* MDWordStorage_Tests.swift in Sources */,
 				224375B526F360D2006B90EB /* MDAPIJWT_Tests.swift in Sources */,
