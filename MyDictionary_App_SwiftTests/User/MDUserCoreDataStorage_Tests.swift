@@ -60,6 +60,45 @@ extension MDUserCoreDataStorage_Tests {
         
     }
     
+    func test_Read_First_User_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Read First User Expectation")
+        
+        userCoreDataStorage.createUser(Constants_For_Tests.mockedUser,
+                                       password: Constants_For_Tests.mockedUserPassword) { [unowned self] createResult in
+            
+            switch createResult {
+            
+            case .success(let createdUser):
+                
+                userCoreDataStorage.readFirstUser() { readResult in
+                    
+                    switch readResult {
+                    
+                    case .success(let readUser):
+                        
+                        XCTAssertTrue(createdUser.userId == readUser.userId)
+                        XCTAssertTrue(createdUser.nickname == readUser.nickname)
+                        XCTAssertTrue(createdUser.password == readUser.password)
+                        XCTAssertTrue(createdUser.createdAt == readUser.createdAt)
+                        
+                        expectation.fulfill()
+                        
+                    case .failure:
+                        XCTExpectFailure()
+                        expectation.fulfill()
+                    }
+                }
+            case .failure:
+                XCTExpectFailure()
+                expectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
+    
     func test_Read_User_Functionality() {
         
         let expectation = XCTestExpectation(description: "Read User Expectation")
