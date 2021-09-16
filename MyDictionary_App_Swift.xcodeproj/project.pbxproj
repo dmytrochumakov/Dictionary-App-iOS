@@ -59,7 +59,7 @@
 		2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */; };
 		2223F8BC26512FFD004F2FE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2223F8BE26512FFD004F2FE9 /* Localizable.strings */; };
 		223648EA26DE38970071F271 /* MDSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223648E926DE38970071F271 /* MDSync.swift */; };
-		224375AC26F33EA3006B90EB /* CourseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375AB26F33EA3006B90EB /* CourseListCell.swift */; };
+		224375AC26F33EA3006B90EB /* MDCourseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375AB26F33EA3006B90EB /* MDCourseListCell.swift */; };
 		224375AF26F3406B006B90EB /* CourseListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375AE26F3406B006B90EB /* CourseListCellModel.swift */; };
 		22493C2E26971413000DA480 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C2D26971413000DA480 /* CoreDataStack.swift */; };
 		22493C312697159E000DA480 /* CDResultSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C302697159E000DA480 /* CDResultSaved.swift */; };
@@ -392,7 +392,7 @@
 		2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageService.swift; sourceTree = "<group>"; };
 		2223F8BD26512FFD004F2FE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		223648E926DE38970071F271 /* MDSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSync.swift; sourceTree = "<group>"; };
-		224375AB26F33EA3006B90EB /* CourseListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListCell.swift; sourceTree = "<group>"; };
+		224375AB26F33EA3006B90EB /* MDCourseListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseListCell.swift; sourceTree = "<group>"; };
 		224375AE26F3406B006B90EB /* CourseListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListCellModel.swift; sourceTree = "<group>"; };
 		22493C2D26971413000DA480 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		22493C302697159E000DA480 /* CDResultSaved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDResultSaved.swift; sourceTree = "<group>"; };
@@ -1068,7 +1068,7 @@
 		224375AA26F33E86006B90EB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				224375AB26F33EA3006B90EB /* CourseListCell.swift */,
+				224375AB26F33EA3006B90EB /* MDCourseListCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2286,7 +2286,7 @@
 				220FFEA426C915C700702CCE /* MDReadUserMemoryStorageOperation.swift in Sources */,
 				227D5E672652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift in Sources */,
 				22557FC526C9587100A4FF31 /* MDJWTStorage.swift in Sources */,
-				224375AC26F33EA3006B90EB /* CourseListCell.swift in Sources */,
+				224375AC26F33EA3006B90EB /* MDCourseListCell.swift in Sources */,
 				22CA088726515F6A0052D169 /* WordListDataManager.swift in Sources */,
 				22E2B4E12664E43B00978E62 /* SettingsDataProvider.swift in Sources */,
 				221D281426C5064A004BC4F7 /* AuthenticationDataManager.swift in Sources */,

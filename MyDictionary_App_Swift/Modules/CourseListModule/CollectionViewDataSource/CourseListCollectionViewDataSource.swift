@@ -33,7 +33,7 @@ extension CourseListCollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: CourseListCell = collectionView.dequeueReusableCell(for: indexPath)
+        let cell: MDCourseListCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.fillWithModel(dataProvider.courseListCellModel(atIndexPath: indexPath))
         return cell
     }

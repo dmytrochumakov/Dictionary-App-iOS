@@ -15,7 +15,7 @@ final class CourseListViewController: UIViewController {
         let collectionView: UICollectionView = .init(frame: .zero,
                                                      collectionViewLayout: flowLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(CourseListCell.self)
+        collectionView.register(MDCourseListCell.self)
         return collectionView
     }()
     

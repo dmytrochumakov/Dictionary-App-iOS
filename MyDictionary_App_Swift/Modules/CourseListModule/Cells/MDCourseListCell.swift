@@ -1,5 +1,5 @@
 //
-//  CourseListCell.swift
+//  MDCourseListCell.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 16.09.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CourseListCell: UICollectionViewCell,
+final class MDCourseListCell: UICollectionViewCell,
                             ReuseIdentifierProtocol {
     
     fileprivate static let titleLabelLeftOffset: CGFloat = 16
@@ -44,7 +44,7 @@ final class CourseListCell: UICollectionViewCell,
 }
 
 // MARK: - FillWithModelProtocol
-extension CourseListCell: FillWithModelProtocol {
+extension MDCourseListCell: FillWithModelProtocol {
     
     typealias Model = CourseListCellModel?
     
@@ -55,7 +55,7 @@ extension CourseListCell: FillWithModelProtocol {
 }
 
 // MARK: - Add Views
-fileprivate extension CourseListCell {
+fileprivate extension MDCourseListCell {
     
     func addViews() {
         addTitleLabel()
@@ -68,7 +68,7 @@ fileprivate extension CourseListCell {
 }
 
 // MARK: - Add Constraints
-fileprivate extension CourseListCell {
+fileprivate extension MDCourseListCell {
     
     func addConstraints() {
         addTitleLabelConstraints()

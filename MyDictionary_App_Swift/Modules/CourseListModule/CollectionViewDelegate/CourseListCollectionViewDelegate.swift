@@ -23,4 +23,8 @@ final class CourseListCollectionViewDelegate: NSObject, CourseListCollectionView
 
 extension CourseListCollectionViewDelegate {            
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return .init(width: collectionView.bounds.width, height: MDCourseListCell.height)
+    }
+    
 }
