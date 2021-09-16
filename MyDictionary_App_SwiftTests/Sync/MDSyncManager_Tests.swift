@@ -22,7 +22,7 @@ final class MDSyncManager_Tests: XCTestCase {
         
         let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)                
         
-        let coreDataStack: CoreDataStack = TestCoreDataStack.init()
+        let coreDataStack: MDCoreDataStack = TestCoreDataStack.init()
         
         let apiJWT: MDAPIJWTProtocol = MDAPIJWT.init(requestDispatcher: requestDispatcher,
                                                      operationQueueService: operationQueueService)

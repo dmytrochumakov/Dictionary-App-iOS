@@ -11,13 +11,13 @@ import CoreData
 final class MDCreateWordCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let wordStorage: MDWordCoreDataStorage
     fileprivate let word: WordResponse
     fileprivate let result: MDOperationResultWithCompletion<WordResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          wordStorage: MDWordCoreDataStorage,
          word: WordResponse,
          result: MDOperationResultWithCompletion<WordResponse>?) {
@@ -63,13 +63,13 @@ final class MDCreateWordCoreDataStorageOperation: MDOperation {
 final class MDCreateWordsCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let coreDataStorage: MDWordCoreDataStorage
     fileprivate let words: [WordResponse]
     fileprivate let result: MDOperationsResultWithCompletion<WordResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          coreDataStorage: MDWordCoreDataStorage,
          words: [WordResponse],
          result: MDOperationsResultWithCompletion<WordResponse>?) {

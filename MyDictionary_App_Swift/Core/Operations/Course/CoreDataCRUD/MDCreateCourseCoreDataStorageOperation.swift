@@ -10,13 +10,13 @@ import CoreData
 final class MDCreateCourseCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let coreDataStorage: MDCourseCoreDataStorage
     fileprivate let courseEntity: CourseResponse
     fileprivate let result: MDOperationResultWithCompletion<CourseResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          coreDataStorage: MDCourseCoreDataStorage,
          courseEntity: CourseResponse,
          result: MDOperationResultWithCompletion<CourseResponse>?) {
@@ -59,13 +59,13 @@ final class MDCreateCourseCoreDataStorageOperation: MDOperation {
 final class MDCreateCoursesCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let coreDataStorage: MDCourseCoreDataStorage
     fileprivate let courseEntities: [CourseResponse]
     fileprivate let result: MDOperationsResultWithCompletion<CourseResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          coreDataStorage: MDCourseCoreDataStorage,
          courseEntities: [CourseResponse],
          result: MDOperationsResultWithCompletion<CourseResponse>?) {

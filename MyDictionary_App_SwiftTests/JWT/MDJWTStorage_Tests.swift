@@ -22,7 +22,7 @@ final class MDJWTStorage_Tests: XCTestCase {
         let memoryStorage: MDJWTMemoryStorageProtocol = MDJWTMemoryStorage.init(operationQueueService: operationQueueService,
                                                                                 array: .init())
         
-        let coreDataStack: CoreDataStack = TestCoreDataStack.init()
+        let coreDataStack: MDCoreDataStack = TestCoreDataStack.init()
         
         let coreDataStorage: MDJWTCoreDataStorageProtocol = MDJWTCoreDataStorage.init(operationQueueService: operationQueueService,
                                                                                       managedObjectContext: coreDataStack.privateContext,

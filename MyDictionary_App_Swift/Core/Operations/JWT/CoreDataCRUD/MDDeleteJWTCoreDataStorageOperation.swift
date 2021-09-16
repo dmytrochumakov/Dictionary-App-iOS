@@ -10,13 +10,13 @@ import CoreData
 final class MDDeleteJWTCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let coreDataStorage: MDJWTCoreDataStorage
     fileprivate let accessToken: String
     fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          coreDataStorage: MDJWTCoreDataStorage,
          accessToken: String,
          result: MDOperationResultWithCompletion<Void>?) {

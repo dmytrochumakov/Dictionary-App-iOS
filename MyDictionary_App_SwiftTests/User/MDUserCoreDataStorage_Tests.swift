@@ -18,7 +18,7 @@ final class MDUserCoreDataStorage_Tests: XCTestCase {
         let operationQueue: OperationQueue = .init()
         let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
         
-        let coreDataStack: CoreDataStack = TestCoreDataStack()
+        let coreDataStack: MDCoreDataStack = TestCoreDataStack()
         
         let userCoreDataStorage: MDUserCoreDataStorageProtocol = MDUserCoreDataStorage.init(operationQueueService: operationQueueService,
                                                                                             managedObjectContext: coreDataStack.privateContext,

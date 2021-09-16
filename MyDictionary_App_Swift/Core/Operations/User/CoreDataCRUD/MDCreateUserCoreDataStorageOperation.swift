@@ -10,14 +10,14 @@ import CoreData
 final class MDCreateUserCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let coreDataStorage: MDUserCoreDataStorage
     fileprivate let userEntity: UserResponse
     fileprivate let password: String
     fileprivate let result: MDOperationResultWithCompletion<UserResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          coreDataStorage: MDUserCoreDataStorage,
          userEntity: UserResponse,
          password: String,

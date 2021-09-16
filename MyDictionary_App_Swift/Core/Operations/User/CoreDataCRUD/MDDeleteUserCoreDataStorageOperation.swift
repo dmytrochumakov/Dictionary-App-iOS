@@ -10,13 +10,13 @@ import CoreData
 final class MDDeleteUserCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let coreDataStorage: MDUserCoreDataStorage
     fileprivate let userId: Int64
     fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          coreDataStorage: MDUserCoreDataStorage,
          userId: Int64,
          result: MDOperationResultWithCompletion<Void>?) {
@@ -64,12 +64,12 @@ final class MDDeleteUserCoreDataStorageOperation: MDOperation {
 final class MDDeleteAllUsersCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let coreDataStorage: MDUserCoreDataStorage
     fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          coreDataStorage: MDUserCoreDataStorage,
          result: MDOperationResultWithCompletion<Void>?) {
         

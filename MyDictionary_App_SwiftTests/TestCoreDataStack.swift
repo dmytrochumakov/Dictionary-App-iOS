@@ -9,7 +9,7 @@ import XCTest
 import CoreData
 @testable import MyDictionary_App_Swift
 
-final class TestCoreDataStack: CoreDataStack {
+final class TestCoreDataStack: MDCoreDataStack {
     
     override init() {
         super.init()
@@ -19,7 +19,7 @@ final class TestCoreDataStack: CoreDataStack {
         
         let container = NSPersistentContainer(
             name: MDConstants.StaticText.appName,
-            managedObjectModel: CoreDataStack.model)
+            managedObjectModel: MDCoreDataStack.model)
         container.persistentStoreDescriptions = [persistentStoreDescription]
         
         container.loadPersistentStores { _, error in

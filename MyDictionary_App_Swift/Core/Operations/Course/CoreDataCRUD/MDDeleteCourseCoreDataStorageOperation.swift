@@ -10,13 +10,13 @@ import CoreData
 final class MDDeleteCourseCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let coreDataStorage: MDCourseCoreDataStorage
     fileprivate let courseId: Int64
     fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          coreDataStorage: MDCourseCoreDataStorage,
          courseId: Int64,
          result: MDOperationResultWithCompletion<Void>?) {

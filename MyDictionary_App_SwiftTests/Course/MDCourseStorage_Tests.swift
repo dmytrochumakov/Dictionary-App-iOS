@@ -22,7 +22,7 @@ final class MDCourseStorage_Tests: XCTestCase {
         let memoryStorage: MDCourseMemoryStorageProtocol = MDCourseMemoryStorage.init(operationQueueService: operationQueueService,
                                                                                       array: .init())
         
-        let coreDataStack: CoreDataStack = TestCoreDataStack.init()
+        let coreDataStack: MDCoreDataStack = TestCoreDataStack.init()
         
         let coreDataStorage: MDCourseCoreDataStorageProtocol = MDCourseCoreDataStorage.init(operationQueueService: operationQueueService,
                                                                                             managedObjectContext: coreDataStack.privateContext,

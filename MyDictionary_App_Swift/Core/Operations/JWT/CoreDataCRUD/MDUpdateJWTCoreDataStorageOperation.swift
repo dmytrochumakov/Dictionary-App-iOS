@@ -10,14 +10,14 @@ import CoreData
 final class MDUpdateJWTCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let coreDataStorage: MDJWTCoreDataStorage
     fileprivate let oldAccessToken: String
     fileprivate let newJWTResponse: JWTResponse
     fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          coreDataStorage: MDJWTCoreDataStorage,
          oldAccessToken: String,
          newJWTResponse: JWTResponse,

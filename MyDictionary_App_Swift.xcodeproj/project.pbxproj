@@ -63,7 +63,7 @@
 		224375AF26F3406B006B90EB /* CourseListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375AE26F3406B006B90EB /* CourseListCellModel.swift */; };
 		224375B226F3509D006B90EB /* MDSyncManager_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375B126F3509D006B90EB /* MDSyncManager_Tests.swift */; };
 		224375B526F360D2006B90EB /* MDAPIJWT_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375B426F360D2006B90EB /* MDAPIJWT_Tests.swift */; };
-		22493C2E26971413000DA480 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C2D26971413000DA480 /* CoreDataStack.swift */; };
+		22493C2E26971413000DA480 /* MDCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C2D26971413000DA480 /* MDCoreDataStack.swift */; };
 		22493C312697159E000DA480 /* CDResultSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C302697159E000DA480 /* CDResultSaved.swift */; };
 		22493C33269715A9000DA480 /* CDResultSavedEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C32269715A9000DA480 /* CDResultSavedEnum.swift */; };
 		22493C3526971726000DA480 /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C3426971726000DA480 /* TestCoreDataStack.swift */; };
@@ -398,7 +398,7 @@
 		224375AE26F3406B006B90EB /* CourseListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListCellModel.swift; sourceTree = "<group>"; };
 		224375B126F3509D006B90EB /* MDSyncManager_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncManager_Tests.swift; sourceTree = "<group>"; };
 		224375B426F360D2006B90EB /* MDAPIJWT_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIJWT_Tests.swift; sourceTree = "<group>"; };
-		22493C2D26971413000DA480 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		22493C2D26971413000DA480 /* MDCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCoreDataStack.swift; sourceTree = "<group>"; };
 		22493C302697159E000DA480 /* CDResultSaved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDResultSaved.swift; sourceTree = "<group>"; };
 		22493C32269715A9000DA480 /* CDResultSavedEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDResultSavedEnum.swift; sourceTree = "<group>"; };
 		22493C3426971726000DA480 /* TestCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
@@ -1526,7 +1526,7 @@
 				22493C3F26972687000DA480 /* AttributeName */,
 				222EF9AF2694808E00542D3D /* Entities */,
 				228BC47026497B2D0030FB30 /* Model */,
-				22493C2D26971413000DA480 /* CoreDataStack.swift */,
+				22493C2D26971413000DA480 /* MDCoreDataStack.swift */,
 				22493C302697159E000DA480 /* CDResultSaved.swift */,
 				22493C32269715A9000DA480 /* CDResultSavedEnum.swift */,
 				22493C4826972A03000DA480 /* CDWordResponseEntity+Extension.swift */,
@@ -2275,7 +2275,7 @@
 				22EF020A269DAE9800FE4435 /* MDAPIWord.swift in Sources */,
 				22B8E6BC26D39840001CCCA8 /* MDReadLanguageCoreDataStorageOperation.swift in Sources */,
 				22BD99AB266A67A60063FEFC /* AppearanceType.swift in Sources */,
-				22493C2E26971413000DA480 /* CoreDataStack.swift in Sources */,
+				22493C2E26971413000DA480 /* MDCoreDataStack.swift in Sources */,
 				227B91D226EF51430086B9AA /* RegistrationTextFieldTag.swift in Sources */,
 				22561C8A26D4CEBA00A6135B /* MDReadAllCoursesCoreDataStorageOperation.swift in Sources */,
 				229D2D4826EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataProvider.swift in Sources */,
