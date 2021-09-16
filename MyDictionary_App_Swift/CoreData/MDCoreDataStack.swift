@@ -45,11 +45,11 @@ open class MDCoreDataStack {
 extension MDCoreDataStack {
     
     public func save() throws {
-        self.privateContext.perform {
-            debugPrint(#function, Self.self)
+        self.privateContext.performAndWait {
+            
         }
-        self.mainContext.perform {
-            debugPrint(#function, Self.self)
+        self.mainContext.performAndWait {
+            
         }
     }
     
