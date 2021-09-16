@@ -17,7 +17,7 @@ enum MDAPIEnvironment: MDEnvironmentProtocol {
         case .development:
             return "http://localhost:8089/api/\(MDAPIVersion.v1.rawValue)/"
         case .production:
-            return "https://my-dictionary-rest-api-cloud-run-service-s3h77mhuwa-uc.a.run.app/api/\(MDAPIVersion.v1.rawValue)/"
+            return "https://mydictionary-rest-api-production-cloud-run-servic-snkpmlqmbq-lz.a.run.app/api/\(MDAPIVersion.v1.rawValue)/"
         }
     }
     
