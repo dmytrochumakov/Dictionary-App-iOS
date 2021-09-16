@@ -76,6 +76,55 @@ extension MDJWTStorage_Tests {
         
     }
     
+    func test_Read_First_JWT_From_All_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Read First JWT From All Expectation")
+        let storageType: MDStorageType = .all
+        
+        var resultCount: Int = .zero
+        
+        jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResults in
+            
+            switch createResults.first!.result {
+            
+            case .success(let createJWT):
+                
+                jwtStorage.readFirstJWT(storageType: storageType) { readResults in
+                    
+                    readResults.forEach { readResult in
+                        
+                        switch readResult.result {
+                        case .success(let readJWT):
+                            
+                            resultCount += 1
+                            
+                            XCTAssertTrue(readJWT.accessToken == createJWT.accessToken)
+                            XCTAssertTrue(readJWT.expirationDate == createJWT.expirationDate)
+                            
+                            if (resultCount == createResults.count) {
+                                expectation.fulfill()
+                            }
+                            
+                        case .failure:
+                            XCTExpectFailure()
+                            expectation.fulfill()
+                        }
+                        
+                    }
+                    
+                }
+                
+            case .failure:
+                XCTExpectFailure()
+                expectation.fulfill()
+            }
+            
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
+    
     func test_Read_JWT_From_All_Functionality() {
         
         let expectation = XCTestExpectation(description: "Read JWT From All Expectation")
