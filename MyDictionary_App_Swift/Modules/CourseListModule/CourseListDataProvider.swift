@@ -11,7 +11,7 @@ protocol CourseListDataProviderProtocol: NumberOfSectionsProtocol,
     
     var courses: [CourseResponse] { get set }
     
-    func courseListCellModel(atIndexPath indexPath: IndexPath) -> CourseListCellModel?
+    func courseListCellModel(atIndexPath indexPath: IndexPath) -> MDCourseListCellModel?
     
 }
 
@@ -40,7 +40,7 @@ extension CourseListDataProvider {
 
 extension CourseListDataProvider {
     
-    func courseListCellModel(atIndexPath indexPath: IndexPath) -> CourseListCellModel? {
+    func courseListCellModel(atIndexPath indexPath: IndexPath) -> MDCourseListCellModel? {
         
         if (courses.isEmpty) {
             return nil

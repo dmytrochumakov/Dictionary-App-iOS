@@ -46,9 +46,9 @@ final class MDCourseListCell: UICollectionViewCell,
 // MARK: - FillWithModelProtocol
 extension MDCourseListCell: FillWithModelProtocol {
     
-    typealias Model = CourseListCellModel?
+    typealias Model = MDCourseListCellModel?
     
-    func fillWithModel(_ model: CourseListCellModel?) {
+    func fillWithModel(_ model: MDCourseListCellModel?) {
         self.titleLabel.text = model?.languageName
     }
     
