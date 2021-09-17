@@ -18,6 +18,9 @@ protocol AuthenticationPresenterOutputProtocol: AnyObject {
     func makePasswordFieldActive()
     func hideKeyboard()
     func showValidationError(_ error: Error)
+    func showProgressHUD()
+    func hideProgressHUD()
+    func updateHUDProgress(_ progress: Float)
 }
 
 protocol AuthenticationPresenterProtocol: AuthenticationPresenterInputProtocol,
@@ -69,6 +72,18 @@ extension AuthenticationPresenter {
     
     func showValidationError(_ error: Error) {
         presenterOutput?.showValidationError(error)
+    }
+    
+    func showProgressHUD() {
+        presenterOutput?.showProgressHUD()
+    }
+    
+    func hideProgressHUD() {
+        presenterOutput?.hideProgressHUD()
+    }
+    
+    func updateHUDProgress(_ progress: Float) {
+        presenterOutput?.updateHUDProgress(progress)
     }
     
 }

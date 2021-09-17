@@ -20,6 +20,9 @@ protocol AuthenticationInteractorOutputProtocol: AnyObject {
     func showCourseList()
     func showRegistration()
     func showValidationError(_ error: Error)
+    func showProgressHUD()
+    func hideProgressHUD()
+    func updateHUDProgress(_ progress: Float)
 }
 
 protocol AuthenticationInteractorProtocol: AuthenticationInteractorInputProtocol,
@@ -119,22 +122,33 @@ fileprivate extension AuthenticationInteractor {
         
         if (authValidation.isValid) {
             
+            // Show Progress HUD
+            interactorOutput?.showProgressHUD()
+            //
             authManager.login(authRequest: .init(nickname: dataManager.getNickname()!,
                                                  password: dataManager.getPassword()!)) { [weak self] progress in
                 
-                debugPrint(#function, Self.self, "progress: ", progress)
+                self?.interactorOutput?.updateHUDProgress(progress)
                 
             } completionHandler: { [weak self] (result) in
                 
                 switch result {
                 case .success:
                     
+                    // Hide Progress HUD
+                    self?.interactorOutput?.hideProgressHUD()
+                    //
                     self?.interactorOutput?.showCourseList()
+                    //
                     break
                     
                 case .failure(let error):
                     
+                    // Hide Progress HUD
+                    self?.interactorOutput?.hideProgressHUD()
+                    //
                     self?.interactorOutput?.showValidationError(error)
+                    //
                     break
                     
                 }
