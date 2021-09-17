@@ -76,7 +76,9 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     }
     
     func reloadData() {
-        collectionView.reloadData()
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
 }
@@ -108,10 +110,10 @@ fileprivate extension CourseListViewController {
 fileprivate extension CourseListViewController {
     
     func addConstraints() {
-        addTableViewConstraints()
+        addCollectionViewConstraints()
     }
     
-    func addTableViewConstraints() {
+    func addCollectionViewConstraints() {
         NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.collectionView,
                                                          toItem: self.view)
     }
