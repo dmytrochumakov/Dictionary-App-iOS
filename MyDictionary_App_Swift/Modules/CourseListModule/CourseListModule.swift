@@ -24,6 +24,7 @@ extension CourseListModule {
     
     var module: UIViewController {
         
+        let fillMemoryService: MDFillMemoryServiceProtocol = MDConstants.AppDependencies.dependencies.fillMemoryService
         let memoryStorage: MDCourseMemoryStorageProtocol = MDConstants.AppDependencies.dependencies.courseStorage.memoryStorage
         let dataProvider: CourseListDataProviderProtocol = CourseListDataProvider.init(courses: .init())
         var dataManager: CourseListDataManagerProtocol = CourseListDataManager.init(memoryStorage: memoryStorage,
@@ -33,6 +34,7 @@ extension CourseListModule {
         let collectionViewDataSource: CourseListCollectionViewDataSourceProtocol = CourseListCollectionViewDataSource.init(dataProvider: dataProvider)
         
         let interactor: CourseListInteractorProtocol = CourseListInteractor.init(dataManager: dataManager,
+                                                                                 fillMemoryService: fillMemoryService,
                                                                                  collectionViewDelegate: collectionViewDelegate,
                                                                                  collectionViewDataSource: collectionViewDataSource)
         

@@ -27,16 +27,19 @@ protocol CourseListInteractorProtocol: CourseListInteractorInputProtocol,
 final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
     
     fileprivate let dataManager: CourseListDataManagerInputProtocol
+    fileprivate let fillMemoryService: MDFillMemoryServiceProtocol
     
     internal var collectionViewDelegate: CourseListCollectionViewDelegateProtocol
     internal var collectionViewDataSource: CourseListCollectionViewDataSourceProtocol
     internal weak var interactorOutput: CourseListInteractorOutputProtocol?
     
     init(dataManager: CourseListDataManagerInputProtocol,
+         fillMemoryService: MDFillMemoryServiceProtocol,
          collectionViewDelegate: CourseListCollectionViewDelegateProtocol,
          collectionViewDataSource: CourseListCollectionViewDataSourceProtocol) {
         
         self.dataManager = dataManager
+        self.fillMemoryService = fillMemoryService
         self.collectionViewDelegate = collectionViewDelegate
         self.collectionViewDataSource = collectionViewDataSource
         
@@ -61,11 +64,11 @@ extension CourseListInteractor {
 fileprivate extension CourseListInteractor {
     
     func subscribe() {
-        didChangeAppearanceObservableSubscribe()
-        readAndAddCoursesToDataProviderActionSubscribe()
+        didChangeAppearanceObservable_Subscribe()
+        didChangeMemoryIsFilledObservable_Subscribe()
     }
     
-    func didChangeAppearanceObservableSubscribe() {
+    func didChangeAppearanceObservable_Subscribe() {
         Appearance
             .current
             .didChangeAppearanceObservable
@@ -74,7 +77,48 @@ fileprivate extension CourseListInteractor {
             }
     }
     
-    func readAndAddCoursesToDataProviderActionSubscribe() {
+    func didChangeMemoryIsFilledObservable_Subscribe() {
+        fillMemoryService
+            .didChangeMemoryIsFilledObservable
+            .addObserver(self) { [weak self] isFilled in
+                if (isFilled) {
+                    self?.readAndAddCoursesToDataProvider()
+                } else {
+                    return
+                }
+            }
+    }
+    
+}
+
+// MARK: - Unsubscribe
+fileprivate extension CourseListInteractor {
+    
+    func unsubscribe() {
+        didChangeAppearanceObservable_Unsubscribe()
+        didChangeMemoryIsFilledObservable_Unsubscribe()
+    }
+    
+    func didChangeAppearanceObservable_Unsubscribe() {
+        Appearance
+            .current
+            .didChangeAppearanceObservable
+            .removeObserver(self)
+    }
+    
+    
+    func didChangeMemoryIsFilledObservable_Unsubscribe() {
+        fillMemoryService
+            .didChangeMemoryIsFilledObservable
+            .removeObserver(self)
+    }
+    
+}
+
+// MARK: -
+fileprivate extension CourseListInteractor {
+    
+    func readAndAddCoursesToDataProvider() {
         
         dataManager.readAndAddCoursesToDataProvider { [weak self] result in
             
@@ -91,18 +135,6 @@ fileprivate extension CourseListInteractor {
             
         }
         
-    }
-    
-}
-
-// MARK: - Unsubscribe
-fileprivate extension CourseListInteractor {
-    
-    func unsubscribe() {
-        Appearance
-            .current
-            .didChangeAppearanceObservable
-            .removeObserver(self)
     }
     
 }
