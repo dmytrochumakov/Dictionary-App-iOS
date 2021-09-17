@@ -184,6 +184,7 @@
 		2299587126F486FD003DF092 /* MDFillMemoryServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299587026F486FD003DF092 /* MDFillMemoryServiceError.swift */; };
 		2299587426F48710003DF092 /* MDFillMemoryResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299587326F48710003DF092 /* MDFillMemoryResult.swift */; };
 		2299587626F4871D003DF092 /* MDFillMemoryResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299587526F4871D003DF092 /* MDFillMemoryResultWithCompletion.swift */; };
+		2299587926F4A76F003DF092 /* MDFillMemoryService_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299587826F4A76F003DF092 /* MDFillMemoryService_Tests.swift */; };
 		2299E47B26F37C2A00C6E287 /* MDAPILanguage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299E47A26F37C2A00C6E287 /* MDAPILanguage_Tests.swift */; };
 		2299E47D26F3823400C6E287 /* MDAPIAuth_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299E47C26F3823400C6E287 /* MDAPIAuth_Tests.swift */; };
 		2299E47F26F3841700C6E287 /* MDAPIUser_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299E47E26F3841700C6E287 /* MDAPIUser_Tests.swift */; };
@@ -532,6 +533,7 @@
 		2299587026F486FD003DF092 /* MDFillMemoryServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDFillMemoryServiceError.swift; sourceTree = "<group>"; };
 		2299587326F48710003DF092 /* MDFillMemoryResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDFillMemoryResult.swift; sourceTree = "<group>"; };
 		2299587526F4871D003DF092 /* MDFillMemoryResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDFillMemoryResultWithCompletion.swift; sourceTree = "<group>"; };
+		2299587826F4A76F003DF092 /* MDFillMemoryService_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDFillMemoryService_Tests.swift; sourceTree = "<group>"; };
 		2299E47A26F37C2A00C6E287 /* MDAPILanguage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPILanguage_Tests.swift; sourceTree = "<group>"; };
 		2299E47C26F3823400C6E287 /* MDAPIAuth_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIAuth_Tests.swift; sourceTree = "<group>"; };
 		2299E47E26F3841700C6E287 /* MDAPIUser_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIUser_Tests.swift; sourceTree = "<group>"; };
@@ -1493,6 +1495,7 @@
 		228BC450264979FF0030FB30 /* MyDictionary_App_SwiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				2299587726F4A751003DF092 /* FillMemoryService */,
 				224375B326F3609E006B90EB /* Api */,
 				224375B026F35055006B90EB /* Sync */,
 				22561C8426D4BB8300A6135B /* Course */,
@@ -1614,6 +1617,14 @@
 				2299587526F4871D003DF092 /* MDFillMemoryResultWithCompletion.swift */,
 			);
 			path = Results;
+			sourceTree = "<group>";
+		};
+		2299587726F4A751003DF092 /* FillMemoryService */ = {
+			isa = PBXGroup;
+			children = (
+				2299587826F4A76F003DF092 /* MDFillMemoryService_Tests.swift */,
+			);
+			path = FillMemoryService;
 			sourceTree = "<group>";
 		};
 		229C2B092652512700B270C1 /* CollectionViewDelegate */ = {
@@ -2610,6 +2621,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2299587926F4A76F003DF092 /* MDFillMemoryService_Tests.swift in Sources */,
 				22561C9026D4D12D00A6135B /* MDCourseCoreDataStorage_Tests.swift in Sources */,
 				2299E47B26F37C2A00C6E287 /* MDAPILanguage_Tests.swift in Sources */,
 				220FFEBA26C93A0000702CCE /* MDUserStorage_Tests.swift in Sources */,
