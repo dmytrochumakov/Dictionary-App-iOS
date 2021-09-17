@@ -39,16 +39,25 @@ final class MDCreateUserCoreDataStorageOperation: MDOperation {
                                                 password: password,
                                                 insertIntoManagedObjectContext: self.managedObjectContext)
         
-        do {
+        
+        coreDataStack.save(context: self.managedObjectContext) { [weak self] result in
             
-            try coreDataStack.save()
+            switch result {
             
-            self.result?(.success(newUser.userResponse))
-            self.finish()
-                        
-        } catch {
-            self.result?(.failure(error))
-            self.finish()
+            case .success:
+                
+                self?.result?(.success(newUser.userResponse))
+                self?.finish()
+                break
+                
+            case .failure(let error):
+                
+                self?.result?(.failure(error))
+                self?.finish()
+                break
+                
+            }
+            
         }
         
     }

@@ -44,12 +44,51 @@ open class MDCoreDataStack {
 // MARK: - Save
 extension MDCoreDataStack {
     
-    public func save() throws {
-        self.privateContext.performAndWait {
-            
+    public func save(context: NSManagedObjectContext, completionHandler: @escaping CDResultSaved) {
+        savePerformAndWaitContext(context, completionHandler: completionHandler)
+        savePerformMainContext()
+    }
+    
+}
+
+fileprivate extension MDCoreDataStack {       
+    
+    func savePerformMainContext() {
+        savePerformContext(mainContext) { result in            
+            switch result {
+            case .success:
+                debugPrint(#function, Self.self, "Success")
+                break
+            case .failure(let error):
+                debugPrint(#function, Self.self, "Failure", "error: ", error.localizedDescription)
+                break
+            }
         }
-        self.mainContext.performAndWait {
-            
+    }
+    
+    func savePerformAndWaitContext(_ context: NSManagedObjectContext, completionHandler: @escaping CDResultSaved) {
+        context.performAndWait {
+            do {
+                try context.save()
+                completionHandler(.success)
+            } catch {
+                let nsError = error as NSError
+                debugPrint(#function, "Unresolved error \(nsError), \(nsError.userInfo)")
+                completionHandler(.failure(error))
+            }
+        }
+    }
+    
+    func savePerformContext(_ context: NSManagedObjectContext, completionHandler: @escaping CDResultSaved) {
+        context.perform {
+            do {
+                try context.save()
+                completionHandler(.success)
+            } catch {
+                let nsError = error as NSError
+                debugPrint(#function, "Unresolved error \(nsError), \(nsError.userInfo)")
+                completionHandler(.failure(error))
+            }
         }
     }
     

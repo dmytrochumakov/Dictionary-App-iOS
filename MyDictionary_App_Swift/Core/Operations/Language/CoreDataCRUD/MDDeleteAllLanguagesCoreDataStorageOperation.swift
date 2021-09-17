@@ -37,10 +37,25 @@ final class MDDeleteAllLanguagesCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            try coreDataStack.save()
-            
-            self.result?(.success(()))
-            self.finish()            
+            coreDataStack.save(context: self.managedObjectContext) { [weak self] result in
+                
+                switch result {
+                
+                case .success:
+                    
+                    self?.result?(.success(()))
+                    self?.finish()
+                    break
+                    
+                case .failure(let error):
+                    
+                    self?.result?(.failure(error))
+                    self?.finish()
+                    break
+                    
+                }
+                
+            }
             
         } catch let error {
             self.result?(.failure(error))

@@ -42,10 +42,25 @@ final class MDDeleteUserCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            try coreDataStack.save()
-            
-            self.result?(.success(()))
-            self.finish()
+            coreDataStack.save(context: self.managedObjectContext) { [weak self] result in
+                
+                switch result {
+                
+                case .success:
+                    
+                    self?.result?(.success(()))
+                    self?.finish()
+                    break
+                    
+                case .failure(let error):
+                    
+                    self?.result?(.failure(error))
+                    self?.finish()
+                    break
+                    
+                }
+                
+            }
             
         } catch let error {
             self.result?(.failure(error))
@@ -92,10 +107,26 @@ final class MDDeleteAllUsersCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            try coreDataStack.save()
+            coreDataStack.save(context: self.managedObjectContext) { [weak self] result in
+                
+                switch result {
+                
+                case .success:
+                    
+                    self?.result?(.success(()))
+                    self?.finish()
+                    break
+                    
+                case .failure(let error):
+                    
+                    self?.result?(.failure(error))
+                    self?.finish()
+                    break
+                    
+                }
+                
+            }
             
-            self.result?(.success(()))
-            self.finish()
             
         } catch let error {
             self.result?(.failure(error))
