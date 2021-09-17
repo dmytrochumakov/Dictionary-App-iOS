@@ -46,15 +46,15 @@ extension MDCoreDataStack {
     
     public func save(context: NSManagedObjectContext, completionHandler: @escaping CDResultSaved) {
         savePerformAndWaitContext(context, completionHandler: completionHandler)
-        savePerformMainContext()
+        savePerformAndWaitMainContext()
     }
     
 }
 
 fileprivate extension MDCoreDataStack {       
     
-    func savePerformMainContext() {
-        savePerformContext(mainContext) { result in            
+    func savePerformAndWaitMainContext() {
+        savePerformAndWaitContext(mainContext) { result in
             switch result {
             case .success:
                 debugPrint(#function, Self.self, "Success")
@@ -77,19 +77,6 @@ fileprivate extension MDCoreDataStack {
                 completionHandler(.failure(error))
             }
         }
-    }
-    
-    func savePerformContext(_ context: NSManagedObjectContext, completionHandler: @escaping CDResultSaved) {
-        context.perform {
-            do {
-                try context.save()
-                completionHandler(.success)
-            } catch {
-                let nsError = error as NSError
-                debugPrint(#function, "Unresolved error \(nsError), \(nsError.userInfo)")
-                completionHandler(.failure(error))
-            }
-        }
-    }
+    }        
     
 }
