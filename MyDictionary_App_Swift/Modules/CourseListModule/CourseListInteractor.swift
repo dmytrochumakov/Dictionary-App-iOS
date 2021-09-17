@@ -14,7 +14,7 @@ protocol CourseListInteractorInputProtocol {
 protocol CourseListInteractorOutputProtocol: AnyObject,
                                              AppearanceHasBeenUpdatedProtocol {
     
-    func showValidationError(_ error: Error)
+    func showError(_ error: Error)
     func reloadData()
     
 }
@@ -129,7 +129,7 @@ fileprivate extension CourseListInteractor {
                 break
                 
             case .failure(let error):
-                self?.interactorOutput?.showValidationError(error)
+                self?.interactorOutput?.showError(error)
                 break
             }
             

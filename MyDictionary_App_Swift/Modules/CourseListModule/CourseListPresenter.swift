@@ -15,7 +15,7 @@ protocol CourseListPresenterInputProtocol: CollectionViewDelegateFlowLayoutPrope
 protocol CourseListPresenterOutputProtocol: AnyObject,
                                             AppearanceHasBeenUpdatedProtocol {
     
-    func showValidationError(_ error: Error)
+    func showError(_ error: Error)
     func reloadData()
     
 }
@@ -55,8 +55,8 @@ extension CourseListPresenter {
         presenterOutput?.appearanceHasBeenUpdated(newValue)
     }
     
-    func showValidationError(_ error: Error) {
-        presenterOutput?.showValidationError(error)
+    func showError(_ error: Error) {
+        presenterOutput?.showError(error)
     }
     
     func reloadData() {

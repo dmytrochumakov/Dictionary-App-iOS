@@ -69,7 +69,7 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
                             collectionView: collectionView)
     }
     
-    func showValidationError(_ error: Error) {
+    func showError(_ error: Error) {
         UIAlertController.showAlertWithOkAction(title: KeysForTranslate.error.localized,
                                                 message: error.localizedDescription,
                                                 presenter: self)
