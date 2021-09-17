@@ -208,7 +208,7 @@ extension MDAppDependencies {
                                                                                       courseStorage: courseStorage,
                                                                                       wordStorage: wordStorage)
         // Fill Memory If Needed
-        fillMemoryService.fillMemoryFromCoreDataIfNeeded()
+        fillMemoryService.fillMemoryFromCoreDataIfNeeded(completionHandler: nil)
         //
         self.fillMemoryService = fillMemoryService
         //
