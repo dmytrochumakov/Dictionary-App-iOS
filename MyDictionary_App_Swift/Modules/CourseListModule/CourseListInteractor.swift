@@ -66,6 +66,9 @@ fileprivate extension CourseListInteractor {
     func subscribe() {
         didChangeAppearanceObservable_Subscribe()
         didChangeMemoryIsFilledObservable_Subscribe()
+        //
+        readAndAddCoursesToDataProvider()
+        //
     }
     
     func didChangeAppearanceObservable_Subscribe() {
@@ -79,13 +82,24 @@ fileprivate extension CourseListInteractor {
     
     func didChangeMemoryIsFilledObservable_Subscribe() {
         fillMemoryService
-            .didChangeMemoryIsFilledObservable
-            .addObserver(self) { [weak self] isFilled in
-                if (isFilled) {
+            .didChangeMemoryIsFilledResultObservable
+            .addObserver(self) { [weak self] result in
+                
+                switch result {
+                
+                case .success:
                     self?.readAndAddCoursesToDataProvider()
-                } else {
-                    return
+                    break
+                    
+                case .failure(let error):
+                    self?.interactorOutput?.showError(error)
+                    break
+                
+                case .none:
+                    break
+                    
                 }
+                
             }
     }
     
@@ -109,7 +123,7 @@ fileprivate extension CourseListInteractor {
     
     func didChangeMemoryIsFilledObservable_Unsubscribe() {
         fillMemoryService
-            .didChangeMemoryIsFilledObservable
+            .didChangeMemoryIsFilledResultObservable
             .removeObserver(self)
     }
     

@@ -10,7 +10,7 @@ import Foundation
 protocol MDFillMemoryServiceProtocol {
     var isRunning: Bool { get }
     var isFilled: Bool { get }
-    var didChangeMemoryIsFilledObservable: Observable<Bool> { get }
+    var didChangeMemoryIsFilledResultObservable: Observable<(MDOperationResultWithoutCompletion<Void>)?> { get }
     func fillMemoryFromCoreDataIfNeeded(completionHandler: (MDOperationResultWithCompletion<Void>)?)
 }
 
@@ -34,8 +34,8 @@ final class MDFillMemoryService: MDFillMemoryServiceProtocol {
     // Default is false
     fileprivate var internalIsFilled: Bool
     
-    /// Default is equal false
-    public var didChangeMemoryIsFilledObservable: Observable<Bool>
+    // Default is nil
+    public var didChangeMemoryIsFilledResultObservable: Observable<(MDOperationResultWithoutCompletion<Void>)?>
     
     public var isRunning: Bool {
         return internalIsRunning
@@ -61,7 +61,7 @@ final class MDFillMemoryService: MDFillMemoryServiceProtocol {
         //
         self.internalIsRunning = false
         self.internalIsFilled = false
-        self.didChangeMemoryIsFilledObservable = .init(value: false)
+        self.didChangeMemoryIsFilledResultObservable = .init(value: nil)
         //
     }
     
@@ -107,7 +107,7 @@ extension MDFillMemoryService {
                             //
                             setInternalIsFilledTrue()
                             //
-                            didChangeMemoryIsFilledTrueObservable()
+                            setDidChangeMemoryIsFilledResult(.success(()))
                             //
                             completionHandler?(.success(()))
                             //
@@ -120,6 +120,10 @@ extension MDFillMemoryService {
                         debugPrint(#function, Self.self, "step: ", result.step, "Failure: ", error)
                         //
                         setInternalIsRunningFalse()
+                        //
+                        setInternalIsFilledFalse()
+                        //
+                        setDidChangeMemoryIsFilledResult(.failure(error))
                         //
                         completionHandler?(.failure(error))
                         //
@@ -405,9 +409,9 @@ fileprivate extension MDFillMemoryService {
         self.setInternalIsFilled(false)
     }
     
-    // didChangeMemoryIsFilledObservable
-    func didChangeMemoryIsFilledTrueObservable() {
-        didChangeMemoryIsFilledObservable.updateValue(true)
+    // didChangeMemoryIsFilledResultObservable
+    func setDidChangeMemoryIsFilledResult(_ newValue: MDOperationResultWithoutCompletion<Void>) {
+        didChangeMemoryIsFilledResultObservable.updateValue(newValue)
     }
     
 }
