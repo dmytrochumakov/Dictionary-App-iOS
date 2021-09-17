@@ -46,7 +46,7 @@ final class MDUpdateJWTCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchUpdateRequest)
             
-            coreDataStack.save(context: self.managedObjectContext) { [weak self] result in
+            coreDataStack.save() { [weak self] result in
                 
                 switch result {
                 

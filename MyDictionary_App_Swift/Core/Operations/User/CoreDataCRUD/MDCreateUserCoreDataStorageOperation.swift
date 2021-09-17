@@ -40,7 +40,7 @@ final class MDCreateUserCoreDataStorageOperation: MDOperation {
                                                 insertIntoManagedObjectContext: self.managedObjectContext)
         
         
-        coreDataStack.save(context: self.managedObjectContext) { [weak self] result in
+        coreDataStack.save() { [weak self] result in
             
             switch result {
             

@@ -44,39 +44,31 @@ open class MDCoreDataStack {
 // MARK: - Save
 extension MDCoreDataStack {
     
-    public func save(context: NSManagedObjectContext, completionHandler: @escaping CDResultSaved) {
-        savePerformAndWaitContext(context, completionHandler: completionHandler)
-        savePerformAndWaitMainContext()
-    }
-    
-}
-
-fileprivate extension MDCoreDataStack {       
-    
-    func savePerformAndWaitMainContext() {
-        savePerformAndWaitContext(mainContext) { result in
-            switch result {
-            case .success:
-                debugPrint(#function, Self.self, "Success")
-                break
-            case .failure(let error):
-                debugPrint(#function, Self.self, "Failure", "error: ", error.localizedDescription)
-                break
-            }
-        }
-    }
-    
-    func savePerformAndWaitContext(_ context: NSManagedObjectContext, completionHandler: @escaping CDResultSaved) {
-        context.performAndWait {
+    public func save(completionHandler: @escaping CDResultSaved) {
+        
+        mainContext.performAndWait {
+            
             do {
-                try context.save()
-                completionHandler(.success)
+                if self.mainContext.hasChanges {
+                    try self.mainContext.save()
+                }
             } catch {
-                let nsError = error as NSError
-                debugPrint(#function, "Unresolved error \(nsError), \(nsError.userInfo)")
                 completionHandler(.failure(error))
             }
+            
+            self.privateContext.performAndWait {
+                do {
+                    if self.privateContext.hasChanges {
+                        try self.privateContext.save()
+                    }
+                    completionHandler(.success)
+                } catch {
+                    completionHandler(.failure(error))
+                }
+            }
+            
         }
-    }        
+        
+    }
     
 }
