@@ -38,7 +38,7 @@ final class MDDeleteAllJWTCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            coreDataStack.save() { [weak self] result in
+            coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
                 
                 switch result {
                 

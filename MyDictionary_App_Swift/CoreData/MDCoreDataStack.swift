@@ -44,9 +44,9 @@ open class MDCoreDataStack {
 // MARK: - Save
 extension MDCoreDataStack {
     
-    public func save(completionHandler: @escaping CDResultSaved) {
+    public func save(managedObjectContext: NSManagedObjectContext, completionHandler: @escaping CDResultSaved) {
         
-        mainContext.performAndWait {
+        mainContext.perform {
             
             do {
                 if self.mainContext.hasChanges {
@@ -56,7 +56,7 @@ extension MDCoreDataStack {
                 completionHandler(.failure(error))
             }
             
-            self.privateContext.performAndWait {
+            managedObjectContext.perform {
                 do {
                     if self.privateContext.hasChanges {
                         try self.privateContext.save()

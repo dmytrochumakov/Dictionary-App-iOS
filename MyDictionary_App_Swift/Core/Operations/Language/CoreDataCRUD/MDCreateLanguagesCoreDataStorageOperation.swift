@@ -39,7 +39,7 @@ final class MDCreateLanguagesCoreDataStorageOperation: MDOperation {
             let _ = CDLanguageResponseEntity.init(languageResponse: languageEntity,
                                                   insertIntoManagedObjectContext: self.managedObjectContext)
             
-            coreDataStack.save() { [weak self] result in
+            coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
                 
                 switch result {
                 

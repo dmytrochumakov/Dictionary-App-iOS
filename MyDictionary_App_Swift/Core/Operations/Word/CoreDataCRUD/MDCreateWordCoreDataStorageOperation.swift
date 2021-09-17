@@ -36,7 +36,7 @@ final class MDCreateWordCoreDataStorageOperation: MDOperation {
         let newWord = CDWordResponseEntity.init(wordResponse: self.word,
                                                 insertIntoManagedObjectContext: self.managedObjectContext)
         
-        coreDataStack.save() { [weak self] result in
+        coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
             
             switch result {
             
@@ -102,7 +102,7 @@ final class MDCreateWordsCoreDataStorageOperation: MDOperation {
                 let _ = CDWordResponseEntity.init(wordResponse: word,
                                                   insertIntoManagedObjectContext: self.managedObjectContext)
                 
-                coreDataStack.save() { [weak self] result in
+                coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
                     
                     switch result {
                     

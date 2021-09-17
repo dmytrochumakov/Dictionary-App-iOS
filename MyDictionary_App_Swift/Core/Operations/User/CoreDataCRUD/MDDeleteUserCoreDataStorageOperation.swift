@@ -42,7 +42,7 @@ final class MDDeleteUserCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            coreDataStack.save() { [weak self] result in
+            coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
                 
                 switch result {
                 
@@ -107,7 +107,7 @@ final class MDDeleteAllUsersCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            coreDataStack.save() { [weak self] result in
+            coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
                 
                 switch result {
                 

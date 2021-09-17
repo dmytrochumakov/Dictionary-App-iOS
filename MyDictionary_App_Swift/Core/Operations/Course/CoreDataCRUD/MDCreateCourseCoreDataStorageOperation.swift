@@ -35,7 +35,7 @@ final class MDCreateCourseCoreDataStorageOperation: MDOperation {
         let newCourseEntity = CDCourseResponseEntity.init(courseResponse: self.courseEntity,
                                                           insertIntoManagedObjectContext: self.managedObjectContext)
         
-        coreDataStack.save() { [weak self] result in
+        coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
             
             switch result {
             
@@ -99,7 +99,7 @@ final class MDCreateCoursesCoreDataStorageOperation: MDOperation {
                                                     insertIntoManagedObjectContext: self.managedObjectContext)
                 
                 
-                coreDataStack.save() { [weak self] result in
+                coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
                     
                     switch result {
                     
