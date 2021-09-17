@@ -30,6 +30,7 @@ enum KeysForTranslate: String {
     case confirmPasswordIsEmpty = "confirm_password_Is_Empty"
     case confirmPasswordAndPasswordDoNotMatch = "confirm_password_and_password_do_not_match"
     case ok
+    case pleaseWaitForDataSync = "please_wait_for_data_sync"
     
     // Api Errors //
     case noDataApiError = "no_data_api_error"
