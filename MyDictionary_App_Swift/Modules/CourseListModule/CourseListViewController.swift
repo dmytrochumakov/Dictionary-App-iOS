@@ -57,6 +57,7 @@ final class CourseListViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         addConstraints()
+        dropShadow()
     }
     
 }
@@ -161,6 +162,22 @@ fileprivate extension CourseListViewController {
     func configureNavigationItemLeftAndRightButtons() {
         addLeftNavigationButton()
         addRightNavigationButton()
+    }
+    
+}
+
+// MARK: - Drop Shadow
+fileprivate extension CourseListViewController {
+    
+    func dropShadow() {
+        dropShadowNavagationBar()
+    }
+    
+    func dropShadowNavagationBar() {
+        navigationController?.navigationBar.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.5),
+                                                       offSet: .init(width: 0,
+                                                                     height: 4),
+                                                       radius: 20)
     }
     
 }
