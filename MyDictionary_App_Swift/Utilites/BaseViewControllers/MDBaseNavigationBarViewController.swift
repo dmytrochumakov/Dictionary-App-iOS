@@ -1,14 +1,14 @@
 //
-//  BaseAuthViewController.swift
+//  MDBaseNavigationBarViewController.swift
 //  MyDictionary_App_Swift
 //
-//  Created by Dmytro Chumakov on 12.09.2021.
+//  Created by Dmytro Chumakov on 18.09.2021.
 //
 
 import UIKit
 
-open class BaseAuthViewController: UIViewController {
-        
+open class MDBaseNavigationBarViewController: UIViewController {
+    
     internal let navigationBarView: UIView = {
         let view: UIView = .init()
         view.backgroundColor = MDAppStyling.Color.md_Blue_1_Light_Appearence.color()
@@ -20,14 +20,6 @@ open class BaseAuthViewController: UIViewController {
         let imageView: UIImageView = .init()
         imageView.image = MDAppStyling.Image.background_navigation_bar_0.image
         imageView.contentMode = .scaleToFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    internal let backgroundImageView: UIImageView = {
-        let imageView: UIImageView = .init()
-        imageView.image = MDAppStyling.Image.background_typography_0.image
-        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -63,14 +55,10 @@ open class BaseAuthViewController: UIViewController {
 }
 
 // MARK: - Add View
-extension BaseAuthViewController {
+extension MDBaseNavigationBarViewController {
     
     func addNavigationBarView() {
         view.addSubview(navigationBarView)
-    }
-    
-    func addBackgroundImageView() {
-        view.addSubview(backgroundImageView)
     }
     
     func addNavigationBarBackgroundImageView() {
@@ -80,46 +68,24 @@ extension BaseAuthViewController {
 }
 
 // MARK: - Add Constraint
-extension BaseAuthViewController {
+extension MDBaseNavigationBarViewController {
     
     func addNavigationBarViewConstraints() {
         
         NSLayoutConstraint.addEqualTopConstraint(item: self.navigationBarView,
-                                                            toItem: self.view,
-                                                            constant: .zero)
+                                                 toItem: self.view,
+                                                 constant: .zero)
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.navigationBarView,
-                                                             toItem: self.view,
-                                                             constant: .zero)
+                                                  toItem: self.view,
+                                                  constant: .zero)
         
         NSLayoutConstraint.addEqualRightConstraint(item: self.navigationBarView,
-                                                              toItem: self.view,
-                                                              constant: .zero)
+                                                   toItem: self.view,
+                                                   constant: .zero)
         
         NSLayoutConstraint.addEqualHeightConstraint(item: self.navigationBarView,
-                                                               constant: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
-        
-    }
-    
-    func addBackgroundImageViewConstraints() {
-        
-        NSLayoutConstraint.addEqualConstraint(item: self.backgroundImageView,
-                                                         attribute: .top,
-                                                         toItem: self.navigationBarView,
-                                                         attribute: .bottom,
-                                                         constant: .zero)
-        
-        NSLayoutConstraint.addEqualLeftConstraint(item: self.backgroundImageView,
-                                                             toItem: self.view,
-                                                             constant: .zero)
-        
-        NSLayoutConstraint.addEqualRightConstraint(item: self.backgroundImageView,
-                                                              toItem: self.view,
-                                                              constant: .zero)
-        
-        NSLayoutConstraint.addEqualBottomConstraint(item: self.backgroundImageView,
-                                                               toItem: self.view,
-                                                               constant: .zero)
+                                                    constant: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
         
     }
     
@@ -133,7 +99,7 @@ extension BaseAuthViewController {
 }
 
 // MARK: - Drop Shadow
-extension BaseAuthViewController {
+extension MDBaseNavigationBarViewController {
     
     func dropShadowNavigationBarView() {
         navigationBarView.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.5),
@@ -145,7 +111,7 @@ extension BaseAuthViewController {
 }
 
 // MARK: - Setup Navigation Bar
-extension BaseAuthViewController {
+extension MDBaseNavigationBarViewController {
     
     func setupNavigationBar() {
         navigationBarPrefersLargeTitles()
@@ -162,39 +128,28 @@ extension BaseAuthViewController {
     
 }
 
-// MARK: - Update Background Image
-extension BaseAuthViewController {
-    
-    func updateBackgroundImage(_ newImage: UIImage) {
-        backgroundImageView.image = newImage
-    }
-    
-}
-
 // MARK: - Add Views
-fileprivate extension BaseAuthViewController {
+fileprivate extension MDBaseNavigationBarViewController {
     
     func addViews() {
         addNavigationBarView()
-        addBackgroundImageView()
         addNavigationBarBackgroundImageView()
     }
     
 }
 
 // MARK: - Add Constraints
-fileprivate extension BaseAuthViewController {
+fileprivate extension MDBaseNavigationBarViewController {
     
     func addConstraints() {
         addNavigationBarViewConstraints()
-        addBackgroundImageViewConstraints()
         addNavigationBarBackgroundImageViewConstraints()
     }
     
 }
 
 // MARK: - Configure UI
-fileprivate extension BaseAuthViewController {
+fileprivate extension MDBaseNavigationBarViewController {
     
     func configureUI() {
         configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
@@ -204,7 +159,7 @@ fileprivate extension BaseAuthViewController {
 }
 
 // MARK: - Drop Shadow
-fileprivate extension BaseAuthViewController {
+fileprivate extension MDBaseNavigationBarViewController {
     
     func dropShadow() {
         dropShadowNavigationBarView()
