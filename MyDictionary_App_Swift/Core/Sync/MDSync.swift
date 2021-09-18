@@ -118,7 +118,7 @@ fileprivate extension MDSync {
             // Append Sync Result
             syncResults.append(result)
             // Compute And Pass Progress
-            progressCompletionHandler(computeProgress(finishedOperationsCount: syncResults.count))
+            progressCompletionHandler(computeProgressForFullSync(finishedOperationsCount: syncResults.count))
             // Dispatch Group Leave
             dispatchGroup.leave()
         }
@@ -130,7 +130,7 @@ fileprivate extension MDSync {
             // Append Sync Result
             syncResults.append(result)
             // Compute And Pass Progress
-            progressCompletionHandler(computeProgress(finishedOperationsCount: syncResults.count))
+            progressCompletionHandler(computeProgressForFullSync(finishedOperationsCount: syncResults.count))
             // Dispatch Group Leave
             dispatchGroup.leave()
         }
@@ -142,7 +142,7 @@ fileprivate extension MDSync {
             // Append Sync Result
             syncResults.append(result)
             // Compute And Pass Progress
-            progressCompletionHandler(computeProgress(finishedOperationsCount: syncResults.count))
+            progressCompletionHandler(computeProgressForFullSync(finishedOperationsCount: syncResults.count))
             // Dispatch Group Leave
             dispatchGroup.leave()
         }
@@ -154,7 +154,7 @@ fileprivate extension MDSync {
             // Append Sync Result
             syncResults.append(result)
             // Compute And Pass Progress
-            progressCompletionHandler(computeProgress(finishedOperationsCount: syncResults.count))
+            progressCompletionHandler(computeProgressForFullSync(finishedOperationsCount: syncResults.count))
             // Dispatch Group Leave
             dispatchGroup.leave()
         }
@@ -166,7 +166,7 @@ fileprivate extension MDSync {
             // Append Sync Result
             syncResults.append(result)
             // Compute And Pass Progress
-            progressCompletionHandler(computeProgress(finishedOperationsCount: syncResults.count))
+            progressCompletionHandler(computeProgressForFullSync(finishedOperationsCount: syncResults.count))
             // Dispatch Group Leave
             dispatchGroup.leave()
         }
@@ -195,7 +195,7 @@ fileprivate extension MDSync {
             // Append Sync Result
             syncResults.append(result)
             // Compute And Pass Progress
-            progressCompletionHandler(computeProgress(finishedOperationsCount: syncResults.count))
+            progressCompletionHandler(computeProgressForJWTAndUserAndLanguageSync(finishedOperationsCount: syncResults.count))
             // Dispatch Group Leave
             dispatchGroup.leave()
         }
@@ -207,7 +207,7 @@ fileprivate extension MDSync {
             // Append Sync Result
             syncResults.append(result)
             // Compute And Pass Progress
-            progressCompletionHandler(computeProgress(finishedOperationsCount: syncResults.count))
+            progressCompletionHandler(computeProgressForJWTAndUserAndLanguageSync(finishedOperationsCount: syncResults.count))
             // Dispatch Group Leave
             dispatchGroup.leave()
         }
@@ -219,7 +219,7 @@ fileprivate extension MDSync {
             // Append Sync Result
             syncResults.append(result)
             // Compute And Pass Progress
-            progressCompletionHandler(computeProgress(finishedOperationsCount: syncResults.count))
+            progressCompletionHandler(computeProgressForJWTAndUserAndLanguageSync(finishedOperationsCount: syncResults.count))
             // Dispatch Group Leave
             dispatchGroup.leave()
         }
@@ -231,8 +231,12 @@ fileprivate extension MDSync {
         
     }
     
-    func computeProgress(finishedOperationsCount: Int) -> Float {
+    func computeProgressForFullSync(finishedOperationsCount: Int) -> Float {
         return Float(finishedOperationsCount) / Float(MDSyncStep.allCases.count)
+    }
+    
+    func computeProgressForJWTAndUserAndLanguageSync(finishedOperationsCount: Int) -> Float {
+        return Float(finishedOperationsCount) / Float(3)
     }
     
 }
