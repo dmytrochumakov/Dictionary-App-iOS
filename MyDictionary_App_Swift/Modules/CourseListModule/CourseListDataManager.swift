@@ -61,7 +61,7 @@ extension CourseListDataManager {
             switch readResult {
             
             case .success(let readCourses):
-                self?.dataProvider.courses = self?.testData ?? []
+                self?.dataProvider.filteredCourses = self?.testData ?? []
                 completionHandler(.success(()))
             case .failure(let error):
                 completionHandler(.failure(error))

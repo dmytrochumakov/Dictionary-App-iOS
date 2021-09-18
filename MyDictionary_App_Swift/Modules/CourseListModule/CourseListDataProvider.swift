@@ -9,7 +9,7 @@ import Foundation
 protocol CourseListDataProviderProtocol: NumberOfSectionsProtocol,
                                          NumberOfRowsInSectionProtocol {
     
-    var courses: [CourseResponse] { get set }
+    var filteredCourses: [CourseResponse] { get set }
     
     func courseListCellModel(atIndexPath indexPath: IndexPath) -> MDCourseListCellModel?
     
@@ -17,10 +17,10 @@ protocol CourseListDataProviderProtocol: NumberOfSectionsProtocol,
 
 final class CourseListDataProvider: CourseListDataProviderProtocol {
     
-    var courses: [CourseResponse]
+    var filteredCourses: [CourseResponse]
     
     init(courses: [CourseResponse]) {
-        self.courses = courses
+        self.filteredCourses = courses
     }
     
 }
@@ -32,20 +32,19 @@ extension CourseListDataProvider {
     }
     
     func numberOfRowsInSection(_ section: Int) -> Int {
-        return courses.count
+        return filteredCourses.count
     }
         
-    
 }
 
 extension CourseListDataProvider {
     
     func courseListCellModel(atIndexPath indexPath: IndexPath) -> MDCourseListCellModel? {
         
-        if (courses.isEmpty) {
+        if (filteredCourses.isEmpty) {
             return nil
         } else {
-            return .init(languageName: courses[indexPath.row].languageName)
+            return .init(languageName: filteredCourses[indexPath.row].languageName)
         }
         
     }
