@@ -79,6 +79,8 @@ fileprivate extension CourseListInteractor {
         //
         searchBarSearchButtonAction_Subscribe()
         //
+        searchBarTextDidChangeAction_Subscribe()
+        //
     }
     
     func didChangeAppearanceObservable_Subscribe() {
@@ -125,6 +127,23 @@ fileprivate extension CourseListInteractor {
         
         searchBarDelegate.searchBarSearchButtonAction = { [weak self] in
             self?.interactorOutput?.hideKeyboard()
+        }
+        
+    }
+    
+    func searchBarTextDidChangeAction_Subscribe() {
+        
+        searchBarDelegate.searchBarTextDidChangeAction = { [weak self] (searchText) in
+            self?.dataManager.searchBarTextDidChangeAction(searchText) { [weak self] result in
+                
+                switch result {
+                case .success:
+                    self?.interactorOutput?.reloadData()
+                case .failure(let error):
+                    self?.interactorOutput?.showError(error)
+                }
+                
+            }
         }
         
     }

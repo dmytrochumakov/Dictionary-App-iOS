@@ -8,6 +8,7 @@ import Foundation
 
 protocol CourseListDataManagerInputProtocol {
     func readAndAddCoursesToDataProvider(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    func searchBarTextDidChangeAction(_ searchText: String, _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
 }
 
 protocol CourseListDataManagerOutputProtocol: AnyObject {
@@ -69,6 +70,38 @@ extension CourseListDataManager {
             
         }
         
+    }
+    
+    func searchBarTextDidChangeAction(_ searchText: String, _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
+        
+        memoryStorage.readAllCourses { [weak self] readResult in
+            
+            switch readResult {
+            
+            case .success(let readCourses):
+                
+                self?.dataProvider.filteredCourses = self?.filteredCourses(input: readCourses,
+                                                                           searchText: searchText) ?? []
+                completionHandler(.success(()))
+                
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+            
+        }
+        
+    }
+    
+}
+
+fileprivate extension CourseListDataManager {
+
+    func filteredCourses(input courses: [CourseResponse], searchText: String) -> [CourseResponse] {
+        if (MDConstants.Text.textIsEmpty(searchText)) {
+            return courses
+        } else {
+            return courses.filter({ $0.languageName.lowercased().contains(searchText.lowercased()) })
+        }
     }
     
 }

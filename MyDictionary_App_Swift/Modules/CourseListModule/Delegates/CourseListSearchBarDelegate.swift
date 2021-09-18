@@ -10,6 +10,7 @@ import UIKit
 protocol MDCourseListSearchBarDelegateProtocol: UISearchBarDelegate {
     var searchBarCancelButtonAction: (() -> Void)? { get set }
     var searchBarSearchButtonAction: (() -> Void)? { get set }
+    var searchBarTextDidChangeAction: ((String) -> Void)? { get set }
 }
 
 final class MDCourseListSearchBarDelegate: NSObject,
@@ -17,6 +18,7 @@ final class MDCourseListSearchBarDelegate: NSObject,
     
     var searchBarCancelButtonAction: (() -> Void)?
     var searchBarSearchButtonAction: (() -> Void)?
+    var searchBarTextDidChangeAction: ((String) -> Void)?
     
 }
 
@@ -28,6 +30,10 @@ extension MDCourseListSearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBarSearchButtonAction?()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchBarTextDidChangeAction?(searchText)
     }
     
 }
