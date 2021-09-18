@@ -9,6 +9,7 @@ import UIKit
 protocol CourseListInteractorInputProtocol {
     var collectionViewDelegate: CourseListCollectionViewDelegateProtocol { get }
     var collectionViewDataSource: CourseListCollectionViewDataSourceProtocol { get }
+    var searchBarDelegate: MDCourseListSearchBarDelegateProtocol { get }
 }
 
 protocol CourseListInteractorOutputProtocol: AnyObject,
@@ -31,17 +32,21 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
     
     internal var collectionViewDelegate: CourseListCollectionViewDelegateProtocol
     internal var collectionViewDataSource: CourseListCollectionViewDataSourceProtocol
+    internal var searchBarDelegate: MDCourseListSearchBarDelegateProtocol
+    
     internal weak var interactorOutput: CourseListInteractorOutputProtocol?
     
     init(dataManager: CourseListDataManagerInputProtocol,
          fillMemoryService: MDFillMemoryServiceProtocol,
          collectionViewDelegate: CourseListCollectionViewDelegateProtocol,
-         collectionViewDataSource: CourseListCollectionViewDataSourceProtocol) {
+         collectionViewDataSource: CourseListCollectionViewDataSourceProtocol,
+         searchBarDelegate: MDCourseListSearchBarDelegateProtocol) {
         
         self.dataManager = dataManager
         self.fillMemoryService = fillMemoryService
         self.collectionViewDelegate = collectionViewDelegate
         self.collectionViewDataSource = collectionViewDataSource
+        self.searchBarDelegate = searchBarDelegate
         
         super.init()
         subscribe()        

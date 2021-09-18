@@ -209,6 +209,8 @@
 		229FFF3626F5E1650024B974 /* MDBaseNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3526F5E1650024B974 /* MDBaseNavigationBarViewController.swift */; };
 		229FFF3826F5E3D90024B974 /* MDBaseTitledBackNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3726F5E3D90024B974 /* MDBaseTitledBackNavigationBarViewController.swift */; };
 		229FFF3A26F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3926F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift */; };
+		229FFF3E26F60AE50024B974 /* CourseListSearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3D26F60AE40024B974 /* CourseListSearchBarDelegate.swift */; };
+		229FFF4026F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3F26F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift */; };
 		22A2521226CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521126CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift */; };
 		22A2521426CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521326CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift */; };
 		22A2521626CFE5230013FCF5 /* MDEntitiesCountProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521526CFE5230013FCF5 /* MDEntitiesCountProtocol.swift */; };
@@ -561,6 +563,8 @@
 		229FFF3526F5E1650024B974 /* MDBaseNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseNavigationBarViewController.swift; sourceTree = "<group>"; };
 		229FFF3726F5E3D90024B974 /* MDBaseTitledBackNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseTitledBackNavigationBarViewController.swift; sourceTree = "<group>"; };
 		229FFF3926F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseTitledNavigationBarViewController.swift; sourceTree = "<group>"; };
+		229FFF3D26F60AE40024B974 /* CourseListSearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListSearchBarDelegate.swift; sourceTree = "<group>"; };
+		229FFF3F26F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSearchBarDelegatePropertyProtocol.swift; sourceTree = "<group>"; };
 		22A2521126CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountResultWithoutCompletion.swift; sourceTree = "<group>"; };
 		22A2521326CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountResultWithCompletion.swift; sourceTree = "<group>"; };
 		22A2521526CFE5230013FCF5 /* MDEntitiesCountProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountProtocol.swift; sourceTree = "<group>"; };
@@ -1005,6 +1009,7 @@
 				22B22692266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift */,
 				22DB2F8A26C3D4D200C1AADA /* TableViewDelegatePropertyProtocol.swift */,
 				22DB2F8C26C3D51500C1AADA /* TableViewDataSourcePropertyProtocol.swift */,
+				229FFF3F26F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1674,6 +1679,23 @@
 			path = CollectionViewDataSource;
 			sourceTree = "<group>";
 		};
+		229FFF3B26F60A940024B974 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				22DB2F8826C3D3F400C1AADA /* CourseListCollectionViewDelegate.swift */,
+				229FFF3D26F60AE40024B974 /* CourseListSearchBarDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		229FFF3C26F60AA90024B974 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				22DB2F8226C3D28900C1AADA /* CourseListCollectionViewDataSource.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
 		22A31B5426ECBA4D00676E55 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1928,10 +1950,10 @@
 		22DB2F6F26C3BE3C00C1AADA /* CourseListModule */ = {
 			isa = PBXGroup;
 			children = (
+				229FFF3C26F60AA90024B974 /* DataSources */,
+				229FFF3B26F60A940024B974 /* Delegates */,
 				224375AD26F34062006B90EB /* Models */,
 				224375AA26F33E86006B90EB /* Cells */,
-				22DB2F8126C3D27B00C1AADA /* CollectionViewDataSource */,
-				22DB2F8026C3D27100C1AADA /* CollectionViewDelegate */,
 				22DB2F7026C3BE7900C1AADA /* CourseListModule.swift */,
 				22DB2F7126C3BE7900C1AADA /* CourseListPresenter.swift */,
 				22DB2F7226C3BE7900C1AADA /* CourseListRouter.swift */,
@@ -1941,22 +1963,6 @@
 				22DB2F7626C3BE7900C1AADA /* CourseListDataManager.swift */,
 			);
 			path = CourseListModule;
-			sourceTree = "<group>";
-		};
-		22DB2F8026C3D27100C1AADA /* CollectionViewDelegate */ = {
-			isa = PBXGroup;
-			children = (
-				22DB2F8826C3D3F400C1AADA /* CourseListCollectionViewDelegate.swift */,
-			);
-			path = CollectionViewDelegate;
-			sourceTree = "<group>";
-		};
-		22DB2F8126C3D27B00C1AADA /* CollectionViewDataSource */ = {
-			isa = PBXGroup;
-			children = (
-				22DB2F8226C3D28900C1AADA /* CourseListCollectionViewDataSource.swift */,
-			);
-			path = CollectionViewDataSource;
 			sourceTree = "<group>";
 		};
 		22DE582426C9536A0032A94C /* JWT */ = {
@@ -2548,6 +2554,7 @@
 				22DB2F7826C3BE7900C1AADA /* CourseListPresenter.swift in Sources */,
 				22CA088126515EEB0052D169 /* WordListPresenter.swift in Sources */,
 				22557FC926C958A200A4FF31 /* MDJWTCoreDataStorage.swift in Sources */,
+				229FFF3E26F60AE50024B974 /* CourseListSearchBarDelegate.swift in Sources */,
 				2223F8AB26512C5A004F2FE9 /* String+Extension.swift in Sources */,
 				22CA088E265167620052D169 /* ReloadDataProtocol.swift in Sources */,
 				22DB2F7726C3BE7900C1AADA /* CourseListModule.swift in Sources */,
@@ -2625,6 +2632,7 @@
 				22493C33269715A9000DA480 /* CDResultSavedEnum.swift in Sources */,
 				225C349726D6774500F3BC9A /* MDAPIAccount.swift in Sources */,
 				229D2D4326EB53A60047B518 /* ChoiceAuthenticationOrRegistrationModule.swift in Sources */,
+				229FFF4026F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift in Sources */,
 				22EF020D269DAFC000FE4435 /* MDAPIEnvironment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

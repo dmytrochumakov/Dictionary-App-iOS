@@ -46,6 +46,15 @@ final class CourseListViewController: MDBaseTitledNavigationBarViewController {
         return view
     }()
     
+    fileprivate static let searchBarHeight: CGFloat = 56
+    fileprivate static let searchBarTopOffset: CGFloat = 16
+    fileprivate let searchBar: UISearchBar = {
+        let searchBar: UISearchBar = .init()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.showsCancelButton = true
+        return searchBar
+    }()
+    
     init(presenter: CourseListPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: KeysForTranslate.courses.localized,
@@ -108,6 +117,7 @@ fileprivate extension CourseListViewController {
         addAddNewCourseButton()
         addCollectionView()
         addSearchBarContainerView()
+        addSearchBar()
     }
     
     func addSettingsButton() {
@@ -128,6 +138,11 @@ fileprivate extension CourseListViewController {
         view.addSubview(searchBarContainerView)
     }
     
+    func addSearchBar() {
+        searchBar.delegate = presenter.searchBarDelegate
+        searchBarContainerView.addSubview(searchBar)
+    }
+    
 }
 
 // MARK: - Add Constraints
@@ -138,6 +153,7 @@ fileprivate extension CourseListViewController {
         addAddNewCourseButtonConstraints()
         addSearchBarContainerViewConstraints()
         addCollectionViewConstraints()
+        addSearchBarConstraints()
     }
     
     func addSettingsButtonConstraints() {
@@ -217,6 +233,26 @@ fileprivate extension CourseListViewController {
         
         NSLayoutConstraint.addEqualBottomConstraint(item: self.collectionView,
                                                     toItem: self.view,
+                                                    constant: .zero)
+        
+    }
+    
+    func addSearchBarConstraints() {
+        
+        NSLayoutConstraint.addEqualTopConstraint(item: self.searchBar,
+                                                 toItem: self.searchBarContainerView,
+                                                 constant: Self.searchBarTopOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.searchBar,
+                                                  toItem: self.searchBarContainerView,
+                                                  constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.searchBar,
+                                                   toItem: self.searchBarContainerView,
+                                                   constant: .zero)
+        
+        NSLayoutConstraint.addEqualBottomConstraint(item: self.searchBar,
+                                                    toItem: self.searchBarContainerView,
                                                     constant: .zero)
         
     }

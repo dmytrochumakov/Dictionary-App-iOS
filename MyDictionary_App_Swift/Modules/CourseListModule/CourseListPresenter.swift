@@ -7,7 +7,8 @@
 import UIKit
 
 protocol CourseListPresenterInputProtocol: CollectionViewDelegateFlowLayoutPropertyProtocol,
-                                           CollectionViewDataSourcePropertyProtocol {
+                                           CollectionViewDataSourcePropertyProtocol,
+                                           MDSearchBarDelegatePropertyProtocol {
     func addNewCourseButtonClicked()
     func settingsButtonClicked()
 }
@@ -61,6 +62,10 @@ extension CourseListPresenter {
     
     func reloadData() {
         presenterOutput?.reloadData()
+    }
+    
+    var searchBarDelegate: UISearchBarDelegate {
+        return interactor.searchBarDelegate
     }
     
 }
