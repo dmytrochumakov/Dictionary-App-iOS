@@ -6,7 +6,7 @@
 
 import UIKit
 
-final class CourseListViewController: UIViewController {
+final class CourseListViewController: MDBaseNavigationBarViewController {
     
     fileprivate let presenter: CourseListPresenterInputProtocol
     
@@ -22,12 +22,14 @@ final class CourseListViewController: UIViewController {
     fileprivate let settingsButton: UIButton = {
         let button: UIButton = .init()
         button.setImage(MDAppStyling.Image.settings.image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     fileprivate let addNewCourseButton: UIButton = {
         let button: UIButton = .init()
         button.setImage(MDAppStyling.Image.add.image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -41,7 +43,8 @@ final class CourseListViewController: UIViewController {
     
     init(presenter: CourseListPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
+        super.init()
+        updateNavigationBarBackgroundImage(MDAppStyling.Image.background_navigation_bar_1.image)
     }
     
     deinit {
@@ -104,16 +107,6 @@ fileprivate extension CourseListViewController {
         view.addSubview(collectionView)
     }
     
-    func addLeftNavigationButton() {
-        settingsButton.addTarget(self, action: #selector(settingsButtonAction), for: .touchUpInside)
-        self.navigationItem.leftBarButtonItem = .init(customView: self.settingsButton)
-    }
-    
-    func addRightNavigationButton() {
-        addNewCourseButton.addTarget(self, action: #selector(addNewCourseButtonAction), for: .touchUpInside)
-        self.navigationItem.rightBarButtonItem = .init(customView: self.addNewCourseButton)
-    }
-    
     func addSearchBarContainerView() {
         view.addSubview(searchBarContainerView)
     }
@@ -173,7 +166,6 @@ fileprivate extension CourseListViewController {
         
     }
     
-    
 }
 
 // MARK: - Configure UI
@@ -182,12 +174,10 @@ fileprivate extension CourseListViewController {
     func configureUI() {
         configureView()
         configureCollectionView()
-        configureNavigationBar()
     }
     
     func configureView() {
         self.configureViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType)
-        self.title = KeysForTranslate.courses.localized
     }
     
     func configureCollectionView() {
@@ -197,42 +187,13 @@ fileprivate extension CourseListViewController {
                                                     collectionView: collectionView)
     }
     
-    func configureNavigationBar() {
-        //
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        //
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : MDAppStyling.Color.md_White_0_Light_Appearence.color(),
-                                                                        NSAttributedString.Key.font : MDAppStyling.Font.MyriadProSemiBold.font(ofSize: 17)]
-        //
-        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : MDAppStyling.Color.md_White_0_Light_Appearence.color(),
-                                                                             NSAttributedString.Key.font : MDAppStyling.Font.MyriadProSemiBold.font(ofSize: 34)]
-        //
-        self.navigationController?.setNavigationBarBackgroundImage(MDAppStyling.Image.background_navigation_bar_1.image,
-                                                                   logoImageViewBackgroundColor: MDAppStyling.Color.md_Blue_1_Light_Appearence.color())
-        //
-        configureNavigationItemLeftAndRightButtons()
-        //
-    }
-    
-    func configureNavigationItemLeftAndRightButtons() {
-        addLeftNavigationButton()
-        addRightNavigationButton()
-    }
-    
 }
 
 // MARK: - Drop Shadow
 fileprivate extension CourseListViewController {
     
     func dropShadow() {
-        dropShadowNavagationBar()
-    }
-    
-    func dropShadowNavagationBar() {
-        navigationController?.navigationBar.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.5),
-                                                       offSet: .init(width: 0,
-                                                                     height: 4),
-                                                       radius: 20)
+        
     }
     
 }

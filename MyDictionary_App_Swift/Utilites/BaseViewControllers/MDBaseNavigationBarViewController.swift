@@ -54,6 +54,15 @@ open class MDBaseNavigationBarViewController: UIViewController {
     
 }
 
+// MARK: - Update Background Image
+extension MDBaseNavigationBarViewController {
+    
+    func updateNavigationBarBackgroundImage(_ newImage: UIImage) {
+        navigationBarBackgroundImageView.image = newImage
+    }
+    
+}
+
 // MARK: - Add View
 extension MDBaseNavigationBarViewController {
     
