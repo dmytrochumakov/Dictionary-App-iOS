@@ -21,12 +21,17 @@ protocol CourseListDataManagerProtocol: CourseListDataManagerInputProtocol {
 
 final class CourseListDataManager: CourseListDataManagerProtocol {
     
-    fileprivate let testData: [CourseResponse] = .init(repeating: .init(userId: 1,
-                                                                        courseId: 1,
-                                                                        languageId: 1,
-                                                                        languageName: "English",
-                                                                        createdAt: "2021-08-15T10:34:33.998Z"),
-                                                       count: 20)
+    fileprivate let testData: [CourseResponse] = [.init(userId: 1,
+                                                        courseId: 1,
+                                                        languageId: 1,
+                                                        languageName: "English",
+                                                        createdAt: "2021-08-15T10:34:33.998Z"),
+                                                  .init(userId: 1,
+                                                        courseId: 2,
+                                                        languageId: 2,
+                                                        languageName: "Spanish",
+                                                        createdAt: "2021-08-15T10:34:33.998Z")
+    ]
     
     fileprivate let memoryStorage: MDCourseMemoryStorageProtocol
     internal var dataProvider: CourseListDataProviderProtocol
@@ -48,7 +53,7 @@ final class CourseListDataManager: CourseListDataManagerProtocol {
 
 // MARK: - CourseListDataManagerInputProtocol
 extension CourseListDataManager {
- 
+    
     func readAndAddCoursesToDataProvider(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
         memoryStorage.readAllCourses { [weak self] readResult in
