@@ -34,6 +34,10 @@ protocol RegistrationInteractorOutputProtocol: AnyObject {
     func showValidationError(_ error: Error)
     func showCourseList()
     
+    func showProgressHUD()
+    func hideProgressHUD()
+    func updateHUDProgress(_ progress: Float)
+    
 }
 
 protocol RegistrationInteractorProtocol: RegistrationInteractorInputProtocol,
@@ -171,12 +175,15 @@ fileprivate extension RegistrationInteractor {
         
         if (registerValidation.isValid) {
             
+            // Show Progress HUD
+            interactorOutput?.showProgressHUD()
+            
             let authRequest: AuthRequest = .init(nickname: dataManager.getNickname()!,
                                                  password: dataManager.getPassword()!)
             
             apiManager.register(authRequest: authRequest) { [weak self] progress in
                 
-                debugPrint(#function, Self.self, "progress: ", progress)
+                self?.interactorOutput?.updateHUDProgress(progress)
                 
             } completionHandler: { [weak self] (result) in
                 
@@ -184,12 +191,20 @@ fileprivate extension RegistrationInteractor {
                 
                 case .success:
                     
+                    // Hide Progress HUD
+                    self?.interactorOutput?.hideProgressHUD()
+                    //
                     self?.interactorOutput?.showCourseList()
+                    //
                     break
                     
                 case .failure(let error):
                     
+                    // Hide Progress HUD
+                    self?.interactorOutput?.hideProgressHUD()
+                    //
                     self?.interactorOutput?.showValidationError(error)
+                    //
                     break
                     
                 }

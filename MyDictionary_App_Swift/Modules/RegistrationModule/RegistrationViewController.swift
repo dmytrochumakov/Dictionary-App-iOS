@@ -4,7 +4,7 @@
 //
 //  Created Dmytro Chumakov on 14.08.2021.
 
-import UIKit
+import MBProgressHUD
 
 final class RegistrationViewController: BaseDetailAuthViewController {
     
@@ -107,6 +107,15 @@ final class RegistrationViewController: BaseDetailAuthViewController {
         return button
     }()
     
+    fileprivate lazy var hud: MBProgressHUD = {
+        let hud: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.mode = .annularDeterminate
+        hud.label.text = KeysForTranslate.pleaseWaitForDataSync.localized
+        hud.label.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        hud.label.textColor = MDAppStyling.Color.md_Black_1_Light_Appearence.color()
+        return hud
+    }()
+    
     init(presenter: RegistrationPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: KeysForTranslate.registration.localized)
@@ -179,6 +188,18 @@ extension RegistrationViewController: RegistrationPresenterOutputProtocol {
         UIAlertController.showAlertWithOkAction(title: KeysForTranslate.error.localized,
                                                 message: error.localizedDescription,
                                                 presenter: self)
+    }
+    
+    func showProgressHUD() {
+        hud.show(animated: true)
+    }
+    
+    func hideProgressHUD() {
+        hud.hide(animated: true)
+    }
+    
+    func updateHUDProgress(_ progress: Float) {
+        hud.progress = progress
     }
     
 }

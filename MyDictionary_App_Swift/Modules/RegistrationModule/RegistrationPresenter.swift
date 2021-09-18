@@ -33,6 +33,10 @@ protocol RegistrationPresenterOutputProtocol: AnyObject {
     
     func showValidationError(_ error: Error)
     
+    func showProgressHUD()
+    func hideProgressHUD()
+    func updateHUDProgress(_ progress: Float)
+    
 }
 
 protocol RegistrationPresenterProtocol: RegistrationPresenterInputProtocol,
@@ -100,6 +104,18 @@ extension RegistrationPresenter {
     
     func showCourseList() {
         router.showCourseList()
+    }
+    
+    func showProgressHUD() {
+        presenterOutput?.showProgressHUD()
+    }
+    
+    func hideProgressHUD() {
+        presenterOutput?.hideKeyboard()
+    }
+    
+    func updateHUDProgress(_ progress: Float) {
+        presenterOutput?.updateHUDProgress(progress)
     }
     
 }
