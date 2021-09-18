@@ -25,9 +25,9 @@ open class MDBaseTitledBackViewControllerWithBackgroundImage: MDBaseNavigationBa
         return label
     }()
     
-    init(title: String) {
+    init(title: String, navigationBarBackgroundImage: UIImage, backgroundImage: UIImage) {
         titleLabel.text = title
-        super.init()
+        super.init(navigationBarBackgroundImage: navigationBarBackgroundImage, backgroundImage: backgroundImage)
     }
     
     deinit {

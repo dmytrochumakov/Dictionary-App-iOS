@@ -120,8 +120,9 @@ final class RegistrationViewController: MDBaseTitledBackViewControllerWithBackgr
     
     init(presenter: RegistrationPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(title: KeysForTranslate.registration.localized)
-        updateBackgroundImage(MDAppStyling.Image.background_typography_2.image)
+        super.init(title: KeysForTranslate.registration.localized,
+                   navigationBarBackgroundImage: MDAppStyling.Image.background_navigation_bar_0.image,
+                   backgroundImage: MDAppStyling.Image.background_typography_2.image)        
     }
     
     deinit {

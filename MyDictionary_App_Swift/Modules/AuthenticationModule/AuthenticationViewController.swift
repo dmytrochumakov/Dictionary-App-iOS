@@ -78,8 +78,9 @@ final class AuthenticationViewController: MDBaseTitledBackViewControllerWithBack
     
     init(presenter: AuthenticationPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(title: KeysForTranslate.login.localized)
-        updateBackgroundImage(MDAppStyling.Image.background_typography_1.image)
+        super.init(title: KeysForTranslate.login.localized,
+                   navigationBarBackgroundImage: MDAppStyling.Image.background_navigation_bar_0.image,
+                   backgroundImage: MDAppStyling.Image.background_typography_1.image)        
     }
     
     deinit {

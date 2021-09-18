@@ -6,7 +6,7 @@
 
 import UIKit
 
-final class CourseListViewController: MDBaseNavigationBarViewController {
+final class CourseListViewController: MDBaseTitledNavigationBarViewController {
     
     fileprivate let presenter: CourseListPresenterInputProtocol
     
@@ -43,8 +43,8 @@ final class CourseListViewController: MDBaseNavigationBarViewController {
     
     init(presenter: CourseListPresenterInputProtocol) {
         self.presenter = presenter
-        super.init()
-        updateNavigationBarBackgroundImage(MDAppStyling.Image.background_navigation_bar_1.image)
+        super.init(title: KeysForTranslate.courses.localized,
+                   navigationBarBackgroundImage: MDAppStyling.Image.background_navigation_bar_1.image)
     }
     
     deinit {

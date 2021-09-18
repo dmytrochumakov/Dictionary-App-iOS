@@ -10,15 +10,15 @@ import UIKit
 open class MDBaseNavigationBarAndBackgroundImageViewController: MDBaseNavigationBarViewController {
     
     internal let backgroundImageView: UIImageView = {
-        let imageView: UIImageView = .init()
-        imageView.image = MDAppStyling.Image.background_typography_0.image
+        let imageView: UIImageView = .init()         
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    override init() {
-        super.init()
+    init(navigationBarBackgroundImage: UIImage, backgroundImage: UIImage) {
+        backgroundImageView.image = backgroundImage
+        super.init(navigationBarBackgroundImage: navigationBarBackgroundImage)
     }
     
     deinit {
@@ -49,7 +49,7 @@ open class MDBaseNavigationBarAndBackgroundImageViewController: MDBaseNavigation
 
 // MARK: - Add View
 extension MDBaseNavigationBarAndBackgroundImageViewController {
-        
+    
     func addBackgroundImageView() {
         view.addSubview(backgroundImageView)
     }
@@ -58,36 +58,27 @@ extension MDBaseNavigationBarAndBackgroundImageViewController {
 
 // MARK: - Add Constraint
 extension MDBaseNavigationBarAndBackgroundImageViewController {
-        
+    
     func addBackgroundImageViewConstraints() {
         
         NSLayoutConstraint.addEqualConstraint(item: self.backgroundImageView,
-                                                         attribute: .top,
-                                                         toItem: self.navigationBarView,
-                                                         attribute: .bottom,
-                                                         constant: .zero)
+                                              attribute: .top,
+                                              toItem: self.navigationBarView,
+                                              attribute: .bottom,
+                                              constant: .zero)
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.backgroundImageView,
-                                                             toItem: self.view,
-                                                             constant: .zero)
+                                                  toItem: self.view,
+                                                  constant: .zero)
         
         NSLayoutConstraint.addEqualRightConstraint(item: self.backgroundImageView,
-                                                              toItem: self.view,
-                                                              constant: .zero)
+                                                   toItem: self.view,
+                                                   constant: .zero)
         
         NSLayoutConstraint.addEqualBottomConstraint(item: self.backgroundImageView,
-                                                               toItem: self.view,
-                                                               constant: .zero)
+                                                    toItem: self.view,
+                                                    constant: .zero)
         
-    }
-        
-}
-
-// MARK: - Update Background Image
-extension MDBaseNavigationBarAndBackgroundImageViewController {
-    
-    func updateBackgroundImage(_ newImage: UIImage) {
-        backgroundImageView.image = newImage
     }
     
 }

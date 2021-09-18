@@ -49,7 +49,8 @@ final class ChoiceAuthenticationOrRegistrationViewController: MDBaseNavigationBa
     
     init(presenter: ChoiceAuthenticationOrRegistrationPresenterInputProtocol) {
         self.presenter = presenter
-        super.init()
+        super.init(navigationBarBackgroundImage: MDAppStyling.Image.background_navigation_bar_0.image,
+                   backgroundImage: MDAppStyling.Image.background_typography_0.image)
     }
     
     deinit {

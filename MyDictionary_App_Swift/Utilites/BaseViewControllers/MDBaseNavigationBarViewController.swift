@@ -18,13 +18,13 @@ open class MDBaseNavigationBarViewController: UIViewController {
     
     internal let navigationBarBackgroundImageView: UIImageView = {
         let imageView: UIImageView = .init()
-        imageView.image = MDAppStyling.Image.background_navigation_bar_0.image
         imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    init() {
+    init(navigationBarBackgroundImage: UIImage) {
+        navigationBarBackgroundImageView.image = navigationBarBackgroundImage
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -50,15 +50,6 @@ open class MDBaseNavigationBarViewController: UIViewController {
         super.viewDidLayoutSubviews()
         addConstraints()
         dropShadow()
-    }
-    
-}
-
-// MARK: - Update Background Image
-extension MDBaseNavigationBarViewController {
-    
-    func updateNavigationBarBackgroundImage(_ newImage: UIImage) {
-        navigationBarBackgroundImageView.image = newImage
     }
     
 }
