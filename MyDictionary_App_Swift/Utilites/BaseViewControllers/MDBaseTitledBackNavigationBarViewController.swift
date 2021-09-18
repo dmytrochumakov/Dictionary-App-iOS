@@ -7,7 +7,7 @@
 
 import UIKit
 
-open class MDBaseTitledBackNavigationBarViewController: MDBaseNavigationBarViewController {
+open class MDBaseTitledBackNavigationBarViewController: MDBaseTitledNavigationBarViewController {
     
     internal let backButtonSize: CGSize = .init(width: 40, height: 40)
     internal let backButton: UIButton = {
@@ -16,18 +16,9 @@ open class MDBaseTitledBackNavigationBarViewController: MDBaseNavigationBarViewC
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    internal let titleLabel: UILabel = {
-        let label: UILabel = .init()
-        label.font = MDAppStyling.Font.MyriadProSemiBold.font(ofSize: 34)
-        label.textColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    init(title: String, navigationBarBackgroundImage: UIImage) {
-        titleLabel.text = title
-        super.init(navigationBarBackgroundImage: navigationBarBackgroundImage)
+        
+    override init(title: String, navigationBarBackgroundImage: UIImage) {
+        super.init(title: title, navigationBarBackgroundImage: navigationBarBackgroundImage)
     }
     
     deinit {
@@ -54,14 +45,9 @@ open class MDBaseTitledBackNavigationBarViewController: MDBaseNavigationBarViewC
 fileprivate extension MDBaseTitledBackNavigationBarViewController {
     
     func addViews() {
-        addTitleLabel()
         addBackButton()
     }
-    
-    func addTitleLabel() {
-        view.addSubview(titleLabel)
-    }
-    
+        
     func addBackButton() {
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
         view.addSubview(backButton)
@@ -73,26 +59,9 @@ fileprivate extension MDBaseTitledBackNavigationBarViewController {
 fileprivate extension MDBaseTitledBackNavigationBarViewController {
     
     func addConstraints() {
-        addTitleLabelConstraints()
         addBackButtonConstraints()
     }
-    
-    func addTitleLabelConstraints() {
         
-        NSLayoutConstraint.addEqualLeftConstraint(item: self.titleLabel,
-                                                  toItem: self.navigationBarView,
-                                                  constant: 16)
-        
-        NSLayoutConstraint.addEqualRightConstraint(item: self.titleLabel,
-                                                   toItem: self.navigationBarView,
-                                                   constant: -16)
-        
-        NSLayoutConstraint.addEqualBottomConstraint(item: self.titleLabel,
-                                                    toItem: self.navigationBarView,
-                                                    constant: -16)
-        
-    }
-    
     func addBackButtonConstraints() {
         
         NSLayoutConstraint.addEqualConstraint(item: self.backButton,
