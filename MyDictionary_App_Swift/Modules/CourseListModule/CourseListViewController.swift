@@ -122,12 +122,10 @@ fileprivate extension CourseListViewController {
     }
     
     func addSearchBarContainerViewConstraints() {
-        
-        guard let navigationBar = self.navigationController?.navigationBar else { return }
-        
+                
         NSLayoutConstraint.addEqualConstraint(item: self.searchBarContainerView,
                                               attribute: .top,
-                                              toItem: navigationBar,
+                                              toItem: navigationBarView,
                                               attribute: .bottom,
                                               constant: .zero)
         
