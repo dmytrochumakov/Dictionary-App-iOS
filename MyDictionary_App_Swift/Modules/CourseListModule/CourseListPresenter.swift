@@ -18,6 +18,7 @@ protocol CourseListPresenterOutputProtocol: AnyObject,
     
     func showError(_ error: Error)
     func reloadData()
+    func hideKeyboard()
     
 }
 
@@ -62,6 +63,10 @@ extension CourseListPresenter {
     
     func reloadData() {
         presenterOutput?.reloadData()
+    }
+    
+    func hideKeyboard() {
+        presenterOutput?.hideKeyboard()
     }
     
     var searchBarDelegate: UISearchBarDelegate {

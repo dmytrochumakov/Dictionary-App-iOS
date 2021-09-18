@@ -122,7 +122,7 @@ final class RegistrationViewController: MDBaseTitledBackViewControllerWithBackgr
         self.presenter = presenter
         super.init(title: KeysForTranslate.registration.localized,
                    navigationBarBackgroundImage: MDAppStyling.Image.background_navigation_bar_0.image,
-                   backgroundImage: MDAppStyling.Image.background_typography_2.image)        
+                   backgroundImage: MDAppStyling.Image.background_typography_2.image)
     }
     
     deinit {
@@ -184,7 +184,7 @@ extension RegistrationViewController: RegistrationPresenterOutputProtocol {
     }
     
     func hideKeyboard() {
-        self.hideKeyboardFunc()
+        MDConstants.Keyboard.hideKeyboard(rootView: self.view)
     }
     
     func showValidationError(_ error: Error) {
@@ -476,15 +476,6 @@ fileprivate extension RegistrationViewController {
     
     @objc func registerButtonAction() {
         presenter.registerButtonClicked()
-    }
-    
-}
-
-// MARK: - Hide Keyboard
-fileprivate extension RegistrationViewController {
-    
-    func hideKeyboardFunc() {
-        self.view.endEditing(true)
     }
     
 }

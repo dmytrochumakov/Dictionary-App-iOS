@@ -118,7 +118,7 @@ extension AuthenticationViewController: AuthenticationPresenterOutputProtocol {
     }
     
     func hideKeyboard() {
-        self.hideKeyboardFunc()
+        MDConstants.Keyboard.hideKeyboard(rootView: self.view)
     }
     
     func showValidationError(_ error: Error) {
@@ -318,15 +318,6 @@ fileprivate extension AuthenticationViewController {
     
     @objc func passwordTextFieldEditingDidChangeAction() {
         presenter.passwordTextFieldEditingDidChangeAction(passwordTextField.text)
-    }
-    
-}
-
-// MARK: - Hide Keyboard
-fileprivate extension AuthenticationViewController {
-    
-    func hideKeyboardFunc() {
-        self.view.endEditing(true)
     }
     
 }

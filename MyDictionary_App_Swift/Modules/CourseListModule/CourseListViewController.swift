@@ -107,6 +107,10 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
         }
     }
     
+    func hideKeyboard() {
+        MDConstants.Keyboard.hideKeyboard(rootView: self.view)
+    }
+    
 }
 
 // MARK: - Add Views

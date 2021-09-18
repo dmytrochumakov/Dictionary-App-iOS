@@ -17,6 +17,7 @@ protocol CourseListInteractorOutputProtocol: AnyObject,
     
     func showError(_ error: Error)
     func reloadData()
+    func hideKeyboard()
     
 }
 
@@ -74,6 +75,8 @@ fileprivate extension CourseListInteractor {
         //
         readAndAddCoursesToDataProvider()
         //
+        searchBarCancelButtonAction_Subscribe()
+        //
     }
     
     func didChangeAppearanceObservable_Subscribe() {
@@ -106,6 +109,14 @@ fileprivate extension CourseListInteractor {
                 }
                 
             }
+    }
+    
+    func searchBarCancelButtonAction_Subscribe() {
+        
+        searchBarDelegate.searchBarCancelButtonAction = { [weak self] in
+            self?.interactorOutput?.hideKeyboard()
+        }
+        
     }
     
 }

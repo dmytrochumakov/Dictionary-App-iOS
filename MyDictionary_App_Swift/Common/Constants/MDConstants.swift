@@ -170,4 +170,12 @@ struct MDConstants {
         
     }
     
+    struct Keyboard {
+        
+        static func hideKeyboard(rootView view: UIView) {
+            view.endEditing(true)
+        }
+        
+    }
+    
 }
