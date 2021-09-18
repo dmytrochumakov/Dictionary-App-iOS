@@ -19,8 +19,8 @@ final class CourseListDataProvider: CourseListDataProviderProtocol {
     
     var filteredCourses: [CourseResponse]
     
-    init(courses: [CourseResponse]) {
-        self.filteredCourses = courses
+    init(filteredCourses: [CourseResponse]) {
+        self.filteredCourses = filteredCourses
     }
     
 }
