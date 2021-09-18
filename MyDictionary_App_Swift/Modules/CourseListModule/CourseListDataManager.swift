@@ -21,6 +21,13 @@ protocol CourseListDataManagerProtocol: CourseListDataManagerInputProtocol {
 
 final class CourseListDataManager: CourseListDataManagerProtocol {
     
+    fileprivate let testData: [CourseResponse] = .init(repeating: .init(userId: 1,
+                                                                        courseId: 1,
+                                                                        languageId: 1,
+                                                                        languageName: "English",
+                                                                        createdAt: "2021-08-15T10:34:33.998Z"),
+                                                       count: 20)
+    
     fileprivate let memoryStorage: MDCourseMemoryStorageProtocol
     internal var dataProvider: CourseListDataProviderProtocol
     internal weak var dataManagerOutput: CourseListDataManagerOutputProtocol?
@@ -49,7 +56,7 @@ extension CourseListDataManager {
             switch readResult {
             
             case .success(let readCourses):
-                self?.dataProvider.courses = readCourses
+                self?.dataProvider.courses = self?.testData ?? []
                 completionHandler(.success(()))
             case .failure(let error):
                 completionHandler(.failure(error))
