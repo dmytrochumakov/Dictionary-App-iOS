@@ -12,14 +12,15 @@ open class MDPasswordTextFieldWithToolBar: HideShowPasswordTextField {
     fileprivate let keyboardToolbar: MDKeyboardToolbar
     fileprivate let rectInset: UIEdgeInsets
     
-    init(frame: CGRect = .zero,
+    init(height: CGFloat,
+         frame: CGRect = .zero,
          rectInset: UIEdgeInsets,
          keyboardToolbar: MDKeyboardToolbar) {
         
         self.keyboardToolbar = keyboardToolbar
         self.rectInset = rectInset
         
-        super.init(frame: frame)
+        super.init(height: height, frame: frame)
         configureUI()
         
     }

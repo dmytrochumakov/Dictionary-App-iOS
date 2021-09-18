@@ -52,7 +52,8 @@ final class RegistrationViewController: BaseDetailAuthViewController {
     fileprivate static let passwordTextFieldLeftOffset: CGFloat = 16
     fileprivate static let passwordTextFieldRightOffset: CGFloat = 16
     fileprivate let passwordTextField: MDCounterPasswordTextFieldWithToolBar = {
-        let textField: MDCounterPasswordTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.passwordInset,
+        let textField: MDCounterPasswordTextFieldWithToolBar = .init(height: passwordTextFieldHeight,
+                                                                     rectInset: MDConstants.Rect.passwordInset,
                                                                      keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.password.localized
         textField.autocapitalizationType = .none
@@ -75,7 +76,8 @@ final class RegistrationViewController: BaseDetailAuthViewController {
     fileprivate static let confirmPasswordTextFieldLeftOffset: CGFloat = 16
     fileprivate static let confirmPasswordTextFieldRightOffset: CGFloat = 16
     fileprivate let confirmPasswordTextField: MDCounterPasswordTextFieldWithToolBar = {
-        let textField: MDCounterPasswordTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.passwordInset,
+        let textField: MDCounterPasswordTextFieldWithToolBar = .init(height: confirmPasswordTextFieldHeight,
+                                                                     rectInset: MDConstants.Rect.passwordInset,
                                                                      keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.confirmPassword.localized
         textField.autocapitalizationType = .none

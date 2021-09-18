@@ -9,8 +9,9 @@ import UIKit
 
 open class HideShowPasswordTextField: UITextField {
     
+    fileprivate let height: CGFloat
     fileprivate var passwordToggleVisibilityView: PasswordToggleVisibilityView!
-       
+    
     override public var isSecureTextEntry: Bool {
         didSet {
             // Hack to prevent text from getting cleared when switching secure entry
@@ -21,7 +22,8 @@ open class HideShowPasswordTextField: UITextField {
         }
     }
     
-    override init(frame: CGRect) {
+    init(height: CGFloat, frame: CGRect = .zero) {
+        self.height = height
         super.init(frame: frame)
         setupViews()
     }
@@ -30,11 +32,6 @@ open class HideShowPasswordTextField: UITextField {
         fatalError()
     }
     
-    override public func awakeFromNib() {
-        super.awakeFromNib()
-        setupViews()
-    }
-        
     @discardableResult
     override public func becomeFirstResponder() -> Bool {
         // Hack to prevent text from getting cleared when switching secure entry
@@ -82,7 +79,7 @@ fileprivate extension HideShowPasswordTextField {
     
     func setupViews() {
         
-        let toggleFrame = CGRect(x: 0, y: 0, width: 66, height: frame.height)
+        let toggleFrame = CGRect(x: 0, y: 0, width: 66, height: height)
         
         passwordToggleVisibilityView = PasswordToggleVisibilityView(frame: toggleFrame)
         passwordToggleVisibilityView.delegate = self

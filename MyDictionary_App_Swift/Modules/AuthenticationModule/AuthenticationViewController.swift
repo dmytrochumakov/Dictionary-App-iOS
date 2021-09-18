@@ -36,7 +36,8 @@ final class AuthenticationViewController: BaseDetailAuthViewController {
     fileprivate static let passwordTextFieldLeftOffset: CGFloat = 16
     fileprivate static let passwordTextFieldRightOffset: CGFloat = 16
     fileprivate let passwordTextField: MDPasswordTextFieldWithToolBar = {
-        let textField: MDPasswordTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.passwordInset,
+        let textField: MDPasswordTextFieldWithToolBar = .init(height: passwordTextFieldHeight,
+                                                              rectInset: MDConstants.Rect.passwordInset,
                                                               keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.password.localized
         textField.autocapitalizationType = .none

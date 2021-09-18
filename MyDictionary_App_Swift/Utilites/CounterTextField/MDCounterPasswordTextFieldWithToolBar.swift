@@ -18,11 +18,13 @@ final class MDCounterPasswordTextFieldWithToolBar: MDPasswordTextFieldWithToolBa
         return label
     }()
     
-    override init(frame: CGRect = .zero,
+    override init(height: CGFloat,
+                  frame: CGRect = .zero,
                   rectInset: UIEdgeInsets,
                   keyboardToolbar: MDKeyboardToolbar) {
         
-        super.init(frame: frame,
+        super.init(height: height,
+                   frame: frame,
                    rectInset: rectInset,
                    keyboardToolbar: keyboardToolbar)
         
@@ -73,18 +75,18 @@ fileprivate extension MDCounterPasswordTextFieldWithToolBar {
     func addCounterLabelConstraints() {
         
         NSLayoutConstraint.addEqualConstraint(item: self.counterLabel,
-                                                         attribute: .top,
-                                                         toItem: self,
-                                                         attribute: .bottom,
-                                                         constant: 4)
+                                              attribute: .top,
+                                              toItem: self,
+                                              attribute: .bottom,
+                                              constant: 4)
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.counterLabel,
-                                                             toItem: self,
-                                                             constant: .zero)
+                                                  toItem: self,
+                                                  constant: .zero)
         
         NSLayoutConstraint.addEqualRightConstraint(item: self.counterLabel,
-                                                              toItem: self,
-                                                              constant: -4)
+                                                   toItem: self,
+                                                   constant: -4)
         
     }
     
