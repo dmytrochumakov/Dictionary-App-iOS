@@ -77,6 +77,8 @@ fileprivate extension CourseListInteractor {
         //
         searchBarCancelButtonAction_Subscribe()
         //
+        searchBarSearchButtonAction_Subscribe()
+        //
     }
     
     func didChangeAppearanceObservable_Subscribe() {
@@ -114,6 +116,14 @@ fileprivate extension CourseListInteractor {
     func searchBarCancelButtonAction_Subscribe() {
         
         searchBarDelegate.searchBarCancelButtonAction = { [weak self] in
+            self?.interactorOutput?.hideKeyboard()
+        }
+        
+    }
+    
+    func searchBarSearchButtonAction_Subscribe() {
+        
+        searchBarDelegate.searchBarSearchButtonAction = { [weak self] in
             self?.interactorOutput?.hideKeyboard()
         }
         
