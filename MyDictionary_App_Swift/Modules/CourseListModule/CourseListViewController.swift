@@ -19,6 +19,9 @@ final class CourseListViewController: MDBaseTitledNavigationBarViewController {
         return collectionView
     }()
     
+    fileprivate static let settingsButtonSize: CGSize = .init(width: 40, height: 40)
+    fileprivate static let settingsButtonLeftOffset: CGFloat = 8
+    fileprivate static let settingsButtonBottomOffset: CGFloat = 8
     fileprivate let settingsButton: UIButton = {
         let button: UIButton = .init()
         button.setImage(MDAppStyling.Image.settings.image, for: .normal)
@@ -26,6 +29,8 @@ final class CourseListViewController: MDBaseTitledNavigationBarViewController {
         return button
     }()
     
+    fileprivate static let addNewCourseButtonSize: CGSize = .init(width: 40, height: 40)
+    fileprivate static let addNewCourseButtonRightOffset: CGFloat = 8
     fileprivate let addNewCourseButton: UIButton = {
         let button: UIButton = .init()
         button.setImage(MDAppStyling.Image.add.image, for: .normal)
@@ -99,8 +104,20 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
 fileprivate extension CourseListViewController {
     
     func addViews() {
+        addSettingsButton()
+        addAddNewCourseButton()
         addCollectionView()
         addSearchBarContainerView()
+    }
+    
+    func addSettingsButton() {
+        settingsButton.addTarget(self, action: #selector(settingsButtonAction), for: .touchUpInside)
+        view.addSubview(settingsButton)
+    }
+    
+    func addAddNewCourseButton() {
+        addNewCourseButton.addTarget(self, action: #selector(addNewCourseButtonAction), for: .touchUpInside)
+        view.addSubview(addNewCourseButton)
     }
     
     func addCollectionView() {
@@ -117,12 +134,52 @@ fileprivate extension CourseListViewController {
 fileprivate extension CourseListViewController {
     
     func addConstraints() {
+        addSettingsButtonConstraints()
+        addAddNewCourseButtonConstraints()
         addSearchBarContainerViewConstraints()
         addCollectionViewConstraints()
     }
     
+    func addSettingsButtonConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.settingsButton,
+                                              attribute: .bottom,
+                                              toItem: self.titleLabel,
+                                              attribute: .top,
+                                              constant: -Self.settingsButtonBottomOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.settingsButton,
+                                                  toItem: self.navigationBarView,
+                                                  constant: Self.settingsButtonLeftOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.settingsButton,
+                                                    constant: Self.settingsButtonSize.height)
+        
+        NSLayoutConstraint.addEqualWidthConstraint(item: self.settingsButton,
+                                                   constant: Self.settingsButtonSize.width)
+        
+    }
+    
+    func addAddNewCourseButtonConstraints() {
+        
+        NSLayoutConstraint.addEqualCenterYConstraint(item: self.addNewCourseButton,
+                                                     toItem: self.settingsButton,
+                                                     constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.addNewCourseButton,
+                                                   toItem: self.navigationBarView,
+                                                   constant: -Self.addNewCourseButtonRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.addNewCourseButton,
+                                                    constant: Self.addNewCourseButtonSize.height)
+        
+        NSLayoutConstraint.addEqualWidthConstraint(item: self.addNewCourseButton,
+                                                   constant: Self.addNewCourseButtonSize.width)
+        
+    }
+    
     func addSearchBarContainerViewConstraints() {
-                
+        
         NSLayoutConstraint.addEqualConstraint(item: self.searchBarContainerView,
                                               attribute: .top,
                                               toItem: navigationBarView,
