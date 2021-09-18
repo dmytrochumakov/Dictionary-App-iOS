@@ -66,7 +66,7 @@ extension MDBaseTitledNavigationBarViewController {
         
         NSLayoutConstraint.addEqualBottomConstraint(item: self.titleLabel,
                                                     toItem: self.navigationBarView,
-                                                    constant: -16)
+                                                    constant: -8)
         
     }
     
