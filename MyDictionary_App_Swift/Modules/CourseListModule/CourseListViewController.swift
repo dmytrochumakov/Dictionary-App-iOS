@@ -31,6 +31,14 @@ final class CourseListViewController: UIViewController {
         return button
     }()
     
+    fileprivate static let searchBarContainerViewHeight: CGFloat = 72
+    fileprivate let searchBarContainerView: UIView = {
+        let view: UIView = .init()
+        view.backgroundColor = .red
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     init(presenter: CourseListPresenterInputProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -89,6 +97,7 @@ fileprivate extension CourseListViewController {
     
     func addViews() {
         addCollectionView()
+        addSearchBarContainerView()
     }
     
     func addCollectionView() {
@@ -105,19 +114,65 @@ fileprivate extension CourseListViewController {
         self.navigationItem.rightBarButtonItem = .init(customView: self.addNewCourseButton)
     }
     
+    func addSearchBarContainerView() {
+        view.addSubview(searchBarContainerView)
+    }
+    
 }
 
 // MARK: - Add Constraints
 fileprivate extension CourseListViewController {
     
     func addConstraints() {
+        addSearchBarContainerViewConstraints()
         addCollectionViewConstraints()
     }
     
-    func addCollectionViewConstraints() {
-        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.collectionView,
-                                                         toItem: self.view)
+    func addSearchBarContainerViewConstraints() {
+        
+        guard let navigationBar = self.navigationController?.navigationBar else { return }
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.searchBarContainerView,
+                                              attribute: .top,
+                                              toItem: navigationBar,
+                                              attribute: .bottom,
+                                              constant: .zero)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.searchBarContainerView,
+                                                  toItem: self.view,
+                                                  constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.searchBarContainerView,
+                                                   toItem: self.view,
+                                                   constant: .zero)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.searchBarContainerView,
+                                                    constant: Self.searchBarContainerViewHeight)
+        
     }
+    
+    func addCollectionViewConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.collectionView,
+                                              attribute: .top,
+                                              toItem: self.searchBarContainerView,
+                                              attribute: .bottom,
+                                              constant: .zero)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.collectionView,
+                                                  toItem: self.view,
+                                                  constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.collectionView,
+                                                   toItem: self.view,
+                                                   constant: .zero)
+        
+        NSLayoutConstraint.addEqualBottomConstraint(item: self.collectionView,
+                                                    toItem: self.view,
+                                                    constant: .zero)
+        
+    }
+    
     
 }
 
