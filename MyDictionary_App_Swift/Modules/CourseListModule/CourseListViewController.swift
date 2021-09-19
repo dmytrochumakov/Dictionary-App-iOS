@@ -10,13 +10,11 @@ final class CourseListViewController: MDBaseTitledNavigationBarViewController {
     
     fileprivate let presenter: CourseListPresenterInputProtocol
     
-    fileprivate let collectionView: UICollectionView = {
-        let flowLayout: UICollectionViewFlowLayout = .init()
-        let collectionView: UICollectionView = .init(frame: .zero,
-                                                     collectionViewLayout: flowLayout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(MDCourseListCell.self)
-        return collectionView
+    fileprivate let tableView: UITableView = {
+        let tableView: UITableView = .init()
+        tableView.register(MDCourseListCell.self)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
     }()
     
     fileprivate static let settingsButtonSize: CGSize = .init(width: 40, height: 40)
@@ -82,7 +80,7 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     
     func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
         configureAppearance(fromAppearanceType: newValue,
-                            collectionView: collectionView)
+                            tableView: tableView)
     }
     
     func showError(_ error: Error) {
@@ -93,7 +91,7 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     
     func reloadData() {
         DispatchQueue.main.async {
-            self.collectionView.reloadData()
+            self.tableView.reloadData()
         }
     }
     
@@ -109,7 +107,7 @@ fileprivate extension CourseListViewController {
     func addViews() {
         addSettingsButton()
         addAddNewCourseButton()
-        addCollectionView()
+        addTableView()
         addSearchBar()
     }
     
@@ -123,8 +121,8 @@ fileprivate extension CourseListViewController {
         view.addSubview(addNewCourseButton)
     }
     
-    func addCollectionView() {
-        view.addSubview(collectionView)
+    func addTableView() {
+        view.addSubview(tableView)
     }
     
     func addSearchBar() {
@@ -140,7 +138,7 @@ fileprivate extension CourseListViewController {
     func addConstraints() {
         addSettingsButtonConstraints()
         addAddNewCourseButtonConstraints()
-        addCollectionViewConstraints()
+        addTableViewConstraints()
         addSearchBarConstraints()
     }
     
@@ -182,23 +180,23 @@ fileprivate extension CourseListViewController {
         
     }
     
-    func addCollectionViewConstraints() {
+    func addTableViewConstraints() {
         
-        NSLayoutConstraint.addEqualConstraint(item: self.collectionView,
+        NSLayoutConstraint.addEqualConstraint(item: self.tableView,
                                               attribute: .top,
                                               toItem: self.searchBar,
                                               attribute: .bottom,
                                               constant: .zero)
         
-        NSLayoutConstraint.addEqualLeftConstraint(item: self.collectionView,
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.tableView,
                                                   toItem: self.view,
                                                   constant: .zero)
         
-        NSLayoutConstraint.addEqualRightConstraint(item: self.collectionView,
+        NSLayoutConstraint.addEqualRightConstraint(item: self.tableView,
                                                    toItem: self.view,
                                                    constant: .zero)
         
-        NSLayoutConstraint.addEqualBottomConstraint(item: self.collectionView,
+        NSLayoutConstraint.addEqualBottomConstraint(item: self.tableView,
                                                     toItem: self.view,
                                                     constant: .zero)
         
@@ -232,18 +230,18 @@ fileprivate extension CourseListViewController {
     
     func configureUI() {
         configureView()
-        configureCollectionView()
+        configureTableView()
     }
     
     func configureView() {
         self.configureViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType)
     }
     
-    func configureCollectionView() {
-        self.collectionView.delegate = self.presenter.collectionViewDelegate
-        self.collectionView.dataSource = self.presenter.collectionViewDataSource
-        self.configureCollectionViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType,
-                                                    collectionView: collectionView)
+    func configureTableView() {
+        self.tableView.delegate = self.presenter.tableViewDelegate
+        self.tableView.dataSource = self.presenter.tableViewDataSource
+        self.configureTableViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType,
+                                               tableView: tableView)
     }
     
 }

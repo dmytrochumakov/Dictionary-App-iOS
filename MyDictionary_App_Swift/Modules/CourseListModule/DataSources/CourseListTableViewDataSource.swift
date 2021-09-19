@@ -12,7 +12,7 @@ protocol CourseListTableViewDataSourceProtocol: UITableViewDataSource {
 }
 
 final class CourseListTableViewDataSource: NSObject,
-                                                CourseListTableViewDataSourceProtocol {
+                                           CourseListTableViewDataSourceProtocol {
     
     fileprivate let dataProvider: CourseListDataProviderProtocol
     
@@ -24,16 +24,16 @@ final class CourseListTableViewDataSource: NSObject,
 
 extension CourseListTableViewDataSource {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return dataProvider.numberOfSections
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataProvider.numberOfRowsInSection(section)
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: MDCourseListCell = collectionView.dequeueReusableCell(for: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: MDCourseListCell = tableView.dequeueReusableCell(for: indexPath)
         cell.fillWithModel(dataProvider.courseListCellModel(atIndexPath: indexPath))
         return cell
     }

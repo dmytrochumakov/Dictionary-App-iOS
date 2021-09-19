@@ -6,8 +6,8 @@
 
 import UIKit
 
-protocol CourseListPresenterInputProtocol: CollectionViewDelegateFlowLayoutPropertyProtocol,
-                                           CollectionViewDataSourcePropertyProtocol,
+protocol CourseListPresenterInputProtocol: TableViewDelegatePropertyProtocol,
+                                           TableViewDataSourcePropertyProtocol,
                                            MDSearchBarDelegatePropertyProtocol {
     func addNewCourseButtonClicked()
     func settingsButtonClicked()
@@ -78,12 +78,12 @@ extension CourseListPresenter {
 // MARK: - CourseListPresenterInputProtocol
 extension CourseListPresenter {
     
-    internal var collectionViewDelegate: UICollectionViewDelegateFlowLayout {
-        return interactor.collectionViewDelegate
+    internal var tableViewDelegate: UITableViewDelegate {
+        return interactor.tableViewDelegate
     }
     
-    internal var collectionViewDataSource: UICollectionViewDataSource {
-        return interactor.collectionViewDataSource
+    internal var tableViewDataSource: UITableViewDataSource {
+        return interactor.tableViewDataSource
     }
     
     // Actions //

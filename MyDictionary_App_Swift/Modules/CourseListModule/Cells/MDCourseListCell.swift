@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MDCourseListCell: UICollectionViewCell,
+final class MDCourseListCell: UITableViewCell,
                               ReuseIdentifierProtocol {
     
     fileprivate static let titleLabelLeftOffset: CGFloat = 16
@@ -41,8 +41,8 @@ final class MDCourseListCell: UICollectionViewCell,
     
     public static let height: CGFloat = 48
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         addViews()
     }
     

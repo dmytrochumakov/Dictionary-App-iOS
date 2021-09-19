@@ -7,8 +7,8 @@
 import UIKit
 
 protocol CourseListInteractorInputProtocol {
-    var collectionViewDelegate: CourseListCollectionViewDelegateProtocol { get }
-    var collectionViewDataSource: CourseListCollectionViewDataSourceProtocol { get }
+    var tableViewDelegate: CourseListTableViewDelegateProtocol { get }
+    var tableViewDataSource: CourseListTableViewDataSourceProtocol { get }
     var searchBarDelegate: MDCourseListSearchBarDelegateProtocol { get }
 }
 
@@ -31,22 +31,22 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
     fileprivate let dataManager: CourseListDataManagerInputProtocol
     fileprivate let fillMemoryService: MDFillMemoryServiceProtocol
     
-    internal var collectionViewDelegate: CourseListCollectionViewDelegateProtocol
-    internal var collectionViewDataSource: CourseListCollectionViewDataSourceProtocol
+    internal var tableViewDelegate: CourseListTableViewDelegateProtocol
+    internal var tableViewDataSource: CourseListTableViewDataSourceProtocol
     internal var searchBarDelegate: MDCourseListSearchBarDelegateProtocol
     
     internal weak var interactorOutput: CourseListInteractorOutputProtocol?
     
     init(dataManager: CourseListDataManagerInputProtocol,
          fillMemoryService: MDFillMemoryServiceProtocol,
-         collectionViewDelegate: CourseListCollectionViewDelegateProtocol,
-         collectionViewDataSource: CourseListCollectionViewDataSourceProtocol,
+         collectionViewDelegate: CourseListTableViewDelegateProtocol,
+         collectionViewDataSource: CourseListTableViewDataSourceProtocol,
          searchBarDelegate: MDCourseListSearchBarDelegateProtocol) {
         
         self.dataManager = dataManager
         self.fillMemoryService = fillMemoryService
-        self.collectionViewDelegate = collectionViewDelegate
-        self.collectionViewDataSource = collectionViewDataSource
+        self.tableViewDelegate = collectionViewDelegate
+        self.tableViewDataSource = collectionViewDataSource
         self.searchBarDelegate = searchBarDelegate
         
         super.init()

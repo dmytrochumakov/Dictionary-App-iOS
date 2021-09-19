@@ -11,7 +11,7 @@ target 'MyDictionary_App_Swift' do
 	pod 'Firebase/Crashlytics'
 	pod 'ReachabilitySwift'
 	pod 'MBProgressHUD'
-	pod 'SwipeCellKit'
+	pod 'SWTableViewCell'
 
 
   target 'MyDictionary_App_SwiftTests' do

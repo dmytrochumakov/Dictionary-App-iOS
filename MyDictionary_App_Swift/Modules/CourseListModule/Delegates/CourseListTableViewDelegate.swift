@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol CourseListTableViewDelegateProtocol: CollectionViewDelegateFlowLayout {
+protocol CourseListTableViewDelegateProtocol: UITableViewDelegate {
     
 }
 
 final class CourseListTableViewDelegate: NSObject, CourseListTableViewDelegateProtocol {
- 
+    
     fileprivate let dataProvider: CourseListDataProviderProtocol
     
     init(dataProvider: CourseListDataProviderProtocol) {
@@ -23,8 +23,8 @@ final class CourseListTableViewDelegate: NSObject, CourseListTableViewDelegatePr
 
 extension CourseListTableViewDelegate {            
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: collectionView.bounds.width, height: MDCourseListCell.height)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return MDCourseListCell.height
     }
     
 }

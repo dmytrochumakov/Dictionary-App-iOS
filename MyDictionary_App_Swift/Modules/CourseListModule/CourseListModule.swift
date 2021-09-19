@@ -30,8 +30,8 @@ extension CourseListModule {
         var dataManager: CourseListDataManagerProtocol = CourseListDataManager.init(memoryStorage: memoryStorage,
                                                                                     dataProvider: dataProvider)
         
-        let collectionViewDelegate: CourseListCollectionViewDelegateProtocol = CourseListCollectionViewDelegate.init(dataProvider: dataProvider)
-        let collectionViewDataSource: CourseListCollectionViewDataSourceProtocol = CourseListCollectionViewDataSource.init(dataProvider: dataProvider)
+        let collectionViewDelegate: CourseListTableViewDelegateProtocol = CourseListTableViewDelegate.init(dataProvider: dataProvider)
+        let collectionViewDataSource: CourseListTableViewDataSourceProtocol = CourseListTableViewDataSource.init(dataProvider: dataProvider)
         let searchBarDelegate: MDCourseListSearchBarDelegateProtocol = MDCourseListSearchBarDelegate.init()
         
         let interactor: CourseListInteractorProtocol = CourseListInteractor.init(dataManager: dataManager,
