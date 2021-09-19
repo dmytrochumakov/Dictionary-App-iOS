@@ -85,6 +85,7 @@ PODS:
   - GoogleUtilities/UserDefaults (7.5.2):
     - GoogleUtilities/Logger
   - MBProgressHUD (1.2.0)
+  - MGSwipeTableCell (1.6.11)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -92,14 +93,13 @@ PODS:
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
   - ReachabilitySwift (5.0.0)
-  - SWTableViewCell (0.3.7)
 
 DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Crashlytics
   - MBProgressHUD
+  - MGSwipeTableCell
   - ReachabilitySwift
-  - SWTableViewCell
 
 SPEC REPOS:
   trunk:
@@ -113,10 +113,10 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUtilities
     - MBProgressHUD
+    - MGSwipeTableCell
     - nanopb
     - PromisesObjC
     - ReachabilitySwift
-    - SWTableViewCell
 
 SPEC CHECKSUMS:
   Firebase: bc9325d5ee2041524bac78a5213d0e530c651309
@@ -129,11 +129,11 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleUtilities: 8de2a97a17e15b6b98e38e8770e2d129a57c0040
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  MGSwipeTableCell: b804e4e450dee439c42250be90bd50458bf67fce
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
-  SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
 
-PODFILE CHECKSUM: fc25ffc013e5055d4426418ea1bb7d544c82552f
+PODFILE CHECKSUM: b67772b1ce0547d227829d2c766fd22ee1164c39
 
 COCOAPODS: 1.11.2

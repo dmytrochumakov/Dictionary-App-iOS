@@ -5,9 +5,9 @@
 //  Created by Dmytro Chumakov on 16.09.2021.
 //
 
-import UIKit
+import MGSwipeTableCell
 
-final class MDCourseListCell: UITableViewCell,
+final class MDCourseListCell: MGSwipeTableCell,
                               ReuseIdentifierProtocol {
     
     fileprivate static let titleLabelLeftOffset: CGFloat = 16
