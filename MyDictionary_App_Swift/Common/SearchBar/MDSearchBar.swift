@@ -15,15 +15,16 @@ protocol MDSearchBarDelegate: AnyObject {
 }
 
 final class MDSearchBar: UIView {
-        
+    
     fileprivate let searchTextFieldContrainerView: UIView = {
         let view: UIView = .init()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = MDAppStyling.Color.md_White_FFFFFF_Light_Appearence.color()
         return view
     }()
     
     fileprivate static let searchTextFieldHeight: CGFloat = 40
-    fileprivate static let searchTextFieldLeftOffset: CGFloat = 16
+    fileprivate static let searchTextFieldLeftOffset: CGFloat = 8
     fileprivate static let searchTextFieldRightOffset: CGFloat = 16
     fileprivate let searchTextField: MDSearchTextField = {
         let textField: MDSearchTextField = .init()
@@ -39,9 +40,24 @@ final class MDSearchBar: UIView {
         return textField
     }()
     
+    fileprivate static let cancelButtondSize: CGSize = .init(width: 48, height: 40)
+    fileprivate static let cancelButtonRightOffset: CGFloat = 8
+    fileprivate let cancelButton: UIButton = {
+        let button: UIButton = .init()
+        button.setTitle(KeysForTranslate.cancel.localized, for: .normal)
+        button.setTitleColor(cancelButtonTextColor(isActive: false), for: .normal)
+        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    /// Default is false
+    fileprivate var cancelButtonIsActive: Bool
+    
     public weak var delegate: MDSearchBarDelegate?
     
     override init(frame: CGRect = .zero) {
+        self.cancelButtonIsActive = false
         super.init(frame: frame)
         addViews()
     }
@@ -66,12 +82,17 @@ final class MDSearchBar: UIView {
 // MARK: - UITextFieldDelegate
 extension MDSearchBar: UITextFieldDelegate {
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activateViews()
+    }
+    
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         delegate?.searchBarShouldClear(self)
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        deactivateViews()
         delegate?.searchBarSearchButtonClicked(self)
         return true
     }
@@ -84,6 +105,7 @@ fileprivate extension MDSearchBar {
     func addViews() {
         addSearchTextFieldContrainerView()
         addSearchTextField()
+        addCancelButton()
     }
     
     func addSearchTextFieldContrainerView() {
@@ -96,6 +118,11 @@ fileprivate extension MDSearchBar {
         searchTextFieldContrainerView.addSubview(searchTextField)
     }
     
+    func addCancelButton() {
+        cancelButton.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
+        searchTextFieldContrainerView.addSubview(cancelButton)
+    }
+    
 }
 
 // MARK: - Add Constraints
@@ -104,6 +131,7 @@ fileprivate extension MDSearchBar {
     func addConstraints() {
         addSearchTextFieldContrainerViewConstraints()
         addSearchTextFieldConstraints()
+        addCancelButtonConstraints()
     }
     
     func addSearchTextFieldContrainerViewConstraints() {
@@ -123,12 +151,32 @@ fileprivate extension MDSearchBar {
                                                   toItem: self.searchTextFieldContrainerView,
                                                   constant: Self.searchTextFieldLeftOffset)
         
-        NSLayoutConstraint.addEqualRightConstraint(item: self.searchTextField,
-                                                   toItem: self.searchTextFieldContrainerView,
-                                                   constant: -Self.searchTextFieldRightOffset)
+        NSLayoutConstraint.addEqualConstraint(item: self.searchTextField,
+                                              attribute: .right,
+                                              toItem: self.cancelButton,
+                                              attribute: .left,
+                                              constant: -Self.searchTextFieldRightOffset)
         
         NSLayoutConstraint.addEqualHeightConstraint(item: self.searchTextField,
                                                     constant: Self.searchTextFieldHeight)
+        
+    }
+    
+    func addCancelButtonConstraints() {
+        
+        NSLayoutConstraint.addEqualCenterYConstraint(item: self.cancelButton,
+                                                     toItem: self.searchTextFieldContrainerView,
+                                                     constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.cancelButton,
+                                                   toItem: self.searchTextFieldContrainerView,
+                                                   constant: -Self.cancelButtonRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.cancelButton,
+                                                    constant: Self.cancelButtondSize.height)
+        
+        NSLayoutConstraint.addEqualWidthConstraint(item: self.cancelButton,
+                                                   constant: Self.cancelButtondSize.width)
         
     }
     
@@ -168,6 +216,65 @@ fileprivate extension MDSearchBar {
     
     @objc func textDidChangeAction(_ sender: UITextField) {
         delegate?.searchBar(self, textDidChange: sender.text)
+    }
+    
+    @objc func cancelButtonAction() {
+        if (cancelButtonIsActive) {
+            deactivateViews()
+            delegate?.searchBarCancelButtonClicked(self)
+        } else {
+            activateViews()
+        }
+    }
+    
+}
+
+// MARK: - Activate Views
+fileprivate extension MDSearchBar {
+    
+    func activateViews() {
+        activateCancelButton()
+        activateInputSearchTextField()
+    }
+    
+    func activateCancelButton() {
+        cancelButton.setTitleColor(Self.cancelButtonTextColor(isActive: true), for: .normal)
+        cancelButtonIsActive = true
+    }
+    
+    func activateInputSearchTextField() {
+        searchTextField.becomeFirstResponder()
+    }
+    
+}
+
+// MARK: - Deactivate Views
+fileprivate extension MDSearchBar {
+    
+    func deactivateViews() {
+        deactivateCancelButton()
+        deactivateInputSearchTextField()
+    }
+    
+    func deactivateCancelButton() {
+        cancelButton.setTitleColor(Self.cancelButtonTextColor(isActive: false), for: .normal)
+        cancelButtonIsActive = false
+    }
+    
+    func deactivateInputSearchTextField() {
+        searchTextField.resignFirstResponder()
+    }
+    
+}
+
+fileprivate extension MDSearchBar {
+    
+    static func cancelButtonTextColor(isActive: Bool) -> UIColor {
+        if (isActive) {
+            return MDAppStyling.Color.md_Blue_4400D4_Light_Appearence.color()
+        } else {
+            return MDAppStyling.Color.light_Gray_C6C6C6.color()
+        }
     }
     
 }

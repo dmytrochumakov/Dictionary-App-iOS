@@ -41,7 +41,7 @@ final class CourseListViewController: MDBaseTitledNavigationBarViewController {
     fileprivate static let searchBarHeight: CGFloat = 56
     fileprivate static let searchBarTopOffset: CGFloat = 16
     fileprivate let searchBar: MDSearchBar = {
-        let searchBar: MDSearchBar = .init()
+        let searchBar: MDSearchBar = .init()        
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         return searchBar
     }()
