@@ -92,12 +92,14 @@ PODS:
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
   - ReachabilitySwift (5.0.0)
+  - SwipeCellKit (2.7.1)
 
 DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Crashlytics
   - MBProgressHUD
   - ReachabilitySwift
+  - SwipeCellKit
 
 SPEC REPOS:
   trunk:
@@ -114,6 +116,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - ReachabilitySwift
+    - SwipeCellKit
 
 SPEC CHECKSUMS:
   Firebase: bc9325d5ee2041524bac78a5213d0e530c651309
@@ -129,7 +132,8 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
 
-PODFILE CHECKSUM: cdbf7a6a23d7b6e9a88c4e1697b2111b6ab75877
+PODFILE CHECKSUM: 2000f0afda10cf16c3ed6d3bec92356c6ef3d4bd
 
-COCOAPODS: 1.11.0
+COCOAPODS: 1.11.2
