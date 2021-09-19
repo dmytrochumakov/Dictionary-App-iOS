@@ -132,6 +132,7 @@ struct MDAppStyling {
         case background_navigation_bar_1
         case right_arrow
         case search
+        case delete
         
         var image: UIImage {
             
@@ -149,7 +150,8 @@ struct MDAppStyling {
                  .settings,
                  .background_navigation_bar_1,
                  .right_arrow,
-                 .search:
+                 .search,
+                 .delete:
                 
                 return configuredImage(fromName: self.rawValue)
                 
