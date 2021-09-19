@@ -35,10 +35,14 @@ extension CourseListTableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: MDCourseListCell = tableView.dequeueReusableCell(for: indexPath)
         cell.fillWithModel(dataProvider.courseListCellModel(atIndexPath: indexPath))
-        cell.rightButtons = [MGSwipeButton.init(title: MDConstants.StaticText.emptyString,
+        let deleteButton: MGSwipeButton = .init(title: MDConstants.StaticText.emptyString,
                                                 icon: MDAppStyling.Image.delete.image,
-                                                backgroundColor: MDAppStyling.Color.md_FFFFFF.color(),
-                                                callback: nil)]
+                                                backgroundColor: MDAppStyling.Color.md_FFFFFF.color()) { [weak self] (sender) -> Bool in
+            debugPrint(#function, Self.self, "delete: ", sender)
+            return true
+            
+        }
+        cell.rightButtons = [deleteButton]
         return cell
     }
     
