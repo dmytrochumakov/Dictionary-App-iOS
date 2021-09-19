@@ -1,5 +1,5 @@
 //
-//  CourseListCollectionViewDataSource.swift
+//  CourseListTableViewDataSource.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 11.08.2021.
@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol CourseListCollectionViewDataSourceProtocol: CollectionViewDataSource {
+protocol CourseListTableViewDataSourceProtocol: UITableViewDataSource {
     
 }
 
-final class CourseListCollectionViewDataSource: NSObject,
-                                                CourseListCollectionViewDataSourceProtocol {
+final class CourseListTableViewDataSource: NSObject,
+                                                CourseListTableViewDataSourceProtocol {
     
     fileprivate let dataProvider: CourseListDataProviderProtocol
     
@@ -22,7 +22,7 @@ final class CourseListCollectionViewDataSource: NSObject,
     
 }
 
-extension CourseListCollectionViewDataSource {
+extension CourseListTableViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return dataProvider.numberOfSections
