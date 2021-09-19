@@ -23,10 +23,10 @@ final class AuthenticationViewController: MDBaseTitledBackViewControllerWithBack
         textField.textAlignment = .left
         textField.clearButtonMode = .whileEditing
         textField.font = MDAppStyling.Font.MyriadProItalic.font()
-        textField.textColor = MDAppStyling.Color.md_Black_3C3C3C_Light_Appearence.color()
+        textField.textColor = MDAppStyling.Color.md_3C3C3C.color()
         textField.returnKeyType = .next
         textField.tag = AuthenticationTextFieldTag.nickname.rawValue
-        textField.backgroundColor = MDAppStyling.Color.md_White_FFFFFF_Light_Appearence.color()
+        textField.backgroundColor = MDAppStyling.Color.md_FFFFFF.color()
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -44,11 +44,11 @@ final class AuthenticationViewController: MDBaseTitledBackViewControllerWithBack
         textField.autocorrectionType = .no
         textField.textAlignment = .left
         textField.font = MDAppStyling.Font.MyriadProItalic.font()
-        textField.textColor = MDAppStyling.Color.md_Black_3C3C3C_Light_Appearence.color()
+        textField.textColor = MDAppStyling.Color.md_3C3C3C.color()
         textField.returnKeyType = .go
         textField.isSecureTextEntry = true
         textField.tag = AuthenticationTextFieldTag.password.rawValue
-        textField.backgroundColor = MDAppStyling.Color.md_White_FFFFFF_Light_Appearence.color()
+        textField.backgroundColor = MDAppStyling.Color.md_FFFFFF.color()
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -59,9 +59,9 @@ final class AuthenticationViewController: MDBaseTitledBackViewControllerWithBack
     fileprivate static let loginButtonRightOffset: CGFloat = 16
     fileprivate let loginButton: UIButton = {
         let button: UIButton = .init()
-        button.backgroundColor = MDAppStyling.Color.md_Blue_4400D4_Light_Appearence.color()
+        button.backgroundColor = MDAppStyling.Color.md_4400D4.color()
         button.setTitle(KeysForTranslate.login.localized, for: .normal)
-        button.setTitleColor(MDAppStyling.Color.md_White_FFFFFF_Light_Appearence.color(), for: .normal)
+        button.setTitleColor(MDAppStyling.Color.md_FFFFFF.color(), for: .normal)
         button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -72,7 +72,7 @@ final class AuthenticationViewController: MDBaseTitledBackViewControllerWithBack
         hud.mode = .annularDeterminate
         hud.label.text = KeysForTranslate.pleaseWaitForDataSync.localized
         hud.label.font = MDAppStyling.Font.MyriadProRegular.font()
-        hud.label.textColor = MDAppStyling.Color.md_Black_3C3C3C_Light_Appearence.color()
+        hud.label.textColor = MDAppStyling.Color.md_3C3C3C.color()
         return hud
     }()
     
@@ -262,19 +262,19 @@ fileprivate extension AuthenticationViewController {
     }
     
     func dropShadowNicknameTextField() {
-        nicknameTextField.dropShadow(color: MDAppStyling.Color.md_Shadow_5200FF_Light_Appearence.color(0.5),
+        nicknameTextField.dropShadow(color: MDAppStyling.Color.md_5200FF.color(0.5),
                                      offSet: .init(width: 2, height: 4),
                                      radius: 15)
     }
     
     func dropShadowPasswordTextField() {
-        passwordTextField.dropShadow(color: MDAppStyling.Color.md_Shadow_5200FF_Light_Appearence.color(0.5),
+        passwordTextField.dropShadow(color: MDAppStyling.Color.md_5200FF.color(0.5),
                                      offSet: .init(width: 2, height: 4),
                                      radius: 15)
     }
     
     func dropShadowLoginButtonView() {
-        loginButton.dropShadow(color: MDAppStyling.Color.md_Blue_4400D4_Light_Appearence.color(0.5),
+        loginButton.dropShadow(color: MDAppStyling.Color.md_4400D4.color(0.5),
                                offSet: .init(width: 0,
                                              height: 4),
                                radius: 20)

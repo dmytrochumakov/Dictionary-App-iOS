@@ -11,68 +11,62 @@ struct MDAppStyling {
     
     enum Color {
         
-        // Light
-        case md_White_FFFFFF_Light_Appearence
-        case md_Black_101010_Light_Appearence
-        case md_Black_3C3C3C_Light_Appearence
-        case md_Light_Gray_F8F8F8_Light_Appearence
-        case md_Blue_007AFF_Light_Appearence
-        case md_Blue_4400D4_Light_Appearence
-        case md_Shadow_5200FF_Light_Appearence
+        case md_FFFFFF
+        case md_101010
+        case md_3C3C3C
+        case md_F8F8F8
+        case md_007AFF
+        case md_4400D4
+        case md_5200FF
         
-        // Dark
-        case md_White_F2F2F7_Dark_Appearence
-        case md_Black_1C1C1E_Dark_Appearence
-        case md_Light_Gray_48484A_Dark_Appearence
-        case md_Blue_0A84FF_Dark_Appearence
+        case md_F2F2F7
+        case md_1C1C1E
+        case md_48484A
+        case md_0A84FF
         
-        // Other
-        case light_Gray_C6C6C6
+        case md_C6C6C6
         
         
         /// - Parameter alpha: 1.0 by default
         func color(_ alpha: CGFloat = 1.0) -> UIColor {
             switch self {
             
-            // Light
-            case .md_White_FFFFFF_Light_Appearence:
+            case .md_FFFFFF:
                 return UIColor.init(rgb: 0xFFFFFF, alpha: alpha)
                 
-            case .md_Black_101010_Light_Appearence:
+            case .md_101010:
                 return UIColor.init(rgb: 0x101010, alpha: alpha)
                 
-            case .md_Black_3C3C3C_Light_Appearence:
+            case .md_3C3C3C:
                 return UIColor.init(rgb: 0x3C3C3C, alpha: alpha)
                 
-            case .md_Light_Gray_F8F8F8_Light_Appearence:
+            case .md_F8F8F8:
                 return UIColor.init(rgb: 0xF8F8F8, alpha: alpha)
                 
-            case .md_Blue_007AFF_Light_Appearence:
+            case .md_007AFF:
                 return UIColor.init(rgb: 0x007AFF, alpha: alpha)
                 
-            case .md_Blue_4400D4_Light_Appearence:
+            case .md_4400D4:
                 return UIColor.init(rgb: 0x4400D4, alpha: alpha)
                 
-            case .md_Shadow_5200FF_Light_Appearence:
+            case .md_5200FF:
                 return UIColor.init(rgb: 0x5200FF, alpha: alpha)
                 
                 
-            // Dark
-            case .md_White_F2F2F7_Dark_Appearence:
+            case .md_F2F2F7:
                 return UIColor.init(rgb: 0xF2F2F7, alpha: alpha)
                 
-            case .md_Black_1C1C1E_Dark_Appearence:
+            case .md_1C1C1E:
                 return UIColor.init(rgb: 0x1C1C1E, alpha: alpha)
                 
-            case .md_Light_Gray_48484A_Dark_Appearence:
+            case .md_48484A:
                 return UIColor.init(rgb: 0x48484A, alpha: alpha)
                 
-            case .md_Blue_0A84FF_Dark_Appearence:
+            case .md_0A84FF:
                 return UIColor.init(rgb: 0x0A84FF, alpha: alpha)
                 
                 
-            // Other
-            case .light_Gray_C6C6C6:
+            case .md_C6C6C6:
                 return UIColor.init(rgb: 0xC6C6C6, alpha: alpha)
                 
             }

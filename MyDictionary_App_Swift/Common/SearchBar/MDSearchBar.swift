@@ -19,7 +19,7 @@ final class MDSearchBar: UIView {
     fileprivate let searchTextFieldContrainerView: UIView = {
         let view: UIView = .init()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = MDAppStyling.Color.md_White_FFFFFF_Light_Appearence.color()
+        view.backgroundColor = MDAppStyling.Color.md_FFFFFF.color()
         return view
     }()
     
@@ -33,9 +33,9 @@ final class MDSearchBar: UIView {
         textField.textAlignment = .left
         textField.clearButtonMode = .whileEditing
         textField.font = MDAppStyling.Font.MyriadProRegular.font()
-        textField.textColor = MDAppStyling.Color.md_Black_3C3C3C_Light_Appearence.color()
+        textField.textColor = MDAppStyling.Color.md_3C3C3C.color()
         textField.returnKeyType = .search
-        textField.backgroundColor = MDAppStyling.Color.md_White_FFFFFF_Light_Appearence.color()
+        textField.backgroundColor = MDAppStyling.Color.md_FFFFFF.color()
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -204,7 +204,7 @@ fileprivate extension MDSearchBar {
     }
     
     func dropShadowSearchTextField() {
-        searchTextField.dropShadow(color: MDAppStyling.Color.md_Blue_4400D4_Light_Appearence.color(0.5),
+        searchTextField.dropShadow(color: MDAppStyling.Color.md_4400D4.color(0.5),
                                    offSet: .init(width: 2,
                                                  height: 4),
                                    radius: 10)
@@ -272,9 +272,9 @@ fileprivate extension MDSearchBar {
     
     static func cancelButtonTextColor(isActive: Bool) -> UIColor {
         if (isActive) {
-            return MDAppStyling.Color.md_Blue_4400D4_Light_Appearence.color()
+            return MDAppStyling.Color.md_4400D4.color()
         } else {
-            return MDAppStyling.Color.light_Gray_C6C6C6.color()
+            return MDAppStyling.Color.md_C6C6C6.color()
         }
     }
     

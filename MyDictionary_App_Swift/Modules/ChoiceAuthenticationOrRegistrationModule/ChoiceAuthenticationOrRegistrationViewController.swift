@@ -23,9 +23,9 @@ final class ChoiceAuthenticationOrRegistrationViewController: MDBaseNavigationBa
     fileprivate static let loginButtonTopOffset: CGFloat = 24
     fileprivate let loginButton: UIButton = {
         let button: UIButton = .init()
-        button.backgroundColor = MDAppStyling.Color.md_Blue_4400D4_Light_Appearence.color()
+        button.backgroundColor = MDAppStyling.Color.md_4400D4.color()
         button.setTitle(KeysForTranslate.login.localized, for: .normal)
-        button.setTitleColor(MDAppStyling.Color.md_White_FFFFFF_Light_Appearence.color(), for: .normal)
+        button.setTitleColor(MDAppStyling.Color.md_FFFFFF.color(), for: .normal)
         button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -37,9 +37,9 @@ final class ChoiceAuthenticationOrRegistrationViewController: MDBaseNavigationBa
     fileprivate static let registrationButtonTopOffset: CGFloat = 16
     fileprivate let registrationButton: UIButton = {
         let button: UIButton = .init()
-        button.backgroundColor = MDAppStyling.Color.md_Blue_4400D4_Light_Appearence.color()
+        button.backgroundColor = MDAppStyling.Color.md_4400D4.color()
         button.setTitle(KeysForTranslate.registration.localized, for: .normal)
-        button.setTitleColor(MDAppStyling.Color.md_White_FFFFFF_Light_Appearence.color(), for: .normal)
+        button.setTitleColor(MDAppStyling.Color.md_FFFFFF.color(), for: .normal)
         button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -210,14 +210,14 @@ fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
     }
     
     func dropShadowLoginButtonView() {
-        loginButton.dropShadow(color: MDAppStyling.Color.md_Blue_4400D4_Light_Appearence.color(0.5),
+        loginButton.dropShadow(color: MDAppStyling.Color.md_4400D4.color(0.5),
                                offSet: .init(width: 0,
                                              height: 4),
                                radius: 20)
     }
     
     func dropShadowRegistrationButton() {
-        registrationButton.dropShadow(color: MDAppStyling.Color.md_Blue_4400D4_Light_Appearence.color(0.5),
+        registrationButton.dropShadow(color: MDAppStyling.Color.md_4400D4.color(0.5),
                                       offSet: .init(width: 0,
                                                     height: 4),
                                       radius: 20)

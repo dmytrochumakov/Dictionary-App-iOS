@@ -20,7 +20,7 @@ open class MDBaseTitledBackViewControllerWithBackgroundImage: MDBaseNavigationBa
     internal let titleLabel: UILabel = {
         let label: UILabel = .init()
         label.font = MDAppStyling.Font.MyriadProSemiBold.font(ofSize: 34)
-        label.textColor = MDAppStyling.Color.md_White_FFFFFF_Light_Appearence.color()
+        label.textColor = MDAppStyling.Color.md_FFFFFF.color()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

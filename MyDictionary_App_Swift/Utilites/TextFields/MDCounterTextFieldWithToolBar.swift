@@ -12,7 +12,7 @@ final class MDCounterTextFieldWithToolBar: MDTextFieldWithToolBar {
     fileprivate let counterLabel: UILabel = {
         let label: UILabel = .init()
         label.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 11)
-        label.textColor = MDAppStyling.Color.md_Black_3C3C3C_Light_Appearence.color()
+        label.textColor = MDAppStyling.Color.md_3C3C3C.color()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .right
         return label

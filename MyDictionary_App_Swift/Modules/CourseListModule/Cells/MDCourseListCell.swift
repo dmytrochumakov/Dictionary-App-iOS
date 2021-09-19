@@ -16,7 +16,7 @@ final class MDCourseListCell: UICollectionViewCell,
         let label: UILabel = .init()
         label.font = MDAppStyling.Font.MyriadProRegular.font()
         label.textAlignment = .left
-        label.textColor = MDAppStyling.Color.md_Black_3C3C3C_Light_Appearence.color()
+        label.textColor = MDAppStyling.Color.md_3C3C3C.color()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -34,7 +34,7 @@ final class MDCourseListCell: UICollectionViewCell,
     fileprivate static let bottomLineViewHeight: CGFloat = 0.5
     fileprivate let bottomLineView: UIView = {
         let view: UIView = .init()
-        view.backgroundColor = MDAppStyling.Color.light_Gray_C6C6C6.color()
+        view.backgroundColor = MDAppStyling.Color.md_C6C6C6.color()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
