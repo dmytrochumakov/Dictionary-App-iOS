@@ -14,6 +14,7 @@ final class CourseListViewController: MDBaseTitledNavigationBarViewController {
         let tableView: UITableView = .init()
         tableView.register(MDCourseListCell.self)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
         return tableView
     }()
     
