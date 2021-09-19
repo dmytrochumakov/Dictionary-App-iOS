@@ -26,7 +26,7 @@ final class ChoiceAuthenticationOrRegistrationViewController: MDBaseNavigationBa
         button.backgroundColor = MDAppStyling.Color.md_Blue_4400D4_Light_Appearence.color()
         button.setTitle(KeysForTranslate.login.localized, for: .normal)
         button.setTitleColor(MDAppStyling.Color.md_White_FFFFFF_Light_Appearence.color(), for: .normal)
-        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -40,7 +40,7 @@ final class ChoiceAuthenticationOrRegistrationViewController: MDBaseNavigationBa
         button.backgroundColor = MDAppStyling.Color.md_Blue_4400D4_Light_Appearence.color()
         button.setTitle(KeysForTranslate.registration.localized, for: .normal)
         button.setTitleColor(MDAppStyling.Color.md_White_FFFFFF_Light_Appearence.color(), for: .normal)
-        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

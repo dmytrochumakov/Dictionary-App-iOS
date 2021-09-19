@@ -32,7 +32,7 @@ final class MDSearchBar: UIView {
         textField.autocorrectionType = .no
         textField.textAlignment = .left
         textField.clearButtonMode = .whileEditing
-        textField.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        textField.font = MDAppStyling.Font.MyriadProRegular.font()
         textField.textColor = MDAppStyling.Color.md_Black_3C3C3C_Light_Appearence.color()
         textField.returnKeyType = .search
         textField.backgroundColor = MDAppStyling.Color.md_White_FFFFFF_Light_Appearence.color()
@@ -42,7 +42,7 @@ final class MDSearchBar: UIView {
     
     fileprivate static let cancelButtonHeight: CGFloat = 40
     fileprivate static let cancelButtonRightOffset: CGFloat = 8
-    fileprivate static let cancelButtonFont: UIFont = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+    fileprivate static let cancelButtonFont: UIFont = MDAppStyling.Font.MyriadProRegular.font()
     fileprivate let cancelButton: UIButton = {
         let button: UIButton = .init()
         button.setTitle(KeysForTranslate.cancel.localized, for: .normal)

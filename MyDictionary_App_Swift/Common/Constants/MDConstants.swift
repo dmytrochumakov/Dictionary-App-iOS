@@ -187,4 +187,8 @@ struct MDConstants {
         
     }
     
+    struct Font {
+        static let defaultSize: CGFloat = 17
+    }
+    
 }

@@ -22,7 +22,7 @@ final class AuthenticationViewController: MDBaseTitledBackViewControllerWithBack
         textField.autocorrectionType = .no
         textField.textAlignment = .left
         textField.clearButtonMode = .whileEditing
-        textField.font = MDAppStyling.Font.MyriadProItalic.font(ofSize: 17)
+        textField.font = MDAppStyling.Font.MyriadProItalic.font()
         textField.textColor = MDAppStyling.Color.md_Black_3C3C3C_Light_Appearence.color()
         textField.returnKeyType = .next
         textField.tag = AuthenticationTextFieldTag.nickname.rawValue
@@ -43,7 +43,7 @@ final class AuthenticationViewController: MDBaseTitledBackViewControllerWithBack
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.textAlignment = .left
-        textField.font = MDAppStyling.Font.MyriadProItalic.font(ofSize: 17)
+        textField.font = MDAppStyling.Font.MyriadProItalic.font()
         textField.textColor = MDAppStyling.Color.md_Black_3C3C3C_Light_Appearence.color()
         textField.returnKeyType = .go
         textField.isSecureTextEntry = true
@@ -62,7 +62,7 @@ final class AuthenticationViewController: MDBaseTitledBackViewControllerWithBack
         button.backgroundColor = MDAppStyling.Color.md_Blue_4400D4_Light_Appearence.color()
         button.setTitle(KeysForTranslate.login.localized, for: .normal)
         button.setTitleColor(MDAppStyling.Color.md_White_FFFFFF_Light_Appearence.color(), for: .normal)
-        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -71,7 +71,7 @@ final class AuthenticationViewController: MDBaseTitledBackViewControllerWithBack
         let hud: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud.mode = .annularDeterminate
         hud.label.text = KeysForTranslate.pleaseWaitForDataSync.localized
-        hud.label.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        hud.label.font = MDAppStyling.Font.MyriadProRegular.font()
         hud.label.textColor = MDAppStyling.Color.md_Black_3C3C3C_Light_Appearence.color()
         return hud
     }()

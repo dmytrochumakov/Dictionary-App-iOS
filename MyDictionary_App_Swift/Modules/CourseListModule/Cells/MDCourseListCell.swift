@@ -14,7 +14,7 @@ final class MDCourseListCell: UICollectionViewCell,
     fileprivate static let titleLabelRightOffset: CGFloat = 16
     fileprivate let titleLabel: UILabel = {
         let label: UILabel = .init()
-        label.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        label.font = MDAppStyling.Font.MyriadProRegular.font()
         label.textAlignment = .left
         label.textColor = MDAppStyling.Color.md_Black_3C3C3C_Light_Appearence.color()
         label.translatesAutoresizingMaskIntoConstraints = false
