@@ -38,20 +38,11 @@ final class CourseListViewController: MDBaseTitledNavigationBarViewController {
         return button
     }()
     
-    fileprivate static let searchBarContainerViewHeight: CGFloat = 72
-    fileprivate let searchBarContainerView: UIView = {
-        let view: UIView = .init()
-        view.backgroundColor = MDAppStyling.Color.md_White_FFFFFF_Light_Appearence.color()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     fileprivate static let searchBarHeight: CGFloat = 56
     fileprivate static let searchBarTopOffset: CGFloat = 16
-    fileprivate let searchBar: UISearchBar = {
-        let searchBar: UISearchBar = .init()
+    fileprivate let searchBar: MDSearchBar = {
+        let searchBar: MDSearchBar = .init()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.showsCancelButton = true
         return searchBar
     }()
     
@@ -82,7 +73,6 @@ final class CourseListViewController: MDBaseTitledNavigationBarViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         addConstraints()
-        dropShadow()
     }
     
 }
@@ -120,7 +110,6 @@ fileprivate extension CourseListViewController {
         addSettingsButton()
         addAddNewCourseButton()
         addCollectionView()
-        addSearchBarContainerView()
         addSearchBar()
     }
     
@@ -138,13 +127,9 @@ fileprivate extension CourseListViewController {
         view.addSubview(collectionView)
     }
     
-    func addSearchBarContainerView() {
-        view.addSubview(searchBarContainerView)
-    }
-    
     func addSearchBar() {
         searchBar.delegate = presenter.searchBarDelegate
-        searchBarContainerView.addSubview(searchBar)
+        view.addSubview(searchBar)
     }
     
 }
@@ -155,7 +140,6 @@ fileprivate extension CourseListViewController {
     func addConstraints() {
         addSettingsButtonConstraints()
         addAddNewCourseButtonConstraints()
-        addSearchBarContainerViewConstraints()
         addCollectionViewConstraints()
         addSearchBarConstraints()
     }
@@ -198,32 +182,11 @@ fileprivate extension CourseListViewController {
         
     }
     
-    func addSearchBarContainerViewConstraints() {
-        
-        NSLayoutConstraint.addEqualConstraint(item: self.searchBarContainerView,
-                                              attribute: .top,
-                                              toItem: navigationBarView,
-                                              attribute: .bottom,
-                                              constant: .zero)
-        
-        NSLayoutConstraint.addEqualLeftConstraint(item: self.searchBarContainerView,
-                                                  toItem: self.view,
-                                                  constant: .zero)
-        
-        NSLayoutConstraint.addEqualRightConstraint(item: self.searchBarContainerView,
-                                                   toItem: self.view,
-                                                   constant: .zero)
-        
-        NSLayoutConstraint.addEqualHeightConstraint(item: self.searchBarContainerView,
-                                                    constant: Self.searchBarContainerViewHeight)
-        
-    }
-    
     func addCollectionViewConstraints() {
         
         NSLayoutConstraint.addEqualConstraint(item: self.collectionView,
                                               attribute: .top,
-                                              toItem: self.searchBarContainerView,
+                                              toItem: self.searchBar,
                                               attribute: .bottom,
                                               constant: .zero)
         
@@ -243,21 +206,22 @@ fileprivate extension CourseListViewController {
     
     func addSearchBarConstraints() {
         
-        NSLayoutConstraint.addEqualTopConstraint(item: self.searchBar,
-                                                 toItem: self.searchBarContainerView,
-                                                 constant: Self.searchBarTopOffset)
+        NSLayoutConstraint.addEqualConstraint(item: self.searchBar,
+                                              attribute: .top,
+                                              toItem: self.navigationBarView,
+                                              attribute: .bottom,
+                                              constant: Self.searchBarTopOffset)
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.searchBar,
-                                                  toItem: self.searchBarContainerView,
+                                                  toItem: self.view,
                                                   constant: .zero)
         
         NSLayoutConstraint.addEqualRightConstraint(item: self.searchBar,
-                                                   toItem: self.searchBarContainerView,
+                                                   toItem: self.view,
                                                    constant: .zero)
         
-        NSLayoutConstraint.addEqualBottomConstraint(item: self.searchBar,
-                                                    toItem: self.searchBarContainerView,
-                                                    constant: .zero)
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.searchBar,
+                                                    constant: Self.searchBarHeight)
         
     }
     
@@ -280,15 +244,6 @@ fileprivate extension CourseListViewController {
         self.collectionView.dataSource = self.presenter.collectionViewDataSource
         self.configureCollectionViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType,
                                                     collectionView: collectionView)
-    }
-    
-}
-
-// MARK: - Drop Shadow
-fileprivate extension CourseListViewController {
-    
-    func dropShadow() {
-        
     }
     
 }

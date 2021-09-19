@@ -7,10 +7,10 @@
 
 import UIKit
 
-protocol MDCourseListSearchBarDelegateProtocol: UISearchBarDelegate {
+protocol MDCourseListSearchBarDelegateProtocol: MDSearchBarDelegate {
     var searchBarCancelButtonAction: (() -> Void)? { get set }
     var searchBarSearchButtonAction: (() -> Void)? { get set }
-    var searchBarTextDidChangeAction: ((String) -> Void)? { get set }
+    var searchBarTextDidChangeAction: ((String?) -> Void)? { get set }
 }
 
 final class MDCourseListSearchBarDelegate: NSObject,
@@ -18,21 +18,21 @@ final class MDCourseListSearchBarDelegate: NSObject,
     
     var searchBarCancelButtonAction: (() -> Void)?
     var searchBarSearchButtonAction: (() -> Void)?
-    var searchBarTextDidChangeAction: ((String) -> Void)?
+    var searchBarTextDidChangeAction: ((String?) -> Void)?
     
 }
 
 extension MDCourseListSearchBarDelegate {
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: MDSearchBar) {
         searchBarCancelButtonAction?()
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: MDSearchBar) {
         searchBarSearchButtonAction?()
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: MDSearchBar, textDidChange searchText: String?) {
         searchBarTextDidChangeAction?(searchText)
     }
     

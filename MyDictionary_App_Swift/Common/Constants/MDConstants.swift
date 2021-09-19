@@ -142,6 +142,7 @@ struct MDConstants {
     }
     
     struct Rect {
+        
         static let defaultInset: UIEdgeInsets = .init(top: .zero,
                                                       left: 16,
                                                       bottom: .zero,
@@ -151,6 +152,14 @@ struct MDConstants {
                                                        left: 16,
                                                        bottom: .zero,
                                                        right: 38)
+        
+        static func searchInset(searchIconImageViewLeftOffset: CGFloat) -> UIEdgeInsets {
+            return .init(top: Rect.defaultInset.top,
+                         left: MDConstants.Rect.defaultInset.left + searchIconImageViewLeftOffset + 6,
+                         bottom: Rect.defaultInset.bottom,
+                         right: Rect.defaultInset.right)
+        }
+        
     }
     
     struct Text {

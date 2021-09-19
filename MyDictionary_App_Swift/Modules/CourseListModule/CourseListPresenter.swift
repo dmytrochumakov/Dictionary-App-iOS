@@ -69,7 +69,7 @@ extension CourseListPresenter {
         presenterOutput?.hideKeyboard()
     }
     
-    var searchBarDelegate: UISearchBarDelegate {
+    var searchBarDelegate: MDSearchBarDelegate {
         return interactor.searchBarDelegate
     }
     

@@ -14,8 +14,7 @@ protocol MDSearchBarDelegate: AnyObject {
 }
 
 final class MDSearchBar: UIView {
-
-    fileprivate static let searchTextFieldContrainerViewHeight: CGFloat = 56
+        
     fileprivate let searchTextFieldContrainerView: UIView = {
         let view: UIView = .init()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -25,10 +24,9 @@ final class MDSearchBar: UIView {
     fileprivate static let searchTextFieldHeight: CGFloat = 40
     fileprivate static let searchTextFieldLeftOffset: CGFloat = 16
     fileprivate static let searchTextFieldRightOffset: CGFloat = 16
-    fileprivate let searchTextField: UITextField = {
-        let textField: UITextField = .init()
-        textField.placeholder = KeysForTranslate.search.localized
-        textField.autocapitalizationType = .none
+    fileprivate let searchTextField: MDSearchTextField = {
+        let textField: MDSearchTextField = .init()
+        textField.placeholder = KeysForTranslate.search.localized        
         textField.autocorrectionType = .no
         textField.textAlignment = .left
         textField.clearButtonMode = .whileEditing
@@ -58,6 +56,7 @@ final class MDSearchBar: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         addConstraints()
+        roundOffEdges()
         dropShadow()
     }
     
@@ -92,19 +91,57 @@ fileprivate extension MDSearchBar {
     
     func addSearchTextFieldContrainerViewConstraints() {
         
+        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.searchTextFieldContrainerView,
+                                                         toItem: self)
+        
     }
     
     func addSearchTextFieldConstraints() {
         
+        NSLayoutConstraint.addEqualCenterYConstraint(item: self.searchTextField,
+                                                     toItem: self.searchTextFieldContrainerView,
+                                                     constant: .zero)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.searchTextField,
+                                                  toItem: self.searchTextFieldContrainerView,
+                                                  constant: Self.searchTextFieldLeftOffset)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.searchTextField,
+                                                   toItem: self.searchTextFieldContrainerView,
+                                                   constant: -Self.searchTextFieldRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.searchTextField,
+                                                    constant: Self.searchTextFieldHeight)
+        
     }
+    
+}
 
+// MARK: - Round Off Edges
+fileprivate extension MDSearchBar {
+    
+    func roundOffEdges() {
+        searchTextFieldRoundOffEdges()
+    }
+    
+    func searchTextFieldRoundOffEdges() {
+        searchTextField.layer.cornerRadius = 10
+    }
+    
 }
 
 // MARK: - Drop Shadow
 fileprivate extension MDSearchBar {
     
     func dropShadow() {
-        
+        dropShadowSearchTextField()
+    }
+    
+    func dropShadowSearchTextField() {
+        searchTextField.dropShadow(color: MDAppStyling.Color.md_Blue_4400D4_Light_Appearence.color(0.5),
+                                   offSet: .init(width: 2,
+                                                 height: 4),
+                                   radius: 10)
     }
     
 }

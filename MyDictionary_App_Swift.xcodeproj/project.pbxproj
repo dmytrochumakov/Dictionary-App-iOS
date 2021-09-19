@@ -168,6 +168,7 @@
 		228BC444264979FE0030FB30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228BC443264979FE0030FB30 /* Assets.xcassets */; };
 		228BC447264979FE0030FB30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228BC445264979FE0030FB30 /* LaunchScreen.storyboard */; };
 		2291BAF026F714DD0012504D /* MDSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291BAEF26F714DD0012504D /* MDSearchBar.swift */; };
+		2291BAF326F7265E0012504D /* MDSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291BAF226F7265E0012504D /* MDSearchTextField.swift */; };
 		2294323026DF9A2A0073048C /* MDSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294322F26DF9A2A0073048C /* MDSyncManager.swift */; };
 		2294323226DF9A460073048C /* MDSyncStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294323126DF9A460073048C /* MDSyncStep.swift */; };
 		2294323426DF9A520073048C /* MDSyncResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294323326DF9A520073048C /* MDSyncResult.swift */; };
@@ -523,6 +524,7 @@
 		228BC44D264979FF0030FB30 /* MyDictionary_App_SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyDictionary_App_SwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		228BC453264979FF0030FB30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2291BAEF26F714DD0012504D /* MDSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSearchBar.swift; sourceTree = "<group>"; };
+		2291BAF226F7265E0012504D /* MDSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSearchTextField.swift; sourceTree = "<group>"; };
 		2294322F26DF9A2A0073048C /* MDSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncManager.swift; sourceTree = "<group>"; };
 		2294323126DF9A460073048C /* MDSyncStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncStep.swift; sourceTree = "<group>"; };
 		2294323326DF9A520073048C /* MDSyncResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncResult.swift; sourceTree = "<group>"; };
@@ -814,14 +816,6 @@
 			path = KeyboardToolbar;
 			sourceTree = "<group>";
 		};
-		220FFE7526C9031200702CCE /* MDTextFieldWithToolBar */ = {
-			isa = PBXGroup;
-			children = (
-				220FFE7626C9031800702CCE /* MDTextFieldWithToolBar.swift */,
-			);
-			path = MDTextFieldWithToolBar;
-			sourceTree = "<group>";
-		};
 		220FFE7826C9060100702CCE /* Storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -977,10 +971,8 @@
 		2223F8A526512BE8004F2FE9 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
-				22CD45EE26F090BD0060978D /* CounterTextField */,
-				228AE05726EE05000088B4CF /* HideShowPasswordTextField */,
+				2291BAF126F726260012504D /* TextFields */,
 				228AE05426EDDFAF0088B4CF /* BaseViewControllers */,
-				220FFE7526C9031200702CCE /* MDTextFieldWithToolBar */,
 				220FFE7226C8F82D00702CCE /* KeyboardToolbar */,
 				221D281D26C54952004BC4F7 /* KeyboardHandler */,
 				22BD99A6266A58EF0063FEFC /* RootViewController */,
@@ -1462,16 +1454,6 @@
 			path = BaseViewControllers;
 			sourceTree = "<group>";
 		};
-		228AE05726EE05000088B4CF /* HideShowPasswordTextField */ = {
-			isa = PBXGroup;
-			children = (
-				228AE05826EE05120088B4CF /* HideShowPasswordTextField.swift */,
-				228AE05A26EE053D0088B4CF /* PasswordToggleVisibilityView.swift */,
-				228AE05C26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift */,
-			);
-			path = HideShowPasswordTextField;
-			sourceTree = "<group>";
-		};
 		228BC42B264979FD0030FB30 = {
 			isa = PBXGroup;
 			children = (
@@ -1595,6 +1577,20 @@
 				2291BAEF26F714DD0012504D /* MDSearchBar.swift */,
 			);
 			path = SearchBar;
+			sourceTree = "<group>";
+		};
+		2291BAF126F726260012504D /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				220FFE7626C9031800702CCE /* MDTextFieldWithToolBar.swift */,
+				228AE05C26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift */,
+				228AE05A26EE053D0088B4CF /* PasswordToggleVisibilityView.swift */,
+				228AE05826EE05120088B4CF /* HideShowPasswordTextField.swift */,
+				22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */,
+				22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */,
+				2291BAF226F7265E0012504D /* MDSearchTextField.swift */,
+			);
+			path = TextFields;
 			sourceTree = "<group>";
 		};
 		2299015F2668EC2900D8C74E /* AppearanceModule */ = {
@@ -1947,15 +1943,6 @@
 				22CA088B265165460052D169 /* MDAppStyling.swift */,
 			);
 			path = AppStyling;
-			sourceTree = "<group>";
-		};
-		22CD45EE26F090BD0060978D /* CounterTextField */ = {
-			isa = PBXGroup;
-			children = (
-				22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */,
-				22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */,
-			);
-			path = CounterTextField;
 			sourceTree = "<group>";
 		};
 		22DB2F6F26C3BE3C00C1AADA /* CourseListModule */ = {
@@ -2425,6 +2412,7 @@
 				22493C4C26972E27000DA480 /* MDEntityOperationError.swift in Sources */,
 				227B91E426EF62F80086B9AA /* RegisterTextFieldDelegate.swift in Sources */,
 				220793D126C6B2D9003D434B /* AuthRequest.swift in Sources */,
+				2291BAF326F7265E0012504D /* MDSearchTextField.swift in Sources */,
 				22557FD326C95D5A00A4FF31 /* MDReadJWTMemoryStorageOperation.swift in Sources */,
 				229901692668EC3400D8C74E /* AppearanceRouter.swift in Sources */,
 				227B91D726EF5F250086B9AA /* RegisterValidation.swift in Sources */,
