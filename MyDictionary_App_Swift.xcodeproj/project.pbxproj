@@ -167,6 +167,7 @@
 		228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 228BC440264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld */; };
 		228BC444264979FE0030FB30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228BC443264979FE0030FB30 /* Assets.xcassets */; };
 		228BC447264979FE0030FB30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228BC445264979FE0030FB30 /* LaunchScreen.storyboard */; };
+		2291BAF026F714DD0012504D /* MDSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291BAEF26F714DD0012504D /* MDSearchBar.swift */; };
 		2294323026DF9A2A0073048C /* MDSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294322F26DF9A2A0073048C /* MDSyncManager.swift */; };
 		2294323226DF9A460073048C /* MDSyncStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294323126DF9A460073048C /* MDSyncStep.swift */; };
 		2294323426DF9A520073048C /* MDSyncResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294323326DF9A520073048C /* MDSyncResult.swift */; };
@@ -521,6 +522,7 @@
 		228BC448264979FE0030FB30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		228BC44D264979FF0030FB30 /* MyDictionary_App_SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyDictionary_App_SwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		228BC453264979FF0030FB30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2291BAEF26F714DD0012504D /* MDSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSearchBar.swift; sourceTree = "<group>"; };
 		2294322F26DF9A2A0073048C /* MDSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncManager.swift; sourceTree = "<group>"; };
 		2294323126DF9A460073048C /* MDSyncStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncStep.swift; sourceTree = "<group>"; };
 		2294323326DF9A520073048C /* MDSyncResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncResult.swift; sourceTree = "<group>"; };
@@ -1239,6 +1241,7 @@
 		226FEE7E266B735B0044A5F9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2291BAEE26F714C90012504D /* SearchBar */,
 				229D2D4A26EB68340047B518 /* NavigationController */,
 				227D8F1326D7A099009CB94B /* AppSettings */,
 				2223F8A926512C48004F2FE9 /* Extensions */,
@@ -1584,6 +1587,14 @@
 				228BC440264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2291BAEE26F714C90012504D /* SearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				2291BAEF26F714DD0012504D /* MDSearchBar.swift */,
+			);
+			path = SearchBar;
 			sourceTree = "<group>";
 		};
 		2299015F2668EC2900D8C74E /* AppearanceModule */ = {
@@ -2387,6 +2398,7 @@
 				220FFEA426C915C700702CCE /* MDReadUserMemoryStorageOperation.swift in Sources */,
 				227D5E672652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift in Sources */,
 				22557FC526C9587100A4FF31 /* MDJWTStorage.swift in Sources */,
+				2291BAF026F714DD0012504D /* MDSearchBar.swift in Sources */,
 				224375AC26F33EA3006B90EB /* MDCourseListCell.swift in Sources */,
 				22CA088726515F6A0052D169 /* WordListDataManager.swift in Sources */,
 				22E2B4E12664E43B00978E62 /* SettingsDataProvider.swift in Sources */,

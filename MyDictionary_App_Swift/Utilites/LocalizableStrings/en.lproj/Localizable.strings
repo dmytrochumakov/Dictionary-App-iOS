@@ -29,6 +29,7 @@
 "confirm_password_and_password_do_not_match" = "Confirm password and password do not match. \n Please check the entered data.";
 "ok" = "Ok";
 "please_wait_for_data_sync" = "Please wait for data sync";
+"search" = "Search";
 
 // Api Errors //
 "no_data_api_error" = "No Data";
