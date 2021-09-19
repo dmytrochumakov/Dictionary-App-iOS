@@ -18,8 +18,7 @@ final class MDSearchBar: UIView {
     
     fileprivate let searchTextFieldContrainerView: UIView = {
         let view: UIView = .init()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = MDAppStyling.Color.md_FFFFFF.color()
+        view.translatesAutoresizingMaskIntoConstraints = false        
         return view
     }()
     
