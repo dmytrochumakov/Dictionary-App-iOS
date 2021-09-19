@@ -33,9 +33,9 @@ final class MDSearchBar: UIView {
         textField.textAlignment = .left
         textField.clearButtonMode = .whileEditing
         textField.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
-        textField.textColor = MDAppStyling.Color.md_Black_1_Light_Appearence.color()
+        textField.textColor = MDAppStyling.Color.md_Black_3C3C3C_Light_Appearence.color()
         textField.returnKeyType = .search
-        textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
+        textField.backgroundColor = MDAppStyling.Color.md_White_FFFFFF_Light_Appearence.color()
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()

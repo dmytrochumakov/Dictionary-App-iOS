@@ -41,7 +41,7 @@ final class CourseListViewController: MDBaseTitledNavigationBarViewController {
     fileprivate static let searchBarContainerViewHeight: CGFloat = 72
     fileprivate let searchBarContainerView: UIView = {
         let view: UIView = .init()
-        view.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
+        view.backgroundColor = MDAppStyling.Color.md_White_FFFFFF_Light_Appearence.color()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
