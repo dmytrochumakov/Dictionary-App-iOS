@@ -8,6 +8,7 @@
 import UIKit
 
 protocol MDSearchBarDelegate: AnyObject {
+    func searchBarShouldClear(_ searchBar: MDSearchBar)
     func searchBarCancelButtonClicked(_ searchBar: MDSearchBar)
     func searchBarSearchButtonClicked(_ searchBar: MDSearchBar)
     func searchBar(_ searchBar: MDSearchBar, textDidChange searchText: String?)
@@ -62,6 +63,21 @@ final class MDSearchBar: UIView {
     
 }
 
+// MARK: - UITextFieldDelegate
+extension MDSearchBar: UITextFieldDelegate {
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        delegate?.searchBarShouldClear(self)
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        delegate?.searchBarSearchButtonClicked(self)
+        return true
+    }
+    
+}
+
 // MARK: - Add Views
 fileprivate extension MDSearchBar {
     
@@ -75,7 +91,8 @@ fileprivate extension MDSearchBar {
     }
     
     func addSearchTextField() {
-        searchTextField.addTarget(self, action: #selector(textDidChangeAction), for: .valueChanged)
+        searchTextField.delegate = self
+        searchTextField.addTarget(self, action: #selector(textDidChangeAction), for: .editingChanged)
         searchTextFieldContrainerView.addSubview(searchTextField)
     }
     

@@ -81,6 +81,8 @@ fileprivate extension CourseListInteractor {
         //
         searchBarTextDidChangeAction_Subscribe()
         //
+        searchBarShouldClearAction_Subscribe()
+        //
     }
     
     func didChangeAppearanceObservable_Subscribe() {
@@ -135,6 +137,23 @@ fileprivate extension CourseListInteractor {
         
         searchBarDelegate.searchBarTextDidChangeAction = { [weak self] (searchText) in
             self?.dataManager.searchBarTextDidChangeAction(searchText) { [weak self] result in
+                
+                switch result {
+                case .success:
+                    self?.interactorOutput?.reloadData()
+                case .failure(let error):
+                    self?.interactorOutput?.showError(error)
+                }
+                
+            }
+        }
+        
+    }
+    
+    func searchBarShouldClearAction_Subscribe() {
+        
+        searchBarDelegate.searchBarShouldClearAction = { [weak self] in
+            self?.dataManager.searchBarShouldClearAction() { [weak self] (result) in
                 
                 switch result {
                 case .success:

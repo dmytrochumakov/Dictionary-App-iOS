@@ -9,6 +9,7 @@ import Foundation
 protocol CourseListDataManagerInputProtocol {
     func readAndAddCoursesToDataProvider(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
     func searchBarTextDidChangeAction(_ searchText: String?, _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    func searchBarShouldClearAction(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
 }
 
 protocol CourseListDataManagerOutputProtocol: AnyObject {
@@ -91,6 +92,10 @@ extension CourseListDataManager {
             
         }
         
+    }
+    
+    func searchBarShouldClearAction(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
+        readAndAddCoursesToDataProvider(completionHandler)
     }
     
 }
