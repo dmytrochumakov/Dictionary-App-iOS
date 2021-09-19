@@ -40,13 +40,14 @@ final class MDSearchBar: UIView {
         return textField
     }()
     
-    fileprivate static let cancelButtondSize: CGSize = .init(width: 48, height: 40)
+    fileprivate static let cancelButtonHeight: CGFloat = 40
     fileprivate static let cancelButtonRightOffset: CGFloat = 8
+    fileprivate static let cancelButtonFont: UIFont = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
     fileprivate let cancelButton: UIButton = {
         let button: UIButton = .init()
         button.setTitle(KeysForTranslate.cancel.localized, for: .normal)
         button.setTitleColor(cancelButtonTextColor(isActive: false), for: .normal)
-        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        button.titleLabel?.font = cancelButtonFont
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -173,10 +174,10 @@ fileprivate extension MDSearchBar {
                                                    constant: -Self.cancelButtonRightOffset)
         
         NSLayoutConstraint.addEqualHeightConstraint(item: self.cancelButton,
-                                                    constant: Self.cancelButtondSize.height)
+                                                    constant: Self.cancelButtonHeight)
         
         NSLayoutConstraint.addEqualWidthConstraint(item: self.cancelButton,
-                                                   constant: Self.cancelButtondSize.width)
+                                                   constant: Self.cancelButtonWidth(fromText: KeysForTranslate.cancel.localized))
         
     }
     
@@ -275,6 +276,17 @@ fileprivate extension MDSearchBar {
         } else {
             return MDAppStyling.Color.light_Gray_C6C6C6.color()
         }
+    }
+    
+}
+
+// MARK: - Cancel Button Width
+fileprivate extension MDSearchBar {
+    
+    static func cancelButtonWidth(fromText text: String) -> CGFloat {
+        return text.widthFromLabel(font: Self.cancelButtonFont,
+                                   height: Self.cancelButtonHeight,
+                                   numberOfLines: 1)
     }
     
 }
