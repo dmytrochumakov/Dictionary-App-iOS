@@ -31,14 +31,6 @@ final class MDCourseListCell: MGSwipeTableCell,
         return imageView
     }()
     
-    fileprivate static let bottomLineViewHeight: CGFloat = 0.5
-    fileprivate let bottomLineView: UIView = {
-        let view: UIView = .init()
-        view.backgroundColor = MDAppStyling.Color.md_C6C6C6.color()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     public static let height: CGFloat = 48
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -78,7 +70,6 @@ fileprivate extension MDCourseListCell {
     func addViews() {
         addTitleLabel()
         addArrowImageView()
-        addBottomLineView()
     }
     
     func addTitleLabel() {
@@ -89,10 +80,6 @@ fileprivate extension MDCourseListCell {
         addSubview(arrowImageView)
     }
     
-    func addBottomLineView() {
-        addSubview(bottomLineView)
-    }
-    
 }
 
 // MARK: - Add Constraints
@@ -101,7 +88,6 @@ fileprivate extension MDCourseListCell {
     func addConstraints() {
         addTitleLabelConstraints()
         addArrowImageViewConstraints()
-        addBottomLineViewConstraints()
     }
     
     func addTitleLabelConstraints() {
@@ -139,25 +125,6 @@ fileprivate extension MDCourseListCell {
         
         NSLayoutConstraint.addEqualHeightConstraint(item: self.arrowImageView,
                                                     constant: Self.arrowImageViewSize.height)
-        
-    }
-    
-    func addBottomLineViewConstraints() {
-        
-        NSLayoutConstraint.addEqualBottomConstraint(item: self.bottomLineView,
-                                                    toItem: self,
-                                                    constant: .zero)
-        
-        NSLayoutConstraint.addEqualLeftConstraint(item: self.bottomLineView,
-                                                  toItem: self.titleLabel,
-                                                  constant: .zero)
-        
-        NSLayoutConstraint.addEqualRightConstraint(item: self.bottomLineView,
-                                                   toItem: self,
-                                                   constant: .zero)
-        
-        NSLayoutConstraint.addEqualHeightConstraint(item: self.bottomLineView,
-                                                    constant: Self.bottomLineViewHeight)
         
     }
     
