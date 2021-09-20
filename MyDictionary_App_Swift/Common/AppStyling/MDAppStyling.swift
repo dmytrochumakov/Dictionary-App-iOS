@@ -18,6 +18,7 @@ struct MDAppStyling {
         case md_007AFF
         case md_4400D4
         case md_5200FF
+        case md_C7C7CC
         
         case md_F2F2F7
         case md_1C1C1E
@@ -51,6 +52,9 @@ struct MDAppStyling {
                 
             case .md_5200FF:
                 return UIColor.init(rgb: 0x5200FF, alpha: alpha)
+                
+            case.md_C7C7CC:
+                return UIColor.init(rgb: 0xC7C7CC, alpha: alpha)
                 
                 
             case .md_F2F2F7:

@@ -44,6 +44,7 @@ final class MDSearchBar: UIView {
     fileprivate static let cancelButtonFont: UIFont = MDAppStyling.Font.MyriadProRegular.font()
     fileprivate let cancelButton: UIButton = {
         let button: UIButton = .init()
+        button.backgroundColor = cancelButtonBackgroundColor(isActive: false)
         button.setTitle(KeysForTranslate.cancel.localized, for: .normal)
         button.setTitleColor(cancelButtonTextColor(isActive: false), for: .normal)
         button.titleLabel?.font = cancelButtonFont
@@ -187,10 +188,15 @@ fileprivate extension MDSearchBar {
     
     func roundOffEdges() {
         searchTextFieldRoundOffEdges()
+        cancelButtonRoundOffEdges()
     }
     
     func searchTextFieldRoundOffEdges() {
         searchTextField.layer.cornerRadius = 10
+    }
+    
+    func cancelButtonRoundOffEdges() {
+        cancelButton.layer.cornerRadius = 10
     }
     
 }
@@ -200,6 +206,7 @@ fileprivate extension MDSearchBar {
     
     func dropShadow() {
         dropShadowSearchTextField()
+        dropShadowCancelButton(isActive: false)
     }
     
     func dropShadowSearchTextField() {
@@ -207,6 +214,13 @@ fileprivate extension MDSearchBar {
                                    offSet: .init(width: 2,
                                                  height: 4),
                                    radius: 10)
+    }
+    
+    func dropShadowCancelButton(isActive: Bool) {
+        cancelButton.dropShadow(color: Self.cancelButtonShadowColor(isActive: isActive),
+                                offSet: .init(width: 0,
+                                              height: 4),
+                                radius: 20)
     }
     
 }
@@ -238,8 +252,20 @@ fileprivate extension MDSearchBar {
     }
     
     func activateCancelButton() {
-        cancelButton.setTitleColor(Self.cancelButtonTextColor(isActive: true), for: .normal)
+        
+        UIView.animate(withDuration: 0.25,
+                       delay: 0.0,
+                       options: [.curveEaseInOut],
+                       animations: {
+                        
+                        self.cancelButton.backgroundColor = Self.cancelButtonBackgroundColor(isActive: true)
+                        self.cancelButton.setTitleColor(Self.cancelButtonTextColor(isActive: true), for: .normal)
+                        self.dropShadowCancelButton(isActive: true)
+                        
+                       }, completion: nil)
+        
         cancelButtonIsActive = true
+        
     }
     
     func activateInputSearchTextField() {
@@ -257,8 +283,20 @@ fileprivate extension MDSearchBar {
     }
     
     func deactivateCancelButton() {
-        cancelButton.setTitleColor(Self.cancelButtonTextColor(isActive: false), for: .normal)
+        
+        UIView.animate(withDuration: 0.25,
+                       delay: 0.0,
+                       options: [.curveEaseInOut],
+                       animations: {
+                        
+                        self.cancelButton.backgroundColor = Self.cancelButtonBackgroundColor(isActive: false)
+                        self.cancelButton.setTitleColor(Self.cancelButtonTextColor(isActive: false), for: .normal)
+                        self.dropShadowCancelButton(isActive: false)
+                        
+                       }, completion: nil)
+        
         cancelButtonIsActive = false
+        
     }
     
     func deactivateInputSearchTextField() {
@@ -267,25 +305,37 @@ fileprivate extension MDSearchBar {
     
 }
 
-fileprivate extension MDSearchBar {
-    
-    static func cancelButtonTextColor(isActive: Bool) -> UIColor {
-        if (isActive) {
-            return MDAppStyling.Color.md_4400D4.color()
-        } else {
-            return MDAppStyling.Color.md_C6C6C6.color()
-        }
-    }
-    
-}
-
-// MARK: - Cancel Button Width
+// MARK: - Cancel Button Configuration
 fileprivate extension MDSearchBar {
     
     static func cancelButtonWidth(fromText text: String) -> CGFloat {
         return text.widthFromLabel(font: Self.cancelButtonFont,
                                    height: Self.cancelButtonHeight,
-                                   numberOfLines: 1)
+                                   numberOfLines: 1) + 16
+    }
+    
+    static func cancelButtonTextColor(isActive: Bool) -> UIColor {
+        if (isActive) {
+            return MDAppStyling.Color.md_FFFFFF.color()
+        } else {
+            return MDAppStyling.Color.md_FFFFFF.color()
+        }
+    }
+    
+    static func cancelButtonBackgroundColor(isActive: Bool) -> UIColor {
+        if (isActive) {
+            return MDAppStyling.Color.md_4400D4.color()
+        } else {
+            return MDAppStyling.Color.md_C7C7CC.color()
+        }
+    }
+    
+    static func cancelButtonShadowColor(isActive: Bool) -> UIColor {
+        if (isActive) {
+            return MDAppStyling.Color.md_4400D4.color(0.5)
+        } else {
+            return MDAppStyling.Color.md_4400D4.color(0.5)
+        }
     }
     
 }
