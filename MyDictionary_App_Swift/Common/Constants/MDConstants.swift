@@ -72,7 +72,11 @@ struct MDConstants {
     }
     
     struct Environment {
+        #if DEBUG
+        static let current: MDEnvironment = .development
+        #elseif RELEASE
         static let current: MDEnvironment = .production
+        #endif
     }
     
     struct APIEnvironment {
