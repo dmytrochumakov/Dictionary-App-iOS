@@ -24,21 +24,23 @@ extension CourseListModule {
     
     var module: UIViewController {
         
-        let fillMemoryService: MDFillMemoryServiceProtocol = MDConstants.AppDependencies.dependencies.fillMemoryService
+        let jwtManager: MDJWTManagerProtocol = MDJWTManager.init(jwtStorage: MDConstants.AppDependencies.dependencies.jwtStorage,
+                                                                 apiJWT: MDConstants.AppDependencies.dependencies.apiJWT)
+        
         let memoryStorage: MDCourseMemoryStorageProtocol = MDConstants.AppDependencies.dependencies.courseStorage.memoryStorage
         let dataProvider: CourseListDataProviderProtocol = CourseListDataProvider.init(filteredCourses: .init())
         var dataManager: CourseListDataManagerProtocol = CourseListDataManager.init(memoryStorage: memoryStorage,
                                                                                     dataProvider: dataProvider)
         
-        let collectionViewDelegate: CourseListTableViewDelegateProtocol = CourseListTableViewDelegate.init(dataProvider: dataProvider)
-        let collectionViewDataSource: CourseListTableViewDataSourceProtocol = CourseListTableViewDataSource.init(dataProvider: dataProvider)
-        let searchBarDelegate: MDCourseListSearchBarDelegateProtocol = MDCourseListSearchBarDelegate.init()
-        
-        let interactor: CourseListInteractorProtocol = CourseListInteractor.init(dataManager: dataManager,
-                                                                                 fillMemoryService: fillMemoryService,
-                                                                                 collectionViewDelegate: collectionViewDelegate,
-                                                                                 collectionViewDataSource: collectionViewDataSource,
-                                                                                 searchBarDelegate: searchBarDelegate)
+        let interactor: CourseListInteractorProtocol = CourseListInteractor.init(userMemoryStorage: MDConstants.AppDependencies.dependencies.userStorage.memoryStorage,
+                                                                                 jwtManager: jwtManager,
+                                                                                 apiCourse: MDConstants.AppDependencies.dependencies.apiCourse,
+                                                                                 courseStorage: MDConstants.AppDependencies.dependencies.courseStorage,
+                                                                                 dataManager: dataManager,
+                                                                                 fillMemoryService: MDConstants.AppDependencies.dependencies.fillMemoryService,
+                                                                                 collectionViewDelegate: CourseListTableViewDelegate.init(dataProvider: dataProvider),
+                                                                                 collectionViewDataSource: CourseListTableViewDataSource.init(dataProvider: dataProvider),
+                                                                                 searchBarDelegate: MDCourseListSearchBarDelegate.init())
         
         var router: CourseListRouterProtocol = CourseListRouter.init()
         let presenter: CourseListPresenterProtocol = CourseListPresenter.init(interactor: interactor, router: router)

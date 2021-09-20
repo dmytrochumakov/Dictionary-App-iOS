@@ -8,7 +8,10 @@
 import Foundation
 
 protocol MDJWTManagerProtocol {
-    func fetchJWT(jwtApiRequest: JWTApiRequest, completionHandler: @escaping MDOperationResultWithCompletion<JWTResponse>)
+    func fetchJWT(nickname: String,
+                  password: String,
+                  userId: Int64,
+                  _ completionHandler: @escaping MDOperationResultWithCompletion<JWTResponse>)
 }
 
 final class MDJWTManager: MDJWTManagerProtocol {
@@ -31,6 +34,36 @@ final class MDJWTManager: MDJWTManagerProtocol {
 }
 
 extension MDJWTManager {
+    
+    func fetchJWT(nickname: String,
+                  password: String,
+                  userId: Int64,
+                  _ completionHandler: @escaping MDOperationResultWithCompletion<JWTResponse>) {
+        
+        
+        self.fetchJWT(jwtApiRequest: .init(nickname: nickname,
+                                           password: password,
+                                           userId: userId,
+                                           oldJWT:
+                                            "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxLGEsYSIsImlzcyI6ImNvbS5kY2hwcm9qZWN0cy5teWRpY3Rpb25hcnlyZXN0YXBpIiwiaWF0IjoxNjMxNzkwNTI5LCJleHAiOjE2MzE3OTQxMjl9.GyX4FznJMKL2rnXmfE8xwzVSJ_pZ_tkR3eb-pB67D7_Vzu8zaXPxO9UIIOjNGHGpFo8_KzsoTdeYQCYQjRxB8g")) { fetchResult in
+            
+            switch fetchResult {
+            
+            case .success(let jwtResponse):
+                
+                completionHandler(.success(jwtResponse))
+                
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+            
+        }
+        
+    }
+    
+}
+
+fileprivate extension MDJWTManager {
     
     func fetchJWT(jwtApiRequest: JWTApiRequest, completionHandler: @escaping MDOperationResultWithCompletion<JWTResponse>) {
         

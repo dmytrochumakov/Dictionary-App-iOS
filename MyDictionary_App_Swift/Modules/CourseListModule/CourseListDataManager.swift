@@ -7,6 +7,7 @@
 import Foundation
 
 protocol CourseListDataManagerInputProtocol {
+    var dataProvider: CourseListDataProviderProtocol { get }
     func readAndAddCoursesToDataProvider()
     func filterCourses(_ searchText: String?)
     func clearCourseFilter()
@@ -20,7 +21,6 @@ protocol CourseListDataManagerOutputProtocol: AnyObject {
 }
 
 protocol CourseListDataManagerProtocol: CourseListDataManagerInputProtocol {
-    var dataProvider: CourseListDataProviderProtocol { get }
     var dataManagerOutput: CourseListDataManagerOutputProtocol? { get set }
 }
 
