@@ -144,6 +144,7 @@
 		228722D926D1161C00C9D1BC /* MDJWTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722D826D1161C00C9D1BC /* MDJWTManager.swift */; };
 		228722DB26D117A900C9D1BC /* MDReadFirstJWTCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722DA26D117A900C9D1BC /* MDReadFirstJWTCoreDataStorageOperation.swift */; };
 		228722DD26D1189700C9D1BC /* MDReadFirstJWTMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722DC26D1189700C9D1BC /* MDReadFirstJWTMemoryStorageOperation.swift */; };
+		228964A826F8A4F700E23292 /* MDCourseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228964A726F8A4F700E23292 /* MDCourseManager.swift */; };
 		2289CEDE2678CC34007254C3 /* MDWordMemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEB72678CC34007254C3 /* MDWordMemoryStorage.swift */; };
 		2289CEDF2678CC34007254C3 /* MDStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEB92678CC34007254C3 /* MDStorageType.swift */; };
 		2289CEE02678CC34007254C3 /* WordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEBB2678CC34007254C3 /* WordResponse.swift */; };
@@ -497,6 +498,7 @@
 		228722D826D1161C00C9D1BC /* MDJWTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTManager.swift; sourceTree = "<group>"; };
 		228722DA26D117A900C9D1BC /* MDReadFirstJWTCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadFirstJWTCoreDataStorageOperation.swift; sourceTree = "<group>"; };
 		228722DC26D1189700C9D1BC /* MDReadFirstJWTMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadFirstJWTMemoryStorageOperation.swift; sourceTree = "<group>"; };
+		228964A726F8A4F700E23292 /* MDCourseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseManager.swift; sourceTree = "<group>"; };
 		2289CEB72678CC34007254C3 /* MDWordMemoryStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordMemoryStorage.swift; sourceTree = "<group>"; };
 		2289CEB92678CC34007254C3 /* MDStorageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDStorageType.swift; sourceTree = "<group>"; };
 		2289CEBB2678CC34007254C3 /* WordResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordResponse.swift; sourceTree = "<group>"; };
@@ -1337,20 +1339,21 @@
 			path = AppSettings;
 			sourceTree = "<group>";
 		};
-		228722CF26D0F16E00C9D1BC /* Manager */ = {
+		228722CF26D0F16E00C9D1BC /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				228722D026D0F18400C9D1BC /* MDAuthManager.swift */,
 				228722D826D1161C00C9D1BC /* MDJWTManager.swift */,
+				228964A726F8A4F700E23292 /* MDCourseManager.swift */,
 			);
-			path = Manager;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		2289CEB62678CC34007254C3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				223648E826DE38050071F271 /* Sync */,
-				228722CF26D0F16E00C9D1BC /* Manager */,
+				228722CF26D0F16E00C9D1BC /* Managers */,
 				220FFE7826C9060100702CCE /* Storage */,
 				22EF01E6269DA6D400FE4435 /* Network */,
 				2289CEB82678CC34007254C3 /* Enums */,
@@ -2406,6 +2409,7 @@
 				227F8AB326CAB0DC00375A38 /* JWTResponse.swift in Sources */,
 				22DB2F7C26C3BE7900C1AADA /* CourseListDataProvider.swift in Sources */,
 				22B8E6E626D3C7C3001CCCA8 /* MDDeleteCourseProtocol.swift in Sources */,
+				228964A826F8A4F700E23292 /* MDCourseManager.swift in Sources */,
 				22493C39269722AA000DA480 /* MDCRUDWordProtocol.swift in Sources */,
 				22C5862D26C79D360030B12D /* MDAPIStatusCode.swift in Sources */,
 				22493C562697421C000DA480 /* MDUpdateWordCoreDataStorageOperation.swift in Sources */,

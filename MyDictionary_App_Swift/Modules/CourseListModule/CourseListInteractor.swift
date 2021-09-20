@@ -34,10 +34,7 @@ protocol CourseListInteractorProtocol: CourseListInteractorInputProtocol,
 
 final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
     
-    fileprivate let userMemoryStorage: MDUserMemoryStorageProtocol
-    fileprivate let jwtManager: MDJWTManagerProtocol
-    fileprivate let apiCourse: MDAPICourseProtocol
-    fileprivate let courseStorage: MDCourseStorageProtocol
+    fileprivate let courseManager: MDCourseManagerProtocol
     fileprivate let dataManager: CourseListDataManagerInputProtocol
     fileprivate let fillMemoryService: MDFillMemoryServiceProtocol
     
@@ -47,20 +44,14 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
     
     internal weak var interactorOutput: CourseListInteractorOutputProtocol?
     
-    init(userMemoryStorage: MDUserMemoryStorageProtocol,
-         jwtManager: MDJWTManagerProtocol,
-         apiCourse: MDAPICourseProtocol,
-         courseStorage: MDCourseStorageProtocol,
+    init(courseManager: MDCourseManagerProtocol,
          dataManager: CourseListDataManagerInputProtocol,
          fillMemoryService: MDFillMemoryServiceProtocol,
          collectionViewDelegate: CourseListTableViewDelegateProtocol,
          collectionViewDataSource: CourseListTableViewDataSourceProtocol,
          searchBarDelegate: MDCourseListSearchBarDelegateProtocol) {
         
-        self.userMemoryStorage = userMemoryStorage
-        self.jwtManager = jwtManager
-        self.apiCourse = apiCourse
-        self.courseStorage = courseStorage
+        self.courseManager = courseManager
         self.dataManager = dataManager
         self.fillMemoryService = fillMemoryService
         self.tableViewDelegate = collectionViewDelegate
@@ -101,83 +92,22 @@ extension CourseListInteractor {
     
     func deleteCourse(atIndexPath indexPath: IndexPath) {
         
-        var resultCount: Int = .zero
-        
-        userMemoryStorage.readFirstUser { [unowned self] readUserResult in
+        courseManager.deleteCourseFromApiAndAllStorage(byCourseId: dataManager
+                                    .dataProvider
+                                    .course(atIndexPath: indexPath).courseId) { [unowned self] deleteCourseResult in
             
-            switch readUserResult {
+            switch deleteCourseResult {
             
-            case .success(let userResponse):
+            case .success:
                 
-                jwtManager.fetchJWT(nickname: userResponse.nickname,
-                                    password: userResponse.password!,
-                                    userId: userResponse.userId) { [unowned self] (fetchResult) in
-                    
-                    switch fetchResult {
-                    
-                    case .success(let jwtResponse):
-                        
-                        apiCourse.deleteCourse(accessToken: jwtResponse.accessToken,
-                                               userId: userResponse.userId,
-                                               courseId: dataManager.dataProvider.course(atIndexPath: indexPath).courseId) { [unowned self] (apiDeleteCourseResult) in
-                            
-                            switch apiDeleteCourseResult {
-                            
-                            case .success:
-                                //
-                                courseStorage.deleteCourse(storageType: .all,
-                                                           fromCourseId: dataManager.dataProvider.course(atIndexPath: indexPath).courseId) { [unowned self] (storageDeleteCourseResults) in
-                                    
-                                    storageDeleteCourseResults.forEach { storageDeleteCourseResult in
-                                        
-                                        switch storageDeleteCourseResult.result {
-                                        
-                                        case .success:
-                                            
-                                            resultCount += 1
-                                            
-                                            if (resultCount == storageDeleteCourseResults.count) {
-                                                //
-                                                dataManager.deleteCourse(atIndexPath: indexPath)
-                                                //
-                                                interactorOutput?.deleteRow(atIndexPath: indexPath)
-                                                //
-                                                break
-                                            }
-                                            
-                                        case .failure(let error):
-                                            //
-                                            interactorOutput?.showError(error)
-                                            //
-                                            break
-                                        //
-                                        }
-                                        
-                                    }
-                                    
-                                }
-                                
-                            //
-                            case .failure(let error):
-                                //
-                                interactorOutput?.showError(error)
-                                //
-                                break
-                            //
-                            }
-                            
-                        }
-                        
-                    case .failure(let error):
-                        //
-                        interactorOutput?.showError(error)
-                        //
-                        break
-                    //
-                    }
-                    
-                }
-                
+                //
+                dataManager.deleteCourse(atIndexPath: indexPath)
+                //
+                interactorOutput?.deleteRow(atIndexPath: indexPath)
+                //
+                break
+            //
+            
             case .failure(let error):
                 //
                 interactorOutput?.showError(error)
