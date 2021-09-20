@@ -70,6 +70,18 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
 // MARK: - CourseListDataManagerOutputProtocol
 extension CourseListInteractor {
     
+    func readAndAddCoursesToDataProviderResult(_ result: MDOperationResultWithoutCompletion<Void>) {
+        checkResultAndExecuteReloadDataOrShowError(result)
+    }
+    
+    func filteredCoursesResult(_ result: MDOperationResultWithoutCompletion<Void>) {
+        checkResultAndExecuteReloadDataOrShowError(result)
+    }
+    
+    func clearCourseFilterResult(_ result: MDOperationResultWithoutCompletion<Void>) {
+        checkResultAndExecuteReloadDataOrShowError(result)
+    }
+    
 }
 
 // MARK: - CourseListInteractorInputProtocol
@@ -128,7 +140,7 @@ fileprivate extension CourseListInteractor {
                 case .failure(let error):
                     self?.interactorOutput?.showError(error)
                     break
-                
+                    
                 case .none:
                     break
                     
@@ -156,16 +168,7 @@ fileprivate extension CourseListInteractor {
     func searchBarTextDidChangeAction_Subscribe() {
         
         searchBarDelegate.searchBarTextDidChangeAction = { [weak self] (searchText) in
-            self?.dataManager.searchBarTextDidChangeAction(searchText) { [weak self] result in
-                
-                switch result {
-                case .success:
-                    self?.interactorOutput?.reloadData()
-                case .failure(let error):
-                    self?.interactorOutput?.showError(error)
-                }
-                
-            }
+            self?.dataManager.filterCourses(searchText)
         }
         
     }
@@ -173,16 +176,7 @@ fileprivate extension CourseListInteractor {
     func searchBarShouldClearAction_Subscribe() {
         
         searchBarDelegate.searchBarShouldClearAction = { [weak self] in
-            self?.dataManager.searchBarShouldClearAction() { [weak self] (result) in
-                
-                switch result {
-                case .success:
-                    self?.interactorOutput?.reloadData()
-                case .failure(let error):
-                    self?.interactorOutput?.showError(error)
-                }
-                
-            }
+            self?.dataManager.clearCourseFilter()
         }
         
     }
@@ -221,24 +215,19 @@ fileprivate extension CourseListInteractor {
     
 }
 
-// MARK: -
+// MARK: - Private Methods
 fileprivate extension CourseListInteractor {
     
     func readAndAddCoursesToDataProvider() {
-        
-        dataManager.readAndAddCoursesToDataProvider { [weak self] result in
-            
-            switch result {
-            
-            case .success:
-                self?.interactorOutput?.reloadData()
-                break
-                
-            case .failure(let error):
-                self?.interactorOutput?.showError(error)
-                break
-            }
-            
+        dataManager.readAndAddCoursesToDataProvider()
+    }
+    
+    func checkResultAndExecuteReloadDataOrShowError(_ result: MDOperationResultWithoutCompletion<Void>) {
+        switch result {
+        case .success:
+            self.interactorOutput?.reloadData()
+        case .failure(let error):
+            self.interactorOutput?.showError(error)
         }
         
     }
