@@ -72,8 +72,7 @@ struct MDConstants {
     }
     
     struct Environment {
-        /// MDEnvironment.development by default
-        static let current: MDEnvironment = .development
+        static let current: MDEnvironment = .production
     }
     
     struct APIEnvironment {
