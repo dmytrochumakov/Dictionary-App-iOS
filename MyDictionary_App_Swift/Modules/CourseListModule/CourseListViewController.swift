@@ -4,39 +4,57 @@
 //
 //  Created Dmytro Chumakov on 11.08.2021.
 
-import UIKit
+import MBProgressHUD
 
-final class CourseListViewController: UIViewController {
+final class CourseListViewController: MDBaseTitledNavigationBarViewController {
     
     fileprivate let presenter: CourseListPresenterInputProtocol
     
-    fileprivate let collectionView: UICollectionView = {
-        let flowLayout: UICollectionViewFlowLayout = .init()
-        let collectionView: UICollectionView = .init(frame: .zero,
-                                                     collectionViewLayout: flowLayout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
+    fileprivate let tableView: UITableView = {
+        let tableView: UITableView = .init()
+        tableView.register(MDCourseListCell.self)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
+        return tableView
     }()
     
+    fileprivate static let settingsButtonSize: CGSize = .init(width: 40, height: 40)
+    fileprivate static let settingsButtonLeftOffset: CGFloat = 8
+    fileprivate static let settingsButtonBottomOffset: CGFloat = 8
     fileprivate let settingsButton: UIButton = {
         let button: UIButton = .init()
-        button.setTitle(KeysForTranslate.settings.localized, for: .normal)
-        button.setTitleColor(ConfigurationAppearanceController.buttonTextColor(), for: .normal)
-        button.titleLabel?.font = MDAppStyling.Font.systemFont.font(ofSize: 17)
+        button.setImage(MDAppStyling.Image.settings.image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
+    fileprivate static let addNewCourseButtonSize: CGSize = .init(width: 40, height: 40)
+    fileprivate static let addNewCourseButtonRightOffset: CGFloat = 8
     fileprivate let addNewCourseButton: UIButton = {
         let button: UIButton = .init()
-        button.setTitle(KeysForTranslate.add.localized, for: .normal)
-        button.setTitleColor(ConfigurationAppearanceController.buttonTextColor(), for: .normal)
-        button.titleLabel?.font = MDAppStyling.Font.systemFont.font(ofSize: 17)
+        button.setImage(MDAppStyling.Image.add.image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    fileprivate static let searchBarHeight: CGFloat = 56
+    fileprivate static let searchBarTopOffset: CGFloat = 16
+    fileprivate let searchBar: MDSearchBar = {
+        let searchBar: MDSearchBar = .init()        
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        return searchBar
+    }()
+    
+    fileprivate lazy var hud: MBProgressHUD = {
+        let hud: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.mode = .indeterminate        
+        return hud
     }()
     
     init(presenter: CourseListPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
+        super.init(title: KeysForTranslate.courses.localized,
+                   navigationBarBackgroundImage: MDAppStyling.Image.background_navigation_bar_1.image)
     }
     
     deinit {
@@ -69,7 +87,39 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     
     func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
         configureAppearance(fromAppearanceType: newValue,
-                            collectionView: collectionView)
+                            tableView: tableView)
+    }
+    
+    func showError(_ error: Error) {
+        UIAlertController.showAlertWithOkAction(title: KeysForTranslate.error.localized,
+                                                message: error.localizedDescription,
+                                                presenter: self)
+    }
+    
+    func reloadData() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func hideKeyboard() {
+        MDConstants.Keyboard.hideKeyboard(rootView: self.view)
+    }
+    
+    func deleteCourseButtonClicked(_ cell: MDCourseListCell) {
+        presenter.deleteCourse(atIndexPath: tableView.indexPath(for: cell)!)
+    }
+    
+    func deleteRow(atIndexPath indexPath: IndexPath) {
+        tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+    
+    func showProgressHUD() {
+        hud.show(animated: true)
+    }
+    
+    func hideProgressHUD() {
+        hud.hide(animated: true)
     }
     
 }
@@ -78,21 +128,29 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
 fileprivate extension CourseListViewController {
     
     func addViews() {
-        addCollectionView()
+        addSettingsButton()
+        addAddNewCourseButton()
+        addTableView()
+        addSearchBar()
     }
     
-    func addCollectionView() {
-        view.addSubview(collectionView)
-    }
-    
-    func addLeftNavigationButton() {
+    func addSettingsButton() {
         settingsButton.addTarget(self, action: #selector(settingsButtonAction), for: .touchUpInside)
-        self.navigationItem.leftBarButtonItem = .init(customView: self.settingsButton)
+        view.addSubview(settingsButton)
     }
     
-    func addRightNavigationButton() {
+    func addAddNewCourseButton() {
         addNewCourseButton.addTarget(self, action: #selector(addNewCourseButtonAction), for: .touchUpInside)
-        self.navigationItem.rightBarButtonItem = .init(customView: self.addNewCourseButton)
+        view.addSubview(addNewCourseButton)
+    }
+    
+    func addTableView() {
+        view.addSubview(tableView)
+    }
+    
+    func addSearchBar() {
+        searchBar.delegate = presenter.searchBarDelegate
+        view.addSubview(searchBar)
     }
     
 }
@@ -101,12 +159,91 @@ fileprivate extension CourseListViewController {
 fileprivate extension CourseListViewController {
     
     func addConstraints() {
+        addSettingsButtonConstraints()
+        addAddNewCourseButtonConstraints()
         addTableViewConstraints()
+        addSearchBarConstraints()
+    }
+    
+    func addSettingsButtonConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.settingsButton,
+                                              attribute: .bottom,
+                                              toItem: self.titleLabel,
+                                              attribute: .top,
+                                              constant: -Self.settingsButtonBottomOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.settingsButton,
+                                                  toItem: self.navigationBarView,
+                                                  constant: Self.settingsButtonLeftOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.settingsButton,
+                                                    constant: Self.settingsButtonSize.height)
+        
+        NSLayoutConstraint.addEqualWidthConstraint(item: self.settingsButton,
+                                                   constant: Self.settingsButtonSize.width)
+        
+    }
+    
+    func addAddNewCourseButtonConstraints() {
+        
+        NSLayoutConstraint.addEqualCenterYConstraint(item: self.addNewCourseButton,
+                                                     toItem: self.settingsButton,
+                                                     constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.addNewCourseButton,
+                                                   toItem: self.navigationBarView,
+                                                   constant: -Self.addNewCourseButtonRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.addNewCourseButton,
+                                                    constant: Self.addNewCourseButtonSize.height)
+        
+        NSLayoutConstraint.addEqualWidthConstraint(item: self.addNewCourseButton,
+                                                   constant: Self.addNewCourseButtonSize.width)
+        
     }
     
     func addTableViewConstraints() {
-        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.collectionView,
-                                                         toItem: self.view)
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.tableView,
+                                              attribute: .top,
+                                              toItem: self.searchBar,
+                                              attribute: .bottom,
+                                              constant: .zero)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.tableView,
+                                                  toItem: self.view,
+                                                  constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.tableView,
+                                                   toItem: self.view,
+                                                   constant: .zero)
+        
+        NSLayoutConstraint.addEqualBottomConstraint(item: self.tableView,
+                                                    toItem: self.view,
+                                                    constant: .zero)
+        
+    }
+    
+    func addSearchBarConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.searchBar,
+                                              attribute: .top,
+                                              toItem: self.navigationBarView,
+                                              attribute: .bottom,
+                                              constant: Self.searchBarTopOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.searchBar,
+                                                  toItem: self.view,
+                                                  constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.searchBar,
+                                                   toItem: self.view,
+                                                   constant: .zero)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.searchBar,
+                                                    constant: Self.searchBarHeight)
+        
     }
     
 }
@@ -116,26 +253,18 @@ fileprivate extension CourseListViewController {
     
     func configureUI() {
         configureView()
-        configureCollectionView()
-        configureNavigationBarAppearance(fromAppearanceType: Appearance.current.appearanceType)
-        configureNavigationItemLeftAndRightButtons()
+        configureTableView()
     }
     
     func configureView() {
         self.configureViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType)
-        self.title = KeysForTranslate.courses.localized
     }
     
-    func configureCollectionView() {
-        self.collectionView.delegate = self.presenter.collectionViewDelegate
-        self.collectionView.dataSource = self.presenter.collectionViewDataSource
-        self.configureCollectionViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType,
-                                                    collectionView: collectionView)
-    }
-    
-    func configureNavigationItemLeftAndRightButtons() {
-        addLeftNavigationButton()
-        addRightNavigationButton()
+    func configureTableView() {
+        self.tableView.delegate = self.presenter.tableViewDelegate
+        self.tableView.dataSource = self.presenter.tableViewDataSource
+        self.configureTableViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType,
+                                               tableView: tableView)
     }
     
 }

@@ -11,7 +11,7 @@ import CoreData
 final class MDUpdateWordCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let wordStorage: MDWordCoreDataStorage
     fileprivate let wordId: Int64
     fileprivate let newWordText: String
@@ -20,7 +20,7 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
     
     init(managedObjectContext: NSManagedObjectContext,
          wordStorage: MDWordCoreDataStorage,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          wordId: Int64,
          newWordText: String,
          newWordDescription: String,
@@ -51,10 +51,22 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchUpdateRequest)
             
-            try coreDataStack.save()
-            
-            self.result?(.success(()))
-            self.finish()
+            coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
+                
+                switch result {
+                
+                case .success:
+                    self?.result?(.success(()))
+                    self?.finish()
+                    break
+                    
+                case .failure(let error):
+                    self?.result?(.failure(error))
+                    self?.finish()
+                    break
+                }
+                
+            }
             
         } catch let error {
             self.result?(.failure(error))

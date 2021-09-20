@@ -11,13 +11,13 @@ import CoreData
 final class MDCreateWordCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let wordStorage: MDWordCoreDataStorage
     fileprivate let word: WordResponse
     fileprivate let result: MDOperationResultWithCompletion<WordResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          wordStorage: MDWordCoreDataStorage,
          word: WordResponse,
          result: MDOperationResultWithCompletion<WordResponse>?) {
@@ -36,18 +36,24 @@ final class MDCreateWordCoreDataStorageOperation: MDOperation {
         let newWord = CDWordResponseEntity.init(wordResponse: self.word,
                                                 insertIntoManagedObjectContext: self.managedObjectContext)
         
-        do {
+        coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
             
-            try coreDataStack.save()
+            switch result {
             
-            DispatchQueue.main.async {
-                self.result?(.success((newWord.wordResponse)))
-                self.finish()
+            case .success:
+                
+                self?.result?(.success((newWord.wordResponse)))
+                self?.finish()
+                break
+                
+            case .failure(let error):
+                
+                self?.result?(.failure(error))
+                self?.finish()
+                break
+                
             }
             
-        } catch {
-            self.result?(.failure(error))
-            self.finish()
         }
         
     }
@@ -57,19 +63,18 @@ final class MDCreateWordCoreDataStorageOperation: MDOperation {
         self.finish()
     }
     
-    
 }
 
 final class MDCreateWordsCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let coreDataStorage: MDWordCoreDataStorage
     fileprivate let words: [WordResponse]
     fileprivate let result: MDOperationsResultWithCompletion<WordResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          coreDataStorage: MDWordCoreDataStorage,
          words: [WordResponse],
          result: MDOperationsResultWithCompletion<WordResponse>?) {
@@ -97,20 +102,26 @@ final class MDCreateWordsCoreDataStorageOperation: MDOperation {
                 let _ = CDWordResponseEntity.init(wordResponse: word,
                                                   insertIntoManagedObjectContext: self.managedObjectContext)
                 
-                do {
+                coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
                     
-                    try coreDataStack.save()
+                    switch result {
                     
-                    resultCount += 1
-                    
-                    if (resultCount == self.words.count) {
-                        self.result?(.success(self.words))
-                        self.finish()
+                    case .success:
+                        
+                        resultCount += 1
+                        
+                        if (resultCount == self?.words.count) {
+                            self?.result?(.success(self?.words ?? []))
+                            self?.finish()
+                            break
+                        }
+                        
+                    case .failure(let error):
+                        self?.result?(.failure(error))
+                        self?.finish()
+                        break
                     }
                     
-                } catch {
-                    self.result?(.failure(error))                    
-                    self.finish()
                 }
                 
             }

@@ -1,5 +1,5 @@
 //
-//  CoreDataStack.swift
+//  MDCoreDataStack.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 08.07.2021.
@@ -7,7 +7,7 @@
 
 import CoreData
 
-open class CoreDataStack {
+open class MDCoreDataStack {
     
     public static let model: NSManagedObjectModel = {
         let modelURL = Bundle.main.url(forResource: MDConstants.StaticText.appName,
@@ -30,7 +30,7 @@ open class CoreDataStack {
     
     public lazy var storeContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: MDConstants.StaticText.appName,
-                                              managedObjectModel: CoreDataStack.model)
+                                              managedObjectModel: MDCoreDataStack.model)
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -42,11 +42,15 @@ open class CoreDataStack {
 }
 
 // MARK: - Save
-extension CoreDataStack {
+extension MDCoreDataStack {
     
     public func save() throws {
-        try privateContext.save()
-        try mainContext.save()
+        self.privateContext.perform {
+            debugPrint(#function, Self.self)
+        }
+        self.mainContext.perform {
+            debugPrint(#function, Self.self)
+        }
     }
-          
+    
 }

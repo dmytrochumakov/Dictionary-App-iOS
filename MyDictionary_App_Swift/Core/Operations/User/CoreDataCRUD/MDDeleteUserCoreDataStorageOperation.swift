@@ -10,13 +10,13 @@ import CoreData
 final class MDDeleteUserCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let coreDataStorage: MDUserCoreDataStorage
     fileprivate let userId: Int64
     fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          coreDataStorage: MDUserCoreDataStorage,
          userId: Int64,
          result: MDOperationResultWithCompletion<Void>?) {
@@ -42,10 +42,25 @@ final class MDDeleteUserCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            try coreDataStack.save()
-            
-            self.result?(.success(()))
-            self.finish()
+            coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
+                
+                switch result {
+                
+                case .success:
+                    
+                    self?.result?(.success(()))
+                    self?.finish()
+                    break
+                    
+                case .failure(let error):
+                    
+                    self?.result?(.failure(error))
+                    self?.finish()
+                    break
+                    
+                }
+                
+            }
             
         } catch let error {
             self.result?(.failure(error))
@@ -64,12 +79,12 @@ final class MDDeleteUserCoreDataStorageOperation: MDOperation {
 final class MDDeleteAllUsersCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let coreDataStorage: MDUserCoreDataStorage
     fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          coreDataStorage: MDUserCoreDataStorage,
          result: MDOperationResultWithCompletion<Void>?) {
         
@@ -92,10 +107,26 @@ final class MDDeleteAllUsersCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            try coreDataStack.save()
+            coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
+                
+                switch result {
+                
+                case .success:
+                    
+                    self?.result?(.success(()))
+                    self?.finish()
+                    break
+                    
+                case .failure(let error):
+                    
+                    self?.result?(.failure(error))
+                    self?.finish()
+                    break
+                    
+                }
+                
+            }
             
-            self.result?(.success(()))
-            self.finish()
             
         } catch let error {
             self.result?(.failure(error))

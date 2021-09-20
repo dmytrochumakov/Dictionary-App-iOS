@@ -10,13 +10,13 @@ import CoreData
 final class MDCreateLanguagesCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let coreDataStorage: MDLanguageCoreDataStorage
     fileprivate let languageEntities: [LanguageResponse]
     fileprivate let result: MDOperationsResultWithCompletion<LanguageResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          coreDataStorage: MDLanguageCoreDataStorage,
          languageEntities: [LanguageResponse],
          result: MDOperationsResultWithCompletion<LanguageResponse>?) {
@@ -39,20 +39,28 @@ final class MDCreateLanguagesCoreDataStorageOperation: MDOperation {
             let _ = CDLanguageResponseEntity.init(languageResponse: languageEntity,
                                                   insertIntoManagedObjectContext: self.managedObjectContext)
             
-            do {
+            coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
                 
-                try coreDataStack.save()
+                switch result {
                 
-                resultCount += 1
-                
-                if (resultCount == self.languageEntities.count) {
-                    self.result?(.success(self.languageEntities))
-                    self.finish()                    
+                case .success:
+                    
+                    resultCount += 1
+                    
+                    if (resultCount == self?.languageEntities.count) {
+                        self?.result?(.success(self?.languageEntities ?? []))
+                        self?.finish()
+                        break
+                    }
+                    
+                case .failure(let error):
+                    
+                    self?.result?(.failure(error))
+                    self?.finish()
+                    break
+                    
                 }
                 
-            } catch let error {
-                self.result?(.failure(error))
-                self.finish()
             }
             
         }
@@ -63,6 +71,5 @@ final class MDCreateLanguagesCoreDataStorageOperation: MDOperation {
         debugPrint(#function, Self.self)
         self.finish()
     }
-    
     
 }

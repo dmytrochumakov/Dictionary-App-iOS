@@ -18,11 +18,11 @@ final class MDUserCoreDataStorage: NSObject,
     
     fileprivate let operationQueueService: OperationQueueServiceProtocol
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     
     init(operationQueueService: OperationQueueServiceProtocol,
          managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack) {
+         coreDataStack: MDCoreDataStack) {
         
         self.operationQueueService = operationQueueService
         self.managedObjectContext = managedObjectContext

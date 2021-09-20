@@ -18,7 +18,7 @@ final class MDJWTCoreDataStorage_Tests: XCTestCase {
         let operationQueue: OperationQueue = .init()
         let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
         
-        let coreDataStack: CoreDataStack = TestCoreDataStack()
+        let coreDataStack: MDCoreDataStack = TestCoreDataStack()
         
         let jwtCoreDataStorage: MDJWTCoreDataStorageProtocol = MDJWTCoreDataStorage.init(operationQueueService: operationQueueService,
                                                                                          managedObjectContext: coreDataStack.privateContext,
@@ -46,6 +46,41 @@ extension MDJWTCoreDataStorage_Tests {
                 XCTAssertTrue(createdJWT.expirationDate == Constants_For_Tests.mockedJWT.expirationDate)
                 expectation.fulfill()
                 
+            case .failure:
+                XCTExpectFailure()
+                expectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
+        
+    }
+    
+    func test_Read_First_JWT_Functionality() {
+        
+        let expectation = XCTestExpectation(description: "Read First JWT Expectation")
+        
+        jwtCoreDataStorage.createJWT(Constants_For_Tests.mockedJWT) { [unowned self] createResult in
+            
+            switch createResult {
+            
+            case .success(let createdJWT):
+                
+                jwtCoreDataStorage.readFirstJWT() { readResult in
+                    
+                    switch readResult {
+                    
+                    case .success(let readJWT):
+                        
+                        XCTAssertTrue(createdJWT.accessToken == readJWT.accessToken)
+                        XCTAssertTrue(createdJWT.expirationDate == readJWT.expirationDate)
+                        expectation.fulfill()
+                        
+                    case .failure:
+                        XCTExpectFailure()
+                        expectation.fulfill()
+                    }
+                }
             case .failure:
                 XCTExpectFailure()
                 expectation.fulfill()
@@ -102,28 +137,13 @@ extension MDJWTCoreDataStorage_Tests {
             case .success(let createdJWT):
                 
                 self.jwtCoreDataStorage.updateJWT(oldAccessToken: createdJWT.accessToken,
-                                                  newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { [unowned self] updateResult in
+                                                  newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { updateResult in
                     
                     switch updateResult {
                     
                     case .success:
                         
-                        jwtCoreDataStorage.readJWT(fromAccessToken: Constants_For_Tests.mockedJWTForUpdate.accessToken) { readResult in
-                            
-                            switch readResult {
-                            
-                            case .success(let readJWT):
-                                
-                                XCTAssertTrue(readJWT.accessToken == Constants_For_Tests.mockedJWTForUpdate.accessToken)
-                                XCTAssertTrue(readJWT.expirationDate == Constants_For_Tests.mockedJWTForUpdate.expirationDate)
-                                expectation.fulfill()
-                                
-                            case .failure:
-                                XCTExpectFailure()
-                                expectation.fulfill()
-                            }
-                            
-                        }
+                        expectation.fulfill()
                         
                     case .failure:
                         XCTExpectFailure()
@@ -156,20 +176,8 @@ extension MDJWTCoreDataStorage_Tests {
                     
                     case .success:                                                
                         
-                        self.jwtCoreDataStorage.entitiesIsEmpty { entitiesIsEmptyResult in
-                            
-                            switch entitiesIsEmptyResult {
-                            
-                            case .success(let entitiesIsEmpty):
-                                
-                                XCTAssertTrue(entitiesIsEmpty)
-                                expectation.fulfill()
-                                
-                            case .failure:
-                                XCTExpectFailure()
-                                expectation.fulfill()
-                            }
-                        }
+                        expectation.fulfill()
+                        
                     case .failure:
                         XCTExpectFailure()
                         expectation.fulfill()
@@ -195,26 +203,13 @@ extension MDJWTCoreDataStorage_Tests {
             
             case .success:
                 
-                self.jwtCoreDataStorage.deleteAllJWT { [unowned self] deleteResult in
+                self.jwtCoreDataStorage.deleteAllJWT { deleteResult in
                     
                     switch deleteResult {
                     
                     case .success:
                         
-                        self.jwtCoreDataStorage.entitiesIsEmpty { entitiesIsEmptyResult in
-                            
-                            switch entitiesIsEmptyResult {
-                            
-                            case .success(let entitiesIsEmpty):
-                                
-                                XCTAssertTrue(entitiesIsEmpty)
-                                expectation.fulfill()
-                                
-                            case .failure:
-                                XCTExpectFailure()
-                                expectation.fulfill()
-                            }
-                        }
+                        expectation.fulfill()
                         
                     case .failure:
                         XCTExpectFailure()

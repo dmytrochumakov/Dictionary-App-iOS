@@ -59,7 +59,11 @@
 		2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */; };
 		2223F8BC26512FFD004F2FE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2223F8BE26512FFD004F2FE9 /* Localizable.strings */; };
 		223648EA26DE38970071F271 /* MDSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223648E926DE38970071F271 /* MDSync.swift */; };
-		22493C2E26971413000DA480 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C2D26971413000DA480 /* CoreDataStack.swift */; };
+		224375AC26F33EA3006B90EB /* MDCourseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375AB26F33EA3006B90EB /* MDCourseListCell.swift */; };
+		224375AF26F3406B006B90EB /* MDCourseListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375AE26F3406B006B90EB /* MDCourseListCellModel.swift */; };
+		224375B226F3509D006B90EB /* MDSyncManager_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375B126F3509D006B90EB /* MDSyncManager_Tests.swift */; };
+		224375B526F360D2006B90EB /* MDAPIJWT_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375B426F360D2006B90EB /* MDAPIJWT_Tests.swift */; };
+		22493C2E26971413000DA480 /* MDCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C2D26971413000DA480 /* MDCoreDataStack.swift */; };
 		22493C312697159E000DA480 /* CDResultSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C302697159E000DA480 /* CDResultSaved.swift */; };
 		22493C33269715A9000DA480 /* CDResultSavedEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C32269715A9000DA480 /* CDResultSavedEnum.swift */; };
 		22493C3526971726000DA480 /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C3426971726000DA480 /* TestCoreDataStack.swift */; };
@@ -119,7 +123,7 @@
 		2270F3A426D264E6006B46F4 /* CDCourseResponseEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A326D264E6006B46F4 /* CDCourseResponseEntity+Extension.swift */; };
 		2270F3A626D2663F006B46F4 /* CDCourseResponseEntityAttributeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A526D2663F006B46F4 /* CDCourseResponseEntityAttributeName.swift */; };
 		2270F3A926D27606006B46F4 /* MDAPILanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A826D27606006B46F4 /* MDAPILanguage.swift */; };
-		227B91D026EF4A1E0086B9AA /* BaseDetailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91CF26EF4A1E0086B9AA /* BaseDetailAuthViewController.swift */; };
+		227B91D026EF4A1E0086B9AA /* MDBaseTitledBackViewControllerWithBackgroundImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91CF26EF4A1E0086B9AA /* MDBaseTitledBackViewControllerWithBackgroundImage.swift */; };
 		227B91D226EF51430086B9AA /* RegistrationTextFieldTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91D126EF51430086B9AA /* RegistrationTextFieldTag.swift */; };
 		227B91D726EF5F250086B9AA /* RegisterValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91D626EF5F250086B9AA /* RegisterValidation.swift */; };
 		227B91DB26EF5F5E0086B9AA /* RegisterValidationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91DA26EF5F5E0086B9AA /* RegisterValidationType.swift */; };
@@ -140,6 +144,12 @@
 		228722D926D1161C00C9D1BC /* MDJWTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722D826D1161C00C9D1BC /* MDJWTManager.swift */; };
 		228722DB26D117A900C9D1BC /* MDReadFirstJWTCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722DA26D117A900C9D1BC /* MDReadFirstJWTCoreDataStorageOperation.swift */; };
 		228722DD26D1189700C9D1BC /* MDReadFirstJWTMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722DC26D1189700C9D1BC /* MDReadFirstJWTMemoryStorageOperation.swift */; };
+		228964A826F8A4F700E23292 /* MDCourseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228964A726F8A4F700E23292 /* MDCourseManager.swift */; };
+		228964AA26F8AA1200E23292 /* MDShowProgressHUDProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228964A926F8AA1200E23292 /* MDShowProgressHUDProtocol.swift */; };
+		228964AC26F8AA2100E23292 /* MDHideProgressHUDProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228964AB26F8AA2100E23292 /* MDHideProgressHUDProtocol.swift */; };
+		228964AE26F8AA2C00E23292 /* MDUpdateHUDProgressProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228964AD26F8AA2C00E23292 /* MDUpdateHUDProgressProtocol.swift */; };
+		228964B026F8AA3E00E23292 /* MDShowHideProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228964AF26F8AA3E00E23292 /* MDShowHideProgressHUD.swift */; };
+		228964B226F8AA4A00E23292 /* MDShowHideUpdateProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228964B126F8AA4A00E23292 /* MDShowHideUpdateProgressHUD.swift */; };
 		2289CEDE2678CC34007254C3 /* MDWordMemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEB72678CC34007254C3 /* MDWordMemoryStorage.swift */; };
 		2289CEDF2678CC34007254C3 /* MDStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEB92678CC34007254C3 /* MDStorageType.swift */; };
 		2289CEE02678CC34007254C3 /* WordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEBB2678CC34007254C3 /* WordResponse.swift */; };
@@ -156,13 +166,16 @@
 		2289CEF92678CC34007254C3 /* OperationQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEDC2678CC34007254C3 /* OperationQueueService.swift */; };
 		2289CEFA2678CC34007254C3 /* MDOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEDD2678CC34007254C3 /* MDOperation.swift */; };
 		2289CEFC2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEFB2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift */; };
-		228AE05626EDDFC20088B4CF /* BaseAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228AE05526EDDFC20088B4CF /* BaseAuthViewController.swift */; };
+		228AE05626EDDFC20088B4CF /* MDBaseNavigationBarAndBackgroundImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228AE05526EDDFC20088B4CF /* MDBaseNavigationBarAndBackgroundImageViewController.swift */; };
 		228AE05926EE05120088B4CF /* HideShowPasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228AE05826EE05120088B4CF /* HideShowPasswordTextField.swift */; };
 		228AE05B26EE053D0088B4CF /* PasswordToggleVisibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228AE05A26EE053D0088B4CF /* PasswordToggleVisibilityView.swift */; };
 		228AE05D26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228AE05C26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift */; };
 		228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 228BC440264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld */; };
 		228BC444264979FE0030FB30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228BC443264979FE0030FB30 /* Assets.xcassets */; };
 		228BC447264979FE0030FB30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228BC445264979FE0030FB30 /* LaunchScreen.storyboard */; };
+		2291BAF026F714DD0012504D /* MDSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291BAEF26F714DD0012504D /* MDSearchBar.swift */; };
+		2291BAF326F7265E0012504D /* MDSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291BAF226F7265E0012504D /* MDSearchTextField.swift */; };
+		2291BAF526F754CF0012504D /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291BAF426F754CF0012504D /* UITableView+Extension.swift */; };
 		2294323026DF9A2A0073048C /* MDSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294322F26DF9A2A0073048C /* MDSyncManager.swift */; };
 		2294323226DF9A460073048C /* MDSyncStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294323126DF9A460073048C /* MDSyncStep.swift */; };
 		2294323426DF9A520073048C /* MDSyncResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294323326DF9A520073048C /* MDSyncResult.swift */; };
@@ -176,6 +189,16 @@
 		2299016C2668EC3400D8C74E /* AppearanceDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901652668EC3400D8C74E /* AppearanceDataProvider.swift */; };
 		2299016D2668EC3400D8C74E /* AppearanceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901662668EC3400D8C74E /* AppearanceDataManager.swift */; };
 		229901712668EE5300D8C74E /* MDAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901702668EE5300D8C74E /* MDAppDelegate.swift */; };
+		2299586F26F486EE003DF092 /* MDFillMemoryStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299586E26F486EE003DF092 /* MDFillMemoryStep.swift */; };
+		2299587126F486FD003DF092 /* MDFillMemoryServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299587026F486FD003DF092 /* MDFillMemoryServiceError.swift */; };
+		2299587426F48710003DF092 /* MDFillMemoryResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299587326F48710003DF092 /* MDFillMemoryResult.swift */; };
+		2299587626F4871D003DF092 /* MDFillMemoryResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299587526F4871D003DF092 /* MDFillMemoryResultWithCompletion.swift */; };
+		2299587926F4A76F003DF092 /* MDFillMemoryService_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299587826F4A76F003DF092 /* MDFillMemoryService_Tests.swift */; };
+		2299E47B26F37C2A00C6E287 /* MDAPILanguage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299E47A26F37C2A00C6E287 /* MDAPILanguage_Tests.swift */; };
+		2299E47D26F3823400C6E287 /* MDAPIAuth_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299E47C26F3823400C6E287 /* MDAPIAuth_Tests.swift */; };
+		2299E47F26F3841700C6E287 /* MDAPIUser_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299E47E26F3841700C6E287 /* MDAPIUser_Tests.swift */; };
+		2299E48126F384DE00C6E287 /* MDAPICourse_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299E48026F384DE00C6E287 /* MDAPICourse_Tests.swift */; };
+		2299E48426F3862700C6E287 /* MDAPIWord_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299E48226F3862000C6E287 /* MDAPIWord_Tests.swift */; };
 		229D2D4326EB53A60047B518 /* ChoiceAuthenticationOrRegistrationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D3C26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationModule.swift */; };
 		229D2D4426EB53A60047B518 /* ChoiceAuthenticationOrRegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D3D26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationPresenter.swift */; };
 		229D2D4526EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D3E26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift */; };
@@ -192,6 +215,11 @@
 		229E08C42652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C32652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift */; };
 		229E08C72652CB9000DA56C4 /* WordListCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */; };
 		229E08CB2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08CA2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift */; };
+		229FFF3626F5E1650024B974 /* MDBaseNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3526F5E1650024B974 /* MDBaseNavigationBarViewController.swift */; };
+		229FFF3826F5E3D90024B974 /* MDBaseTitledBackNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3726F5E3D90024B974 /* MDBaseTitledBackNavigationBarViewController.swift */; };
+		229FFF3A26F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3926F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift */; };
+		229FFF3E26F60AE50024B974 /* CourseListSearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3D26F60AE40024B974 /* CourseListSearchBarDelegate.swift */; };
+		229FFF4026F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3F26F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift */; };
 		22A2521226CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521126CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift */; };
 		22A2521426CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521326CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift */; };
 		22A2521626CFE5230013FCF5 /* MDEntitiesCountProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521526CFE5230013FCF5 /* MDEntitiesCountProtocol.swift */; };
@@ -274,8 +302,8 @@
 		22DB2F7C26C3BE7900C1AADA /* CourseListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7526C3BE7900C1AADA /* CourseListDataProvider.swift */; };
 		22DB2F7D26C3BE7900C1AADA /* CourseListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7626C3BE7900C1AADA /* CourseListDataManager.swift */; };
 		22DB2F7F26C3C3A900C1AADA /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7E26C3C3A800C1AADA /* UIColor+Extension.swift */; };
-		22DB2F8326C3D28900C1AADA /* CourseListCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F8226C3D28900C1AADA /* CourseListCollectionViewDataSource.swift */; };
-		22DB2F8926C3D3F400C1AADA /* CourseListCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F8826C3D3F400C1AADA /* CourseListCollectionViewDelegate.swift */; };
+		22DB2F8326C3D28900C1AADA /* CourseListTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F8226C3D28900C1AADA /* CourseListTableViewDataSource.swift */; };
+		22DB2F8926C3D3F400C1AADA /* CourseListTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F8826C3D3F400C1AADA /* CourseListTableViewDelegate.swift */; };
 		22DB2F8B26C3D4D200C1AADA /* TableViewDelegatePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F8A26C3D4D200C1AADA /* TableViewDelegatePropertyProtocol.swift */; };
 		22DB2F8D26C3D51500C1AADA /* TableViewDataSourcePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F8C26C3D51500C1AADA /* TableViewDataSourcePropertyProtocol.swift */; };
 		22DE582826C9548B0032A94C /* MDCRUDJWTProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE582726C9548B0032A94C /* MDCRUDJWTProtocol.swift */; };
@@ -390,7 +418,11 @@
 		2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageService.swift; sourceTree = "<group>"; };
 		2223F8BD26512FFD004F2FE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		223648E926DE38970071F271 /* MDSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSync.swift; sourceTree = "<group>"; };
-		22493C2D26971413000DA480 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		224375AB26F33EA3006B90EB /* MDCourseListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseListCell.swift; sourceTree = "<group>"; };
+		224375AE26F3406B006B90EB /* MDCourseListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseListCellModel.swift; sourceTree = "<group>"; };
+		224375B126F3509D006B90EB /* MDSyncManager_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncManager_Tests.swift; sourceTree = "<group>"; };
+		224375B426F360D2006B90EB /* MDAPIJWT_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIJWT_Tests.swift; sourceTree = "<group>"; };
+		22493C2D26971413000DA480 /* MDCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCoreDataStack.swift; sourceTree = "<group>"; };
 		22493C302697159E000DA480 /* CDResultSaved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDResultSaved.swift; sourceTree = "<group>"; };
 		22493C32269715A9000DA480 /* CDResultSavedEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDResultSavedEnum.swift; sourceTree = "<group>"; };
 		22493C3426971726000DA480 /* TestCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
@@ -450,7 +482,7 @@
 		2270F3A326D264E6006B46F4 /* CDCourseResponseEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCourseResponseEntity+Extension.swift"; sourceTree = "<group>"; };
 		2270F3A526D2663F006B46F4 /* CDCourseResponseEntityAttributeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDCourseResponseEntityAttributeName.swift; sourceTree = "<group>"; };
 		2270F3A826D27606006B46F4 /* MDAPILanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPILanguage.swift; sourceTree = "<group>"; };
-		227B91CF26EF4A1E0086B9AA /* BaseDetailAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDetailAuthViewController.swift; sourceTree = "<group>"; };
+		227B91CF26EF4A1E0086B9AA /* MDBaseTitledBackViewControllerWithBackgroundImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseTitledBackViewControllerWithBackgroundImage.swift; sourceTree = "<group>"; };
 		227B91D126EF51430086B9AA /* RegistrationTextFieldTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTextFieldTag.swift; sourceTree = "<group>"; };
 		227B91D626EF5F250086B9AA /* RegisterValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterValidation.swift; sourceTree = "<group>"; };
 		227B91DA26EF5F5E0086B9AA /* RegisterValidationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterValidationType.swift; sourceTree = "<group>"; };
@@ -471,6 +503,12 @@
 		228722D826D1161C00C9D1BC /* MDJWTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTManager.swift; sourceTree = "<group>"; };
 		228722DA26D117A900C9D1BC /* MDReadFirstJWTCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadFirstJWTCoreDataStorageOperation.swift; sourceTree = "<group>"; };
 		228722DC26D1189700C9D1BC /* MDReadFirstJWTMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadFirstJWTMemoryStorageOperation.swift; sourceTree = "<group>"; };
+		228964A726F8A4F700E23292 /* MDCourseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseManager.swift; sourceTree = "<group>"; };
+		228964A926F8AA1200E23292 /* MDShowProgressHUDProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDShowProgressHUDProtocol.swift; sourceTree = "<group>"; };
+		228964AB26F8AA2100E23292 /* MDHideProgressHUDProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDHideProgressHUDProtocol.swift; sourceTree = "<group>"; };
+		228964AD26F8AA2C00E23292 /* MDUpdateHUDProgressProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUpdateHUDProgressProtocol.swift; sourceTree = "<group>"; };
+		228964AF26F8AA3E00E23292 /* MDShowHideProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDShowHideProgressHUD.swift; sourceTree = "<group>"; };
+		228964B126F8AA4A00E23292 /* MDShowHideUpdateProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDShowHideUpdateProgressHUD.swift; sourceTree = "<group>"; };
 		2289CEB72678CC34007254C3 /* MDWordMemoryStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordMemoryStorage.swift; sourceTree = "<group>"; };
 		2289CEB92678CC34007254C3 /* MDStorageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDStorageType.swift; sourceTree = "<group>"; };
 		2289CEBB2678CC34007254C3 /* WordResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordResponse.swift; sourceTree = "<group>"; };
@@ -487,7 +525,7 @@
 		2289CEDC2678CC34007254C3 /* OperationQueueService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueueService.swift; sourceTree = "<group>"; };
 		2289CEDD2678CC34007254C3 /* MDOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDOperation.swift; sourceTree = "<group>"; };
 		2289CEFB2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordMemoryStorage_Tests.swift; sourceTree = "<group>"; };
-		228AE05526EDDFC20088B4CF /* BaseAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAuthViewController.swift; sourceTree = "<group>"; };
+		228AE05526EDDFC20088B4CF /* MDBaseNavigationBarAndBackgroundImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseNavigationBarAndBackgroundImageViewController.swift; sourceTree = "<group>"; };
 		228AE05826EE05120088B4CF /* HideShowPasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideShowPasswordTextField.swift; sourceTree = "<group>"; };
 		228AE05A26EE053D0088B4CF /* PasswordToggleVisibilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordToggleVisibilityView.swift; sourceTree = "<group>"; };
 		228AE05C26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDPasswordTextFieldWithToolBar.swift; sourceTree = "<group>"; };
@@ -498,6 +536,9 @@
 		228BC448264979FE0030FB30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		228BC44D264979FF0030FB30 /* MyDictionary_App_SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyDictionary_App_SwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		228BC453264979FF0030FB30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2291BAEF26F714DD0012504D /* MDSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSearchBar.swift; sourceTree = "<group>"; };
+		2291BAF226F7265E0012504D /* MDSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSearchTextField.swift; sourceTree = "<group>"; };
+		2291BAF426F754CF0012504D /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		2294322F26DF9A2A0073048C /* MDSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncManager.swift; sourceTree = "<group>"; };
 		2294323126DF9A460073048C /* MDSyncStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncStep.swift; sourceTree = "<group>"; };
 		2294323326DF9A520073048C /* MDSyncResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncResult.swift; sourceTree = "<group>"; };
@@ -511,6 +552,16 @@
 		229901652668EC3400D8C74E /* AppearanceDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceDataProvider.swift; sourceTree = "<group>"; };
 		229901662668EC3400D8C74E /* AppearanceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceDataManager.swift; sourceTree = "<group>"; };
 		229901702668EE5300D8C74E /* MDAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppDelegate.swift; sourceTree = "<group>"; };
+		2299586E26F486EE003DF092 /* MDFillMemoryStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDFillMemoryStep.swift; sourceTree = "<group>"; };
+		2299587026F486FD003DF092 /* MDFillMemoryServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDFillMemoryServiceError.swift; sourceTree = "<group>"; };
+		2299587326F48710003DF092 /* MDFillMemoryResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDFillMemoryResult.swift; sourceTree = "<group>"; };
+		2299587526F4871D003DF092 /* MDFillMemoryResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDFillMemoryResultWithCompletion.swift; sourceTree = "<group>"; };
+		2299587826F4A76F003DF092 /* MDFillMemoryService_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDFillMemoryService_Tests.swift; sourceTree = "<group>"; };
+		2299E47A26F37C2A00C6E287 /* MDAPILanguage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPILanguage_Tests.swift; sourceTree = "<group>"; };
+		2299E47C26F3823400C6E287 /* MDAPIAuth_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIAuth_Tests.swift; sourceTree = "<group>"; };
+		2299E47E26F3841700C6E287 /* MDAPIUser_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIUser_Tests.swift; sourceTree = "<group>"; };
+		2299E48026F384DE00C6E287 /* MDAPICourse_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPICourse_Tests.swift; sourceTree = "<group>"; };
+		2299E48226F3862000C6E287 /* MDAPIWord_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIWord_Tests.swift; sourceTree = "<group>"; };
 		229D2D3C26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationModule.swift; sourceTree = "<group>"; };
 		229D2D3D26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationPresenter.swift; sourceTree = "<group>"; };
 		229D2D3E26EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceAuthenticationOrRegistrationRouter.swift; sourceTree = "<group>"; };
@@ -527,6 +578,11 @@
 		229E08C32652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfRowsInSectionProtocol.swift; sourceTree = "<group>"; };
 		229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		229E08CA2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourcePropertyProtocol.swift; sourceTree = "<group>"; };
+		229FFF3526F5E1650024B974 /* MDBaseNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseNavigationBarViewController.swift; sourceTree = "<group>"; };
+		229FFF3726F5E3D90024B974 /* MDBaseTitledBackNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseTitledBackNavigationBarViewController.swift; sourceTree = "<group>"; };
+		229FFF3926F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseTitledNavigationBarViewController.swift; sourceTree = "<group>"; };
+		229FFF3D26F60AE40024B974 /* CourseListSearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListSearchBarDelegate.swift; sourceTree = "<group>"; };
+		229FFF3F26F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSearchBarDelegatePropertyProtocol.swift; sourceTree = "<group>"; };
 		22A2521126CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountResultWithoutCompletion.swift; sourceTree = "<group>"; };
 		22A2521326CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountResultWithCompletion.swift; sourceTree = "<group>"; };
 		22A2521526CFE5230013FCF5 /* MDEntitiesCountProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountProtocol.swift; sourceTree = "<group>"; };
@@ -609,8 +665,8 @@
 		22DB2F7526C3BE7900C1AADA /* CourseListDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListDataProvider.swift; sourceTree = "<group>"; };
 		22DB2F7626C3BE7900C1AADA /* CourseListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListDataManager.swift; sourceTree = "<group>"; };
 		22DB2F7E26C3C3A800C1AADA /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
-		22DB2F8226C3D28900C1AADA /* CourseListCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListCollectionViewDataSource.swift; sourceTree = "<group>"; };
-		22DB2F8826C3D3F400C1AADA /* CourseListCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		22DB2F8226C3D28900C1AADA /* CourseListTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListTableViewDataSource.swift; sourceTree = "<group>"; };
+		22DB2F8826C3D3F400C1AADA /* CourseListTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListTableViewDelegate.swift; sourceTree = "<group>"; };
 		22DB2F8A26C3D4D200C1AADA /* TableViewDelegatePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDelegatePropertyProtocol.swift; sourceTree = "<group>"; };
 		22DB2F8C26C3D51500C1AADA /* TableViewDataSourcePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDataSourcePropertyProtocol.swift; sourceTree = "<group>"; };
 		22DE582726C9548B0032A94C /* MDCRUDJWTProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCRUDJWTProtocol.swift; sourceTree = "<group>"; };
@@ -774,14 +830,6 @@
 			path = KeyboardToolbar;
 			sourceTree = "<group>";
 		};
-		220FFE7526C9031200702CCE /* MDTextFieldWithToolBar */ = {
-			isa = PBXGroup;
-			children = (
-				220FFE7626C9031800702CCE /* MDTextFieldWithToolBar.swift */,
-			);
-			path = MDTextFieldWithToolBar;
-			sourceTree = "<group>";
-		};
 		220FFE7826C9060100702CCE /* Storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -937,10 +985,8 @@
 		2223F8A526512BE8004F2FE9 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
-				22CD45EE26F090BD0060978D /* CounterTextField */,
-				228AE05726EE05000088B4CF /* HideShowPasswordTextField */,
+				2291BAF126F726260012504D /* TextFields */,
 				228AE05426EDDFAF0088B4CF /* BaseViewControllers */,
-				220FFE7526C9031200702CCE /* MDTextFieldWithToolBar */,
 				220FFE7226C8F82D00702CCE /* KeyboardToolbar */,
 				221D281D26C54952004BC4F7 /* KeyboardHandler */,
 				22BD99A6266A58EF0063FEFC /* RootViewController */,
@@ -971,6 +1017,10 @@
 				22B22692266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift */,
 				22DB2F8A26C3D4D200C1AADA /* TableViewDelegatePropertyProtocol.swift */,
 				22DB2F8C26C3D51500C1AADA /* TableViewDataSourcePropertyProtocol.swift */,
+				229FFF3F26F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift */,
+				228964A926F8AA1200E23292 /* MDShowProgressHUDProtocol.swift */,
+				228964AB26F8AA2100E23292 /* MDHideProgressHUDProtocol.swift */,
+				228964AD26F8AA2C00E23292 /* MDUpdateHUDProgressProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -987,6 +1037,7 @@
 				220793D226C6B303003D434B /* Encodable+Extension.swift */,
 				229D2D4D26EB706E0047B518 /* UINavigationController+Extension.swift */,
 				22B9080826EB7DD6003848D6 /* UIView+Extension.swift */,
+				2291BAF426F754CF0012504D /* UITableView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1059,6 +1110,43 @@
 				22BBA15C26E0C0F0002955A6 /* MDProgress.swift */,
 			);
 			path = Sync;
+			sourceTree = "<group>";
+		};
+		224375AA26F33E86006B90EB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				224375AB26F33EA3006B90EB /* MDCourseListCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		224375AD26F34062006B90EB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				224375AE26F3406B006B90EB /* MDCourseListCellModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		224375B026F35055006B90EB /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				224375B126F3509D006B90EB /* MDSyncManager_Tests.swift */,
+			);
+			path = Sync;
+			sourceTree = "<group>";
+		};
+		224375B326F3609E006B90EB /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				224375B426F360D2006B90EB /* MDAPIJWT_Tests.swift */,
+				2299E47A26F37C2A00C6E287 /* MDAPILanguage_Tests.swift */,
+				2299E47C26F3823400C6E287 /* MDAPIAuth_Tests.swift */,
+				2299E47E26F3841700C6E287 /* MDAPIUser_Tests.swift */,
+				2299E48026F384DE00C6E287 /* MDAPICourse_Tests.swift */,
+				2299E48226F3862000C6E287 /* MDAPIWord_Tests.swift */,
+			);
+			path = Api;
 			sourceTree = "<group>";
 		};
 		22493C3F26972687000DA480 /* AttributeName */ = {
@@ -1163,6 +1251,7 @@
 		226FEE7E266B735B0044A5F9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2291BAEE26F714C90012504D /* SearchBar */,
 				229D2D4A26EB68340047B518 /* NavigationController */,
 				227D8F1326D7A099009CB94B /* AppSettings */,
 				2223F8A926512C48004F2FE9 /* Extensions */,
@@ -1263,20 +1352,21 @@
 			path = AppSettings;
 			sourceTree = "<group>";
 		};
-		228722CF26D0F16E00C9D1BC /* Manager */ = {
+		228722CF26D0F16E00C9D1BC /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				228722D026D0F18400C9D1BC /* MDAuthManager.swift */,
 				228722D826D1161C00C9D1BC /* MDJWTManager.swift */,
+				228964A726F8A4F700E23292 /* MDCourseManager.swift */,
 			);
-			path = Manager;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		2289CEB62678CC34007254C3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				223648E826DE38050071F271 /* Sync */,
-				228722CF26D0F16E00C9D1BC /* Manager */,
+				228722CF26D0F16E00C9D1BC /* Managers */,
 				220FFE7826C9060100702CCE /* Storage */,
 				22EF01E6269DA6D400FE4435 /* Network */,
 				2289CEB82678CC34007254C3 /* Enums */,
@@ -1365,8 +1455,8 @@
 		2289CEDB2678CC34007254C3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2299586C26F486CF003DF092 /* MDFillMemoryService */,
 				2289CEDC2678CC34007254C3 /* OperationQueueService.swift */,
-				22BBA15E26E0DFC9002955A6 /* MDFillMemoryService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1374,20 +1464,13 @@
 		228AE05426EDDFAF0088B4CF /* BaseViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				228AE05526EDDFC20088B4CF /* BaseAuthViewController.swift */,
-				227B91CF26EF4A1E0086B9AA /* BaseDetailAuthViewController.swift */,
+				228AE05526EDDFC20088B4CF /* MDBaseNavigationBarAndBackgroundImageViewController.swift */,
+				227B91CF26EF4A1E0086B9AA /* MDBaseTitledBackViewControllerWithBackgroundImage.swift */,
+				229FFF3526F5E1650024B974 /* MDBaseNavigationBarViewController.swift */,
+				229FFF3726F5E3D90024B974 /* MDBaseTitledBackNavigationBarViewController.swift */,
+				229FFF3926F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift */,
 			);
 			path = BaseViewControllers;
-			sourceTree = "<group>";
-		};
-		228AE05726EE05000088B4CF /* HideShowPasswordTextField */ = {
-			isa = PBXGroup;
-			children = (
-				228AE05826EE05120088B4CF /* HideShowPasswordTextField.swift */,
-				228AE05A26EE053D0088B4CF /* PasswordToggleVisibilityView.swift */,
-				228AE05C26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift */,
-			);
-			path = HideShowPasswordTextField;
 			sourceTree = "<group>";
 		};
 		228BC42B264979FD0030FB30 = {
@@ -1430,6 +1513,9 @@
 		228BC450264979FF0030FB30 /* MyDictionary_App_SwiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				2299587726F4A751003DF092 /* FillMemoryService */,
+				224375B326F3609E006B90EB /* Api */,
+				224375B026F35055006B90EB /* Sync */,
 				22561C8426D4BB8300A6135B /* Course */,
 				22B8E6B526D39173001CCCA8 /* Language */,
 				22557FCD26C95A4200A4FF31 /* JWT */,
@@ -1484,7 +1570,7 @@
 				22493C3F26972687000DA480 /* AttributeName */,
 				222EF9AF2694808E00542D3D /* Entities */,
 				228BC47026497B2D0030FB30 /* Model */,
-				22493C2D26971413000DA480 /* CoreDataStack.swift */,
+				22493C2D26971413000DA480 /* MDCoreDataStack.swift */,
 				22493C302697159E000DA480 /* CDResultSaved.swift */,
 				22493C32269715A9000DA480 /* CDResultSavedEnum.swift */,
 				22493C4826972A03000DA480 /* CDWordResponseEntity+Extension.swift */,
@@ -1504,6 +1590,28 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		2291BAEE26F714C90012504D /* SearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				2291BAEF26F714DD0012504D /* MDSearchBar.swift */,
+			);
+			path = SearchBar;
+			sourceTree = "<group>";
+		};
+		2291BAF126F726260012504D /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				220FFE7626C9031800702CCE /* MDTextFieldWithToolBar.swift */,
+				228AE05C26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift */,
+				228AE05A26EE053D0088B4CF /* PasswordToggleVisibilityView.swift */,
+				228AE05826EE05120088B4CF /* HideShowPasswordTextField.swift */,
+				22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */,
+				22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */,
+				2291BAF226F7265E0012504D /* MDSearchTextField.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
 		2299015F2668EC2900D8C74E /* AppearanceModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -1521,6 +1629,42 @@
 				22BD99A1266A4B8D0063FEFC /* AppearanceModule.swift */,
 			);
 			path = AppearanceModule;
+			sourceTree = "<group>";
+		};
+		2299586C26F486CF003DF092 /* MDFillMemoryService */ = {
+			isa = PBXGroup;
+			children = (
+				2299587226F48708003DF092 /* Results */,
+				2299586D26F486E2003DF092 /* Enums */,
+				22BBA15E26E0DFC9002955A6 /* MDFillMemoryService.swift */,
+			);
+			path = MDFillMemoryService;
+			sourceTree = "<group>";
+		};
+		2299586D26F486E2003DF092 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				2299586E26F486EE003DF092 /* MDFillMemoryStep.swift */,
+				2299587026F486FD003DF092 /* MDFillMemoryServiceError.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		2299587226F48708003DF092 /* Results */ = {
+			isa = PBXGroup;
+			children = (
+				2299587326F48710003DF092 /* MDFillMemoryResult.swift */,
+				2299587526F4871D003DF092 /* MDFillMemoryResultWithCompletion.swift */,
+			);
+			path = Results;
+			sourceTree = "<group>";
+		};
+		2299587726F4A751003DF092 /* FillMemoryService */ = {
+			isa = PBXGroup;
+			children = (
+				2299587826F4A76F003DF092 /* MDFillMemoryService_Tests.swift */,
+			);
+			path = FillMemoryService;
 			sourceTree = "<group>";
 		};
 		229C2B092652512700B270C1 /* CollectionViewDelegate */ = {
@@ -1559,6 +1703,23 @@
 				229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */,
 			);
 			path = CollectionViewDataSource;
+			sourceTree = "<group>";
+		};
+		229FFF3B26F60A940024B974 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				22DB2F8826C3D3F400C1AADA /* CourseListTableViewDelegate.swift */,
+				229FFF3D26F60AE40024B974 /* CourseListSearchBarDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		229FFF3C26F60AA90024B974 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				22DB2F8226C3D28900C1AADA /* CourseListTableViewDataSource.swift */,
+			);
+			path = DataSources;
 			sourceTree = "<group>";
 		};
 		22A31B5426ECBA4D00676E55 /* Fonts */ = {
@@ -1803,20 +1964,13 @@
 			path = AppStyling;
 			sourceTree = "<group>";
 		};
-		22CD45EE26F090BD0060978D /* CounterTextField */ = {
-			isa = PBXGroup;
-			children = (
-				22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */,
-				22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */,
-			);
-			path = CounterTextField;
-			sourceTree = "<group>";
-		};
 		22DB2F6F26C3BE3C00C1AADA /* CourseListModule */ = {
 			isa = PBXGroup;
 			children = (
-				22DB2F8126C3D27B00C1AADA /* CollectionViewDataSource */,
-				22DB2F8026C3D27100C1AADA /* CollectionViewDelegate */,
+				229FFF3C26F60AA90024B974 /* DataSources */,
+				229FFF3B26F60A940024B974 /* Delegates */,
+				224375AD26F34062006B90EB /* Models */,
+				224375AA26F33E86006B90EB /* Cells */,
 				22DB2F7026C3BE7900C1AADA /* CourseListModule.swift */,
 				22DB2F7126C3BE7900C1AADA /* CourseListPresenter.swift */,
 				22DB2F7226C3BE7900C1AADA /* CourseListRouter.swift */,
@@ -1826,22 +1980,6 @@
 				22DB2F7626C3BE7900C1AADA /* CourseListDataManager.swift */,
 			);
 			path = CourseListModule;
-			sourceTree = "<group>";
-		};
-		22DB2F8026C3D27100C1AADA /* CollectionViewDelegate */ = {
-			isa = PBXGroup;
-			children = (
-				22DB2F8826C3D3F400C1AADA /* CourseListCollectionViewDelegate.swift */,
-			);
-			path = CollectionViewDelegate;
-			sourceTree = "<group>";
-		};
-		22DB2F8126C3D27B00C1AADA /* CollectionViewDataSource */ = {
-			isa = PBXGroup;
-			children = (
-				22DB2F8226C3D28900C1AADA /* CourseListCollectionViewDataSource.swift */,
-			);
-			path = CollectionViewDataSource;
 			sourceTree = "<group>";
 		};
 		22DE582426C9536A0032A94C /* JWT */ = {
@@ -1907,6 +2045,8 @@
 			children = (
 				22E2B4FD266515D400978E62 /* CollectionViewDelegateFlowLayout.swift */,
 				22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */,
+				228964AF26F8AA3E00E23292 /* MDShowHideProgressHUD.swift */,
+				228964B126F8AA4A00E23292 /* MDShowHideUpdateProgressHUD.swift */,
 			);
 			path = Typealias;
 			sourceTree = "<group>";
@@ -2220,6 +2360,7 @@
 				22B8E6CE26D3B472001CCCA8 /* MDDeleteAllJWTMemoryStorageOperation.swift in Sources */,
 				229D2D4526EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift in Sources */,
 				22493C52269741FF000DA480 /* MDDeleteWordCoreDataStorageOperation.swift in Sources */,
+				228964B226F8AA4A00E23292 /* MDShowHideUpdateProgressHUD.swift in Sources */,
 				2258921D26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift in Sources */,
 				22E2B4F02664EF3200978E62 /* UICollectionView+Extension.swift in Sources */,
 				2220FCB426D50E6100B22515 /* CreateCourseRequest.swift in Sources */,
@@ -2231,12 +2372,13 @@
 				22EF020A269DAE9800FE4435 /* MDAPIWord.swift in Sources */,
 				22B8E6BC26D39840001CCCA8 /* MDReadLanguageCoreDataStorageOperation.swift in Sources */,
 				22BD99AB266A67A60063FEFC /* AppearanceType.swift in Sources */,
-				22493C2E26971413000DA480 /* CoreDataStack.swift in Sources */,
+				22493C2E26971413000DA480 /* MDCoreDataStack.swift in Sources */,
 				227B91D226EF51430086B9AA /* RegistrationTextFieldTag.swift in Sources */,
 				22561C8A26D4CEBA00A6135B /* MDReadAllCoursesCoreDataStorageOperation.swift in Sources */,
 				229D2D4826EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataProvider.swift in Sources */,
 				227B91DF26EF60310086B9AA /* RegisterValidationResult.swift in Sources */,
 				226FEE7D266B65080044A5F9 /* AppearanceCell.swift in Sources */,
+				2299587126F486FD003DF092 /* MDFillMemoryServiceError.swift in Sources */,
 				22B22689266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift in Sources */,
 				225C349526D6746800F3BC9A /* JWTApiRequest.swift in Sources */,
 				227B91DB26EF5F5E0086B9AA /* RegisterValidationType.swift in Sources */,
@@ -2252,17 +2394,21 @@
 				22B8E6A326D381EF001CCCA8 /* MDLanguageCoreDataStorage.swift in Sources */,
 				22B22691266CF866007AB292 /* UIViewController+Extension.swift in Sources */,
 				229901712668EE5300D8C74E /* MDAppDelegate.swift in Sources */,
+				229FFF3626F5E1650024B974 /* MDBaseNavigationBarViewController.swift in Sources */,
+				224375AF26F3406B006B90EB /* MDCourseListCellModel.swift in Sources */,
 				220793CB26C67432003D434B /* UIAlertController+Extension.swift in Sources */,
 				22E2B4F9266509CA00978E62 /* SettingsRowModel.swift in Sources */,
 				22557FC726C9589000A4FF31 /* MDJWTMemoryStorage.swift in Sources */,
 				221D281C26C533AF004BC4F7 /* AuthTextFieldDelegate.swift in Sources */,
 				22B8E6D426D3B9EA001CCCA8 /* MDDeleteAllWordsCoreDataStorageOperation.swift in Sources */,
-				22DB2F8326C3D28900C1AADA /* CourseListCollectionViewDataSource.swift in Sources */,
+				22DB2F8326C3D28900C1AADA /* CourseListTableViewDataSource.swift in Sources */,
 				229901682668EC3400D8C74E /* AppearancePresenter.swift in Sources */,
 				22557FD726C9660F00A4FF31 /* MDDeleteJWTMemoryStorageOperation.swift in Sources */,
 				220FFEA426C915C700702CCE /* MDReadUserMemoryStorageOperation.swift in Sources */,
 				227D5E672652585C00B54524 /* CollectionViewDelegateFlowLayoutPropertyProtocol.swift in Sources */,
 				22557FC526C9587100A4FF31 /* MDJWTStorage.swift in Sources */,
+				2291BAF026F714DD0012504D /* MDSearchBar.swift in Sources */,
+				224375AC26F33EA3006B90EB /* MDCourseListCell.swift in Sources */,
 				22CA088726515F6A0052D169 /* WordListDataManager.swift in Sources */,
 				22E2B4E12664E43B00978E62 /* SettingsDataProvider.swift in Sources */,
 				221D281426C5064A004BC4F7 /* AuthenticationDataManager.swift in Sources */,
@@ -2279,14 +2425,18 @@
 				227F8AB326CAB0DC00375A38 /* JWTResponse.swift in Sources */,
 				22DB2F7C26C3BE7900C1AADA /* CourseListDataProvider.swift in Sources */,
 				22B8E6E626D3C7C3001CCCA8 /* MDDeleteCourseProtocol.swift in Sources */,
+				228964A826F8A4F700E23292 /* MDCourseManager.swift in Sources */,
 				22493C39269722AA000DA480 /* MDCRUDWordProtocol.swift in Sources */,
 				22C5862D26C79D360030B12D /* MDAPIStatusCode.swift in Sources */,
 				22493C562697421C000DA480 /* MDUpdateWordCoreDataStorageOperation.swift in Sources */,
 				22C5863D26C7AFB80030B12D /* RegistrationViewController.swift in Sources */,
+				2299587426F48710003DF092 /* MDFillMemoryResult.swift in Sources */,
 				2270F3A926D27606006B46F4 /* MDAPILanguage.swift in Sources */,
 				22493C4C26972E27000DA480 /* MDEntityOperationError.swift in Sources */,
+				228964AC26F8AA2100E23292 /* MDHideProgressHUDProtocol.swift in Sources */,
 				227B91E426EF62F80086B9AA /* RegisterTextFieldDelegate.swift in Sources */,
 				220793D126C6B2D9003D434B /* AuthRequest.swift in Sources */,
+				2291BAF326F7265E0012504D /* MDSearchTextField.swift in Sources */,
 				22557FD326C95D5A00A4FF31 /* MDReadJWTMemoryStorageOperation.swift in Sources */,
 				229901692668EC3400D8C74E /* AppearanceRouter.swift in Sources */,
 				227B91D726EF5F250086B9AA /* RegisterValidation.swift in Sources */,
@@ -2295,12 +2445,13 @@
 				22DE582C26C954A70032A94C /* MDReadJWTProtocol.swift in Sources */,
 				2294323626DF9A5D0073048C /* MDSyncResultWithCompletion.swift in Sources */,
 				22561C8C26D4CF6A00A6135B /* MDDeleteCourseCoreDataStorageOperation.swift in Sources */,
-				22DB2F8926C3D3F400C1AADA /* CourseListCollectionViewDelegate.swift in Sources */,
+				22DB2F8926C3D3F400C1AADA /* CourseListTableViewDelegate.swift in Sources */,
 				220793C526C66F6A003D434B /* AuthValidationType.swift in Sources */,
 				22DE583026C954C00032A94C /* MDDeleteJWTProtocol.swift in Sources */,
 				220FFEB526C9298200702CCE /* MDReadUsersCoreDataStorageOperation.swift in Sources */,
 				228AE05D26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift in Sources */,
 				22A2521426CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift in Sources */,
+				2291BAF526F754CF0012504D /* UITableView+Extension.swift in Sources */,
 				22E2B4F7266509B900978E62 /* SettingsSectionModel.swift in Sources */,
 				220793DA26C6BF58003D434B /* AuthResponse.swift in Sources */,
 				22493C3726972232000DA480 /* MDWordCoreDataStorage.swift in Sources */,
@@ -2311,6 +2462,7 @@
 				22EF01EC269DA70300FE4435 /* Endpoint.swift in Sources */,
 				220793D326C6B303003D434B /* Encodable+Extension.swift in Sources */,
 				227D5E6A2652586F00B54524 /* WordListCollectionViewDelegate.swift in Sources */,
+				228964B026F8AA3E00E23292 /* MDShowHideProgressHUD.swift in Sources */,
 				22C5863F26C7AFB80030B12D /* RegistrationDataProvider.swift in Sources */,
 				229E08CB2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift in Sources */,
 				22A2521626CFE5230013FCF5 /* MDEntitiesCountProtocol.swift in Sources */,
@@ -2360,7 +2512,7 @@
 				22DB2F7A26C3BE7900C1AADA /* CourseListViewController.swift in Sources */,
 				2299016C2668EC3400D8C74E /* AppearanceDataProvider.swift in Sources */,
 				22E2B4E02664E43B00978E62 /* SettingsInteractor.swift in Sources */,
-				228AE05626EDDFC20088B4CF /* BaseAuthViewController.swift in Sources */,
+				228AE05626EDDFC20088B4CF /* MDBaseNavigationBarAndBackgroundImageViewController.swift in Sources */,
 				227D8F1526D7A4FA009CB94B /* MDAppSettings.swift in Sources */,
 				2294323026DF9A2A0073048C /* MDSyncManager.swift in Sources */,
 				22B22693266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift in Sources */,
@@ -2390,6 +2542,7 @@
 				22E2B4E22664E43B00978E62 /* SettingsDataManager.swift in Sources */,
 				22B8E6DB26D3C519001CCCA8 /* MDCourseMemoryStorage.swift in Sources */,
 				22B8E6BE26D39BD4001CCCA8 /* MDReadAllLanguagesCoreDataStorageOperation.swift in Sources */,
+				2299587626F4871D003DF092 /* MDFillMemoryResultWithCompletion.swift in Sources */,
 				2289CEF42678CC34007254C3 /* MDUpdateWordProtocol.swift in Sources */,
 				22B6B9E426958F4E0076B003 /* MDAppDependencies.swift in Sources */,
 				220FFE8E26C90B2A00702CCE /* MDUpdateUserProtocol.swift in Sources */,
@@ -2409,7 +2562,7 @@
 				229E08C72652CB9000DA56C4 /* WordListCollectionViewDataSource.swift in Sources */,
 				22BD99A2266A4B8D0063FEFC /* AppearanceModule.swift in Sources */,
 				22DB2F8D26C3D51500C1AADA /* TableViewDataSourcePropertyProtocol.swift in Sources */,
-				227B91D026EF4A1E0086B9AA /* BaseDetailAuthViewController.swift in Sources */,
+				227B91D026EF4A1E0086B9AA /* MDBaseTitledBackViewControllerWithBackgroundImage.swift in Sources */,
 				2223F8B426512F01004F2FE9 /* KeysForTranslate.swift in Sources */,
 				221D281926C53356004BC4F7 /* AuthenticationTextFieldTag.swift in Sources */,
 				227B91DD26EF5F670086B9AA /* RegisterValidationError.swift in Sources */,
@@ -2417,8 +2570,10 @@
 				2223F8AE26512DEB004F2FE9 /* MDConstants.swift in Sources */,
 				2299016B2668EC3400D8C74E /* AppearanceInteractor.swift in Sources */,
 				22561CA326D4F09100A6135B /* MDAPIUser.swift in Sources */,
+				228964AA26F8AA1200E23292 /* MDShowProgressHUDProtocol.swift in Sources */,
 				220793C726C66F76003D434B /* AuthValidationError.swift in Sources */,
 				22EF0202269DA9E300FE4435 /* MDResponseOperationResult.swift in Sources */,
+				229FFF3A26F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift in Sources */,
 				22BBA15B26E0B366002955A6 /* MDSyncError.swift in Sources */,
 				22B8E6CC26D3B398001CCCA8 /* MDDeleteAllJWTCoreDataStorageOperation.swift in Sources */,
 				220793BF26C65BF4003D434B /* AuthValidation.swift in Sources */,
@@ -2426,6 +2581,7 @@
 				22DB2F7826C3BE7900C1AADA /* CourseListPresenter.swift in Sources */,
 				22CA088126515EEB0052D169 /* WordListPresenter.swift in Sources */,
 				22557FC926C958A200A4FF31 /* MDJWTCoreDataStorage.swift in Sources */,
+				229FFF3E26F60AE50024B974 /* CourseListSearchBarDelegate.swift in Sources */,
 				2223F8AB26512C5A004F2FE9 /* String+Extension.swift in Sources */,
 				22CA088E265167620052D169 /* ReloadDataProtocol.swift in Sources */,
 				22DB2F7726C3BE7900C1AADA /* CourseListModule.swift in Sources */,
@@ -2467,6 +2623,7 @@
 				228722DD26D1189700C9D1BC /* MDReadFirstJWTMemoryStorageOperation.swift in Sources */,
 				220FFE9226C90B5000702CCE /* MDCRUDUserProtocol.swift in Sources */,
 				22EF01F6269DA81100FE4435 /* MDRequestDispatcher.swift in Sources */,
+				2299586F26F486EE003DF092 /* MDFillMemoryStep.swift in Sources */,
 				226FEE8C266BB2620044A5F9 /* AppearanceRowModel.swift in Sources */,
 				22B8E6A126D380CE001CCCA8 /* MDLanguageMemoryStorage.swift in Sources */,
 				221D281126C5064A004BC4F7 /* AuthenticationViewController.swift in Sources */,
@@ -2478,6 +2635,7 @@
 				22B8E69F26D38059001CCCA8 /* MDLanguageStorage.swift in Sources */,
 				2270F3A226D262F5006B46F4 /* CourseResponse.swift in Sources */,
 				22B8E6B226D38D6D001CCCA8 /* MDReadAllLanguagesMemoryStorageOperation.swift in Sources */,
+				228964AE26F8AA2C00E23292 /* MDUpdateHUDProgressProtocol.swift in Sources */,
 				22C5863A26C7AFB80030B12D /* RegistrationModule.swift in Sources */,
 				22C5863126C7A5690030B12D /* MDAPIAuthError.swift in Sources */,
 				22CD45F026F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift in Sources */,
@@ -2487,6 +2645,7 @@
 				2223F8A826512C1A004F2FE9 /* LocalizableProtocol.swift in Sources */,
 				22DEAE3226C289F100B64B16 /* MDAPIVersion.swift in Sources */,
 				2294323426DF9A520073048C /* MDSyncResult.swift in Sources */,
+				229FFF3826F5E3D90024B974 /* MDBaseTitledBackNavigationBarViewController.swift in Sources */,
 				228AE05B26EE053D0088B4CF /* PasswordToggleVisibilityView.swift in Sources */,
 				22B8E6BA26D396B0001CCCA8 /* MDCreateLanguagesCoreDataStorageOperation.swift in Sources */,
 				22B8E6DD26D3C54B001CCCA8 /* MDCourseCoreDataStorage.swift in Sources */,
@@ -2501,6 +2660,7 @@
 				22493C33269715A9000DA480 /* CDResultSavedEnum.swift in Sources */,
 				225C349726D6774500F3BC9A /* MDAPIAccount.swift in Sources */,
 				229D2D4326EB53A60047B518 /* ChoiceAuthenticationOrRegistrationModule.swift in Sources */,
+				229FFF4026F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift in Sources */,
 				22EF020D269DAFC000FE4435 /* MDAPIEnvironment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2509,17 +2669,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2299587926F4A76F003DF092 /* MDFillMemoryService_Tests.swift in Sources */,
 				22561C9026D4D12D00A6135B /* MDCourseCoreDataStorage_Tests.swift in Sources */,
+				2299E47B26F37C2A00C6E287 /* MDAPILanguage_Tests.swift in Sources */,
 				220FFEBA26C93A0000702CCE /* MDUserStorage_Tests.swift in Sources */,
 				22EF01DF269D8EC600FE4435 /* MDWordStorage_Tests.swift in Sources */,
+				224375B526F360D2006B90EB /* MDAPIJWT_Tests.swift in Sources */,
+				2299E48126F384DE00C6E287 /* MDAPICourse_Tests.swift in Sources */,
 				220FFEA826C9168700702CCE /* MDUserMemoryStorage_Tests.swift in Sources */,
 				22B8E6CA26D3A53E001CCCA8 /* MDLanguageStorage_Tests.swift in Sources */,
+				224375B226F3509D006B90EB /* MDSyncManager_Tests.swift in Sources */,
+				2299E47F26F3841700C6E287 /* MDAPIUser_Tests.swift in Sources */,
 				22557FCF26C95A5100A4FF31 /* MDJWTMemoryStorage_Tests.swift in Sources */,
 				2289CEFC2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift in Sources */,
 				2294D6C526A2F5DC0066BE77 /* Constants_For_Tests.swift in Sources */,
 				22493C5826974F4C000DA480 /* MDWordCoreDataStorage_Tests.swift in Sources */,
 				2258546426CA6A2F00368354 /* MDJWTStorage_Tests.swift in Sources */,
+				2299E47D26F3823400C6E287 /* MDAPIAuth_Tests.swift in Sources */,
 				220FFEB326C91F6600702CCE /* MDUserCoreDataStorage_Tests.swift in Sources */,
+				2299E48426F3862700C6E287 /* MDAPIWord_Tests.swift in Sources */,
 				2258921F26CA393F00AD6F18 /* MDJWTCoreDataStorage_Tests.swift in Sources */,
 				22493C3526971726000DA480 /* TestCoreDataStack.swift in Sources */,
 				22B8E6B726D3917C001CCCA8 /* MDLanguageMemoryStorage_Tests.swift in Sources */,

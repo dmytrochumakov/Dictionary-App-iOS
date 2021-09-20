@@ -11,66 +11,66 @@ struct MDAppStyling {
     
     enum Color {
         
-        // Light
-        case md_White_0_Light_Appearence
-        case md_Black_0_Light_Appearence
-        case md_Black_1_Light_Appearence
-        case md_Light_Gray_0_Light_Appearence
-        case md_Blue_0_Light_Appearence
-        case md_Blue_1_Light_Appearence
-        case md_Shadow_0_Light_Appearence
+        case md_FFFFFF
+        case md_101010
+        case md_3C3C3C
+        case md_F8F8F8
+        case md_007AFF
+        case md_4400D4
+        case md_5200FF
+        case md_C7C7CC
         
-        // Dark
-        case md_White_0_Dark_Appearence
-        case md_Black_0_Dark_Appearence
-        case md_Light_Gray_0_Dark_Appearence
-        case md_Blue_0_Dark_Appearence
+        case md_F2F2F7
+        case md_1C1C1E
+        case md_48484A
+        case md_0A84FF
         
-        // Other
-        case light_Gray_0
+        case md_C6C6C6
         
         
         /// - Parameter alpha: 1.0 by default
         func color(_ alpha: CGFloat = 1.0) -> UIColor {
             switch self {
             
-            // Light
-            case .md_White_0_Light_Appearence:
+            case .md_FFFFFF:
                 return UIColor.init(rgb: 0xFFFFFF, alpha: alpha)
                 
-            case .md_Black_0_Light_Appearence:
+            case .md_101010:
                 return UIColor.init(rgb: 0x101010, alpha: alpha)
                 
-            case .md_Black_1_Light_Appearence:
+            case .md_3C3C3C:
                 return UIColor.init(rgb: 0x3C3C3C, alpha: alpha)
                 
-            case .md_Light_Gray_0_Light_Appearence:
+            case .md_F8F8F8:
                 return UIColor.init(rgb: 0xF8F8F8, alpha: alpha)
                 
-            case .md_Blue_0_Light_Appearence:
+            case .md_007AFF:
                 return UIColor.init(rgb: 0x007AFF, alpha: alpha)
                 
-            case .md_Blue_1_Light_Appearence:
+            case .md_4400D4:
                 return UIColor.init(rgb: 0x4400D4, alpha: alpha)
                 
-            case .md_Shadow_0_Light_Appearence:
+            case .md_5200FF:
                 return UIColor.init(rgb: 0x5200FF, alpha: alpha)
                 
+            case.md_C7C7CC:
+                return UIColor.init(rgb: 0xC7C7CC, alpha: alpha)
                 
-            // Dark
-            case .md_White_0_Dark_Appearence:
+                
+            case .md_F2F2F7:
                 return UIColor.init(rgb: 0xF2F2F7, alpha: alpha)
                 
-            case .md_Black_0_Dark_Appearence:
+            case .md_1C1C1E:
                 return UIColor.init(rgb: 0x1C1C1E, alpha: alpha)
                 
-            case .md_Light_Gray_0_Dark_Appearence:
+            case .md_48484A:
                 return UIColor.init(rgb: 0x48484A, alpha: alpha)
                 
-            case .md_Blue_0_Dark_Appearence:
+            case .md_0A84FF:
                 return UIColor.init(rgb: 0x0A84FF, alpha: alpha)
                 
-            case .light_Gray_0:
+                
+            case .md_C6C6C6:
                 return UIColor.init(rgb: 0xC6C6C6, alpha: alpha)
                 
             }
@@ -89,8 +89,8 @@ struct MDAppStyling {
         case MyriadProItalic
         case MyriadProRegular
         
-        /// - Parameter ofSize: 14.0 by default
-        func font(ofSize size: CGFloat = 14.0) -> UIFont {
+        /// - Parameter ofSize: MDConstants.Font.defaultSize by default
+        func font(ofSize size: CGFloat = MDConstants.Font.defaultSize) -> UIFont {
             switch self {
             case .systemFont:
                 return .systemFont(ofSize: size)
@@ -107,12 +107,6 @@ struct MDAppStyling {
             }
         }
         
-        /// Font: systemFont by default
-        /// Font size: 17.0 by default
-        static var `default`: UIFont {
-            return Font.systemFont.font(ofSize: 17)
-        }
-        
     }
     
     enum Image: String {
@@ -125,6 +119,12 @@ struct MDAppStyling {
         case eye_closed
         case eye_open
         case background_typography_2
+        case add
+        case settings
+        case background_navigation_bar_1
+        case right_arrow
+        case search
+        case delete
         
         var image: UIImage {
             
@@ -137,7 +137,13 @@ struct MDAppStyling {
                  .eye_open,
                  .eye_closed,
                  .back_white_arrow,
-                 .background_typography_2:
+                 .background_typography_2,
+                 .add,
+                 .settings,
+                 .background_navigation_bar_1,
+                 .right_arrow,
+                 .search,
+                 .delete:
                 
                 return configuredImage(fromName: self.rawValue)
                 

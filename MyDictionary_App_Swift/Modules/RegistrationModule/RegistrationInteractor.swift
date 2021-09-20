@@ -18,7 +18,8 @@ protocol RegistrationInteractorInputProtocol {
     
 }
 
-protocol RegistrationInteractorOutputProtocol: AnyObject {
+protocol RegistrationInteractorOutputProtocol: AnyObject,
+                                               MDShowHideUpdateProgressHUD {
     
     func makePasswordFieldActive()
     func makeConfirmPasswordFieldActive()
@@ -171,12 +172,15 @@ fileprivate extension RegistrationInteractor {
         
         if (registerValidation.isValid) {
             
+            // Show Progress HUD
+            interactorOutput?.showProgressHUD()
+            
             let authRequest: AuthRequest = .init(nickname: dataManager.getNickname()!,
                                                  password: dataManager.getPassword()!)
             
             apiManager.register(authRequest: authRequest) { [weak self] progress in
                 
-                debugPrint(#function, Self.self, "progress: ", progress)
+                self?.interactorOutput?.updateHUDProgress(progress)
                 
             } completionHandler: { [weak self] (result) in
                 
@@ -184,12 +188,20 @@ fileprivate extension RegistrationInteractor {
                 
                 case .success:
                     
+                    // Hide Progress HUD
+                    self?.interactorOutput?.hideProgressHUD()
+                    //
                     self?.interactorOutput?.showCourseList()
+                    //
                     break
                     
                 case .failure(let error):
                     
+                    // Hide Progress HUD
+                    self?.interactorOutput?.hideProgressHUD()
+                    //
                     self?.interactorOutput?.showValidationError(error)
+                    //
                     break
                     
                 }

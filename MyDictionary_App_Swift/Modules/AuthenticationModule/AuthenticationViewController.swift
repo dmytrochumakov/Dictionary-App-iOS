@@ -4,9 +4,9 @@
 //
 //  Created Dmytro Chumakov on 12.08.2021.
 
-import UIKit
+import MBProgressHUD
 
-final class AuthenticationViewController: BaseDetailAuthViewController {
+final class AuthenticationViewController: MDBaseTitledBackViewControllerWithBackgroundImage {
     
     fileprivate let presenter: AuthenticationPresenterInputProtocol
     
@@ -22,11 +22,11 @@ final class AuthenticationViewController: BaseDetailAuthViewController {
         textField.autocorrectionType = .no
         textField.textAlignment = .left
         textField.clearButtonMode = .whileEditing
-        textField.font = MDAppStyling.Font.MyriadProItalic.font(ofSize: 17)
-        textField.textColor = MDAppStyling.Color.md_Black_1_Light_Appearence.color()
+        textField.font = MDAppStyling.Font.MyriadProItalic.font()
+        textField.textColor = MDAppStyling.Color.md_3C3C3C.color()
         textField.returnKeyType = .next
         textField.tag = AuthenticationTextFieldTag.nickname.rawValue
-        textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
+        textField.backgroundColor = MDAppStyling.Color.md_FFFFFF.color()
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -36,18 +36,19 @@ final class AuthenticationViewController: BaseDetailAuthViewController {
     fileprivate static let passwordTextFieldLeftOffset: CGFloat = 16
     fileprivate static let passwordTextFieldRightOffset: CGFloat = 16
     fileprivate let passwordTextField: MDPasswordTextFieldWithToolBar = {
-        let textField: MDPasswordTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.passwordInset,
+        let textField: MDPasswordTextFieldWithToolBar = .init(height: passwordTextFieldHeight,
+                                                              rectInset: MDConstants.Rect.passwordInset,
                                                               keyboardToolbar: .init())
         textField.placeholder = KeysForTranslate.password.localized
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.textAlignment = .left
-        textField.font = MDAppStyling.Font.MyriadProItalic.font(ofSize: 17)
-        textField.textColor = MDAppStyling.Color.md_Black_1_Light_Appearence.color()
+        textField.font = MDAppStyling.Font.MyriadProItalic.font()
+        textField.textColor = MDAppStyling.Color.md_3C3C3C.color()
         textField.returnKeyType = .go
         textField.isSecureTextEntry = true
         textField.tag = AuthenticationTextFieldTag.password.rawValue
-        textField.backgroundColor = MDAppStyling.Color.md_White_0_Light_Appearence.color()
+        textField.backgroundColor = MDAppStyling.Color.md_FFFFFF.color()
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -58,18 +59,28 @@ final class AuthenticationViewController: BaseDetailAuthViewController {
     fileprivate static let loginButtonRightOffset: CGFloat = 16
     fileprivate let loginButton: UIButton = {
         let button: UIButton = .init()
-        button.backgroundColor = MDAppStyling.Color.md_Blue_1_Light_Appearence.color()
+        button.backgroundColor = MDAppStyling.Color.md_4400D4.color()
         button.setTitle(KeysForTranslate.login.localized, for: .normal)
-        button.setTitleColor(MDAppStyling.Color.md_White_0_Light_Appearence.color(), for: .normal)
-        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        button.setTitleColor(MDAppStyling.Color.md_FFFFFF.color(), for: .normal)
+        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
+    fileprivate lazy var hud: MBProgressHUD = {
+        let hud: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.mode = .annularDeterminate
+        hud.label.text = KeysForTranslate.pleaseWaitForDataSync.localized
+        hud.label.font = MDAppStyling.Font.MyriadProRegular.font()
+        hud.label.textColor = MDAppStyling.Color.md_3C3C3C.color()
+        return hud
+    }()
+    
     init(presenter: AuthenticationPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(title: KeysForTranslate.login.localized)
-        updateBackgroundImage(MDAppStyling.Image.background_typography_1.image)
+        super.init(title: KeysForTranslate.login.localized,
+                   navigationBarBackgroundImage: MDAppStyling.Image.background_navigation_bar_0.image,
+                   backgroundImage: MDAppStyling.Image.background_typography_1.image)        
     }
     
     deinit {
@@ -107,13 +118,25 @@ extension AuthenticationViewController: AuthenticationPresenterOutputProtocol {
     }
     
     func hideKeyboard() {
-        self.hideKeyboardFunc()
+        MDConstants.Keyboard.hideKeyboard(rootView: self.view)
     }
     
     func showValidationError(_ error: Error) {
         UIAlertController.showAlertWithOkAction(title: KeysForTranslate.error.localized,
                                                 message: error.localizedDescription,
                                                 presenter: self)
+    }
+    
+    func showProgressHUD() {
+        hud.show(animated: true)
+    }
+    
+    func hideProgressHUD() {
+        hud.hide(animated: true)
+    }
+    
+    func updateHUDProgress(_ progress: Float) {
+        hud.progress = progress
     }
     
 }
@@ -239,19 +262,19 @@ fileprivate extension AuthenticationViewController {
     }
     
     func dropShadowNicknameTextField() {
-        nicknameTextField.dropShadow(color: MDAppStyling.Color.md_Shadow_0_Light_Appearence.color(0.5),
+        nicknameTextField.dropShadow(color: MDAppStyling.Color.md_5200FF.color(0.5),
                                      offSet: .init(width: 2, height: 4),
                                      radius: 15)
     }
     
     func dropShadowPasswordTextField() {
-        passwordTextField.dropShadow(color: MDAppStyling.Color.md_Shadow_0_Light_Appearence.color(0.5),
+        passwordTextField.dropShadow(color: MDAppStyling.Color.md_5200FF.color(0.5),
                                      offSet: .init(width: 2, height: 4),
                                      radius: 15)
     }
     
     func dropShadowLoginButtonView() {
-        loginButton.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.5),
+        loginButton.dropShadow(color: MDAppStyling.Color.md_4400D4.color(0.5),
                                offSet: .init(width: 0,
                                              height: 4),
                                radius: 20)
@@ -295,15 +318,6 @@ fileprivate extension AuthenticationViewController {
     
     @objc func passwordTextFieldEditingDidChangeAction() {
         presenter.passwordTextFieldEditingDidChangeAction(passwordTextField.text)
-    }
-    
-}
-
-// MARK: - Hide Keyboard
-fileprivate extension AuthenticationViewController {
-    
-    func hideKeyboardFunc() {
-        self.view.endEditing(true)
     }
     
 }

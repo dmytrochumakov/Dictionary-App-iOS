@@ -15,7 +15,7 @@ protocol MDAppDependenciesProtocol {
     var reachability: Reachability! { get }
     var operationQueue: OperationQueue! { get }
     var operationQueueService: OperationQueueServiceProtocol! { get }
-    var coreDataStack: CoreDataStack! { get }
+    var coreDataStack: MDCoreDataStack! { get }
     
     // API //
     var apiJWT: MDAPIJWTProtocol! { get }
@@ -46,7 +46,7 @@ final class MDAppDependencies: NSObject,
     var reachability: Reachability!
     var operationQueue: OperationQueue!
     var operationQueueService: OperationQueueServiceProtocol!
-    var coreDataStack: CoreDataStack!
+    var coreDataStack: MDCoreDataStack!
     
     // API //
     var apiJWT: MDAPIJWTProtocol!
@@ -92,7 +92,7 @@ extension MDAppDependencies {
         let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
         self.operationQueueService = operationQueueService
         //
-        let coreDataStack: CoreDataStack = .init()
+        let coreDataStack: MDCoreDataStack = .init()
         self.coreDataStack = coreDataStack        
         //
         let requestDispatcher: MDRequestDispatcherProtocol = MDConstants.RequestDispatcher.defaultRequestDispatcher(reachability: reachability)
@@ -208,7 +208,7 @@ extension MDAppDependencies {
                                                                                       courseStorage: courseStorage,
                                                                                       wordStorage: wordStorage)
         // Fill Memory If Needed
-        fillMemoryService.fillMemoryFromCoreDataIfNeeded()
+        fillMemoryService.fillMemoryFromCoreDataIfNeeded(completionHandler: nil)
         //
         self.fillMemoryService = fillMemoryService
         //

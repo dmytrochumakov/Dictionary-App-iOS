@@ -10,12 +10,12 @@ import CoreData
 final class MDDeleteAllCoursesCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let coreDataStorage: MDCourseCoreDataStorage
     fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          coreDataStorage: MDCourseCoreDataStorage,
          result: MDOperationResultWithCompletion<Void>?) {
         
@@ -38,10 +38,24 @@ final class MDDeleteAllCoursesCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchDeleteRequest)
             
-            try coreDataStack.save()
+            coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
+                
+                switch result {
+                
+                case .success:
+                    
+                    self?.result?(.success(()))
+                    self?.finish()
+                    break
+                    
+                case .failure(let error):
+                    self?.result?(.failure(error))
+                    self?.finish()
+                    break
+                }
+                
+            }
             
-            self.result?(.success(()))
-            self.finish()
             
         } catch let error {
             self.result?(.failure(error))                            

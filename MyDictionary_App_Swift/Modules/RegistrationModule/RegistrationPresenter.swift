@@ -18,7 +18,8 @@ protocol RegistrationPresenterInputProtocol {
     
 }
 
-protocol RegistrationPresenterOutputProtocol: AnyObject {
+protocol RegistrationPresenterOutputProtocol: AnyObject,
+                                              MDShowHideUpdateProgressHUD {
     
     func updateNicknameFieldCounter(_ count: Int)
     func updatePasswordFieldCounter(_ count: Int)
@@ -31,7 +32,7 @@ protocol RegistrationPresenterOutputProtocol: AnyObject {
     
     func hideKeyboard()
     
-    func showValidationError(_ error: Error)
+    func showValidationError(_ error: Error)        
     
 }
 
@@ -100,6 +101,18 @@ extension RegistrationPresenter {
     
     func showCourseList() {
         router.showCourseList()
+    }
+    
+    func showProgressHUD() {
+        presenterOutput?.showProgressHUD()
+    }
+    
+    func hideProgressHUD() {
+        presenterOutput?.hideKeyboard()
+    }
+    
+    func updateHUDProgress(_ progress: Float) {
+        presenterOutput?.updateHUDProgress(progress)
     }
     
 }

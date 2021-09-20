@@ -6,7 +6,7 @@
 
 import UIKit
 
-final class ChoiceAuthenticationOrRegistrationViewController: BaseAuthViewController {
+final class ChoiceAuthenticationOrRegistrationViewController: MDBaseNavigationBarAndBackgroundImageViewController {
     
     fileprivate static let iconNavigationBarImageViewSize: CGSize = .init(width: 189, height: 71)
     fileprivate let iconNavigationBarImageView: UIImageView = {
@@ -23,10 +23,10 @@ final class ChoiceAuthenticationOrRegistrationViewController: BaseAuthViewContro
     fileprivate static let loginButtonTopOffset: CGFloat = 24
     fileprivate let loginButton: UIButton = {
         let button: UIButton = .init()
-        button.backgroundColor = MDAppStyling.Color.md_Blue_1_Light_Appearence.color()
+        button.backgroundColor = MDAppStyling.Color.md_4400D4.color()
         button.setTitle(KeysForTranslate.login.localized, for: .normal)
-        button.setTitleColor(MDAppStyling.Color.md_White_0_Light_Appearence.color(), for: .normal)
-        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        button.setTitleColor(MDAppStyling.Color.md_FFFFFF.color(), for: .normal)
+        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -37,10 +37,10 @@ final class ChoiceAuthenticationOrRegistrationViewController: BaseAuthViewContro
     fileprivate static let registrationButtonTopOffset: CGFloat = 16
     fileprivate let registrationButton: UIButton = {
         let button: UIButton = .init()
-        button.backgroundColor = MDAppStyling.Color.md_Blue_1_Light_Appearence.color()
+        button.backgroundColor = MDAppStyling.Color.md_4400D4.color()
         button.setTitle(KeysForTranslate.registration.localized, for: .normal)
-        button.setTitleColor(MDAppStyling.Color.md_White_0_Light_Appearence.color(), for: .normal)
-        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font(ofSize: 17)
+        button.setTitleColor(MDAppStyling.Color.md_FFFFFF.color(), for: .normal)
+        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -49,7 +49,8 @@ final class ChoiceAuthenticationOrRegistrationViewController: BaseAuthViewContro
     
     init(presenter: ChoiceAuthenticationOrRegistrationPresenterInputProtocol) {
         self.presenter = presenter
-        super.init()
+        super.init(navigationBarBackgroundImage: MDAppStyling.Image.background_navigation_bar_0.image,
+                   backgroundImage: MDAppStyling.Image.background_typography_0.image)
     }
     
     deinit {
@@ -209,14 +210,14 @@ fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
     }
     
     func dropShadowLoginButtonView() {
-        loginButton.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.5),
+        loginButton.dropShadow(color: MDAppStyling.Color.md_4400D4.color(0.5),
                                offSet: .init(width: 0,
                                              height: 4),
                                radius: 20)
     }
     
     func dropShadowRegistrationButton() {
-        registrationButton.dropShadow(color: MDAppStyling.Color.md_Blue_1_Light_Appearence.color(0.5),
+        registrationButton.dropShadow(color: MDAppStyling.Color.md_4400D4.color(0.5),
                                       offSet: .init(width: 0,
                                                     height: 4),
                                       radius: 20)

@@ -22,7 +22,7 @@ final class MDLanguageStorage_Tests: XCTestCase {
         let memoryStorage: MDLanguageMemoryStorageProtocol = MDLanguageMemoryStorage.init(operationQueueService: operationQueueService,
                                                                                           array: .init())
         
-        let coreDataStack: CoreDataStack = TestCoreDataStack.init()
+        let coreDataStack: MDCoreDataStack = TestCoreDataStack.init()
         
         let coreDataStorage: MDLanguageCoreDataStorageProtocol = MDLanguageCoreDataStorage.init(operationQueueService: operationQueueService,
                                                                                                 managedObjectContext: coreDataStack.privateContext,
@@ -140,7 +140,7 @@ extension MDLanguageStorage_Tests {
                 
                 XCTAssertTrue(createLanguages.count == Constants_For_Tests.mockedLanguages.count)
                 
-                self.languageStorage.deleteAllLanguages(storageType: storageType) { [unowned self] deleteResults in
+                self.languageStorage.deleteAllLanguages(storageType: storageType) { deleteResults in
                     
                     deleteResults.forEach { deleteResult in
                         
@@ -148,26 +148,12 @@ extension MDLanguageStorage_Tests {
                         
                         case .success:
                             
-                            self.languageStorage.entitiesIsEmpty(storageType: deleteResult.storageType) { entitiesIsEmptyResult in
-                                
-                                switch entitiesIsEmptyResult.first!.result {
-                                
-                                case .success(let entitiesIsEmpty):
-                                    
-                                    resultCount += 1
-                                    
-                                    XCTAssertTrue(entitiesIsEmpty)
-                                    
-                                    if (resultCount == deleteResults.count) {
-                                        expectation.fulfill()
-                                    }
-                                    
-                                    
-                                case .failure:
-                                    XCTExpectFailure()
-                                    expectation.fulfill()
-                                }
+                            resultCount += 1
+                            
+                            if (resultCount == deleteResults.count) {
+                                expectation.fulfill()
                             }
+                            
                         case .failure:
                             XCTExpectFailure()
                             expectation.fulfill()

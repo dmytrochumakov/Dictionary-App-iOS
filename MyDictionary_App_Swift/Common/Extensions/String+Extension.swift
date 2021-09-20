@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {
         
@@ -22,4 +23,19 @@ extension String {
         return NSLocalizedString(self, tableName: tableName, value: "**\(self)**", comment: "")
     }
     
+}
+
+extension String {
+
+    func widthFromLabel(font: UIFont, height: CGFloat, numberOfLines: Int = .zero) -> CGFloat {
+        let label: UILabel = UILabel(frame: CGRect(x: .zero, y: .zero, width: .greatestFiniteMagnitude, height: height))
+        label.numberOfLines = numberOfLines
+        label.lineBreakMode = .byWordWrapping
+        label.font = font
+        label.text = self
+        
+        label.sizeToFit()
+        return label.frame.width
+    }
+
 }

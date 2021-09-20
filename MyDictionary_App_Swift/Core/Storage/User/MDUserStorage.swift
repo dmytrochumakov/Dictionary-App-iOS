@@ -9,6 +9,8 @@ import Foundation
 
 protocol MDUserStorageProtocol: MDStorageProtocol {
     
+    var memoryStorage: MDUserMemoryStorageProtocol { get }
+    
     func createUser(_ userEntity: UserResponse,
                     password: String,
                     storageType: MDStorageType,
@@ -32,7 +34,7 @@ protocol MDUserStorageProtocol: MDStorageProtocol {
 
 final class MDUserStorage: MDStorage, MDUserStorageProtocol {
     
-    fileprivate let memoryStorage: MDUserMemoryStorageProtocol
+    let memoryStorage: MDUserMemoryStorageProtocol
     fileprivate let coreDataStorage: MDUserCoreDataStorageProtocol
     
     init(memoryStorage: MDUserMemoryStorageProtocol,

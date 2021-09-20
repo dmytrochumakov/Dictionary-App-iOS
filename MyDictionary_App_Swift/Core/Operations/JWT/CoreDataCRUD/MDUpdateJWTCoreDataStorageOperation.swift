@@ -10,14 +10,14 @@ import CoreData
 final class MDUpdateJWTCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let coreDataStorage: MDJWTCoreDataStorage
     fileprivate let oldAccessToken: String
     fileprivate let newJWTResponse: JWTResponse
     fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          coreDataStorage: MDJWTCoreDataStorage,
          oldAccessToken: String,
          newJWTResponse: JWTResponse,
@@ -46,10 +46,23 @@ final class MDUpdateJWTCoreDataStorageOperation: MDOperation {
             
             try managedObjectContext.execute(batchUpdateRequest)
             
-            try coreDataStack.save()
-            
-            self.result?(.success(()))
-            self.finish()
+            coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
+                
+                switch result {
+                
+                case .success:
+                    
+                    self?.result?(.success(()))
+                    self?.finish()
+                    break
+                    
+                case .failure(let error):
+                    self?.result?(.failure(error))
+                    self?.finish()
+                    break
+                }
+                
+            }
             
         } catch let error {
             self.result?(.failure(error))

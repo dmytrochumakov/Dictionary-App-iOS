@@ -6,14 +6,25 @@
 
 import UIKit
 
-protocol CourseListPresenterInputProtocol: CollectionViewDelegateFlowLayoutPropertyProtocol,
-                                           CollectionViewDataSourcePropertyProtocol {
+protocol CourseListPresenterInputProtocol: TableViewDelegatePropertyProtocol,
+                                           TableViewDataSourcePropertyProtocol,
+                                           MDSearchBarDelegatePropertyProtocol {
+    
     func addNewCourseButtonClicked()
     func settingsButtonClicked()
+    func deleteCourse(atIndexPath indexPath: IndexPath)
+    
 }
 
 protocol CourseListPresenterOutputProtocol: AnyObject,
-                                            AppearanceHasBeenUpdatedProtocol {
+                                            AppearanceHasBeenUpdatedProtocol,
+                                            MDShowHideProgressHUD {
+    
+    func showError(_ error: Error)
+    func reloadData()
+    func hideKeyboard()
+    func deleteCourseButtonClicked(_ cell: MDCourseListCell)
+    func deleteRow(atIndexPath indexPath: IndexPath)
     
 }
 
@@ -52,17 +63,49 @@ extension CourseListPresenter {
         presenterOutput?.appearanceHasBeenUpdated(newValue)
     }
     
+    func showError(_ error: Error) {
+        presenterOutput?.showError(error)
+    }
+    
+    func reloadData() {
+        presenterOutput?.reloadData()
+    }
+    
+    func hideKeyboard() {
+        presenterOutput?.hideKeyboard()
+    }
+    
+    func deleteCourseButtonClicked(_ cell: MDCourseListCell) {
+        presenterOutput?.deleteCourseButtonClicked(cell)
+    }
+    
+    func deleteRow(atIndexPath indexPath: IndexPath) {
+        presenterOutput?.deleteRow(atIndexPath: indexPath)
+    }
+    
+    func showProgressHUD() {
+        presenterOutput?.showProgressHUD()
+    }
+    
+    func hideProgressHUD() {
+        presenterOutput?.hideProgressHUD()
+    }
+    
+    var searchBarDelegate: MDSearchBarDelegate {
+        return interactor.searchBarDelegate
+    }
+    
 }
 
 // MARK: - CourseListPresenterInputProtocol
 extension CourseListPresenter {
     
-    internal var collectionViewDelegate: UICollectionViewDelegateFlowLayout {
-        return interactor.collectionViewDelegate
+    internal var tableViewDelegate: UITableViewDelegate {
+        return interactor.tableViewDelegate
     }
     
-    internal var collectionViewDataSource: UICollectionViewDataSource {
-        return interactor.collectionViewDataSource
+    internal var tableViewDataSource: UITableViewDataSource {
+        return interactor.tableViewDataSource
     }
     
     // Actions //
@@ -72,6 +115,10 @@ extension CourseListPresenter {
     
     func settingsButtonClicked() {
         router.openSettings()
+    }
+    
+    func deleteCourse(atIndexPath indexPath: IndexPath) {
+        interactor.deleteCourse(atIndexPath: indexPath)
     }
     // --- //
     

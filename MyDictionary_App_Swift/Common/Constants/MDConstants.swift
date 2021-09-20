@@ -72,8 +72,7 @@ struct MDConstants {
     }
     
     struct Environment {
-        /// MDEnvironment.development by default
-        static let current: MDEnvironment = .development
+        static let current: MDEnvironment = .production
     }
     
     struct APIEnvironment {
@@ -142,6 +141,7 @@ struct MDConstants {
     }
     
     struct Rect {
+        
         static let defaultInset: UIEdgeInsets = .init(top: .zero,
                                                       left: 16,
                                                       bottom: .zero,
@@ -151,6 +151,14 @@ struct MDConstants {
                                                        left: 16,
                                                        bottom: .zero,
                                                        right: 38)
+        
+        static func searchInset(searchIconImageViewLeftOffset: CGFloat) -> UIEdgeInsets {
+            return .init(top: Rect.defaultInset.top,
+                         left: MDConstants.Rect.defaultInset.left + searchIconImageViewLeftOffset + 6,
+                         bottom: Rect.defaultInset.bottom,
+                         right: Rect.defaultInset.right)
+        }
+        
     }
     
     struct Text {
@@ -168,6 +176,18 @@ struct MDConstants {
             static let passwordTextField: Int = 255
         }
         
+    }
+    
+    struct Keyboard {
+        
+        static func hideKeyboard(rootView view: UIView) {
+            view.endEditing(true)
+        }
+        
+    }
+    
+    struct Font {
+        static let defaultSize: CGFloat = 17
     }
     
 }

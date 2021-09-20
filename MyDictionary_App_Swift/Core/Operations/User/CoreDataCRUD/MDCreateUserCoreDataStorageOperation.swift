@@ -10,14 +10,14 @@ import CoreData
 final class MDCreateUserCoreDataStorageOperation: MDOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let coreDataStack: CoreDataStack
+    fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let coreDataStorage: MDUserCoreDataStorage
     fileprivate let userEntity: UserResponse
     fileprivate let password: String
     fileprivate let result: MDOperationResultWithCompletion<UserResponse>?
     
     init(managedObjectContext: NSManagedObjectContext,
-         coreDataStack: CoreDataStack,
+         coreDataStack: MDCoreDataStack,
          coreDataStorage: MDUserCoreDataStorage,
          userEntity: UserResponse,
          password: String,
@@ -39,16 +39,25 @@ final class MDCreateUserCoreDataStorageOperation: MDOperation {
                                                 password: password,
                                                 insertIntoManagedObjectContext: self.managedObjectContext)
         
-        do {
+        
+        coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
             
-            try coreDataStack.save()
+            switch result {
             
-            self.result?(.success(newUser.userResponse))
-            self.finish()
-                        
-        } catch {
-            self.result?(.failure(error))
-            self.finish()
+            case .success:
+                
+                self?.result?(.success(newUser.userResponse))
+                self?.finish()
+                break
+                
+            case .failure(let error):
+                
+                self?.result?(.failure(error))
+                self?.finish()
+                break
+                
+            }
+            
         }
         
     }
