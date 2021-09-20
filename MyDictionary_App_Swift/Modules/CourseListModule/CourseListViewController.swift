@@ -100,6 +100,14 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
         MDConstants.Keyboard.hideKeyboard(rootView: self.view)
     }
     
+    func deleteCourseButtonClicked(_ cell: MDCourseListCell) {
+        presenter.deleteCourse(atIndexPath: tableView.indexPath(for: cell)!)
+    }
+    
+    func deleteRow(atIndexPath indexPath: IndexPath) {
+        tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+    
 }
 
 // MARK: - Add Views

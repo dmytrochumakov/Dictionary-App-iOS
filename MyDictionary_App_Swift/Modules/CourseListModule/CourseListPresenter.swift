@@ -9,8 +9,11 @@ import UIKit
 protocol CourseListPresenterInputProtocol: TableViewDelegatePropertyProtocol,
                                            TableViewDataSourcePropertyProtocol,
                                            MDSearchBarDelegatePropertyProtocol {
+    
     func addNewCourseButtonClicked()
     func settingsButtonClicked()
+    func deleteCourse(atIndexPath indexPath: IndexPath)
+    
 }
 
 protocol CourseListPresenterOutputProtocol: AnyObject,
@@ -19,6 +22,8 @@ protocol CourseListPresenterOutputProtocol: AnyObject,
     func showError(_ error: Error)
     func reloadData()
     func hideKeyboard()
+    func deleteCourseButtonClicked(_ cell: MDCourseListCell)
+    func deleteRow(atIndexPath indexPath: IndexPath)
     
 }
 
@@ -69,6 +74,14 @@ extension CourseListPresenter {
         presenterOutput?.hideKeyboard()
     }
     
+    func deleteCourseButtonClicked(_ cell: MDCourseListCell) {
+        presenterOutput?.deleteCourseButtonClicked(cell)
+    }
+    
+    func deleteRow(atIndexPath indexPath: IndexPath) {
+        presenterOutput?.deleteRow(atIndexPath: indexPath)
+    }
+    
     var searchBarDelegate: MDSearchBarDelegate {
         return interactor.searchBarDelegate
     }
@@ -93,6 +106,10 @@ extension CourseListPresenter {
     
     func settingsButtonClicked() {
         router.openSettings()
+    }
+    
+    func deleteCourse(atIndexPath indexPath: IndexPath) {
+        interactor.deleteCourse(atIndexPath: indexPath)
     }
     // --- //
     

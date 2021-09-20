@@ -8,13 +8,15 @@
 import MGSwipeTableCell
 
 protocol CourseListTableViewDataSourceProtocol: UITableViewDataSource {
-    
+    var deleteButtonAction: ((MDCourseListCell) -> Void)? { get set }
 }
 
 final class CourseListTableViewDataSource: NSObject,
                                            CourseListTableViewDataSourceProtocol {
     
     fileprivate let dataProvider: CourseListDataProviderProtocol
+    
+    public var deleteButtonAction: ((MDCourseListCell) -> Void)?
     
     init(dataProvider: CourseListDataProviderProtocol) {
         self.dataProvider = dataProvider
@@ -38,7 +40,9 @@ extension CourseListTableViewDataSource {
         let deleteButton: MGSwipeButton = .init(title: MDConstants.StaticText.emptyString,
                                                 icon: MDAppStyling.Image.delete.image,
                                                 backgroundColor: MDAppStyling.Color.md_FFFFFF.color()) { [weak self] (sender) -> Bool in
-            debugPrint(#function, Self.self, "delete: ", sender)
+            
+            self?.deleteButtonAction?(sender as! MDCourseListCell)
+            
             return true
             
         }

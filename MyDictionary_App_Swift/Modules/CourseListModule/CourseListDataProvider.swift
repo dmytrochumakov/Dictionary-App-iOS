@@ -12,6 +12,7 @@ protocol CourseListDataProviderProtocol: NumberOfSectionsProtocol,
     var filteredCourses: [CourseResponse] { get set }
     
     func courseListCellModel(atIndexPath indexPath: IndexPath) -> MDCourseListCellModel?
+    func deleteCourse(atIndexPath indexPath: IndexPath)
     
 }
 
@@ -47,6 +48,10 @@ extension CourseListDataProvider {
             return .init(languageName: filteredCourses[indexPath.row].languageName)
         }
         
+    }
+    
+    func deleteCourse(atIndexPath indexPath: IndexPath) {
+        filteredCourses.remove(at: indexPath.row)
     }
     
 }

@@ -10,6 +10,7 @@ protocol CourseListDataManagerInputProtocol {
     func readAndAddCoursesToDataProvider(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
     func searchBarTextDidChangeAction(_ searchText: String?, _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
     func searchBarShouldClearAction(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    func deleteCourse(atIndexPath indexPath: IndexPath)
 }
 
 protocol CourseListDataManagerOutputProtocol: AnyObject {
@@ -96,6 +97,10 @@ extension CourseListDataManager {
     
     func searchBarShouldClearAction(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         readAndAddCoursesToDataProvider(completionHandler)
+    }
+    
+    func deleteCourse(atIndexPath indexPath: IndexPath) {
+        dataProvider.deleteCourse(atIndexPath: indexPath)
     }
     
 }

@@ -7,9 +7,13 @@
 import UIKit
 
 protocol CourseListInteractorInputProtocol {
+    
     var tableViewDelegate: CourseListTableViewDelegateProtocol { get }
     var tableViewDataSource: CourseListTableViewDataSourceProtocol { get }
     var searchBarDelegate: MDCourseListSearchBarDelegateProtocol { get }
+    
+    func deleteCourse(atIndexPath indexPath: IndexPath)
+    
 }
 
 protocol CourseListInteractorOutputProtocol: AnyObject,
@@ -18,6 +22,8 @@ protocol CourseListInteractorOutputProtocol: AnyObject,
     func showError(_ error: Error)
     func reloadData()
     func hideKeyboard()
+    func deleteCourseButtonClicked(_ cell: MDCourseListCell)
+    func deleteRow(atIndexPath indexPath: IndexPath)
     
 }
 
@@ -66,11 +72,23 @@ extension CourseListInteractor {
     
 }
 
+// MARK: - CourseListInteractorInputProtocol
+extension CourseListInteractor {
+    
+    func deleteCourse(atIndexPath indexPath: IndexPath) {
+        dataManager.deleteCourse(atIndexPath: indexPath)
+        interactorOutput?.deleteRow(atIndexPath: indexPath)
+    }
+    
+}
+
 // MARK: - Subscribe
 fileprivate extension CourseListInteractor {
     
     func subscribe() {
+        //
         didChangeAppearanceObservable_Subscribe()
+        //
         didChangeMemoryIsFilledObservable_Subscribe()
         //
         readAndAddCoursesToDataProvider()
@@ -82,6 +100,8 @@ fileprivate extension CourseListInteractor {
         searchBarTextDidChangeAction_Subscribe()
         //
         searchBarShouldClearAction_Subscribe()
+        //
+        deleteButtonAction_Subscribe()
         //
     }
     
@@ -163,6 +183,14 @@ fileprivate extension CourseListInteractor {
                 }
                 
             }
+        }
+        
+    }
+    
+    func deleteButtonAction_Subscribe() {
+        
+        tableViewDataSource.deleteButtonAction = { [weak self] (cell) in
+            self?.interactorOutput?.deleteCourseButtonClicked(cell)
         }
         
     }
