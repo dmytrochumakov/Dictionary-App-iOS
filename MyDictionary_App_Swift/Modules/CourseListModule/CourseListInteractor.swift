@@ -114,6 +114,8 @@ extension CourseListInteractor {
             //
             
             case .failure(let error):
+                // Hide Progress HUD
+                interactorOutput?.hideProgressHUD()                
                 //
                 interactorOutput?.showError(error)
                 //
