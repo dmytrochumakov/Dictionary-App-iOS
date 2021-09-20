@@ -14,13 +14,13 @@ protocol AuthenticationPresenterInputProtocol {
     func passwordTextFieldEditingDidChangeAction(_ text: String?)
 }
 
-protocol AuthenticationPresenterOutputProtocol: AnyObject {
+protocol AuthenticationPresenterOutputProtocol: AnyObject,
+                                                MDShowHideUpdateProgressHUD {
+    
     func makePasswordFieldActive()
     func hideKeyboard()
     func showValidationError(_ error: Error)
-    func showProgressHUD()
-    func hideProgressHUD()
-    func updateHUDProgress(_ progress: Float)
+    
 }
 
 protocol AuthenticationPresenterProtocol: AuthenticationPresenterInputProtocol,

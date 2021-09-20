@@ -145,6 +145,11 @@
 		228722DB26D117A900C9D1BC /* MDReadFirstJWTCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722DA26D117A900C9D1BC /* MDReadFirstJWTCoreDataStorageOperation.swift */; };
 		228722DD26D1189700C9D1BC /* MDReadFirstJWTMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228722DC26D1189700C9D1BC /* MDReadFirstJWTMemoryStorageOperation.swift */; };
 		228964A826F8A4F700E23292 /* MDCourseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228964A726F8A4F700E23292 /* MDCourseManager.swift */; };
+		228964AA26F8AA1200E23292 /* MDShowProgressHUDProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228964A926F8AA1200E23292 /* MDShowProgressHUDProtocol.swift */; };
+		228964AC26F8AA2100E23292 /* MDHideProgressHUDProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228964AB26F8AA2100E23292 /* MDHideProgressHUDProtocol.swift */; };
+		228964AE26F8AA2C00E23292 /* MDUpdateHUDProgressProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228964AD26F8AA2C00E23292 /* MDUpdateHUDProgressProtocol.swift */; };
+		228964B026F8AA3E00E23292 /* MDShowHideProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228964AF26F8AA3E00E23292 /* MDShowHideProgressHUD.swift */; };
+		228964B226F8AA4A00E23292 /* MDShowHideUpdateProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228964B126F8AA4A00E23292 /* MDShowHideUpdateProgressHUD.swift */; };
 		2289CEDE2678CC34007254C3 /* MDWordMemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEB72678CC34007254C3 /* MDWordMemoryStorage.swift */; };
 		2289CEDF2678CC34007254C3 /* MDStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEB92678CC34007254C3 /* MDStorageType.swift */; };
 		2289CEE02678CC34007254C3 /* WordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEBB2678CC34007254C3 /* WordResponse.swift */; };
@@ -499,6 +504,11 @@
 		228722DA26D117A900C9D1BC /* MDReadFirstJWTCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadFirstJWTCoreDataStorageOperation.swift; sourceTree = "<group>"; };
 		228722DC26D1189700C9D1BC /* MDReadFirstJWTMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadFirstJWTMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		228964A726F8A4F700E23292 /* MDCourseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseManager.swift; sourceTree = "<group>"; };
+		228964A926F8AA1200E23292 /* MDShowProgressHUDProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDShowProgressHUDProtocol.swift; sourceTree = "<group>"; };
+		228964AB26F8AA2100E23292 /* MDHideProgressHUDProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDHideProgressHUDProtocol.swift; sourceTree = "<group>"; };
+		228964AD26F8AA2C00E23292 /* MDUpdateHUDProgressProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUpdateHUDProgressProtocol.swift; sourceTree = "<group>"; };
+		228964AF26F8AA3E00E23292 /* MDShowHideProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDShowHideProgressHUD.swift; sourceTree = "<group>"; };
+		228964B126F8AA4A00E23292 /* MDShowHideUpdateProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDShowHideUpdateProgressHUD.swift; sourceTree = "<group>"; };
 		2289CEB72678CC34007254C3 /* MDWordMemoryStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordMemoryStorage.swift; sourceTree = "<group>"; };
 		2289CEB92678CC34007254C3 /* MDStorageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDStorageType.swift; sourceTree = "<group>"; };
 		2289CEBB2678CC34007254C3 /* WordResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordResponse.swift; sourceTree = "<group>"; };
@@ -1008,6 +1018,9 @@
 				22DB2F8A26C3D4D200C1AADA /* TableViewDelegatePropertyProtocol.swift */,
 				22DB2F8C26C3D51500C1AADA /* TableViewDataSourcePropertyProtocol.swift */,
 				229FFF3F26F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift */,
+				228964A926F8AA1200E23292 /* MDShowProgressHUDProtocol.swift */,
+				228964AB26F8AA2100E23292 /* MDHideProgressHUDProtocol.swift */,
+				228964AD26F8AA2C00E23292 /* MDUpdateHUDProgressProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2032,6 +2045,8 @@
 			children = (
 				22E2B4FD266515D400978E62 /* CollectionViewDelegateFlowLayout.swift */,
 				22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */,
+				228964AF26F8AA3E00E23292 /* MDShowHideProgressHUD.swift */,
+				228964B126F8AA4A00E23292 /* MDShowHideUpdateProgressHUD.swift */,
 			);
 			path = Typealias;
 			sourceTree = "<group>";
@@ -2345,6 +2360,7 @@
 				22B8E6CE26D3B472001CCCA8 /* MDDeleteAllJWTMemoryStorageOperation.swift in Sources */,
 				229D2D4526EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift in Sources */,
 				22493C52269741FF000DA480 /* MDDeleteWordCoreDataStorageOperation.swift in Sources */,
+				228964B226F8AA4A00E23292 /* MDShowHideUpdateProgressHUD.swift in Sources */,
 				2258921D26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift in Sources */,
 				22E2B4F02664EF3200978E62 /* UICollectionView+Extension.swift in Sources */,
 				2220FCB426D50E6100B22515 /* CreateCourseRequest.swift in Sources */,
@@ -2417,6 +2433,7 @@
 				2299587426F48710003DF092 /* MDFillMemoryResult.swift in Sources */,
 				2270F3A926D27606006B46F4 /* MDAPILanguage.swift in Sources */,
 				22493C4C26972E27000DA480 /* MDEntityOperationError.swift in Sources */,
+				228964AC26F8AA2100E23292 /* MDHideProgressHUDProtocol.swift in Sources */,
 				227B91E426EF62F80086B9AA /* RegisterTextFieldDelegate.swift in Sources */,
 				220793D126C6B2D9003D434B /* AuthRequest.swift in Sources */,
 				2291BAF326F7265E0012504D /* MDSearchTextField.swift in Sources */,
@@ -2445,6 +2462,7 @@
 				22EF01EC269DA70300FE4435 /* Endpoint.swift in Sources */,
 				220793D326C6B303003D434B /* Encodable+Extension.swift in Sources */,
 				227D5E6A2652586F00B54524 /* WordListCollectionViewDelegate.swift in Sources */,
+				228964B026F8AA3E00E23292 /* MDShowHideProgressHUD.swift in Sources */,
 				22C5863F26C7AFB80030B12D /* RegistrationDataProvider.swift in Sources */,
 				229E08CB2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift in Sources */,
 				22A2521626CFE5230013FCF5 /* MDEntitiesCountProtocol.swift in Sources */,
@@ -2552,6 +2570,7 @@
 				2223F8AE26512DEB004F2FE9 /* MDConstants.swift in Sources */,
 				2299016B2668EC3400D8C74E /* AppearanceInteractor.swift in Sources */,
 				22561CA326D4F09100A6135B /* MDAPIUser.swift in Sources */,
+				228964AA26F8AA1200E23292 /* MDShowProgressHUDProtocol.swift in Sources */,
 				220793C726C66F76003D434B /* AuthValidationError.swift in Sources */,
 				22EF0202269DA9E300FE4435 /* MDResponseOperationResult.swift in Sources */,
 				229FFF3A26F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift in Sources */,
@@ -2616,6 +2635,7 @@
 				22B8E69F26D38059001CCCA8 /* MDLanguageStorage.swift in Sources */,
 				2270F3A226D262F5006B46F4 /* CourseResponse.swift in Sources */,
 				22B8E6B226D38D6D001CCCA8 /* MDReadAllLanguagesMemoryStorageOperation.swift in Sources */,
+				228964AE26F8AA2C00E23292 /* MDUpdateHUDProgressProtocol.swift in Sources */,
 				22C5863A26C7AFB80030B12D /* RegistrationModule.swift in Sources */,
 				22C5863126C7A5690030B12D /* MDAPIAuthError.swift in Sources */,
 				22CD45F026F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift in Sources */,

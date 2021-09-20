@@ -4,7 +4,7 @@
 //
 //  Created Dmytro Chumakov on 11.08.2021.
 
-import UIKit
+import MBProgressHUD
 
 final class CourseListViewController: MDBaseTitledNavigationBarViewController {
     
@@ -43,6 +43,12 @@ final class CourseListViewController: MDBaseTitledNavigationBarViewController {
         let searchBar: MDSearchBar = .init()        
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         return searchBar
+    }()
+    
+    fileprivate lazy var hud: MBProgressHUD = {
+        let hud: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.mode = .indeterminate        
+        return hud
     }()
     
     init(presenter: CourseListPresenterInputProtocol) {
@@ -106,6 +112,14 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     
     func deleteRow(atIndexPath indexPath: IndexPath) {
         tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+    
+    func showProgressHUD() {
+        hud.show(animated: true)
+    }
+    
+    func hideProgressHUD() {
+        hud.hide(animated: true)
     }
     
 }

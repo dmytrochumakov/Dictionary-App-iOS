@@ -17,7 +17,8 @@ protocol CourseListPresenterInputProtocol: TableViewDelegatePropertyProtocol,
 }
 
 protocol CourseListPresenterOutputProtocol: AnyObject,
-                                            AppearanceHasBeenUpdatedProtocol {
+                                            AppearanceHasBeenUpdatedProtocol,
+                                            MDShowHideProgressHUD {
     
     func showError(_ error: Error)
     func reloadData()
@@ -80,6 +81,14 @@ extension CourseListPresenter {
     
     func deleteRow(atIndexPath indexPath: IndexPath) {
         presenterOutput?.deleteRow(atIndexPath: indexPath)
+    }
+    
+    func showProgressHUD() {
+        presenterOutput?.showProgressHUD()
+    }
+    
+    func hideProgressHUD() {
+        presenterOutput?.hideProgressHUD()
     }
     
     var searchBarDelegate: MDSearchBarDelegate {

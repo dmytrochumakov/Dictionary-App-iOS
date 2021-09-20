@@ -14,15 +14,15 @@ protocol AuthenticationInteractorInputProtocol {
     func registerButtonClicked()
 }
 
-protocol AuthenticationInteractorOutputProtocol: AnyObject {
+protocol AuthenticationInteractorOutputProtocol: AnyObject,
+                                                 MDShowHideUpdateProgressHUD {
+    
     func makePasswordFieldActive()
     func hideKeyboard()
     func showCourseList()
     func showRegistration()
     func showValidationError(_ error: Error)
-    func showProgressHUD()
-    func hideProgressHUD()
-    func updateHUDProgress(_ progress: Float)
+    
 }
 
 protocol AuthenticationInteractorProtocol: AuthenticationInteractorInputProtocol,

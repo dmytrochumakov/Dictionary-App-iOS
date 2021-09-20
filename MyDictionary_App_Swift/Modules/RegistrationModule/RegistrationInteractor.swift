@@ -18,7 +18,8 @@ protocol RegistrationInteractorInputProtocol {
     
 }
 
-protocol RegistrationInteractorOutputProtocol: AnyObject {
+protocol RegistrationInteractorOutputProtocol: AnyObject,
+                                               MDShowHideUpdateProgressHUD {
     
     func makePasswordFieldActive()
     func makeConfirmPasswordFieldActive()
@@ -33,10 +34,6 @@ protocol RegistrationInteractorOutputProtocol: AnyObject {
     
     func showValidationError(_ error: Error)
     func showCourseList()
-    
-    func showProgressHUD()
-    func hideProgressHUD()
-    func updateHUDProgress(_ progress: Float)
     
 }
 

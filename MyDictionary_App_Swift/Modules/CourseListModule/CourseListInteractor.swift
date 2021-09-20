@@ -17,7 +17,8 @@ protocol CourseListInteractorInputProtocol {
 }
 
 protocol CourseListInteractorOutputProtocol: AnyObject,
-                                             AppearanceHasBeenUpdatedProtocol {
+                                             AppearanceHasBeenUpdatedProtocol,
+                                             MDShowHideProgressHUD {
     
     func showError(_ error: Error)
     func reloadData()
@@ -30,7 +31,7 @@ protocol CourseListInteractorOutputProtocol: AnyObject,
 protocol CourseListInteractorProtocol: CourseListInteractorInputProtocol,
                                        CourseListDataManagerOutputProtocol {
     var interactorOutput: CourseListInteractorOutputProtocol? { get set }
-}
+}    
 
 final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
     
@@ -92,6 +93,9 @@ extension CourseListInteractor {
     
     func deleteCourse(atIndexPath indexPath: IndexPath) {
         
+        // Show Progress HUD
+        interactorOutput?.showProgressHUD()
+        // Delete Course From API And Storage
         courseManager.deleteCourseFromApiAndAllStorage(byCourseId: dataManager
                                     .dataProvider
                                     .course(atIndexPath: indexPath).courseId) { [unowned self] deleteCourseResult in
@@ -99,7 +103,8 @@ extension CourseListInteractor {
             switch deleteCourseResult {
             
             case .success:
-                
+                // Hide Progress HUD
+                interactorOutput?.hideProgressHUD()
                 //
                 dataManager.deleteCourse(atIndexPath: indexPath)
                 //
