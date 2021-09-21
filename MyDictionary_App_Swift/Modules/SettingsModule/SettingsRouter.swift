@@ -8,13 +8,12 @@ import UIKit
 
 protocol SettingsRouterProtocol {
     var settingsViewController: UIViewController! { get set }
-    func showAppearanceList()
+    func showPrivacyPolicy()
 }
 
 final class SettingsRouter: SettingsRouterProtocol {
     
-    internal var appearanceRouter: AppearanceRouterProtocol!
-    internal weak var settingsViewController: UIViewController!    
+    internal weak var settingsViewController: UIViewController!
     
     deinit {
         debugPrint(#function, Self.self)
@@ -24,8 +23,8 @@ final class SettingsRouter: SettingsRouterProtocol {
 
 extension SettingsRouter {
     
-    func showAppearanceList() {        
-        settingsViewController.navigationController?.pushViewController(AppearanceModule.init().module, animated: true)
+    func showPrivacyPolicy() {
+        settingsViewController.show(PrivacyPolicyViewController.init(), sender: nil)
     }
     
 }

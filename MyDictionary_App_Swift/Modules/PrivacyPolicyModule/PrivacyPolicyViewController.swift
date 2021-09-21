@@ -6,13 +6,12 @@
 
 import UIKit
 
-final class PrivacyPolicyViewController: UIViewController {
-
-    fileprivate let presenter: PrivacyPolicyPresenterInputProtocol
-
-    init(presenter: PrivacyPolicyPresenterInputProtocol) {
-        self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
+final class PrivacyPolicyViewController: MDBaseTitledBackNavigationBarWebViewController {
+    
+    init() {        
+        super.init(url: MDConstants.StaticURL.privacyPolicyURL,
+                   title: KeysForTranslate.privacyPolicy.localized,
+                   navigationBarBackgroundImage: MDAppStyling.Image.background_navigation_bar_2.image)
     }
     
     deinit {
@@ -23,24 +22,4 @@ final class PrivacyPolicyViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func loadView() {
-        super.loadView()
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-    }
-
-}
-
-// MARK: - PrivacyPolicyPresenterOutputProtocol
-extension PrivacyPolicyViewController: PrivacyPolicyPresenterOutputProtocol {
-       
 }

@@ -230,13 +230,8 @@
 		22A31B5A26ECBB1A00676E55 /* MyriadProBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5626ECBB1A00676E55 /* MyriadProBold.ttf */; };
 		22A31B5B26ECBB1A00676E55 /* MyriadProRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5726ECBB1A00676E55 /* MyriadProRegular.ttf */; };
 		22A31B5C26ECBB1A00676E55 /* MyriadProSemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5826ECBB1A00676E55 /* MyriadProSemiBold.ttf */; };
-		22AF541826F9ED1D00556225 /* PrivacyPolicyModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AF541126F9ED1D00556225 /* PrivacyPolicyModule.swift */; };
-		22AF541926F9ED1D00556225 /* PrivacyPolicyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AF541226F9ED1D00556225 /* PrivacyPolicyPresenter.swift */; };
-		22AF541A26F9ED1D00556225 /* PrivacyPolicyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AF541326F9ED1D00556225 /* PrivacyPolicyRouter.swift */; };
 		22AF541B26F9ED1D00556225 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AF541426F9ED1D00556225 /* PrivacyPolicyViewController.swift */; };
-		22AF541C26F9ED1D00556225 /* PrivacyPolicyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AF541526F9ED1D00556225 /* PrivacyPolicyInteractor.swift */; };
-		22AF541D26F9ED1D00556225 /* PrivacyPolicyDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AF541626F9ED1D00556225 /* PrivacyPolicyDataProvider.swift */; };
-		22AF541E26F9ED1D00556225 /* PrivacyPolicyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AF541726F9ED1D00556225 /* PrivacyPolicyDataManager.swift */; };
+		22AF542026F9F1BB00556225 /* MDBaseTitledBackNavigationBarWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AF541F26F9F1BB00556225 /* MDBaseTitledBackNavigationBarWebViewController.swift */; };
 		22B22681266CC033007AB292 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B22680266CC033007AB292 /* Observable.swift */; };
 		22B22689266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B22688266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift */; };
 		22B2268F266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B2268E266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift */; };
@@ -600,13 +595,8 @@
 		22A31B5626ECBB1A00676E55 /* MyriadProBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProBold.ttf; sourceTree = "<group>"; };
 		22A31B5726ECBB1A00676E55 /* MyriadProRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProRegular.ttf; sourceTree = "<group>"; };
 		22A31B5826ECBB1A00676E55 /* MyriadProSemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProSemiBold.ttf; sourceTree = "<group>"; };
-		22AF541126F9ED1D00556225 /* PrivacyPolicyModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyModule.swift; sourceTree = "<group>"; };
-		22AF541226F9ED1D00556225 /* PrivacyPolicyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyPresenter.swift; sourceTree = "<group>"; };
-		22AF541326F9ED1D00556225 /* PrivacyPolicyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyRouter.swift; sourceTree = "<group>"; };
 		22AF541426F9ED1D00556225 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
-		22AF541526F9ED1D00556225 /* PrivacyPolicyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyInteractor.swift; sourceTree = "<group>"; };
-		22AF541626F9ED1D00556225 /* PrivacyPolicyDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyDataProvider.swift; sourceTree = "<group>"; };
-		22AF541726F9ED1D00556225 /* PrivacyPolicyDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyDataManager.swift; sourceTree = "<group>"; };
+		22AF541F26F9F1BB00556225 /* MDBaseTitledBackNavigationBarWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseTitledBackNavigationBarWebViewController.swift; sourceTree = "<group>"; };
 		22B22680266CC033007AB292 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		22B22688266CDE77007AB292 /* ConfigureAppearanceCellLabelTextColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureAppearanceCellLabelTextColor.swift; sourceTree = "<group>"; };
 		22B2268E266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationAppearanceControllerProtocol.swift; sourceTree = "<group>"; };
@@ -1298,13 +1288,7 @@
 		2277FE1726F9EBFF00001710 /* PrivacyPolicyModule */ = {
 			isa = PBXGroup;
 			children = (
-				22AF541126F9ED1D00556225 /* PrivacyPolicyModule.swift */,
-				22AF541226F9ED1D00556225 /* PrivacyPolicyPresenter.swift */,
-				22AF541326F9ED1D00556225 /* PrivacyPolicyRouter.swift */,
 				22AF541426F9ED1D00556225 /* PrivacyPolicyViewController.swift */,
-				22AF541526F9ED1D00556225 /* PrivacyPolicyInteractor.swift */,
-				22AF541626F9ED1D00556225 /* PrivacyPolicyDataProvider.swift */,
-				22AF541726F9ED1D00556225 /* PrivacyPolicyDataManager.swift */,
 			);
 			path = PrivacyPolicyModule;
 			sourceTree = "<group>";
@@ -1500,6 +1484,7 @@
 				2277FE1526F9DB7100001710 /* MDBaseTitledBackNavigationBarViewController.swift */,
 				2277FE1326F9DB2300001710 /* MDBaseTitledNavigationBarViewController.swift */,
 				2277FE1126F9D7E900001710 /* MDBaseNavigationBarViewController.swift */,
+				22AF541F26F9F1BB00556225 /* MDBaseTitledBackNavigationBarWebViewController.swift */,
 			);
 			path = BaseViewControllers;
 			sourceTree = "<group>";
@@ -2415,6 +2400,7 @@
 				2270F3A426D264E6006B46F4 /* CDCourseResponseEntity+Extension.swift in Sources */,
 				228AE05926EE05120088B4CF /* HideShowPasswordTextField.swift in Sources */,
 				229D2D4626EB53A60047B518 /* ChoiceAuthenticationOrRegistrationViewController.swift in Sources */,
+				22AF542026F9F1BB00556225 /* MDBaseTitledBackNavigationBarWebViewController.swift in Sources */,
 				2294323226DF9A460073048C /* MDSyncStep.swift in Sources */,
 				22EF01FC269DA90000FE4435 /* MDResponseType.swift in Sources */,
 				229E08C22652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift in Sources */,
@@ -2447,7 +2433,6 @@
 				22B8E6C026D39DAF001CCCA8 /* MDDeleteAllLanguagesCoreDataStorageOperation.swift in Sources */,
 				229D2D4C26EB68420047B518 /* MDNavigationController.swift in Sources */,
 				22561C8E26D4D02D00A6135B /* MDDeleteAllCoursesCoreDataStorageOperation.swift in Sources */,
-				22AF541D26F9ED1D00556225 /* PrivacyPolicyDataProvider.swift in Sources */,
 				22EF01FF269DA99800FE4435 /* MDAPIError.swift in Sources */,
 				2270F3A626D2663F006B46F4 /* CDCourseResponseEntityAttributeName.swift in Sources */,
 				2258922526CA3DC600AD6F18 /* MDDeleteJWTCoreDataStorageOperation.swift in Sources */,
@@ -2468,7 +2453,6 @@
 				220793D126C6B2D9003D434B /* AuthRequest.swift in Sources */,
 				2291BAF326F7265E0012504D /* MDSearchTextField.swift in Sources */,
 				22557FD326C95D5A00A4FF31 /* MDReadJWTMemoryStorageOperation.swift in Sources */,
-				22AF541E26F9ED1D00556225 /* PrivacyPolicyDataManager.swift in Sources */,
 				229901692668EC3400D8C74E /* AppearanceRouter.swift in Sources */,
 				227B91D726EF5F250086B9AA /* RegisterValidation.swift in Sources */,
 				22BBA15D26E0C0F0002955A6 /* MDProgress.swift in Sources */,
@@ -2503,7 +2487,6 @@
 				22EDF02626C7E6A100D19DA1 /* CDJWTResponseEntity+Extension.swift in Sources */,
 				221D281026C5064A004BC4F7 /* AuthenticationRouter.swift in Sources */,
 				22CA088326515F020052D169 /* WordListRouter.swift in Sources */,
-				22AF541C26F9ED1D00556225 /* PrivacyPolicyInteractor.swift in Sources */,
 				22493C50269741D0000DA480 /* MDCreateWordCoreDataStorageOperation.swift in Sources */,
 				229E08C42652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift in Sources */,
 				2289CEDE2678CC34007254C3 /* MDWordMemoryStorage.swift in Sources */,
@@ -2532,7 +2515,6 @@
 				229D2D4926EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataManager.swift in Sources */,
 				22E2B4E42664EB6900978E62 /* SettingsCollectionViewDataSource.swift in Sources */,
 				220FFE8C26C90B1F00702CCE /* MDReadUserProtocol.swift in Sources */,
-				22AF541A26F9ED1D00556225 /* PrivacyPolicyRouter.swift in Sources */,
 				2289CEF92678CC34007254C3 /* OperationQueueService.swift in Sources */,
 				22B8E6D926D3C4F4001CCCA8 /* MDCourseStorage.swift in Sources */,
 				22E2B4DE2664E43B00978E62 /* SettingsRouter.swift in Sources */,
@@ -2616,7 +2598,6 @@
 				229FFF3E26F60AE50024B974 /* CourseListSearchBarDelegate.swift in Sources */,
 				2223F8AB26512C5A004F2FE9 /* String+Extension.swift in Sources */,
 				22CA088E265167620052D169 /* ReloadDataProtocol.swift in Sources */,
-				22AF541826F9ED1D00556225 /* PrivacyPolicyModule.swift in Sources */,
 				22DB2F7726C3BE7900C1AADA /* CourseListModule.swift in Sources */,
 				22C5864026C7AFB80030B12D /* RegistrationDataManager.swift in Sources */,
 				2277FE1426F9DB2300001710 /* MDBaseTitledNavigationBarViewController.swift in Sources */,
@@ -2675,7 +2656,6 @@
 				22C5863126C7A5690030B12D /* MDAPIAuthError.swift in Sources */,
 				22CD45F026F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift in Sources */,
 				22B8E6B426D38F5C001CCCA8 /* MDDeleteAllLanguagesMemoryStorageOperation.swift in Sources */,
-				22AF541926F9ED1D00556225 /* PrivacyPolicyPresenter.swift in Sources */,
 				22E2B4E62664EB8000978E62 /* SettingsCollectionViewDelegate.swift in Sources */,
 				221D281F26C54960004BC4F7 /* KeyboardHandler.swift in Sources */,
 				2223F8A826512C1A004F2FE9 /* LocalizableProtocol.swift in Sources */,
