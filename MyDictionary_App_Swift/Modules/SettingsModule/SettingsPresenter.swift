@@ -71,6 +71,7 @@ extension SettingsPresenter {
             break
             
         case .termsOfService:
+            router.showTermsOfService()
             break
             
         case .support:
