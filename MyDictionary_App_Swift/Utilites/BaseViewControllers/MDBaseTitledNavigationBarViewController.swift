@@ -11,7 +11,7 @@ open class MDBaseTitledNavigationBarViewController: MDBaseNavigationBarViewContr
     
     internal let titleLabel: UILabel = {
         let label: UILabel = .init()
-        label.font = MDAppStyling.Font.MyriadProSemiBold.font(ofSize: 34)
+        label.font = MDAppStyling.Font.MyriadProSemiBold.font(ofSize: 17)
         label.textColor = MDAppStyling.Color.md_FFFFFF.color()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -46,7 +46,7 @@ open class MDBaseTitledNavigationBarViewController: MDBaseNavigationBarViewContr
 extension MDBaseTitledNavigationBarViewController {
     
     func addTitleLabel() {
-        view.addSubview(titleLabel)
+        navigationBarView.addSubview(titleLabel)
     }
     
 }
@@ -56,17 +56,13 @@ extension MDBaseTitledNavigationBarViewController {
     
     func addTitleLabelConstraints() {
         
-        NSLayoutConstraint.addEqualLeftConstraint(item: self.titleLabel,
-                                                  toItem: self.navigationBarView,
-                                                  constant: 16)
+        NSLayoutConstraint.addEqualCenterXConstraint(item: self.titleLabel,
+                                                     toItem: self.navigationBarView,
+                                                     constant: .zero)
         
-        NSLayoutConstraint.addEqualRightConstraint(item: self.titleLabel,
-                                                   toItem: self.navigationBarView,
-                                                   constant: -16)
-        
-        NSLayoutConstraint.addEqualBottomConstraint(item: self.titleLabel,
-                                                    toItem: self.navigationBarView,
-                                                    constant: -8)
+        NSLayoutConstraint.addEqualCenterYConstraint(item: self.titleLabel,
+                                                     toItem: self.navigationBarView,
+                                                     constant: .zero)
         
     }
     
@@ -89,4 +85,3 @@ fileprivate extension MDBaseTitledNavigationBarViewController {
     }
     
 }
-
