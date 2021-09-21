@@ -51,7 +51,7 @@ final class SettingsViewController: MDBaseTitledBackNavigationBarViewController 
 
 // MARK: - SettingsPresenterOutputProtocol
 extension SettingsViewController: SettingsPresenterOutputProtocol {
-        
+    
     func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
         configureAppearance(fromAppearanceType: newValue,
                             collectionView: collectionView)
@@ -91,7 +91,7 @@ fileprivate extension SettingsViewController {
                                               attribute: .top,
                                               toItem: self.navigationBarView,
                                               attribute: .bottom,
-                                              constant: .zero)
+                                              constant: 24)
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.collectionView,
                                                   toItem: self.view,
@@ -115,19 +115,17 @@ fileprivate extension SettingsViewController {
     func configureUI() {
         configureView()
         configureCollectionView()
-        configureNavigationBarAppearance(fromAppearanceType: Appearance.current.appearanceType)        
     }
     
     func configureView() {
         self.view.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor()
-        self.title = KeysForTranslate.settings.localized
     }
     
     func configureCollectionView() {
         self.collectionView.delegate = self.presenter.collectionViewDelegate
         self.collectionView.dataSource = self.presenter.collectionViewDataSource
         self.collectionView.register(SettingsCell.self)
-        self.collectionView.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor()
+        self.collectionView.backgroundColor = .clear
     }
     
 }
