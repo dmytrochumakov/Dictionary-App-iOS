@@ -52,10 +52,6 @@ final class SettingsPresenter: NSObject,
 // MARK: - SettingsInteractorOutputProtocol
 extension SettingsPresenter {
     
-    func didSelectAppearanceRow() {
-        router.showAppearanceList()        
-    }
-    
     func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
         self.presenterOutput?.appearanceHasBeenUpdated(newValue)
     }
@@ -71,6 +67,7 @@ extension SettingsPresenter {
             break
             
         case .privacyPolicy:
+            router.showPrivacyPolicy()
             break
             
         case .termsOfService:
