@@ -6,7 +6,7 @@
 
 import UIKit
 
-final class SettingsViewController: MDBaseLargeTitledBackNavigationBarViewController {
+final class SettingsViewController: MDBaseTitledBackNavigationBarViewController {
     
     fileprivate let presenter: SettingsPresenterInputProtocol
     
