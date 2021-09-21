@@ -1281,6 +1281,13 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		2277FE1726F9EBFF00001710 /* PrivacyPolicyModule */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PrivacyPolicyModule;
+			sourceTree = "<group>";
+		};
 		227864EE2663740100921778 /* SettingsModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -1892,6 +1899,7 @@
 		22CA086F26515D240052D169 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				2277FE1726F9EBFF00001710 /* PrivacyPolicyModule */,
 				229D2D2D26EB52D90047B518 /* ChoiceAuthenticationOrRegistrationModule */,
 				22C5863226C7AFAC0030B12D /* RegistrationModule */,
 				221D280626C5062A004BC4F7 /* AuthenticationModule */,
