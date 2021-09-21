@@ -6,7 +6,7 @@
 
 import UIKit
 
-final class ChoiceAuthenticationOrRegistrationViewController: MDBaseNavigationBarAndBackgroundImageViewController {
+final class ChoiceAuthenticationOrRegistrationViewController: MDBaseLargeNavigationBarAndBackgroundImageViewController {
     
     fileprivate static let iconNavigationBarImageViewSize: CGSize = .init(width: 189, height: 71)
     fileprivate let iconNavigationBarImageView: UIImageView = {

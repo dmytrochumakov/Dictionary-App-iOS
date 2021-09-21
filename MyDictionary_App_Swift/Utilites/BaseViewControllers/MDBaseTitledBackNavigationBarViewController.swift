@@ -2,7 +2,7 @@
 //  MDBaseTitledBackNavigationBarViewController.swift
 //  MyDictionary_App_Swift
 //
-//  Created by Dmytro Chumakov on 18.09.2021.
+//  Created by Dmytro Chumakov on 21.09.2021.
 //
 
 import UIKit
@@ -16,7 +16,7 @@ open class MDBaseTitledBackNavigationBarViewController: MDBaseTitledNavigationBa
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-        
+    
     override init(title: String, navigationBarBackgroundImage: UIImage) {
         super.init(title: title, navigationBarBackgroundImage: navigationBarBackgroundImage)
     }
@@ -47,10 +47,10 @@ fileprivate extension MDBaseTitledBackNavigationBarViewController {
     func addViews() {
         addBackButton()
     }
-        
+    
     func addBackButton() {
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-        view.addSubview(backButton)
+        navigationBarView.addSubview(backButton)
     }
     
 }
@@ -61,14 +61,12 @@ fileprivate extension MDBaseTitledBackNavigationBarViewController {
     func addConstraints() {
         addBackButtonConstraints()
     }
-        
+    
     func addBackButtonConstraints() {
         
-        NSLayoutConstraint.addEqualConstraint(item: self.backButton,
-                                              attribute: .bottom,
-                                              toItem: self.titleLabel,
-                                              attribute: .top,
-                                              constant: -16)
+        NSLayoutConstraint.addEqualCenterYConstraint(item: self.backButton,
+                                                     toItem: self.titleLabel,
+                                                     constant: .zero)
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.backButton,
                                                   toItem: self.navigationBarView,
@@ -86,3 +84,4 @@ fileprivate extension MDBaseTitledBackNavigationBarViewController {
     }
     
 }
+

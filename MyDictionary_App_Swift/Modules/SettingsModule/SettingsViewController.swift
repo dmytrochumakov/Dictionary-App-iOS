@@ -6,7 +6,7 @@
 
 import UIKit
 
-final class SettingsViewController: UIViewController {
+final class SettingsViewController: MDBaseTitledBackNavigationBarViewController {
     
     fileprivate let presenter: SettingsPresenterInputProtocol
     
@@ -20,7 +20,8 @@ final class SettingsViewController: UIViewController {
     
     init(presenter: SettingsPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
+        super.init(title: KeysForTranslate.settings.localized,
+                   navigationBarBackgroundImage: MDAppStyling.Image.background_navigation_bar_2.image)
     }
     
     deinit {
@@ -50,16 +51,10 @@ final class SettingsViewController: UIViewController {
 
 // MARK: - SettingsPresenterOutputProtocol
 extension SettingsViewController: SettingsPresenterOutputProtocol {
-        
+    
     func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
         configureAppearance(fromAppearanceType: newValue,
                             collectionView: collectionView)
-    }
-    
-    func reloadRows(_ rows: [IndexPath : SettingsRowModel]) {
-        rows.forEach { (indexPath, rowModel) in
-            (collectionView.cellForItem(at: indexPath) as! SettingsCell).fillWithModel(rowModel)
-        }
     }
     
 }
@@ -85,8 +80,25 @@ fileprivate extension SettingsViewController {
     }
     
     func addCollectionConstraints() {
-        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.collectionView,
-                                                         toItem: self.view)
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.collectionView,
+                                              attribute: .top,
+                                              toItem: self.navigationBarView,
+                                              attribute: .bottom,
+                                              constant: 24)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.collectionView,
+                                                  toItem: self.view,
+                                                  constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.collectionView,
+                                                   toItem: self.view,
+                                                   constant: .zero)
+        
+        NSLayoutConstraint.addEqualBottomConstraint(item: self.collectionView,
+                                                    toItem: self.view,
+                                                    constant: .zero)
+        
     }
     
 }
@@ -97,19 +109,17 @@ fileprivate extension SettingsViewController {
     func configureUI() {
         configureView()
         configureCollectionView()
-        configureNavigationBarAppearance(fromAppearanceType: Appearance.current.appearanceType)        
     }
     
     func configureView() {
         self.view.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor()
-        self.title = KeysForTranslate.settings.localized
     }
     
     func configureCollectionView() {
         self.collectionView.delegate = self.presenter.collectionViewDelegate
         self.collectionView.dataSource = self.presenter.collectionViewDataSource
         self.collectionView.register(SettingsCell.self)
-        self.collectionView.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor()
+        self.collectionView.backgroundColor = .clear
     }
     
 }

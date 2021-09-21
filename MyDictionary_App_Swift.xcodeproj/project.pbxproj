@@ -123,7 +123,10 @@
 		2270F3A426D264E6006B46F4 /* CDCourseResponseEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A326D264E6006B46F4 /* CDCourseResponseEntity+Extension.swift */; };
 		2270F3A626D2663F006B46F4 /* CDCourseResponseEntityAttributeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A526D2663F006B46F4 /* CDCourseResponseEntityAttributeName.swift */; };
 		2270F3A926D27606006B46F4 /* MDAPILanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A826D27606006B46F4 /* MDAPILanguage.swift */; };
-		227B91D026EF4A1E0086B9AA /* MDBaseTitledBackViewControllerWithBackgroundImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91CF26EF4A1E0086B9AA /* MDBaseTitledBackViewControllerWithBackgroundImage.swift */; };
+		2277FE1226F9D7E900001710 /* MDBaseNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2277FE1126F9D7E900001710 /* MDBaseNavigationBarViewController.swift */; };
+		2277FE1426F9DB2300001710 /* MDBaseTitledNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2277FE1326F9DB2300001710 /* MDBaseTitledNavigationBarViewController.swift */; };
+		2277FE1626F9DB7100001710 /* MDBaseTitledBackNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2277FE1526F9DB7100001710 /* MDBaseTitledBackNavigationBarViewController.swift */; };
+		227B91D026EF4A1E0086B9AA /* MDBaseLargeTitledBackViewControllerWithBackgroundImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91CF26EF4A1E0086B9AA /* MDBaseLargeTitledBackViewControllerWithBackgroundImage.swift */; };
 		227B91D226EF51430086B9AA /* RegistrationTextFieldTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91D126EF51430086B9AA /* RegistrationTextFieldTag.swift */; };
 		227B91D726EF5F250086B9AA /* RegisterValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91D626EF5F250086B9AA /* RegisterValidation.swift */; };
 		227B91DB26EF5F5E0086B9AA /* RegisterValidationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91DA26EF5F5E0086B9AA /* RegisterValidationType.swift */; };
@@ -166,7 +169,7 @@
 		2289CEF92678CC34007254C3 /* OperationQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEDC2678CC34007254C3 /* OperationQueueService.swift */; };
 		2289CEFA2678CC34007254C3 /* MDOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEDD2678CC34007254C3 /* MDOperation.swift */; };
 		2289CEFC2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEFB2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift */; };
-		228AE05626EDDFC20088B4CF /* MDBaseNavigationBarAndBackgroundImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228AE05526EDDFC20088B4CF /* MDBaseNavigationBarAndBackgroundImageViewController.swift */; };
+		228AE05626EDDFC20088B4CF /* MDBaseLargeNavigationBarAndBackgroundImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228AE05526EDDFC20088B4CF /* MDBaseLargeNavigationBarAndBackgroundImageViewController.swift */; };
 		228AE05926EE05120088B4CF /* HideShowPasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228AE05826EE05120088B4CF /* HideShowPasswordTextField.swift */; };
 		228AE05B26EE053D0088B4CF /* PasswordToggleVisibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228AE05A26EE053D0088B4CF /* PasswordToggleVisibilityView.swift */; };
 		228AE05D26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228AE05C26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift */; };
@@ -215,9 +218,9 @@
 		229E08C42652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C32652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift */; };
 		229E08C72652CB9000DA56C4 /* WordListCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */; };
 		229E08CB2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08CA2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift */; };
-		229FFF3626F5E1650024B974 /* MDBaseNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3526F5E1650024B974 /* MDBaseNavigationBarViewController.swift */; };
-		229FFF3826F5E3D90024B974 /* MDBaseTitledBackNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3726F5E3D90024B974 /* MDBaseTitledBackNavigationBarViewController.swift */; };
-		229FFF3A26F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3926F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift */; };
+		229FFF3626F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3526F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift */; };
+		229FFF3826F5E3D90024B974 /* MDBaseLargeTitledBackNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3726F5E3D90024B974 /* MDBaseLargeTitledBackNavigationBarViewController.swift */; };
+		229FFF3A26F5EB1D0024B974 /* MDBaseLargeTitledNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3926F5EB1D0024B974 /* MDBaseLargeTitledNavigationBarViewController.swift */; };
 		229FFF3E26F60AE50024B974 /* CourseListSearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3D26F60AE40024B974 /* CourseListSearchBarDelegate.swift */; };
 		229FFF4026F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3F26F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift */; };
 		22A2521226CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521126CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift */; };
@@ -324,10 +327,7 @@
 		22E2B4EC2664EE1400978E62 /* FillWithModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4EB2664EE1400978E62 /* FillWithModelProtocol.swift */; };
 		22E2B4F02664EF3200978E62 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4EF2664EF3200978E62 /* UICollectionView+Extension.swift */; };
 		22E2B4F32665085E00978E62 /* SettingsRowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4F22665085E00978E62 /* SettingsRowType.swift */; };
-		22E2B4F52665097900978E62 /* SettingsSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4F42665097900978E62 /* SettingsSectionType.swift */; };
-		22E2B4F7266509B900978E62 /* SettingsSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4F6266509B900978E62 /* SettingsSectionModel.swift */; };
 		22E2B4F9266509CA00978E62 /* SettingsRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4F8266509CA00978E62 /* SettingsRowModel.swift */; };
-		22E2B4FB266509DC00978E62 /* SettingsDataProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4FA266509DC00978E62 /* SettingsDataProviderModel.swift */; };
 		22E2B4FE266515D400978E62 /* CollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4FD266515D400978E62 /* CollectionViewDelegateFlowLayout.swift */; };
 		22E2B500266515E700978E62 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */; };
 		22E691B626CE5E5200641DFA /* MDStorageResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E691B526CE5E5200641DFA /* MDStorageResult.swift */; };
@@ -482,7 +482,10 @@
 		2270F3A326D264E6006B46F4 /* CDCourseResponseEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCourseResponseEntity+Extension.swift"; sourceTree = "<group>"; };
 		2270F3A526D2663F006B46F4 /* CDCourseResponseEntityAttributeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDCourseResponseEntityAttributeName.swift; sourceTree = "<group>"; };
 		2270F3A826D27606006B46F4 /* MDAPILanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPILanguage.swift; sourceTree = "<group>"; };
-		227B91CF26EF4A1E0086B9AA /* MDBaseTitledBackViewControllerWithBackgroundImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseTitledBackViewControllerWithBackgroundImage.swift; sourceTree = "<group>"; };
+		2277FE1126F9D7E900001710 /* MDBaseNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseNavigationBarViewController.swift; sourceTree = "<group>"; };
+		2277FE1326F9DB2300001710 /* MDBaseTitledNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseTitledNavigationBarViewController.swift; sourceTree = "<group>"; };
+		2277FE1526F9DB7100001710 /* MDBaseTitledBackNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseTitledBackNavigationBarViewController.swift; sourceTree = "<group>"; };
+		227B91CF26EF4A1E0086B9AA /* MDBaseLargeTitledBackViewControllerWithBackgroundImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseLargeTitledBackViewControllerWithBackgroundImage.swift; sourceTree = "<group>"; };
 		227B91D126EF51430086B9AA /* RegistrationTextFieldTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTextFieldTag.swift; sourceTree = "<group>"; };
 		227B91D626EF5F250086B9AA /* RegisterValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterValidation.swift; sourceTree = "<group>"; };
 		227B91DA26EF5F5E0086B9AA /* RegisterValidationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterValidationType.swift; sourceTree = "<group>"; };
@@ -525,7 +528,7 @@
 		2289CEDC2678CC34007254C3 /* OperationQueueService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueueService.swift; sourceTree = "<group>"; };
 		2289CEDD2678CC34007254C3 /* MDOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDOperation.swift; sourceTree = "<group>"; };
 		2289CEFB2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordMemoryStorage_Tests.swift; sourceTree = "<group>"; };
-		228AE05526EDDFC20088B4CF /* MDBaseNavigationBarAndBackgroundImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseNavigationBarAndBackgroundImageViewController.swift; sourceTree = "<group>"; };
+		228AE05526EDDFC20088B4CF /* MDBaseLargeNavigationBarAndBackgroundImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseLargeNavigationBarAndBackgroundImageViewController.swift; sourceTree = "<group>"; };
 		228AE05826EE05120088B4CF /* HideShowPasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideShowPasswordTextField.swift; sourceTree = "<group>"; };
 		228AE05A26EE053D0088B4CF /* PasswordToggleVisibilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordToggleVisibilityView.swift; sourceTree = "<group>"; };
 		228AE05C26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDPasswordTextFieldWithToolBar.swift; sourceTree = "<group>"; };
@@ -578,9 +581,9 @@
 		229E08C32652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfRowsInSectionProtocol.swift; sourceTree = "<group>"; };
 		229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		229E08CA2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourcePropertyProtocol.swift; sourceTree = "<group>"; };
-		229FFF3526F5E1650024B974 /* MDBaseNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseNavigationBarViewController.swift; sourceTree = "<group>"; };
-		229FFF3726F5E3D90024B974 /* MDBaseTitledBackNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseTitledBackNavigationBarViewController.swift; sourceTree = "<group>"; };
-		229FFF3926F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseTitledNavigationBarViewController.swift; sourceTree = "<group>"; };
+		229FFF3526F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseLargeNavigationBarViewController.swift; sourceTree = "<group>"; };
+		229FFF3726F5E3D90024B974 /* MDBaseLargeTitledBackNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseLargeTitledBackNavigationBarViewController.swift; sourceTree = "<group>"; };
+		229FFF3926F5EB1D0024B974 /* MDBaseLargeTitledNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseLargeTitledNavigationBarViewController.swift; sourceTree = "<group>"; };
 		229FFF3D26F60AE40024B974 /* CourseListSearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListSearchBarDelegate.swift; sourceTree = "<group>"; };
 		229FFF3F26F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSearchBarDelegatePropertyProtocol.swift; sourceTree = "<group>"; };
 		22A2521126CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountResultWithoutCompletion.swift; sourceTree = "<group>"; };
@@ -687,10 +690,7 @@
 		22E2B4EB2664EE1400978E62 /* FillWithModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillWithModelProtocol.swift; sourceTree = "<group>"; };
 		22E2B4EF2664EF3200978E62 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		22E2B4F22665085E00978E62 /* SettingsRowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowType.swift; sourceTree = "<group>"; };
-		22E2B4F42665097900978E62 /* SettingsSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSectionType.swift; sourceTree = "<group>"; };
-		22E2B4F6266509B900978E62 /* SettingsSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSectionModel.swift; sourceTree = "<group>"; };
 		22E2B4F8266509CA00978E62 /* SettingsRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowModel.swift; sourceTree = "<group>"; };
-		22E2B4FA266509DC00978E62 /* SettingsDataProviderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataProviderModel.swift; sourceTree = "<group>"; };
 		22E2B4FD266515D400978E62 /* CollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegateFlowLayout.swift; sourceTree = "<group>"; };
 		22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		22E691B526CE5E5200641DFA /* MDStorageResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorageResult.swift; sourceTree = "<group>"; };
@@ -1464,11 +1464,14 @@
 		228AE05426EDDFAF0088B4CF /* BaseViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				228AE05526EDDFC20088B4CF /* MDBaseNavigationBarAndBackgroundImageViewController.swift */,
-				227B91CF26EF4A1E0086B9AA /* MDBaseTitledBackViewControllerWithBackgroundImage.swift */,
-				229FFF3526F5E1650024B974 /* MDBaseNavigationBarViewController.swift */,
-				229FFF3726F5E3D90024B974 /* MDBaseTitledBackNavigationBarViewController.swift */,
-				229FFF3926F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift */,
+				228AE05526EDDFC20088B4CF /* MDBaseLargeNavigationBarAndBackgroundImageViewController.swift */,
+				227B91CF26EF4A1E0086B9AA /* MDBaseLargeTitledBackViewControllerWithBackgroundImage.swift */,
+				229FFF3526F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift */,
+				229FFF3726F5E3D90024B974 /* MDBaseLargeTitledBackNavigationBarViewController.swift */,
+				229FFF3926F5EB1D0024B974 /* MDBaseLargeTitledNavigationBarViewController.swift */,
+				2277FE1526F9DB7100001710 /* MDBaseTitledBackNavigationBarViewController.swift */,
+				2277FE1326F9DB2300001710 /* MDBaseTitledNavigationBarViewController.swift */,
+				2277FE1126F9D7E900001710 /* MDBaseNavigationBarViewController.swift */,
 			);
 			path = BaseViewControllers;
 			sourceTree = "<group>";
@@ -2024,9 +2027,7 @@
 		22E2B4E82664ED8700978E62 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				22E2B4F6266509B900978E62 /* SettingsSectionModel.swift */,
 				22E2B4F8266509CA00978E62 /* SettingsRowModel.swift */,
-				22E2B4FA266509DC00978E62 /* SettingsDataProviderModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2035,7 +2036,6 @@
 			isa = PBXGroup;
 			children = (
 				22E2B4F22665085E00978E62 /* SettingsRowType.swift */,
-				22E2B4F42665097900978E62 /* SettingsSectionType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -2394,7 +2394,7 @@
 				22B8E6A326D381EF001CCCA8 /* MDLanguageCoreDataStorage.swift in Sources */,
 				22B22691266CF866007AB292 /* UIViewController+Extension.swift in Sources */,
 				229901712668EE5300D8C74E /* MDAppDelegate.swift in Sources */,
-				229FFF3626F5E1650024B974 /* MDBaseNavigationBarViewController.swift in Sources */,
+				229FFF3626F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift in Sources */,
 				224375AF26F3406B006B90EB /* MDCourseListCellModel.swift in Sources */,
 				220793CB26C67432003D434B /* UIAlertController+Extension.swift in Sources */,
 				22E2B4F9266509CA00978E62 /* SettingsRowModel.swift in Sources */,
@@ -2452,7 +2452,6 @@
 				228AE05D26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift in Sources */,
 				22A2521426CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift in Sources */,
 				2291BAF526F754CF0012504D /* UITableView+Extension.swift in Sources */,
-				22E2B4F7266509B900978E62 /* SettingsSectionModel.swift in Sources */,
 				220793DA26C6BF58003D434B /* AuthResponse.swift in Sources */,
 				22493C3726972232000DA480 /* MDWordCoreDataStorage.swift in Sources */,
 				2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */,
@@ -2491,6 +2490,7 @@
 				22B8E6E026D3C774001CCCA8 /* MDCRUDCourseProtocol.swift in Sources */,
 				22E2B4DD2664E43B00978E62 /* SettingsPresenter.swift in Sources */,
 				220793CE26C68081003D434B /* MDAPIAuth.swift in Sources */,
+				2277FE1226F9D7E900001710 /* MDBaseNavigationBarViewController.swift in Sources */,
 				22EF01E3269D9CDA00FE4435 /* MDEntitiesIsEmptyProtocol.swift in Sources */,
 				229E08BE2652C8E600DA56C4 /* SectionTypeProtocol.swift in Sources */,
 				2270F3A026D26199006B46F4 /* CDLanguageResponseEntity+Extension.swift in Sources */,
@@ -2512,7 +2512,7 @@
 				22DB2F7A26C3BE7900C1AADA /* CourseListViewController.swift in Sources */,
 				2299016C2668EC3400D8C74E /* AppearanceDataProvider.swift in Sources */,
 				22E2B4E02664E43B00978E62 /* SettingsInteractor.swift in Sources */,
-				228AE05626EDDFC20088B4CF /* MDBaseNavigationBarAndBackgroundImageViewController.swift in Sources */,
+				228AE05626EDDFC20088B4CF /* MDBaseLargeNavigationBarAndBackgroundImageViewController.swift in Sources */,
 				227D8F1526D7A4FA009CB94B /* MDAppSettings.swift in Sources */,
 				2294323026DF9A2A0073048C /* MDSyncManager.swift in Sources */,
 				22B22693266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift in Sources */,
@@ -2536,7 +2536,6 @@
 				22B2268F266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift in Sources */,
 				22E2B4DF2664E43B00978E62 /* SettingsViewController.swift in Sources */,
 				22BD99A8266A58F40063FEFC /* RootViewController.swift in Sources */,
-				22E2B4FB266509DC00978E62 /* SettingsDataProviderModel.swift in Sources */,
 				22561C7E26D4B67300A6135B /* MDDeleteCourseMemoryStorageOperation.swift in Sources */,
 				22557FCC26C959D100A4FF31 /* MDCreateJWTMemoryStorageOperation.swift in Sources */,
 				22E2B4E22664E43B00978E62 /* SettingsDataManager.swift in Sources */,
@@ -2562,7 +2561,7 @@
 				229E08C72652CB9000DA56C4 /* WordListCollectionViewDataSource.swift in Sources */,
 				22BD99A2266A4B8D0063FEFC /* AppearanceModule.swift in Sources */,
 				22DB2F8D26C3D51500C1AADA /* TableViewDataSourcePropertyProtocol.swift in Sources */,
-				227B91D026EF4A1E0086B9AA /* MDBaseTitledBackViewControllerWithBackgroundImage.swift in Sources */,
+				227B91D026EF4A1E0086B9AA /* MDBaseLargeTitledBackViewControllerWithBackgroundImage.swift in Sources */,
 				2223F8B426512F01004F2FE9 /* KeysForTranslate.swift in Sources */,
 				221D281926C53356004BC4F7 /* AuthenticationTextFieldTag.swift in Sources */,
 				227B91DD26EF5F670086B9AA /* RegisterValidationError.swift in Sources */,
@@ -2573,7 +2572,7 @@
 				228964AA26F8AA1200E23292 /* MDShowProgressHUDProtocol.swift in Sources */,
 				220793C726C66F76003D434B /* AuthValidationError.swift in Sources */,
 				22EF0202269DA9E300FE4435 /* MDResponseOperationResult.swift in Sources */,
-				229FFF3A26F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift in Sources */,
+				229FFF3A26F5EB1D0024B974 /* MDBaseLargeTitledNavigationBarViewController.swift in Sources */,
 				22BBA15B26E0B366002955A6 /* MDSyncError.swift in Sources */,
 				22B8E6CC26D3B398001CCCA8 /* MDDeleteAllJWTCoreDataStorageOperation.swift in Sources */,
 				220793BF26C65BF4003D434B /* AuthValidation.swift in Sources */,
@@ -2586,6 +2585,7 @@
 				22CA088E265167620052D169 /* ReloadDataProtocol.swift in Sources */,
 				22DB2F7726C3BE7900C1AADA /* CourseListModule.swift in Sources */,
 				22C5864026C7AFB80030B12D /* RegistrationDataManager.swift in Sources */,
+				2277FE1426F9DB2300001710 /* MDBaseTitledNavigationBarViewController.swift in Sources */,
 				22493C41269726A4000DA480 /* CDWordResponseEntityAttributeName.swift in Sources */,
 				220793C126C66F2A003D434B /* AuthValidationLogic.swift in Sources */,
 				2289CEED2678CC34007254C3 /* MDWordStorage.swift in Sources */,
@@ -2603,7 +2603,6 @@
 				221D281226C5064A004BC4F7 /* AuthenticationInteractor.swift in Sources */,
 				22C5864226C7B7AE0030B12D /* UserResponse.swift in Sources */,
 				22CA08892651603A0052D169 /* WordListDataProvider.swift in Sources */,
-				22E2B4F52665097900978E62 /* SettingsSectionType.swift in Sources */,
 				2270F39C26D25ED1006B46F4 /* LanguageResponse.swift in Sources */,
 				228722D126D0F18400C9D1BC /* MDAuthManager.swift in Sources */,
 				22493C3B269724CB000DA480 /* CoreDataEntityName.swift in Sources */,
@@ -2634,6 +2633,7 @@
 				226FEE7A266B644F0044A5F9 /* AppearanceCollectionViewDataSource.swift in Sources */,
 				22B8E69F26D38059001CCCA8 /* MDLanguageStorage.swift in Sources */,
 				2270F3A226D262F5006B46F4 /* CourseResponse.swift in Sources */,
+				2277FE1626F9DB7100001710 /* MDBaseTitledBackNavigationBarViewController.swift in Sources */,
 				22B8E6B226D38D6D001CCCA8 /* MDReadAllLanguagesMemoryStorageOperation.swift in Sources */,
 				228964AE26F8AA2C00E23292 /* MDUpdateHUDProgressProtocol.swift in Sources */,
 				22C5863A26C7AFB80030B12D /* RegistrationModule.swift in Sources */,
@@ -2645,7 +2645,7 @@
 				2223F8A826512C1A004F2FE9 /* LocalizableProtocol.swift in Sources */,
 				22DEAE3226C289F100B64B16 /* MDAPIVersion.swift in Sources */,
 				2294323426DF9A520073048C /* MDSyncResult.swift in Sources */,
-				229FFF3826F5E3D90024B974 /* MDBaseTitledBackNavigationBarViewController.swift in Sources */,
+				229FFF3826F5E3D90024B974 /* MDBaseLargeTitledBackNavigationBarViewController.swift in Sources */,
 				228AE05B26EE053D0088B4CF /* PasswordToggleVisibilityView.swift in Sources */,
 				22B8E6BA26D396B0001CCCA8 /* MDCreateLanguagesCoreDataStorageOperation.swift in Sources */,
 				22B8E6DD26D3C54B001CCCA8 /* MDCourseCoreDataStorage.swift in Sources */,

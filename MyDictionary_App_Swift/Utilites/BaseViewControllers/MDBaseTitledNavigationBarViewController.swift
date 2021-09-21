@@ -2,22 +2,31 @@
 //  MDBaseTitledNavigationBarViewController.swift
 //  MyDictionary_App_Swift
 //
-//  Created by Dmytro Chumakov on 18.09.2021.
+//  Created by Dmytro Chumakov on 21.09.2021.
 //
 
 import UIKit
 
 open class MDBaseTitledNavigationBarViewController: MDBaseNavigationBarViewController {
     
+    fileprivate static let titleLabelHeight: CGFloat = 24
+    fileprivate static let titleLabelBottomOffset: CGFloat = 16
+    fileprivate static let titleLabelFont: UIFont = MDAppStyling.Font.MyriadProSemiBold.font(ofSize: 17)
+    fileprivate static let titleLabelNumberOfLines: Int = 1
+    
+    fileprivate let titleText: String
     internal let titleLabel: UILabel = {
         let label: UILabel = .init()
-        label.font = MDAppStyling.Font.MyriadProSemiBold.font(ofSize: 34)
+        label.font = titleLabelFont
         label.textColor = MDAppStyling.Color.md_FFFFFF.color()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.numberOfLines = titleLabelNumberOfLines
         return label
     }()
     
     init(title: String, navigationBarBackgroundImage: UIImage) {
+        self.titleText = title
         titleLabel.text = title
         super.init(navigationBarBackgroundImage: navigationBarBackgroundImage)
     }
@@ -56,17 +65,16 @@ extension MDBaseTitledNavigationBarViewController {
     
     func addTitleLabelConstraints() {
         
-        NSLayoutConstraint.addEqualLeftConstraint(item: self.titleLabel,
-                                                  toItem: self.navigationBarView,
-                                                  constant: 16)
+        NSLayoutConstraint.addEqualCenterXConstraint(item: self.titleLabel,
+                                                     toItem: self.navigationBarView,
+                                                     constant: .zero)
         
-        NSLayoutConstraint.addEqualRightConstraint(item: self.titleLabel,
-                                                   toItem: self.navigationBarView,
-                                                   constant: -16)
+        NSLayoutConstraint.addEqualWidthConstraint(item: self.titleLabel,
+                                                   constant: Self.titleLabelWidth(fromText: titleText))
         
         NSLayoutConstraint.addEqualBottomConstraint(item: self.titleLabel,
                                                     toItem: self.navigationBarView,
-                                                    constant: -8)
+                                                    constant: -Self.titleLabelBottomOffset)
         
     }
     
@@ -76,7 +84,7 @@ extension MDBaseTitledNavigationBarViewController {
 fileprivate extension MDBaseTitledNavigationBarViewController {
     
     func addViews() {
-        addTitleLabel()        
+        addTitleLabel()
     }
     
 }
@@ -86,6 +94,17 @@ fileprivate extension MDBaseTitledNavigationBarViewController {
     
     func addConstraints() {
         addTitleLabelConstraints()
+    }
+    
+}
+
+// MARK: - Title Label Configuration
+fileprivate extension MDBaseTitledNavigationBarViewController {
+    
+    static func titleLabelWidth(fromText text: String) -> CGFloat {
+        return text.widthFromLabel(font: Self.titleLabelFont,
+                                   height: Self.titleLabelHeight,
+                                   numberOfLines: Self.titleLabelNumberOfLines)
     }
     
 }

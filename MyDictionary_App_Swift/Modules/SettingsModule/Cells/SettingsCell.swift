@@ -15,7 +15,21 @@ final class SettingsCell: UICollectionViewCell,
     fileprivate let titleLabel: UILabel = {
         let label: UILabel = .init()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = MDAppStyling.Font.MyriadProRegular.font()
+        label.textColor = MDAppStyling.Color.md_3C3C3C.color()
+        label.textAlignment = .left
+        label.numberOfLines = .zero
         return label
+    }()
+    
+    fileprivate static let arrowImageViewSize: CGSize = .init(width: 32, height: 32)
+    fileprivate static let arrowImageViewRightOffset: CGFloat = 4
+    fileprivate let arrowImageView: UIImageView = {
+        let imageView: UIImageView = .init()
+        imageView.image = MDAppStyling.Image.right_arrow.image
+        imageView.contentMode = .center
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     override init(frame: CGRect) {
@@ -41,8 +55,7 @@ extension SettingsCell: FillWithModelProtocol {
     typealias Model = SettingsRowModel
     
     func fillWithModel(_ model: SettingsRowModel) {
-        self.updateSelfView(model)
-        self.updateTitleLabel(model)
+        self.titleLabel.text = model.rowType.description
     }
     
 }
@@ -52,10 +65,15 @@ fileprivate extension SettingsCell {
     
     func addViews() {
         addTitleLabel()
+        addArrowImageView()
     }
     
     func addTitleLabel() {
         addSubview(titleLabel)
+    }
+    
+    func addArrowImageView() {
+        addSubview(arrowImageView)
     }
     
 }
@@ -65,21 +83,47 @@ fileprivate extension SettingsCell {
     
     func addConstraints() {
         addTitleLabelConstraints()
+        addArrowImageViewConstraints()
     }
     
     func addTitleLabelConstraints() {
+        
         NSLayoutConstraint.addEqualTopConstraint(item: titleLabel,
-                                                            toItem: self,
-                                                            constant: .zero)
+                                                 toItem: self,
+                                                 constant: .zero)
+        
         NSLayoutConstraint.addEqualLeftConstraint(item: titleLabel,
-                                                             toItem: self,
-                                                             constant: 16)
-        NSLayoutConstraint.addEqualRightConstraint(item: titleLabel,
-                                                              toItem: self,
-                                                              constant: .zero)
+                                                  toItem: self,
+                                                  constant: 16)
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.titleLabel,
+                                              attribute: .right,
+                                              toItem: self.arrowImageView,
+                                              attribute: .left,
+                                              constant: -16)
+        
         NSLayoutConstraint.addEqualBottomConstraint(item: titleLabel,
-                                                               toItem: self,
-                                                               constant: .zero)
+                                                    toItem: self,
+                                                    constant: .zero)
+        
+    }
+    
+    func addArrowImageViewConstraints() {
+        
+        NSLayoutConstraint.addEqualCenterYConstraint(item: self.arrowImageView,
+                                                     toItem: self,
+                                                     constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.arrowImageView,
+                                                   toItem: self,
+                                                   constant: -Self.arrowImageViewRightOffset)
+        
+        NSLayoutConstraint.addEqualWidthConstraint(item: self.arrowImageView,
+                                                   constant: Self.arrowImageViewSize.width)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.arrowImageView,
+                                                    constant: Self.arrowImageViewSize.height)
+        
     }
     
 }
@@ -88,33 +132,11 @@ fileprivate extension SettingsCell {
 fileprivate extension SettingsCell {
     
     func configureUI() {
-        configureView()
-        configureTitleLabel()
+        configureSelfView()
     }
     
-    func configureView() {
-        self.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor()
-    }
-    
-    func configureTitleLabel() {
-        self.titleLabel.font = MDAppStyling.Font.systemFont.font()
-        self.titleLabel.textColor = ConfigurationAppearanceController.labelTextColor()
-        self.titleLabel.textAlignment = .left
-        self.titleLabel.numberOfLines = .zero
-    }
-    
-}
-
-// MARK: - Update
-fileprivate extension SettingsCell {
-    
-    func updateSelfView(_ model: SettingsRowModel) {
-        self.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor(fromAppearanceType: model.appearanceType)
-    }
-    
-    func updateTitleLabel(_ model: SettingsRowModel) {
-        self.titleLabel.textColor = ConfigurationAppearanceController.labelTextColor(fromAppearanceType: model.appearanceType)
-        self.titleLabel.text = model.titleText
+    func configureSelfView() {
+        self.backgroundColor = .clear
     }
     
 }

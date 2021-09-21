@@ -2,7 +2,7 @@
 //  MDBaseNavigationBarViewController.swift
 //  MyDictionary_App_Swift
 //
-//  Created by Dmytro Chumakov on 18.09.2021.
+//  Created by Dmytro Chumakov on 21.09.2021.
 //
 
 import UIKit
@@ -50,6 +50,11 @@ open class MDBaseNavigationBarViewController: UIViewController {
         super.viewDidLayoutSubviews()
         addConstraints()
         dropShadow()
+    }
+    
+    open func setupNavigationBar() {
+        hideNavigationBar()
+        navigationBarPrefersLargeTitlesFalse()
     }
     
 }
@@ -113,17 +118,12 @@ extension MDBaseNavigationBarViewController {
 // MARK: - Setup Navigation Bar
 extension MDBaseNavigationBarViewController {
     
-    func setupNavigationBar() {
-        navigationBarPrefersLargeTitles()
-        hideNavigationBar()
-    }
-    
     func hideNavigationBar() {
         self.navigationController?.navigationBar.isHidden = true
     }
     
-    func navigationBarPrefersLargeTitles() {
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+    func navigationBarPrefersLargeTitlesFalse() {
+        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
 }

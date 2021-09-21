@@ -30,6 +30,11 @@
 "ok" = "Ok";
 "please_wait_for_data_sync" = "Please wait for data sync";
 "search" = "Search";
+"about" = "About";
+"account" = "Account";
+"privacy_Policy" = "Privacy Policy";
+"terms_Of_Service" = "Terms Of Service";
+"support" = "Support";
 
 // Api Errors //
 "no_data_api_error" = "No Data";

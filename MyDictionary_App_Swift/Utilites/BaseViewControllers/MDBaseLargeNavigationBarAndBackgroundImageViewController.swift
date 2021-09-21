@@ -1,5 +1,5 @@
 //
-//  MDBaseNavigationBarAndBackgroundImageViewController.swift
+//  MDBaseLargeNavigationBarAndBackgroundImageViewController.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 12.09.2021.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-open class MDBaseNavigationBarAndBackgroundImageViewController: MDBaseNavigationBarViewController {
+open class MDBaseLargeNavigationBarAndBackgroundImageViewController: MDBaseLargeNavigationBarViewController {
     
     internal let backgroundImageView: UIImageView = {
-        let imageView: UIImageView = .init()         
+        let imageView: UIImageView = .init()
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -48,7 +48,7 @@ open class MDBaseNavigationBarAndBackgroundImageViewController: MDBaseNavigation
 }
 
 // MARK: - Add View
-extension MDBaseNavigationBarAndBackgroundImageViewController {
+extension MDBaseLargeNavigationBarAndBackgroundImageViewController {
     
     func addBackgroundImageView() {
         view.addSubview(backgroundImageView)
@@ -57,7 +57,7 @@ extension MDBaseNavigationBarAndBackgroundImageViewController {
 }
 
 // MARK: - Add Constraint
-extension MDBaseNavigationBarAndBackgroundImageViewController {
+extension MDBaseLargeNavigationBarAndBackgroundImageViewController {
     
     func addBackgroundImageViewConstraints() {
         
@@ -84,7 +84,7 @@ extension MDBaseNavigationBarAndBackgroundImageViewController {
 }
 
 // MARK: - Add Views
-fileprivate extension MDBaseNavigationBarAndBackgroundImageViewController {
+fileprivate extension MDBaseLargeNavigationBarAndBackgroundImageViewController {
     
     func addViews() {
         addNavigationBarView()
@@ -95,7 +95,7 @@ fileprivate extension MDBaseNavigationBarAndBackgroundImageViewController {
 }
 
 // MARK: - Add Constraints
-fileprivate extension MDBaseNavigationBarAndBackgroundImageViewController {
+fileprivate extension MDBaseLargeNavigationBarAndBackgroundImageViewController {
     
     func addConstraints() {
         addNavigationBarViewConstraints()
@@ -106,7 +106,7 @@ fileprivate extension MDBaseNavigationBarAndBackgroundImageViewController {
 }
 
 // MARK: - Configure UI
-fileprivate extension MDBaseNavigationBarAndBackgroundImageViewController {
+fileprivate extension MDBaseLargeNavigationBarAndBackgroundImageViewController {
     
     func configureUI() {
         configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
@@ -116,7 +116,7 @@ fileprivate extension MDBaseNavigationBarAndBackgroundImageViewController {
 }
 
 // MARK: - Drop Shadow
-fileprivate extension MDBaseNavigationBarAndBackgroundImageViewController {
+fileprivate extension MDBaseLargeNavigationBarAndBackgroundImageViewController {
     
     func dropShadow() {
         dropShadowNavigationBarView()

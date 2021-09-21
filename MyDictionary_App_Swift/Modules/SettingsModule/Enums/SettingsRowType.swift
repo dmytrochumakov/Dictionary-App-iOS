@@ -8,7 +8,30 @@
 import Foundation
 
 enum SettingsRowType: Int {
-    case appearance
+    case about
+    case account
+    case privacyPolicy
+    case termsOfService
+    case support
+}
+
+extension SettingsRowType: CustomStringConvertible {
+    
+    var description: String {
+        switch self {
+        case .about:
+            return KeysForTranslate.about.localized
+        case .account:
+            return KeysForTranslate.account.localized
+        case .privacyPolicy:
+            return KeysForTranslate.privacyPolicy.localized
+        case .termsOfService:
+            return KeysForTranslate.termsOfService.localized
+        case .support:
+            return KeysForTranslate.support.localized
+        }
+    }
+    
 }
 
 // MARK: - RowTypeProtocol

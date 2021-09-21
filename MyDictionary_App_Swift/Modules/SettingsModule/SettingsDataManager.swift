@@ -6,12 +6,12 @@
 
 import Foundation
 
-protocol SettingsDataManagerInputProtocol: AppearanceHasBeenUpdatedProtocol {
+protocol SettingsDataManagerInputProtocol {
     var dataProvider: SettingsDataProviderProtocol { get }
 }
 
 protocol SettingsDataManagerOutputProtocol: AnyObject {
-    func rowsForUpdate(_ rows: [IndexPath : SettingsRowModel])
+    
 }
 
 protocol SettingsDataManagerProtocol: SettingsDataManagerInputProtocol {
@@ -29,22 +29,6 @@ final class SettingsDataManager: SettingsDataManagerProtocol {
     
     deinit {
         debugPrint(#function, Self.self)
-    }
-    
-}
-
-extension SettingsDataManager {
-    
-    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
-        var rowsForUpdate: [IndexPath : SettingsRowModel] = [:]
-        dataProvider.rows(atSection: SettingsSectionType.list.rawValue).forEach { row in
-            var updatedRow = row
-            updatedRow.appearanceType = newValue
-            rowsForUpdate.updateValue(updatedRow,
-                                      forKey: IndexPath.init(row: row.rowType.rawValue,
-                                                             section: SettingsSectionType.list.rawValue))
-        }
-        dataManagerOutput?.rowsForUpdate(rowsForUpdate)
     }
     
 }

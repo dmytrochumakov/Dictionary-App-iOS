@@ -6,7 +6,7 @@
 
 import MBProgressHUD
 
-final class AuthenticationViewController: MDBaseTitledBackViewControllerWithBackgroundImage {
+final class AuthenticationViewController: MDBaseLargeTitledBackViewControllerWithBackgroundImage {
     
     fileprivate let presenter: AuthenticationPresenterInputProtocol
     

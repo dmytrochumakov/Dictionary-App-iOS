@@ -1,13 +1,13 @@
 //
-//  MDBaseTitledBackViewControllerWithBackgroundImage.swift
+//  MDBaseLargeTitledBackNavigationBarViewController.swift
 //  MyDictionary_App_Swift
 //
-//  Created by Dmytro Chumakov on 13.09.2021.
+//  Created by Dmytro Chumakov on 18.09.2021.
 //
 
 import UIKit
 
-open class MDBaseTitledBackViewControllerWithBackgroundImage: MDBaseNavigationBarAndBackgroundImageViewController {
+open class MDBaseLargeTitledBackNavigationBarViewController: MDBaseLargeTitledNavigationBarViewController {
     
     internal let backButtonSize: CGSize = .init(width: 40, height: 40)
     internal let backButton: UIButton = {
@@ -17,17 +17,8 @@ open class MDBaseTitledBackViewControllerWithBackgroundImage: MDBaseNavigationBa
         return button
     }()
     
-    internal let titleLabel: UILabel = {
-        let label: UILabel = .init()
-        label.font = MDAppStyling.Font.MyriadProSemiBold.font(ofSize: 34)
-        label.textColor = MDAppStyling.Color.md_FFFFFF.color()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    init(title: String, navigationBarBackgroundImage: UIImage, backgroundImage: UIImage) {
-        titleLabel.text = title
-        super.init(navigationBarBackgroundImage: navigationBarBackgroundImage, backgroundImage: backgroundImage)
+    override init(title: String, navigationBarBackgroundImage: UIImage) {
+        super.init(title: title, navigationBarBackgroundImage: navigationBarBackgroundImage)
     }
     
     deinit {
@@ -51,15 +42,10 @@ open class MDBaseTitledBackViewControllerWithBackgroundImage: MDBaseNavigationBa
 }
 
 // MARK: - Add Views
-fileprivate extension MDBaseTitledBackViewControllerWithBackgroundImage {
+fileprivate extension MDBaseLargeTitledBackNavigationBarViewController {
     
     func addViews() {
-        addTitleLabel()
         addBackButton()
-    }
-    
-    func addTitleLabel() {
-        view.addSubview(titleLabel)
     }
     
     func addBackButton() {
@@ -70,27 +56,10 @@ fileprivate extension MDBaseTitledBackViewControllerWithBackgroundImage {
 }
 
 // MARK: - Add Constraints
-fileprivate extension MDBaseTitledBackViewControllerWithBackgroundImage {
+fileprivate extension MDBaseLargeTitledBackNavigationBarViewController {
     
     func addConstraints() {
-        addTitleLabelConstraints()
         addBackButtonConstraints()
-    }
-    
-    func addTitleLabelConstraints() {
-        
-        NSLayoutConstraint.addEqualLeftConstraint(item: self.titleLabel,
-                                                  toItem: self.navigationBarView,
-                                                  constant: 16)
-        
-        NSLayoutConstraint.addEqualRightConstraint(item: self.titleLabel,
-                                                   toItem: self.navigationBarView,
-                                                   constant: -16)
-        
-        NSLayoutConstraint.addEqualBottomConstraint(item: self.titleLabel,
-                                                    toItem: self.navigationBarView,
-                                                    constant: -16)
-        
     }
     
     func addBackButtonConstraints() {
@@ -110,7 +79,7 @@ fileprivate extension MDBaseTitledBackViewControllerWithBackgroundImage {
 }
 
 // MARK: - Actions
-fileprivate extension MDBaseTitledBackViewControllerWithBackgroundImage {
+fileprivate extension MDBaseLargeTitledBackNavigationBarViewController {
     
     @objc func backButtonAction() {
         navigationController?.popViewController(animated: true)

@@ -13,7 +13,7 @@ protocol SettingsPresenterInputProtocol: CollectionViewDelegateFlowLayoutPropert
 
 protocol SettingsPresenterOutputProtocol: AnyObject,                                          
                                           AppearanceHasBeenUpdatedProtocol {
-    func reloadRows(_ rows: [IndexPath : SettingsRowModel])
+    
 }
 
 protocol SettingsPresenterProtocol: SettingsPresenterInputProtocol,
@@ -60,8 +60,27 @@ extension SettingsPresenter {
         self.presenterOutput?.appearanceHasBeenUpdated(newValue)
     }
     
-    func reloadRows(_ rows: [IndexPath : SettingsRowModel]) {
-        self.presenterOutput?.reloadRows(rows)
+    func didSelectRow(_ rowType: SettingsRowType) {
+        
+        switch rowType {
+            
+        case .about:
+            break
+            
+        case .account:
+            break
+            
+        case .privacyPolicy:
+            break
+            
+        case .termsOfService:
+            break
+            
+        case .support:
+            break
+            
+        }
+        
     }
     
 }

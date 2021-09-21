@@ -13,8 +13,9 @@ protocol SettingsInteractorInputProtocol {
 
 protocol SettingsInteractorOutputProtocol: AnyObject,
                                            AppearanceHasBeenUpdatedProtocol {
-    func didSelectAppearanceRow()
-    func reloadRows(_ rows: [IndexPath : SettingsRowModel])
+    
+    func didSelectRow(_ rowType: SettingsRowType)
+    
 }
 
 protocol SettingsInteractorProtocol: SettingsInteractorInputProtocol,
@@ -54,40 +55,37 @@ final class SettingsInteractor: NSObject,
 // MARK: - SettingsDataManagerOutputProtocol
 extension SettingsInteractor {
     
-    func rowsForUpdate(_ rows: [IndexPath : SettingsRowModel]) {
-        self.interactorOutput?.reloadRows(rows)
-    }
-    
 }
 
 // MARK: - Subscribe
 fileprivate extension SettingsInteractor {
     
     func subscribe() {
-        didChangeAppearanceObservableSubscribe()
-        didSelectItemAtIndexPathSubscribe()
+        didChangeAppearanceObservable_Subscribe()
+        didSelectItemAtIndexPath_Subscribe()
     }
     
-    func didSelectItemAtIndexPathSubscribe() {
+    func didSelectItemAtIndexPath_Subscribe() {
+        
         collectionViewDelegate.didSelectItemAtIndexPath = { [weak self] (indexPath) in
-            guard let rowModel = self?.dataManager.dataProvider.rowModel(atIndexPath: indexPath)
-            else { return }
-            switch rowModel.rowType {
-            case .appearance:
-                self?.interactorOutput?.didSelectAppearanceRow()
-                break
-            }
+            
+            guard let rowModel = self?.dataManager.dataProvider.rowModel(atIndexPath: indexPath) else { return }
+            
+            self?.interactorOutput?.didSelectRow(rowModel.rowType)
+            
         }
+        
     }
     
-    func didChangeAppearanceObservableSubscribe() {
+    func didChangeAppearanceObservable_Subscribe() {
+        
         Appearance
             .current
             .didChangeAppearanceObservable
             .addObserver(self) { [weak self] (value) in
                 self?.interactorOutput?.appearanceHasBeenUpdated(value)
-                self?.dataManager.appearanceHasBeenUpdated(value)
             }
+        
     }
     
 }

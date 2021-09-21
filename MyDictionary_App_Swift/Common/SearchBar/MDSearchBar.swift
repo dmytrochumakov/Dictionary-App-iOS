@@ -46,7 +46,7 @@ final class MDSearchBar: UIView {
         let button: UIButton = .init()
         button.backgroundColor = cancelButtonBackgroundColor(isActive: false)
         button.setTitle(KeysForTranslate.cancel.localized, for: .normal)
-        button.setTitleColor(cancelButtonTextColor(isActive: false), for: .normal)
+        button.setTitleColor(MDAppStyling.Color.md_FFFFFF.color(), for: .normal)
         button.titleLabel?.font = cancelButtonFont
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -258,8 +258,7 @@ fileprivate extension MDSearchBar {
                        options: [.curveEaseInOut],
                        animations: {
                         
-                        self.cancelButton.backgroundColor = Self.cancelButtonBackgroundColor(isActive: true)
-                        self.cancelButton.setTitleColor(Self.cancelButtonTextColor(isActive: true), for: .normal)
+                        self.cancelButton.backgroundColor = Self.cancelButtonBackgroundColor(isActive: true)                        
                         self.dropShadowCancelButton(isActive: true)
                         
                        }, completion: nil)
@@ -290,7 +289,6 @@ fileprivate extension MDSearchBar {
                        animations: {
                         
                         self.cancelButton.backgroundColor = Self.cancelButtonBackgroundColor(isActive: false)
-                        self.cancelButton.setTitleColor(Self.cancelButtonTextColor(isActive: false), for: .normal)
                         self.dropShadowCancelButton(isActive: false)
                         
                        }, completion: nil)
@@ -314,14 +312,6 @@ fileprivate extension MDSearchBar {
                                    numberOfLines: 1) + 16
     }
     
-    static func cancelButtonTextColor(isActive: Bool) -> UIColor {
-        if (isActive) {
-            return MDAppStyling.Color.md_FFFFFF.color()
-        } else {
-            return MDAppStyling.Color.md_FFFFFF.color()
-        }
-    }
-    
     static func cancelButtonBackgroundColor(isActive: Bool) -> UIColor {
         if (isActive) {
             return MDAppStyling.Color.md_4400D4.color()
@@ -334,7 +324,7 @@ fileprivate extension MDSearchBar {
         if (isActive) {
             return MDAppStyling.Color.md_4400D4.color(0.5)
         } else {
-            return MDAppStyling.Color.md_4400D4.color(0.5)
+            return MDAppStyling.Color.md_C7C7CC.color()
         }
     }
     
