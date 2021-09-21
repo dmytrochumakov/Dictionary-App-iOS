@@ -50,7 +50,7 @@ fileprivate extension MDBaseTitledBackNavigationBarViewController {
     
     func addBackButton() {
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-        view.addSubview(backButton)
+        navigationBarView.addSubview(backButton)
     }
     
 }
@@ -64,11 +64,9 @@ fileprivate extension MDBaseTitledBackNavigationBarViewController {
     
     func addBackButtonConstraints() {
         
-        NSLayoutConstraint.addEqualConstraint(item: self.backButton,
-                                              attribute: .bottom,
-                                              toItem: self.titleLabel,
-                                              attribute: .top,
-                                              constant: -16)
+        NSLayoutConstraint.addEqualCenterYConstraint(item: self.backButton,
+                                                     toItem: self.navigationBarView,
+                                                     constant: .zero)
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.backButton,
                                                   toItem: self.navigationBarView,
