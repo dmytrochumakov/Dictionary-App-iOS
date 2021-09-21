@@ -7,26 +7,7 @@
 
 import UIKit
 
-open class MDBaseLargeNavigationBarViewController: UIViewController {
-    
-    internal let navigationBarView: UIView = {
-        let view: UIView = .init()
-        view.backgroundColor = MDAppStyling.Color.md_4400D4.color()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    internal let navigationBarBackgroundImageView: UIImageView = {
-        let imageView: UIImageView = .init()
-        imageView.contentMode = .scaleToFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    init(navigationBarBackgroundImage: UIImage) {
-        navigationBarBackgroundImageView.image = navigationBarBackgroundImage
-        super.init(nibName: nil, bundle: nil)
-    }
+open class MDBaseLargeNavigationBarViewController: MDBaseNavigationBarViewController {
     
     deinit {
         debugPrint(#function, Self.self)
@@ -36,133 +17,17 @@ open class MDBaseLargeNavigationBarViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    open override func loadView() {
-        super.loadView()
-        addViews()
-    }
-    
-    open override func viewDidLoad() {
-        super.viewDidLoad()
-        configureUI()
-    }
-    
-    open override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        addConstraints()
-        dropShadow()
-    }
-    
-}
-
-// MARK: - Add View
-extension MDBaseLargeNavigationBarViewController {
-    
-    func addNavigationBarView() {
-        view.addSubview(navigationBarView)
-    }
-    
-    func addNavigationBarBackgroundImageView() {
-        view.addSubview(navigationBarBackgroundImageView)
-    }
-    
-}
-
-// MARK: - Add Constraint
-extension MDBaseLargeNavigationBarViewController {
-    
-    func addNavigationBarViewConstraints() {
-        
-        NSLayoutConstraint.addEqualTopConstraint(item: self.navigationBarView,
-                                                 toItem: self.view,
-                                                 constant: .zero)
-        
-        NSLayoutConstraint.addEqualLeftConstraint(item: self.navigationBarView,
-                                                  toItem: self.view,
-                                                  constant: .zero)
-        
-        NSLayoutConstraint.addEqualRightConstraint(item: self.navigationBarView,
-                                                   toItem: self.view,
-                                                   constant: .zero)
-        
-        NSLayoutConstraint.addEqualHeightConstraint(item: self.navigationBarView,
-                                                    constant: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
-        
-    }
-    
-    func addNavigationBarBackgroundImageViewConstraints() {
-        
-        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.navigationBarBackgroundImageView,
-                                                         toItem: self.navigationBarView)
-        
-    }
-    
-}
-
-// MARK: - Drop Shadow
-extension MDBaseLargeNavigationBarViewController {
-    
-    func dropShadowNavigationBarView() {
-        navigationBarView.dropShadow(color: MDAppStyling.Color.md_4400D4.color(0.5),
-                                     offSet: .init(width: 0,
-                                                   height: 4),
-                                     radius: 20)
-    }
-    
-}
-
-// MARK: - Setup Navigation Bar
-extension MDBaseLargeNavigationBarViewController {
-    
-    func setupNavigationBar() {
+    open override func setupNavigationBar() {
+        super.setupNavigationBar()
         navigationBarPrefersLargeTitles()
-        hideNavigationBar()
     }
     
-    func hideNavigationBar() {
-        self.navigationController?.navigationBar.isHidden = true
-    }
+}
+
+extension MDBaseLargeNavigationBarViewController {
     
     func navigationBarPrefersLargeTitles() {
         self.navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
-}
-
-// MARK: - Add Views
-fileprivate extension MDBaseLargeNavigationBarViewController {
-    
-    func addViews() {
-        addNavigationBarView()
-        addNavigationBarBackgroundImageView()
-    }
-    
-}
-
-// MARK: - Add Constraints
-fileprivate extension MDBaseLargeNavigationBarViewController {
-    
-    func addConstraints() {
-        addNavigationBarViewConstraints()
-        addNavigationBarBackgroundImageViewConstraints()
-    }
-    
-}
-
-// MARK: - Configure UI
-fileprivate extension MDBaseLargeNavigationBarViewController {
-    
-    func configureUI() {
-        configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
-        setupNavigationBar()
-    }
-    
-}
-
-// MARK: - Drop Shadow
-fileprivate extension MDBaseLargeNavigationBarViewController {
-    
-    func dropShadow() {
-        dropShadowNavigationBarView()
     }
     
 }
