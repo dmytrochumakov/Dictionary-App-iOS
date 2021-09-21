@@ -23,14 +23,14 @@ open class MDBaseLargeNavigationBarViewController: MDBaseNavigationBarViewContro
     
     open override func setupNavigationBar() {
         super.setupNavigationBar()
-        navigationBarPrefersLargeTitles()
+        navigationBarPrefersLargeTitlesTrue()
     }
     
 }
 
 extension MDBaseLargeNavigationBarViewController {
     
-    func navigationBarPrefersLargeTitles() {
+    func navigationBarPrefersLargeTitlesTrue() {
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
