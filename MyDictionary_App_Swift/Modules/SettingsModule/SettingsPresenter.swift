@@ -12,7 +12,7 @@ protocol SettingsPresenterInputProtocol: CollectionViewDelegateFlowLayoutPropert
 }
 
 protocol SettingsPresenterOutputProtocol: AnyObject,                                          
-                                          AppearanceHasBeenUpdatedProtocol {
+                                            AppearanceHasBeenUpdatedProtocol {
     
 }
 
@@ -61,6 +61,7 @@ extension SettingsPresenter {
         switch rowType {
             
         case .about:
+            router.showAbout()
             break
             
         case .account:
