@@ -125,6 +125,7 @@
 		2270F3A926D27606006B46F4 /* MDAPILanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A826D27606006B46F4 /* MDAPILanguage.swift */; };
 		2277FE1226F9D7E900001710 /* MDBaseNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2277FE1126F9D7E900001710 /* MDBaseNavigationBarViewController.swift */; };
 		2277FE1426F9DB2300001710 /* MDBaseTitledNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2277FE1326F9DB2300001710 /* MDBaseTitledNavigationBarViewController.swift */; };
+		2277FE1626F9DB7100001710 /* MDBaseTitledBackNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2277FE1526F9DB7100001710 /* MDBaseTitledBackNavigationBarViewController.swift */; };
 		227B91D026EF4A1E0086B9AA /* MDBaseLargeTitledBackViewControllerWithBackgroundImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91CF26EF4A1E0086B9AA /* MDBaseLargeTitledBackViewControllerWithBackgroundImage.swift */; };
 		227B91D226EF51430086B9AA /* RegistrationTextFieldTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91D126EF51430086B9AA /* RegistrationTextFieldTag.swift */; };
 		227B91D726EF5F250086B9AA /* RegisterValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91D626EF5F250086B9AA /* RegisterValidation.swift */; };
@@ -483,6 +484,7 @@
 		2270F3A826D27606006B46F4 /* MDAPILanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPILanguage.swift; sourceTree = "<group>"; };
 		2277FE1126F9D7E900001710 /* MDBaseNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseNavigationBarViewController.swift; sourceTree = "<group>"; };
 		2277FE1326F9DB2300001710 /* MDBaseTitledNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseTitledNavigationBarViewController.swift; sourceTree = "<group>"; };
+		2277FE1526F9DB7100001710 /* MDBaseTitledBackNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseTitledBackNavigationBarViewController.swift; sourceTree = "<group>"; };
 		227B91CF26EF4A1E0086B9AA /* MDBaseLargeTitledBackViewControllerWithBackgroundImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseLargeTitledBackViewControllerWithBackgroundImage.swift; sourceTree = "<group>"; };
 		227B91D126EF51430086B9AA /* RegistrationTextFieldTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTextFieldTag.swift; sourceTree = "<group>"; };
 		227B91D626EF5F250086B9AA /* RegisterValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterValidation.swift; sourceTree = "<group>"; };
@@ -1467,6 +1469,7 @@
 				229FFF3526F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift */,
 				229FFF3726F5E3D90024B974 /* MDBaseLargeTitledBackNavigationBarViewController.swift */,
 				229FFF3926F5EB1D0024B974 /* MDBaseLargeTitledNavigationBarViewController.swift */,
+				2277FE1526F9DB7100001710 /* MDBaseTitledBackNavigationBarViewController.swift */,
 				2277FE1326F9DB2300001710 /* MDBaseTitledNavigationBarViewController.swift */,
 				2277FE1126F9D7E900001710 /* MDBaseNavigationBarViewController.swift */,
 			);
@@ -2630,6 +2633,7 @@
 				226FEE7A266B644F0044A5F9 /* AppearanceCollectionViewDataSource.swift in Sources */,
 				22B8E69F26D38059001CCCA8 /* MDLanguageStorage.swift in Sources */,
 				2270F3A226D262F5006B46F4 /* CourseResponse.swift in Sources */,
+				2277FE1626F9DB7100001710 /* MDBaseTitledBackNavigationBarViewController.swift in Sources */,
 				22B8E6B226D38D6D001CCCA8 /* MDReadAllLanguagesMemoryStorageOperation.swift in Sources */,
 				228964AE26F8AA2C00E23292 /* MDUpdateHUDProgressProtocol.swift in Sources */,
 				22C5863A26C7AFB80030B12D /* RegistrationModule.swift in Sources */,
