@@ -72,10 +72,10 @@ extension ConfigurationAppearanceController {
         switch type {
         case .light:
             return [NSAttributedString.Key.foregroundColor : MDAppStyling.Color.md_101010.color(),
-                    NSAttributedString.Key.font : MDAppStyling.Font.systemFont.font()]
+                    NSAttributedString.Key.font : MDAppStyling.Font.MyriadProRegular.font()]
         case .dark:
             return [NSAttributedString.Key.foregroundColor : MDAppStyling.Color.md_F2F2F7.color(),
-                    NSAttributedString.Key.font : MDAppStyling.Font.systemFont.font()]
+                    NSAttributedString.Key.font : MDAppStyling.Font.MyriadProRegular.font()]
         default:
             return Self.navigationBarAttributedStringForegroundColorAndFont(fromAppearanceType: .light)
         }
