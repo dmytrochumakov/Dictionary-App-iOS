@@ -64,9 +64,9 @@ fileprivate extension MDBaseTitledBackNavigationBarViewController {
     
     func addBackButtonConstraints() {
         
-        NSLayoutConstraint.addEqualCenterYConstraint(item: self.backButton,
+        NSLayoutConstraint.addEqualBottomConstraint(item: self.backButton,
                                                      toItem: self.navigationBarView,
-                                                     constant: .zero)
+                                                     constant: -16)
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.backButton,
                                                   toItem: self.navigationBarView,
