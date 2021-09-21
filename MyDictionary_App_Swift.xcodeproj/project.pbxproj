@@ -317,6 +317,13 @@
 		22DE582C26C954A70032A94C /* MDReadJWTProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE582B26C954A70032A94C /* MDReadJWTProtocol.swift */; };
 		22DE582E26C954B40032A94C /* MDUpdateJWTProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE582D26C954B40032A94C /* MDUpdateJWTProtocol.swift */; };
 		22DE583026C954C00032A94C /* MDDeleteJWTProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE582F26C954C00032A94C /* MDDeleteJWTProtocol.swift */; };
+		22DEA00226FA05A900892D78 /* AccountModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE9FFB26FA05A900892D78 /* AccountModule.swift */; };
+		22DEA00326FA05A900892D78 /* AccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE9FFC26FA05A900892D78 /* AccountPresenter.swift */; };
+		22DEA00426FA05A900892D78 /* AccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE9FFD26FA05A900892D78 /* AccountRouter.swift */; };
+		22DEA00526FA05A900892D78 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE9FFE26FA05A900892D78 /* AccountViewController.swift */; };
+		22DEA00626FA05A900892D78 /* AccountInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE9FFF26FA05A900892D78 /* AccountInteractor.swift */; };
+		22DEA00726FA05A900892D78 /* AccountDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DEA00026FA05A900892D78 /* AccountDataProvider.swift */; };
+		22DEA00826FA05A900892D78 /* AccountDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DEA00126FA05A900892D78 /* AccountDataManager.swift */; };
 		22DEAE3226C289F100B64B16 /* MDAPIVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DEAE3126C289F100B64B16 /* MDAPIVersion.swift */; };
 		22E2B4DD2664E43B00978E62 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4D62664E43B00978E62 /* SettingsPresenter.swift */; };
 		22E2B4DE2664E43B00978E62 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4D72664E43B00978E62 /* SettingsRouter.swift */; };
@@ -684,6 +691,13 @@
 		22DE582B26C954A70032A94C /* MDReadJWTProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadJWTProtocol.swift; sourceTree = "<group>"; };
 		22DE582D26C954B40032A94C /* MDUpdateJWTProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUpdateJWTProtocol.swift; sourceTree = "<group>"; };
 		22DE582F26C954C00032A94C /* MDDeleteJWTProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteJWTProtocol.swift; sourceTree = "<group>"; };
+		22DE9FFB26FA05A900892D78 /* AccountModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModule.swift; sourceTree = "<group>"; };
+		22DE9FFC26FA05A900892D78 /* AccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPresenter.swift; sourceTree = "<group>"; };
+		22DE9FFD26FA05A900892D78 /* AccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRouter.swift; sourceTree = "<group>"; };
+		22DE9FFE26FA05A900892D78 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		22DE9FFF26FA05A900892D78 /* AccountInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInteractor.swift; sourceTree = "<group>"; };
+		22DEA00026FA05A900892D78 /* AccountDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataProvider.swift; sourceTree = "<group>"; };
+		22DEA00126FA05A900892D78 /* AccountDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataManager.swift; sourceTree = "<group>"; };
 		22DEAE3126C289F100B64B16 /* MDAPIVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIVersion.swift; sourceTree = "<group>"; };
 		22E2B4D62664E43B00978E62 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		22E2B4D72664E43B00978E62 /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
@@ -1917,6 +1931,7 @@
 		22CA086F26515D240052D169 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				22DE9FFA26FA058500892D78 /* AccountModule */,
 				22E861BB26F9FF4F00AB1755 /* AboutApplicationModule */,
 				223EB28426F9FCB40021D8E1 /* TermsOfServiceModule */,
 				2277FE1726F9EBFF00001710 /* PrivacyPolicyModule */,
@@ -2042,6 +2057,20 @@
 				22DE582F26C954C00032A94C /* MDDeleteJWTProtocol.swift */,
 			);
 			path = JWT;
+			sourceTree = "<group>";
+		};
+		22DE9FFA26FA058500892D78 /* AccountModule */ = {
+			isa = PBXGroup;
+			children = (
+				22DE9FFB26FA05A900892D78 /* AccountModule.swift */,
+				22DE9FFC26FA05A900892D78 /* AccountPresenter.swift */,
+				22DE9FFD26FA05A900892D78 /* AccountRouter.swift */,
+				22DE9FFE26FA05A900892D78 /* AccountViewController.swift */,
+				22DE9FFF26FA05A900892D78 /* AccountInteractor.swift */,
+				22DEA00026FA05A900892D78 /* AccountDataProvider.swift */,
+				22DEA00126FA05A900892D78 /* AccountDataManager.swift */,
+			);
+			path = AccountModule;
 			sourceTree = "<group>";
 		};
 		22E2B4E72664ED8200978E62 /* Cells */ = {
@@ -2392,6 +2421,7 @@
 				22493C4926972A03000DA480 /* CDWordResponseEntity+Extension.swift in Sources */,
 				22561C7C26D4B5AF00A6135B /* MDReadAllCoursesMemoryStorageOperation.swift in Sources */,
 				22493C312697159E000DA480 /* CDResultSaved.swift in Sources */,
+				22DEA00226FA05A900892D78 /* AccountModule.swift in Sources */,
 				22EF01F2269DA75E00FE4435 /* HTTPParameters.swift in Sources */,
 				22B8E6CE26D3B472001CCCA8 /* MDDeleteAllJWTMemoryStorageOperation.swift in Sources */,
 				229D2D4526EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift in Sources */,
@@ -2449,6 +2479,7 @@
 				224375AC26F33EA3006B90EB /* MDCourseListCell.swift in Sources */,
 				22CA088726515F6A0052D169 /* WordListDataManager.swift in Sources */,
 				22E2B4E12664E43B00978E62 /* SettingsDataProvider.swift in Sources */,
+				22DEA00826FA05A900892D78 /* AccountDataManager.swift in Sources */,
 				221D281426C5064A004BC4F7 /* AuthenticationDataManager.swift in Sources */,
 				220FFE9026C90B3700702CCE /* MDDeleteUserProtocol.swift in Sources */,
 				22B8E6A726D38327001CCCA8 /* MDCreateLanguagesMemoryStorageOperation.swift in Sources */,
@@ -2541,6 +2572,7 @@
 				2289CEF92678CC34007254C3 /* OperationQueueService.swift in Sources */,
 				22B8E6D926D3C4F4001CCCA8 /* MDCourseStorage.swift in Sources */,
 				22E2B4DE2664E43B00978E62 /* SettingsRouter.swift in Sources */,
+				22DEA00726FA05A900892D78 /* AccountDataProvider.swift in Sources */,
 				22B8E6AA26D3889E001CCCA8 /* MDCRUDLanguageProtocol.swift in Sources */,
 				2289CEE02678CC34007254C3 /* WordResponse.swift in Sources */,
 				228722D926D1161C00C9D1BC /* MDJWTManager.swift in Sources */,
@@ -2556,6 +2588,7 @@
 				22B22693266CFB15007AB292 /* AppearanceTypePropertyProtocol.swift in Sources */,
 				22E2B4EC2664EE1400978E62 /* FillWithModelProtocol.swift in Sources */,
 				220FFE7426C8F83A00702CCE /* MDKeyboardToolbar.swift in Sources */,
+				22DEA00326FA05A900892D78 /* AccountPresenter.swift in Sources */,
 				22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */,
 				2299016A2668EC3400D8C74E /* AppearanceViewController.swift in Sources */,
 				22BD99A5266A58DE0063FEFC /* RootWindow.swift in Sources */,
@@ -2603,6 +2636,7 @@
 				2223F8B426512F01004F2FE9 /* KeysForTranslate.swift in Sources */,
 				221D281926C53356004BC4F7 /* AuthenticationTextFieldTag.swift in Sources */,
 				227B91DD26EF5F670086B9AA /* RegisterValidationError.swift in Sources */,
+				22DEA00626FA05A900892D78 /* AccountInteractor.swift in Sources */,
 				2289CEEC2678CC34007254C3 /* MDOperationResultWithCompletion.swift in Sources */,
 				2223F8AE26512DEB004F2FE9 /* MDConstants.swift in Sources */,
 				2299016B2668EC3400D8C74E /* AppearanceInteractor.swift in Sources */,
@@ -2613,6 +2647,7 @@
 				229FFF3A26F5EB1D0024B974 /* MDBaseLargeTitledNavigationBarViewController.swift in Sources */,
 				22BBA15B26E0B366002955A6 /* MDSyncError.swift in Sources */,
 				22B8E6CC26D3B398001CCCA8 /* MDDeleteAllJWTCoreDataStorageOperation.swift in Sources */,
+				22DEA00426FA05A900892D78 /* AccountRouter.swift in Sources */,
 				220793BF26C65BF4003D434B /* AuthValidation.swift in Sources */,
 				22EF0205269DACC300FE4435 /* MDAPIOperation.swift in Sources */,
 				22DB2F7826C3BE7900C1AADA /* CourseListPresenter.swift in Sources */,
@@ -2636,6 +2671,7 @@
 				22C5863B26C7AFB80030B12D /* RegistrationPresenter.swift in Sources */,
 				2294D6C326A2F1B60066BE77 /* CDUserResponseEntity+Extension.swift in Sources */,
 				22DE582826C9548B0032A94C /* MDCRUDJWTProtocol.swift in Sources */,
+				22DEA00526FA05A900892D78 /* AccountViewController.swift in Sources */,
 				2289CEE12678CC34007254C3 /* MDCreateWordMemoryStorageOperation.swift in Sources */,
 				22DE582E26C954B40032A94C /* MDUpdateJWTProtocol.swift in Sources */,
 				221D281226C5064A004BC4F7 /* AuthenticationInteractor.swift in Sources */,
