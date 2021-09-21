@@ -7,7 +7,7 @@
 
 import UIKit
 
-open class MDBaseTitledNavigationBarViewController: MDBaseNavigationBarViewController {
+open class MDBaseTitledNavigationBarViewController: MDBaseLargeNavigationBarViewController {
     
     internal let titleLabel: UILabel = {
         let label: UILabel = .init()

@@ -215,7 +215,7 @@
 		229E08C42652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C32652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift */; };
 		229E08C72652CB9000DA56C4 /* WordListCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */; };
 		229E08CB2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08CA2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift */; };
-		229FFF3626F5E1650024B974 /* MDBaseNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3526F5E1650024B974 /* MDBaseNavigationBarViewController.swift */; };
+		229FFF3626F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3526F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift */; };
 		229FFF3826F5E3D90024B974 /* MDBaseTitledBackNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3726F5E3D90024B974 /* MDBaseTitledBackNavigationBarViewController.swift */; };
 		229FFF3A26F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3926F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift */; };
 		229FFF3E26F60AE50024B974 /* CourseListSearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3D26F60AE40024B974 /* CourseListSearchBarDelegate.swift */; };
@@ -575,7 +575,7 @@
 		229E08C32652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfRowsInSectionProtocol.swift; sourceTree = "<group>"; };
 		229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		229E08CA2652CDB500DA56C4 /* CollectionViewDataSourcePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourcePropertyProtocol.swift; sourceTree = "<group>"; };
-		229FFF3526F5E1650024B974 /* MDBaseNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseNavigationBarViewController.swift; sourceTree = "<group>"; };
+		229FFF3526F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseLargeNavigationBarViewController.swift; sourceTree = "<group>"; };
 		229FFF3726F5E3D90024B974 /* MDBaseTitledBackNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseTitledBackNavigationBarViewController.swift; sourceTree = "<group>"; };
 		229FFF3926F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseTitledNavigationBarViewController.swift; sourceTree = "<group>"; };
 		229FFF3D26F60AE40024B974 /* CourseListSearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListSearchBarDelegate.swift; sourceTree = "<group>"; };
@@ -1460,7 +1460,7 @@
 			children = (
 				228AE05526EDDFC20088B4CF /* MDBaseNavigationBarAndBackgroundImageViewController.swift */,
 				227B91CF26EF4A1E0086B9AA /* MDBaseTitledBackViewControllerWithBackgroundImage.swift */,
-				229FFF3526F5E1650024B974 /* MDBaseNavigationBarViewController.swift */,
+				229FFF3526F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift */,
 				229FFF3726F5E3D90024B974 /* MDBaseTitledBackNavigationBarViewController.swift */,
 				229FFF3926F5EB1D0024B974 /* MDBaseTitledNavigationBarViewController.swift */,
 			);
@@ -2385,7 +2385,7 @@
 				22B8E6A326D381EF001CCCA8 /* MDLanguageCoreDataStorage.swift in Sources */,
 				22B22691266CF866007AB292 /* UIViewController+Extension.swift in Sources */,
 				229901712668EE5300D8C74E /* MDAppDelegate.swift in Sources */,
-				229FFF3626F5E1650024B974 /* MDBaseNavigationBarViewController.swift in Sources */,
+				229FFF3626F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift in Sources */,
 				224375AF26F3406B006B90EB /* MDCourseListCellModel.swift in Sources */,
 				220793CB26C67432003D434B /* UIAlertController+Extension.swift in Sources */,
 				22E2B4F9266509CA00978E62 /* SettingsRowModel.swift in Sources */,

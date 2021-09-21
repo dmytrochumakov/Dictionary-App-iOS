@@ -1,5 +1,5 @@
 //
-//  MDBaseNavigationBarViewController.swift
+//  MDBaseLargeNavigationBarViewController.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 18.09.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-open class MDBaseNavigationBarViewController: UIViewController {
+open class MDBaseLargeNavigationBarViewController: UIViewController {
     
     internal let navigationBarView: UIView = {
         let view: UIView = .init()
@@ -55,7 +55,7 @@ open class MDBaseNavigationBarViewController: UIViewController {
 }
 
 // MARK: - Add View
-extension MDBaseNavigationBarViewController {
+extension MDBaseLargeNavigationBarViewController {
     
     func addNavigationBarView() {
         view.addSubview(navigationBarView)
@@ -68,7 +68,7 @@ extension MDBaseNavigationBarViewController {
 }
 
 // MARK: - Add Constraint
-extension MDBaseNavigationBarViewController {
+extension MDBaseLargeNavigationBarViewController {
     
     func addNavigationBarViewConstraints() {
         
@@ -99,7 +99,7 @@ extension MDBaseNavigationBarViewController {
 }
 
 // MARK: - Drop Shadow
-extension MDBaseNavigationBarViewController {
+extension MDBaseLargeNavigationBarViewController {
     
     func dropShadowNavigationBarView() {
         navigationBarView.dropShadow(color: MDAppStyling.Color.md_4400D4.color(0.5),
@@ -111,7 +111,7 @@ extension MDBaseNavigationBarViewController {
 }
 
 // MARK: - Setup Navigation Bar
-extension MDBaseNavigationBarViewController {
+extension MDBaseLargeNavigationBarViewController {
     
     func setupNavigationBar() {
         navigationBarPrefersLargeTitles()
@@ -129,7 +129,7 @@ extension MDBaseNavigationBarViewController {
 }
 
 // MARK: - Add Views
-fileprivate extension MDBaseNavigationBarViewController {
+fileprivate extension MDBaseLargeNavigationBarViewController {
     
     func addViews() {
         addNavigationBarView()
@@ -139,7 +139,7 @@ fileprivate extension MDBaseNavigationBarViewController {
 }
 
 // MARK: - Add Constraints
-fileprivate extension MDBaseNavigationBarViewController {
+fileprivate extension MDBaseLargeNavigationBarViewController {
     
     func addConstraints() {
         addNavigationBarViewConstraints()
@@ -149,7 +149,7 @@ fileprivate extension MDBaseNavigationBarViewController {
 }
 
 // MARK: - Configure UI
-fileprivate extension MDBaseNavigationBarViewController {
+fileprivate extension MDBaseLargeNavigationBarViewController {
     
     func configureUI() {
         configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
@@ -159,7 +159,7 @@ fileprivate extension MDBaseNavigationBarViewController {
 }
 
 // MARK: - Drop Shadow
-fileprivate extension MDBaseNavigationBarViewController {
+fileprivate extension MDBaseLargeNavigationBarViewController {
     
     func dropShadow() {
         dropShadowNavigationBarView()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-open class MDBaseNavigationBarAndBackgroundImageViewController: MDBaseNavigationBarViewController {
+open class MDBaseNavigationBarAndBackgroundImageViewController: MDBaseLargeNavigationBarViewController {
     
     internal let backgroundImageView: UIImageView = {
         let imageView: UIImageView = .init()         
