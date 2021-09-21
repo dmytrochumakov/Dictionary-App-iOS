@@ -59,6 +59,7 @@
 		2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */; };
 		2223F8BC26512FFD004F2FE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2223F8BE26512FFD004F2FE9 /* Localizable.strings */; };
 		223648EA26DE38970071F271 /* MDSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223648E926DE38970071F271 /* MDSync.swift */; };
+		223EB28626F9FD030021D8E1 /* TermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223EB28526F9FD030021D8E1 /* TermsOfServiceViewController.swift */; };
 		224375AC26F33EA3006B90EB /* MDCourseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375AB26F33EA3006B90EB /* MDCourseListCell.swift */; };
 		224375AF26F3406B006B90EB /* MDCourseListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375AE26F3406B006B90EB /* MDCourseListCellModel.swift */; };
 		224375B226F3509D006B90EB /* MDSyncManager_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375B126F3509D006B90EB /* MDSyncManager_Tests.swift */; };
@@ -420,6 +421,7 @@
 		2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageService.swift; sourceTree = "<group>"; };
 		2223F8BD26512FFD004F2FE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		223648E926DE38970071F271 /* MDSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSync.swift; sourceTree = "<group>"; };
+		223EB28526F9FD030021D8E1 /* TermsOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceViewController.swift; sourceTree = "<group>"; };
 		224375AB26F33EA3006B90EB /* MDCourseListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseListCell.swift; sourceTree = "<group>"; };
 		224375AE26F3406B006B90EB /* MDCourseListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseListCellModel.swift; sourceTree = "<group>"; };
 		224375B126F3509D006B90EB /* MDSyncManager_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncManager_Tests.swift; sourceTree = "<group>"; };
@@ -1114,6 +1116,14 @@
 				22BBA15C26E0C0F0002955A6 /* MDProgress.swift */,
 			);
 			path = Sync;
+			sourceTree = "<group>";
+		};
+		223EB28426F9FCB40021D8E1 /* TermsOfServiceModule */ = {
+			isa = PBXGroup;
+			children = (
+				223EB28526F9FD030021D8E1 /* TermsOfServiceViewController.swift */,
+			);
+			path = TermsOfServiceModule;
 			sourceTree = "<group>";
 		};
 		224375AA26F33E86006B90EB /* Cells */ = {
@@ -1905,6 +1915,7 @@
 		22CA086F26515D240052D169 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				223EB28426F9FCB40021D8E1 /* TermsOfServiceModule */,
 				2277FE1726F9EBFF00001710 /* PrivacyPolicyModule */,
 				229D2D2D26EB52D90047B518 /* ChoiceAuthenticationOrRegistrationModule */,
 				22C5863226C7AFAC0030B12D /* RegistrationModule */,
@@ -2620,6 +2631,7 @@
 				22CA08892651603A0052D169 /* WordListDataProvider.swift in Sources */,
 				2270F39C26D25ED1006B46F4 /* LanguageResponse.swift in Sources */,
 				228722D126D0F18400C9D1BC /* MDAuthManager.swift in Sources */,
+				223EB28626F9FD030021D8E1 /* TermsOfServiceViewController.swift in Sources */,
 				22493C3B269724CB000DA480 /* CoreDataEntityName.swift in Sources */,
 				220FFEA226C9150100702CCE /* MDCreateUserMemoryStorageOperation.swift in Sources */,
 				22493C542697420F000DA480 /* MDReadWordCoreDataStorageOperation.swift in Sources */,
