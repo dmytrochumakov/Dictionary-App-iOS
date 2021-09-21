@@ -1,5 +1,5 @@
 //
-//  MDBaseTitledNavigationBarViewController.swift
+//  MDBaseLargeTitledNavigationBarViewController.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 18.09.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-open class MDBaseTitledNavigationBarViewController: MDBaseLargeNavigationBarViewController {
+open class MDBaseLargeTitledNavigationBarViewController: MDBaseLargeNavigationBarViewController {
     
     internal let titleLabel: UILabel = {
         let label: UILabel = .init()
@@ -43,7 +43,7 @@ open class MDBaseTitledNavigationBarViewController: MDBaseLargeNavigationBarView
 }
 
 // MARK: - Add View
-extension MDBaseTitledNavigationBarViewController {
+extension MDBaseLargeTitledNavigationBarViewController {
     
     func addTitleLabel() {
         view.addSubview(titleLabel)
@@ -52,7 +52,7 @@ extension MDBaseTitledNavigationBarViewController {
 }
 
 // MARK: - Add Constraint
-extension MDBaseTitledNavigationBarViewController {
+extension MDBaseLargeTitledNavigationBarViewController {
     
     func addTitleLabelConstraints() {
         
@@ -73,16 +73,16 @@ extension MDBaseTitledNavigationBarViewController {
 }
 
 // MARK: - Add Views
-fileprivate extension MDBaseTitledNavigationBarViewController {
+fileprivate extension MDBaseLargeTitledNavigationBarViewController {
     
     func addViews() {
-        addTitleLabel()        
+        addTitleLabel()
     }
     
 }
 
 // MARK: - Add Constraints
-fileprivate extension MDBaseTitledNavigationBarViewController {
+fileprivate extension MDBaseLargeTitledNavigationBarViewController {
     
     func addConstraints() {
         addTitleLabelConstraints()

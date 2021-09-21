@@ -1,5 +1,5 @@
 //
-//  MDBaseTitledBackNavigationBarViewController.swift
+//  MDBaseLargeTitledBackNavigationBarViewController.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 18.09.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-open class MDBaseTitledBackNavigationBarViewController: MDBaseTitledNavigationBarViewController {
+open class MDBaseLargeTitledBackNavigationBarViewController: MDBaseLargeTitledNavigationBarViewController {
     
     internal let backButtonSize: CGSize = .init(width: 40, height: 40)
     internal let backButton: UIButton = {
@@ -16,7 +16,7 @@ open class MDBaseTitledBackNavigationBarViewController: MDBaseTitledNavigationBa
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-        
+    
     override init(title: String, navigationBarBackgroundImage: UIImage) {
         super.init(title: title, navigationBarBackgroundImage: navigationBarBackgroundImage)
     }
@@ -42,12 +42,12 @@ open class MDBaseTitledBackNavigationBarViewController: MDBaseTitledNavigationBa
 }
 
 // MARK: - Add Views
-fileprivate extension MDBaseTitledBackNavigationBarViewController {
+fileprivate extension MDBaseLargeTitledBackNavigationBarViewController {
     
     func addViews() {
         addBackButton()
     }
-        
+    
     func addBackButton() {
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
         view.addSubview(backButton)
@@ -56,12 +56,12 @@ fileprivate extension MDBaseTitledBackNavigationBarViewController {
 }
 
 // MARK: - Add Constraints
-fileprivate extension MDBaseTitledBackNavigationBarViewController {
+fileprivate extension MDBaseLargeTitledBackNavigationBarViewController {
     
     func addConstraints() {
         addBackButtonConstraints()
     }
-        
+    
     func addBackButtonConstraints() {
         
         NSLayoutConstraint.addEqualConstraint(item: self.backButton,
@@ -79,7 +79,7 @@ fileprivate extension MDBaseTitledBackNavigationBarViewController {
 }
 
 // MARK: - Actions
-fileprivate extension MDBaseTitledBackNavigationBarViewController {
+fileprivate extension MDBaseLargeTitledBackNavigationBarViewController {
     
     @objc func backButtonAction() {
         navigationController?.popViewController(animated: true)

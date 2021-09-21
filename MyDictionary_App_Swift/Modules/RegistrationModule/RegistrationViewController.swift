@@ -6,7 +6,7 @@
 
 import MBProgressHUD
 
-final class RegistrationViewController: MDBaseTitledBackViewControllerWithBackgroundImage {
+final class RegistrationViewController: MDBaseLargeTitledBackViewControllerWithBackgroundImage {
     
     fileprivate let presenter: RegistrationPresenterInputProtocol
     

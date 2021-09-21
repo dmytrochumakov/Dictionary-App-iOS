@@ -6,7 +6,7 @@
 
 import MBProgressHUD
 
-final class CourseListViewController: MDBaseTitledNavigationBarViewController {
+final class CourseListViewController: MDBaseLargeTitledNavigationBarViewController {
     
     fileprivate let presenter: CourseListPresenterInputProtocol
     
