@@ -32,6 +32,11 @@ enum KeysForTranslate: String {
     case ok
     case pleaseWaitForDataSync = "please_wait_for_data_sync"
     case search
+    case about
+    case account
+    case privacyPolicy = "privacy_Policy"
+    case termsOfService = "terms_Of_Service"
+    case support
     
     // Api Errors //
     case noDataApiError = "no_data_api_error"

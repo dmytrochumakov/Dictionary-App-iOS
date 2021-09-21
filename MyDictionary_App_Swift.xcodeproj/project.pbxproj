@@ -324,10 +324,7 @@
 		22E2B4EC2664EE1400978E62 /* FillWithModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4EB2664EE1400978E62 /* FillWithModelProtocol.swift */; };
 		22E2B4F02664EF3200978E62 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4EF2664EF3200978E62 /* UICollectionView+Extension.swift */; };
 		22E2B4F32665085E00978E62 /* SettingsRowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4F22665085E00978E62 /* SettingsRowType.swift */; };
-		22E2B4F52665097900978E62 /* SettingsSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4F42665097900978E62 /* SettingsSectionType.swift */; };
-		22E2B4F7266509B900978E62 /* SettingsSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4F6266509B900978E62 /* SettingsSectionModel.swift */; };
 		22E2B4F9266509CA00978E62 /* SettingsRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4F8266509CA00978E62 /* SettingsRowModel.swift */; };
-		22E2B4FB266509DC00978E62 /* SettingsDataProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4FA266509DC00978E62 /* SettingsDataProviderModel.swift */; };
 		22E2B4FE266515D400978E62 /* CollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4FD266515D400978E62 /* CollectionViewDelegateFlowLayout.swift */; };
 		22E2B500266515E700978E62 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */; };
 		22E691B626CE5E5200641DFA /* MDStorageResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E691B526CE5E5200641DFA /* MDStorageResult.swift */; };
@@ -687,10 +684,7 @@
 		22E2B4EB2664EE1400978E62 /* FillWithModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillWithModelProtocol.swift; sourceTree = "<group>"; };
 		22E2B4EF2664EF3200978E62 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		22E2B4F22665085E00978E62 /* SettingsRowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowType.swift; sourceTree = "<group>"; };
-		22E2B4F42665097900978E62 /* SettingsSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSectionType.swift; sourceTree = "<group>"; };
-		22E2B4F6266509B900978E62 /* SettingsSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSectionModel.swift; sourceTree = "<group>"; };
 		22E2B4F8266509CA00978E62 /* SettingsRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowModel.swift; sourceTree = "<group>"; };
-		22E2B4FA266509DC00978E62 /* SettingsDataProviderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataProviderModel.swift; sourceTree = "<group>"; };
 		22E2B4FD266515D400978E62 /* CollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegateFlowLayout.swift; sourceTree = "<group>"; };
 		22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		22E691B526CE5E5200641DFA /* MDStorageResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorageResult.swift; sourceTree = "<group>"; };
@@ -2024,9 +2018,7 @@
 		22E2B4E82664ED8700978E62 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				22E2B4F6266509B900978E62 /* SettingsSectionModel.swift */,
 				22E2B4F8266509CA00978E62 /* SettingsRowModel.swift */,
-				22E2B4FA266509DC00978E62 /* SettingsDataProviderModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2035,7 +2027,6 @@
 			isa = PBXGroup;
 			children = (
 				22E2B4F22665085E00978E62 /* SettingsRowType.swift */,
-				22E2B4F42665097900978E62 /* SettingsSectionType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -2452,7 +2443,6 @@
 				228AE05D26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift in Sources */,
 				22A2521426CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift in Sources */,
 				2291BAF526F754CF0012504D /* UITableView+Extension.swift in Sources */,
-				22E2B4F7266509B900978E62 /* SettingsSectionModel.swift in Sources */,
 				220793DA26C6BF58003D434B /* AuthResponse.swift in Sources */,
 				22493C3726972232000DA480 /* MDWordCoreDataStorage.swift in Sources */,
 				2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */,
@@ -2536,7 +2526,6 @@
 				22B2268F266CF680007AB292 /* ConfigurationAppearanceControllerProtocol.swift in Sources */,
 				22E2B4DF2664E43B00978E62 /* SettingsViewController.swift in Sources */,
 				22BD99A8266A58F40063FEFC /* RootViewController.swift in Sources */,
-				22E2B4FB266509DC00978E62 /* SettingsDataProviderModel.swift in Sources */,
 				22561C7E26D4B67300A6135B /* MDDeleteCourseMemoryStorageOperation.swift in Sources */,
 				22557FCC26C959D100A4FF31 /* MDCreateJWTMemoryStorageOperation.swift in Sources */,
 				22E2B4E22664E43B00978E62 /* SettingsDataManager.swift in Sources */,
@@ -2603,7 +2592,6 @@
 				221D281226C5064A004BC4F7 /* AuthenticationInteractor.swift in Sources */,
 				22C5864226C7B7AE0030B12D /* UserResponse.swift in Sources */,
 				22CA08892651603A0052D169 /* WordListDataProvider.swift in Sources */,
-				22E2B4F52665097900978E62 /* SettingsSectionType.swift in Sources */,
 				2270F39C26D25ED1006B46F4 /* LanguageResponse.swift in Sources */,
 				228722D126D0F18400C9D1BC /* MDAuthManager.swift in Sources */,
 				22493C3B269724CB000DA480 /* CoreDataEntityName.swift in Sources */,

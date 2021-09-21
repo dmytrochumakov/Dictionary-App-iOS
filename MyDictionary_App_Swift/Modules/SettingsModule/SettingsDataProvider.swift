@@ -8,16 +8,16 @@ import Foundation
 
 protocol SettingsDataProviderProtocol: NumberOfSectionsProtocol,
                                        NumberOfRowsInSectionProtocol {
-    func rows(atSection section: Int) -> [SettingsRowModel]
+    
     func rowModel(atIndexPath indexPath: IndexPath) -> SettingsRowModel
 }
 
 final class SettingsDataProvider: SettingsDataProviderProtocol {
     
-    fileprivate let model: SettingsDataProviderModel
+    fileprivate let rows: [SettingsRowModel]
     
-    init(model: SettingsDataProviderModel) {
-        self.model = model
+    init(rows: [SettingsRowModel]) {
+        self.rows = rows
     }
     
 }
@@ -25,11 +25,11 @@ final class SettingsDataProvider: SettingsDataProviderProtocol {
 extension SettingsDataProvider {
     
     var numberOfSections: Int {
-        return model.sections.count
+        return 1
     }
     
     func numberOfRowsInSection(_ section: Int) -> Int {
-        return model.sections[section].rows.count
+        return rows.count
     }
     
 }
@@ -37,11 +37,7 @@ extension SettingsDataProvider {
 extension SettingsDataProvider {
     
     func rowModel(atIndexPath indexPath: IndexPath) -> SettingsRowModel {
-        return model.sections[indexPath.section].rows[indexPath.row]        
-    }
-    
-    func rows(atSection section: Int) -> [SettingsRowModel] {
-        return model.sections[section].rows
+        return rows[indexPath.row]
     }
     
 }

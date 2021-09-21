@@ -57,12 +57,6 @@ extension SettingsViewController: SettingsPresenterOutputProtocol {
                             collectionView: collectionView)
     }
     
-    func reloadRows(_ rows: [IndexPath : SettingsRowModel]) {
-        rows.forEach { (indexPath, rowModel) in
-            (collectionView.cellForItem(at: indexPath) as! SettingsCell).fillWithModel(rowModel)
-        }
-    }
-    
 }
 
 // MARK: - Add Views

@@ -7,8 +7,6 @@
 
 import Foundation
 
-struct SettingsRowModel: AppearanceTypePropertyProtocol {
+struct SettingsRowModel {
     let rowType: SettingsRowType
-    let titleText: String
-    var appearanceType: AppearanceType
 }

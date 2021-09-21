@@ -15,6 +15,10 @@ final class SettingsCell: UICollectionViewCell,
     fileprivate let titleLabel: UILabel = {
         let label: UILabel = .init()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = MDAppStyling.Font.MyriadProRegular.font()
+        label.textColor = MDAppStyling.Color.md_3C3C3C.color()
+        label.textAlignment = .left
+        label.numberOfLines = .zero
         return label
     }()
     
@@ -51,8 +55,7 @@ extension SettingsCell: FillWithModelProtocol {
     typealias Model = SettingsRowModel
     
     func fillWithModel(_ model: SettingsRowModel) {
-        self.updateSelfView(model)
-        self.updateTitleLabel(model)
+        self.titleLabel.text = model.rowType.description
     }
     
 }
@@ -129,33 +132,11 @@ fileprivate extension SettingsCell {
 fileprivate extension SettingsCell {
     
     func configureUI() {
-        configureView()
-        configureTitleLabel()
+        configureSelfView()
     }
     
-    func configureView() {
-        self.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor()
-    }
-    
-    func configureTitleLabel() {
-        self.titleLabel.font = MDAppStyling.Font.systemFont.font()
-        self.titleLabel.textColor = ConfigurationAppearanceController.labelTextColor()
-        self.titleLabel.textAlignment = .left
-        self.titleLabel.numberOfLines = .zero
-    }
-    
-}
-
-// MARK: - Update
-fileprivate extension SettingsCell {
-    
-    func updateSelfView(_ model: SettingsRowModel) {
+    func configureSelfView() {
         self.backgroundColor = .clear
-    }
-    
-    func updateTitleLabel(_ model: SettingsRowModel) {
-        self.titleLabel.textColor = ConfigurationAppearanceController.labelTextColor(fromAppearanceType: model.appearanceType)
-        self.titleLabel.text = model.titleText
     }
     
 }
