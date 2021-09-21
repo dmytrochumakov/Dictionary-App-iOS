@@ -54,6 +54,7 @@ open class MDBaseNavigationBarViewController: UIViewController {
     
     open func setupNavigationBar() {
         hideNavigationBar()
+        navigationBarPrefersLargeTitlesFalse()
     }
     
 }
@@ -119,6 +120,10 @@ extension MDBaseNavigationBarViewController {
     
     func hideNavigationBar() {
         self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    func navigationBarPrefersLargeTitlesFalse() {
+        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
 }
