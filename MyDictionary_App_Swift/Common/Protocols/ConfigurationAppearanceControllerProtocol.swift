@@ -54,7 +54,7 @@ extension ConfigurationAppearanceController {
         case .light:
             return MDAppStyling.Color.md_FFFFFF.color()
         case .dark:
-            return MDAppStyling.Color.md_1C1C1E.color()
+            return MDAppStyling.Color.md_FFFFFF.color()
         }
     }
     
@@ -71,10 +71,10 @@ extension ConfigurationAppearanceController {
     fileprivate static func navigationBarAttributedStringForegroundColorAndFont(fromAppearanceType type: AppearanceType) -> [NSAttributedString.Key : Any] {
         switch type {
         case .light:
-            return [NSAttributedString.Key.foregroundColor : MDAppStyling.Color.md_101010.color(),
+            return [NSAttributedString.Key.foregroundColor : MDAppStyling.Color.md_FFFFFF.color(),
                     NSAttributedString.Key.font : MDAppStyling.Font.MyriadProRegular.font()]
         case .dark:
-            return [NSAttributedString.Key.foregroundColor : MDAppStyling.Color.md_F2F2F7.color(),
+            return [NSAttributedString.Key.foregroundColor : MDAppStyling.Color.md_FFFFFF.color(),
                     NSAttributedString.Key.font : MDAppStyling.Font.MyriadProRegular.font()]
         default:
             return Self.navigationBarAttributedStringForegroundColorAndFont(fromAppearanceType: .light)
@@ -87,9 +87,9 @@ extension ConfigurationAppearanceController {
         case .automatic:
             return self.navigationBarTintColor(fromAppearanceType: .light)
         case .light:
-            return MDAppStyling.Color.md_F8F8F8.color()
+            return MDAppStyling.Color.md_FFFFFF.color()
         case .dark:
-            return MDAppStyling.Color.md_48484A.color()
+            return MDAppStyling.Color.md_FFFFFF.color()
         }
     }
     
@@ -99,9 +99,9 @@ extension ConfigurationAppearanceController {
         case .automatic:
             return self.buttonBackgroundColor(fromAppearanceType: .light)
         case .light:
-            return MDAppStyling.Color.md_F8F8F8.color()
+            return MDAppStyling.Color.md_FFFFFF.color()
         case .dark:
-            return MDAppStyling.Color.md_48484A.color()
+            return MDAppStyling.Color.md_FFFFFF.color()
         }
     }
     
@@ -111,9 +111,9 @@ extension ConfigurationAppearanceController {
         case .automatic:
             return self.buttonTextColor(fromAppearanceType: .light)
         case .light:
-            return MDAppStyling.Color.md_007AFF.color()
+            return MDAppStyling.Color.md_FFFFFF.color()
         case .dark:
-            return MDAppStyling.Color.md_0A84FF.color()
+            return MDAppStyling.Color.md_FFFFFF.color()
         }
     }
     
@@ -123,9 +123,9 @@ extension ConfigurationAppearanceController {
         case .automatic:
             return self.labelTextColor(fromAppearanceType: .light)
         case .light:
-            return MDAppStyling.Color.md_101010.color()
+            return MDAppStyling.Color.md_FFFFFF.color()
         case .dark:
-            return MDAppStyling.Color.md_F2F2F7.color()
+            return MDAppStyling.Color.md_FFFFFF.color()
         }
     }
     
