@@ -71,7 +71,7 @@ struct MDConstants {
         }
     }
     
-    struct Environment {        
+    struct Environment {
         static let current: MDEnvironment = .production
     }
     
@@ -188,6 +188,12 @@ struct MDConstants {
     
     struct Font {
         static let defaultSize: CGFloat = 17
+    }
+    
+    struct StaticURL {
+        static let privacyPolicyURL: URL = .init(string: "https://dchprojects.github.io/MyDictionary-Web/privacy_policy.html")!
+        static let termsOfServiceURL: URL = .init(string: "https://dchprojects.github.io/MyDictionary-Web/terms_of_service.html")!
+        static let aboutAppURL: URL = .init(string: "https://dchprojects.github.io/MyDictionary-Web/index.html#about")!
     }
     
 }
