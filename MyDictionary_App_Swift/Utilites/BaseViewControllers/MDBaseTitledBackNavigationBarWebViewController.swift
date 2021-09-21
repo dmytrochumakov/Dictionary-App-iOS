@@ -6,9 +6,9 @@
 //
 
 import WebKit
+import MBProgressHUD
 
-open class MDBaseTitledBackNavigationBarWebViewController: MDBaseTitledBackNavigationBarViewController,
-                                                           WKNavigationDelegate {
+open class MDBaseTitledBackNavigationBarWebViewController: MDBaseTitledBackNavigationBarViewController {
     
     fileprivate let webView: WKWebView = {
         let webView: WKWebView = .init()
@@ -18,14 +18,20 @@ open class MDBaseTitledBackNavigationBarWebViewController: MDBaseTitledBackNavig
         return webView
     }()
     
+    fileprivate lazy var hud: MBProgressHUD = {
+        let hud: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.mode = .indeterminate
+        return hud
+    }()
+    
     init(url: URL,
          title: String,
          navigationBarBackgroundImage: UIImage) {
         
-        webView.load(URLRequest.init(url: url))
-        
         super.init(title: title,
                    navigationBarBackgroundImage: navigationBarBackgroundImage)
+        
+        loadWebPage(url)
         
     }
     
@@ -41,6 +47,36 @@ open class MDBaseTitledBackNavigationBarWebViewController: MDBaseTitledBackNavig
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         addConstraints()
+    }
+    
+}
+
+// MARK: - WKNavigationDelegate
+extension MDBaseTitledBackNavigationBarWebViewController: WKNavigationDelegate {
+    
+    public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        showProgressHUD()        
+    }
+    
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        hideProgressHUD()
+    }
+    
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        hideProgressHUD()
+    }
+    
+}
+
+// MARK: - MDShowHideProgressHUD
+extension MDBaseTitledBackNavigationBarWebViewController: MDShowHideProgressHUD {
+    
+    func showProgressHUD() {
+        hud.show(animated: true)
+    }
+    
+    func hideProgressHUD() {
+        hud.hide(animated: true)
     }
     
 }
@@ -85,6 +121,16 @@ fileprivate extension MDBaseTitledBackNavigationBarWebViewController {
                                                     toItem: self.view,
                                                     constant: .zero)
         
+    }
+    
+}
+
+// MARK: - Load Web Page
+fileprivate extension MDBaseTitledBackNavigationBarWebViewController {
+    
+    func loadWebPage(_ url: URL) {
+        webView.load(URLRequest.init(url: url))
+        webView.navigationDelegate = self
     }
     
 }
