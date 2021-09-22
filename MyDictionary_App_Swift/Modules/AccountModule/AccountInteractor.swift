@@ -7,24 +7,28 @@
 import UIKit
 
 protocol AccountInteractorInputProtocol {
-    
+    func viewDidLoad()
 }
 
-protocol AccountInteractorOutputProtocol: AnyObject {
-    
+protocol AccountInteractorOutputProtocol: AnyObject,
+                                          MDShowErrorProtocol {
+    func updateNicknameText(_ text: String)
 }
 
-protocol AccountInteractorProtocol: AccountInteractorInputProtocol, AccountDataManagerOutputProtocol {
+protocol AccountInteractorProtocol: AccountInteractorInputProtocol,
+                                    AccountDataManagerOutputProtocol {
     var interactorOutput: AccountInteractorOutputProtocol? { get set }
 }
 
-final class AccountInteractor: AccountInteractorProtocol {
-
+final class AccountInteractor: NSObject,
+                               AccountInteractorProtocol {
+    
     fileprivate let dataManager: AccountDataManagerInputProtocol
     internal weak var interactorOutput: AccountInteractorOutputProtocol?
     
     init(dataManager: AccountDataManagerInputProtocol) {
         self.dataManager = dataManager
+        super.init()
     }
     
     deinit {
@@ -35,5 +39,36 @@ final class AccountInteractor: AccountInteractorProtocol {
 
 // MARK: - AccountDataManagerOutputProtocol
 extension AccountInteractor {
+    
+    func loadAndPassUserToDataProviderResult(_ result: MDOperationResultWithoutCompletion<Void>) {
+        
+        switch result {
+            
+        case .success:
+            
+            DispatchQueue.main.async {
+                self.interactorOutput?.updateNicknameText(self.dataManager.dataProvider.user!.nickname)
+            }
+            break
+            
+        case .failure(let error):
+            
+            DispatchQueue.main.async {
+                self.interactorOutput?.showError(error)
+            }
+            break
+            
+        }
+        
+    }
+    
+}
+
+// MARK: - AccountInteractorInputProtocol
+extension AccountInteractor {
+    
+    func viewDidLoad() {
+        dataManager.loadAndPassUserToDataProvider()
+    }
     
 }

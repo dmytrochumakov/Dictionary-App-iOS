@@ -7,19 +7,21 @@
 import UIKit
 
 protocol AccountPresenterInputProtocol {
-    
+    func viewDidLoad()
 }
 
-protocol AccountPresenterOutputProtocol: AnyObject {
-    
+protocol AccountPresenterOutputProtocol: AnyObject,
+                                         MDShowErrorProtocol {
+    func updateNicknameText(_ text: String)
 }
 
 protocol AccountPresenterProtocol: AccountPresenterInputProtocol,
-AccountInteractorOutputProtocol {
+                                   AccountInteractorOutputProtocol {
     var presenterOutput: AccountPresenterOutputProtocol? { get set }
 }
 
-final class AccountPresenter: NSObject, AccountPresenterProtocol {
+final class AccountPresenter: NSObject,
+                              AccountPresenterProtocol {
     
     fileprivate let interactor: AccountInteractorInputProtocol
     fileprivate let router: AccountRouterProtocol
@@ -41,5 +43,22 @@ final class AccountPresenter: NSObject, AccountPresenterProtocol {
 
 // MARK: - AccountInteractorOutputProtocol
 extension AccountPresenter {
+    
+    func updateNicknameText(_ text: String) {
+        self.presenterOutput?.updateNicknameText(text)
+    }
+    
+    func showError(_ error: Error) {
+        self.presenterOutput?.showError(error)
+    }
+    
+}
+
+// MARK: - AccountPresenterInputProtocol
+extension AccountPresenter {
+    
+    func viewDidLoad() {
+        interactor.viewDidLoad()
+    }
     
 }

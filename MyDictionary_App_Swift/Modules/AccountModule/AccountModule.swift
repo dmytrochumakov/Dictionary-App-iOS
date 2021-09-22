@@ -23,8 +23,9 @@ final class AccountModule {
 extension AccountModule {
     
     var module: UIViewController {
-        let dataProvider: AccountDataProviderProtocol = AccountDataProvider.init()
-        var dataManager: AccountDataManagerProtocol = AccountDataManager.init(dataProvider: dataProvider)
+        
+        var dataManager: AccountDataManagerProtocol = AccountDataManager.init(userMemoryStorage: MDConstants.AppDependencies.dependencies.userStorage.memoryStorage,
+                                                                              dataProvider: AccountDataProvider.init())
         
         let interactor: AccountInteractorProtocol = AccountInteractor.init(dataManager: dataManager)
         var router: AccountRouterProtocol = AccountRouter.init()
@@ -37,6 +38,7 @@ extension AccountModule {
         router.presenter = vc
         
         return vc
+        
     }
     
 }

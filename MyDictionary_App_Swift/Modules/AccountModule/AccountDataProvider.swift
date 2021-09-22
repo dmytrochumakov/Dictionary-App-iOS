@@ -7,9 +7,11 @@
 import Foundation
 
 protocol AccountDataProviderProtocol {
-    
+    var user: UserResponse? { get set }
 }
 
 final class AccountDataProvider: AccountDataProviderProtocol {
+    
+    var user: UserResponse?
     
 }

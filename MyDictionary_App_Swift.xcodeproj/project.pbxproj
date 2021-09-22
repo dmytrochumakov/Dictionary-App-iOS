@@ -340,6 +340,7 @@
 		22E2B4F9266509CA00978E62 /* SettingsRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4F8266509CA00978E62 /* SettingsRowModel.swift */; };
 		22E2B4FE266515D400978E62 /* CollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4FD266515D400978E62 /* CollectionViewDelegateFlowLayout.swift */; };
 		22E2B500266515E700978E62 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */; };
+		22E327C726FB207C00445917 /* MDShowErrorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E327C626FB207C00445917 /* MDShowErrorProtocol.swift */; };
 		22E691B626CE5E5200641DFA /* MDStorageResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E691B526CE5E5200641DFA /* MDStorageResult.swift */; };
 		22E861BD26F9FF7F00AB1755 /* AboutApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E861BC26F9FF7F00AB1755 /* AboutApplicationViewController.swift */; };
 		22EDF02626C7E6A100D19DA1 /* CDJWTResponseEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDF02526C7E6A000D19DA1 /* CDJWTResponseEntity+Extension.swift */; };
@@ -714,6 +715,7 @@
 		22E2B4F8266509CA00978E62 /* SettingsRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowModel.swift; sourceTree = "<group>"; };
 		22E2B4FD266515D400978E62 /* CollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegateFlowLayout.swift; sourceTree = "<group>"; };
 		22E2B4FF266515E700978E62 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
+		22E327C626FB207C00445917 /* MDShowErrorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDShowErrorProtocol.swift; sourceTree = "<group>"; };
 		22E691B526CE5E5200641DFA /* MDStorageResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorageResult.swift; sourceTree = "<group>"; };
 		22E861BC26F9FF7F00AB1755 /* AboutApplicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutApplicationViewController.swift; sourceTree = "<group>"; };
 		22EDF02526C7E6A000D19DA1 /* CDJWTResponseEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDJWTResponseEntity+Extension.swift"; sourceTree = "<group>"; };
@@ -1043,6 +1045,7 @@
 				228964A926F8AA1200E23292 /* MDShowProgressHUDProtocol.swift */,
 				228964AB26F8AA2100E23292 /* MDHideProgressHUDProtocol.swift */,
 				228964AD26F8AA2C00E23292 /* MDUpdateHUDProgressProtocol.swift */,
+				22E327C626FB207C00445917 /* MDShowErrorProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2723,6 +2726,7 @@
 				2294323426DF9A520073048C /* MDSyncResult.swift in Sources */,
 				229FFF3826F5E3D90024B974 /* MDBaseLargeTitledBackNavigationBarViewController.swift in Sources */,
 				228AE05B26EE053D0088B4CF /* PasswordToggleVisibilityView.swift in Sources */,
+				22E327C726FB207C00445917 /* MDShowErrorProtocol.swift in Sources */,
 				22B8E6BA26D396B0001CCCA8 /* MDCreateLanguagesCoreDataStorageOperation.swift in Sources */,
 				22B8E6DD26D3C54B001CCCA8 /* MDCourseCoreDataStorage.swift in Sources */,
 				22DB2F8B26C3D4D200C1AADA /* TableViewDelegatePropertyProtocol.swift in Sources */,

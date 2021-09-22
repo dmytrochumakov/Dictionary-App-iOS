@@ -11,6 +11,7 @@ protocol SettingsRouterProtocol {
     func showPrivacyPolicy()
     func showTermsOfService()
     func showAbout()
+    func showAccount()
 }
 
 final class SettingsRouter: SettingsRouterProtocol {
@@ -35,6 +36,10 @@ extension SettingsRouter {
     
     func showAbout() {
         settingsViewController.show(AboutApplicationViewController.init(), sender: nil)
+    }
+
+    func showAccount() {
+        settingsViewController.show(AccountModule.init(sender: nil).module, sender: nil)
     }
     
 }
