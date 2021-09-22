@@ -4,7 +4,7 @@
 //
 //  Created Dmytro Chumakov on 21.09.2021.
 
-import UIKit
+import MBProgressHUD
 
 final class AccountViewController: MDBaseTitledBackNavigationBarViewController {
     
@@ -56,6 +56,11 @@ final class AccountViewController: MDBaseTitledBackNavigationBarViewController {
         return button
     }()
     
+    fileprivate lazy var hud: MBProgressHUD = {
+        let hud: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        return hud
+    }()
+    
     init(presenter: AccountPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: KeysForTranslate.account.localized,
@@ -94,13 +99,25 @@ final class AccountViewController: MDBaseTitledBackNavigationBarViewController {
 extension AccountViewController: AccountPresenterOutputProtocol {
     
     func updateNicknameText(_ text: String) {
-        self.nicknameDetailLabel.text = text
+        DispatchQueue.main.async {
+            self.nicknameDetailLabel.text = text
+        }
     }
     
     func showError(_ error: Error) {
-        UIAlertController.showAlertWithOkAction(title: KeysForTranslate.error.localized,
-                                                message: error.localizedDescription,
-                                                presenter: self)
+        DispatchQueue.main.async {
+            UIAlertController.showAlertWithOkAction(title: KeysForTranslate.error.localized,
+                                                    message: error.localizedDescription,
+                                                    presenter: self)
+        }
+    }
+    
+    func showProgressHUD() {
+        hud.show(animated: true)
+    }
+    
+    func hideProgressHUD() {
+        hud.show(animated: true)
     }
     
 }

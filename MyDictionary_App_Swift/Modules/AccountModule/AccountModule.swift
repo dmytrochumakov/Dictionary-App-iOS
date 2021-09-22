@@ -27,7 +27,13 @@ extension AccountModule {
         var dataManager: AccountDataManagerProtocol = AccountDataManager.init(userMemoryStorage: MDConstants.AppDependencies.dependencies.userStorage.memoryStorage,
                                                                               dataProvider: AccountDataProvider.init())
         
-        let interactor: AccountInteractorProtocol = AccountInteractor.init(dataManager: dataManager)
+        let interactor: AccountInteractorProtocol = AccountInteractor.init(dataManager: dataManager,
+                                                                           storageCleanupService: MDStorageCleanupService.init(jwtStorage: MDConstants.AppDependencies.dependencies.jwtStorage,
+                                                                                                                               userStorage: MDConstants.AppDependencies.dependencies.userStorage,
+                                                                                                                               languageStorage: MDConstants.AppDependencies.dependencies.languageStorage,
+                                                                                                                               courseStorage: MDConstants.AppDependencies.dependencies.courseStorage,
+                                                                                                                               wordStorage: MDConstants.AppDependencies.dependencies.wordStorage),
+                                                                           appSettings: MDConstants.AppDependencies.dependencies.appSettings)
         var router: AccountRouterProtocol = AccountRouter.init()
         let presenter: AccountPresenterProtocol = AccountPresenter.init(interactor: interactor, router: router)
         let vc = AccountViewController.init(presenter: presenter)

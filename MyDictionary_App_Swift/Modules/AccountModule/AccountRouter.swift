@@ -8,6 +8,7 @@ import UIKit
 
 protocol AccountRouterProtocol {
     var presenter: UIViewController? { get set }
+    func showChoiceAuthenticationOrRegistration()
 }
 
 final class AccountRouter: AccountRouterProtocol {
@@ -16,6 +17,14 @@ final class AccountRouter: AccountRouterProtocol {
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension AccountRouter {
+    
+    func showChoiceAuthenticationOrRegistration() {
+        MDConstants.AppDependencies.dependencies.rootWindow.rootViewController = RootViewController.viewController(isLoggedIn: false)
     }
     
 }

@@ -13,7 +13,8 @@ protocol AccountPresenterInputProtocol {
 }
 
 protocol AccountPresenterOutputProtocol: AnyObject,
-                                         MDShowErrorProtocol {
+                                         MDShowErrorProtocol,
+                                         MDShowHideProgressHUD {
     func updateNicknameText(_ text: String)
 }
 
@@ -52,6 +53,18 @@ extension AccountPresenter {
     
     func showError(_ error: Error) {
         self.presenterOutput?.showError(error)
+    }
+    
+    func didCompleteLogout() {
+        self.router.showChoiceAuthenticationOrRegistration()
+    }
+    
+    func showProgressHUD() {
+        presenterOutput?.showProgressHUD()
+    }
+    
+    func hideProgressHUD() {
+        presenterOutput?.hideProgressHUD()
     }
     
 }

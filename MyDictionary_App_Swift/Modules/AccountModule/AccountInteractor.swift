@@ -13,8 +13,10 @@ protocol AccountInteractorInputProtocol {
 }
 
 protocol AccountInteractorOutputProtocol: AnyObject,
-                                          MDShowErrorProtocol {
+                                          MDShowErrorProtocol,
+                                          MDShowHideProgressHUD {
     func updateNicknameText(_ text: String)
+    func didCompleteLogout()
 }
 
 protocol AccountInteractorProtocol: AccountInteractorInputProtocol,
@@ -26,11 +28,21 @@ final class AccountInteractor: NSObject,
                                AccountInteractorProtocol {
     
     fileprivate let dataManager: AccountDataManagerInputProtocol
+    fileprivate let storageCleanupService: MDStorageCleanupServiceProtocol
+    fileprivate let appSettings: MDAppSettingsProtocol
+    
     internal weak var interactorOutput: AccountInteractorOutputProtocol?
     
-    init(dataManager: AccountDataManagerInputProtocol) {
+    init(dataManager: AccountDataManagerInputProtocol,
+         storageCleanupService: MDStorageCleanupServiceProtocol,
+         appSettings: MDAppSettingsProtocol) {
+        
         self.dataManager = dataManager
+        self.storageCleanupService = storageCleanupService
+        self.appSettings = appSettings
+        
         super.init()
+        
     }
     
     deinit {
@@ -48,16 +60,12 @@ extension AccountInteractor {
             
         case .success:
             
-            DispatchQueue.main.async {
-                self.interactorOutput?.updateNicknameText(self.dataManager.dataProvider.user!.nickname)
-            }
+            self.interactorOutput?.updateNicknameText(self.dataManager.dataProvider.user!.nickname)
             break
             
         case .failure(let error):
             
-            DispatchQueue.main.async {
-                self.interactorOutput?.showError(error)
-            }
+            self.interactorOutput?.showError(error)
             break
             
         }
@@ -78,6 +86,79 @@ extension AccountInteractor {
     }
     
     func logOutButtonClicked() {
+        logOut()
+    }
+    
+}
+
+// MARK: - Private
+fileprivate extension AccountInteractor {
+    
+    func logOut() {
+        
+        // Show Progress HUD
+        interactorOutput?.showProgressHUD()
+        //        
+        clearAllStorages() { [unowned self] clearAllStoragesResult in
+            
+            switch clearAllStoragesResult {
+                
+            case .success:
+                
+                // Hide Progress HUD
+                interactorOutput?.hideProgressHUD()                
+                // Set Is Logged False
+                appSettings.setIsLoggedFalse()
+                //
+                interactorOutput?.didCompleteLogout()
+                break
+                //
+                
+            case .failure(let error):
+                
+                // Hide Progress HUD
+                interactorOutput?.hideProgressHUD()
+                //
+                interactorOutput?.showError(error)
+                //
+                break
+                //
+            }
+            
+        }
+        
+    }
+    
+    func clearAllStorages(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
+        
+        var resultCount: Int = .zero
+        
+        storageCleanupService.clearAllStorages { cleanupResults in
+            
+            cleanupResults.forEach { cleanupResult in
+                
+                switch cleanupResult.result {
+                    
+                case .success:
+                    
+                    resultCount += 1
+                    
+                    if (resultCount == cleanupResults.count) {
+                        completionHandler(.success(()))
+                        break
+                    }
+                    
+                case .failure(let error):
+                    //
+                    completionHandler(.failure(error))
+                    //
+                    return
+                    //
+                }
+                
+            }
+            
+        }
         
     }
     

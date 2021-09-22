@@ -152,7 +152,7 @@ extension MDAuthManager {
 fileprivate extension MDAuthManager {
     
     func setIsLoggedInIntoTrue() {
-        appSettings.isLoggedIn = true
+        appSettings.setIsLoggedTrue()
     }
     
 }
