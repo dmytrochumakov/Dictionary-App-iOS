@@ -8,10 +8,7 @@ import UIKit
 
 final class ShareFeedbackViewController: UIViewController {
 
-    fileprivate let presenter: ShareFeedbackPresenterInputProtocol
-
-    init(presenter: ShareFeedbackPresenterInputProtocol) {
-        self.presenter = presenter
+    init() {        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -38,9 +35,4 @@ final class ShareFeedbackViewController: UIViewController {
         
     }
 
-}
-
-// MARK: - ShareFeedbackPresenterOutputProtocol
-extension ShareFeedbackViewController: ShareFeedbackPresenterOutputProtocol {
-       
 }
