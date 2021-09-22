@@ -8,6 +8,8 @@ import UIKit
 
 protocol AccountInteractorInputProtocol {
     func viewDidLoad()
+    func logOutButtonClicked()
+    func deleteAccountButtonClicked()
 }
 
 protocol AccountInteractorOutputProtocol: AnyObject,
@@ -69,6 +71,14 @@ extension AccountInteractor {
     
     func viewDidLoad() {
         dataManager.loadAndPassUserToDataProvider()
+    }
+    
+    func deleteAccountButtonClicked() {
+        
+    }
+    
+    func logOutButtonClicked() {
+        
     }
     
 }

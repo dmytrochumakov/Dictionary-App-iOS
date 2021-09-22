@@ -34,6 +34,28 @@ final class AccountViewController: MDBaseTitledBackNavigationBarViewController {
         return label
     }()
     
+    fileprivate static let logOutButtonHeight: CGFloat = 48
+    fileprivate let logOutButton: UIButton = {
+        let button: UIButton = .init()
+        button.backgroundColor = MDAppStyling.Color.md_4400D4.color()
+        button.setTitle(KeysForTranslate.logOut.localized, for: .normal)
+        button.setTitleColor(MDAppStyling.Color.md_FFFFFF.color(), for: .normal)
+        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    fileprivate static let deleteAccountButtonHeight: CGFloat = 48
+    fileprivate let deleteAccountButton: UIButton = {
+        let button: UIButton = .init()
+        button.backgroundColor = MDAppStyling.Color.md_FF3B30.color()
+        button.setTitle(KeysForTranslate.delete.localized, for: .normal)
+        button.setTitleColor(MDAppStyling.Color.md_FFFFFF.color(), for: .normal)
+        button.titleLabel?.font = MDAppStyling.Font.MyriadProSemiBold.font()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     init(presenter: AccountPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: KeysForTranslate.account.localized,
@@ -89,6 +111,8 @@ fileprivate extension AccountViewController {
     func addViews() {
         addNicknameTitleLabel()
         addNicknameDetailLabel()
+        addLogOutButton()
+        addDeleteAccountButton()
     }
     
     func addNicknameTitleLabel() {
@@ -99,6 +123,16 @@ fileprivate extension AccountViewController {
         view.addSubview(nicknameDetailLabel)
     }
     
+    func addLogOutButton() {
+        logOutButton.addTarget(self, action: #selector(logOutButtonAction), for: .touchUpInside)
+        view.addSubview(logOutButton)
+    }
+    
+    func addDeleteAccountButton() {
+        deleteAccountButton.addTarget(self, action: #selector(deleteAccountButtonAction), for: .touchUpInside)
+        view.addSubview(deleteAccountButton)
+    }
+    
 }
 
 // MARK: - Add Constraints
@@ -106,7 +140,9 @@ fileprivate extension AccountViewController {
     
     func addConstraints() {
         addNicknameTitleLabelConstraints()
-        addNicknameDetailLabeConstraintsl()
+        addNicknameDetailLabelConstraints()
+        addLogOutButtonConstraints()
+        addDeleteAccountButtonConstraints()
     }
     
     func addNicknameTitleLabelConstraints() {
@@ -129,7 +165,7 @@ fileprivate extension AccountViewController {
         
     }
     
-    func addNicknameDetailLabeConstraintsl() {
+    func addNicknameDetailLabelConstraints() {
         
         NSLayoutConstraint.addEqualConstraint(item: self.nicknameDetailLabel,
                                               attribute: .left,
@@ -145,6 +181,46 @@ fileprivate extension AccountViewController {
                                                    toItem: self.view,
                                                    constant: -16)
         
+        
+    }
+    
+    func addLogOutButtonConstraints() {
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.logOutButton,
+                                                  toItem: self.view,
+                                                  constant: 16)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.logOutButton,
+                                                   toItem: self.view,
+                                                   constant: -16)
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.logOutButton,
+                                              attribute: .bottom,
+                                              toItem: self.deleteAccountButton,
+                                              attribute: .top,
+                                              constant: -16)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.logOutButton,
+                                                    constant: Self.logOutButtonHeight)
+        
+    }
+    
+    func addDeleteAccountButtonConstraints() {
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.deleteAccountButton,
+                                                  toItem: self.view,
+                                                  constant: 16)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.deleteAccountButton,
+                                                   toItem: self.view,
+                                                   constant: -16)
+        
+        NSLayoutConstraint.addEqualBottomConstraint(item: self.deleteAccountButton,
+                                                    toItem: self.view,
+                                                    constant: -24)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.deleteAccountButton,
+                                                    constant: Self.deleteAccountButtonHeight)
         
     }
     
@@ -167,7 +243,20 @@ fileprivate extension AccountViewController {
 fileprivate extension AccountViewController {
     
     func dropShadow() {
-        
+        dropShadowLogOutButton()
+        dropShadowDeleteAccountButton()
+    }
+    
+    func dropShadowLogOutButton() {
+        logOutButton.dropShadow(color: MDAppStyling.Color.md_4400D4.color(0.5),
+                                offSet: .init(width: 0, height: 4),
+                                radius: 10)
+    }
+    
+    func dropShadowDeleteAccountButton() {
+        deleteAccountButton.dropShadow(color: MDAppStyling.Color.md_FF3B30.color(0.5),
+                                       offSet: .init(width: 0, height: 4),
+                                       radius: 10)
     }
     
 }
@@ -176,13 +265,30 @@ fileprivate extension AccountViewController {
 fileprivate extension AccountViewController {
     
     func roundOffEdges() {
-        
+        logOutButtonRoundOffEdges()
+        deleteAccountButtonRoundOffEdges()
+    }
+    
+    func logOutButtonRoundOffEdges() {
+        logOutButton.layer.cornerRadius = 10
+    }
+    
+    func deleteAccountButtonRoundOffEdges() {
+        deleteAccountButton.layer.cornerRadius = 10
     }
     
 }
 
 // MARK: - Actions
 fileprivate extension AccountViewController {
+    
+    @objc func logOutButtonAction() {
+        presenter.logOutButtonClicked()
+    }
+    
+    @objc func deleteAccountButtonAction() {
+        presenter.deleteAccountButtonClicked()
+    }
     
 }
 

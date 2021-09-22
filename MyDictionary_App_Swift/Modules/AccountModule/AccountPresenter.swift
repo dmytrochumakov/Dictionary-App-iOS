@@ -8,6 +8,8 @@ import UIKit
 
 protocol AccountPresenterInputProtocol {
     func viewDidLoad()
+    func logOutButtonClicked()
+    func deleteAccountButtonClicked()
 }
 
 protocol AccountPresenterOutputProtocol: AnyObject,
@@ -59,6 +61,14 @@ extension AccountPresenter {
     
     func viewDidLoad() {
         interactor.viewDidLoad()
+    }
+    
+    func deleteAccountButtonClicked() {
+        interactor.deleteAccountButtonClicked()
+    }
+    
+    func logOutButtonClicked() {
+        interactor.logOutButtonClicked()
     }
     
 }

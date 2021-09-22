@@ -16,6 +16,7 @@ struct MDAppStyling {
         case md_4400D4
         case md_5200FF
         case md_C7C7CC
+        case md_FF3B30
         
         
         /// - Parameter alpha: 1.0 by default
@@ -36,6 +37,9 @@ struct MDAppStyling {
                 
             case.md_C7C7CC:
                 return .init(rgb: 0xC7C7CC, alpha: alpha)
+                
+            case .md_FF3B30:
+                return .init(rgb: 0xFF3B30, alpha: alpha)
                 
             }
         }
