@@ -38,8 +38,8 @@ extension CourseListTableViewDataSource {
         let cell: MDCourseListCell = tableView.dequeueReusableCell(for: indexPath)
         cell.fillWithModel(dataProvider.courseListCellModel(atIndexPath: indexPath))
         let deleteButton: MGSwipeButton = .init(title: MDConstants.StaticText.emptyString,
-                                                icon: MDAppStyling.Image.delete.image,
-                                                backgroundColor: MDAppStyling.Color.md_FFFFFF.color()) { [weak self] (sender) -> Bool in
+                                                icon: MDUIResources.Image.delete.image,
+                                                backgroundColor: MDUIResources.Color.md_FFFFFF.color()) { [weak self] (sender) -> Bool in
             
             self?.deleteButtonAction?(sender as! MDCourseListCell)
             

@@ -58,8 +58,8 @@ fileprivate extension PasswordToggleVisibilityView {
         eyeButton.frame = buttonFrame
         eyeButton.backgroundColor = UIColor.clear
         eyeButton.adjustsImageWhenHighlighted = false
-        eyeButton.setImage(MDAppStyling.Image.eye_closed.image, for: UIControl.State())
-        eyeButton.setImage(MDAppStyling.Image.eye_open.image, for: .selected)
+        eyeButton.setImage(MDUIResources.Image.eye_closed.image, for: UIControl.State())
+        eyeButton.setImage(MDUIResources.Image.eye_open.image, for: .selected)
         eyeButton.addTarget(self, action: #selector(eyeButtonPressed), for: .touchUpInside)
         eyeButton.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         eyeButton.tintColor = self.tintColor

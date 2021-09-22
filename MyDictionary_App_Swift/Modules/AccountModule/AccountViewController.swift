@@ -11,13 +11,13 @@ final class AccountViewController: MDBaseTitledBackNavigationBarViewController {
     fileprivate let presenter: AccountPresenterInputProtocol
     
     fileprivate static let nicknameTitleLabelHeight: CGFloat = 18
-    fileprivate static let nicknameTitleLabelFont: UIFont = MDAppStyling.Font.MyriadProSemiBold.font()
+    fileprivate static let nicknameTitleLabelFont: UIFont = MDUIResources.Font.MyriadProSemiBold.font()
     fileprivate static let nicknameTitleLabelNumberOfLines: Int = 1
     fileprivate static let nicknameTitleLabelLeftOffset: CGFloat = 16
     fileprivate let nicknameTitleLabel: UILabel = {
         let label: UILabel = .init()
         label.font = nicknameTitleLabelFont
-        label.textColor = MDAppStyling.Color.md_C7C7CC.color()
+        label.textColor = MDUIResources.Color.md_C7C7CC.color()
         label.textAlignment = .left
         label.text = LocalizedText.nickname.localized + MDConstants.StaticText.colon
         label.numberOfLines = nicknameTitleLabelNumberOfLines
@@ -27,8 +27,8 @@ final class AccountViewController: MDBaseTitledBackNavigationBarViewController {
     
     fileprivate let nicknameDetailLabel: UILabel = {
         let label: UILabel = .init()
-        label.font = MDAppStyling.Font.MyriadProSemiBold.font()
-        label.textColor = MDAppStyling.Color.md_3C3C3C.color()
+        label.font = MDUIResources.Font.MyriadProSemiBold.font()
+        label.textColor = MDUIResources.Color.md_3C3C3C.color()
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -37,10 +37,10 @@ final class AccountViewController: MDBaseTitledBackNavigationBarViewController {
     fileprivate static let logOutButtonHeight: CGFloat = 48
     fileprivate let logOutButton: UIButton = {
         let button: UIButton = .init()
-        button.backgroundColor = MDAppStyling.Color.md_4400D4.color()
+        button.backgroundColor = MDUIResources.Color.md_4400D4.color()
         button.setTitle(LocalizedText.logOut.localized, for: .normal)
-        button.setTitleColor(MDAppStyling.Color.md_FFFFFF.color(), for: .normal)
-        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font()
+        button.setTitleColor(MDUIResources.Color.md_FFFFFF.color(), for: .normal)
+        button.titleLabel?.font = MDUIResources.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -48,10 +48,10 @@ final class AccountViewController: MDBaseTitledBackNavigationBarViewController {
     fileprivate static let deleteAccountButtonHeight: CGFloat = 48
     fileprivate let deleteAccountButton: UIButton = {
         let button: UIButton = .init()
-        button.backgroundColor = MDAppStyling.Color.md_FF3B30.color()
+        button.backgroundColor = MDUIResources.Color.md_FF3B30.color()
         button.setTitle(LocalizedText.delete.localized, for: .normal)
-        button.setTitleColor(MDAppStyling.Color.md_FFFFFF.color(), for: .normal)
-        button.titleLabel?.font = MDAppStyling.Font.MyriadProSemiBold.font()
+        button.setTitleColor(MDUIResources.Color.md_FFFFFF.color(), for: .normal)
+        button.titleLabel?.font = MDUIResources.Font.MyriadProSemiBold.font()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -64,7 +64,7 @@ final class AccountViewController: MDBaseTitledBackNavigationBarViewController {
     init(presenter: AccountPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: LocalizedText.account.localized,
-                   navigationBarBackgroundImage: MDAppStyling.Image.background_navigation_bar_2.image)
+                   navigationBarBackgroundImage: MDUIResources.Image.background_navigation_bar_2.image)
     }
     
     deinit {
@@ -265,13 +265,13 @@ fileprivate extension AccountViewController {
     }
     
     func dropShadowLogOutButton() {
-        logOutButton.dropShadow(color: MDAppStyling.Color.md_4400D4.color(0.5),
+        logOutButton.dropShadow(color: MDUIResources.Color.md_4400D4.color(0.5),
                                 offSet: .init(width: 0, height: 4),
                                 radius: 10)
     }
     
     func dropShadowDeleteAccountButton() {
-        deleteAccountButton.dropShadow(color: MDAppStyling.Color.md_FF3B30.color(0.5),
+        deleteAccountButton.dropShadow(color: MDUIResources.Color.md_FF3B30.color(0.5),
                                        offSet: .init(width: 0, height: 4),
                                        radius: 10)
     }

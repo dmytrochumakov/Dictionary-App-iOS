@@ -11,7 +11,7 @@ open class MDBaseNavigationBarViewController: UIViewController {
     
     internal let navigationBarView: UIView = {
         let view: UIView = .init()
-        view.backgroundColor = MDAppStyling.Color.md_4400D4.color()
+        view.backgroundColor = MDUIResources.Color.md_4400D4.color()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -107,7 +107,7 @@ extension MDBaseNavigationBarViewController {
 extension MDBaseNavigationBarViewController {
     
     func dropShadowNavigationBarView() {
-        navigationBarView.dropShadow(color: MDAppStyling.Color.md_4400D4.color(0.5),
+        navigationBarView.dropShadow(color: MDUIResources.Color.md_4400D4.color(0.5),
                                      offSet: .init(width: 0,
                                                    height: 4),
                                      radius: 20)

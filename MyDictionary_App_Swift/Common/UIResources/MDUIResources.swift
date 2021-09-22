@@ -1,5 +1,5 @@
 //
-//  MDAppStyling.swift
+//  MDUIResources.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 16.05.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct MDAppStyling {
+struct MDUIResources {
     
     enum Color {
         

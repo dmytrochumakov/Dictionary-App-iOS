@@ -12,7 +12,7 @@ open class MDBaseTitledBackNavigationBarViewController: MDBaseTitledNavigationBa
     internal let backButtonSize: CGSize = .init(width: 40, height: 40)
     internal let backButton: UIButton = {
         let button: UIButton = .init()
-        button.setImage(MDAppStyling.Image.back_white_arrow.image, for: .normal)
+        button.setImage(MDUIResources.Image.back_white_arrow.image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

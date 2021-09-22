@@ -21,7 +21,7 @@ final class SettingsViewController: MDBaseTitledBackNavigationBarViewController 
     init(presenter: SettingsPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: LocalizedText.settings.localized,
-                   navigationBarBackgroundImage: MDAppStyling.Image.background_navigation_bar_2.image)
+                   navigationBarBackgroundImage: MDUIResources.Image.background_navigation_bar_2.image)
     }
     
     deinit {

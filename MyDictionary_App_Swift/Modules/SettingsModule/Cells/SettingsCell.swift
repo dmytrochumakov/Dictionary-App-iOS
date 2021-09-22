@@ -15,8 +15,8 @@ final class SettingsCell: UICollectionViewCell,
     fileprivate let titleLabel: UILabel = {
         let label: UILabel = .init()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = MDAppStyling.Font.MyriadProRegular.font()
-        label.textColor = MDAppStyling.Color.md_3C3C3C.color()
+        label.font = MDUIResources.Font.MyriadProRegular.font()
+        label.textColor = MDUIResources.Color.md_3C3C3C.color()
         label.textAlignment = .left
         label.numberOfLines = .zero
         return label
@@ -26,7 +26,7 @@ final class SettingsCell: UICollectionViewCell,
     fileprivate static let arrowImageViewRightOffset: CGFloat = 4
     fileprivate let arrowImageView: UIImageView = {
         let imageView: UIImageView = .init()
-        imageView.image = MDAppStyling.Image.right_arrow.image
+        imageView.image = MDUIResources.Image.right_arrow.image
         imageView.contentMode = .center
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
