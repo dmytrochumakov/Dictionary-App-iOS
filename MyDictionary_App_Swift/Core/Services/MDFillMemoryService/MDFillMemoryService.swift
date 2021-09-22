@@ -91,13 +91,13 @@ extension MDFillMemoryService {
                 
                 results.forEach { result in
                     
-                    debugPrint(#function, Self.self, "step: ", result.step)
+                    debugPrint(#function, Self.self, "step: ", result.storageServiceType)
                     
                     switch result.result {
-                    
+                        
                     case .success:
                         //
-                        debugPrint(#function, Self.self, "step: ", result.step, "Success")
+                        debugPrint(#function, Self.self, "step: ", result.storageServiceType, "Success")
                         //
                         countResult += 1
                         //
@@ -114,10 +114,10 @@ extension MDFillMemoryService {
                             break
                             //
                         }
-                    //
+                        //
                     case .failure(let error):
                         //
-                        debugPrint(#function, Self.self, "step: ", result.step, "Failure: ", error)
+                        debugPrint(#function, Self.self, "step: ", result.storageServiceType, "Failure: ", error)
                         //
                         setInternalIsRunningFalse()
                         //
@@ -144,9 +144,9 @@ extension MDFillMemoryService {
 // MARK: - Fill
 fileprivate extension MDFillMemoryService {
     
-    func fillMemory(completionHandler: @escaping(([MDFillMemoryResult]) -> Void)) {
+    func fillMemory(completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void)) {
         
-        var results: [MDFillMemoryResult] = .init()
+        var results: [MDStorageServiceOperationResult] = .init()
         
         // Initialize Dispatch Group
         let dispatchGroup: DispatchGroup = .init()
@@ -203,26 +203,26 @@ fileprivate extension MDFillMemoryService {
         
     }
     
-    func fillJWTMemoryFromCoreData(_ completionHandler: @escaping(MDFillMemoryResultWithCompletion)) {
+    func fillJWTMemoryFromCoreData(_ completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
         
-        let step: MDFillMemoryStep = .jwt
+        let storageServiceType: MDStorageServiceType = .jwt
         
         jwtStorage.readFirstJWT(storageType: fromCoreData) { [unowned self] readResults in
             
             switch readResults.first!.result {
-            
+                
             case .success(let jwt):
                 
                 jwtStorage.createJWT(storageType: toMemory,
                                      jwtResponse: jwt) { createResults in
                     
                     switch createResults.first!.result {
-                    
+                        
                     case .success:
-                        completionHandler(.init(step: step, result: .success(())))
+                        completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
                         break
                     case .failure(let error):
-                        completionHandler(.init(step: step, result: .failure(error)))
+                        completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                         return
                     }
                     
@@ -230,7 +230,7 @@ fileprivate extension MDFillMemoryService {
                 
                 break
             case .failure(let error):
-                completionHandler(.init(step: step, result: .failure(error)))
+                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                 return
             }
             
@@ -238,14 +238,14 @@ fileprivate extension MDFillMemoryService {
         
     }
     
-    func fillUserMemoryFromCoreData(_ completionHandler: @escaping(MDFillMemoryResultWithCompletion)) {
+    func fillUserMemoryFromCoreData(_ completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
         
-        let step: MDFillMemoryStep = .user
+        let storageServiceType: MDStorageServiceType = .user
         
         userStorage.readFirstUser(storageType: fromCoreData) { [unowned self] readResults in
             
             switch readResults.first!.result {
-            
+                
             case .success(let user):
                 
                 userStorage.createUser(user,
@@ -253,12 +253,12 @@ fileprivate extension MDFillMemoryService {
                                        storageType: toMemory) { createResults in
                     
                     switch createResults.first!.result {
-                    
+                        
                     case .success:
-                        completionHandler(.init(step: step, result: .success(())))
+                        completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
                         break
                     case .failure(let error):
-                        completionHandler(.init(step: step, result: .failure(error)))
+                        completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                         return
                     }
                     
@@ -266,7 +266,7 @@ fileprivate extension MDFillMemoryService {
                 
                 break
             case .failure(let error):
-                completionHandler(.init(step: step, result: .failure(error)))
+                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                 return
             }
             
@@ -274,26 +274,26 @@ fileprivate extension MDFillMemoryService {
         
     }
     
-    func fillLanguageMemoryFromCoreData(_ completionHandler: @escaping(MDFillMemoryResultWithCompletion)) {
+    func fillLanguageMemoryFromCoreData(_ completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
         
-        let step: MDFillMemoryStep = .language
+        let storageServiceType: MDStorageServiceType = .language
         
         languageStorage.readAllLanguages(storageType: fromCoreData) { [unowned self] readResults in
             
             switch readResults.first!.result {
-            
+                
             case .success(let languages):
                 
                 languageStorage.createLanguages(storageType: toMemory,
                                                 languageEntities: languages) { createResults in
                     
                     switch createResults.first!.result {
-                    
+                        
                     case .success:
-                        completionHandler(.init(step: step, result: .success(())))
+                        completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
                         break
                     case .failure(let error):
-                        completionHandler(.init(step: step, result: .failure(error)))
+                        completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                         return
                     }
                     
@@ -301,7 +301,7 @@ fileprivate extension MDFillMemoryService {
                 
                 break
             case .failure(let error):
-                completionHandler(.init(step: step, result: .failure(error)))
+                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                 return
             }
             
@@ -309,26 +309,26 @@ fileprivate extension MDFillMemoryService {
         
     }
     
-    func fillCourseMemoryFromCoreData(_ completionHandler: @escaping(MDFillMemoryResultWithCompletion)) {
+    func fillCourseMemoryFromCoreData(_ completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
         
-        let step: MDFillMemoryStep = .course
+        let storageServiceType: MDStorageServiceType = .course
         
         courseStorage.readAllCourses(storageType: fromCoreData) { [unowned self] readResults in
             
             switch readResults.first!.result {
-            
+                
             case .success(let courses):
                 
                 courseStorage.createCourses(storageType: toMemory,
                                             courseEntities: courses) { createResults in
                     
                     switch createResults.first!.result {
-                    
+                        
                     case .success:
-                        completionHandler(.init(step: step, result: .success(())))
+                        completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
                         break
                     case .failure(let error):
-                        completionHandler(.init(step: step, result: .failure(error)))
+                        completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                         return
                     }
                     
@@ -336,7 +336,7 @@ fileprivate extension MDFillMemoryService {
                 
                 break
             case .failure(let error):
-                completionHandler(.init(step: step, result: .failure(error)))
+                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                 return
             }
             
@@ -344,25 +344,25 @@ fileprivate extension MDFillMemoryService {
         
     }
     
-    func fillWordMemoryFromCoreData(_ completionHandler: @escaping(MDFillMemoryResultWithCompletion)) {
+    func fillWordMemoryFromCoreData(_ completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
         
-        let step: MDFillMemoryStep = .word
+        let storageServiceType: MDStorageServiceType = .word
         
         wordStorage.readAllWords(storageType: fromCoreData) { [unowned self] readResults in
             
             switch readResults.first!.result {
-            
+                
             case .success(let words):
                 
                 wordStorage.createWords(words, storageType: toMemory) { createResults in
                     
                     switch createResults.first!.result {
-                    
+                        
                     case .success:
-                        completionHandler(.init(step: step, result: .success(())))
+                        completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
                         break
                     case .failure(let error):
-                        completionHandler(.init(step: step, result: .failure(error)))
+                        completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                         return
                     }
                     
@@ -370,7 +370,7 @@ fileprivate extension MDFillMemoryService {
                 
                 break
             case .failure(let error):
-                completionHandler(.init(step: step, result: .failure(error)))
+                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                 return
             }
             
