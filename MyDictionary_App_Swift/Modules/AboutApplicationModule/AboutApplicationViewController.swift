@@ -11,7 +11,7 @@ final class AboutApplicationViewController: MDBaseTitledBackNavigationBarWebView
     
     init() {
         super.init(url: MDConstants.StaticURL.aboutAppURL,
-                   title: KeysForTranslate.about.localized,
+                   title: LocalizedText.about.localized,
                    navigationBarBackgroundImage: MDAppStyling.Image.background_navigation_bar_2.image)
     }
     

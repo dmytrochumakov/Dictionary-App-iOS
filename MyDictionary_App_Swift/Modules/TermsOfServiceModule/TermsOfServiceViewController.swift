@@ -11,7 +11,7 @@ final class TermsOfServiceViewController: MDBaseTitledBackNavigationBarWebViewCo
     
     init() {
         super.init(url: MDConstants.StaticURL.termsOfServiceURL,
-                   title: KeysForTranslate.termsOfService.localized,
+                   title: LocalizedText.termsOfService.localized,
                    navigationBarBackgroundImage: MDAppStyling.Image.background_navigation_bar_2.image)
     }
     

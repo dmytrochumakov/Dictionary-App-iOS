@@ -100,7 +100,7 @@ fileprivate extension WordListViewController {
     
     func configureView() {
         self.configureViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType)
-        self.title = KeysForTranslate.words.localized
+        self.title = LocalizedText.words.localized
     }
     
     func configureCollectionView() {

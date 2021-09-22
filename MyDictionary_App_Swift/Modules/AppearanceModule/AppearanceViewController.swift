@@ -102,7 +102,7 @@ fileprivate extension AppearanceViewController {
     
     func configureView() {
         self.configureViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType)
-        self.title = KeysForTranslate.appearance.localized
+        self.title = LocalizedText.appearance.localized
     }
     
     func configureCollectionView() {

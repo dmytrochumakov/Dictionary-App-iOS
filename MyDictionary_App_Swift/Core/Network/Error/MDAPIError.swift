@@ -27,29 +27,29 @@ extension MDAPIError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .noData:
-            return KeysForTranslate.noDataApiError.localized
+            return LocalizedText.noDataApiError.localized
         case .invalidResponse:
-            return KeysForTranslate.invalidResponseApiError.localized
+            return LocalizedText.invalidResponseApiError.localized
         case .badRequest:
-            return KeysForTranslate.badRequestApiError.localized
+            return LocalizedText.badRequestApiError.localized
         case .unauthorized:
-            return KeysForTranslate.unauthorizedApiError.localized
+            return LocalizedText.unauthorizedApiError.localized
         case .forbidden:
-            return KeysForTranslate.forbiddenApiError.localized
+            return LocalizedText.forbiddenApiError.localized
         case .notFound:
-            return KeysForTranslate.notFoundApiError.localized
+            return LocalizedText.notFoundApiError.localized
         case .methodNotAllowed:
-            return KeysForTranslate.methodNotAllowedApiError.localized
+            return LocalizedText.methodNotAllowedApiError.localized
         case .conflict:
-            return KeysForTranslate.conflictApiError.localized
+            return LocalizedText.conflictApiError.localized
         case .internalServerError:
-            return KeysForTranslate.internalServerErrorApiError.localized
+            return LocalizedText.internalServerErrorApiError.localized
         case .parseError:
-            return KeysForTranslate.parseErrorApiError.localized
+            return LocalizedText.parseErrorApiError.localized
         case .noInternetConnection:
-            return KeysForTranslate.noInternetConnection.localized
+            return LocalizedText.noInternetConnection.localized
         case .unknown:
-            return KeysForTranslate.unknownApiError.localized
+            return LocalizedText.unknownApiError.localized
         }
     }
     

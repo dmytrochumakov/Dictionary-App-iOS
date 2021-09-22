@@ -59,11 +59,11 @@ fileprivate extension AppearanceDataProvider {
     static func configuredTitleText(rowType: AppearanceRowType) -> String {
         switch rowType {
         case .automatic:
-            return KeysForTranslate.automatic.localized
+            return LocalizedText.automatic.localized
         case .light:
-            return KeysForTranslate.light.localized
+            return LocalizedText.light.localized
         case .dark:
-            return KeysForTranslate.dark.localized
+            return LocalizedText.dark.localized
         }
     }
     
