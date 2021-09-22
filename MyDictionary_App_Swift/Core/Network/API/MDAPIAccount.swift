@@ -44,8 +44,8 @@ extension MDAPIAccount {
         
         var path: String {
             switch self {
-            case .deleteAccount(_, let userId):
-                return "deleteAccount/userId/\(userId)"
+            case .deleteAccount(_, let userId):                
+                return "account/deleteAccount/userId/\(userId)"
             }
         }
         

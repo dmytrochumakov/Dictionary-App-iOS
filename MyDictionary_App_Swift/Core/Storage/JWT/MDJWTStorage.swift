@@ -9,6 +9,8 @@ import Foundation
 
 protocol MDJWTStorageProtocol: MDStorageProtocol {
     
+    var memoryStorage: MDJWTMemoryStorageProtocol { get }
+    
     func createJWT(storageType: MDStorageType,
                    jwtResponse: JWTResponse,
                    _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<JWTResponse>>))
@@ -36,7 +38,7 @@ protocol MDJWTStorageProtocol: MDStorageProtocol {
 
 final class MDJWTStorage: MDStorage, MDJWTStorageProtocol {
     
-    fileprivate let memoryStorage: MDJWTMemoryStorageProtocol
+    let memoryStorage: MDJWTMemoryStorageProtocol
     fileprivate let coreDataStorage: MDJWTCoreDataStorageProtocol
     
     init(memoryStorage: MDJWTMemoryStorageProtocol,

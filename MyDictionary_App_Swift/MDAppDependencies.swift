@@ -23,6 +23,7 @@ protocol MDAppDependenciesProtocol {
     var apiLanguage: MDAPILanguageProtocol! { get }
     var apiCourse: MDAPICourseProtocol! { get }
     var apiWord: MDAPIWordProtocol! { get }
+    var apiAccount: MDAPIAccountProtocol! { get }
     // End API //
     
     // Storage //
@@ -54,6 +55,7 @@ final class MDAppDependencies: NSObject,
     var apiLanguage: MDAPILanguageProtocol!
     var apiCourse: MDAPICourseProtocol!
     var apiWord: MDAPIWordProtocol!
+    var apiAccount: MDAPIAccountProtocol!
     // End API //
     
     // Storage //
@@ -119,6 +121,10 @@ extension MDAppDependencies {
         let apiWord: MDAPIWordProtocol = MDAPIWord.init(requestDispatcher: requestDispatcher,
                                                         operationQueueService: operationQueueService)
         self.apiWord = apiWord
+        //
+        let apiAccount: MDAPIAccountProtocol = MDAPIAccount.init(requestDispatcher: requestDispatcher,
+                                                                 operationQueueService: operationQueueService)
+        self.apiAccount = apiAccount
         //
         // END API //
         

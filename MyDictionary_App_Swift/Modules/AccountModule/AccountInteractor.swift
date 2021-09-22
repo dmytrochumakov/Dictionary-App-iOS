@@ -30,16 +30,22 @@ final class AccountInteractor: NSObject,
     fileprivate let dataManager: AccountDataManagerInputProtocol
     fileprivate let storageCleanupService: MDStorageCleanupServiceProtocol
     fileprivate let appSettings: MDAppSettingsProtocol
+    fileprivate let apiAccount: MDAPIAccountProtocol
+    fileprivate let jwtMemoryStorage: MDJWTMemoryStorageProtocol
     
     internal weak var interactorOutput: AccountInteractorOutputProtocol?
     
     init(dataManager: AccountDataManagerInputProtocol,
          storageCleanupService: MDStorageCleanupServiceProtocol,
-         appSettings: MDAppSettingsProtocol) {
+         appSettings: MDAppSettingsProtocol,
+         apiAccount: MDAPIAccountProtocol,
+         jwtMemoryStorage: MDJWTMemoryStorageProtocol) {
         
         self.dataManager = dataManager
         self.storageCleanupService = storageCleanupService
         self.appSettings = appSettings
+        self.apiAccount = apiAccount
+        self.jwtMemoryStorage = jwtMemoryStorage
         
         super.init()
         
@@ -82,7 +88,7 @@ extension AccountInteractor {
     }
     
     func deleteAccountButtonClicked() {
-        
+        deleteAccount()
     }
     
     func logOutButtonClicked() {
@@ -94,11 +100,60 @@ extension AccountInteractor {
 // MARK: - Private
 fileprivate extension AccountInteractor {
     
+    func deleteAccount() {
+        
+        // Show Progress HUD
+        interactorOutput?.showProgressHUD()
+        //
+        jwtMemoryStorage.readFirstJWT { [unowned self] readJWTResult in
+            
+            switch readJWTResult {
+                
+            case .success(let jwtResponse):
+                
+                apiAccount.deleteAccount(accessToken: jwtResponse.accessToken,
+                                         userId: dataManager.dataProvider.user!.userId) { [unowned self] (deleteAccountResult) in
+                    
+                    switch deleteAccountResult {
+                        
+                    case .success:
+                        //
+                        logOut()
+                        //
+                        break
+                        //
+                    case .failure(let error):
+                        // Hide Progress HUD
+                        interactorOutput?.hideProgressHUD()
+                        //
+                        interactorOutput?.showError(error)
+                        //
+                        break
+                        //
+                    }
+                    
+                }
+                //
+                
+            case .failure(let error):
+                // Hide Progress HUD
+                interactorOutput?.hideProgressHUD()
+                //
+                interactorOutput?.showError(error)
+                //
+                break
+                //
+            }
+            
+        }
+        
+    }
+    
     func logOut() {
         
         // Show Progress HUD
         interactorOutput?.showProgressHUD()
-        //        
+        //
         clearAllStorages() { [unowned self] clearAllStoragesResult in
             
             switch clearAllStoragesResult {
@@ -106,11 +161,12 @@ fileprivate extension AccountInteractor {
             case .success:
                 
                 // Hide Progress HUD
-                interactorOutput?.hideProgressHUD()                
+                interactorOutput?.hideProgressHUD()
                 // Set Is Logged False
                 appSettings.setIsLoggedFalse()
                 //
                 interactorOutput?.didCompleteLogout()
+                //
                 break
                 //
                 

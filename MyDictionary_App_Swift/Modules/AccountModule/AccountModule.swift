@@ -33,7 +33,10 @@ extension AccountModule {
                                                                                                                                languageStorage: MDConstants.AppDependencies.dependencies.languageStorage,
                                                                                                                                courseStorage: MDConstants.AppDependencies.dependencies.courseStorage,
                                                                                                                                wordStorage: MDConstants.AppDependencies.dependencies.wordStorage),
-                                                                           appSettings: MDConstants.AppDependencies.dependencies.appSettings)
+                                                                           appSettings: MDConstants.AppDependencies.dependencies.appSettings,
+                                                                           apiAccount: MDConstants.AppDependencies.dependencies.apiAccount,
+                                                                           jwtMemoryStorage: MDConstants.AppDependencies.dependencies.jwtStorage.memoryStorage)
+        
         var router: AccountRouterProtocol = AccountRouter.init()
         let presenter: AccountPresenterProtocol = AccountPresenter.init(interactor: interactor, router: router)
         let vc = AccountViewController.init(presenter: presenter)
