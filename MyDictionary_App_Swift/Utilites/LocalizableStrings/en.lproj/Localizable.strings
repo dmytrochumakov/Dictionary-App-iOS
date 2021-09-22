@@ -37,6 +37,9 @@
 "support" = "Support";
 "delete" = "Delete";
 "log_out" = "Log out";
+"share_feedback" = "Share Feedback";
+"feature_request" = "Feature Request";
+"bug_report" = "Bug Report";
 
 // Api Errors //
 "no_data_api_error" = "No Data";

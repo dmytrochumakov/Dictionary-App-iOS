@@ -39,6 +39,9 @@ enum KeysForTranslate: String {
     case support
     case delete
     case logOut = "log_out"
+    case shareFeedback = "share_feedback"
+    case featureRequest = "feature_request"
+    case bugReport = "bug_report"
     
     // Api Errors //
     case noDataApiError = "no_data_api_error"
