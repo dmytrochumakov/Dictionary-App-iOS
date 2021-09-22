@@ -8,7 +8,9 @@
 import Foundation
 
 protocol MDAppSettingsProtocol {
-    var isLoggedIn: Bool { get set }
+    var isLoggedIn: Bool { get }
+    func setIsLoggedTrue()
+    func setIsLoggedFalse()
 }
 
 final class MDAppSettings: MDAppSettingsProtocol {
@@ -30,6 +32,18 @@ extension MDAppSettings {
         set {
             userDefaults.set(newValue, forKey: #function)
         }
+    }
+    
+}
+
+extension MDAppSettings {
+    
+    func setIsLoggedTrue() {
+        self.isLoggedIn = true
+    }
+    
+    func setIsLoggedFalse() {
+        self.isLoggedIn = false
     }
     
 }

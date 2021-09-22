@@ -65,13 +65,13 @@ extension MDSyncManager {
             
             results.forEach { result in
                 
-                debugPrint(#function, Self.self, "step: ", result.syncStep)
+                debugPrint(#function, Self.self, "step: ", result.storageServiceType)
                 
                 switch result.result {
-                
+                    
                 case .success:
                     //
-                    debugPrint(#function, Self.self, "step: ", result.syncStep, "Success")
+                    debugPrint(#function, Self.self, "step: ", result.storageServiceType, "Success")
                     //
                     countResult += 1
                     //
@@ -84,10 +84,10 @@ extension MDSyncManager {
                         break
                         //
                     }
-                //
+                    //
                 case .failure(let error):
                     //
-                    debugPrint(#function, Self.self, "step: ", result.syncStep, "Failure: ", error)
+                    debugPrint(#function, Self.self, "step: ", result.storageServiceType, "Failure: ", error)
                     //
                     setInternalIsRunningFalse()
                     //
@@ -124,13 +124,13 @@ extension MDSyncManager {
             
             results.forEach { result in
                 
-                debugPrint(#function, Self.self, "step: ", result.syncStep)
+                debugPrint(#function, Self.self, "step: ", result.storageServiceType)
                 
                 switch result.result {
-                
+                    
                 case .success:
                     //
-                    debugPrint(#function, Self.self, "step: ", result.syncStep, "Success")
+                    debugPrint(#function, Self.self, "step: ", result.storageServiceType, "Success")
                     // Increment count Result
                     countResult += 1
                     //
@@ -143,10 +143,10 @@ extension MDSyncManager {
                         break
                         //
                     }
-                //
+                    //
                 case .failure(let error):
                     //
-                    debugPrint(#function, Self.self, "step: ", result.syncStep, "Failure: ", error)
+                    debugPrint(#function, Self.self, "step: ", result.storageServiceType, "Failure: ", error)
                     //
                     setInternalIsRunningFalse()
                     //

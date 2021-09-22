@@ -35,6 +35,8 @@
 "privacy_Policy" = "Privacy Policy";
 "terms_Of_Service" = "Terms Of Service";
 "support" = "Support";
+"delete" = "Delete";
+"log_out" = "Log out";
 
 // Api Errors //
 "no_data_api_error" = "No Data";

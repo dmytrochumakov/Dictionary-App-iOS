@@ -20,7 +20,7 @@ final class MDSyncManager_Tests: XCTestCase {
         
         let operationQueue: OperationQueue = .init()
         
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)                
+        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
         
         let coreDataStack: MDCoreDataStack = TestCoreDataStack.init()
         
@@ -28,40 +28,56 @@ final class MDSyncManager_Tests: XCTestCase {
                                                      operationQueueService: operationQueueService)
         self.apiJWT = apiJWT
         
+        let jwtStorage: MDJWTStorageProtocol = MDJWTStorage.init(memoryStorage: MDJWTMemoryStorage.init(operationQueueService: operationQueueService,
+                                                                                                        array: .init()),
+                                                                 coreDataStorage: MDJWTCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                                                            managedObjectContext: coreDataStack.privateContext,
+                                                                                                            coreDataStack: coreDataStack))
+        
+        let userStorage: MDUserStorageProtocol = MDUserStorage.init(memoryStorage: MDUserMemoryStorage.init(operationQueueService: operationQueueService,
+                                                                                                            array: .init()),
+                                                                    coreDataStorage: MDUserCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                                                                managedObjectContext: coreDataStack.privateContext,
+                                                                                                                coreDataStack: coreDataStack))
+        
+        let languageStorage: MDLanguageStorageProtocol = MDLanguageStorage.init(memoryStorage: MDLanguageMemoryStorage.init(operationQueueService: operationQueueService,
+                                                                                                                            array: .init()),
+                                                                                coreDataStorage: MDLanguageCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                                                                                managedObjectContext: coreDataStack.privateContext,
+                                                                                                                                coreDataStack: coreDataStack))
+        
+        let courseStorage: MDCourseStorageProtocol = MDCourseStorage.init(memoryStorage: MDCourseMemoryStorage.init(operationQueueService: operationQueueService,
+                                                                                                                    array: .init()),
+                                                                          coreDataStorage: MDCourseCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                                                                        managedObjectContext: coreDataStack.privateContext,
+                                                                                                                        coreDataStack: coreDataStack))
+        
+        let wordStorage: MDWordStorageProtocol = MDWordStorage.init(memoryStorage: MDWordMemoryStorage.init(operationQueueService: operationQueueService,
+                                                                                                            arrayWords: .init()),
+                                                                    coreDataStorage: MDWordCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                                                                managedObjectContext: coreDataStack.privateContext,
+                                                                                                                coreDataStack: coreDataStack))
+        
         self.syncManager = MDSyncManager.init(sync: MDSync.init(apiJWT: apiJWT,
-                                                                jwtStorage: MDJWTStorage.init(memoryStorage: MDJWTMemoryStorage.init(operationQueueService: operationQueueService,
-                                                                                                                                     array: .init()),
-                                                                                              coreDataStorage: MDJWTCoreDataStorage.init(operationQueueService: operationQueueService,
-                                                                                                                                         managedObjectContext: coreDataStack.privateContext,
-                                                                                                                                         coreDataStack: coreDataStack)),
+                                                                jwtStorage: jwtStorage,
                                                                 apiUser: MDAPIUser.init(requestDispatcher: requestDispatcher,
                                                                                         operationQueueService: operationQueueService),
-                                                                userStorage: MDUserStorage.init(memoryStorage: MDUserMemoryStorage.init(operationQueueService: operationQueueService,
-                                                                                                                                        array: .init()),
-                                                                                                coreDataStorage: MDUserCoreDataStorage.init(operationQueueService: operationQueueService,
-                                                                                                                                            managedObjectContext: coreDataStack.privateContext,
-                                                                                                                                            coreDataStack: coreDataStack)),
+                                                                userStorage: userStorage,
                                                                 apiLanguage: MDAPILanguage.init(requestDispatcher: requestDispatcher,
                                                                                                 operationQueueService: operationQueueService),
-                                                                languageStorage: MDLanguageStorage.init(memoryStorage: MDLanguageMemoryStorage.init(operationQueueService: operationQueueService,
-                                                                                                                                                    array: .init()),
-                                                                                                        coreDataStorage: MDLanguageCoreDataStorage.init(operationQueueService: operationQueueService,
-                                                                                                                                                        managedObjectContext: coreDataStack.privateContext,
-                                                                                                                                                        coreDataStack: coreDataStack)),
+                                                                languageStorage: languageStorage,
                                                                 apiCourse: MDAPICourse.init(requestDispatcher: requestDispatcher,
                                                                                             operationQueueService: operationQueueService),
-                                                                courseStorage: MDCourseStorage.init(memoryStorage: MDCourseMemoryStorage.init(operationQueueService: operationQueueService,
-                                                                                                                                              array: .init()),
-                                                                                                    coreDataStorage: MDCourseCoreDataStorage.init(operationQueueService: operationQueueService,
-                                                                                                                                                  managedObjectContext: coreDataStack.privateContext,
-                                                                                                                                                  coreDataStack: coreDataStack)),
+                                                                courseStorage: courseStorage,
                                                                 apiWord: MDAPIWord.init(requestDispatcher: requestDispatcher,
                                                                                         operationQueueService: operationQueueService),
-                                                                wordStorage: MDWordStorage.init(memoryStorage: MDWordMemoryStorage.init(operationQueueService: operationQueueService,
-                                                                                                                                        arrayWords: .init()),
-                                                                                                coreDataStorage: MDWordCoreDataStorage.init(operationQueueService: operationQueueService,
-                                                                                                                                            managedObjectContext: coreDataStack.privateContext,
-                                                                                                                                            coreDataStack: coreDataStack))))
+                                                                wordStorage: wordStorage,
+                                                                
+                                                                storageCleanupService: MDStorageCleanupService.init(jwtStorage: jwtStorage,
+                                                                                                                    userStorage: userStorage,
+                                                                                                                    languageStorage: languageStorage,
+                                                                                                                    courseStorage: courseStorage,
+                                                                                                                    wordStorage: wordStorage)))
         
     }
     
@@ -77,7 +93,7 @@ extension MDSyncManager_Tests {
         apiJWT.accessToken(jwtApiRequest: Constants_For_Tests.jwtApiRequest) { [unowned self] (jwtResult) in
             
             switch jwtResult {
-            
+                
             case .success(let jwtResponse):
                 
                 syncManager.startFullSync(withSyncItem: Constants_For_Tests.syncItem(accessToken: jwtResponse.accessToken)) { progress in
@@ -87,7 +103,7 @@ extension MDSyncManager_Tests {
                 } completionHandler: { result in
                     
                     switch result {
-                    
+                        
                     case .success:
                         
                         expectation.fulfill()
@@ -117,7 +133,7 @@ extension MDSyncManager_Tests {
         apiJWT.accessToken(jwtApiRequest: Constants_For_Tests.jwtApiRequest) { [unowned self] (jwtResult) in
             
             switch jwtResult {
-            
+                
             case .success(let jwtResponse):
                 
                 syncManager.startWithJWTAndUserAndLanguageSync(withSyncItem: Constants_For_Tests.syncItem(accessToken: jwtResponse.accessToken)) { progress in
@@ -127,7 +143,7 @@ extension MDSyncManager_Tests {
                 } completionHandler: { result in
                     
                     switch result {
-                    
+                        
                     case .success:
                         
                         expectation.fulfill()

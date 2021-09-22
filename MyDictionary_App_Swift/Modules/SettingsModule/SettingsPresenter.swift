@@ -65,6 +65,7 @@ extension SettingsPresenter {
             break
             
         case .account:
+            router.showAccount()
             break
             
         case .privacyPolicy:

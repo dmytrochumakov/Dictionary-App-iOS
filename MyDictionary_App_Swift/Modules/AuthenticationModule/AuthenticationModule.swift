@@ -31,7 +31,7 @@ extension AuthenticationModule {
         
         let validationTypes: [AuthValidationType] = [.nickname, .password]
         let authValidation: AuthValidationProtocol = AuthValidation.init(dataProvider: dataProvider,
-                                                                         validationTypes: validationTypes)                
+                                                                         validationTypes: validationTypes)
         
         let apiAuth: MDAPIAuthProtocol = MDAPIAuth.init(requestDispatcher: MDConstants.RequestDispatcher.defaultRequestDispatcher(reachability: MDConstants.AppDependencies.dependencies.reachability),
                                                         operationQueueService: MDConstants.AppDependencies.dependencies.operationQueueService)
@@ -45,7 +45,12 @@ extension AuthenticationModule {
                                                apiCourse: MDConstants.AppDependencies.dependencies.apiCourse,
                                                courseStorage: MDConstants.AppDependencies.dependencies.courseStorage,
                                                apiWord: MDConstants.AppDependencies.dependencies.apiWord,
-                                               wordStorage: MDConstants.AppDependencies.dependencies.wordStorage)
+                                               wordStorage: MDConstants.AppDependencies.dependencies.wordStorage,
+                                               storageCleanupService: MDStorageCleanupService.init(jwtStorage: MDConstants.AppDependencies.dependencies.jwtStorage,
+                                                                                                   userStorage: MDConstants.AppDependencies.dependencies.userStorage,
+                                                                                                   languageStorage: MDConstants.AppDependencies.dependencies.languageStorage,
+                                                                                                   courseStorage: MDConstants.AppDependencies.dependencies.courseStorage,
+                                                                                                   wordStorage: MDConstants.AppDependencies.dependencies.wordStorage))
         
         let syncManager: MDSyncManagerProtocol = MDSyncManager.init(sync: sync)
         let authManager: MDAuthManagerProtocol = MDAuthManager.init(apiAuth: apiAuth,

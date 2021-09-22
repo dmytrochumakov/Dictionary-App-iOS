@@ -21,6 +21,7 @@ struct MDConstants {
         static let sqliteExtension: String = "sqlite"
         static let spaceString: String = " "
         static let forwardSlash: String = "/"
+        static let colon: String = ":"
     }
     
     struct HTTPHeaderConstants {

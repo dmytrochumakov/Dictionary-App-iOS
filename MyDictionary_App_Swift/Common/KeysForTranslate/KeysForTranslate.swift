@@ -37,6 +37,8 @@ enum KeysForTranslate: String {
     case privacyPolicy = "privacy_Policy"
     case termsOfService = "terms_Of_Service"
     case support
+    case delete
+    case logOut = "log_out"
     
     // Api Errors //
     case noDataApiError = "no_data_api_error"
