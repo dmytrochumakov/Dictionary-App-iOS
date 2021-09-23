@@ -222,6 +222,13 @@
 		22A2521426CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521326CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift */; };
 		22A2521626CFE5230013FCF5 /* MDEntitiesCountProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521526CFE5230013FCF5 /* MDEntitiesCountProtocol.swift */; };
 		22A2985C26FC635100E79843 /* MDSettingsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2985B26FC635000E79843 /* MDSettingsError.swift */; };
+		22A2986526FC80B700E79843 /* SelectCourseModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2985E26FC80B700E79843 /* SelectCourseModule.swift */; };
+		22A2986626FC80B700E79843 /* SelectCoursePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2985F26FC80B700E79843 /* SelectCoursePresenter.swift */; };
+		22A2986726FC80B700E79843 /* SelectCourseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2986026FC80B700E79843 /* SelectCourseRouter.swift */; };
+		22A2986826FC80B700E79843 /* SelectCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2986126FC80B700E79843 /* SelectCourseViewController.swift */; };
+		22A2986926FC80B700E79843 /* SelectCourseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2986226FC80B700E79843 /* SelectCourseInteractor.swift */; };
+		22A2986A26FC80B700E79843 /* SelectCourseDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2986326FC80B700E79843 /* SelectCourseDataProvider.swift */; };
+		22A2986B26FC80B700E79843 /* SelectCourseDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2986426FC80B700E79843 /* SelectCourseDataManager.swift */; };
 		22A31B5926ECBB1A00676E55 /* MyriadProItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5526ECBB1A00676E55 /* MyriadProItalic.ttf */; };
 		22A31B5A26ECBB1A00676E55 /* MyriadProBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5626ECBB1A00676E55 /* MyriadProBold.ttf */; };
 		22A31B5B26ECBB1A00676E55 /* MyriadProRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5726ECBB1A00676E55 /* MyriadProRegular.ttf */; };
@@ -598,6 +605,13 @@
 		22A2521326CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountResultWithCompletion.swift; sourceTree = "<group>"; };
 		22A2521526CFE5230013FCF5 /* MDEntitiesCountProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountProtocol.swift; sourceTree = "<group>"; };
 		22A2985B26FC635000E79843 /* MDSettingsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSettingsError.swift; sourceTree = "<group>"; };
+		22A2985E26FC80B700E79843 /* SelectCourseModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCourseModule.swift; sourceTree = "<group>"; };
+		22A2985F26FC80B700E79843 /* SelectCoursePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCoursePresenter.swift; sourceTree = "<group>"; };
+		22A2986026FC80B700E79843 /* SelectCourseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCourseRouter.swift; sourceTree = "<group>"; };
+		22A2986126FC80B700E79843 /* SelectCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCourseViewController.swift; sourceTree = "<group>"; };
+		22A2986226FC80B700E79843 /* SelectCourseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCourseInteractor.swift; sourceTree = "<group>"; };
+		22A2986326FC80B700E79843 /* SelectCourseDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCourseDataProvider.swift; sourceTree = "<group>"; };
+		22A2986426FC80B700E79843 /* SelectCourseDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCourseDataManager.swift; sourceTree = "<group>"; };
 		22A31B5526ECBB1A00676E55 /* MyriadProItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProItalic.ttf; sourceTree = "<group>"; };
 		22A31B5626ECBB1A00676E55 /* MyriadProBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProBold.ttf; sourceTree = "<group>"; };
 		22A31B5726ECBB1A00676E55 /* MyriadProRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProRegular.ttf; sourceTree = "<group>"; };
@@ -1759,6 +1773,20 @@
 			path = DataSources;
 			sourceTree = "<group>";
 		};
+		22A2985D26FC809600E79843 /* SelectCourseModule */ = {
+			isa = PBXGroup;
+			children = (
+				22A2985E26FC80B700E79843 /* SelectCourseModule.swift */,
+				22A2985F26FC80B700E79843 /* SelectCoursePresenter.swift */,
+				22A2986026FC80B700E79843 /* SelectCourseRouter.swift */,
+				22A2986126FC80B700E79843 /* SelectCourseViewController.swift */,
+				22A2986226FC80B700E79843 /* SelectCourseInteractor.swift */,
+				22A2986326FC80B700E79843 /* SelectCourseDataProvider.swift */,
+				22A2986426FC80B700E79843 /* SelectCourseDataManager.swift */,
+			);
+			path = SelectCourseModule;
+			sourceTree = "<group>";
+		};
 		22A31B5426ECBA4D00676E55 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1926,6 +1954,7 @@
 		22CA086F26515D240052D169 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				22A2985D26FC809600E79843 /* SelectCourseModule */,
 				22E327D326FB5ECB00445917 /* ShareFeedbackModule */,
 				22DE9FFA26FA058500892D78 /* AccountModule */,
 				22E861BB26F9FF4F00AB1755 /* AboutApplicationModule */,
@@ -2481,8 +2510,10 @@
 				22B9080926EB7DD6003848D6 /* UIView+Extension.swift in Sources */,
 				22CA087D26515E810052D169 /* WordListViewController.swift in Sources */,
 				22B8E6A326D381EF001CCCA8 /* MDLanguageCoreDataStorage.swift in Sources */,
+				22A2986726FC80B700E79843 /* SelectCourseRouter.swift in Sources */,
 				22B22691266CF866007AB292 /* UIViewController+Extension.swift in Sources */,
 				229901712668EE5300D8C74E /* MDAppDelegate.swift in Sources */,
+				22A2986526FC80B700E79843 /* SelectCourseModule.swift in Sources */,
 				229FFF3626F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift in Sources */,
 				22E327CE26FB319D00445917 /* MDStorageServiceOperationResult.swift in Sources */,
 				224375AF26F3406B006B90EB /* MDCourseListCellModel.swift in Sources */,
@@ -2507,11 +2538,13 @@
 				220FFE9026C90B3700702CCE /* MDDeleteUserProtocol.swift in Sources */,
 				22B8E6A726D38327001CCCA8 /* MDCreateLanguagesMemoryStorageOperation.swift in Sources */,
 				22E2B4F32665085E00978E62 /* SettingsRowType.swift in Sources */,
+				22A2986A26FC80B700E79843 /* SelectCourseDataProvider.swift in Sources */,
 				22B8E6C026D39DAF001CCCA8 /* MDDeleteAllLanguagesCoreDataStorageOperation.swift in Sources */,
 				229D2D4C26EB68420047B518 /* MDNavigationController.swift in Sources */,
 				22561C8E26D4D02D00A6135B /* MDDeleteAllCoursesCoreDataStorageOperation.swift in Sources */,
 				22EF01FF269DA99800FE4435 /* MDAPIError.swift in Sources */,
 				2270F3A626D2663F006B46F4 /* CDCourseResponseEntityAttributeName.swift in Sources */,
+				22A2986626FC80B700E79843 /* SelectCoursePresenter.swift in Sources */,
 				2258922526CA3DC600AD6F18 /* MDDeleteJWTCoreDataStorageOperation.swift in Sources */,
 				220FFEAF26C91DD400702CCE /* MDReadUserCoreDataStorageOperation.swift in Sources */,
 				227F8AB326CAB0DC00375A38 /* JWTResponse.swift in Sources */,
@@ -2612,6 +2645,7 @@
 				220FFE7426C8F83A00702CCE /* MDKeyboardToolbar.swift in Sources */,
 				22DEA00326FA05A900892D78 /* AccountPresenter.swift in Sources */,
 				22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */,
+				22A2986926FC80B700E79843 /* SelectCourseInteractor.swift in Sources */,
 				2299016A2668EC3400D8C74E /* AppearanceViewController.swift in Sources */,
 				22BD99A5266A58DE0063FEFC /* RootWindow.swift in Sources */,
 				2299016D2668EC3400D8C74E /* AppearanceDataManager.swift in Sources */,
@@ -2713,6 +2747,7 @@
 				22EDF02A26C7E91D00D19DA1 /* CDUserResponseEntityAttributeName.swift in Sources */,
 				22B8E6EA26D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift in Sources */,
 				2270F39E26D26132006B46F4 /* CDLanguageResponseEntityAttributeName.swift in Sources */,
+				22A2986826FC80B700E79843 /* SelectCourseViewController.swift in Sources */,
 				227B91E126EF607A0086B9AA /* RegisterValidationLogic.swift in Sources */,
 				227D5E642652584700B54524 /* NSLayoutConstraint+Extension.swift in Sources */,
 				22AF541B26F9ED1D00556225 /* PrivacyPolicyViewController.swift in Sources */,
@@ -2741,6 +2776,7 @@
 				22B8E6B426D38F5C001CCCA8 /* MDDeleteAllLanguagesMemoryStorageOperation.swift in Sources */,
 				22E2B4E62664EB8000978E62 /* SettingsCollectionViewDelegate.swift in Sources */,
 				221D281F26C54960004BC4F7 /* KeyboardHandler.swift in Sources */,
+				22A2986B26FC80B700E79843 /* SelectCourseDataManager.swift in Sources */,
 				2223F8A826512C1A004F2FE9 /* LocalizableProtocol.swift in Sources */,
 				22DEAE3226C289F100B64B16 /* MDAPIVersion.swift in Sources */,
 				229FFF3826F5E3D90024B974 /* MDBaseLargeTitledBackNavigationBarViewController.swift in Sources */,
