@@ -233,6 +233,7 @@
 		22A2988426FCA5AB00E79843 /* MDAddCourseCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2988326FCA5AB00E79843 /* MDAddCourseCollectionViewDelegate.swift */; };
 		22A2988626FCA6EF00E79843 /* MDAddCourseCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2988526FCA6EF00E79843 /* MDAddCourseCollectionViewDataSource.swift */; };
 		22A2988A26FCB14000E79843 /* MDSearchBarDelegateImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2988926FCB14000E79843 /* MDSearchBarDelegateImplementation.swift */; };
+		22A2988C26FCB2F700E79843 /* MDHideKeyboardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2988B26FCB2F700E79843 /* MDHideKeyboardProtocol.swift */; };
 		22A31B5926ECBB1A00676E55 /* MyriadProItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5526ECBB1A00676E55 /* MyriadProItalic.ttf */; };
 		22A31B5A26ECBB1A00676E55 /* MyriadProBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5626ECBB1A00676E55 /* MyriadProBold.ttf */; };
 		22A31B5B26ECBB1A00676E55 /* MyriadProRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5726ECBB1A00676E55 /* MyriadProRegular.ttf */; };
@@ -618,6 +619,7 @@
 		22A2988326FCA5AB00E79843 /* MDAddCourseCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAddCourseCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		22A2988526FCA6EF00E79843 /* MDAddCourseCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAddCourseCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		22A2988926FCB14000E79843 /* MDSearchBarDelegateImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSearchBarDelegateImplementation.swift; sourceTree = "<group>"; };
+		22A2988B26FCB2F700E79843 /* MDHideKeyboardProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDHideKeyboardProtocol.swift; sourceTree = "<group>"; };
 		22A31B5526ECBB1A00676E55 /* MyriadProItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProItalic.ttf; sourceTree = "<group>"; };
 		22A31B5626ECBB1A00676E55 /* MyriadProBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProBold.ttf; sourceTree = "<group>"; };
 		22A31B5726ECBB1A00676E55 /* MyriadProRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProRegular.ttf; sourceTree = "<group>"; };
@@ -1066,6 +1068,7 @@
 				228964AB26F8AA2100E23292 /* MDHideProgressHUDProtocol.swift */,
 				228964AD26F8AA2C00E23292 /* MDUpdateHUDProgressProtocol.swift */,
 				22E327C626FB207C00445917 /* MDShowErrorProtocol.swift */,
+				22A2988B26FCB2F700E79843 /* MDHideKeyboardProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2590,6 +2593,7 @@
 				228964A826F8A4F700E23292 /* MDCourseManager.swift in Sources */,
 				22493C39269722AA000DA480 /* MDCRUDWordProtocol.swift in Sources */,
 				22C5862D26C79D360030B12D /* MDAPIStatusCode.swift in Sources */,
+				22A2988C26FCB2F700E79843 /* MDHideKeyboardProtocol.swift in Sources */,
 				22493C562697421C000DA480 /* MDUpdateWordCoreDataStorageOperation.swift in Sources */,
 				22C5863D26C7AFB80030B12D /* RegistrationViewController.swift in Sources */,
 				2270F3A926D27606006B46F4 /* MDAPILanguage.swift in Sources */,

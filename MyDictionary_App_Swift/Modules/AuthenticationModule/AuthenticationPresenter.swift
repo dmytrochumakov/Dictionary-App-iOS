@@ -15,10 +15,10 @@ protocol AuthenticationPresenterInputProtocol {
 }
 
 protocol AuthenticationPresenterOutputProtocol: AnyObject,
-                                                MDShowHideUpdateProgressHUD {
+                                                MDShowHideUpdateProgressHUD,
+                                                MDHideKeyboardProtocol {
     
     func makePasswordFieldActive()
-    func hideKeyboard()
     func showValidationError(_ error: Error)
     
 }

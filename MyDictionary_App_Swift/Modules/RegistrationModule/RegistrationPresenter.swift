@@ -19,7 +19,8 @@ protocol RegistrationPresenterInputProtocol {
 }
 
 protocol RegistrationPresenterOutputProtocol: AnyObject,
-                                              MDShowHideUpdateProgressHUD {
+                                              MDShowHideUpdateProgressHUD,
+                                              MDHideKeyboardProtocol {
     
     func updateNicknameFieldCounter(_ count: Int)
     func updatePasswordFieldCounter(_ count: Int)
@@ -29,8 +30,6 @@ protocol RegistrationPresenterOutputProtocol: AnyObject,
     
     func makePasswordFieldActive()
     func makeConfirmPasswordFieldActive()
-    
-    func hideKeyboard()
     
     func showValidationError(_ error: Error)        
     
