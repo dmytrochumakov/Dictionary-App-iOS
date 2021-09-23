@@ -10,6 +10,7 @@ protocol AddCourseInteractorInputProtocol {
     
     var collectionViewDelegate: MDAddCourseCollectionViewDelegateProtocol { get }
     var collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol { get }
+    var searchBarDelegate: MDSearchBarDelegate { get }
     
     func viewDidLoad()
     
@@ -31,15 +32,18 @@ final class AddCourseInteractor: AddCourseInteractorProtocol {
     fileprivate let dataManager: AddCourseDataManagerInputProtocol
     internal var collectionViewDelegate: MDAddCourseCollectionViewDelegateProtocol
     internal var collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol
+    internal var searchBarDelegate: MDSearchBarDelegate
     internal weak var interactorOutput: AddCourseInteractorOutputProtocol?
     
     init(dataManager: AddCourseDataManagerInputProtocol,
          collectionViewDelegate: MDAddCourseCollectionViewDelegateProtocol,
-         collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol) {
+         collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol,
+         searchBarDelegate: MDSearchBarDelegate) {
         
         self.collectionViewDelegate = collectionViewDelegate
         self.collectionViewDataSource = collectionViewDataSource
         self.dataManager = dataManager
+        self.searchBarDelegate = searchBarDelegate
         
     }
     

@@ -7,7 +7,8 @@
 import UIKit
 
 protocol AddCoursePresenterInputProtocol: MDCollectionViewDelegateFlowLayoutPropertyProtocol,
-                                          MDCollectionViewDataSourcePropertyProtocol {
+                                          MDCollectionViewDataSourcePropertyProtocol,
+                                          MDSearchBarDelegatePropertyProtocol {
     func viewDidLoad()
 }
 
@@ -71,4 +72,8 @@ extension AddCoursePresenter {
         return interactor.collectionViewDataSource
     }
         
+    var searchBarDelegate: MDSearchBarDelegate {
+        return interactor.searchBarDelegate
+    }
+    
 }

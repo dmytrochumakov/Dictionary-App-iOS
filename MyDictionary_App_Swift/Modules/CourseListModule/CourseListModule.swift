@@ -40,7 +40,7 @@ extension CourseListModule {
                                                                                  fillMemoryService: MDConstants.AppDependencies.dependencies.fillMemoryService,
                                                                                  collectionViewDelegate: CourseListTableViewDelegate.init(dataProvider: dataProvider),
                                                                                  collectionViewDataSource: CourseListTableViewDataSource.init(dataProvider: dataProvider),
-                                                                                 searchBarDelegate: MDCourseListSearchBarDelegate.init())
+                                                                                 searchBarDelegate: MDSearchBarDelegateImplementation.init())
         
         var router: CourseListRouterProtocol = CourseListRouter.init()
         let presenter: CourseListPresenterProtocol = CourseListPresenter.init(interactor: interactor, router: router)

@@ -216,7 +216,6 @@
 		229FFF3626F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3526F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift */; };
 		229FFF3826F5E3D90024B974 /* MDBaseLargeTitledBackNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3726F5E3D90024B974 /* MDBaseLargeTitledBackNavigationBarViewController.swift */; };
 		229FFF3A26F5EB1D0024B974 /* MDBaseLargeTitledNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3926F5EB1D0024B974 /* MDBaseLargeTitledNavigationBarViewController.swift */; };
-		229FFF3E26F60AE50024B974 /* CourseListSearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3D26F60AE40024B974 /* CourseListSearchBarDelegate.swift */; };
 		229FFF4026F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3F26F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift */; };
 		22A2521226CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521126CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift */; };
 		22A2521426CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521326CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift */; };
@@ -233,6 +232,7 @@
 		22A2988226FCA50400E79843 /* MDAddCourseCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2988126FCA50400E79843 /* MDAddCourseCellModel.swift */; };
 		22A2988426FCA5AB00E79843 /* MDAddCourseCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2988326FCA5AB00E79843 /* MDAddCourseCollectionViewDelegate.swift */; };
 		22A2988626FCA6EF00E79843 /* MDAddCourseCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2988526FCA6EF00E79843 /* MDAddCourseCollectionViewDataSource.swift */; };
+		22A2988A26FCB14000E79843 /* MDSearchBarDelegateImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2988926FCB14000E79843 /* MDSearchBarDelegateImplementation.swift */; };
 		22A31B5926ECBB1A00676E55 /* MyriadProItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5526ECBB1A00676E55 /* MyriadProItalic.ttf */; };
 		22A31B5A26ECBB1A00676E55 /* MyriadProBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5626ECBB1A00676E55 /* MyriadProBold.ttf */; };
 		22A31B5B26ECBB1A00676E55 /* MyriadProRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5726ECBB1A00676E55 /* MyriadProRegular.ttf */; };
@@ -601,7 +601,6 @@
 		229FFF3526F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseLargeNavigationBarViewController.swift; sourceTree = "<group>"; };
 		229FFF3726F5E3D90024B974 /* MDBaseLargeTitledBackNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseLargeTitledBackNavigationBarViewController.swift; sourceTree = "<group>"; };
 		229FFF3926F5EB1D0024B974 /* MDBaseLargeTitledNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseLargeTitledNavigationBarViewController.swift; sourceTree = "<group>"; };
-		229FFF3D26F60AE40024B974 /* CourseListSearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListSearchBarDelegate.swift; sourceTree = "<group>"; };
 		229FFF3F26F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSearchBarDelegatePropertyProtocol.swift; sourceTree = "<group>"; };
 		22A2521126CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountResultWithoutCompletion.swift; sourceTree = "<group>"; };
 		22A2521326CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountResultWithCompletion.swift; sourceTree = "<group>"; };
@@ -618,6 +617,7 @@
 		22A2988126FCA50400E79843 /* MDAddCourseCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAddCourseCellModel.swift; sourceTree = "<group>"; };
 		22A2988326FCA5AB00E79843 /* MDAddCourseCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAddCourseCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		22A2988526FCA6EF00E79843 /* MDAddCourseCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAddCourseCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		22A2988926FCB14000E79843 /* MDSearchBarDelegateImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSearchBarDelegateImplementation.swift; sourceTree = "<group>"; };
 		22A31B5526ECBB1A00676E55 /* MyriadProItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProItalic.ttf; sourceTree = "<group>"; };
 		22A31B5626ECBB1A00676E55 /* MyriadProBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProBold.ttf; sourceTree = "<group>"; };
 		22A31B5726ECBB1A00676E55 /* MyriadProRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProRegular.ttf; sourceTree = "<group>"; };
@@ -1660,6 +1660,7 @@
 			isa = PBXGroup;
 			children = (
 				2291BAEF26F714DD0012504D /* MDSearchBar.swift */,
+				22A2988926FCB14000E79843 /* MDSearchBarDelegateImplementation.swift */,
 			);
 			path = SearchBar;
 			sourceTree = "<group>";
@@ -1764,7 +1765,6 @@
 			isa = PBXGroup;
 			children = (
 				22DB2F8826C3D3F400C1AADA /* CourseListTableViewDelegate.swift */,
-				229FFF3D26F60AE40024B974 /* CourseListSearchBarDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -2748,7 +2748,6 @@
 				22DB2F7826C3BE7900C1AADA /* CourseListPresenter.swift in Sources */,
 				22CA088126515EEB0052D169 /* WordListPresenter.swift in Sources */,
 				22557FC926C958A200A4FF31 /* MDJWTCoreDataStorage.swift in Sources */,
-				229FFF3E26F60AE50024B974 /* CourseListSearchBarDelegate.swift in Sources */,
 				2223F8AB26512C5A004F2FE9 /* String+Extension.swift in Sources */,
 				22CA088E265167620052D169 /* MDReloadDataProtocol.swift in Sources */,
 				22DB2F7726C3BE7900C1AADA /* CourseListModule.swift in Sources */,
@@ -2798,6 +2797,7 @@
 				22EF01F6269DA81100FE4435 /* MDRequestDispatcher.swift in Sources */,
 				22A2987A26FC84F000E79843 /* AddCourseDataProvider.swift in Sources */,
 				226FEE8C266BB2620044A5F9 /* AppearanceRowModel.swift in Sources */,
+				22A2988A26FCB14000E79843 /* MDSearchBarDelegateImplementation.swift in Sources */,
 				22B8E6A126D380CE001CCCA8 /* MDLanguageMemoryStorage.swift in Sources */,
 				221D281126C5064A004BC4F7 /* AuthenticationViewController.swift in Sources */,
 				22A2521226CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift in Sources */,

@@ -201,4 +201,11 @@ struct MDConstants {
         static let recipientEmail: String = "dima.chumakovwork@gmail.com"
     }
     
+    struct SearchBar {
+        /// Value -> 56
+        static let defaultHeight: CGFloat = 56
+        /// Value -> 16
+        static let defaultTopOffset: CGFloat = 16
+    }
+    
 }

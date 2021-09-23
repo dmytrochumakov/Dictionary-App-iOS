@@ -10,7 +10,7 @@ protocol CourseListInteractorInputProtocol {
     
     var tableViewDelegate: CourseListTableViewDelegateProtocol { get }
     var tableViewDataSource: CourseListTableViewDataSourceProtocol { get }
-    var searchBarDelegate: MDCourseListSearchBarDelegateProtocol { get }
+    var searchBarDelegate: MDSearchBarDelegateImplementationProtocol { get }
     
     func deleteCourse(atIndexPath indexPath: IndexPath)
     
@@ -41,7 +41,7 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
     
     internal var tableViewDelegate: CourseListTableViewDelegateProtocol
     internal var tableViewDataSource: CourseListTableViewDataSourceProtocol
-    internal var searchBarDelegate: MDCourseListSearchBarDelegateProtocol
+    internal var searchBarDelegate: MDSearchBarDelegateImplementationProtocol
     
     internal weak var interactorOutput: CourseListInteractorOutputProtocol?
     
@@ -50,7 +50,7 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
          fillMemoryService: MDFillMemoryServiceProtocol,
          collectionViewDelegate: CourseListTableViewDelegateProtocol,
          collectionViewDataSource: CourseListTableViewDataSourceProtocol,
-         searchBarDelegate: MDCourseListSearchBarDelegateProtocol) {
+         searchBarDelegate: MDSearchBarDelegateImplementationProtocol) {
         
         self.courseManager = courseManager
         self.dataManager = dataManager

@@ -19,6 +19,12 @@ final class AddCourseViewController: MDBaseLargeTitledBackNavigationBarViewContr
         return collectionView
     }()
     
+    fileprivate let searchBar: MDSearchBar = {
+        let searchBar: MDSearchBar = .init()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        return searchBar
+    }()
+    
     init(presenter: AddCoursePresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: LocalizedText.addCourse.localized,
@@ -77,6 +83,12 @@ fileprivate extension AddCourseViewController {
     
     func addViews() {
         addCollectionView()
+        addSearchBar()
+    }
+    
+    func addSearchBar() {
+        searchBar.delegate = presenter.searchBarDelegate
+        view.addSubview(searchBar)
     }
     
     func addCollectionView() {
@@ -89,14 +101,36 @@ fileprivate extension AddCourseViewController {
 fileprivate extension AddCourseViewController {
     
     func addConstraints() {
+        addSearchBarConstraints()
         addCollectionViewConstraints()
+    }
+    
+    func addSearchBarConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.searchBar,
+                                              attribute: .top,
+                                              toItem: self.navigationBarView,
+                                              attribute: .bottom,
+                                              constant: MDConstants.SearchBar.defaultTopOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.searchBar,
+                                                  toItem: self.view,
+                                                  constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.searchBar,
+                                                   toItem: self.view,
+                                                   constant: .zero)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.searchBar,
+                                                    constant: MDConstants.SearchBar.defaultHeight)
+        
     }
     
     func addCollectionViewConstraints() {
         
         NSLayoutConstraint.addEqualConstraint(item: self.collectionView,
                                               attribute: .top,
-                                              toItem: self.navigationBarView,
+                                              toItem: self.searchBar,
                                               attribute: .bottom,
                                               constant: .zero)
         

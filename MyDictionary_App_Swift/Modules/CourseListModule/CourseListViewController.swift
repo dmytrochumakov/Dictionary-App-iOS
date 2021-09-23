@@ -36,9 +36,7 @@ final class CourseListViewController: MDBaseLargeTitledNavigationBarViewControll
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    fileprivate static let searchBarHeight: CGFloat = 56
-    fileprivate static let searchBarTopOffset: CGFloat = 16
+        
     fileprivate let searchBar: MDSearchBar = {
         let searchBar: MDSearchBar = .init()        
         searchBar.translatesAutoresizingMaskIntoConstraints = false
@@ -231,7 +229,7 @@ fileprivate extension CourseListViewController {
                                               attribute: .top,
                                               toItem: self.navigationBarView,
                                               attribute: .bottom,
-                                              constant: Self.searchBarTopOffset)
+                                              constant: MDConstants.SearchBar.defaultTopOffset)
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.searchBar,
                                                   toItem: self.view,
@@ -242,7 +240,7 @@ fileprivate extension CourseListViewController {
                                                    constant: .zero)
         
         NSLayoutConstraint.addEqualHeightConstraint(item: self.searchBar,
-                                                    constant: Self.searchBarHeight)
+                                                    constant: MDConstants.SearchBar.defaultHeight)
         
     }
     

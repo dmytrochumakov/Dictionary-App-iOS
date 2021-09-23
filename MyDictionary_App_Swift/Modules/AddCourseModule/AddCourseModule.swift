@@ -30,7 +30,8 @@ extension AddCourseModule {
         
         let interactor: AddCourseInteractorProtocol = AddCourseInteractor.init(dataManager: dataManager,
                                                                                collectionViewDelegate: MDAddCourseCollectionViewDelegate.init(dataProvider: dataProvider),
-                                                                               collectionViewDataSource: MDAddCourseCollectionViewDataSource.init(dataProvider: dataProvider))
+                                                                               collectionViewDataSource: MDAddCourseCollectionViewDataSource.init(dataProvider: dataProvider),
+                                                                               searchBarDelegate: MDSearchBarDelegateImplementation.init())
         
         var router: AddCourseRouterProtocol = AddCourseRouter.init()
         let presenter: AddCoursePresenterProtocol = AddCoursePresenter.init(interactor: interactor, router: router)
