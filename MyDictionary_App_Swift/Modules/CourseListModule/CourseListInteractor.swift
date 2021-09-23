@@ -19,10 +19,10 @@ protocol CourseListInteractorInputProtocol {
 protocol CourseListInteractorOutputProtocol: AnyObject,
                                              AppearanceHasBeenUpdatedProtocol,
                                              MDShowHideProgressHUD,
-                                             MDHideKeyboardProtocol {
+                                             MDHideKeyboardProtocol,
+                                             MDReloadDataProtocol {
     
     func showError(_ error: Error)
-    func reloadData()
     func deleteCourseButtonClicked(_ cell: MDCourseListCell)
     func deleteRow(atIndexPath indexPath: IndexPath)
     

@@ -19,10 +19,10 @@ protocol CourseListPresenterInputProtocol: TableViewDelegatePropertyProtocol,
 protocol CourseListPresenterOutputProtocol: AnyObject,
                                             AppearanceHasBeenUpdatedProtocol,
                                             MDShowHideProgressHUD,
-                                            MDHideKeyboardProtocol {
+                                            MDHideKeyboardProtocol,
+                                            MDReloadDataProtocol {
     
-    func showError(_ error: Error)
-    func reloadData()
+    func showError(_ error: Error)    
     func deleteCourseButtonClicked(_ cell: MDCourseListCell)
     func deleteRow(atIndexPath indexPath: IndexPath)
     
