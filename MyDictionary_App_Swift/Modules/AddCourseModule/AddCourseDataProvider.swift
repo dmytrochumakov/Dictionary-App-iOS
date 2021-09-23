@@ -9,17 +9,17 @@ import Foundation
 protocol AddCourseDataProviderProtocol: NumberOfSectionsProtocol,
                                         NumberOfRowsInSectionProtocol {
     
-    var languages: [LanguageResponse] { get set }
+    var filteredLanguages: [LanguageResponse] { get set }
     func addCourseCellModel(atIndexPath indexPath: IndexPath) -> MDAddCourseCellModel?
     
 }
 
 final class AddCourseDataProvider: AddCourseDataProviderProtocol {
     
-    var languages: [LanguageResponse]
+    var filteredLanguages: [LanguageResponse]
     
-    init(languages: [LanguageResponse]) {
-        self.languages = languages
+    init(filteredLanguages: [LanguageResponse]) {
+        self.filteredLanguages = filteredLanguages
     }
     
 }
@@ -31,7 +31,7 @@ extension AddCourseDataProvider {
     }
     
     func numberOfRowsInSection(_ section: Int) -> Int {
-        return languages.count
+        return filteredLanguages.count
     }
     
 }
@@ -39,10 +39,10 @@ extension AddCourseDataProvider {
 extension AddCourseDataProvider {
     
     func addCourseCellModel(atIndexPath indexPath: IndexPath) -> MDAddCourseCellModel? {
-        if (languages.isEmpty) {
+        if (filteredLanguages.isEmpty) {
             return nil
         } else {
-            return .init(title: languages[indexPath.row].languageName)
+            return .init(title: filteredLanguages[indexPath.row].languageName)
         }
     }
     

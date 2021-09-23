@@ -14,7 +14,8 @@ protocol AddCoursePresenterInputProtocol: MDCollectionViewDelegateFlowLayoutProp
 
 protocol AddCoursePresenterOutputProtocol: AnyObject,
                                            MDShowErrorProtocol,
-                                           MDReloadDataProtocol {
+                                           MDReloadDataProtocol,
+                                           MDHideKeyboardProtocol {
     
 }
 
@@ -55,6 +56,10 @@ extension AddCoursePresenter {
         presenterOutput?.reloadData()
     }
     
+    func hideKeyboard() {
+        presenterOutput?.hideKeyboard()
+    }
+    
 }
 
 // MARK: - AddCoursePresenterInputProtocol
@@ -71,7 +76,7 @@ extension AddCoursePresenter {
     var collectionViewDataSource: UICollectionViewDataSource {
         return interactor.collectionViewDataSource
     }
-        
+    
     var searchBarDelegate: MDSearchBarDelegate {
         return interactor.searchBarDelegate
     }

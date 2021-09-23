@@ -24,8 +24,8 @@ extension AddCourseModule {
     
     var module: UIViewController {
         
-        let dataProvider: AddCourseDataProviderProtocol = AddCourseDataProvider.init(languages: .init())
-        var dataManager: AddCourseDataManagerProtocol = AddCourseDataManager.init(languageMemoryStorage: MDConstants.AppDependencies.dependencies.languageStorage.memoryStorage,
+        let dataProvider: AddCourseDataProviderProtocol = AddCourseDataProvider.init(filteredLanguages: .init())
+        var dataManager: AddCourseDataManagerProtocol = AddCourseDataManager.init(memoryStorage: MDConstants.AppDependencies.dependencies.languageStorage.memoryStorage,
                                                                                   dataProvider: dataProvider)
         
         let interactor: AddCourseInteractorProtocol = AddCourseInteractor.init(dataManager: dataManager,

@@ -76,6 +76,12 @@ extension AddCourseViewController: AddCoursePresenterOutputProtocol {
         }
     }
     
+    func hideKeyboard() {
+        DispatchQueue.main.async {
+            MDConstants.Keyboard.hideKeyboard(rootView: self.view)
+        }
+    }
+    
 }
 
 // MARK: - Add Views
