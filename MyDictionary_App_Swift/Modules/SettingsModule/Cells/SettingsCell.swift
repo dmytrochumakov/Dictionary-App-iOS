@@ -50,7 +50,7 @@ final class SettingsCell: UICollectionViewCell,
 }
 
 // MARK: - FillWithModelProtocol
-extension SettingsCell: FillWithModelProtocol {
+extension SettingsCell: MDFillWithModelProtocol {
     
     typealias Model = SettingsRowModel
     

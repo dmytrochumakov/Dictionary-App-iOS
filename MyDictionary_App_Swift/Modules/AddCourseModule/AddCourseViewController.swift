@@ -6,7 +6,7 @@
 
 import UIKit
 
-final class AddCourseViewController: MDBaseTitledBackNavigationBarViewController {
+final class AddCourseViewController: MDBaseLargeTitledBackNavigationBarViewController {
     
     fileprivate let presenter: AddCoursePresenterInputProtocol
     
@@ -15,6 +15,7 @@ final class AddCourseViewController: MDBaseTitledBackNavigationBarViewController
         let collectionView: UICollectionView = .init(frame: .zero,
                                                      collectionViewLayout: flowLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(AddCourseCell.self)
         return collectionView
     }()
     

@@ -36,7 +36,7 @@ final class AppearanceCell: UICollectionViewCell,
 }
 
 // MARK: - FillWithModelProtocol
-extension AppearanceCell: FillWithModelProtocol {
+extension AppearanceCell: MDFillWithModelProtocol {
     
     typealias Model = AppearanceRowModel
     
