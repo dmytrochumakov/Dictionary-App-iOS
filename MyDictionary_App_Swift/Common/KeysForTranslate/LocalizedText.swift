@@ -42,6 +42,7 @@ enum LocalizedText: String {
     case featureRequest = "feature_request"
     case bugReport = "bug_report"
     case mailServicesAreNotAvailable = "mail_services_are_not_available"
+    case addCourse = "add_course"    
     
     // Api Errors //
     case noDataApiError = "no_data_api_error"

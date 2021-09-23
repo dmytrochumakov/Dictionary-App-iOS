@@ -222,13 +222,13 @@
 		22A2521426CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521326CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift */; };
 		22A2521626CFE5230013FCF5 /* MDEntitiesCountProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521526CFE5230013FCF5 /* MDEntitiesCountProtocol.swift */; };
 		22A2985C26FC635100E79843 /* MDSettingsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2985B26FC635000E79843 /* MDSettingsError.swift */; };
-		22A2986526FC80B700E79843 /* SelectCourseModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2985E26FC80B700E79843 /* SelectCourseModule.swift */; };
-		22A2986626FC80B700E79843 /* SelectCoursePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2985F26FC80B700E79843 /* SelectCoursePresenter.swift */; };
-		22A2986726FC80B700E79843 /* SelectCourseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2986026FC80B700E79843 /* SelectCourseRouter.swift */; };
-		22A2986826FC80B700E79843 /* SelectCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2986126FC80B700E79843 /* SelectCourseViewController.swift */; };
-		22A2986926FC80B700E79843 /* SelectCourseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2986226FC80B700E79843 /* SelectCourseInteractor.swift */; };
-		22A2986A26FC80B700E79843 /* SelectCourseDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2986326FC80B700E79843 /* SelectCourseDataProvider.swift */; };
-		22A2986B26FC80B700E79843 /* SelectCourseDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2986426FC80B700E79843 /* SelectCourseDataManager.swift */; };
+		22A2987526FC84F000E79843 /* AddCourseModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2986E26FC84F000E79843 /* AddCourseModule.swift */; };
+		22A2987626FC84F000E79843 /* AddCoursePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2986F26FC84F000E79843 /* AddCoursePresenter.swift */; };
+		22A2987726FC84F000E79843 /* AddCourseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2987026FC84F000E79843 /* AddCourseRouter.swift */; };
+		22A2987826FC84F000E79843 /* AddCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2987126FC84F000E79843 /* AddCourseViewController.swift */; };
+		22A2987926FC84F000E79843 /* AddCourseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2987226FC84F000E79843 /* AddCourseInteractor.swift */; };
+		22A2987A26FC84F000E79843 /* AddCourseDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2987326FC84F000E79843 /* AddCourseDataProvider.swift */; };
+		22A2987B26FC84F000E79843 /* AddCourseDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2987426FC84F000E79843 /* AddCourseDataManager.swift */; };
 		22A31B5926ECBB1A00676E55 /* MyriadProItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5526ECBB1A00676E55 /* MyriadProItalic.ttf */; };
 		22A31B5A26ECBB1A00676E55 /* MyriadProBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5626ECBB1A00676E55 /* MyriadProBold.ttf */; };
 		22A31B5B26ECBB1A00676E55 /* MyriadProRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5726ECBB1A00676E55 /* MyriadProRegular.ttf */; };
@@ -605,13 +605,13 @@
 		22A2521326CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountResultWithCompletion.swift; sourceTree = "<group>"; };
 		22A2521526CFE5230013FCF5 /* MDEntitiesCountProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountProtocol.swift; sourceTree = "<group>"; };
 		22A2985B26FC635000E79843 /* MDSettingsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSettingsError.swift; sourceTree = "<group>"; };
-		22A2985E26FC80B700E79843 /* SelectCourseModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCourseModule.swift; sourceTree = "<group>"; };
-		22A2985F26FC80B700E79843 /* SelectCoursePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCoursePresenter.swift; sourceTree = "<group>"; };
-		22A2986026FC80B700E79843 /* SelectCourseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCourseRouter.swift; sourceTree = "<group>"; };
-		22A2986126FC80B700E79843 /* SelectCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCourseViewController.swift; sourceTree = "<group>"; };
-		22A2986226FC80B700E79843 /* SelectCourseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCourseInteractor.swift; sourceTree = "<group>"; };
-		22A2986326FC80B700E79843 /* SelectCourseDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCourseDataProvider.swift; sourceTree = "<group>"; };
-		22A2986426FC80B700E79843 /* SelectCourseDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCourseDataManager.swift; sourceTree = "<group>"; };
+		22A2986E26FC84F000E79843 /* AddCourseModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseModule.swift; sourceTree = "<group>"; };
+		22A2986F26FC84F000E79843 /* AddCoursePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoursePresenter.swift; sourceTree = "<group>"; };
+		22A2987026FC84F000E79843 /* AddCourseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseRouter.swift; sourceTree = "<group>"; };
+		22A2987126FC84F000E79843 /* AddCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseViewController.swift; sourceTree = "<group>"; };
+		22A2987226FC84F000E79843 /* AddCourseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseInteractor.swift; sourceTree = "<group>"; };
+		22A2987326FC84F000E79843 /* AddCourseDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseDataProvider.swift; sourceTree = "<group>"; };
+		22A2987426FC84F000E79843 /* AddCourseDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseDataManager.swift; sourceTree = "<group>"; };
 		22A31B5526ECBB1A00676E55 /* MyriadProItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProItalic.ttf; sourceTree = "<group>"; };
 		22A31B5626ECBB1A00676E55 /* MyriadProBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProBold.ttf; sourceTree = "<group>"; };
 		22A31B5726ECBB1A00676E55 /* MyriadProRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProRegular.ttf; sourceTree = "<group>"; };
@@ -1773,18 +1773,34 @@
 			path = DataSources;
 			sourceTree = "<group>";
 		};
-		22A2985D26FC809600E79843 /* SelectCourseModule */ = {
+		22A2986C26FC84D500E79843 /* AddCourseModule */ = {
 			isa = PBXGroup;
 			children = (
-				22A2985E26FC80B700E79843 /* SelectCourseModule.swift */,
-				22A2985F26FC80B700E79843 /* SelectCoursePresenter.swift */,
-				22A2986026FC80B700E79843 /* SelectCourseRouter.swift */,
-				22A2986126FC80B700E79843 /* SelectCourseViewController.swift */,
-				22A2986226FC80B700E79843 /* SelectCourseInteractor.swift */,
-				22A2986326FC80B700E79843 /* SelectCourseDataProvider.swift */,
-				22A2986426FC80B700E79843 /* SelectCourseDataManager.swift */,
+				22A2987C26FC855F00E79843 /* DataSources */,
+				22A2986D26FC84D500E79843 /* Delegates */,
+				22A2986E26FC84F000E79843 /* AddCourseModule.swift */,
+				22A2986F26FC84F000E79843 /* AddCoursePresenter.swift */,
+				22A2987026FC84F000E79843 /* AddCourseRouter.swift */,
+				22A2987126FC84F000E79843 /* AddCourseViewController.swift */,
+				22A2987226FC84F000E79843 /* AddCourseInteractor.swift */,
+				22A2987326FC84F000E79843 /* AddCourseDataProvider.swift */,
+				22A2987426FC84F000E79843 /* AddCourseDataManager.swift */,
 			);
-			path = SelectCourseModule;
+			path = AddCourseModule;
+			sourceTree = "<group>";
+		};
+		22A2986D26FC84D500E79843 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		22A2987C26FC855F00E79843 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataSources;
 			sourceTree = "<group>";
 		};
 		22A31B5426ECBA4D00676E55 /* Fonts */ = {
@@ -1954,7 +1970,7 @@
 		22CA086F26515D240052D169 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				22A2985D26FC809600E79843 /* SelectCourseModule */,
+				22A2986C26FC84D500E79843 /* AddCourseModule */,
 				22E327D326FB5ECB00445917 /* ShareFeedbackModule */,
 				22DE9FFA26FA058500892D78 /* AccountModule */,
 				22E861BB26F9FF4F00AB1755 /* AboutApplicationModule */,
@@ -2472,6 +2488,7 @@
 				22493C4926972A03000DA480 /* CDWordResponseEntity+Extension.swift in Sources */,
 				22561C7C26D4B5AF00A6135B /* MDReadAllCoursesMemoryStorageOperation.swift in Sources */,
 				22493C312697159E000DA480 /* CDResultSaved.swift in Sources */,
+				22A2987626FC84F000E79843 /* AddCoursePresenter.swift in Sources */,
 				22DEA00226FA05A900892D78 /* AccountModule.swift in Sources */,
 				22EF01F2269DA75E00FE4435 /* HTTPParameters.swift in Sources */,
 				22B8E6CE26D3B472001CCCA8 /* MDDeleteAllJWTMemoryStorageOperation.swift in Sources */,
@@ -2487,6 +2504,7 @@
 				22561C8826D4CDB200A6135B /* MDReadCourseCoreDataStorageOperation.swift in Sources */,
 				2270F39626D2502B006B46F4 /* MDAPIJWT.swift in Sources */,
 				2289CEF72678CC34007254C3 /* MDCreateWordProtocol.swift in Sources */,
+				22A2987726FC84F000E79843 /* AddCourseRouter.swift in Sources */,
 				22EF020A269DAE9800FE4435 /* MDAPIWord.swift in Sources */,
 				22B8E6BC26D39840001CCCA8 /* MDReadLanguageCoreDataStorageOperation.swift in Sources */,
 				22BD99AB266A67A60063FEFC /* AppearanceType.swift in Sources */,
@@ -2510,10 +2528,8 @@
 				22B9080926EB7DD6003848D6 /* UIView+Extension.swift in Sources */,
 				22CA087D26515E810052D169 /* WordListViewController.swift in Sources */,
 				22B8E6A326D381EF001CCCA8 /* MDLanguageCoreDataStorage.swift in Sources */,
-				22A2986726FC80B700E79843 /* SelectCourseRouter.swift in Sources */,
 				22B22691266CF866007AB292 /* UIViewController+Extension.swift in Sources */,
 				229901712668EE5300D8C74E /* MDAppDelegate.swift in Sources */,
-				22A2986526FC80B700E79843 /* SelectCourseModule.swift in Sources */,
 				229FFF3626F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift in Sources */,
 				22E327CE26FB319D00445917 /* MDStorageServiceOperationResult.swift in Sources */,
 				224375AF26F3406B006B90EB /* MDCourseListCellModel.swift in Sources */,
@@ -2538,13 +2554,11 @@
 				220FFE9026C90B3700702CCE /* MDDeleteUserProtocol.swift in Sources */,
 				22B8E6A726D38327001CCCA8 /* MDCreateLanguagesMemoryStorageOperation.swift in Sources */,
 				22E2B4F32665085E00978E62 /* SettingsRowType.swift in Sources */,
-				22A2986A26FC80B700E79843 /* SelectCourseDataProvider.swift in Sources */,
 				22B8E6C026D39DAF001CCCA8 /* MDDeleteAllLanguagesCoreDataStorageOperation.swift in Sources */,
 				229D2D4C26EB68420047B518 /* MDNavigationController.swift in Sources */,
 				22561C8E26D4D02D00A6135B /* MDDeleteAllCoursesCoreDataStorageOperation.swift in Sources */,
 				22EF01FF269DA99800FE4435 /* MDAPIError.swift in Sources */,
 				2270F3A626D2663F006B46F4 /* CDCourseResponseEntityAttributeName.swift in Sources */,
-				22A2986626FC80B700E79843 /* SelectCoursePresenter.swift in Sources */,
 				2258922526CA3DC600AD6F18 /* MDDeleteJWTCoreDataStorageOperation.swift in Sources */,
 				220FFEAF26C91DD400702CCE /* MDReadUserCoreDataStorageOperation.swift in Sources */,
 				227F8AB326CAB0DC00375A38 /* JWTResponse.swift in Sources */,
@@ -2605,6 +2619,7 @@
 				220793C926C66F85003D434B /* AuthValidationResult.swift in Sources */,
 				229E08C02652C9E700DA56C4 /* RowTypeProtocol.swift in Sources */,
 				22B8E6E426D3C7B7001CCCA8 /* MDReadCourseProtocol.swift in Sources */,
+				22A2987526FC84F000E79843 /* AddCourseModule.swift in Sources */,
 				228722CC26D0DDC500C9D1BC /* MDUpdateJWTCoreDataStorageOperation.swift in Sources */,
 				2289CEDF2678CC34007254C3 /* MDStorageType.swift in Sources */,
 				229D2D4726EB53A60047B518 /* ChoiceAuthenticationOrRegistrationInteractor.swift in Sources */,
@@ -2637,6 +2652,7 @@
 				22DB2F7A26C3BE7900C1AADA /* CourseListViewController.swift in Sources */,
 				2299016C2668EC3400D8C74E /* AppearanceDataProvider.swift in Sources */,
 				22E2B4E02664E43B00978E62 /* SettingsInteractor.swift in Sources */,
+				22A2987826FC84F000E79843 /* AddCourseViewController.swift in Sources */,
 				228AE05626EDDFC20088B4CF /* MDBaseLargeNavigationBarAndBackgroundImageViewController.swift in Sources */,
 				227D8F1526D7A4FA009CB94B /* MDAppSettings.swift in Sources */,
 				2294323026DF9A2A0073048C /* MDSyncManager.swift in Sources */,
@@ -2645,7 +2661,6 @@
 				220FFE7426C8F83A00702CCE /* MDKeyboardToolbar.swift in Sources */,
 				22DEA00326FA05A900892D78 /* AccountPresenter.swift in Sources */,
 				22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */,
-				22A2986926FC80B700E79843 /* SelectCourseInteractor.swift in Sources */,
 				2299016A2668EC3400D8C74E /* AppearanceViewController.swift in Sources */,
 				22BD99A5266A58DE0063FEFC /* RootWindow.swift in Sources */,
 				2299016D2668EC3400D8C74E /* AppearanceDataManager.swift in Sources */,
@@ -2666,6 +2681,7 @@
 				22BD99A8266A58F40063FEFC /* RootViewController.swift in Sources */,
 				22561C7E26D4B67300A6135B /* MDDeleteCourseMemoryStorageOperation.swift in Sources */,
 				22557FCC26C959D100A4FF31 /* MDCreateJWTMemoryStorageOperation.swift in Sources */,
+				22A2987926FC84F000E79843 /* AddCourseInteractor.swift in Sources */,
 				22E2B4E22664E43B00978E62 /* SettingsDataManager.swift in Sources */,
 				22B8E6DB26D3C519001CCCA8 /* MDCourseMemoryStorage.swift in Sources */,
 				22B8E6BE26D39BD4001CCCA8 /* MDReadAllLanguagesCoreDataStorageOperation.swift in Sources */,
@@ -2744,10 +2760,10 @@
 				221D280F26C5064A004BC4F7 /* AuthenticationPresenter.swift in Sources */,
 				22B8E6AC26D38A4D001CCCA8 /* MDCreateLanguageProtocol.swift in Sources */,
 				220FFE7726C9031800702CCE /* MDTextFieldWithToolBar.swift in Sources */,
+				22A2987B26FC84F000E79843 /* AddCourseDataManager.swift in Sources */,
 				22EDF02A26C7E91D00D19DA1 /* CDUserResponseEntityAttributeName.swift in Sources */,
 				22B8E6EA26D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift in Sources */,
 				2270F39E26D26132006B46F4 /* CDLanguageResponseEntityAttributeName.swift in Sources */,
-				22A2986826FC80B700E79843 /* SelectCourseViewController.swift in Sources */,
 				227B91E126EF607A0086B9AA /* RegisterValidationLogic.swift in Sources */,
 				227D5E642652584700B54524 /* NSLayoutConstraint+Extension.swift in Sources */,
 				22AF541B26F9ED1D00556225 /* PrivacyPolicyViewController.swift in Sources */,
@@ -2757,6 +2773,7 @@
 				228722DD26D1189700C9D1BC /* MDReadFirstJWTMemoryStorageOperation.swift in Sources */,
 				220FFE9226C90B5000702CCE /* MDCRUDUserProtocol.swift in Sources */,
 				22EF01F6269DA81100FE4435 /* MDRequestDispatcher.swift in Sources */,
+				22A2987A26FC84F000E79843 /* AddCourseDataProvider.swift in Sources */,
 				226FEE8C266BB2620044A5F9 /* AppearanceRowModel.swift in Sources */,
 				22B8E6A126D380CE001CCCA8 /* MDLanguageMemoryStorage.swift in Sources */,
 				221D281126C5064A004BC4F7 /* AuthenticationViewController.swift in Sources */,
@@ -2776,7 +2793,6 @@
 				22B8E6B426D38F5C001CCCA8 /* MDDeleteAllLanguagesMemoryStorageOperation.swift in Sources */,
 				22E2B4E62664EB8000978E62 /* SettingsCollectionViewDelegate.swift in Sources */,
 				221D281F26C54960004BC4F7 /* KeyboardHandler.swift in Sources */,
-				22A2986B26FC80B700E79843 /* SelectCourseDataManager.swift in Sources */,
 				2223F8A826512C1A004F2FE9 /* LocalizableProtocol.swift in Sources */,
 				22DEAE3226C289F100B64B16 /* MDAPIVersion.swift in Sources */,
 				229FFF3826F5E3D90024B974 /* MDBaseLargeTitledBackNavigationBarViewController.swift in Sources */,
