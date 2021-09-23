@@ -7,11 +7,11 @@
 import Foundation
 
 protocol AddCourseDataManagerInputProtocol {
-    
+    func loadAndPassLanguagesArrayToDataProvider()
 }
 
 protocol AddCourseDataManagerOutputProtocol: AnyObject {
-    
+    func loadAndPassLanguagesArrayToDataProviderResult(_ completionHandler: MDOperationResultWithoutCompletion<Void>)
 }
 
 protocol AddCourseDataManagerProtocol: AddCourseDataManagerInputProtocol {
@@ -21,10 +21,14 @@ protocol AddCourseDataManagerProtocol: AddCourseDataManagerInputProtocol {
 
 final class AddCourseDataManager: AddCourseDataManagerProtocol {
     
-    internal let dataProvider: AddCourseDataProviderProtocol
+    fileprivate let languageMemoryStorage: MDLanguageMemoryStorageProtocol
+    
+    internal var dataProvider: AddCourseDataProviderProtocol
     internal weak var dataManagerOutput: AddCourseDataManagerOutputProtocol?
     
-    init(dataProvider: AddCourseDataProviderProtocol) {
+    init(languageMemoryStorage: MDLanguageMemoryStorageProtocol,
+         dataProvider: AddCourseDataProviderProtocol) {
+        self.languageMemoryStorage = languageMemoryStorage
         self.dataProvider = dataProvider
     }
     
@@ -33,3 +37,33 @@ final class AddCourseDataManager: AddCourseDataManagerProtocol {
     }
     
 }
+
+extension AddCourseDataManager {
+    
+    func loadAndPassLanguagesArrayToDataProvider() {
+        
+        languageMemoryStorage.readAllLanguages { [weak self] readResult in
+            
+            switch readResult {
+                
+            case .success(let languages):
+                // Set Languages
+                self?.dataProvider.languages = languages
+                // Pass Result
+                self?.dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.success(()))
+                //
+                break
+                
+            case .failure(let error):
+                // Pass Result
+                self?.dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.failure(error))
+                //
+                break
+            }
+            
+        }
+        
+    }
+    
+}
+

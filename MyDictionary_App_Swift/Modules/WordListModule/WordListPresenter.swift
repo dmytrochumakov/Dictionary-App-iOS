@@ -13,7 +13,7 @@ protocol WordListPresenterInputProtocol: CollectionViewDelegateFlowLayoutPropert
 }
 
 protocol WordListPresenterOutputProtocol: AnyObject,
-                                          ReloadDataProtocol,
+                                          MDReloadDataProtocol,
                                           AppearanceHasBeenUpdatedProtocol {
     
 }

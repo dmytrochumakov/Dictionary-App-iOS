@@ -23,8 +23,10 @@ final class AddCourseModule {
 extension AddCourseModule {
     
     var module: UIViewController {
-        let dataProvider: AddCourseDataProviderProtocol = AddCourseDataProvider.init()
-        var dataManager: AddCourseDataManagerProtocol = AddCourseDataManager.init(dataProvider: dataProvider)
+        
+        let dataProvider: AddCourseDataProviderProtocol = AddCourseDataProvider.init(languages: .init())
+        var dataManager: AddCourseDataManagerProtocol = AddCourseDataManager.init(languageMemoryStorage: MDConstants.AppDependencies.dependencies.languageStorage.memoryStorage,
+                                                                                  dataProvider: dataProvider)
         
         let interactor: AddCourseInteractorProtocol = AddCourseInteractor.init(dataManager: dataManager)
         var router: AddCourseRouterProtocol = AddCourseRouter.init()
@@ -37,6 +39,7 @@ extension AddCourseModule {
         router.presenter = vc
         
         return vc
+        
     }
     
 }

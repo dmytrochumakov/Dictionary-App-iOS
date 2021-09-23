@@ -10,7 +10,9 @@ protocol AddCourseInteractorInputProtocol {
     func viewDidLoad()
 }
 
-protocol AddCourseInteractorOutputProtocol: AnyObject {
+protocol AddCourseInteractorOutputProtocol: AnyObject,
+                                            MDShowErrorProtocol,
+                                            MDReloadDataProtocol {
     
 }
 
@@ -20,7 +22,7 @@ protocol AddCourseInteractorProtocol: AddCourseInteractorInputProtocol,
 }
 
 final class AddCourseInteractor: AddCourseInteractorProtocol {
-
+    
     fileprivate let dataManager: AddCourseDataManagerInputProtocol
     internal weak var interactorOutput: AddCourseInteractorOutputProtocol?
     
@@ -37,13 +39,34 @@ final class AddCourseInteractor: AddCourseInteractorProtocol {
 // MARK: - AddCourseDataManagerOutputProtocol
 extension AddCourseInteractor {
     
+    func loadAndPassLanguagesArrayToDataProviderResult(_ result: MDOperationResultWithoutCompletion<Void>) {
+        
+        switch result {
+            
+        case .success:
+            
+            //
+            self.interactorOutput?.reloadData()
+            //
+            break
+            
+        case .failure(let error):
+            //
+            self.interactorOutput?.showError(error)
+            //
+            break
+            
+        }
+        
+    }
+    
 }
 
 // MARK: - AddCourseInteractorInputProtocol
 extension AddCourseInteractor {
     
     func viewDidLoad() {
-        
+        dataManager.loadAndPassLanguagesArrayToDataProvider()
     }
     
 }

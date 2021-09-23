@@ -10,7 +10,9 @@ protocol AddCoursePresenterInputProtocol {
     func viewDidLoad()
 }
 
-protocol AddCoursePresenterOutputProtocol: AnyObject {
+protocol AddCoursePresenterOutputProtocol: AnyObject,
+                                           MDShowErrorProtocol,
+                                           MDReloadDataProtocol {
     
 }
 
@@ -19,7 +21,8 @@ protocol AddCoursePresenterProtocol: AddCoursePresenterInputProtocol,
     var presenterOutput: AddCoursePresenterOutputProtocol? { get set }
 }
 
-final class AddCoursePresenter: NSObject, AddCoursePresenterProtocol {
+final class AddCoursePresenter: NSObject,
+                                AddCoursePresenterProtocol {
     
     fileprivate let interactor: AddCourseInteractorInputProtocol
     fileprivate let router: AddCourseRouterProtocol
@@ -41,6 +44,14 @@ final class AddCoursePresenter: NSObject, AddCoursePresenterProtocol {
 
 // MARK: - AddCourseInteractorOutputProtocol
 extension AddCoursePresenter {
+    
+    func showError(_ error: Error) {
+        presenterOutput?.showError(error)
+    }
+    
+    func reloadData() {
+        presenterOutput?.reloadData()
+    }
     
 }
 
