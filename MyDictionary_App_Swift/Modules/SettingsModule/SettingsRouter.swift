@@ -12,6 +12,7 @@ protocol SettingsRouterProtocol {
     func showTermsOfService()
     func showAbout()
     func showAccount()
+    func presentShareFeedback(withOption option: ShareFeedbackOption)
 }
 
 final class SettingsRouter: SettingsRouterProtocol {
@@ -37,9 +38,13 @@ extension SettingsRouter {
     func showAbout() {
         settingsViewController.show(AboutApplicationViewController.init(), sender: nil)
     }
-
+    
     func showAccount() {
         settingsViewController.show(AccountModule.init(sender: nil).module, sender: nil)
+    }
+    
+    func presentShareFeedback(withOption option: ShareFeedbackOption) {
+        settingsViewController.present(ShareFeedbackViewController.init(option: option), animated: true, completion: nil)
     }
     
 }

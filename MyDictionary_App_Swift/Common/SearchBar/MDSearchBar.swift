@@ -27,26 +27,26 @@ final class MDSearchBar: UIView {
     fileprivate static let searchTextFieldRightOffset: CGFloat = 16
     fileprivate let searchTextField: MDSearchTextField = {
         let textField: MDSearchTextField = .init()
-        textField.placeholder = KeysForTranslate.search.localized        
+        textField.placeholder = LocalizedText.search.localized        
         textField.autocorrectionType = .no
         textField.textAlignment = .left
         textField.clearButtonMode = .whileEditing
-        textField.font = MDAppStyling.Font.MyriadProRegular.font()
-        textField.textColor = MDAppStyling.Color.md_3C3C3C.color()
+        textField.font = MDUIResources.Font.MyriadProRegular.font()
+        textField.textColor = MDUIResources.Color.md_3C3C3C.color()
         textField.returnKeyType = .search
-        textField.backgroundColor = MDAppStyling.Color.md_FFFFFF.color()
+        textField.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
     fileprivate static let cancelButtonHeight: CGFloat = 40
     fileprivate static let cancelButtonRightOffset: CGFloat = 8
-    fileprivate static let cancelButtonFont: UIFont = MDAppStyling.Font.MyriadProRegular.font()
+    fileprivate static let cancelButtonFont: UIFont = MDUIResources.Font.MyriadProRegular.font()
     fileprivate let cancelButton: UIButton = {
         let button: UIButton = .init()
         button.backgroundColor = cancelButtonBackgroundColor(isActive: false)
-        button.setTitle(KeysForTranslate.cancel.localized, for: .normal)
-        button.setTitleColor(MDAppStyling.Color.md_FFFFFF.color(), for: .normal)
+        button.setTitle(LocalizedText.cancel.localized, for: .normal)
+        button.setTitleColor(MDUIResources.Color.md_FFFFFF.color(), for: .normal)
         button.titleLabel?.font = cancelButtonFont
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -177,7 +177,7 @@ fileprivate extension MDSearchBar {
                                                     constant: Self.cancelButtonHeight)
         
         NSLayoutConstraint.addEqualWidthConstraint(item: self.cancelButton,
-                                                   constant: Self.cancelButtonWidth(fromText: KeysForTranslate.cancel.localized))
+                                                   constant: Self.cancelButtonWidth(fromText: LocalizedText.cancel.localized))
         
     }
     
@@ -210,7 +210,7 @@ fileprivate extension MDSearchBar {
     }
     
     func dropShadowSearchTextField() {
-        searchTextField.dropShadow(color: MDAppStyling.Color.md_4400D4.color(0.5),
+        searchTextField.dropShadow(color: MDUIResources.Color.md_4400D4.color(0.5),
                                    offSet: .init(width: 2,
                                                  height: 4),
                                    radius: 10)
@@ -314,17 +314,17 @@ fileprivate extension MDSearchBar {
     
     static func cancelButtonBackgroundColor(isActive: Bool) -> UIColor {
         if (isActive) {
-            return MDAppStyling.Color.md_4400D4.color()
+            return MDUIResources.Color.md_4400D4.color()
         } else {
-            return MDAppStyling.Color.md_C7C7CC.color()
+            return MDUIResources.Color.md_C7C7CC.color()
         }
     }
     
     static func cancelButtonShadowColor(isActive: Bool) -> UIColor {
         if (isActive) {
-            return MDAppStyling.Color.md_4400D4.color(0.5)
+            return MDUIResources.Color.md_4400D4.color(0.5)
         } else {
-            return MDAppStyling.Color.md_C7C7CC.color()
+            return MDUIResources.Color.md_C7C7CC.color()
         }
     }
     

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CloudKit
 
 extension UIAlertController {
     
@@ -15,14 +16,47 @@ extension UIAlertController {
                                       presenter: UIViewController) {
         
         let alertController = UIAlertController.init(title: title,
-                                           message: message,
-                                           preferredStyle: .alert)
+                                                     message: message,
+                                                     preferredStyle: .alert)
         
-        let okAction: UIAlertAction = .init(title: KeysForTranslate.ok.localized,
+        let okAction: UIAlertAction = .init(title: LocalizedText.ok.localized,
                                             style: .default,
                                             handler: okActionHandler)
         
         alertController.addAction(okAction)
+        
+        presenter.present(alertController, animated: true, completion: nil)
+        
+    }
+    
+}
+
+extension UIAlertController {
+    
+    struct MDAlertAction {
+        let title: String
+        let style: UIAlertAction.Style
+    }
+    
+    static func showActionSheet(title: String,
+                                message: String?,
+                                actions: [MDAlertAction],
+                                handler: ((MDAlertAction) -> Void)? = nil,
+                                presenter: UIViewController) {
+        
+        let alertController = UIAlertController.init(title: title,
+                                                     message: message,
+                                                     preferredStyle: .actionSheet)
+        
+        actions.forEach { action in
+            alertController.addAction(.init(title: action.title,
+                                            style: action.style,
+                                            handler: { action in
+                
+                handler?(.init(title: action.title!, style: action.style))
+                
+            }))
+        }
         
         presenter.present(alertController, animated: true, completion: nil)
         

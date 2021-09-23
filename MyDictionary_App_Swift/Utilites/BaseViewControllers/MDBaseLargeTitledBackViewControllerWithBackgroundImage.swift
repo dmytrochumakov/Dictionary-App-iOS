@@ -12,15 +12,15 @@ open class MDBaseLargeTitledBackViewControllerWithBackgroundImage: MDBaseLargeNa
     internal let backButtonSize: CGSize = .init(width: 40, height: 40)
     internal let backButton: UIButton = {
         let button: UIButton = .init()
-        button.setImage(MDAppStyling.Image.back_white_arrow.image, for: .normal)
+        button.setImage(MDUIResources.Image.back_white_arrow.image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     internal let titleLabel: UILabel = {
         let label: UILabel = .init()
-        label.font = MDAppStyling.Font.MyriadProSemiBold.font(ofSize: 34)
-        label.textColor = MDAppStyling.Color.md_FFFFFF.color()
+        label.font = MDUIResources.Font.MyriadProSemiBold.font(ofSize: 34)
+        label.textColor = MDUIResources.Color.md_FFFFFF.color()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

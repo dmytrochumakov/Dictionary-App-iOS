@@ -14,9 +14,9 @@ final class MDCourseListCell: MGSwipeTableCell,
     fileprivate static let titleLabelRightOffset: CGFloat = 16
     fileprivate let titleLabel: UILabel = {
         let label: UILabel = .init()
-        label.font = MDAppStyling.Font.MyriadProRegular.font()
+        label.font = MDUIResources.Font.MyriadProRegular.font()
         label.textAlignment = .left
-        label.textColor = MDAppStyling.Color.md_3C3C3C.color()
+        label.textColor = MDUIResources.Color.md_3C3C3C.color()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -25,7 +25,7 @@ final class MDCourseListCell: MGSwipeTableCell,
     fileprivate static let arrowImageViewRightOffset: CGFloat = 4
     fileprivate let arrowImageView: UIImageView = {
         let imageView: UIImageView = .init()
-        imageView.image = MDAppStyling.Image.right_arrow.image
+        imageView.image = MDUIResources.Image.right_arrow.image
         imageView.contentMode = .center
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView

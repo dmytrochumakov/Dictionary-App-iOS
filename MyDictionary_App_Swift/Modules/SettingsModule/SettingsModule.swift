@@ -25,7 +25,7 @@ extension SettingsModule {
                                                 .init(rowType: .privacyPolicy),
                                                 .init(rowType: .termsOfService),
                                                 .init(rowType: .about),
-                                                .init(rowType: .support)]
+                                                .init(rowType: .shareFeedback)]
         
         let settingsDataProvider: SettingsDataProviderProtocol = SettingsDataProvider.init(rows: settingsRows)
         

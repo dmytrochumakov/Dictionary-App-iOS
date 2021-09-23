@@ -11,8 +11,8 @@ open class MDBaseLargeTitledNavigationBarViewController: MDBaseLargeNavigationBa
     
     internal let titleLabel: UILabel = {
         let label: UILabel = .init()
-        label.font = MDAppStyling.Font.MyriadProSemiBold.font(ofSize: 34)
-        label.textColor = MDAppStyling.Color.md_FFFFFF.color()
+        label.font = MDUIResources.Font.MyriadProSemiBold.font(ofSize: 34)
+        label.textColor = MDUIResources.Color.md_FFFFFF.color()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

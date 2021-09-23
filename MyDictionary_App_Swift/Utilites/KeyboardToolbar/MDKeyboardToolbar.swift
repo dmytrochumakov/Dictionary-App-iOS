@@ -41,7 +41,7 @@ fileprivate extension MDKeyboardToolbar {
                                                    target: nil,
                                                    action: nil)
         
-        let doneBarButton: UIBarButtonItem = .init(title: KeysForTranslate.done.localized,
+        let doneBarButton: UIBarButtonItem = .init(title: LocalizedText.done.localized,
                                                    style: .plain,
                                                    target: target,
                                                    action: action)

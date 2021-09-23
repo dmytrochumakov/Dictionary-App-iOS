@@ -54,7 +54,7 @@
 		2223F8A826512C1A004F2FE9 /* LocalizableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8A726512C1A004F2FE9 /* LocalizableProtocol.swift */; };
 		2223F8AB26512C5A004F2FE9 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8AA26512C5A004F2FE9 /* String+Extension.swift */; };
 		2223F8AE26512DEB004F2FE9 /* MDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8AD26512DEB004F2FE9 /* MDConstants.swift */; };
-		2223F8B426512F01004F2FE9 /* KeysForTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8B326512F01004F2FE9 /* KeysForTranslate.swift */; };
+		2223F8B426512F01004F2FE9 /* LocalizedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8B326512F01004F2FE9 /* LocalizedText.swift */; };
 		2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8B626512F5B004F2FE9 /* AppLanguageType.swift */; };
 		2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */; };
 		2223F8BC26512FFD004F2FE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2223F8BE26512FFD004F2FE9 /* Localizable.strings */; };
@@ -221,6 +221,7 @@
 		22A2521226CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521126CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift */; };
 		22A2521426CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521326CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift */; };
 		22A2521626CFE5230013FCF5 /* MDEntitiesCountProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2521526CFE5230013FCF5 /* MDEntitiesCountProtocol.swift */; };
+		22A2985C26FC635100E79843 /* MDSettingsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2985B26FC635000E79843 /* MDSettingsError.swift */; };
 		22A31B5926ECBB1A00676E55 /* MyriadProItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5526ECBB1A00676E55 /* MyriadProItalic.ttf */; };
 		22A31B5A26ECBB1A00676E55 /* MyriadProBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5626ECBB1A00676E55 /* MyriadProBold.ttf */; };
 		22A31B5B26ECBB1A00676E55 /* MyriadProRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5726ECBB1A00676E55 /* MyriadProRegular.ttf */; };
@@ -290,7 +291,7 @@
 		22CA088326515F020052D169 /* WordListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088226515F020052D169 /* WordListRouter.swift */; };
 		22CA088726515F6A0052D169 /* WordListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088626515F6A0052D169 /* WordListDataManager.swift */; };
 		22CA08892651603A0052D169 /* WordListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA08882651603A0052D169 /* WordListDataProvider.swift */; };
-		22CA088C265165460052D169 /* MDAppStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088B265165460052D169 /* MDAppStyling.swift */; };
+		22CA088C265165460052D169 /* MDUIResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088B265165460052D169 /* MDUIResources.swift */; };
 		22CA088E265167620052D169 /* ReloadDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088D265167620052D169 /* ReloadDataProtocol.swift */; };
 		22CD45F026F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */; };
 		22CD45F226F090F20060978D /* MDCounterTextFieldWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */; };
@@ -339,6 +340,8 @@
 		22E327CC26FB318A00445917 /* MDStorageServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E327CB26FB318A00445917 /* MDStorageServiceType.swift */; };
 		22E327CE26FB319D00445917 /* MDStorageServiceOperationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E327CD26FB319D00445917 /* MDStorageServiceOperationResult.swift */; };
 		22E327D026FB31A900445917 /* MDStorageServiceOperationResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E327CF26FB31A900445917 /* MDStorageServiceOperationResultWithCompletion.swift */; };
+		22E327DE26FB5EE200445917 /* ShareFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E327D726FB5EE200445917 /* ShareFeedbackViewController.swift */; };
+		22E327E426FB6C7C00445917 /* ShareFeedbackOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E327E326FB6C7C00445917 /* ShareFeedbackOption.swift */; };
 		22E691B626CE5E5200641DFA /* MDStorageResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E691B526CE5E5200641DFA /* MDStorageResult.swift */; };
 		22E861BD26F9FF7F00AB1755 /* AboutApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E861BC26F9FF7F00AB1755 /* AboutApplicationViewController.swift */; };
 		22EDF02626C7E6A100D19DA1 /* CDJWTResponseEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDF02526C7E6A000D19DA1 /* CDJWTResponseEntity+Extension.swift */; };
@@ -423,7 +426,7 @@
 		2223F8A726512C1A004F2FE9 /* LocalizableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableProtocol.swift; sourceTree = "<group>"; };
 		2223F8AA26512C5A004F2FE9 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		2223F8AD26512DEB004F2FE9 /* MDConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDConstants.swift; sourceTree = "<group>"; };
-		2223F8B326512F01004F2FE9 /* KeysForTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysForTranslate.swift; sourceTree = "<group>"; };
+		2223F8B326512F01004F2FE9 /* LocalizedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedText.swift; sourceTree = "<group>"; };
 		2223F8B626512F5B004F2FE9 /* AppLanguageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageType.swift; sourceTree = "<group>"; };
 		2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageService.swift; sourceTree = "<group>"; };
 		2223F8BD26512FFD004F2FE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -594,6 +597,7 @@
 		22A2521126CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountResultWithoutCompletion.swift; sourceTree = "<group>"; };
 		22A2521326CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountResultWithCompletion.swift; sourceTree = "<group>"; };
 		22A2521526CFE5230013FCF5 /* MDEntitiesCountProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntitiesCountProtocol.swift; sourceTree = "<group>"; };
+		22A2985B26FC635000E79843 /* MDSettingsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSettingsError.swift; sourceTree = "<group>"; };
 		22A31B5526ECBB1A00676E55 /* MyriadProItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProItalic.ttf; sourceTree = "<group>"; };
 		22A31B5626ECBB1A00676E55 /* MyriadProBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProBold.ttf; sourceTree = "<group>"; };
 		22A31B5726ECBB1A00676E55 /* MyriadProRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProRegular.ttf; sourceTree = "<group>"; };
@@ -663,7 +667,7 @@
 		22CA088226515F020052D169 /* WordListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListRouter.swift; sourceTree = "<group>"; };
 		22CA088626515F6A0052D169 /* WordListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListDataManager.swift; sourceTree = "<group>"; };
 		22CA08882651603A0052D169 /* WordListDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListDataProvider.swift; sourceTree = "<group>"; };
-		22CA088B265165460052D169 /* MDAppStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppStyling.swift; sourceTree = "<group>"; };
+		22CA088B265165460052D169 /* MDUIResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUIResources.swift; sourceTree = "<group>"; };
 		22CA088D265167620052D169 /* ReloadDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadDataProtocol.swift; sourceTree = "<group>"; };
 		22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCounterPasswordTextFieldWithToolBar.swift; sourceTree = "<group>"; };
 		22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCounterTextFieldWithToolBar.swift; sourceTree = "<group>"; };
@@ -712,6 +716,8 @@
 		22E327CB26FB318A00445917 /* MDStorageServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorageServiceType.swift; sourceTree = "<group>"; };
 		22E327CD26FB319D00445917 /* MDStorageServiceOperationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorageServiceOperationResult.swift; sourceTree = "<group>"; };
 		22E327CF26FB31A900445917 /* MDStorageServiceOperationResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorageServiceOperationResultWithCompletion.swift; sourceTree = "<group>"; };
+		22E327D726FB5EE200445917 /* ShareFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareFeedbackViewController.swift; sourceTree = "<group>"; };
+		22E327E326FB6C7C00445917 /* ShareFeedbackOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareFeedbackOption.swift; sourceTree = "<group>"; };
 		22E691B526CE5E5200641DFA /* MDStorageResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorageResult.swift; sourceTree = "<group>"; };
 		22E861BC26F9FF7F00AB1755 /* AboutApplicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutApplicationViewController.swift; sourceTree = "<group>"; };
 		22EDF02526C7E6A000D19DA1 /* CDJWTResponseEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDJWTResponseEntity+Extension.swift"; sourceTree = "<group>"; };
@@ -1082,7 +1088,7 @@
 		2223F8B226512EF2004F2FE9 /* KeysForTranslate */ = {
 			isa = PBXGroup;
 			children = (
-				2223F8B326512F01004F2FE9 /* KeysForTranslate.swift */,
+				2223F8B326512F01004F2FE9 /* LocalizedText.swift */,
 			);
 			path = KeysForTranslate;
 			sourceTree = "<group>";
@@ -1286,7 +1292,7 @@
 				2223F8B226512EF2004F2FE9 /* KeysForTranslate */,
 				2223F8A626512C0A004F2FE9 /* Protocols */,
 				2223F8AC26512DE6004F2FE9 /* Constants */,
-				22CA088A265165370052D169 /* AppStyling */,
+				22CA088A265165370052D169 /* UIResources */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1920,6 +1926,7 @@
 		22CA086F26515D240052D169 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				22E327D326FB5ECB00445917 /* ShareFeedbackModule */,
 				22DE9FFA26FA058500892D78 /* AccountModule */,
 				22E861BB26F9FF4F00AB1755 /* AboutApplicationModule */,
 				223EB28426F9FCB40021D8E1 /* TermsOfServiceModule */,
@@ -1991,12 +1998,12 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		22CA088A265165370052D169 /* AppStyling */ = {
+		22CA088A265165370052D169 /* UIResources */ = {
 			isa = PBXGroup;
 			children = (
-				22CA088B265165460052D169 /* MDAppStyling.swift */,
+				22CA088B265165460052D169 /* MDUIResources.swift */,
 			);
-			path = AppStyling;
+			path = UIResources;
 			sourceTree = "<group>";
 		};
 		22DB2F6F26C3BE3C00C1AADA /* CourseListModule */ = {
@@ -2082,6 +2089,7 @@
 			isa = PBXGroup;
 			children = (
 				22E2B4F22665085E00978E62 /* SettingsRowType.swift */,
+				22A2985B26FC635000E79843 /* MDSettingsError.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -2103,6 +2111,23 @@
 				22E327C926FB2CEE00445917 /* MDStorageCleanupService.swift */,
 			);
 			path = MDStorageCleanupService;
+			sourceTree = "<group>";
+		};
+		22E327D326FB5ECB00445917 /* ShareFeedbackModule */ = {
+			isa = PBXGroup;
+			children = (
+				22E327E226FB6C7300445917 /* Enums */,
+				22E327D726FB5EE200445917 /* ShareFeedbackViewController.swift */,
+			);
+			path = ShareFeedbackModule;
+			sourceTree = "<group>";
+		};
+		22E327E226FB6C7300445917 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				22E327E326FB6C7C00445917 /* ShareFeedbackOption.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		22E861BB26F9FF4F00AB1755 /* AboutApplicationModule */ = {
@@ -2465,6 +2490,7 @@
 				22E2B4F9266509CA00978E62 /* SettingsRowModel.swift in Sources */,
 				22557FC726C9589000A4FF31 /* MDJWTMemoryStorage.swift in Sources */,
 				221D281C26C533AF004BC4F7 /* AuthTextFieldDelegate.swift in Sources */,
+				22E327E426FB6C7C00445917 /* ShareFeedbackOption.swift in Sources */,
 				22B8E6D426D3B9EA001CCCA8 /* MDDeleteAllWordsCoreDataStorageOperation.swift in Sources */,
 				22DB2F8326C3D28900C1AADA /* CourseListTableViewDataSource.swift in Sources */,
 				229901682668EC3400D8C74E /* AppearancePresenter.swift in Sources */,
@@ -2557,6 +2583,7 @@
 				2277FE1226F9D7E900001710 /* MDBaseNavigationBarViewController.swift in Sources */,
 				22EF01E3269D9CDA00FE4435 /* MDEntitiesIsEmptyProtocol.swift in Sources */,
 				229E08BE2652C8E600DA56C4 /* SectionTypeProtocol.swift in Sources */,
+				22E327DE26FB5EE200445917 /* ShareFeedbackViewController.swift in Sources */,
 				2270F3A026D26199006B46F4 /* CDLanguageResponseEntity+Extension.swift in Sources */,
 				22C5863E26C7AFB80030B12D /* RegistrationInteractor.swift in Sources */,
 				2289CEFA2678CC34007254C3 /* MDOperation.swift in Sources */,
@@ -2614,7 +2641,7 @@
 				227D8F0826D77594009CB94B /* CreateWordRequest.swift in Sources */,
 				22EF01F0269DA74000FE4435 /* HTTPMethod.swift in Sources */,
 				229D2D4426EB53A60047B518 /* ChoiceAuthenticationOrRegistrationPresenter.swift in Sources */,
-				22CA088C265165460052D169 /* MDAppStyling.swift in Sources */,
+				22CA088C265165460052D169 /* MDUIResources.swift in Sources */,
 				22DB2F7D26C3BE7900C1AADA /* CourseListDataManager.swift in Sources */,
 				229D2D4E26EB706E0047B518 /* UINavigationController+Extension.swift in Sources */,
 				220FFEB126C91EF000702CCE /* MDDeleteUserCoreDataStorageOperation.swift in Sources */,
@@ -2628,7 +2655,7 @@
 				22BD99A2266A4B8D0063FEFC /* AppearanceModule.swift in Sources */,
 				22DB2F8D26C3D51500C1AADA /* TableViewDataSourcePropertyProtocol.swift in Sources */,
 				227B91D026EF4A1E0086B9AA /* MDBaseLargeTitledBackViewControllerWithBackgroundImage.swift in Sources */,
-				2223F8B426512F01004F2FE9 /* KeysForTranslate.swift in Sources */,
+				2223F8B426512F01004F2FE9 /* LocalizedText.swift in Sources */,
 				221D281926C53356004BC4F7 /* AuthenticationTextFieldTag.swift in Sources */,
 				227B91DD26EF5F670086B9AA /* RegisterValidationError.swift in Sources */,
 				22DEA00626FA05A900892D78 /* AccountInteractor.swift in Sources */,
@@ -2659,6 +2686,7 @@
 				2289CEED2678CC34007254C3 /* MDWordStorage.swift in Sources */,
 				22B8E6EC26D3C9B7001CCCA8 /* MDReadCourseMemoryStorageOperation.swift in Sources */,
 				228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */,
+				22A2985C26FC635100E79843 /* MDSettingsError.swift in Sources */,
 				22DE582A26C9549B0032A94C /* MDCreateJWTProtocol.swift in Sources */,
 				223648EA26DE38970071F271 /* MDSync.swift in Sources */,
 				22EF01E5269D9EBC00FE4435 /* MDEntitiesIsEmptyResultWithCompletion.swift in Sources */,
@@ -2921,9 +2949,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Sign to Run Locally";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CXRA2S6SCR;
@@ -2935,7 +2963,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dcteam.MyDictionary-App-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "com.dcteam.MyDictionary-App-Swift AppStore";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2948,9 +2976,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = CXRA2S6SCR;
 				INFOPLIST_FILE = MyDictionary_App_Swift/Resources/InfoPlist/Info.plist;
@@ -2961,7 +2989,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dcteam.MyDictionary-App-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "com.dcteam.MyDictionary-App-Swift AppStore";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";

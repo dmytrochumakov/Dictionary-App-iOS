@@ -15,7 +15,7 @@ open class MDSearchTextField: UITextField {
     fileprivate static let searchIconImageViewLeftOffset: CGFloat = 10
     fileprivate let searchIconImageView: UIImageView = {
         let imageView: UIImageView = .init()
-        imageView.image = MDAppStyling.Image.search.image
+        imageView.image = MDUIResources.Image.search.image
         imageView.contentMode = .center
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView

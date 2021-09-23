@@ -23,7 +23,7 @@ final class CourseListViewController: MDBaseLargeTitledNavigationBarViewControll
     fileprivate static let settingsButtonBottomOffset: CGFloat = 8
     fileprivate let settingsButton: UIButton = {
         let button: UIButton = .init()
-        button.setImage(MDAppStyling.Image.settings.image, for: .normal)
+        button.setImage(MDUIResources.Image.settings.image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -32,7 +32,7 @@ final class CourseListViewController: MDBaseLargeTitledNavigationBarViewControll
     fileprivate static let addNewCourseButtonRightOffset: CGFloat = 8
     fileprivate let addNewCourseButton: UIButton = {
         let button: UIButton = .init()
-        button.setImage(MDAppStyling.Image.add.image, for: .normal)
+        button.setImage(MDUIResources.Image.add.image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -53,8 +53,8 @@ final class CourseListViewController: MDBaseLargeTitledNavigationBarViewControll
     
     init(presenter: CourseListPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(title: KeysForTranslate.courses.localized,
-                   navigationBarBackgroundImage: MDAppStyling.Image.background_navigation_bar_1.image)
+        super.init(title: LocalizedText.courses.localized,
+                   navigationBarBackgroundImage: MDUIResources.Image.background_navigation_bar_1.image)
     }
     
     deinit {
@@ -91,7 +91,7 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     }
     
     func showError(_ error: Error) {
-        UIAlertController.showAlertWithOkAction(title: KeysForTranslate.error.localized,
+        UIAlertController.showAlertWithOkAction(title: LocalizedText.error.localized,
                                                 message: error.localizedDescription,
                                                 presenter: self)
     }

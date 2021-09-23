@@ -31,16 +31,16 @@ final class RegistrationViewController: MDBaseLargeTitledBackViewControllerWithB
     fileprivate let nicknameTextField: MDCounterTextFieldWithToolBar = {
         let textField: MDCounterTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.defaultInset,
                                                              keyboardToolbar: .init())
-        textField.placeholder = KeysForTranslate.nickname.localized
+        textField.placeholder = LocalizedText.nickname.localized
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.textAlignment = .left
         textField.clearButtonMode = .whileEditing
-        textField.font = MDAppStyling.Font.MyriadProItalic.font()
-        textField.textColor = MDAppStyling.Color.md_3C3C3C.color()
+        textField.font = MDUIResources.Font.MyriadProItalic.font()
+        textField.textColor = MDUIResources.Color.md_3C3C3C.color()
         textField.returnKeyType = .next
         textField.tag = RegistrationTextFieldTag.nickname.rawValue
-        textField.backgroundColor = MDAppStyling.Color.md_FFFFFF.color()
+        textField.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
         textField.updateCounter(currentCount: .zero,
                                 maxCount: MDConstants.Text.MaxCountCharacters.nicknameTextField)
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -55,16 +55,16 @@ final class RegistrationViewController: MDBaseLargeTitledBackViewControllerWithB
         let textField: MDCounterPasswordTextFieldWithToolBar = .init(height: passwordTextFieldHeight,
                                                                      rectInset: MDConstants.Rect.passwordInset,
                                                                      keyboardToolbar: .init())
-        textField.placeholder = KeysForTranslate.password.localized
+        textField.placeholder = LocalizedText.password.localized
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.textAlignment = .left
-        textField.font = MDAppStyling.Font.MyriadProItalic.font()
-        textField.textColor = MDAppStyling.Color.md_3C3C3C.color()
+        textField.font = MDUIResources.Font.MyriadProItalic.font()
+        textField.textColor = MDUIResources.Color.md_3C3C3C.color()
         textField.returnKeyType = .next
         textField.isSecureTextEntry = true
         textField.tag = RegistrationTextFieldTag.password.rawValue
-        textField.backgroundColor = MDAppStyling.Color.md_FFFFFF.color()
+        textField.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
         textField.updateCounter(currentCount: .zero,
                                 maxCount: MDConstants.Text.MaxCountCharacters.passwordTextField)
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -79,16 +79,16 @@ final class RegistrationViewController: MDBaseLargeTitledBackViewControllerWithB
         let textField: MDCounterPasswordTextFieldWithToolBar = .init(height: confirmPasswordTextFieldHeight,
                                                                      rectInset: MDConstants.Rect.passwordInset,
                                                                      keyboardToolbar: .init())
-        textField.placeholder = KeysForTranslate.confirmPassword.localized
+        textField.placeholder = LocalizedText.confirmPassword.localized
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.textAlignment = .left
-        textField.font = MDAppStyling.Font.MyriadProItalic.font()
-        textField.textColor = MDAppStyling.Color.md_3C3C3C.color()
+        textField.font = MDUIResources.Font.MyriadProItalic.font()
+        textField.textColor = MDUIResources.Color.md_3C3C3C.color()
         textField.returnKeyType = .go
         textField.isSecureTextEntry = true
         textField.tag = RegistrationTextFieldTag.confirmPassword.rawValue
-        textField.backgroundColor = MDAppStyling.Color.md_FFFFFF.color()
+        textField.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
         textField.updateCounter(currentCount: .zero,
                                 maxCount: MDConstants.Text.MaxCountCharacters.passwordTextField)
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -101,10 +101,10 @@ final class RegistrationViewController: MDBaseLargeTitledBackViewControllerWithB
     fileprivate static let registerButtonRightOffset: CGFloat = 16
     fileprivate let registerButton: UIButton = {
         let button: UIButton = .init()
-        button.backgroundColor = MDAppStyling.Color.md_4400D4.color()
-        button.setTitle(KeysForTranslate.register.localized, for: .normal)
-        button.setTitleColor(MDAppStyling.Color.md_FFFFFF.color(), for: .normal)
-        button.titleLabel?.font = MDAppStyling.Font.MyriadProRegular.font()
+        button.backgroundColor = MDUIResources.Color.md_4400D4.color()
+        button.setTitle(LocalizedText.register.localized, for: .normal)
+        button.setTitleColor(MDUIResources.Color.md_FFFFFF.color(), for: .normal)
+        button.titleLabel?.font = MDUIResources.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -112,17 +112,17 @@ final class RegistrationViewController: MDBaseLargeTitledBackViewControllerWithB
     fileprivate lazy var hud: MBProgressHUD = {
         let hud: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud.mode = .annularDeterminate
-        hud.label.text = KeysForTranslate.pleaseWaitForDataSync.localized
-        hud.label.font = MDAppStyling.Font.MyriadProRegular.font()
-        hud.label.textColor = MDAppStyling.Color.md_3C3C3C.color()
+        hud.label.text = LocalizedText.pleaseWaitForDataSync.localized
+        hud.label.font = MDUIResources.Font.MyriadProRegular.font()
+        hud.label.textColor = MDUIResources.Color.md_3C3C3C.color()
         return hud
     }()
     
     init(presenter: RegistrationPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(title: KeysForTranslate.registration.localized,
-                   navigationBarBackgroundImage: MDAppStyling.Image.background_navigation_bar_0.image,
-                   backgroundImage: MDAppStyling.Image.background_typography_2.image)
+        super.init(title: LocalizedText.registration.localized,
+                   navigationBarBackgroundImage: MDUIResources.Image.background_navigation_bar_0.image,
+                   backgroundImage: MDUIResources.Image.background_typography_2.image)
     }
     
     deinit {
@@ -188,7 +188,7 @@ extension RegistrationViewController: RegistrationPresenterOutputProtocol {
     }
     
     func showValidationError(_ error: Error) {
-        UIAlertController.showAlertWithOkAction(title: KeysForTranslate.error.localized,
+        UIAlertController.showAlertWithOkAction(title: LocalizedText.error.localized,
                                                 message: error.localizedDescription,
                                                 presenter: self)
     }
@@ -405,25 +405,25 @@ fileprivate extension RegistrationViewController {
     }
     
     func dropShadowNicknameTextField() {
-        nicknameTextField.dropShadow(color: MDAppStyling.Color.md_5200FF.color(0.5),
+        nicknameTextField.dropShadow(color: MDUIResources.Color.md_5200FF.color(0.5),
                                      offSet: .init(width: 2, height: 4),
                                      radius: 15)
     }
     
     func dropShadowPasswordTextField() {
-        passwordTextField.dropShadow(color: MDAppStyling.Color.md_5200FF.color(0.5),
+        passwordTextField.dropShadow(color: MDUIResources.Color.md_5200FF.color(0.5),
                                      offSet: .init(width: 2, height: 4),
                                      radius: 15)
     }
     
     func dropShadowConfirmPasswordTextField() {
-        confirmPasswordTextField.dropShadow(color: MDAppStyling.Color.md_5200FF.color(0.5),
+        confirmPasswordTextField.dropShadow(color: MDUIResources.Color.md_5200FF.color(0.5),
                                             offSet: .init(width: 2, height: 4),
                                             radius: 15)
     }
     
     func dropShadowRegisterButton() {
-        registerButton.dropShadow(color: MDAppStyling.Color.md_4400D4.color(0.5),
+        registerButton.dropShadow(color: MDUIResources.Color.md_4400D4.color(0.5),
                                   offSet: .init(width: 0,
                                                 height: 4),
                                   radius: 20)

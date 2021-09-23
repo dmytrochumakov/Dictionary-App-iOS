@@ -197,4 +197,8 @@ struct MDConstants {
         static let aboutAppURL: URL = .init(string: "https://dchprojects.github.io/MyDictionary-Web/index.html#about")!
     }
     
+    struct ShareFeedback {
+        static let recipientEmail: String = "dima.chumakovwork@gmail.com"
+    }
+    
 }

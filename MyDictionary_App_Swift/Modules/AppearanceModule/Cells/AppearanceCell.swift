@@ -129,9 +129,9 @@ fileprivate extension AppearanceCell {
     
     func titleLabelFont(isSelected: Bool) -> UIFont {
         if (isSelected) {
-            return MDAppStyling.Font.MyriadProRegular.font()
+            return MDUIResources.Font.MyriadProRegular.font()
         } else {
-            return MDAppStyling.Font.MyriadProRegular.font()
+            return MDUIResources.Font.MyriadProRegular.font()
         }
     }
     

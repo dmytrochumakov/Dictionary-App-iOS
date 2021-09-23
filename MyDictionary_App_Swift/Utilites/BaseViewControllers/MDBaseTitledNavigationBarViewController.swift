@@ -11,14 +11,14 @@ open class MDBaseTitledNavigationBarViewController: MDBaseNavigationBarViewContr
     
     fileprivate static let titleLabelHeight: CGFloat = 24
     fileprivate static let titleLabelBottomOffset: CGFloat = 16
-    fileprivate static let titleLabelFont: UIFont = MDAppStyling.Font.MyriadProSemiBold.font(ofSize: 17)
+    fileprivate static let titleLabelFont: UIFont = MDUIResources.Font.MyriadProSemiBold.font(ofSize: 17)
     fileprivate static let titleLabelNumberOfLines: Int = 1
     
     fileprivate let titleText: String
     internal let titleLabel: UILabel = {
         let label: UILabel = .init()
         label.font = titleLabelFont
-        label.textColor = MDAppStyling.Color.md_FFFFFF.color()
+        label.textColor = MDUIResources.Color.md_FFFFFF.color()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.numberOfLines = titleLabelNumberOfLines
