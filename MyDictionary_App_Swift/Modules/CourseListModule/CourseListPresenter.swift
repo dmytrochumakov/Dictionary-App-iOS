@@ -110,7 +110,7 @@ extension CourseListPresenter {
     
     // Actions //
     func addNewCourseButtonClicked() {
-        debugPrint(#function, Self.self)
+        router.showAddCourse()
     }
     
     func settingsButtonClicked() {

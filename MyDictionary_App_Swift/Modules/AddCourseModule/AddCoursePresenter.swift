@@ -7,7 +7,7 @@
 import UIKit
 
 protocol AddCoursePresenterInputProtocol {
-    
+    func viewDidLoad()
 }
 
 protocol AddCoursePresenterOutputProtocol: AnyObject {
@@ -41,5 +41,14 @@ final class AddCoursePresenter: NSObject, AddCoursePresenterProtocol {
 
 // MARK: - AddCourseInteractorOutputProtocol
 extension AddCoursePresenter {
+    
+}
+
+// MARK: - AddCoursePresenterInputProtocol
+extension AddCoursePresenter {
+    
+    func viewDidLoad() {
+        interactor.viewDidLoad()
+    }
     
 }

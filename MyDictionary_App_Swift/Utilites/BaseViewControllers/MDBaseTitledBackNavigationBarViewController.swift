@@ -50,7 +50,7 @@ fileprivate extension MDBaseTitledBackNavigationBarViewController {
     
     func addBackButton() {
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-        navigationBarView.addSubview(backButton)
+        view.addSubview(backButton)        
     }
     
 }

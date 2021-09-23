@@ -10,6 +10,14 @@ final class AddCourseViewController: MDBaseTitledBackNavigationBarViewController
     
     fileprivate let presenter: AddCoursePresenterInputProtocol
     
+    fileprivate let collectionView: UICollectionView = {
+        let flowLayout: UICollectionViewFlowLayout = .init()
+        let collectionView: UICollectionView = .init(frame: .zero,
+                                                     collectionViewLayout: flowLayout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
+    }()
+    
     init(presenter: AddCoursePresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: LocalizedText.addCourse.localized,
@@ -31,6 +39,7 @@ final class AddCourseViewController: MDBaseTitledBackNavigationBarViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.viewDidLoad()
         configureUI()
     }
     
@@ -52,10 +61,12 @@ extension AddCourseViewController: AddCoursePresenterOutputProtocol {
 fileprivate extension AddCourseViewController {
     
     func addViews() {
-        
+        addCollectionView()
     }
     
-    
+    func addCollectionView() {
+        view.addSubview(collectionView)
+    }
     
 }
 
@@ -63,9 +74,30 @@ fileprivate extension AddCourseViewController {
 fileprivate extension AddCourseViewController {
     
     func addConstraints() {
-        
+        addCollectionViewConstraints()
     }
     
+    func addCollectionViewConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.collectionView,
+                                              attribute: .top,
+                                              toItem: self.navigationBarView,
+                                              attribute: .bottom,
+                                              constant: .zero)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.collectionView,
+                                                  toItem: self.view,
+                                                  constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.collectionView,
+                                                   toItem: self.view,
+                                                   constant: .zero)
+        
+        NSLayoutConstraint.addEqualBottomConstraint(item: self.collectionView,
+                                                    toItem: self.view,
+                                                    constant: .zero)
+        
+    }
     
 }
 
@@ -73,7 +105,16 @@ fileprivate extension AddCourseViewController {
 fileprivate extension AddCourseViewController {
     
     func configureUI() {
-        
+        configureSelfView()
+        configureCollectionView()
+    }
+    
+    func configureSelfView() {
+        self.view.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
+    }
+    
+    func configureCollectionView() {
+        self.collectionView.backgroundColor = .clear
     }
     
 }
