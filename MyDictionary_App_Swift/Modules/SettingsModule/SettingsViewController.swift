@@ -57,6 +57,38 @@ extension SettingsViewController: SettingsPresenterOutputProtocol {
                             collectionView: collectionView)
     }
     
+    func showError(_ error: Error) {
+        UIAlertController.showAlertWithOkAction(title: LocalizedText.error.localized,
+                                                message: error.localizedDescription,
+                                                presenter: self)
+    }
+    
+    func showShareFeedbackActionsSheet() {
+        
+        UIAlertController.showActionSheet(title: LocalizedText.shareFeedback.localized,
+                                          message: nil,
+                                          actions: [.init(title: LocalizedText.featureRequest.localized,
+                                                          style: .default),
+                                                    .init(title: LocalizedText.bugReport.localized,
+                                                          style: .default),
+                                                    .init(title: LocalizedText.cancel.localized,
+                                                          style: .cancel)
+                                                   ],
+                                          handler: { action in
+            
+            if (action.title == LocalizedText.featureRequest.localized) {
+                self.presenter.shareFeedbackFeatureRequestClicked()
+            } else if (action.title == LocalizedText.bugReport.localized) {
+                self.presenter.shareFeedbackBugReportClicked()
+            } else {
+                return
+            }
+            
+        },
+                                          presenter: self)
+        
+    }
+    
 }
 
 // MARK: - Add Views

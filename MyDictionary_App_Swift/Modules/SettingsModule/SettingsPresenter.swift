@@ -9,10 +9,16 @@ import Foundation
 protocol SettingsPresenterInputProtocol: CollectionViewDelegateFlowLayoutPropertyProtocol,
                                          CollectionViewDataSourcePropertyProtocol {
     
+    func shareFeedbackFeatureRequestClicked()
+    func shareFeedbackBugReportClicked()
+    
 }
 
-protocol SettingsPresenterOutputProtocol: AnyObject,                                          
-                                            AppearanceHasBeenUpdatedProtocol {
+protocol SettingsPresenterOutputProtocol: AnyObject,
+                                          AppearanceHasBeenUpdatedProtocol,
+                                          MDShowErrorProtocol {
+    
+    func showShareFeedbackActionsSheet()
     
 }
 
@@ -56,31 +62,45 @@ extension SettingsPresenter {
         self.presenterOutput?.appearanceHasBeenUpdated(newValue)
     }
     
-    func didSelectRow(_ rowType: SettingsRowType) {
-        
-        switch rowType {
-            
-        case .about:
-            router.showAbout()
-            break
-            
-        case .account:
-            router.showAccount()
-            break
-            
-        case .privacyPolicy:
-            router.showPrivacyPolicy()
-            break
-            
-        case .termsOfService:
-            router.showTermsOfService()
-            break
-            
-        case .support:
-            break
-            
-        }
-        
+    func showError(_ error: Error) {
+        presenterOutput?.showError(error)
+    }
+    
+    func showAbout() {
+        router.showAbout()
+    }
+    
+    func showAccount() {
+        router.showAccount()
+    }
+    
+    func showPrivacyPolicy() {
+        router.showPrivacyPolicy()
+    }
+    
+    func showTermsOfService() {
+        router.showTermsOfService()
+    }
+    
+    func showShareFeedbackActionsSheet() {
+        presenterOutput?.showShareFeedbackActionsSheet()
+    }
+    
+    func showShareFeedback(withOption option: ShareFeedbackOption) {
+        router.presentShareFeedback(withOption: option)
+    }
+    
+}
+
+// MARK: - SettingsPresenterInputProtocol
+extension SettingsPresenter: SettingsPresenterInputProtocol {
+    
+    func shareFeedbackBugReportClicked() {
+        interactor.shareFeedbackBugReportClicked()
+    }
+    
+    func shareFeedbackFeatureRequestClicked() {
+        interactor.shareFeedbackFeatureRequestClicked()
     }
     
 }

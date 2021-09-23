@@ -4,12 +4,16 @@
 //
 //  Created Dmytro Chumakov on 22.09.2021.
 
-import UIKit
+import MessageUI
 
-final class ShareFeedbackViewController: UIViewController {
+final class ShareFeedbackViewController: MFMailComposeViewController {
 
-    init() {        
+    fileprivate let option: ShareFeedbackOption
+    
+    init(option: ShareFeedbackOption) {
+        self.option = option
         super.init(nibName: nil, bundle: nil)
+        configureUI()
     }
     
     deinit {
@@ -19,20 +23,29 @@ final class ShareFeedbackViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func loadView() {
-        super.loadView()
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-    }
+ 
+}
 
+// MARK: - MFMailComposeViewControllerDelegate
+extension ShareFeedbackViewController: MFMailComposeViewControllerDelegate {
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        debugPrint(#function, Self.self, "result: ", result, "error: ", error ?? "")
+        self.dismiss(animated: true)
+    }
+    
+}
+
+// MARK: - Configure UI
+fileprivate extension ShareFeedbackViewController {
+    
+    func configureUI() {
+        // Configure the fields of the interface.
+        setToRecipients([MDConstants.ShareFeedback.recipientEmail])
+        setSubject(option.description)
+        //
+        self.mailComposeDelegate = self
+        //
+    }
+    
 }

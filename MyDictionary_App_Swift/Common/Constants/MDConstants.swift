@@ -73,7 +73,7 @@ struct MDConstants {
     }
     
     struct Environment {
-        static let current: MDEnvironment = .production
+        static let current: MDEnvironment = .development
     }
     
     struct APIEnvironment {
@@ -195,6 +195,10 @@ struct MDConstants {
         static let privacyPolicyURL: URL = .init(string: "https://dchprojects.github.io/MyDictionary-Web/privacy_policy.html")!
         static let termsOfServiceURL: URL = .init(string: "https://dchprojects.github.io/MyDictionary-Web/terms_of_service.html")!
         static let aboutAppURL: URL = .init(string: "https://dchprojects.github.io/MyDictionary-Web/index.html#about")!
+    }
+    
+    struct ShareFeedback {
+        static let recipientEmail: String = "dima.chumakovwork@gmail.com"
     }
     
 }

@@ -12,7 +12,7 @@ enum SettingsRowType: Int {
     case account
     case privacyPolicy
     case termsOfService
-    case support
+    case shareFeedback
 }
 
 extension SettingsRowType: CustomStringConvertible {
@@ -27,8 +27,8 @@ extension SettingsRowType: CustomStringConvertible {
             return LocalizedText.privacyPolicy.localized
         case .termsOfService:
             return LocalizedText.termsOfService.localized
-        case .support:
-            return LocalizedText.support.localized
+        case .shareFeedback:
+            return LocalizedText.shareFeedback.localized
         }
     }
     

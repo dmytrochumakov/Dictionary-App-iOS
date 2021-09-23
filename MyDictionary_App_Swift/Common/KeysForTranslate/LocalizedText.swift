@@ -35,13 +35,13 @@ enum LocalizedText: String {
     case about
     case account
     case privacyPolicy = "privacy_Policy"
-    case termsOfService = "terms_Of_Service"
-    case support
+    case termsOfService = "terms_Of_Service"    
     case delete
     case logOut = "log_out"
     case shareFeedback = "share_feedback"
     case featureRequest = "feature_request"
     case bugReport = "bug_report"
+    case mailServicesAreNotAvailable = "mail_services_are_not_available"
     
     // Api Errors //
     case noDataApiError = "no_data_api_error"

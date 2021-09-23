@@ -4,17 +4,25 @@
 //
 //  Created Dmytro Chumakov on 31.05.2021.
 
-import UIKit
+import MessageUI
 
 protocol SettingsInteractorInputProtocol {
     var collectionViewDelegate: SettingsCollectionViewDelegateProtocol { get }
     var collectionViewDataSource: SettingsCollectionViewDataSourceProtocol { get }
+    func shareFeedbackFeatureRequestClicked()
+    func shareFeedbackBugReportClicked()
 }
 
 protocol SettingsInteractorOutputProtocol: AnyObject,
-                                           AppearanceHasBeenUpdatedProtocol {
+                                           AppearanceHasBeenUpdatedProtocol,
+                                           MDShowErrorProtocol {
     
-    func didSelectRow(_ rowType: SettingsRowType)
+    func showAbout()
+    func showAccount()
+    func showPrivacyPolicy()
+    func showTermsOfService()
+    func showShareFeedbackActionsSheet()
+    func showShareFeedback(withOption option: ShareFeedbackOption)
     
 }
 
@@ -52,6 +60,27 @@ final class SettingsInteractor: NSObject,
     
 }
 
+// MARK: - SettingsInteractorInputProtocol
+extension SettingsInteractor: SettingsInteractorInputProtocol {
+    
+    func shareFeedbackBugReportClicked() {
+        guard MFMailComposeViewController.canSendMail() else {
+            self.interactorOutput?.showError(MDSettingsError.mailServicesAreNotAvailable)
+            return
+        }
+        interactorOutput?.showShareFeedback(withOption: .bugReport)
+    }
+    
+    func shareFeedbackFeatureRequestClicked() {
+        guard MFMailComposeViewController.canSendMail() else {
+            self.interactorOutput?.showError(MDSettingsError.mailServicesAreNotAvailable)
+            return
+        }
+        interactorOutput?.showShareFeedback(withOption: .featureRequest)
+    }
+    
+}
+
 // MARK: - SettingsDataManagerOutputProtocol
 extension SettingsInteractor {
     
@@ -71,7 +100,29 @@ fileprivate extension SettingsInteractor {
             
             guard let rowModel = self?.dataManager.dataProvider.rowModel(atIndexPath: indexPath) else { return }
             
-            self?.interactorOutput?.didSelectRow(rowModel.rowType)
+            switch rowModel.rowType {
+                
+            case .about:
+                self?.interactorOutput?.showAbout()
+                break
+                
+            case .account:
+                self?.interactorOutput?.showAccount()
+                break
+                
+            case .privacyPolicy:
+                self?.interactorOutput?.showPrivacyPolicy()
+                break
+                
+            case .termsOfService:
+                self?.interactorOutput?.showTermsOfService()
+                break
+                
+            case .shareFeedback:
+                self?.interactorOutput?.showShareFeedbackActionsSheet()
+                break
+            }
+            
             
         }
         
@@ -101,3 +152,4 @@ fileprivate extension SettingsInteractor {
     }
     
 }
+
