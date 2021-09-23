@@ -7,7 +7,12 @@
 import UIKit
 
 protocol AddCourseInteractorInputProtocol {
+    
+    var collectionViewDelegate: MDAddCourseCollectionViewDelegateProtocol { get }
+    var collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol { get }
+    
     func viewDidLoad()
+    
 }
 
 protocol AddCourseInteractorOutputProtocol: AnyObject,
@@ -24,10 +29,18 @@ protocol AddCourseInteractorProtocol: AddCourseInteractorInputProtocol,
 final class AddCourseInteractor: AddCourseInteractorProtocol {
     
     fileprivate let dataManager: AddCourseDataManagerInputProtocol
+    internal var collectionViewDelegate: MDAddCourseCollectionViewDelegateProtocol
+    internal var collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol
     internal weak var interactorOutput: AddCourseInteractorOutputProtocol?
     
-    init(dataManager: AddCourseDataManagerInputProtocol) {
+    init(dataManager: AddCourseDataManagerInputProtocol,
+         collectionViewDelegate: MDAddCourseCollectionViewDelegateProtocol,
+         collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol) {
+        
+        self.collectionViewDelegate = collectionViewDelegate
+        self.collectionViewDataSource = collectionViewDataSource
         self.dataManager = dataManager
+        
     }
     
     deinit {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol AppearanceCollectionViewDelegateProtocol: CollectionViewDelegateFlowLayout {
+protocol AppearanceCollectionViewDelegateProtocol: UICollectionViewDelegateFlowLayout {
     var didSelectItemAtIndexPath: ((IndexPath) -> Void)? { get set }
 }
 

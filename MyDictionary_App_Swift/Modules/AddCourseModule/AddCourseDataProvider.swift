@@ -6,8 +6,12 @@
 
 import Foundation
 
-protocol AddCourseDataProviderProtocol {
+protocol AddCourseDataProviderProtocol: NumberOfSectionsProtocol,
+                                        NumberOfRowsInSectionProtocol {
+    
     var languages: [LanguageResponse] { get set }
+    func addCourseCellModel(atIndexPath indexPath: IndexPath) -> MDAddCourseCellModel?
+    
 }
 
 final class AddCourseDataProvider: AddCourseDataProviderProtocol {
@@ -16,6 +20,30 @@ final class AddCourseDataProvider: AddCourseDataProviderProtocol {
     
     init(languages: [LanguageResponse]) {
         self.languages = languages
+    }
+    
+}
+
+extension AddCourseDataProvider {
+    
+    var numberOfSections: Int {
+        return 1
+    }
+    
+    func numberOfRowsInSection(_ section: Int) -> Int {
+        return languages.count
+    }
+    
+}
+
+extension AddCourseDataProvider {
+    
+    func addCourseCellModel(atIndexPath indexPath: IndexPath) -> MDAddCourseCellModel? {
+        if (languages.isEmpty) {
+            return nil
+        } else {
+            return .init(title: languages[indexPath.row].languageName)
+        }
     }
     
 }

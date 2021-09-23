@@ -1,5 +1,5 @@
 //
-//  AddCourseCell.swift
+//  MDAddCourseCell.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 23.09.2021.
@@ -7,14 +7,17 @@
 
 import UIKit
 
-final class AddCourseCell: UICollectionViewCell,
+final class MDAddCourseCell: UICollectionViewCell,
                            ReuseIdentifierProtocol {
+    
+    public static let height: CGFloat = 40
     
     fileprivate let titleLabel: UILabel = {
         let label: UILabel = .init()
         label.font = MDUIResources.Font.MyriadProRegular.font()
         label.textColor = MDUIResources.Color.md_3C3C3C.color()
         label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -36,18 +39,18 @@ final class AddCourseCell: UICollectionViewCell,
 }
 
 // MARK: -
-extension AddCourseCell: MDFillWithModelProtocol {
+extension MDAddCourseCell: MDFillWithModelProtocol {
     
-    typealias Model = AddCourseCellModel
+    typealias Model = MDAddCourseCellModel?
     
-    func fillWithModel(_ model: AddCourseCellModel) {
-        self.titleLabel.text = model.title
+    func fillWithModel(_ model: MDAddCourseCellModel?) {
+        self.titleLabel.text = model?.title
     }
     
 }
 
 // MARK: - Add Views
-fileprivate extension AddCourseCell {
+fileprivate extension MDAddCourseCell {
     
     func addViews() {
         addTitleLabel()
@@ -60,7 +63,7 @@ fileprivate extension AddCourseCell {
 }
 
 // MARK: - Add Constraints
-fileprivate extension AddCourseCell {
+fileprivate extension MDAddCourseCell {
     
     func addConstraints() {
         addTitleLabelConstraints()
@@ -87,7 +90,7 @@ fileprivate extension AddCourseCell {
 }
 
 // MARK: - Configure UI
-fileprivate extension AddCourseCell {
+fileprivate extension MDAddCourseCell {
     
     func configureUI() {
         configureSelfView()

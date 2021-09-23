@@ -5,10 +5,10 @@
 //  Created by Dmytro Chumakov on 16.05.2021.
 //
 
-import Foundation
+import UIKit
 
-protocol WordListPresenterInputProtocol: CollectionViewDelegateFlowLayoutPropertyProtocol,
-                                         CollectionViewDataSourcePropertyProtocol {
+protocol WordListPresenterInputProtocol: MDCollectionViewDelegateFlowLayoutPropertyProtocol,
+                                         MDCollectionViewDataSourcePropertyProtocol {
     
 }
 
@@ -30,10 +30,10 @@ final class WordListPresenter: NSObject,
     fileprivate let router: WordListRouterProtocol
     
     internal weak var presenterOutput: WordListPresenterOutputProtocol?
-    internal var collectionViewDelegate: CollectionViewDelegateFlowLayout {
+    internal var collectionViewDelegate: UICollectionViewDelegateFlowLayout {
         return self.interactor.collectionViewDelegate
     }
-    internal var collectionViewDataSource: CollectionViewDataSource {
+    internal var collectionViewDataSource: UICollectionViewDataSource {
         return self.interactor.collectionViewDataSource
     }
     

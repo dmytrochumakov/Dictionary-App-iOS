@@ -15,7 +15,7 @@ final class AddCourseViewController: MDBaseLargeTitledBackNavigationBarViewContr
         let collectionView: UICollectionView = .init(frame: .zero,
                                                      collectionViewLayout: flowLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(AddCourseCell.self)
+        collectionView.register(MDAddCourseCell.self)
         return collectionView
     }()
     
@@ -129,6 +129,8 @@ fileprivate extension AddCourseViewController {
     }
     
     func configureCollectionView() {
+        self.collectionView.delegate = presenter.collectionViewDelegate
+        self.collectionView.dataSource = presenter.collectionViewDataSource
         self.collectionView.backgroundColor = .clear
     }
     

@@ -28,7 +28,10 @@ extension AddCourseModule {
         var dataManager: AddCourseDataManagerProtocol = AddCourseDataManager.init(languageMemoryStorage: MDConstants.AppDependencies.dependencies.languageStorage.memoryStorage,
                                                                                   dataProvider: dataProvider)
         
-        let interactor: AddCourseInteractorProtocol = AddCourseInteractor.init(dataManager: dataManager)
+        let interactor: AddCourseInteractorProtocol = AddCourseInteractor.init(dataManager: dataManager,
+                                                                               collectionViewDelegate: MDAddCourseCollectionViewDelegate.init(dataProvider: dataProvider),
+                                                                               collectionViewDataSource: MDAddCourseCollectionViewDataSource.init(dataProvider: dataProvider))
+        
         var router: AddCourseRouterProtocol = AddCourseRouter.init()
         let presenter: AddCoursePresenterProtocol = AddCoursePresenter.init(interactor: interactor, router: router)
         let vc = AddCourseViewController.init(presenter: presenter)

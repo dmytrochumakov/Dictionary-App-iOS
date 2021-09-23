@@ -6,7 +6,8 @@
 
 import UIKit
 
-protocol AddCoursePresenterInputProtocol {
+protocol AddCoursePresenterInputProtocol: MDCollectionViewDelegateFlowLayoutPropertyProtocol,
+                                          MDCollectionViewDataSourcePropertyProtocol {
     func viewDidLoad()
 }
 
@@ -62,4 +63,12 @@ extension AddCoursePresenter {
         interactor.viewDidLoad()
     }
     
+    var collectionViewDelegate: UICollectionViewDelegateFlowLayout {
+        return interactor.collectionViewDelegate
+    }
+    
+    var collectionViewDataSource: UICollectionViewDataSource {
+        return interactor.collectionViewDataSource
+    }
+        
 }

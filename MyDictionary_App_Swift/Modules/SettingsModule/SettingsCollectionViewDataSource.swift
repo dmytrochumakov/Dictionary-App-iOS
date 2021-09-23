@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SettingsCollectionViewDataSourceProtocol: CollectionViewDataSource {
+protocol SettingsCollectionViewDataSourceProtocol: UICollectionViewDataSource {
     
 }
 
