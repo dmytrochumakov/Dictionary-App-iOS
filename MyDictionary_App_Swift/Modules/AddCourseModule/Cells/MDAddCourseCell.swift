@@ -8,7 +8,7 @@
 import UIKit
 
 final class MDAddCourseCell: UICollectionViewCell,
-                           ReuseIdentifierProtocol {
+                             ReuseIdentifierProtocol {
     
     public static let height: CGFloat = 40
     
@@ -19,6 +19,14 @@ final class MDAddCourseCell: UICollectionViewCell,
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    fileprivate static let checkboxImageViewSize: CGSize = .init(width: 30, height: 30)
+    fileprivate let checkboxImageView: UIImageView = {
+        let imageView: UIImageView = .init()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = image(isSelected: false)
+        return imageView
     }()
     
     override init(frame: CGRect) {
@@ -54,10 +62,15 @@ fileprivate extension MDAddCourseCell {
     
     func addViews() {
         addTitleLabel()
+        addCheckboxImageView()
     }
     
     func addTitleLabel() {
         addSubview(titleLabel)
+    }
+    
+    func addCheckboxImageView() {
+        addSubview(checkboxImageView)
     }
     
 }
@@ -67,6 +80,7 @@ fileprivate extension MDAddCourseCell {
     
     func addConstraints() {
         addTitleLabelConstraints()
+        addCheckboxImageViewConstraints()
     }
     
     func addTitleLabelConstraints() {
@@ -77,13 +91,33 @@ fileprivate extension MDAddCourseCell {
         
         NSLayoutConstraint.addEqualConstraint(item: self.titleLabel,
                                               attribute: .right,
-                                              toItem: self,
-                                              attribute: .right,
+                                              toItem: self.checkboxImageView,
+                                              attribute: .left,
                                               constant: -16)
         
-        NSLayoutConstraint.addEqualCenterYConstraint(item: self.titleLabel,
+        NSLayoutConstraint.addEqualConstraint(item: self.titleLabel,
+                                              attribute: .centerY,
+                                              toItem: self.checkboxImageView,
+                                              attribute: .centerY,
+                                              constant: .zero)
+        
+    }
+    
+    func addCheckboxImageViewConstraints() {
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.checkboxImageView,
+                                                   toItem: self,
+                                                   constant: -16)
+        
+        NSLayoutConstraint.addEqualCenterYConstraint(item: self.checkboxImageView,
                                                      toItem: self,
                                                      constant: .zero)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.checkboxImageView,
+                                                    constant: Self.checkboxImageViewSize.height)
+        
+        NSLayoutConstraint.addEqualWidthConstraint(item: self.checkboxImageView,
+                                                   constant: Self.checkboxImageViewSize.width)
         
     }
     
@@ -98,6 +132,19 @@ fileprivate extension MDAddCourseCell {
     
     func configureSelfView() {
         self.backgroundColor = .clear
+    }
+    
+}
+
+// MARK: - Private Methods
+fileprivate extension MDAddCourseCell {
+    
+    static func image(isSelected: Bool) -> UIImage {
+        if (isSelected) {
+            return MDUIResources.Image.checkbox_selected.image
+        } else {
+            return MDUIResources.Image.checkbox_unselected.image
+        }
     }
     
 }
