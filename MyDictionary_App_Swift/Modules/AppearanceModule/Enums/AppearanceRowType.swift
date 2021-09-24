@@ -14,7 +14,7 @@ enum AppearanceRowType: Int, CaseIterable {
 }
 
 // MARK: - RowTypeProtocol
-extension AppearanceRowType: RowTypeProtocol {
+extension AppearanceRowType: MDRowTypeProtocol {
     
     typealias RowType = Self
     

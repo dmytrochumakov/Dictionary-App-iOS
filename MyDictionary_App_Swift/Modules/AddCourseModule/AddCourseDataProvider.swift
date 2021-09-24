@@ -9,17 +9,19 @@ import Foundation
 protocol AddCourseDataProviderProtocol: NumberOfSectionsProtocol,
                                         NumberOfRowsInSectionProtocol {
     
-    var filteredLanguages: [LanguageResponse] { get set }
+    var sections: [MDAddCourseSection] { get set }
+    func addCourseHeaderViewCellModel(atSection section: Int) -> MDAddCourseHeaderViewCellModel?
     func addCourseCellModel(atIndexPath indexPath: IndexPath) -> MDAddCourseCellModel?
+    func addCourseCellModels(atSection section: Int) -> [LanguageResponse]
     
 }
 
 final class AddCourseDataProvider: AddCourseDataProviderProtocol {
     
-    var filteredLanguages: [LanguageResponse]
+    var sections: [MDAddCourseSection]
     
-    init(filteredLanguages: [LanguageResponse]) {
-        self.filteredLanguages = filteredLanguages
+    init(sections: [MDAddCourseSection]) {
+        self.sections = sections
     }
     
 }
@@ -27,22 +29,38 @@ final class AddCourseDataProvider: AddCourseDataProviderProtocol {
 extension AddCourseDataProvider {
     
     var numberOfSections: Int {
-        return 1
+        return sections.count
     }
     
     func numberOfRowsInSection(_ section: Int) -> Int {
-        return filteredLanguages.count
+        return sections[section].rows.count
     }
     
 }
 
 extension AddCourseDataProvider {
     
-    func addCourseCellModel(atIndexPath indexPath: IndexPath) -> MDAddCourseCellModel? {
-        if (filteredLanguages.isEmpty) {
+    func addCourseHeaderViewCellModel(atSection section: Int) -> MDAddCourseHeaderViewCellModel? {
+        if (sections.isEmpty) {
             return nil
         } else {
-            return .init(title: filteredLanguages[indexPath.row].languageName)
+            return .init(character: sections[section].character)
+        }
+    }
+    
+    func addCourseCellModel(atIndexPath indexPath: IndexPath) -> MDAddCourseCellModel? {
+        if (sections.isEmpty) {
+            return nil
+        } else {
+            return .init(title: sections[indexPath.section].rows[indexPath.row].languageName)
+        }
+    }
+    
+    func addCourseCellModels(atSection section: Int) -> [LanguageResponse] {
+        if (sections.isEmpty) {
+            return .init()
+        } else {
+            return sections[section].rows
         }
     }
     

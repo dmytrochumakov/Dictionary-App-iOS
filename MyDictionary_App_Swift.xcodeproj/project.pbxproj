@@ -207,8 +207,8 @@
 		229D2D4C26EB68420047B518 /* MDNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D4B26EB68420047B518 /* MDNavigationController.swift */; };
 		229D2D4E26EB706E0047B518 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D4D26EB706E0047B518 /* UINavigationController+Extension.swift */; };
 		229E08BC2652C41400DA56C4 /* ReuseIdentifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BB2652C41400DA56C4 /* ReuseIdentifierProtocol.swift */; };
-		229E08BE2652C8E600DA56C4 /* SectionTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BD2652C8E600DA56C4 /* SectionTypeProtocol.swift */; };
-		229E08C02652C9E700DA56C4 /* RowTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BF2652C9E700DA56C4 /* RowTypeProtocol.swift */; };
+		229E08BE2652C8E600DA56C4 /* MDSectionTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BD2652C8E600DA56C4 /* MDSectionTypeProtocol.swift */; };
+		229E08C02652C9E700DA56C4 /* MDRowTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BF2652C9E700DA56C4 /* MDRowTypeProtocol.swift */; };
 		229E08C22652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C12652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift */; };
 		229E08C42652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C32652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift */; };
 		229E08C72652CB9000DA56C4 /* WordListCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */; };
@@ -332,6 +332,9 @@
 		22DEA00726FA05A900892D78 /* AccountDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DEA00026FA05A900892D78 /* AccountDataProvider.swift */; };
 		22DEA00826FA05A900892D78 /* AccountDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DEA00126FA05A900892D78 /* AccountDataManager.swift */; };
 		22DEAE3226C289F100B64B16 /* MDAPIVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DEAE3126C289F100B64B16 /* MDAPIVersion.swift */; };
+		22E17B1726FDAF92008CB714 /* MDAddCourseHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E17B1626FDAF92008CB714 /* MDAddCourseHeaderView.swift */; };
+		22E17B1926FDB544008CB714 /* MDAddCourseSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E17B1826FDB544008CB714 /* MDAddCourseSection.swift */; };
+		22E17B1D26FDB565008CB714 /* MDAddCourseHeaderViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E17B1C26FDB565008CB714 /* MDAddCourseHeaderViewCellModel.swift */; };
 		22E2B4DD2664E43B00978E62 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4D62664E43B00978E62 /* SettingsPresenter.swift */; };
 		22E2B4DE2664E43B00978E62 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4D72664E43B00978E62 /* SettingsRouter.swift */; };
 		22E2B4DF2664E43B00978E62 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4D82664E43B00978E62 /* SettingsViewController.swift */; };
@@ -593,8 +596,8 @@
 		229D2D4B26EB68420047B518 /* MDNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDNavigationController.swift; sourceTree = "<group>"; };
 		229D2D4D26EB706E0047B518 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 		229E08BB2652C41400DA56C4 /* ReuseIdentifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifierProtocol.swift; sourceTree = "<group>"; };
-		229E08BD2652C8E600DA56C4 /* SectionTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTypeProtocol.swift; sourceTree = "<group>"; };
-		229E08BF2652C9E700DA56C4 /* RowTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowTypeProtocol.swift; sourceTree = "<group>"; };
+		229E08BD2652C8E600DA56C4 /* MDSectionTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSectionTypeProtocol.swift; sourceTree = "<group>"; };
+		229E08BF2652C9E700DA56C4 /* MDRowTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDRowTypeProtocol.swift; sourceTree = "<group>"; };
 		229E08C12652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfSectionsProtocol.swift; sourceTree = "<group>"; };
 		229E08C32652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfRowsInSectionProtocol.swift; sourceTree = "<group>"; };
 		229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListCollectionViewDataSource.swift; sourceTree = "<group>"; };
@@ -718,6 +721,9 @@
 		22DEA00026FA05A900892D78 /* AccountDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataProvider.swift; sourceTree = "<group>"; };
 		22DEA00126FA05A900892D78 /* AccountDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataManager.swift; sourceTree = "<group>"; };
 		22DEAE3126C289F100B64B16 /* MDAPIVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIVersion.swift; sourceTree = "<group>"; };
+		22E17B1626FDAF92008CB714 /* MDAddCourseHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAddCourseHeaderView.swift; sourceTree = "<group>"; };
+		22E17B1826FDB544008CB714 /* MDAddCourseSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAddCourseSection.swift; sourceTree = "<group>"; };
+		22E17B1C26FDB565008CB714 /* MDAddCourseHeaderViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAddCourseHeaderViewCellModel.swift; sourceTree = "<group>"; };
 		22E2B4D62664E43B00978E62 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		22E2B4D72664E43B00978E62 /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
 		22E2B4D82664E43B00978E62 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -1050,8 +1056,8 @@
 				227D5E652652585C00B54524 /* MDCollectionViewDelegateFlowLayoutPropertyProtocol.swift */,
 				2223F8A726512C1A004F2FE9 /* LocalizableProtocol.swift */,
 				229E08BB2652C41400DA56C4 /* ReuseIdentifierProtocol.swift */,
-				229E08BD2652C8E600DA56C4 /* SectionTypeProtocol.swift */,
-				229E08BF2652C9E700DA56C4 /* RowTypeProtocol.swift */,
+				229E08BD2652C8E600DA56C4 /* MDSectionTypeProtocol.swift */,
+				229E08BF2652C9E700DA56C4 /* MDRowTypeProtocol.swift */,
 				229E08C12652CA1D00DA56C4 /* NumberOfSectionsProtocol.swift */,
 				229E08C32652CA5100DA56C4 /* NumberOfRowsInSectionProtocol.swift */,
 				229E08CA2652CDB500DA56C4 /* MDCollectionViewDataSourcePropertyProtocol.swift */,
@@ -1818,6 +1824,7 @@
 			isa = PBXGroup;
 			children = (
 				22A2987E26FCA26000E79843 /* MDAddCourseCell.swift */,
+				22E17B1626FDAF92008CB714 /* MDAddCourseHeaderView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1826,6 +1833,8 @@
 			isa = PBXGroup;
 			children = (
 				22A2988126FCA50400E79843 /* MDAddCourseCellModel.swift */,
+				22E17B1826FDB544008CB714 /* MDAddCourseSection.swift */,
+				22E17B1C26FDB565008CB714 /* MDAddCourseHeaderViewCellModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2559,6 +2568,7 @@
 				229FFF3626F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift in Sources */,
 				22E327CE26FB319D00445917 /* MDStorageServiceOperationResult.swift in Sources */,
 				224375AF26F3406B006B90EB /* MDCourseListCellModel.swift in Sources */,
+				22E17B1926FDB544008CB714 /* MDAddCourseSection.swift in Sources */,
 				220793CB26C67432003D434B /* UIAlertController+Extension.swift in Sources */,
 				22E2B4F9266509CA00978E62 /* SettingsRowModel.swift in Sources */,
 				22557FC726C9589000A4FF31 /* MDJWTMemoryStorage.swift in Sources */,
@@ -2644,7 +2654,7 @@
 				22561C8326D4BA5C00A6135B /* MDCreateCourseCoreDataStorageOperation.swift in Sources */,
 				2289CEF52678CC34007254C3 /* MDReadWordProtocol.swift in Sources */,
 				220793C926C66F85003D434B /* AuthValidationResult.swift in Sources */,
-				229E08C02652C9E700DA56C4 /* RowTypeProtocol.swift in Sources */,
+				229E08C02652C9E700DA56C4 /* MDRowTypeProtocol.swift in Sources */,
 				22B8E6E426D3C7B7001CCCA8 /* MDReadCourseProtocol.swift in Sources */,
 				22A2987526FC84F000E79843 /* AddCourseModule.swift in Sources */,
 				228722CC26D0DDC500C9D1BC /* MDUpdateJWTCoreDataStorageOperation.swift in Sources */,
@@ -2657,13 +2667,14 @@
 				220793CE26C68081003D434B /* MDAPIAuth.swift in Sources */,
 				2277FE1226F9D7E900001710 /* MDBaseNavigationBarViewController.swift in Sources */,
 				22EF01E3269D9CDA00FE4435 /* MDEntitiesIsEmptyProtocol.swift in Sources */,
-				229E08BE2652C8E600DA56C4 /* SectionTypeProtocol.swift in Sources */,
+				229E08BE2652C8E600DA56C4 /* MDSectionTypeProtocol.swift in Sources */,
 				22E327DE26FB5EE200445917 /* ShareFeedbackViewController.swift in Sources */,
 				2270F3A026D26199006B46F4 /* CDLanguageResponseEntity+Extension.swift in Sources */,
 				22C5863E26C7AFB80030B12D /* RegistrationInteractor.swift in Sources */,
 				2289CEFA2678CC34007254C3 /* MDOperation.swift in Sources */,
 				22EF01F4269DA7C000FE4435 /* MDNetworkSession.swift in Sources */,
 				229D2D4926EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataManager.swift in Sources */,
+				22E17B1726FDAF92008CB714 /* MDAddCourseHeaderView.swift in Sources */,
 				22E2B4E42664EB6900978E62 /* SettingsCollectionViewDataSource.swift in Sources */,
 				220FFE8C26C90B1F00702CCE /* MDReadUserProtocol.swift in Sources */,
 				2289CEF92678CC34007254C3 /* OperationQueueService.swift in Sources */,
@@ -2722,6 +2733,7 @@
 				22CA088C265165460052D169 /* MDUIResources.swift in Sources */,
 				22DB2F7D26C3BE7900C1AADA /* CourseListDataManager.swift in Sources */,
 				229D2D4E26EB706E0047B518 /* UINavigationController+Extension.swift in Sources */,
+				22E17B1D26FDB565008CB714 /* MDAddCourseHeaderViewCellModel.swift in Sources */,
 				220FFEB126C91EF000702CCE /* MDDeleteUserCoreDataStorageOperation.swift in Sources */,
 				22E2B4EA2664EDA200978E62 /* SettingsCell.swift in Sources */,
 				2258922326CA3C8F00AD6F18 /* MDReadJWTsCoreDataStorageOperation.swift in Sources */,

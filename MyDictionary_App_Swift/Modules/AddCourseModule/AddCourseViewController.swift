@@ -16,6 +16,7 @@ final class AddCourseViewController: MDBaseLargeTitledBackNavigationBarViewContr
                                                      collectionViewLayout: flowLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(MDAddCourseCell.self)
+        collectionView.register(MDAddCourseHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
         return collectionView
     }()
     

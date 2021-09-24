@@ -32,4 +32,12 @@ extension MDAddCourseCollectionViewDelegate {
         return .init(width: collectionView.bounds.width, height: MDAddCourseCell.height)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if (dataProvider.addCourseCellModels(atSection: section)).isEmpty {
+            return .zero
+        } else {            
+            return .init(width: collectionView.bounds.width, height: MDAddCourseHeaderView.height)
+        }
+    }
+    
 }

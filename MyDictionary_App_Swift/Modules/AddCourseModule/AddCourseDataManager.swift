@@ -52,7 +52,7 @@ extension AddCourseDataManager {
                 
             case .success(let languages):
                 // Set Languages
-                self?.dataProvider.filteredLanguages = languages
+                self?.dataProvider.sections = self?.configuredSections(byLanguages: languages) ?? []
                 // Pass Result
                 self?.dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.success(()))
                 //
@@ -77,8 +77,8 @@ extension AddCourseDataManager {
                 
             case .success(let readLanguages):
                 // Set Filtered Result
-                self?.dataProvider.filteredLanguages = self?.filteredLanguages(input: readLanguages,
-                                                                               searchText: searchText) ?? []
+                self?.dataProvider.sections = self?.filteredLanguages(input: readLanguages,
+                                                                      searchText: searchText) ?? []
                 // Pass Result
                 self?.dataManagerOutput?.filteredLanguagesResult(.success(()))
                 //
@@ -103,8 +103,8 @@ extension AddCourseDataManager {
             switch readResult {
                 
             case .success(let languages):
-                // Set Languages
-                self?.dataProvider.filteredLanguages = languages
+                // Set Sections
+                self?.dataProvider.sections = self?.configuredSections(byLanguages: languages) ?? []
                 // Pass Result
                 self?.dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.success(()))
                 //
@@ -123,15 +123,48 @@ extension AddCourseDataManager {
     
 }
 
+// MARK: - Private Methods
 fileprivate extension AddCourseDataManager {
     
     func filteredLanguages(input array: [LanguageResponse],
-                           searchText: String?) -> [LanguageResponse] {
+                           searchText: String?) -> [MDAddCourseSection] {
         if (MDConstants.Text.textIsEmpty(searchText)) {
-            return array
+            return configuredSections(byLanguages: array)
         } else {
-            return array.filter({ $0.languageName.lowercased().contains(searchText!.lowercased()) })
+            return configuredSections(byLanguages: array.filter({ $0.languageName.lowercased().contains(searchText!.lowercased()) }))
         }
+    }
+    
+    func sortAlphabeticallyLanguages(_ array: [LanguageResponse]) -> [LanguageResponse] {
+        return array.sorted(by: { $0.languageName.localizedCaseInsensitiveCompare($1.languageName) == ComparisonResult.orderedAscending })
+    }
+    
+    func configuredSections(byLanguages languages: [LanguageResponse]) -> [MDAddCourseSection] {
+        
+        if (languages.isEmpty) {
+            return .init()
+        } else {
+            
+            var result: [MDAddCourseSection] = .init()
+            
+            let sortedLanguages: [LanguageResponse] = sortAlphabeticallyLanguages(languages)
+            
+            MDConstants.EnglishAlphabet.uppercasedCharacters.forEach { character in
+                
+                result.append(.init(character: character,
+                                    rows: configuredRows(sortedLanguages: sortedLanguages, character:
+                                                            character)))
+                
+            }
+            
+            return result
+            
+        }
+        
+    }
+    
+    func configuredRows(sortedLanguages: [LanguageResponse], character: String) -> [LanguageResponse] {
+        return sortedLanguages.filter({ String($0.languageName.first!).contains(character)})
     }
     
 }

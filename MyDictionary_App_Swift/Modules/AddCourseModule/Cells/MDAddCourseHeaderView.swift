@@ -1,20 +1,20 @@
 //
-//  MDAddCourseCell.swift
+//  MDAddCourseHeaderView.swift
 //  MyDictionary_App_Swift
 //
-//  Created by Dmytro Chumakov on 23.09.2021.
+//  Created by Dmytro Chumakov on 24.09.2021.
 //
 
 import UIKit
 
-final class MDAddCourseCell: UICollectionViewCell,
-                           ReuseIdentifierProtocol {
+final class MDAddCourseHeaderView: UICollectionReusableView,
+                                   ReuseIdentifierProtocol {
     
-    public static let height: CGFloat = 40
+    public static let height: CGFloat = 32
     
     fileprivate let titleLabel: UILabel = {
         let label: UILabel = .init()
-        label.font = MDUIResources.Font.MyriadProRegular.font()
+        label.font = MDUIResources.Font.MyriadProSemiBold.font()
         label.textColor = MDUIResources.Color.md_3C3C3C.color()
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -39,18 +39,18 @@ final class MDAddCourseCell: UICollectionViewCell,
 }
 
 // MARK: - MDFillWithModelProtocol
-extension MDAddCourseCell: MDFillWithModelProtocol {
+extension MDAddCourseHeaderView: MDFillWithModelProtocol {
     
-    typealias Model = MDAddCourseCellModel?
+    typealias Model = MDAddCourseHeaderViewCellModel?
     
-    func fillWithModel(_ model: MDAddCourseCellModel?) {
-        self.titleLabel.text = model?.title
+    func fillWithModel(_ model: MDAddCourseHeaderViewCellModel?) {
+        self.titleLabel.text = model?.character
     }
     
 }
 
 // MARK: - Add Views
-fileprivate extension MDAddCourseCell {
+fileprivate extension MDAddCourseHeaderView {
     
     func addViews() {
         addTitleLabel()
@@ -63,7 +63,7 @@ fileprivate extension MDAddCourseCell {
 }
 
 // MARK: - Add Constraints
-fileprivate extension MDAddCourseCell {
+fileprivate extension MDAddCourseHeaderView {
     
     func addConstraints() {
         addTitleLabelConstraints()
@@ -75,11 +75,9 @@ fileprivate extension MDAddCourseCell {
                                                   toItem: self,
                                                   constant: 16)
         
-        NSLayoutConstraint.addEqualConstraint(item: self.titleLabel,
-                                              attribute: .right,
-                                              toItem: self,
-                                              attribute: .right,
-                                              constant: -16)
+        NSLayoutConstraint.addEqualRightConstraint(item: self.titleLabel,
+                                                   toItem: self,
+                                                   constant: -16)
         
         NSLayoutConstraint.addEqualCenterYConstraint(item: self.titleLabel,
                                                      toItem: self,
@@ -90,7 +88,7 @@ fileprivate extension MDAddCourseCell {
 }
 
 // MARK: - Configure UI
-fileprivate extension MDAddCourseCell {
+fileprivate extension MDAddCourseHeaderView {
     
     func configureUI() {
         configureSelfView()
@@ -101,3 +99,4 @@ fileprivate extension MDAddCourseCell {
     }
     
 }
+

@@ -208,4 +208,11 @@ struct MDConstants {
         static let defaultTopOffset: CGFloat = 16
     }
     
+    struct EnglishAlphabet {
+        static let uppercasedCharacters: [String] = ["A", "B", "C", "D", "E", "F", "G", "H",
+                                                     "I", "J", "K", "L", "M", "N", "O", "P",
+                                                     "Q", "R", "S", "T", "U", "V", "W", "X",
+                                                     "Y", "Z"]
+    }
+    
 }
