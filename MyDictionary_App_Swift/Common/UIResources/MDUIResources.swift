@@ -88,6 +88,8 @@ struct MDUIResources {
         case search
         case delete
         case background_navigation_bar_2
+        case checkbox_selected
+        case checkbox_unselected
         
         var image: UIImage {
             
@@ -107,7 +109,9 @@ struct MDUIResources {
                     .right_arrow,
                     .search,
                     .delete,
-                    .background_navigation_bar_2:
+                    .background_navigation_bar_2,
+                    .checkbox_selected,
+                    .checkbox_unselected:
                 
                 return configuredImage(fromName: self.rawValue)
                 
