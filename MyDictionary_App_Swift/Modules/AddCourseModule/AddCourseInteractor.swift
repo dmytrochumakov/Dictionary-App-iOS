@@ -36,20 +36,25 @@ final class AddCourseInteractor: NSObject,
                                  AddCourseInteractorProtocol {
     
     fileprivate let dataManager: AddCourseDataManagerInputProtocol
+    fileprivate let bridge: MDBridgeProtocol
+    
     internal var collectionViewDelegate: MDAddCourseCollectionViewDelegateProtocol
     internal var collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol
     internal var searchBarDelegate: MDSearchBarDelegateImplementationProtocol
+    
     internal weak var interactorOutput: AddCourseInteractorOutputProtocol?
     
     init(dataManager: AddCourseDataManagerInputProtocol,
          collectionViewDelegate: MDAddCourseCollectionViewDelegateProtocol,
          collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol,
-         searchBarDelegate: MDSearchBarDelegateImplementationProtocol) {
+         searchBarDelegate: MDSearchBarDelegateImplementationProtocol,
+         bridge: MDBridgeProtocol) {
         
         self.collectionViewDelegate = collectionViewDelegate
         self.collectionViewDataSource = collectionViewDataSource
         self.dataManager = dataManager
         self.searchBarDelegate = searchBarDelegate
+        self.bridge = bridge
         
         super.init()
         subscribe()
@@ -87,9 +92,10 @@ extension AddCourseInteractor {
     }
     
     func addButtonClicked() {
-        if (dataManager.firstSelectedIndexPath == nil) {
+        if (dataManager.selectedRow == nil) {
             interactorOutput?.showError(MDAddCourseError.pleaseSelectACourse)
         } else {
+            bridge.didSelectCourse?(dataManager.selectedRow!)
             interactorOutput?.closeModule()
         }
     }

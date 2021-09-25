@@ -7,7 +7,7 @@
 import Foundation
 
 protocol AddCourseDataManagerInputProtocol {
-    var firstSelectedIndexPath: IndexPath? { get }
+    var selectedRow: MDAddCourseRow? { get }
     func loadAndPassLanguagesArrayToDataProvider()
     func filterLanguages(_ searchText: String?)
     func clearLanguageFilter()
@@ -29,10 +29,9 @@ final class AddCourseDataManager: AddCourseDataManagerProtocol {
     
     fileprivate let memoryStorage: MDLanguageMemoryStorageProtocol
     
-    public var firstSelectedIndexPath: IndexPath? {
-        guard let sectionIndex = dataProvider.sections.firstIndex(where: { $0.rows.contains(where: { $0.isSelected }) }) else { return (nil) }
-        guard let rowIndex = dataProvider.sections[sectionIndex].rows.firstIndex(where: { $0.isSelected }) else { return (nil) }
-        return .init(row: rowIndex, section: sectionIndex)
+    var selectedRow: MDAddCourseRow? {
+        guard let selectedIndexPath = self.firstSelectedIndexPath else { return nil }
+        return dataProvider.sections[selectedIndexPath.section].rows[selectedIndexPath.row]
     }
     
     internal var dataProvider: AddCourseDataProviderProtocol
@@ -224,6 +223,12 @@ fileprivate extension AddCourseDataManager {
         
         return result
         
+    }
+    
+    var firstSelectedIndexPath: IndexPath? {
+        guard let sectionIndex = dataProvider.sections.firstIndex(where: { $0.rows.contains(where: { $0.isSelected }) }) else { return (nil) }
+        guard let rowIndex = dataProvider.sections[sectionIndex].rows.firstIndex(where: { $0.isSelected }) else { return (nil) }
+        return .init(row: rowIndex, section: sectionIndex)
     }
     
     func newSelectedIndexPath(fromSelectedRow row: MDAddCourseRow) -> IndexPath {
