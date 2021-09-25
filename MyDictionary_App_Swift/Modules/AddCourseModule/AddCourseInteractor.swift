@@ -37,6 +37,7 @@ final class AddCourseInteractor: NSObject,
     
     fileprivate let dataManager: AddCourseDataManagerInputProtocol
     fileprivate let bridge: MDBridgeProtocol
+    fileprivate let courseManager: MDCourseManagerProtocol
     
     internal var collectionViewDelegate: MDAddCourseCollectionViewDelegateProtocol
     internal var collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol
@@ -48,13 +49,15 @@ final class AddCourseInteractor: NSObject,
          collectionViewDelegate: MDAddCourseCollectionViewDelegateProtocol,
          collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol,
          searchBarDelegate: MDSearchBarDelegateImplementationProtocol,
-         bridge: MDBridgeProtocol) {
+         bridge: MDBridgeProtocol,
+         courseManager: MDCourseManagerProtocol) {
         
         self.collectionViewDelegate = collectionViewDelegate
         self.collectionViewDataSource = collectionViewDataSource
         self.dataManager = dataManager
         self.searchBarDelegate = searchBarDelegate
         self.bridge = bridge
+        self.courseManager = courseManager
         
         super.init()
         subscribe()
@@ -95,8 +98,33 @@ extension AddCourseInteractor {
         if (dataManager.selectedRow == nil) {
             interactorOutput?.showError(MDAddCourseError.pleaseSelectACourse)
         } else {
-            bridge.didSelectCourse?(dataManager.selectedRow!)
-            interactorOutput?.closeModule()
+            
+            courseManager.addCourse(byLanguage: dataManager.selectedRow!.languageResponse) { [unowned self] addCourseResult in
+                
+                switch addCourseResult {
+                    
+                case .success(let courseResponse):
+                    
+                    //
+                    bridge.didAddCourse?(courseResponse)
+                    //
+                    interactorOutput?.closeModule()
+                    //
+                    break
+                    //
+                    
+                case .failure(let error):
+                    
+                    //
+                    interactorOutput?.showError(error)
+                    //
+                    break
+                    //
+                    
+                }
+                
+            }
+            
         }
     }
     

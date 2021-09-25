@@ -33,7 +33,12 @@ extension AddCourseModule {
                                                                                collectionViewDelegate: MDAddCourseCollectionViewDelegate.init(dataProvider: dataProvider),
                                                                                collectionViewDataSource: MDAddCourseCollectionViewDataSource.init(dataProvider: dataProvider),
                                                                                searchBarDelegate: MDSearchBarDelegateImplementation.init(),
-                                                                               bridge: MDConstants.AppDependencies.dependencies.bridge)
+                                                                               bridge: MDConstants.AppDependencies.dependencies.bridge,
+                                                                               courseManager: MDCourseManager.init(userMemoryStorage: MDConstants.AppDependencies.dependencies.userStorage.memoryStorage,
+                                                                                                                   jwtManager: MDJWTManager.init(jwtStorage: MDConstants.AppDependencies.dependencies.jwtStorage,
+                                                                                                                                                 apiJWT: MDConstants.AppDependencies.dependencies.apiJWT),
+                                                                                                                   apiCourse: MDConstants.AppDependencies.dependencies.apiCourse,
+                                                                                                                   courseStorage: MDConstants.AppDependencies.dependencies.courseStorage))
         
         var router: AddCourseRouterProtocol = AddCourseRouter.init()
         let presenter: AddCoursePresenterProtocol = AddCoursePresenter.init(interactor: interactor, router: router)

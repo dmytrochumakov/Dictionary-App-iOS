@@ -216,7 +216,7 @@ fileprivate extension AddCourseDataManager {
             .filter({ String($0.languageName.first!).contains(character)})
             .forEach { languageResponse in
                 
-                result.append(.init(languageName: languageResponse.languageName,
+                result.append(.init(languageResponse: languageResponse,
                                     isSelected: false))
                 
             }

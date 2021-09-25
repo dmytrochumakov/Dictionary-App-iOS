@@ -38,6 +38,7 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
     fileprivate let courseManager: MDCourseManagerProtocol
     fileprivate let dataManager: CourseListDataManagerInputProtocol
     fileprivate let fillMemoryService: MDFillMemoryServiceProtocol
+    fileprivate var bridge: MDBridgeProtocol
     
     internal var tableViewDelegate: CourseListTableViewDelegateProtocol
     internal var tableViewDataSource: CourseListTableViewDataSourceProtocol
@@ -50,7 +51,8 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
          fillMemoryService: MDFillMemoryServiceProtocol,
          collectionViewDelegate: CourseListTableViewDelegateProtocol,
          collectionViewDataSource: CourseListTableViewDataSourceProtocol,
-         searchBarDelegate: MDSearchBarDelegateImplementationProtocol) {
+         searchBarDelegate: MDSearchBarDelegateImplementationProtocol,
+         bridge: MDBridgeProtocol) {
         
         self.courseManager = courseManager
         self.dataManager = dataManager
@@ -58,9 +60,10 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
         self.tableViewDelegate = collectionViewDelegate
         self.tableViewDataSource = collectionViewDataSource
         self.searchBarDelegate = searchBarDelegate
+        self.bridge = bridge
         
         super.init()
-        subscribe()        
+        subscribe()
         
     }
     
@@ -97,11 +100,11 @@ extension CourseListInteractor {
         interactorOutput?.showProgressHUD()
         // Delete Course From API And Storage
         courseManager.deleteCourseFromApiAndAllStorage(byCourseId: dataManager
-                                    .dataProvider
-                                    .course(atIndexPath: indexPath).courseId) { [unowned self] deleteCourseResult in
+                                                        .dataProvider
+                                                        .course(atIndexPath: indexPath).courseId) { [unowned self] deleteCourseResult in
             
             switch deleteCourseResult {
-            
+                
             case .success:
                 // Hide Progress HUD
                 interactorOutput?.hideProgressHUD()
@@ -111,16 +114,16 @@ extension CourseListInteractor {
                 interactorOutput?.deleteRow(atIndexPath: indexPath)
                 //
                 break
-            //
-            
+                //
+                
             case .failure(let error):
                 // Hide Progress HUD
-                interactorOutput?.hideProgressHUD()                
+                interactorOutput?.hideProgressHUD()
                 //
                 interactorOutput?.showError(error)
                 //
                 break
-            //
+                //
             }
             
         }
@@ -150,6 +153,8 @@ fileprivate extension CourseListInteractor {
         //
         deleteButtonAction_Subscribe()
         //
+        didSelectCourseAction_Subscribe()
+        //
     }
     
     func didChangeAppearanceObservable_Subscribe() {
@@ -167,7 +172,7 @@ fileprivate extension CourseListInteractor {
             .addObserver(self) { [weak self] result in
                 
                 switch result {
-                
+                    
                 case .success:
                     self?.readAndAddCoursesToDataProvider()
                     break
@@ -220,6 +225,14 @@ fileprivate extension CourseListInteractor {
         
         tableViewDataSource.deleteButtonAction = { [weak self] (cell) in
             self?.interactorOutput?.deleteCourseButtonClicked(cell)
+        }
+        
+    }
+    
+    func didSelectCourseAction_Subscribe() {
+        
+        bridge.didAddCourse = { [weak self] (row) in
+            
         }
         
     }

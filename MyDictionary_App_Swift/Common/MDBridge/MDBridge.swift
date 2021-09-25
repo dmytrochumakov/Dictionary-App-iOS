@@ -8,12 +8,12 @@
 import Foundation
 
 protocol MDBridgeProtocol {
-    var didSelectCourse: ((MDAddCourseRow) -> Void)? { get set }
+    var didAddCourse: ((CourseResponse) -> Void)? { get set }
 }
 
 final class MDBridge: MDBridgeProtocol {
     
-    public var didSelectCourse: ((MDAddCourseRow) -> Void)?
+    public var didAddCourse: ((CourseResponse) -> Void)?
     
     deinit {
         debugPrint(#function, Self.self)

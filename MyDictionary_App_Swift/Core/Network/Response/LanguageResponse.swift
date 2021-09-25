@@ -41,3 +41,12 @@ extension LanguageResponse: Decodable {
     }
     
 }
+
+// MARK: - Equatable
+extension LanguageResponse: Equatable {
+    
+    static func == (lhs: LanguageResponse, rhs: LanguageResponse) -> Bool {
+        return lhs.languageId == rhs.languageId && lhs.languageName == rhs.languageName
+    }
+    
+}
