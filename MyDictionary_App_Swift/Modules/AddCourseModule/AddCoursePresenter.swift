@@ -9,7 +9,10 @@ import UIKit
 protocol AddCoursePresenterInputProtocol: MDCollectionViewDelegateFlowLayoutPropertyProtocol,
                                           MDCollectionViewDataSourcePropertyProtocol,
                                           MDSearchBarDelegatePropertyProtocol {
+    
     func viewDidLoad()
+    func addButtonClicked()
+    
 }
 
 protocol AddCoursePresenterOutputProtocol: AnyObject,
@@ -66,6 +69,9 @@ extension AddCoursePresenter {
         presenterOutput?.selectAndDeselectRow(at: results)
     }
     
+    func closeModule() {
+        router.closeModule()
+    }
     
 }
 
@@ -86,6 +92,10 @@ extension AddCoursePresenter {
     
     var searchBarDelegate: MDSearchBarDelegate {
         return interactor.searchBarDelegate
+    }
+    
+    func addButtonClicked() {
+        interactor.addButtonClicked()
     }
     
 }

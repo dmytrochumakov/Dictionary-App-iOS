@@ -26,6 +26,20 @@ final class AddCourseViewController: MDBaseLargeTitledBackNavigationBarViewContr
         return searchBar
     }()
     
+    fileprivate static let addButtonLeftOffset: CGFloat = 16
+    fileprivate static let addButtonRightOffset: CGFloat = 16
+    fileprivate static let addButtonBottomOffset: CGFloat = 24
+    fileprivate static let addButtonHeight: CGFloat = 48
+    fileprivate let addButton: UIButton = {
+        let button: UIButton = .init()
+        button.backgroundColor = MDUIResources.Color.md_4400D4.color()
+        button.setTitle(LocalizedText.add.localized, for: .normal)
+        button.setTitleColor(MDUIResources.Color.md_FFFFFF.color(), for: .normal)
+        button.titleLabel?.font = MDUIResources.Font.MyriadProRegular.font()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     init(presenter: AddCoursePresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: LocalizedText.addCourse.localized,
@@ -103,6 +117,7 @@ fileprivate extension AddCourseViewController {
     func addViews() {
         addCollectionView()
         addSearchBar()
+        addAddButton()
     }
     
     func addSearchBar() {
@@ -114,6 +129,11 @@ fileprivate extension AddCourseViewController {
         view.addSubview(collectionView)
     }
     
+    func addAddButton() {
+        addButton.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
+        view.addSubview(addButton)
+    }
+    
 }
 
 // MARK: - Add Constraints
@@ -122,6 +142,7 @@ fileprivate extension AddCourseViewController {
     func addConstraints() {
         addSearchBarConstraints()
         addCollectionViewConstraints()
+        addAddButtonConstraints()
     }
     
     func addSearchBarConstraints() {
@@ -161,9 +182,30 @@ fileprivate extension AddCourseViewController {
                                                    toItem: self.view,
                                                    constant: .zero)
         
-        NSLayoutConstraint.addEqualBottomConstraint(item: self.collectionView,
+        NSLayoutConstraint.addEqualConstraint(item: self.collectionView,
+                                              attribute: .bottom,
+                                              toItem: self.addButton,
+                                              attribute: .top,
+                                              constant: .zero)
+        
+    }
+    
+    func addAddButtonConstraints() {
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.addButton,
+                                                  toItem: self.view,
+                                                  constant: Self.addButtonLeftOffset)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.addButton,
+                                                   toItem: self.view,
+                                                   constant: -Self.addButtonRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.addButton,
+                                                    constant: Self.addButtonHeight)
+        
+        NSLayoutConstraint.addEqualBottomConstraint(item: self.addButton,
                                                     toItem: self.view,
-                                                    constant: .zero)
+                                                    constant: -Self.addButtonBottomOffset)
         
     }
     
@@ -193,9 +235,14 @@ fileprivate extension AddCourseViewController {
 fileprivate extension AddCourseViewController {
     
     func dropShadow() {
-        
+        addButtonDropShadow()
     }
     
+    func addButtonDropShadow() {
+        addButton.dropShadow(color: MDUIResources.Color.md_4400D4.color(0.5),
+                             offSet: .init(width: 0, height: 4),
+                             radius: 10)
+    }
     
 }
 
@@ -203,7 +250,11 @@ fileprivate extension AddCourseViewController {
 fileprivate extension AddCourseViewController {
     
     func roundOffEdges() {
-        
+        roundOffEdgesAddButton()
+    }
+    
+    func roundOffEdgesAddButton() {
+        self.addButton.layer.cornerRadius = 10
     }
     
 }
@@ -211,6 +262,8 @@ fileprivate extension AddCourseViewController {
 // MARK: - Actions
 fileprivate extension AddCourseViewController {
     
-    
+    @objc func addButtonAction() {
+        presenter.addButtonClicked()
+    }
     
 }

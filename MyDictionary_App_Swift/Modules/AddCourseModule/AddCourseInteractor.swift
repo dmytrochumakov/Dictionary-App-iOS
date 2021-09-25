@@ -13,6 +13,7 @@ protocol AddCourseInteractorInputProtocol {
     var searchBarDelegate: MDSearchBarDelegateImplementationProtocol { get }
     
     func viewDidLoad()
+    func addButtonClicked()
     
 }
 
@@ -22,6 +23,7 @@ protocol AddCourseInteractorOutputProtocol: AnyObject,
                                             MDHideKeyboardProtocol {
     
     func selectAndDeselectRow(at results: [Bool : IndexPath])
+    func closeModule()
     
 }
 
@@ -82,6 +84,14 @@ extension AddCourseInteractor {
     
     func viewDidLoad() {
         dataManager.loadAndPassLanguagesArrayToDataProvider()
+    }
+    
+    func addButtonClicked() {
+        if (dataManager.firstSelectedIndexPath == nil) {
+            interactorOutput?.showError(MDAddCourseError.pleaseSelectACourse)
+        } else {
+            interactorOutput?.closeModule()
+        }
     }
     
 }

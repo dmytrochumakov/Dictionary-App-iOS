@@ -8,6 +8,7 @@ import UIKit
 
 protocol AddCourseRouterProtocol {
     var presenter: UIViewController? { get set }
+    func closeModule()
 }
 
 final class AddCourseRouter: AddCourseRouterProtocol {
@@ -16,6 +17,14 @@ final class AddCourseRouter: AddCourseRouterProtocol {
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension AddCourseRouter {
+    
+    func closeModule() {
+        presenter?.navigationController?.popViewController(animated: true)
     }
     
 }
