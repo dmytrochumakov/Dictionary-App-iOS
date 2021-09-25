@@ -1,21 +1,21 @@
 //
-//  CourseListSearchBarDelegate.swift
+//  MDSearchBarDelegateImplementation.swift
 //  MyDictionary_App_Swift
 //
-//  Created by Dmytro Chumakov on 18.09.2021.
+//  Created by Dmytro Chumakov on 23.09.2021.
 //
 
-import UIKit
+import Foundation
 
-protocol MDCourseListSearchBarDelegateProtocol: MDSearchBarDelegate {
+protocol MDSearchBarDelegateImplementationProtocol: MDSearchBarDelegate {
     var searchBarShouldClearAction: (() -> Void)? { get set }
     var searchBarCancelButtonAction: (() -> Void)? { get set }
     var searchBarSearchButtonAction: (() -> Void)? { get set }
     var searchBarTextDidChangeAction: ((String?) -> Void)? { get set }
 }
 
-final class MDCourseListSearchBarDelegate: NSObject,
-                                           MDCourseListSearchBarDelegateProtocol {
+final class MDSearchBarDelegateImplementation: NSObject,
+                                               MDSearchBarDelegateImplementationProtocol {
     
     var searchBarShouldClearAction: (() -> Void)?
     var searchBarCancelButtonAction: (() -> Void)?
@@ -24,7 +24,7 @@ final class MDCourseListSearchBarDelegate: NSObject,
     
 }
 
-extension MDCourseListSearchBarDelegate {
+extension MDSearchBarDelegateImplementation {
     
     func searchBarShouldClear(_ searchBar: MDSearchBar) {
         searchBarShouldClearAction?()

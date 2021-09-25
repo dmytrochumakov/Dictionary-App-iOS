@@ -150,11 +150,15 @@ extension MDAPICourse {
                 
                 break
                 
-            case .error(let error, _):
+            case .error(let error, let httpURLResponse):
                 
                 debugPrint(#function, Self.self, "error: ", error.localizedDescription)
                 
-                completionHandler(.failure(error))
+                if (httpURLResponse?.statusCode == MDAPIStatusCode.conflict.rawValue) {
+                    completionHandler(.failure(MDAPICourseError.conflict))
+                } else {
+                    completionHandler(.failure(error))
+                }
                 
                 break
                 

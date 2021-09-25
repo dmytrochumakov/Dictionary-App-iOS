@@ -19,7 +19,8 @@ protocol RegistrationInteractorInputProtocol {
 }
 
 protocol RegistrationInteractorOutputProtocol: AnyObject,
-                                               MDShowHideUpdateProgressHUD {
+                                               MDShowHideUpdateProgressHUD,
+                                               MDHideKeyboardProtocol {
     
     func makePasswordFieldActive()
     func makeConfirmPasswordFieldActive()
@@ -29,9 +30,7 @@ protocol RegistrationInteractorOutputProtocol: AnyObject,
     func updateConfirmPasswordFieldCounter(_ count: Int)
     
     func nicknameTextFieldShouldClearAction()
-    
-    func hideKeyboard()
-    
+        
     func showValidationError(_ error: Error)
     func showCourseList()
     

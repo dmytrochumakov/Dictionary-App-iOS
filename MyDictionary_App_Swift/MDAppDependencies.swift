@@ -38,6 +38,7 @@ protocol MDAppDependenciesProtocol {
     
     var fillMemoryService: MDFillMemoryServiceProtocol! { get }
     
+    var bridge: MDBridgeProtocol! { get }
 }
 
 final class MDAppDependencies: NSObject,
@@ -69,6 +70,8 @@ final class MDAppDependencies: NSObject,
     var appSettings: MDAppSettingsProtocol!
     
     var fillMemoryService: MDFillMemoryServiceProtocol!
+    
+    var bridge: MDBridgeProtocol!
     
     override init() {
         super.init()
@@ -217,6 +220,12 @@ extension MDAppDependencies {
         fillMemoryService.fillMemoryFromCoreDataIfNeeded(completionHandler: nil)
         //
         self.fillMemoryService = fillMemoryService
+        //
+        
+        //
+        // Bridge
+        let bridge: MDBridgeProtocol = MDBridge.init()
+        self.bridge = bridge
         //
         
         // Configure FirebaseApp

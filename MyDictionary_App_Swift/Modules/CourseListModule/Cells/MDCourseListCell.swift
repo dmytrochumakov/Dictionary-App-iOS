@@ -54,7 +54,7 @@ final class MDCourseListCell: MGSwipeTableCell,
 }
 
 // MARK: - FillWithModelProtocol
-extension MDCourseListCell: FillWithModelProtocol {
+extension MDCourseListCell: MDFillWithModelProtocol {
     
     typealias Model = MDCourseListCellModel?
     

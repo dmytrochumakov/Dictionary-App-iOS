@@ -18,13 +18,14 @@ protocol CourseListPresenterInputProtocol: TableViewDelegatePropertyProtocol,
 
 protocol CourseListPresenterOutputProtocol: AnyObject,
                                             AppearanceHasBeenUpdatedProtocol,
-                                            MDShowHideProgressHUD {
+                                            MDShowHideProgressHUD,
+                                            MDHideKeyboardProtocol,
+                                            MDReloadDataProtocol {
     
-    func showError(_ error: Error)
-    func reloadData()
-    func hideKeyboard()
+    func showError(_ error: Error)    
     func deleteCourseButtonClicked(_ cell: MDCourseListCell)
     func deleteRow(atIndexPath indexPath: IndexPath)
+    func insertRow(atIndexPath indexPath: IndexPath)
     
 }
 
@@ -91,6 +92,10 @@ extension CourseListPresenter {
         presenterOutput?.hideProgressHUD()
     }
     
+    func insertRow(atIndexPath indexPath: IndexPath) {
+        presenterOutput?.insertRow(atIndexPath: indexPath)
+    }
+    
     var searchBarDelegate: MDSearchBarDelegate {
         return interactor.searchBarDelegate
     }
@@ -110,7 +115,7 @@ extension CourseListPresenter {
     
     // Actions //
     func addNewCourseButtonClicked() {
-        debugPrint(#function, Self.self)
+        router.showAddCourse()
     }
     
     func settingsButtonClicked() {

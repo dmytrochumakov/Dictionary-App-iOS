@@ -11,6 +11,7 @@ protocol CourseListRouterProtocol {
     var presenter: UIViewController? { get set }
     
     func openSettings()
+    func showAddCourse()
     
 }
 
@@ -28,6 +29,10 @@ extension CourseListRouter {
     
     func openSettings() {        
         presenter?.show(SettingsModule.init().module, sender: nil)
+    }
+    
+    func showAddCourse() {
+        presenter?.show(AddCourseModule.init(sender: nil).module, sender: nil)
     }
     
 }

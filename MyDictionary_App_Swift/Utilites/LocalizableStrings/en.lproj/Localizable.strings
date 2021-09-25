@@ -40,6 +40,8 @@
 "feature_request" = "Feature Request";
 "bug_report" = "Bug Report";
 "mail_services_are_not_available" = "Sorry, mail services is not available. \n\n Please set up your Apple ID in System Preferences. \n\n Also, please, install the original Mail app from the App Store, if you don't have one.";
+"add_course" = "Add Course";
+"please_select_a_course" = "Please select a course";
 
 // Api Errors //
 "no_data_api_error" = "No Data";
@@ -58,6 +60,7 @@
 // Api Auth Errors //
 "unauthorized_api_auth_error" = "User with this nickname does not exist. \n Please check the entered data or create a new account.";
 "conflict_api_auth_error" = "Nickname exists. \n Please try another nickname.";
+"conflict_api_course_error" = "Course exists. \n Please select another course.";
 // End Api Auth Errors //
 
 "registration" = "Registration";

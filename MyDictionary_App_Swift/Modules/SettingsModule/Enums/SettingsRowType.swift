@@ -35,7 +35,7 @@ extension SettingsRowType: CustomStringConvertible {
 }
 
 // MARK: - RowTypeProtocol
-extension SettingsRowType: RowTypeProtocol {
+extension SettingsRowType: MDRowTypeProtocol {
     
     typealias RowType = Self
     

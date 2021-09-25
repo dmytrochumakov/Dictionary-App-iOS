@@ -8,8 +8,18 @@
 import Foundation
 
 protocol MDCourseManagerProtocol {
+    
+    func addCourse(byLanguage language: LanguageResponse,
+                   _ completionHandler: @escaping(MDOperationResultWithCompletion<CourseResponse>))
+    
     func deleteCourseFromApiAndAllStorage(byCourseId courseId: Int64,
                                           _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    
+}
+
+struct MDUserAndJWT {
+    let user: UserResponse
+    let jwt: JWTResponse
 }
 
 final class MDCourseManager: MDCourseManagerProtocol {
@@ -39,77 +49,146 @@ final class MDCourseManager: MDCourseManagerProtocol {
 
 extension MDCourseManager {
     
+    func addCourse(byLanguage language: LanguageResponse,
+                   _ completionHandler: @escaping(MDOperationResultWithCompletion<CourseResponse>)) {
+        
+        var resultCount: Int = .zero
+        
+        fetchUserAndJWT { [unowned self] fetchUserAndJWTResult in
+            
+            switch fetchUserAndJWTResult {
+                
+            case .success(let userAndJWT):
+                
+                apiCourse.createCourse(accessToken: userAndJWT.jwt.accessToken,
+                                       createCourseRequest: .init(userId: userAndJWT.user.userId,
+                                                                  languageId: language.languageId,
+                                                                  languageName: language.languageName)) { [unowned self] createApiCourseResult in
+                    
+                    switch createApiCourseResult {
+                        
+                    case .success(let courseResponse):
+                        
+                        courseStorage.createCourse(storageType: .all,
+                                                   courseEntity: courseResponse) { createStorageCourseResults in
+                            
+                            createStorageCourseResults.forEach { createStorageCourseResult in
+                                
+                                switch createStorageCourseResult.result {
+                                    
+                                case .success:
+                                    
+                                    //
+                                    resultCount += 1
+                                    //
+                                    
+                                    if (resultCount == createStorageCourseResults.count) {
+                                        //
+                                        completionHandler(.success(courseResponse))
+                                        //
+                                        break
+                                        //
+                                    }
+                                    
+                                case .failure(let error):
+                                    
+                                    //
+                                    completionHandler(.failure(error))
+                                    //
+                                    break
+                                    //
+                                }
+                                
+                            }
+                            
+                        }
+                        break
+                        
+                    case .failure(let error):
+                        
+                        //
+                        completionHandler(.failure(error))
+                        //
+                        break
+                        //
+                        
+                    }
+                    
+                }
+                
+                break
+                
+            case .failure(let error):
+                
+                //
+                completionHandler(.failure(error))
+                //
+                break
+                //
+                
+            }
+            
+        }
+        
+    }
+    
+}
+
+extension MDCourseManager {
+    
     func deleteCourseFromApiAndAllStorage(byCourseId courseId: Int64,
                                           _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
         var resultCount: Int = .zero
         
-        userMemoryStorage.readFirstUser { [unowned self] readUserResult in
+        fetchUserAndJWT { [unowned self] fetchUserAndJWTResult in
             
-            switch readUserResult {
-            
-            case .success(let userResponse):
+            switch fetchUserAndJWTResult {
                 
-                jwtManager.fetchJWT(nickname: userResponse.nickname,
-                                    password: userResponse.password!,
-                                    userId: userResponse.userId) { [unowned self] (fetchResult) in
+            case .success(let userAndJWT):
+                
+                apiCourse.deleteCourse(accessToken: userAndJWT.jwt.accessToken,
+                                       userId: userAndJWT.user.userId,
+                                       courseId: courseId) { [unowned self] (apiDeleteCourseResult) in
                     
-                    switch fetchResult {
-                    
-                    case .success(let jwtResponse):
+                    switch apiDeleteCourseResult {
                         
-                        apiCourse.deleteCourse(accessToken: jwtResponse.accessToken,
-                                               userId: userResponse.userId,
-                                               courseId: courseId) { [unowned self] (apiDeleteCourseResult) in
+                    case .success:
+                        //
+                        courseStorage.deleteCourse(storageType: .all,
+                                                   fromCourseId: courseId) { (storageDeleteCourseResults) in
                             
-                            switch apiDeleteCourseResult {
-                            
-                            case .success:
-                                //
-                                courseStorage.deleteCourse(storageType: .all,
-                                                           fromCourseId: courseId) { (storageDeleteCourseResults) in
+                            storageDeleteCourseResults.forEach { storageDeleteCourseResult in
+                                
+                                switch storageDeleteCourseResult.result {
                                     
-                                    storageDeleteCourseResults.forEach { storageDeleteCourseResult in
-                                        
-                                        switch storageDeleteCourseResult.result {
-                                        
-                                        case .success:
-                                            
-                                            resultCount += 1
-                                            
-                                            if (resultCount == storageDeleteCourseResults.count) {
-                                                completionHandler(.success(()))
-                                            }
-                                            
-                                        case .failure(let error):
-                                            //
-                                            completionHandler(.failure(error))
-                                            //
-                                            break
-                                        //
-                                        }
-                                        
+                                case .success:
+                                    
+                                    resultCount += 1
+                                    
+                                    if (resultCount == storageDeleteCourseResults.count) {
+                                        completionHandler(.success(()))
                                     }
                                     
+                                case .failure(let error):
+                                    //
+                                    completionHandler(.failure(error))
+                                    //
+                                    break
+                                    //
                                 }
                                 
-                            //
-                            case .failure(let error):
-                                //
-                                completionHandler(.failure(error))
-                                //
-                                break
-                            //
                             }
                             
                         }
                         
+                        //
                     case .failure(let error):
                         //
                         completionHandler(.failure(error))
                         //
                         break
-                    //
+                        //
                     }
                     
                 }
@@ -119,9 +198,51 @@ extension MDCourseManager {
                 completionHandler(.failure(error))
                 //
                 break
-            //
+                //
             }
             
+        }
+        
+    }
+    
+}
+
+fileprivate extension MDCourseManager {
+    
+    func fetchUserAndJWT(_ completionHandler: @escaping(MDOperationResultWithCompletion<MDUserAndJWT>)) {
+        
+        userMemoryStorage.readFirstUser { [unowned self] readUserResult in
+            
+            switch readUserResult {
+                
+            case .success(let userResponse):
+                
+                jwtManager.fetchJWT(nickname: userResponse.nickname,
+                                    password: userResponse.password!,
+                                    userId: userResponse.userId) { (fetchResult) in
+                    
+                    switch fetchResult {
+                        
+                    case .success(let jwtResponse):
+                        
+                        completionHandler(.success(.init(user: userResponse,
+                                                         jwt: jwtResponse)))
+                        break
+                        
+                    case .failure(let error):
+                        
+                        completionHandler(.failure(error))
+                        break
+                        
+                    }
+                }
+                
+            case .failure(let error):
+                
+                completionHandler(.failure(error))
+                break
+                
+            }
         }
         
     }

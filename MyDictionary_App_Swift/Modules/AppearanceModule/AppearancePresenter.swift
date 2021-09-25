@@ -6,8 +6,8 @@
 
 import UIKit
 
-protocol AppearancePresenterInputProtocol: CollectionViewDelegateFlowLayoutPropertyProtocol,
-                                           CollectionViewDataSourcePropertyProtocol {
+protocol AppearancePresenterInputProtocol: MDCollectionViewDelegateFlowLayoutPropertyProtocol,
+                                           MDCollectionViewDataSourcePropertyProtocol {
     
 }
 

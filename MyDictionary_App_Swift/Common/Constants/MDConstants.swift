@@ -201,4 +201,18 @@ struct MDConstants {
         static let recipientEmail: String = "dima.chumakovwork@gmail.com"
     }
     
+    struct SearchBar {
+        /// Value -> 56
+        static let defaultHeight: CGFloat = 56
+        /// Value -> 16
+        static let defaultTopOffset: CGFloat = 16
+    }
+    
+    struct EnglishAlphabet {
+        static let uppercasedCharacters: [String] = ["A", "B", "C", "D", "E", "F", "G", "H",
+                                                     "I", "J", "K", "L", "M", "N", "O", "P",
+                                                     "Q", "R", "S", "T", "U", "V", "W", "X",
+                                                     "Y", "Z"]
+    }
+    
 }

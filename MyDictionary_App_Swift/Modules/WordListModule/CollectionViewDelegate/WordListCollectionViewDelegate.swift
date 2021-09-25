@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol WordListCollectionViewDelegateProtocol: CollectionViewDelegateFlowLayout {
+protocol WordListCollectionViewDelegateProtocol: UICollectionViewDelegateFlowLayout {
     
 }
 

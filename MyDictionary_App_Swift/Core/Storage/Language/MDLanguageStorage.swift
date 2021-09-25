@@ -9,6 +9,8 @@ import Foundation
 
 protocol MDLanguageStorageProtocol: MDStorageProtocol {
     
+    var memoryStorage: MDLanguageMemoryStorageProtocol { get }
+    
     func createLanguages(storageType: MDStorageType,
                          languageEntities: [LanguageResponse],
                          _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>>))
@@ -23,7 +25,7 @@ protocol MDLanguageStorageProtocol: MDStorageProtocol {
 
 final class MDLanguageStorage: MDStorage, MDLanguageStorageProtocol {
     
-    fileprivate let memoryStorage: MDLanguageMemoryStorageProtocol
+    let memoryStorage: MDLanguageMemoryStorageProtocol
     fileprivate let coreDataStorage: MDLanguageCoreDataStorageProtocol
     
     init(memoryStorage: MDLanguageMemoryStorageProtocol,

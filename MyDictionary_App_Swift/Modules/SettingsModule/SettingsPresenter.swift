@@ -4,10 +4,10 @@
 //
 //  Created Dmytro Chumakov on 31.05.2021.
 
-import Foundation
+import UIKit
 
-protocol SettingsPresenterInputProtocol: CollectionViewDelegateFlowLayoutPropertyProtocol,
-                                         CollectionViewDataSourcePropertyProtocol {
+protocol SettingsPresenterInputProtocol: MDCollectionViewDelegateFlowLayoutPropertyProtocol,
+                                         MDCollectionViewDataSourcePropertyProtocol {
     
     func shareFeedbackFeatureRequestClicked()
     func shareFeedbackBugReportClicked()
@@ -35,10 +35,10 @@ final class SettingsPresenter: NSObject,
     
     internal weak var presenterOutput: SettingsPresenterOutputProtocol?
     
-    internal var collectionViewDelegate: CollectionViewDelegateFlowLayout {
+    internal var collectionViewDelegate: UICollectionViewDelegateFlowLayout {
         return self.interactor.collectionViewDelegate
     }
-    internal var collectionViewDataSource: CollectionViewDataSource {
+    internal var collectionViewDataSource: UICollectionViewDataSource {
         return self.interactor.collectionViewDataSource
     }
     
