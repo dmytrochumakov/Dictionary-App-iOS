@@ -21,6 +21,8 @@ protocol AddCourseInteractorOutputProtocol: AnyObject,
                                             MDReloadDataProtocol,
                                             MDHideKeyboardProtocol {
     
+    func selectAndDeselectRow(at results: [Bool : IndexPath])
+    
 }
 
 protocol AddCourseInteractorProtocol: AddCourseInteractorInputProtocol,
@@ -97,6 +99,8 @@ fileprivate extension AddCourseInteractor {
         //
         searchBarShouldClearAction_Subscribe()
         //
+        collectionViewDelegateDidSelectItemAction_Subscribe()
+        //
     }
     
     func searchBarCancelButtonAction_Subscribe() {
@@ -127,6 +131,18 @@ fileprivate extension AddCourseInteractor {
         
         searchBarDelegate.searchBarShouldClearAction = { [weak self] in
             self?.dataManager.clearLanguageFilter()
+        }
+        
+    }
+    
+    func collectionViewDelegateDidSelectItemAction_Subscribe() {
+        
+        collectionViewDelegate.didSelectItem = { [unowned self] (item) in
+            
+            //
+            interactorOutput?.selectAndDeselectRow(at: dataManager.selectAndDeselectRow(item))
+            //
+            
         }
         
     }

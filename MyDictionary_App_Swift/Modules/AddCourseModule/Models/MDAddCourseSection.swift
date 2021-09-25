@@ -9,5 +9,14 @@ import Foundation
 
 struct MDAddCourseSection {
     let character: String
-    let rows: [LanguageResponse]
+    var rows: [MDAddCourseRow]
+}
+
+// MARK: - Equatable
+extension MDAddCourseSection: Equatable {
+    
+    static func == (lhs: MDAddCourseSection, rhs: MDAddCourseSection) -> Bool {
+        return lhs.character == rhs.character
+    }
+    
 }

@@ -38,7 +38,7 @@ extension MDAddCourseCollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: MDAddCourseCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.fillWithModel(dataProvider.addCourseCellModel(atIndexPath: indexPath))
+        cell.fillWithModel(dataProvider.addCourseRow(atIndexPath: indexPath))
         return cell
     }
 

@@ -17,6 +17,8 @@ protocol AddCoursePresenterOutputProtocol: AnyObject,
                                            MDReloadDataProtocol,
                                            MDHideKeyboardProtocol {
     
+    func selectAndDeselectRow(at results: [Bool : IndexPath])
+    
 }
 
 protocol AddCoursePresenterProtocol: AddCoursePresenterInputProtocol,
@@ -59,6 +61,11 @@ extension AddCoursePresenter {
     func hideKeyboard() {
         presenterOutput?.hideKeyboard()
     }
+    
+    func selectAndDeselectRow(at results: [Bool : IndexPath]) {
+        presenterOutput?.selectAndDeselectRow(at: results)
+    }
+    
     
 }
 

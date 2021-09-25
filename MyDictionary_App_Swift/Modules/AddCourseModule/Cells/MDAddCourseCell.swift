@@ -21,13 +21,20 @@ final class MDAddCourseCell: UICollectionViewCell,
         return label
     }()
     
-    fileprivate static let checkboxImageViewSize: CGSize = .init(width: 30, height: 30)
+    fileprivate static let checkboxImageViewSize: CGSize = .init(width: 24, height: 24)
     fileprivate let checkboxImageView: UIImageView = {
         let imageView: UIImageView = .init()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = image(isSelected: false)
+        imageView.contentMode = .center
         return imageView
     }()
+    
+    override var isSelected: Bool {
+        didSet {
+            self.updateCheckboxImage(isSelected: self.isSelected)
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,10 +56,10 @@ final class MDAddCourseCell: UICollectionViewCell,
 // MARK: - MDFillWithModelProtocol
 extension MDAddCourseCell: MDFillWithModelProtocol {
     
-    typealias Model = MDAddCourseCellModel?
+    typealias Model = MDAddCourseRow?
     
-    func fillWithModel(_ model: MDAddCourseCellModel?) {
-        self.titleLabel.text = model?.title
+    func fillWithModel(_ model: MDAddCourseRow?) {
+        self.titleLabel.text = model?.languageName
     }
     
 }
@@ -138,6 +145,10 @@ fileprivate extension MDAddCourseCell {
 
 // MARK: - Private Methods
 fileprivate extension MDAddCourseCell {
+    
+    func updateCheckboxImage(isSelected: Bool) {
+        self.checkboxImageView.image = Self.image(isSelected: isSelected)
+    }
     
     static func image(isSelected: Bool) -> UIImage {
         if (isSelected) {

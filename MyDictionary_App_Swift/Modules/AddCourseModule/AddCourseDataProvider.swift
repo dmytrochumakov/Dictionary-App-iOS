@@ -11,8 +11,8 @@ protocol AddCourseDataProviderProtocol: NumberOfSectionsProtocol,
     
     var sections: [MDAddCourseSection] { get set }
     func addCourseHeaderViewCellModel(atSection section: Int) -> MDAddCourseHeaderViewCellModel?
-    func addCourseCellModel(atIndexPath indexPath: IndexPath) -> MDAddCourseCellModel?
-    func addCourseCellModels(atSection section: Int) -> [LanguageResponse]
+    func addCourseRow(atIndexPath indexPath: IndexPath) -> MDAddCourseRow?
+    func addCourseCellModels(atSection section: Int) -> [MDAddCourseRow]
     
 }
 
@@ -48,15 +48,15 @@ extension AddCourseDataProvider {
         }
     }
     
-    func addCourseCellModel(atIndexPath indexPath: IndexPath) -> MDAddCourseCellModel? {
+    func addCourseRow(atIndexPath indexPath: IndexPath) -> MDAddCourseRow? {
         if (sections.isEmpty) {
             return nil
         } else {
-            return .init(title: sections[indexPath.section].rows[indexPath.row].languageName)
+            return sections[indexPath.section].rows[indexPath.row]
         }
     }
     
-    func addCourseCellModels(atSection section: Int) -> [LanguageResponse] {
+    func addCourseCellModels(atSection section: Int) -> [MDAddCourseRow] {
         if (sections.isEmpty) {
             return .init()
         } else {

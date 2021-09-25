@@ -83,6 +83,18 @@ extension AddCourseViewController: AddCoursePresenterOutputProtocol {
         }
     }
     
+    func selectAndDeselectRow(at results: [Bool : IndexPath]) {
+        
+        if (results.isEmpty) {
+            return
+        } else {
+            results.forEach { result in
+                collectionView.cellForItem(at: result.value)?.isSelected = result.key
+            }
+        }
+        
+    }
+    
 }
 
 // MARK: - Add Views
