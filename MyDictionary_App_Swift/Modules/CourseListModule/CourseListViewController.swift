@@ -36,16 +36,16 @@ final class CourseListViewController: MDBaseLargeTitledNavigationBarViewControll
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-        
+    
     fileprivate let searchBar: MDSearchBar = {
-        let searchBar: MDSearchBar = .init()        
+        let searchBar: MDSearchBar = .init()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         return searchBar
     }()
     
     fileprivate lazy var hud: MBProgressHUD = {
         let hud: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
-        hud.mode = .indeterminate        
+        hud.mode = .indeterminate
         return hud
     }()
     
@@ -89,9 +89,11 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     }
     
     func showError(_ error: Error) {
-        UIAlertController.showAlertWithOkAction(title: LocalizedText.error.localized,
-                                                message: error.localizedDescription,
-                                                presenter: self)
+        DispatchQueue.main.async {
+            UIAlertController.showAlertWithOkAction(title: LocalizedText.error.localized,
+                                                    message: error.localizedDescription,
+                                                    presenter: self)
+        }
     }
     
     func reloadData() {
@@ -101,7 +103,9 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     }
     
     func hideKeyboard() {
-        MDConstants.Keyboard.hideKeyboard(rootView: self.view)
+        DispatchQueue.main.async {
+            MDConstants.Keyboard.hideKeyboard(rootView: self.view)
+        }
     }
     
     func deleteCourseButtonClicked(_ cell: MDCourseListCell) {
@@ -109,15 +113,29 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     }
     
     func deleteRow(atIndexPath indexPath: IndexPath) {
-        tableView.deleteRows(at: [indexPath], with: .fade)
+        DispatchQueue.main.async {
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
     
     func showProgressHUD() {
-        hud.show(animated: true)
+        DispatchQueue.main.async {
+            self.hud.show(animated: true)
+        }
     }
     
     func hideProgressHUD() {
-        hud.hide(animated: true)
+        DispatchQueue.main.async {
+            self.hud.hide(animated: true)
+        }
+    }
+    
+    func insertRow(atIndexPath indexPath: IndexPath) {
+        DispatchQueue.main.async {
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: [indexPath], with: .fade)
+            self.tableView.endUpdates()
+        }
     }
     
 }

@@ -25,6 +25,7 @@ protocol CourseListInteractorOutputProtocol: AnyObject,
     func showError(_ error: Error)
     func deleteCourseButtonClicked(_ cell: MDCourseListCell)
     func deleteRow(atIndexPath indexPath: IndexPath)
+    func insertRow(atIndexPath indexPath: IndexPath)
     
 }
 
@@ -231,8 +232,10 @@ fileprivate extension CourseListInteractor {
     
     func didSelectCourseAction_Subscribe() {
         
-        bridge.didAddCourse = { [weak self] (courseResponse) in
-            
+        bridge.didAddCourse = { [unowned self] (courseResponse) in
+            //
+            interactorOutput?.insertRow(atIndexPath: dataManager.addCourse(atNewCourse: courseResponse))
+            //
         }
         
     }
