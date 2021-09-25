@@ -18,7 +18,8 @@ protocol AddCoursePresenterInputProtocol: MDCollectionViewDelegateFlowLayoutProp
 protocol AddCoursePresenterOutputProtocol: AnyObject,
                                            MDShowErrorProtocol,
                                            MDReloadDataProtocol,
-                                           MDHideKeyboardProtocol {
+                                           MDHideKeyboardProtocol,
+                                           MDShowHideProgressHUD {
     
     func selectAndDeselectRow(at results: [Bool : IndexPath])
     
@@ -71,6 +72,14 @@ extension AddCoursePresenter {
     
     func closeModule() {
         router.closeModule()
+    }
+    
+    func showProgressHUD() {
+        presenterOutput?.showProgressHUD()
+    }
+    
+    func hideProgressHUD() {
+        presenterOutput?.hideProgressHUD()
     }
     
 }

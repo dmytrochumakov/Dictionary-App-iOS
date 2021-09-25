@@ -20,7 +20,8 @@ protocol AddCourseInteractorInputProtocol {
 protocol AddCourseInteractorOutputProtocol: AnyObject,
                                             MDShowErrorProtocol,
                                             MDReloadDataProtocol,
-                                            MDHideKeyboardProtocol {
+                                            MDHideKeyboardProtocol,
+                                            MDShowHideProgressHUD {
     
     func selectAndDeselectRow(at results: [Bool : IndexPath])
     func closeModule()
@@ -99,12 +100,17 @@ extension AddCourseInteractor {
             interactorOutput?.showError(MDAddCourseError.pleaseSelectACourse)
         } else {
             
+            //
+            interactorOutput?.showProgressHUD()
+            //
             courseManager.addCourse(byLanguage: dataManager.selectedRow!.languageResponse) { [unowned self] addCourseResult in
                 
                 switch addCourseResult {
                     
                 case .success(let courseResponse):
                     
+                    //
+                    interactorOutput?.hideProgressHUD()
                     //
                     bridge.didAddCourse?(courseResponse)
                     //
@@ -115,6 +121,8 @@ extension AddCourseInteractor {
                     
                 case .failure(let error):
                     
+                    //
+                    interactorOutput?.hideProgressHUD()
                     //
                     interactorOutput?.showError(error)
                     //

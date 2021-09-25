@@ -62,6 +62,7 @@ enum LocalizedText: String {
     // Api Auth Errors //
     case unauthorizedApiAuthError = "unauthorized_api_auth_error"
     case conflictApiAuthError = "conflict_api_auth_error"
+    case conflictApiCourseError = "conflict_api_course_error"
     // End Api Auth Errors //
     
     case registration

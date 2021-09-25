@@ -4,7 +4,7 @@
 //
 //  Created Dmytro Chumakov on 23.09.2021.
 
-import UIKit
+import MBProgressHUD
 
 final class AddCourseViewController: MDBaseLargeTitledBackNavigationBarViewController {
     
@@ -107,6 +107,18 @@ extension AddCourseViewController: AddCoursePresenterOutputProtocol {
             }
         }
         
+    }
+    
+    func showProgressHUD() {
+        DispatchQueue.main.async {
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+        }
+    }
+    
+    func hideProgressHUD() {
+        DispatchQueue.main.async {
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
     }
     
 }

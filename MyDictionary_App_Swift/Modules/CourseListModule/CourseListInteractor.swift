@@ -231,7 +231,7 @@ fileprivate extension CourseListInteractor {
     
     func didSelectCourseAction_Subscribe() {
         
-        bridge.didAddCourse = { [weak self] (row) in
+        bridge.didAddCourse = { [weak self] (courseResponse) in
             
         }
         
