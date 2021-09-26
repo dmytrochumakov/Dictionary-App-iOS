@@ -24,8 +24,7 @@ protocol MDWordStorageProtocol: MDStorageProtocol {
     func readAllWords(storageType: MDStorageType,
                       _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>))
     
-    func updateWord(byWordID wordId: Int64,
-                    newWordText: String,
+    func updateWord(byWordID wordId: Int64,                    
                     newWordDescription: String,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
@@ -69,7 +68,7 @@ extension MDWordStorage {
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
             memoryStorage.createWord(wordModel) { result in
@@ -128,7 +127,7 @@ extension MDWordStorage {
                      _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
             memoryStorage.createWords(wordModels) { result in
@@ -187,7 +186,7 @@ extension MDWordStorage {
                   _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
             memoryStorage.readWord(fromWordID: wordId) { (result) in
@@ -246,7 +245,7 @@ extension MDWordStorage {
                       _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
             memoryStorage.readAllWords { (result) in
@@ -302,17 +301,15 @@ extension MDWordStorage {
     }
     
     func updateWord(byWordID wordId: Int64,
-                    newWordText: String,
                     newWordDescription: String,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
             memoryStorage.updateWord(byWordID: wordId,
-                                     newWordText: newWordText,
                                      newWordDescription: newWordDescription) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
@@ -320,7 +317,6 @@ extension MDWordStorage {
         case .coreData:
             
             coreDataStorage.updateWord(byWordID: wordId,
-                                       newWordText: newWordText,
                                        newWordDescription: newWordDescription) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
@@ -337,7 +333,6 @@ extension MDWordStorage {
             // Dispatch Group Enter
             dispatchGroup.enter()
             memoryStorage.updateWord(byWordID: wordId,
-                                     newWordText: newWordText,
                                      newWordDescription: newWordDescription) { result in
                 
                 // Append Result
@@ -351,8 +346,7 @@ extension MDWordStorage {
             // Update In Core Data
             // Dispatch Group Enter
             dispatchGroup.enter()
-            coreDataStorage.updateWord(byWordID: wordId,
-                                       newWordText: newWordText,
+            coreDataStorage.updateWord(byWordID: wordId,                                       
                                        newWordDescription: newWordDescription) { result in
                 
                 // Append Result
@@ -376,7 +370,7 @@ extension MDWordStorage {
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
             memoryStorage.deleteWord(byWordId: wordId) { result in
@@ -433,7 +427,7 @@ extension MDWordStorage {
                         _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
             memoryStorage.deleteAllWords { result in
