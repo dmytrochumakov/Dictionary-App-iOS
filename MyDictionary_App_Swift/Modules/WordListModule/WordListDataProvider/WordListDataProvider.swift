@@ -11,15 +11,22 @@ protocol WordListDataProviderProcotol: MDNumberOfSectionsProtocol,
                                        MDNumberOfRowsInSectionProtocol {
     
     var course: CourseResponse { get }
+    var words: [WordResponse] { get set }
     
 }
 
 final class WordListDataProvider: WordListDataProviderProcotol {
     
     var course: CourseResponse
+    var words: [WordResponse]
     
-    init(course: CourseResponse) {
+    init(course: CourseResponse, words: [WordResponse]) {
         self.course = course
+        self.words = words
+    }
+    
+    deinit {
+        debugPrint(#function, Self.self)
     }
     
 }

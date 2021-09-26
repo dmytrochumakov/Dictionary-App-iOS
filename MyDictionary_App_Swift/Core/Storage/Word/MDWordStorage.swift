@@ -9,6 +9,8 @@ import Foundation
 
 protocol MDWordStorageProtocol: MDStorageProtocol {
     
+    var memoryStorage: MDWordMemoryStorageProtocol { get }
+    
     func createWord(_ wordModel: WordResponse,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>))
@@ -24,7 +26,7 @@ protocol MDWordStorageProtocol: MDStorageProtocol {
     func readAllWords(storageType: MDStorageType,
                       _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>))
     
-    func updateWord(byWordID wordId: Int64,                    
+    func updateWord(byWordID wordId: Int64,
                     newWordDescription: String,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
@@ -40,7 +42,7 @@ protocol MDWordStorageProtocol: MDStorageProtocol {
 
 final class MDWordStorage: MDStorage, MDWordStorageProtocol {
     
-    fileprivate let memoryStorage: MDWordMemoryStorageProtocol
+    let memoryStorage: MDWordMemoryStorageProtocol
     fileprivate let coreDataStorage: MDWordCoreDataStorageProtocol
     
     init(memoryStorage: MDWordMemoryStorageProtocol,
@@ -346,7 +348,7 @@ extension MDWordStorage {
             // Update In Core Data
             // Dispatch Group Enter
             dispatchGroup.enter()
-            coreDataStorage.updateWord(byWordID: wordId,                                       
+            coreDataStorage.updateWord(byWordID: wordId,
                                        newWordDescription: newWordDescription) { result in
                 
                 // Append Result

@@ -59,7 +59,17 @@ final class WordListViewController: MDBaseLargeTitledBackNavigationBarViewContro
 extension WordListViewController: WordListPresenterOutputProtocol {
     
     func reloadData() {
-        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func showError(_ error: Error) {
+        DispatchQueue.main.async {
+            UIAlertController.showAlertWithOkAction(title: LocalizedText.error.localized,
+                                                    message: error.localizedDescription,
+                                                    presenter: self)
+        }
     }
     
     func hideKeyboard() {

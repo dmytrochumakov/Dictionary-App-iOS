@@ -8,11 +8,11 @@
 import Foundation
 
 protocol WordListDataManagerInputProtocol {
-    
+    func readAndAddWordsToDataProvider()
 }
 
 protocol WordListDataManagerOutputProtocol: AnyObject {
-    
+    func readAndAddWordsToDataProviderResult(_ result: MDOperationResultWithoutCompletion<Void>)
 }
 
 protocol WordListDataManagerProtocol: WordListDataManagerInputProtocol {
@@ -22,11 +22,17 @@ protocol WordListDataManagerProtocol: WordListDataManagerInputProtocol {
 
 final class WordListDataManager: WordListDataManagerProtocol {
     
-    let dataProvider: WordListDataProviderProcotol
+    fileprivate let memoryStorage: MDWordMemoryStorageProtocol
+    var dataProvider: WordListDataProviderProcotol
+    
     internal weak var dataManagerOutput: WordListDataManagerOutputProtocol?
     
-    init(dataProvider: WordListDataProviderProcotol) {
+    init(dataProvider: WordListDataProviderProcotol,
+         memoryStorage: MDWordMemoryStorageProtocol) {
+        
         self.dataProvider = dataProvider
+        self.memoryStorage = memoryStorage
+        
     }
     
     deinit {
@@ -35,8 +41,33 @@ final class WordListDataManager: WordListDataManagerProtocol {
     
 }
 
+// MARK: - WordListDataManagerInputProtocol
 extension WordListDataManager {
     
-   
+    func readAndAddWordsToDataProvider() {
+     
+        memoryStorage.readAllWords { [unowned self] result in
+            
+            switch result {
+                
+            case .success(let words):
+                //
+                dataProvider.words = words
+                //
+                dataManagerOutput?.readAndAddWordsToDataProviderResult(.success(()))
+                //
+                break
+                //
+            case .failure(let error):
+                //
+                dataManagerOutput?.readAndAddWordsToDataProviderResult(.failure(error))
+                //
+                break
+                //
+            }
+            
+        }
+        
+    }
     
 }

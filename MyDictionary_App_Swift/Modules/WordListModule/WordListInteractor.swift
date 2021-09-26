@@ -14,7 +14,9 @@ protocol WordListInteractorInputProtocol: MDViewDidLoadProtocol {
 }
 
 protocol WordListInteractorOutputProtocol: AnyObject,
-                                           MDHideKeyboardProtocol {
+                                           MDHideKeyboardProtocol,
+                                           MDReloadDataProtocol,
+                                           MDShowErrorProtocol {
     
 }
 
@@ -58,13 +60,37 @@ final class WordListInteractor: NSObject,
 // MARK: - WordListDataManagerOutputProtocol
 extension WordListInteractor {
     
+    func readAndAddWordsToDataProviderResult(_ result: MDOperationResultWithoutCompletion<Void>) {
+        
+        switch result {
+            
+        case .success:
+            
+            //
+            interactorOutput?.reloadData()
+            //
+            break
+            //
+            
+        case .failure(let error):
+            
+            //
+            interactorOutput?.showError(error)
+            //
+            break
+            //
+            
+        }
+        
+    }
+    
 }
 
 // MARK: - WordListInteractorInputProtocol
 extension WordListInteractor {
     
     func viewDidLoad() {
-        
+        dataManager.readAndAddWordsToDataProvider()
     }
     
 }

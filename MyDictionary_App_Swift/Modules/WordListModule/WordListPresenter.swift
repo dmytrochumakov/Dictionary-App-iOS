@@ -16,7 +16,8 @@ protocol WordListPresenterInputProtocol: MDTableViewDelegatePropertyProtocol,
 
 protocol WordListPresenterOutputProtocol: AnyObject,
                                           MDReloadDataProtocol,
-                                          MDHideKeyboardProtocol {
+                                          MDHideKeyboardProtocol,
+                                          MDShowErrorProtocol {
     
 }
 
@@ -54,6 +55,14 @@ extension WordListPresenter {
     
     func hideKeyboard() {
         presenterOutput?.hideKeyboard()
+    }
+    
+    func reloadData() {
+        presenterOutput?.reloadData()
+    }
+    
+    func showError(_ error: Error) {
+        presenterOutput?.showError(error)
     }
     
 }
