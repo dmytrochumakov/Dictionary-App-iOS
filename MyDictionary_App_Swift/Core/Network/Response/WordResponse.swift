@@ -58,3 +58,12 @@ extension WordResponse: Decodable {
     }
     
 }
+
+// MARK: - Equatable
+extension WordResponse: Equatable {
+    
+    static func == (lhs: WordResponse, rhs: WordResponse) -> Bool {
+        return lhs.userId == rhs.userId && lhs.wordId == rhs.wordId && lhs.courseId == rhs.courseId && lhs.languageId == rhs.languageId
+    }
+    
+}

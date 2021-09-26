@@ -45,21 +45,21 @@ final class WordListDataManager: WordListDataManagerProtocol {
 extension WordListDataManager {
     
     func readAndAddWordsToDataProvider() {
-     
+        
         memoryStorage.readAllWords(byCourseID: dataProvider.course.courseId) { [unowned self] result in
             
             switch result {
                 
             case .success(let words):
-                //
-                dataProvider.words = words
-                //
+                // Set Sections
+                dataProvider.sections = configuredSections(byWords: words)
+                // Pass Result
                 dataManagerOutput?.readAndAddWordsToDataProviderResult(.success(()))
                 //
                 break
                 //
             case .failure(let error):
-                //
+                // Pass Result
                 dataManagerOutput?.readAndAddWordsToDataProviderResult(.failure(error))
                 //
                 break
@@ -68,6 +68,56 @@ extension WordListDataManager {
             
         }
         
+    }
+    
+}
+
+// MARK: - Private Methods
+fileprivate extension WordListDataManager {
+    
+    func configuredSections(byWords words: [WordResponse]) -> [MDWordListSection] {
+        
+        if (words.isEmpty) {
+            return .init()
+        } else {
+            
+            var result: [MDWordListSection] = .init()
+            
+            let sortedWords: [WordResponse] = sortAlphabeticallyWords(words)
+            
+            MDConstants.EnglishAlphabet.uppercasedCharacters.forEach { character in
+                
+                result.append(.init(character: character,
+                                    rows: configuredRows(sortedWords: sortedWords,
+                                                         character: character)))
+                
+            }
+            
+            return result
+            
+        }
+        
+    }
+    
+    func configuredRows(sortedWords: [WordResponse], character: String) -> [MDWordListRow] {
+        
+        var result: [MDWordListRow] = .init()
+        
+        sortedWords
+            .filter({ String($0.wordText.first!).contains(character)})
+            .forEach { wordResponse in
+                
+                result.append(.init(wordResponse: wordResponse,
+                                    isSelected: false))
+                
+            }
+        
+        return result
+        
+    }
+    
+    func sortAlphabeticallyWords(_ array: [WordResponse]) -> [WordResponse] {
+        return array.sorted(by: { $0.wordText.localizedCaseInsensitiveCompare($1.wordText) == ComparisonResult.orderedAscending })
     }
     
 }
