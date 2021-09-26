@@ -12,6 +12,8 @@ protocol WordListPresenterInputProtocol: MDTableViewDelegatePropertyProtocol,
                                          MDViewDidLoadProtocol,
                                          MDSearchBarDelegatePropertyProtocol {
     
+    func addNewWordButtonClicked()
+    
 }
 
 protocol WordListPresenterOutputProtocol: AnyObject,
@@ -99,6 +101,10 @@ extension WordListPresenter: WordListPresenterInputProtocol {
     
     func viewDidLoad() {
         interactor.viewDidLoad()
+    }
+
+    func addNewWordButtonClicked() {
+        interactor.addNewWordButtonClicked()
     }
     
 }

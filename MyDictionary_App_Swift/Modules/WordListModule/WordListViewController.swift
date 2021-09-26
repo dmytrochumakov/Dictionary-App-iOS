@@ -25,6 +25,15 @@ final class WordListViewController: MDBaseLargeTitledBackNavigationBarViewContro
         return tableView
     }()
     
+    fileprivate static let addNewWordButtonSize: CGSize = .init(width: 40, height: 40)
+    fileprivate static let addNewWordButtonRightOffset: CGFloat = 8
+    fileprivate let addNewWordButton: UIButton = {
+        let button: UIButton = .init()
+        button.setImage(MDUIResources.Image.add.image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     init(presenter: WordListPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: LocalizedText.words.localized,
@@ -106,6 +115,7 @@ fileprivate extension WordListViewController {
     func addViews() {
         addSearchBar()
         addTableView()
+        addAddNewWordButton()
     }
     
     func addSearchBar() {
@@ -117,6 +127,11 @@ fileprivate extension WordListViewController {
         view.addSubview(tableView)
     }
     
+    func addAddNewWordButton() {
+        addNewWordButton.addTarget(self, action: #selector(addNewWordButtonAction), for: .touchUpInside)
+        view.addSubview(addNewWordButton)
+    }
+    
 }
 
 // MARK: - Add Constraints
@@ -125,6 +140,7 @@ fileprivate extension WordListViewController {
     func addConstraints() {
         addSearchBarConstraints()
         addTableViewConstraints()
+        addAddNewWordButtonConstraints()
     }
     
     func addSearchBarConstraints() {
@@ -170,6 +186,24 @@ fileprivate extension WordListViewController {
         
     }
     
+    func addAddNewWordButtonConstraints() {
+        
+        NSLayoutConstraint.addEqualCenterYConstraint(item: self.addNewWordButton,
+                                                     toItem: self.backButton,
+                                                     constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.addNewWordButton,
+                                                   toItem: self.navigationBarView,
+                                                   constant: -Self.addNewWordButtonRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.addNewWordButton,
+                                                    constant: Self.addNewWordButtonSize.height)
+        
+        NSLayoutConstraint.addEqualWidthConstraint(item: self.addNewWordButton,
+                                                   constant: Self.addNewWordButtonSize.width)
+        
+    }
+    
 }
 
 // MARK: - Configure UI
@@ -178,11 +212,20 @@ fileprivate extension WordListViewController {
     func configureUI() {
         configureTableView()
     }
-   
+    
     func configureTableView() {
         self.tableView.delegate = self.presenter.tableViewDelegate
         self.tableView.dataSource = self.presenter.tableViewDataSource
         self.tableView.backgroundColor = .clear
+    }
+    
+}
+
+// MARK: - Actions
+fileprivate extension WordListViewController {
+    
+    @objc func addNewWordButtonAction() {
+        presenter.addNewWordButtonClicked()
     }
     
 }

@@ -11,6 +11,7 @@ protocol WordListInteractorInputProtocol: MDViewDidLoadProtocol {
     var tableViewDelegate: WordListTableViewDelegateProtocol { get }
     var tableViewDataSource: WordListTableViewDataSourceProtocol { get }
     var searchBarDelegate: MDSearchBarDelegateImplementationProtocol { get }
+    func addNewWordButtonClicked()
 }
 
 protocol WordListInteractorOutputProtocol: AnyObject,
@@ -85,6 +86,10 @@ extension WordListInteractor {
     
     func viewDidLoad() {
         dataManager.readAndAddWordsToDataProvider()
+    }
+    
+    func addNewWordButtonClicked() {
+        debugPrint(#function, Self.self)
     }
     
 }
