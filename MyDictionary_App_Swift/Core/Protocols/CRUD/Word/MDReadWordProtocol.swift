@@ -18,4 +18,7 @@ protocol MDReadWordProtocol {
     
     func readAllWords(_ completionHandler: @escaping(MDOperationsResultWithCompletion<WordResponse>))
     
+    func readAllWords(byCourseID courseID: Int64,
+                      _ completionHandler: @escaping(MDOperationsResultWithCompletion<WordResponse>))
+    
 }

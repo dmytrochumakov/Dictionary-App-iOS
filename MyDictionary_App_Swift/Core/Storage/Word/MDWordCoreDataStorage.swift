@@ -124,6 +124,16 @@ extension MDWordCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
+    func readAllWords(byCourseID courseID: Int64,
+                      _ completionHandler: @escaping (MDOperationsResultWithCompletion<WordResponse>)) {
+        let operation = MDReadAllWordsByCourseIDCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
+                                                                              wordStorage: self,
+                                                                              courseId: courseID) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
+    }
+    
 }
 
 // MARK: - Update
@@ -136,7 +146,7 @@ extension MDWordCoreDataStorage {
         let operation = MDUpdateWordCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                   wordStorage: self,
                                                                   coreDataStack: self.coreDataStack,
-                                                                  wordId: wordId,                                                                  
+                                                                  wordId: wordId,
                                                                   newWordDescription: newWordDescription) { result in
             completionHandler(result)
         }

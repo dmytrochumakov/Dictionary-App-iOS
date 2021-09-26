@@ -83,16 +83,56 @@ final class MDReadWordsCoreDataStorageOperation: MDOperation {
         let fetchRequest = NSFetchRequest<CDWordResponseEntity>(entityName: CoreDataEntityName.CDWordResponseEntity)
         
         fetchRequest.fetchLimit = self.fetchLimit
-        fetchRequest.fetchOffset = self.fetchOffset               
+        fetchRequest.fetchOffset = self.fetchOffset
         
         do {
             self.result?(.success(try managedObjectContext.fetch(fetchRequest).map({ $0.wordResponse })))
             self.finish()
         } catch let error {
-            DispatchQueue.main.async {
-                self.result?(.failure(error))
-                self.finish()
-            }
+            self.result?(.failure(error))
+            self.finish()
+        }
+        
+    }
+    
+    deinit {
+        debugPrint(#function, Self.self)
+        self.finish()
+    }
+    
+}
+
+final class MDReadAllWordsByCourseIDCoreDataStorageOperation: MDOperation {
+    
+    fileprivate let managedObjectContext: NSManagedObjectContext
+    fileprivate let wordStorage: MDWordCoreDataStorage
+    fileprivate let courseId: Int64
+    fileprivate let result: MDOperationsResultWithCompletion<WordResponse>?
+    
+    init(managedObjectContext: NSManagedObjectContext,
+         wordStorage: MDWordCoreDataStorage,
+         courseId: Int64,
+         result: MDOperationsResultWithCompletion<WordResponse>?) {
+        
+        self.managedObjectContext = managedObjectContext
+        self.wordStorage = wordStorage
+        self.courseId = courseId
+        self.result = result
+        
+        super.init()
+    }
+    
+    override func main() {
+        
+        let fetchRequest = NSFetchRequest<CDWordResponseEntity>(entityName: CoreDataEntityName.CDWordResponseEntity)
+        fetchRequest.predicate = NSPredicate(format: "\(CDWordResponseEntityAttributeName.courseId) == %i", self.courseId)
+        
+        do {
+            self.result?(.success(try managedObjectContext.fetch(fetchRequest).map({ $0.wordResponse })))
+            self.finish()
+        } catch let error {
+            self.result?(.failure(error))
+            self.finish()
         }
         
     }
