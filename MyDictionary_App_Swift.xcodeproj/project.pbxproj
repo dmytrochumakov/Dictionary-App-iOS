@@ -1665,14 +1665,6 @@
 			path = FillMemoryService;
 			sourceTree = "<group>";
 		};
-		229C2B092652512700B270C1 /* CollectionViewDelegate */ = {
-			isa = PBXGroup;
-			children = (
-				227D5E692652586F00B54524 /* WordListTableViewDelegate.swift */,
-			);
-			path = CollectionViewDelegate;
-			sourceTree = "<group>";
-		};
 		229D2D2D26EB52D90047B518 /* ChoiceAuthenticationOrRegistrationModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -1693,14 +1685,6 @@
 				229D2D4B26EB68420047B518 /* MDNavigationController.swift */,
 			);
 			path = NavigationController;
-			sourceTree = "<group>";
-		};
-		229E08C52652CB6900DA56C4 /* CollectionViewDataSource */ = {
-			isa = PBXGroup;
-			children = (
-				229E08C62652CB9000DA56C4 /* WordListTableViewDataSource.swift */,
-			);
-			path = CollectionViewDataSource;
 			sourceTree = "<group>";
 		};
 		229FFF3B26F60A940024B974 /* Delegates */ = {
@@ -1942,10 +1926,10 @@
 		22CA087026515D280052D169 /* WordListModule */ = {
 			isa = PBXGroup;
 			children = (
-				229E08C52652CB6900DA56C4 /* CollectionViewDataSource */,
-				229C2B092652512700B270C1 /* CollectionViewDelegate */,
-				22CA087526515D650052D169 /* WordListDataManager */,
-				22CA087426515D590052D169 /* WordListDataProvider */,
+				227D5E692652586F00B54524 /* WordListTableViewDelegate.swift */,
+				229E08C62652CB9000DA56C4 /* WordListTableViewDataSource.swift */,
+				22CA088626515F6A0052D169 /* WordListDataManager.swift */,
+				22CA08882651603A0052D169 /* WordListDataProvider.swift */,
 				22CA088226515F020052D169 /* WordListRouter.swift */,
 				22CA087E26515ED90052D169 /* WordListInteractor.swift */,
 				22CA088026515EEB0052D169 /* WordListPresenter.swift */,
@@ -1953,22 +1937,6 @@
 				22BD999F266A4AB10063FEFC /* WordListModule.swift */,
 			);
 			path = WordListModule;
-			sourceTree = "<group>";
-		};
-		22CA087426515D590052D169 /* WordListDataProvider */ = {
-			isa = PBXGroup;
-			children = (
-				22CA08882651603A0052D169 /* WordListDataProvider.swift */,
-			);
-			path = WordListDataProvider;
-			sourceTree = "<group>";
-		};
-		22CA087526515D650052D169 /* WordListDataManager */ = {
-			isa = PBXGroup;
-			children = (
-				22CA088626515F6A0052D169 /* WordListDataManager.swift */,
-			);
-			path = WordListDataManager;
 			sourceTree = "<group>";
 		};
 		22CA088A265165370052D169 /* UIResources */ = {
