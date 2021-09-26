@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		22014F7A2700756200D5250A /* MDWordListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22014F792700756200D5250A /* MDWordListCell.swift */; };
 		22014F872700980900D5250A /* MDWordListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22014F862700980900D5250A /* MDWordListCellModel.swift */; };
+		22014F892700A7D300D5250A /* MDWordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22014F882700A7D300D5250A /* MDWordManager.swift */; };
 		220793BB26C65965003D434B /* MDEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793BA26C65965003D434B /* MDEnvironment.swift */; };
 		220793BF26C65BF4003D434B /* AuthValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793BE26C65BF4003D434B /* AuthValidation.swift */; };
 		220793C126C66F2A003D434B /* AuthValidationLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793C026C66F2A003D434B /* AuthValidationLogic.swift */; };
@@ -379,6 +380,7 @@
 /* Begin PBXFileReference section */
 		22014F792700756200D5250A /* MDWordListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordListCell.swift; sourceTree = "<group>"; };
 		22014F862700980900D5250A /* MDWordListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordListCellModel.swift; sourceTree = "<group>"; };
+		22014F882700A7D300D5250A /* MDWordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordManager.swift; sourceTree = "<group>"; };
 		220793BA26C65965003D434B /* MDEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEnvironment.swift; sourceTree = "<group>"; };
 		220793BE26C65BF4003D434B /* AuthValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthValidation.swift; sourceTree = "<group>"; };
 		220793C026C66F2A003D434B /* AuthValidationLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthValidationLogic.swift; sourceTree = "<group>"; };
@@ -1381,6 +1383,7 @@
 				228722D026D0F18400C9D1BC /* MDAuthManager.swift */,
 				228722D826D1161C00C9D1BC /* MDJWTManager.swift */,
 				228964A726F8A4F700E23292 /* MDCourseManager.swift */,
+				22014F882700A7D300D5250A /* MDWordManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -2568,6 +2571,7 @@
 				227D8F1526D7A4FA009CB94B /* MDAppSettings.swift in Sources */,
 				2294323026DF9A2A0073048C /* MDSyncManager.swift in Sources */,
 				22E2B4EC2664EE1400978E62 /* MDFillWithModelProtocol.swift in Sources */,
+				22014F892700A7D300D5250A /* MDWordManager.swift in Sources */,
 				220FFE7426C8F83A00702CCE /* MDKeyboardToolbar.swift in Sources */,
 				22DEA00326FA05A900892D78 /* AccountPresenter.swift in Sources */,
 				22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */,

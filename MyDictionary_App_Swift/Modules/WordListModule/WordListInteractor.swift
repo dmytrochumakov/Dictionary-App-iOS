@@ -16,7 +16,10 @@ protocol WordListInteractorInputProtocol: MDViewDidLoadProtocol {
 protocol WordListInteractorOutputProtocol: AnyObject,
                                            MDHideKeyboardProtocol,
                                            MDReloadDataProtocol,
-                                           MDShowErrorProtocol {
+                                           MDShowErrorProtocol,
+                                           MDShowHideProgressHUD {
+    
+    func deleteRow(at indexPath: IndexPath)
     
 }
 
@@ -29,6 +32,7 @@ final class WordListInteractor: NSObject,
                                 WordListInteractorProtocol {
     
     fileprivate let dataManager: WordListDataManagerInputProtocol
+    fileprivate let wordManager: MDWordManagerProtocol
     
     internal var tableViewDelegate: WordListTableViewDelegateProtocol
     internal var tableViewDataSource: WordListTableViewDataSourceProtocol
@@ -39,12 +43,14 @@ final class WordListInteractor: NSObject,
     init(dataManager: WordListDataManagerInputProtocol,
          tableViewDelegate: WordListTableViewDelegateProtocol,
          tableViewDataSource: WordListTableViewDataSourceProtocol,
-         searchBarDelegate: MDSearchBarDelegateImplementationProtocol) {
+         searchBarDelegate: MDSearchBarDelegateImplementationProtocol,
+         wordManager: MDWordManagerProtocol) {
         
         self.dataManager = dataManager
         self.tableViewDelegate = tableViewDelegate
         self.tableViewDataSource = tableViewDataSource
         self.searchBarDelegate = searchBarDelegate
+        self.wordManager = wordManager
         
         super.init()
         subscribe()
@@ -96,6 +102,8 @@ fileprivate extension WordListInteractor {
         //
         searchBarShouldClearAction_Subscribe()
         //
+        tableViewDataSourceDeleteButtonAction_Subscribe()
+        //
     }
     
     func searchBarCancelButtonAction_Subscribe() {
@@ -126,6 +134,49 @@ fileprivate extension WordListInteractor {
         
         searchBarDelegate.searchBarShouldClearAction = { [weak self] in
             self?.dataManager.clearWordFilter()
+        }
+        
+    }
+    
+    func tableViewDataSourceDeleteButtonAction_Subscribe() {
+        
+        tableViewDataSource.deleteButtonAction = { [unowned self] (indexPath) in
+            
+            // Show Progress HUD
+            interactorOutput?.showProgressHUD()
+            //
+            let word = dataManager.dataProvider.wordListCellModel(atIndexPath: indexPath)!.wordResponse
+            // Delete Word From API And Storage
+            wordManager.deleteWordFromApiAndAllStorage(byUserId: word.userId,
+                                                       byCourseId: word.courseId,
+                                                       byWordId: word.wordId) { [unowned self] deleteWordResult in
+                
+                switch deleteWordResult {
+                    
+                case .success:
+                    // Hide Progress HUD
+                    interactorOutput?.hideProgressHUD()
+                    //
+                    dataManager.deleteWord(atIndexPath: indexPath)
+                    //
+                    interactorOutput?.deleteRow(at: indexPath)
+                    //
+                    break
+                    //
+                    
+                case .failure(let error):
+                    // Hide Progress HUD
+                    interactorOutput?.hideProgressHUD()
+                    //
+                    interactorOutput?.showError(error)
+                    //
+                    break
+                    //
+                }
+                
+            }
+            
+            
         }
         
     }

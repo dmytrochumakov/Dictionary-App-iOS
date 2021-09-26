@@ -8,9 +8,11 @@
 import Foundation
 
 protocol WordListDataManagerInputProtocol {
+    var dataProvider: WordListDataProviderProcotol { get }
     func readAndAddWordsToDataProvider()
     func filterWords(_ searchText: String?)
     func clearWordFilter()
+    func deleteWord(atIndexPath indexPath: IndexPath)
 }
 
 protocol WordListDataManagerOutputProtocol: AnyObject {
@@ -125,6 +127,10 @@ extension WordListDataManager {
             
         }
         
+    }
+    
+    func deleteWord(atIndexPath indexPath: IndexPath) {
+        dataProvider.deleteWord(atIndexPath: indexPath)
     }
     
 }

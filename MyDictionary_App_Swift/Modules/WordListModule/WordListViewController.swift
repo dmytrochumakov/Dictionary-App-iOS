@@ -5,7 +5,7 @@
 //  Created by Dmytro Chumakov on 16.05.2021.
 //
 
-import UIKit
+import MBProgressHUD
 
 final class WordListViewController: MDBaseLargeTitledBackNavigationBarViewController {
     
@@ -77,6 +77,24 @@ extension WordListViewController: WordListPresenterOutputProtocol {
     func hideKeyboard() {
         DispatchQueue.main.async {
             MDConstants.Keyboard.hideKeyboard(rootView: self.view)
+        }
+    }
+    
+    func deleteRow(at indexPath: IndexPath) {
+        DispatchQueue.main.async {
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    func showProgressHUD() {
+        DispatchQueue.main.async {
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+        }
+    }
+    
+    func hideProgressHUD() {
+        DispatchQueue.main.async {
+            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
     
@@ -157,7 +175,7 @@ fileprivate extension WordListViewController {
 // MARK: - Configure UI
 fileprivate extension WordListViewController {
     
-    func configureUI() {   
+    func configureUI() {
         configureTableView()
     }
    

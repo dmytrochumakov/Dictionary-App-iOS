@@ -14,6 +14,7 @@ protocol WordListDataProviderProcotol: MDNumberOfSectionsProtocol,
     var filteredWords: [WordResponse] { get set }
     
     func wordListCellModel(atIndexPath indexPath: IndexPath) -> MDWordListCellModel?
+    func deleteWord(atIndexPath indexPath: IndexPath)
     
 }
 
@@ -54,6 +55,10 @@ extension WordListDataProvider {
         } else {
             return .init(wordResponse: filteredWords[indexPath.row])
         }
+    }
+    
+    func deleteWord(atIndexPath indexPath: IndexPath) {
+        filteredWords.remove(at: indexPath.row)
     }
     
 }

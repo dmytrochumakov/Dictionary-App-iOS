@@ -17,7 +17,10 @@ protocol WordListPresenterInputProtocol: MDTableViewDelegatePropertyProtocol,
 protocol WordListPresenterOutputProtocol: AnyObject,
                                           MDReloadDataProtocol,
                                           MDHideKeyboardProtocol,
-                                          MDShowErrorProtocol {
+                                          MDShowErrorProtocol,
+                                          MDShowHideProgressHUD {
+    
+    func deleteRow(at indexPath: IndexPath)
     
 }
 
@@ -63,6 +66,18 @@ extension WordListPresenter {
     
     func showError(_ error: Error) {
         presenterOutput?.showError(error)
+    }
+    
+    func deleteRow(at indexPath: IndexPath) {
+        presenterOutput?.deleteRow(at: indexPath)
+    }
+    
+    func showProgressHUD() {
+        presenterOutput?.showProgressHUD()
+    }
+    
+    func hideProgressHUD() {
+        presenterOutput?.hideProgressHUD()
     }
     
 }

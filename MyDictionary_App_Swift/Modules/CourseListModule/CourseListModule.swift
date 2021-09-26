@@ -18,7 +18,8 @@ extension CourseListModule {
     
     var module: UIViewController {
         
-        let jwtManager: MDJWTManagerProtocol = MDJWTManager.init(jwtStorage: MDConstants.AppDependencies.dependencies.jwtStorage,
+        let jwtManager: MDJWTManagerProtocol = MDJWTManager.init(userMemoryStorage: MDConstants.AppDependencies.dependencies.userStorage.memoryStorage,
+                                                                 jwtStorage: MDConstants.AppDependencies.dependencies.jwtStorage,
                                                                  apiJWT: MDConstants.AppDependencies.dependencies.apiJWT)
         
         let memoryStorage: MDCourseMemoryStorageProtocol = MDConstants.AppDependencies.dependencies.courseStorage.memoryStorage
@@ -26,8 +27,7 @@ extension CourseListModule {
         var dataManager: CourseListDataManagerProtocol = CourseListDataManager.init(memoryStorage: memoryStorage,
                                                                                     dataProvider: dataProvider)
         
-        let interactor: CourseListInteractorProtocol = CourseListInteractor.init(courseManager: MDCourseManager.init(userMemoryStorage: MDConstants.AppDependencies.dependencies.userStorage.memoryStorage,
-                                                                                                                     jwtManager: jwtManager,
+        let interactor: CourseListInteractorProtocol = CourseListInteractor.init(courseManager: MDCourseManager.init(jwtManager: jwtManager,
                                                                                                                      apiCourse: MDConstants.AppDependencies.dependencies.apiCourse,
                                                                                                                      courseStorage: MDConstants.AppDependencies.dependencies.courseStorage),
                                                                                  dataManager: dataManager,

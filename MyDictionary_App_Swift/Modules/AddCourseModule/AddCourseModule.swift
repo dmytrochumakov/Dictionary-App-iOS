@@ -28,8 +28,8 @@ extension AddCourseModule {
                                                                                collectionViewDataSource: MDAddCourseCollectionViewDataSource.init(dataProvider: dataProvider),
                                                                                searchBarDelegate: MDSearchBarDelegateImplementation.init(),
                                                                                bridge: MDConstants.AppDependencies.dependencies.bridge,
-                                                                               courseManager: MDCourseManager.init(userMemoryStorage: MDConstants.AppDependencies.dependencies.userStorage.memoryStorage,
-                                                                                                                   jwtManager: MDJWTManager.init(jwtStorage: MDConstants.AppDependencies.dependencies.jwtStorage,
+                                                                               courseManager: MDCourseManager.init(jwtManager: MDJWTManager.init(userMemoryStorage: MDConstants.AppDependencies.dependencies.userStorage.memoryStorage,
+                                                                                                                                                 jwtStorage: MDConstants.AppDependencies.dependencies.jwtStorage,
                                                                                                                                                  apiJWT: MDConstants.AppDependencies.dependencies.apiJWT),
                                                                                                                    apiCourse: MDConstants.AppDependencies.dependencies.apiCourse,
                                                                                                                    courseStorage: MDConstants.AppDependencies.dependencies.courseStorage))
