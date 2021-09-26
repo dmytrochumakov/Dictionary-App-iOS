@@ -163,8 +163,7 @@ fileprivate extension WordListViewController {
     }
     
     func configureView() {
-        self.view.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
-        self.title = LocalizedText.words.localized
+        self.view.backgroundColor = MDUIResources.Color.md_FFFFFF.color()        
     }
     
     func configureTableView() {
