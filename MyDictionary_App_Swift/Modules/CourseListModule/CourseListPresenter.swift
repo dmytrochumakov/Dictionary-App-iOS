@@ -93,6 +93,10 @@ extension CourseListPresenter {
         presenterOutput?.insertRow(atIndexPath: indexPath)
     }
     
+    func showWordList(withCourse course: CourseResponse) {
+        router.showWordList(withCourse: course)
+    }
+    
     var searchBarDelegate: MDSearchBarDelegate {
         return interactor.searchBarDelegate
     }

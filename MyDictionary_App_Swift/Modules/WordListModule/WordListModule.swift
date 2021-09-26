@@ -13,13 +13,23 @@ struct WordListModuleSender {
 
 final class WordListModule {
     
+    fileprivate let sender: CourseResponse
+    
+    init(sender: CourseResponse) {
+        self.sender = sender
+    }
+    
+    deinit {
+        debugPrint(#function, Self.self)
+    }
+    
 }
 
 extension WordListModule {
     
     var module: UIViewController {
         // Word List Module Classes
-        let wordListDataProvider: WordListDataProviderProcotol = WordListDataProvider.init()
+        let wordListDataProvider: WordListDataProviderProcotol = WordListDataProvider.init(course: sender)
         var wordListDataManager: WordListDataManagerProtocol = WordListDataManager.init(dataProvider: wordListDataProvider)
         let wordListCollectionViewDelegate: WordListCollectionViewDelegateProtocol = WordListCollectionViewDelegate.init(dataProvider: wordListDataProvider)
         let wordListCollectionViewDataSource: WordListCollectionViewDataSourceProtocol = WordListCollectionViewDataSource.init(dataProvider: wordListDataProvider)

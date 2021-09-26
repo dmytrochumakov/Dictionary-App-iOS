@@ -11,7 +11,7 @@ protocol CourseListInteractorInputProtocol: MDViewDidLoadProtocol {
     var tableViewDelegate: CourseListTableViewDelegateProtocol { get }
     var tableViewDataSource: CourseListTableViewDataSourceProtocol { get }
     var searchBarDelegate: MDSearchBarDelegateImplementationProtocol { get }
-    
+        
     func deleteCourse(atIndexPath indexPath: IndexPath)
     
 }
@@ -25,6 +25,7 @@ protocol CourseListInteractorOutputProtocol: AnyObject,
     func deleteCourseButtonClicked(_ cell: MDCourseListCell)
     func deleteRow(atIndexPath indexPath: IndexPath)
     func insertRow(atIndexPath indexPath: IndexPath)
+    func showWordList(withCourse course: CourseResponse)
     
 }
 
@@ -152,6 +153,8 @@ fileprivate extension CourseListInteractor {
         //
         deleteButtonAction_Subscribe()
         //
+        didAddCourseAction_Subscribe()
+        //
         didSelectCourseAction_Subscribe()
         //
     }
@@ -215,11 +218,21 @@ fileprivate extension CourseListInteractor {
         
     }
     
-    func didSelectCourseAction_Subscribe() {
+    func didAddCourseAction_Subscribe() {
         
         bridge.didAddCourse = { [unowned self] (courseResponse) in
             //
             interactorOutput?.insertRow(atIndexPath: dataManager.addCourse(atNewCourse: courseResponse))
+            //
+        }
+        
+    }
+    
+    func didSelectCourseAction_Subscribe() {
+        
+        tableViewDelegate.didSelectCourse = { [unowned self] (course) in
+            //
+            interactorOutput?.showWordList(withCourse: course)
             //
         }
         

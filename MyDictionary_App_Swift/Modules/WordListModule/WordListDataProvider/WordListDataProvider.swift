@@ -10,9 +10,17 @@ import Foundation
 protocol WordListDataProviderProcotol: MDNumberOfSectionsProtocol,
                                        MDNumberOfRowsInSectionProtocol {
     
+    var course: CourseResponse { get }
+    
 }
 
 final class WordListDataProvider: WordListDataProviderProcotol {
+    
+    var course: CourseResponse
+    
+    init(course: CourseResponse) {
+        self.course = course
+    }
     
 }
 
