@@ -147,8 +147,7 @@ extension MDWordMemoryStorage_Tests {
             
             case .success(let createdWord):
                 
-                self.wordMemoryStorage.updateWord(byWordID: createdWord.wordId,
-                                                  newWordText: Constants_For_Tests.mockedWordForUpdate.wordText,
+                self.wordMemoryStorage.updateWord(byWordID: createdWord.wordId,                                                  
                                                   newWordDescription: Constants_For_Tests.mockedWordForUpdate.wordDescription) { [unowned self] updateResult in
                     
                     switch updateResult {
