@@ -8,7 +8,7 @@
 import UIKit
 
 final class MDAddCourseCell: UICollectionViewCell,
-                             ReuseIdentifierProtocol {
+                             MDReuseIdentifierProtocol {
     
     public static let height: CGFloat = 40
     

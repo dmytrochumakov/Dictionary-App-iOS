@@ -12,8 +12,7 @@ protocol WordListInteractorInputProtocol {
     var collectionViewDataSource: WordListCollectionViewDataSourceProtocol { get }
 }
 
-protocol WordListInteractorOutputProtocol: AnyObject,
-                                           AppearanceHasBeenUpdatedProtocol {
+protocol WordListInteractorOutputProtocol: AnyObject {
     
 }
 
@@ -45,8 +44,7 @@ final class WordListInteractor: NSObject,
     }
     
     deinit {
-        debugPrint(#function, Self.self)
-        unsubscribe()
+        debugPrint(#function, Self.self)        
     }
     
 }
@@ -60,29 +58,7 @@ extension WordListInteractor {
 fileprivate extension WordListInteractor {
     
     func subscribe() {
-        didChangeAppearanceObservableSubscribe()
-    }
-    
-    func didChangeAppearanceObservableSubscribe() {
-        Appearance
-            .current
-            .didChangeAppearanceObservable
-            .addObserver(self) { [weak self] (value) in
-                self?.interactorOutput?.appearanceHasBeenUpdated(value)
-                self?.dataManager.appearanceHasBeenUpdated(value)
-            }
-    }
-    
-}
-
-// MARK: - Unsubscribe
-fileprivate extension WordListInteractor {
-    
-    func unsubscribe() {
-        Appearance
-            .current
-            .didChangeAppearanceObservable
-            .removeObserver(self)
+        
     }
     
 }

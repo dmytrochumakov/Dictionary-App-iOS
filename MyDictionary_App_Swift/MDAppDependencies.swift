@@ -215,7 +215,8 @@ extension MDAppDependencies {
                                                                                       userStorage: userStorage,
                                                                                       languageStorage: languageStorage,
                                                                                       courseStorage: courseStorage,
-                                                                                      wordStorage: wordStorage)
+                                                                                      wordStorage: wordStorage,
+                                                                                      bridge: MDConstants.AppDependencies.dependencies.bridge)
         // Fill Memory If Needed
         fillMemoryService.fillMemoryFromCoreDataIfNeeded(completionHandler: nil)
         //

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol WordListDataManagerInputProtocol: AppearanceHasBeenUpdatedProtocol {
+protocol WordListDataManagerInputProtocol {
     
 }
 
@@ -37,8 +37,6 @@ final class WordListDataManager: WordListDataManagerProtocol {
 
 extension WordListDataManager {
     
-    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
-        
-    }
+   
     
 }

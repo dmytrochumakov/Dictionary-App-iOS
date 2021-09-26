@@ -74,7 +74,7 @@ enum LocalizedText: String {
 }
 
 // MARK: - LocalizableProtocol
-extension LocalizedText: LocalizableProtocol {
+extension LocalizedText: MDLocalizableProtocol {
     
     /// Default is Constants.StaticText.defaultTableName
     var tableName: String {

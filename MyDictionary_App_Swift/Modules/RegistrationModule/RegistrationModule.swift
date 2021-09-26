@@ -8,12 +8,6 @@ import UIKit
 
 final class RegistrationModule {
     
-    let sender: Any?
-    
-    init(sender: Any?) {
-        self.sender = sender
-    }
-    
     deinit {
         debugPrint(#function, Self.self)
     }

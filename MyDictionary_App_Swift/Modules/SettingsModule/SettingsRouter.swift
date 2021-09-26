@@ -40,7 +40,7 @@ extension SettingsRouter {
     }
     
     func showAccount() {
-        settingsViewController.show(AccountModule.init(sender: nil).module, sender: nil)
+        settingsViewController.show(AccountModule.init().module, sender: nil)
     }
     
     func presentShareFeedback(withOption option: ShareFeedbackOption) {

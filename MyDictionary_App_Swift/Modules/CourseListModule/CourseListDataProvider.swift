@@ -6,8 +6,8 @@
 
 import Foundation
 
-protocol CourseListDataProviderProtocol: NumberOfSectionsProtocol,
-                                         NumberOfRowsInSectionProtocol {
+protocol CourseListDataProviderProtocol: MDNumberOfSectionsProtocol,
+                                         MDNumberOfRowsInSectionProtocol {
     
     var filteredCourses: [CourseResponse] { get set }
     

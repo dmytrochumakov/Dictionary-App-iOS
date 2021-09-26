@@ -15,7 +15,6 @@ protocol SettingsPresenterInputProtocol: MDCollectionViewDelegateFlowLayoutPrope
 }
 
 protocol SettingsPresenterOutputProtocol: AnyObject,
-                                          AppearanceHasBeenUpdatedProtocol,
                                           MDShowErrorProtocol {
     
     func showShareFeedbackActionsSheet()
@@ -57,10 +56,6 @@ final class SettingsPresenter: NSObject,
 
 // MARK: - SettingsInteractorOutputProtocol
 extension SettingsPresenter {
-    
-    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
-        self.presenterOutput?.appearanceHasBeenUpdated(newValue)
-    }
     
     func showError(_ error: Error) {
         presenterOutput?.showError(error)

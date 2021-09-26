@@ -6,13 +6,7 @@
 
 import UIKit
 
-final class CourseListModule {
-    
-    let sender: Any?
-    
-    init(sender: Any?) {
-        self.sender = sender
-    }
+final class CourseListModule {       
     
     deinit {
         debugPrint(#function, Self.self)

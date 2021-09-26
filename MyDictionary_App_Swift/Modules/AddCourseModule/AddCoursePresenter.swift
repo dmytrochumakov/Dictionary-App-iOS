@@ -8,9 +8,9 @@ import UIKit
 
 protocol AddCoursePresenterInputProtocol: MDCollectionViewDelegateFlowLayoutPropertyProtocol,
                                           MDCollectionViewDataSourcePropertyProtocol,
-                                          MDSearchBarDelegatePropertyProtocol {
-    
-    func viewDidLoad()
+                                          MDSearchBarDelegatePropertyProtocol,
+                                          MDViewDidLoadProtocol {
+        
     func addButtonClicked()
     
 }

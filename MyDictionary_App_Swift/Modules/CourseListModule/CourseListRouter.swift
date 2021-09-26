@@ -32,7 +32,7 @@ extension CourseListRouter {
     }
     
     func showAddCourse() {
-        presenter?.show(AddCourseModule.init(sender: nil).module, sender: nil)
+        presenter?.show(AddCourseModule.init().module, sender: nil)
     }
     
 }

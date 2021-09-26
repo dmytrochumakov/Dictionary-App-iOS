@@ -6,8 +6,8 @@
 
 import Foundation
 
-protocol AddCourseDataProviderProtocol: NumberOfSectionsProtocol,
-                                        NumberOfRowsInSectionProtocol {
+protocol AddCourseDataProviderProtocol: MDNumberOfSectionsProtocol,
+                                        MDNumberOfRowsInSectionProtocol {
     
     var sections: [MDAddCourseSection] { get set }
     func addCourseHeaderViewCellModel(atSection section: Int) -> MDAddCourseHeaderViewCellModel?

@@ -6,13 +6,12 @@
 
 import UIKit
 
-protocol AddCourseInteractorInputProtocol {
+protocol AddCourseInteractorInputProtocol: MDViewDidLoadProtocol {
     
     var collectionViewDelegate: MDAddCourseCollectionViewDelegateProtocol { get }
     var collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol { get }
     var searchBarDelegate: MDSearchBarDelegateImplementationProtocol { get }
-    
-    func viewDidLoad()
+        
     func addButtonClicked()
     
 }

@@ -13,8 +13,7 @@ protocol WordListPresenterInputProtocol: MDCollectionViewDelegateFlowLayoutPrope
 }
 
 protocol WordListPresenterOutputProtocol: AnyObject,
-                                          MDReloadDataProtocol,
-                                          AppearanceHasBeenUpdatedProtocol {
+                                          MDReloadDataProtocol {
     
 }
 
@@ -54,10 +53,6 @@ final class WordListPresenter: NSObject,
 
 // MARK: - WordListInteractorOutputProtocol
 extension WordListPresenter {
-    
-    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
-        self.presenterOutput?.appearanceHasBeenUpdated(newValue)
-    }
     
 }
 

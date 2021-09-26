@@ -8,7 +8,7 @@
 import MGSwipeTableCell
 
 final class MDCourseListCell: MGSwipeTableCell,
-                              ReuseIdentifierProtocol {
+                              MDReuseIdentifierProtocol {
     
     fileprivate static let titleLabelLeftOffset: CGFloat = 16
     fileprivate static let titleLabelRightOffset: CGFloat = 16

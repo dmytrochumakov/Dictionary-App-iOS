@@ -55,11 +55,6 @@ extension WordListViewController: WordListPresenterOutputProtocol {
         
     }    
     
-    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
-        configureAppearance(fromAppearanceType: newValue,
-                            collectionView: collectionView)
-    }
-    
 }
 
 // MARK: - Add Views
@@ -95,19 +90,17 @@ fileprivate extension WordListViewController {
     func configureUI() {
         configureView()
         configureCollectionView()
-        configureNavigationBarAppearance(fromAppearanceType: Appearance.current.appearanceType)        
     }
     
     func configureView() {
-        self.configureViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType)
+        self.view.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
         self.title = LocalizedText.words.localized
     }
     
     func configureCollectionView() {
         self.collectionView.delegate = self.presenter.collectionViewDelegate
         self.collectionView.dataSource = self.presenter.collectionViewDataSource
-        self.configureCollectionViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType,
-                                                    collectionView: collectionView)
+        self.collectionView.backgroundColor = .clear
     }
     
 }

@@ -6,7 +6,7 @@
 
 import UIKit
 
-protocol CourseListInteractorInputProtocol {
+protocol CourseListInteractorInputProtocol: MDViewDidLoadProtocol {
     
     var tableViewDelegate: CourseListTableViewDelegateProtocol { get }
     var tableViewDataSource: CourseListTableViewDataSourceProtocol { get }
@@ -17,7 +17,6 @@ protocol CourseListInteractorInputProtocol {
 }
 
 protocol CourseListInteractorOutputProtocol: AnyObject,
-                                             AppearanceHasBeenUpdatedProtocol,
                                              MDShowHideProgressHUD,
                                              MDHideKeyboardProtocol,
                                              MDReloadDataProtocol {
@@ -69,8 +68,7 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
     }
     
     deinit {
-        debugPrint(#function, Self.self)
-        unsubscribe()
+        debugPrint(#function, Self.self)        
     }
     
 }
@@ -94,6 +92,10 @@ extension CourseListInteractor {
 
 // MARK: - CourseListInteractorInputProtocol
 extension CourseListInteractor {
+    
+    func viewDidLoad() {
+        dataManager.readAndAddCoursesToDataProvider()
+    }
     
     func deleteCourse(atIndexPath indexPath: IndexPath) {
         
@@ -138,11 +140,7 @@ fileprivate extension CourseListInteractor {
     
     func subscribe() {
         //
-        didChangeAppearanceObservable_Subscribe()
-        //
-        didChangeMemoryIsFilledObservable_Subscribe()
-        //
-        readAndAddCoursesToDataProvider()
+        didChangeMemoryIsFilledAction_Subscribe()
         //
         searchBarCancelButtonAction_Subscribe()
         //
@@ -158,19 +156,9 @@ fileprivate extension CourseListInteractor {
         //
     }
     
-    func didChangeAppearanceObservable_Subscribe() {
-        Appearance
-            .current
-            .didChangeAppearanceObservable
-            .addObserver(self) { [weak self] (value) in
-                self?.interactorOutput?.appearanceHasBeenUpdated(value)
-            }
-    }
-    
-    func didChangeMemoryIsFilledObservable_Subscribe() {
-        fillMemoryService
-            .didChangeMemoryIsFilledResultObservable
-            .addObserver(self) { [weak self] result in
+    func didChangeMemoryIsFilledAction_Subscribe() {
+        bridge
+            .didChangeMemoryIsFilledResult = { [weak self] result in
                 
                 switch result {
                     
@@ -180,9 +168,6 @@ fileprivate extension CourseListInteractor {
                     
                 case .failure(let error):
                     self?.interactorOutput?.showError(error)
-                    break
-                    
-                case .none:
                     break
                     
                 }
@@ -238,30 +223,6 @@ fileprivate extension CourseListInteractor {
             //
         }
         
-    }
-    
-}
-
-// MARK: - Unsubscribe
-fileprivate extension CourseListInteractor {
-    
-    func unsubscribe() {
-        didChangeAppearanceObservable_Unsubscribe()
-        didChangeMemoryIsFilledObservable_Unsubscribe()
-    }
-    
-    func didChangeAppearanceObservable_Unsubscribe() {
-        Appearance
-            .current
-            .didChangeAppearanceObservable
-            .removeObserver(self)
-    }
-    
-    
-    func didChangeMemoryIsFilledObservable_Unsubscribe() {
-        fillMemoryService
-            .didChangeMemoryIsFilledResultObservable
-            .removeObserver(self)
     }
     
 }

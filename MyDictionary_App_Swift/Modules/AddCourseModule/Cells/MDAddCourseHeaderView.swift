@@ -8,7 +8,7 @@
 import UIKit
 
 final class MDAddCourseHeaderView: UICollectionReusableView,
-                                   ReuseIdentifierProtocol {
+                                   MDReuseIdentifierProtocol {
     
     public static let height: CGFloat = 32
     

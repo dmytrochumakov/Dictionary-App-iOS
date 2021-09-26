@@ -7,15 +7,11 @@
 
 import UIKit
 
-protocol WordListModuleProtocol: ModuleProtocol {
-    
-}
-
 struct WordListModuleSender {
     
 }
 
-final class WordListModule: WordListModuleProtocol {
+final class WordListModule {
     
 }
 

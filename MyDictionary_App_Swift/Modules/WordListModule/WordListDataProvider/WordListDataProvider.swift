@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol WordListDataProviderProcotol: NumberOfSectionsProtocol,
-                                       NumberOfRowsInSectionProtocol {
+protocol WordListDataProviderProcotol: MDNumberOfSectionsProtocol,
+                                       MDNumberOfRowsInSectionProtocol {
     
 }
 

@@ -70,6 +70,7 @@ final class CourseListViewController: MDBaseLargeTitledNavigationBarViewControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.viewDidLoad()
         configureUI()
     }
     
@@ -82,11 +83,6 @@ final class CourseListViewController: MDBaseLargeTitledNavigationBarViewControll
 
 // MARK: - CourseListPresenterOutputProtocol
 extension CourseListViewController: CourseListPresenterOutputProtocol {
-    
-    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
-        configureAppearance(fromAppearanceType: newValue,
-                            tableView: tableView)
-    }
     
     func showError(_ error: Error) {
         DispatchQueue.main.async {
@@ -268,19 +264,18 @@ fileprivate extension CourseListViewController {
 fileprivate extension CourseListViewController {
     
     func configureUI() {
-        configureView()
+        configureSelfView()
         configureTableView()
     }
     
-    func configureView() {
-        self.configureViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType)
+    func configureSelfView() {
+        self.view.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
     }
     
     func configureTableView() {
         self.tableView.delegate = self.presenter.tableViewDelegate
         self.tableView.dataSource = self.presenter.tableViewDataSource
-        self.configureTableViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType,
-                                               tableView: tableView)
+        self.tableView.backgroundColor = .clear
     }
     
 }

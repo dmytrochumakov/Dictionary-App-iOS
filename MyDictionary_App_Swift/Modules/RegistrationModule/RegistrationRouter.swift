@@ -24,7 +24,7 @@ final class RegistrationRouter: RegistrationRouterProtocol {
 extension RegistrationRouter {
     
     func showCourseList() {
-        MDConstants.AppDependencies.dependencies.rootWindow.rootViewController = UINavigationController.init(rootViewController: CourseListModule.init(sender: nil).module)
+        MDConstants.AppDependencies.dependencies.rootWindow.rootViewController = UINavigationController.init(rootViewController: CourseListModule.init().module)
     }
     
 }

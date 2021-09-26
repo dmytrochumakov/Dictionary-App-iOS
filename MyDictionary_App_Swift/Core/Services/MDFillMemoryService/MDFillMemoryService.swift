@@ -10,7 +10,6 @@ import Foundation
 protocol MDFillMemoryServiceProtocol {
     var isRunning: Bool { get }
     var isFilled: Bool { get }
-    var didChangeMemoryIsFilledResultObservable: Observable<(MDOperationResultWithoutCompletion<Void>)?> { get }
     func fillMemoryFromCoreDataIfNeeded(completionHandler: (MDOperationResultWithCompletion<Void>)?)
 }
 
@@ -22,6 +21,7 @@ final class MDFillMemoryService: MDFillMemoryServiceProtocol {
     fileprivate let languageStorage: MDLanguageStorageProtocol
     fileprivate let courseStorage: MDCourseStorageProtocol
     fileprivate let wordStorage: MDWordStorageProtocol
+    fileprivate var bridge: MDBridgeProtocol
     
     // Default is .coreData
     fileprivate let fromCoreData: MDStorageType = .coreData
@@ -33,9 +33,6 @@ final class MDFillMemoryService: MDFillMemoryServiceProtocol {
     
     // Default is false
     fileprivate var internalIsFilled: Bool
-    
-    // Default is nil
-    public var didChangeMemoryIsFilledResultObservable: Observable<(MDOperationResultWithoutCompletion<Void>)?>
     
     public var isRunning: Bool {
         return internalIsRunning
@@ -50,7 +47,8 @@ final class MDFillMemoryService: MDFillMemoryServiceProtocol {
          userStorage: MDUserStorageProtocol,
          languageStorage: MDLanguageStorageProtocol,
          courseStorage: MDCourseStorageProtocol,
-         wordStorage: MDWordStorageProtocol) {
+         wordStorage: MDWordStorageProtocol,
+         bridge: MDBridgeProtocol) {
         //
         self.isLoggedIn = isLoggedIn
         self.jwtStorage = jwtStorage
@@ -58,10 +56,10 @@ final class MDFillMemoryService: MDFillMemoryServiceProtocol {
         self.languageStorage = languageStorage
         self.courseStorage = courseStorage
         self.wordStorage = wordStorage
+        self.bridge = bridge
         //
         self.internalIsRunning = false
         self.internalIsFilled = false
-        self.didChangeMemoryIsFilledResultObservable = .init(value: nil)
         //
     }
     
@@ -409,9 +407,9 @@ fileprivate extension MDFillMemoryService {
         self.setInternalIsFilled(false)
     }
     
-    // didChangeMemoryIsFilledResultObservable
+    // didChangeMemoryIsFilledResult
     func setDidChangeMemoryIsFilledResult(_ newValue: MDOperationResultWithoutCompletion<Void>) {
-        didChangeMemoryIsFilledResultObservable.updateValue(newValue)
+        bridge.didChangeMemoryIsFilledResult?(newValue)        
     }
     
 }

@@ -6,9 +6,10 @@
 
 import UIKit
 
-protocol CourseListPresenterInputProtocol: TableViewDelegatePropertyProtocol,
-                                           TableViewDataSourcePropertyProtocol,
-                                           MDSearchBarDelegatePropertyProtocol {
+protocol CourseListPresenterInputProtocol: MDTableViewDelegatePropertyProtocol,
+                                           MDTableViewDataSourcePropertyProtocol,
+                                           MDSearchBarDelegatePropertyProtocol,
+                                           MDViewDidLoadProtocol {
     
     func addNewCourseButtonClicked()
     func settingsButtonClicked()
@@ -17,7 +18,6 @@ protocol CourseListPresenterInputProtocol: TableViewDelegatePropertyProtocol,
 }
 
 protocol CourseListPresenterOutputProtocol: AnyObject,
-                                            AppearanceHasBeenUpdatedProtocol,
                                             MDShowHideProgressHUD,
                                             MDHideKeyboardProtocol,
                                             MDReloadDataProtocol {
@@ -34,7 +34,8 @@ protocol CourseListPresenterProtocol: CourseListPresenterInputProtocol,
     var presenterOutput: CourseListPresenterOutputProtocol? { get set }
 }
 
-final class CourseListPresenter: NSObject, CourseListPresenterProtocol {
+final class CourseListPresenter: NSObject,
+                                 CourseListPresenterProtocol {
     
     fileprivate let interactor: CourseListInteractorInputProtocol
     fileprivate let router: CourseListRouterProtocol
@@ -59,10 +60,6 @@ final class CourseListPresenter: NSObject, CourseListPresenterProtocol {
 
 // MARK: - CourseListInteractorOutputProtocol
 extension CourseListPresenter {
-    
-    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
-        presenterOutput?.appearanceHasBeenUpdated(newValue)
-    }
     
     func showError(_ error: Error) {
         presenterOutput?.showError(error)
@@ -113,6 +110,7 @@ extension CourseListPresenter {
         return interactor.tableViewDataSource
     }
     
+        
     // Actions //
     func addNewCourseButtonClicked() {
         router.showAddCourse()
@@ -124,6 +122,10 @@ extension CourseListPresenter {
     
     func deleteCourse(atIndexPath indexPath: IndexPath) {
         interactor.deleteCourse(atIndexPath: indexPath)
+    }
+    
+    func viewDidLoad() {
+        interactor.viewDidLoad()
     }
     // --- //
     

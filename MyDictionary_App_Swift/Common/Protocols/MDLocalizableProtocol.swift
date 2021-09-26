@@ -1,5 +1,5 @@
 //
-//  LocalizableProtocol.swift
+//  MDLocalizableProtocol.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 16.05.2021.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol LocalizableProtocol {
+protocol MDLocalizableProtocol {
     var tableName: String { get }
     var localized: String { get }
 }
 
-extension LocalizableProtocol where Self: RawRepresentable, Self.RawValue == String {
+extension MDLocalizableProtocol where Self: RawRepresentable, Self.RawValue == String {
             
     func localized(lang: AppLanguageType, tableName: String) -> String {
         return rawValue.localized(lang: lang.rawValue, tableName: tableName)

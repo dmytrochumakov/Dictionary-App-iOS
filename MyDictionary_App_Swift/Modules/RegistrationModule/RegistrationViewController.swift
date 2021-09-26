@@ -389,7 +389,11 @@ fileprivate extension RegistrationViewController {
 fileprivate extension RegistrationViewController {
     
     func configureUI() {
-        configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
+        configureSelfView()
+    }
+    
+    func configureSelfView() {
+        self.view.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
     }
     
 }
