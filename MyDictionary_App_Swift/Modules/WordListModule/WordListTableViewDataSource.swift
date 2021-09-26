@@ -33,7 +33,9 @@ extension WordListTableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return .init()
+        let cell: MDWordListCell = tableView.dequeueReusableCell(for: indexPath)
+        cell.fillWithModel(dataProvider.model(atIndexPath: indexPath))
+        return cell
     }
     
 }

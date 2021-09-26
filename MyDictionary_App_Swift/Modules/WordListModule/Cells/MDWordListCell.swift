@@ -1,14 +1,18 @@
 //
-//  MDCourseListCell.swift
+//  MDWordListCell.swift
 //  MyDictionary_App_Swift
 //
-//  Created by Dmytro Chumakov on 16.09.2021.
+//  Created by Dmytro Chumakov on 26.09.2021.
 //
 
 import MGSwipeTableCell
 
-final class MDCourseListCell: MGSwipeTableCell,
-                              MDReuseIdentifierProtocol {
+struct MDWordListCellModel {
+    let wordText: String
+}
+
+final class MDWordListCell: MGSwipeTableCell,
+                            MDReuseIdentifierProtocol {
     
     fileprivate static let titleLabelLeftOffset: CGFloat = 16
     fileprivate static let titleLabelRightOffset: CGFloat = 16
@@ -31,7 +35,7 @@ final class MDCourseListCell: MGSwipeTableCell,
         return imageView
     }()
     
-    public static let height: CGFloat = 48
+    public static let height: CGFloat = 40
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -55,18 +59,18 @@ final class MDCourseListCell: MGSwipeTableCell,
 }
 
 // MARK: - FillWithModelProtocol
-extension MDCourseListCell: MDFillWithModelProtocol {
+extension MDWordListCell: MDFillWithModelProtocol {
     
-    typealias Model = MDCourseListCellModel?
+    typealias Model = MDWordListCellModel?
     
-    func fillWithModel(_ model: MDCourseListCellModel?) {
-        self.titleLabel.text = model?.languageName
+    func fillWithModel(_ model: MDWordListCellModel?) {
+        self.titleLabel.text = model?.wordText
     }
     
 }
 
 // MARK: - Add Views
-fileprivate extension MDCourseListCell {
+fileprivate extension MDWordListCell {
     
     func addViews() {
         addTitleLabel()
@@ -84,7 +88,7 @@ fileprivate extension MDCourseListCell {
 }
 
 // MARK: - Add Constraints
-fileprivate extension MDCourseListCell {
+fileprivate extension MDWordListCell {
     
     func addConstraints() {
         addTitleLabelConstraints()
@@ -132,7 +136,7 @@ fileprivate extension MDCourseListCell {
 }
 
 // MARK: - Configure UI
-fileprivate extension MDCourseListCell {
+fileprivate extension MDWordListCell {
     
     func configureUI() {
         self.selectionStyle = .none

@@ -24,4 +24,8 @@ final class WordListTableViewDelegate: NSObject,
 
 extension WordListTableViewDelegate {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return MDWordListCell.height
+    }
+    
 }
