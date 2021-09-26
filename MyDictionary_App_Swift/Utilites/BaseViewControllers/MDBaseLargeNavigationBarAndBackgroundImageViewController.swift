@@ -109,8 +109,12 @@ fileprivate extension MDBaseLargeNavigationBarAndBackgroundImageViewController {
 fileprivate extension MDBaseLargeNavigationBarAndBackgroundImageViewController {
     
     func configureUI() {
-        configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
+        configureSelfView()
         setupNavigationBar()
+    }
+    
+    func configureSelfView() {
+        self.view.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
     }
     
 }

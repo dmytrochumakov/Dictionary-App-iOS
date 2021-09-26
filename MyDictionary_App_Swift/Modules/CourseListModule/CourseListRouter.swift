@@ -12,6 +12,7 @@ protocol CourseListRouterProtocol {
     
     func openSettings()
     func showAddCourse()
+    func showWordList(withCourse course: CourseResponse)
     
 }
 
@@ -32,7 +33,11 @@ extension CourseListRouter {
     }
     
     func showAddCourse() {
-        presenter?.show(AddCourseModule.init(sender: nil).module, sender: nil)
+        presenter?.show(AddCourseModule.init().module, sender: nil)
+    }
+    
+    func showWordList(withCourse course: CourseResponse) {
+        presenter?.show(WordListModule.init(sender: course).module, sender: nil)
     }
     
 }

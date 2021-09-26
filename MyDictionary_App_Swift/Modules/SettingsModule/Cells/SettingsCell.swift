@@ -8,7 +8,7 @@
 import UIKit
 
 final class SettingsCell: UICollectionViewCell,
-                          ReuseIdentifierProtocol {
+                          MDReuseIdentifierProtocol {
     
     static let height: CGFloat = 40
     

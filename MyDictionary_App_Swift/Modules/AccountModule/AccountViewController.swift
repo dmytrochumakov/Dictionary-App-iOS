@@ -251,7 +251,7 @@ fileprivate extension AccountViewController {
     }
     
     func configureSelfView() {
-        self.view.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor()
+        self.view.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
     }
     
 }

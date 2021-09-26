@@ -67,3 +67,32 @@ final class MDReadAllWordsMemoryStorageOperation: MDOperation {
     }
     
 }
+
+final class MDReadAllWordsByCourseIDMemoryStorageOperation: MDOperation {
+    
+    fileprivate let memoryStorage: MDWordMemoryStorage
+    fileprivate let courseID: Int64
+    fileprivate let result: MDOperationsResultWithCompletion<WordResponse>?
+    
+    init(memoryStorage: MDWordMemoryStorage,
+         courseID: Int64,
+         result: MDOperationsResultWithCompletion<WordResponse>?) {
+        
+        self.memoryStorage = memoryStorage
+        self.courseID = courseID
+        self.result = result
+        
+        super.init()
+    }
+    
+    override func main() {
+        self.result?(.success(self.memoryStorage.arrayWords.filter({ $0.courseId == self.courseID })))
+        self.finish()
+    }
+    
+    deinit {
+        debugPrint(#function, Self.self)
+        self.finish()
+    }
+    
+}

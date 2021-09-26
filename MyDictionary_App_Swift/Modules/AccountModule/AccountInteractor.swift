@@ -6,8 +6,7 @@
 
 import UIKit
 
-protocol AccountInteractorInputProtocol {
-    func viewDidLoad()
+protocol AccountInteractorInputProtocol: MDViewDidLoadProtocol {    
     func logOutButtonClicked()
     func deleteAccountButtonClicked()
 }

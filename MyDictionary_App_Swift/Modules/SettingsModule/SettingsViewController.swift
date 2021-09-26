@@ -52,11 +52,6 @@ final class SettingsViewController: MDBaseTitledBackNavigationBarViewController 
 // MARK: - SettingsPresenterOutputProtocol
 extension SettingsViewController: SettingsPresenterOutputProtocol {
     
-    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
-        configureAppearance(fromAppearanceType: newValue,
-                            collectionView: collectionView)
-    }
-    
     func showError(_ error: Error) {
         UIAlertController.showAlertWithOkAction(title: LocalizedText.error.localized,
                                                 message: error.localizedDescription,
@@ -144,7 +139,7 @@ fileprivate extension SettingsViewController {
     }
     
     func configureView() {
-        self.view.backgroundColor = ConfigurationAppearanceController.viewBackgroundColor()
+        self.view.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
     }
     
     func configureCollectionView() {

@@ -7,13 +7,20 @@
 
 import Foundation
 
-protocol WordListInteractorInputProtocol {
-    var collectionViewDelegate: WordListCollectionViewDelegateProtocol { get }
-    var collectionViewDataSource: WordListCollectionViewDataSourceProtocol { get }
+protocol WordListInteractorInputProtocol: MDViewDidLoadProtocol {
+    var tableViewDelegate: WordListTableViewDelegateProtocol { get }
+    var tableViewDataSource: WordListTableViewDataSourceProtocol { get }
+    var searchBarDelegate: MDSearchBarDelegateImplementationProtocol { get }
+    func addNewWordButtonClicked()
 }
 
 protocol WordListInteractorOutputProtocol: AnyObject,
-                                           AppearanceHasBeenUpdatedProtocol {
+                                           MDHideKeyboardProtocol,
+                                           MDReloadDataProtocol,
+                                           MDShowErrorProtocol,
+                                           MDShowHideProgressHUD {
+    
+    func deleteRow(at indexPath: IndexPath)
     
 }
 
@@ -26,18 +33,25 @@ final class WordListInteractor: NSObject,
                                 WordListInteractorProtocol {
     
     fileprivate let dataManager: WordListDataManagerInputProtocol
+    fileprivate let wordManager: MDWordManagerProtocol
     
-    internal var collectionViewDelegate: WordListCollectionViewDelegateProtocol
-    internal var collectionViewDataSource: WordListCollectionViewDataSourceProtocol
+    internal var tableViewDelegate: WordListTableViewDelegateProtocol
+    internal var tableViewDataSource: WordListTableViewDataSourceProtocol
+    internal var searchBarDelegate: MDSearchBarDelegateImplementationProtocol
+    
     internal weak var interactorOutput: WordListInteractorOutputProtocol?
     
     init(dataManager: WordListDataManagerInputProtocol,
-         collectionViewDelegate: WordListCollectionViewDelegateProtocol,
-         collectionViewDataSource: WordListCollectionViewDataSourceProtocol) {
+         tableViewDelegate: WordListTableViewDelegateProtocol,
+         tableViewDataSource: WordListTableViewDataSourceProtocol,
+         searchBarDelegate: MDSearchBarDelegateImplementationProtocol,
+         wordManager: MDWordManagerProtocol) {
         
         self.dataManager = dataManager
-        self.collectionViewDelegate = collectionViewDelegate
-        self.collectionViewDataSource = collectionViewDataSource
+        self.tableViewDelegate = tableViewDelegate
+        self.tableViewDataSource = tableViewDataSource
+        self.searchBarDelegate = searchBarDelegate
+        self.wordManager = wordManager
         
         super.init()
         subscribe()
@@ -46,7 +60,6 @@ final class WordListInteractor: NSObject,
     
     deinit {
         debugPrint(#function, Self.self)
-        unsubscribe()
     }
     
 }
@@ -54,35 +67,152 @@ final class WordListInteractor: NSObject,
 // MARK: - WordListDataManagerOutputProtocol
 extension WordListInteractor {
     
+    func readAndAddWordsToDataProviderResult(_ result: MDOperationResultWithoutCompletion<Void>) {
+        checkResultAndExecuteReloadDataOrShowError(result)
+    }
+    
+    func filteredWordsResult(_ result: MDOperationResultWithoutCompletion<Void>) {
+        checkResultAndExecuteReloadDataOrShowError(result)
+    }
+    
+    func clearWordFilterResult(_ result: MDOperationResultWithoutCompletion<Void>) {
+        checkResultAndExecuteReloadDataOrShowError(result)
+    }
+    
+}
+
+// MARK: - WordListInteractorInputProtocol
+extension WordListInteractor {
+    
+    func viewDidLoad() {
+        dataManager.readAndAddWordsToDataProvider()
+    }
+    
+    func addNewWordButtonClicked() {
+        debugPrint(#function, Self.self)
+    }
+    
 }
 
 // MARK: - Subscribe
 fileprivate extension WordListInteractor {
     
     func subscribe() {
-        didChangeAppearanceObservableSubscribe()
+        //
+        searchBarCancelButtonAction_Subscribe()
+        //
+        searchBarSearchButtonAction_Subscribe()
+        //
+        searchBarTextDidChangeAction_Subscribe()
+        //
+        searchBarShouldClearAction_Subscribe()
+        //
+        tableViewDataSourceDeleteButtonAction_Subscribe()
+        //
     }
     
-    func didChangeAppearanceObservableSubscribe() {
-        Appearance
-            .current
-            .didChangeAppearanceObservable
-            .addObserver(self) { [weak self] (value) in
-                self?.interactorOutput?.appearanceHasBeenUpdated(value)
-                self?.dataManager.appearanceHasBeenUpdated(value)
+    func searchBarCancelButtonAction_Subscribe() {
+        
+        searchBarDelegate.searchBarCancelButtonAction = { [weak self] in
+            self?.interactorOutput?.hideKeyboard()
+        }
+        
+    }
+    
+    func searchBarSearchButtonAction_Subscribe() {
+        
+        searchBarDelegate.searchBarSearchButtonAction = { [weak self] in
+            self?.interactorOutput?.hideKeyboard()
+        }
+        
+    }
+    
+    func searchBarTextDidChangeAction_Subscribe() {
+        
+        searchBarDelegate.searchBarTextDidChangeAction = { [weak self] (searchText) in
+            self?.dataManager.filterWords(searchText)
+        }
+        
+    }
+    
+    func searchBarShouldClearAction_Subscribe() {
+        
+        searchBarDelegate.searchBarShouldClearAction = { [weak self] in
+            self?.dataManager.clearWordFilter()
+        }
+        
+    }
+    
+    func tableViewDataSourceDeleteButtonAction_Subscribe() {
+        
+        tableViewDataSource.deleteButtonAction = { [unowned self] (indexPath) in
+            
+            // Show Progress HUD
+            interactorOutput?.showProgressHUD()
+            //
+            let word = dataManager.dataProvider.wordListCellModel(atIndexPath: indexPath)!.wordResponse
+            // Delete Word From API And Storage
+            wordManager.deleteWordFromApiAndAllStorage(byUserId: word.userId,
+                                                       byCourseId: word.courseId,
+                                                       byWordId: word.wordId) { [unowned self] deleteWordResult in
+                
+                switch deleteWordResult {
+                    
+                case .success:
+                    // Hide Progress HUD
+                    interactorOutput?.hideProgressHUD()
+                    //
+                    dataManager.deleteWord(atIndexPath: indexPath)
+                    //
+                    interactorOutput?.deleteRow(at: indexPath)
+                    //
+                    break
+                    //
+                    
+                case .failure(let error):
+                    // Hide Progress HUD
+                    interactorOutput?.hideProgressHUD()
+                    //
+                    interactorOutput?.showError(error)
+                    //
+                    break
+                    //
+                }
+                
             }
+            
+            
+        }
+        
     }
     
 }
 
-// MARK: - Unsubscribe
+// MARK: - Private Methods
 fileprivate extension WordListInteractor {
     
-    func unsubscribe() {
-        Appearance
-            .current
-            .didChangeAppearanceObservable
-            .removeObserver(self)
+    func checkResultAndExecuteReloadDataOrShowError(_ result: MDOperationResultWithoutCompletion<Void>) {
+        
+        switch result {
+            
+        case .success:
+            
+            //
+            interactorOutput?.reloadData()
+            //
+            break
+            //
+            
+        case .failure(let error):
+            
+            //
+            interactorOutput?.showError(error)
+            //
+            break
+            //
+            
+        }
+        
     }
     
 }

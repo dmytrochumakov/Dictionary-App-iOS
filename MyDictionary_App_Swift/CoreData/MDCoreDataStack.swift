@@ -46,8 +46,10 @@ extension MDCoreDataStack {
     
     public func save(managedObjectContext: NSManagedObjectContext, completionHandler: @escaping CDResultSaved) {
         
-        mainContext.performAndWait {            
-            managedObjectContext.performAndWait {
+        managedObjectContext.performAndWait {
+            
+            mainContext.performAndWait {
+                
                 do {
                     if (managedObjectContext.hasChanges)  {
                         try managedObjectContext.save()
@@ -59,6 +61,7 @@ extension MDCoreDataStack {
                 } catch {
                     completionHandler(.failure(error))
                 }
+                
             }
             
         }

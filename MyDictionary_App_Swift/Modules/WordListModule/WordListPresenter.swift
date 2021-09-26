@@ -7,14 +7,22 @@
 
 import UIKit
 
-protocol WordListPresenterInputProtocol: MDCollectionViewDelegateFlowLayoutPropertyProtocol,
-                                         MDCollectionViewDataSourcePropertyProtocol {
+protocol WordListPresenterInputProtocol: MDTableViewDelegatePropertyProtocol,
+                                         MDTableViewDataSourcePropertyProtocol,
+                                         MDViewDidLoadProtocol,
+                                         MDSearchBarDelegatePropertyProtocol {
+    
+    func addNewWordButtonClicked()
     
 }
 
 protocol WordListPresenterOutputProtocol: AnyObject,
                                           MDReloadDataProtocol,
-                                          AppearanceHasBeenUpdatedProtocol {
+                                          MDHideKeyboardProtocol,
+                                          MDShowErrorProtocol,
+                                          MDShowHideProgressHUD {
+    
+    func deleteRow(at indexPath: IndexPath)
     
 }
 
@@ -30,23 +38,18 @@ final class WordListPresenter: NSObject,
     fileprivate let router: WordListRouterProtocol
     
     internal weak var presenterOutput: WordListPresenterOutputProtocol?
-    internal var collectionViewDelegate: UICollectionViewDelegateFlowLayout {
-        return self.interactor.collectionViewDelegate
-    }
-    internal var collectionViewDataSource: UICollectionViewDataSource {
-        return self.interactor.collectionViewDataSource
-    }
     
     init(interactor: WordListInteractorInputProtocol,
          router: WordListRouterProtocol) {
+        
         self.interactor = interactor
         self.router = router
+        
         super.init()
-        subscribe()
+        
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
         debugPrint(#function, Self.self)
     }
     
@@ -55,22 +58,53 @@ final class WordListPresenter: NSObject,
 // MARK: - WordListInteractorOutputProtocol
 extension WordListPresenter {
     
-    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
-        self.presenterOutput?.appearanceHasBeenUpdated(newValue)
+    func hideKeyboard() {
+        presenterOutput?.hideKeyboard()
+    }
+    
+    func reloadData() {
+        presenterOutput?.reloadData()
+    }
+    
+    func showError(_ error: Error) {
+        presenterOutput?.showError(error)
+    }
+    
+    func deleteRow(at indexPath: IndexPath) {
+        presenterOutput?.deleteRow(at: indexPath)
+    }
+    
+    func showProgressHUD() {
+        presenterOutput?.showProgressHUD()
+    }
+    
+    func hideProgressHUD() {
+        presenterOutput?.hideProgressHUD()
     }
     
 }
 
-// MARK: - Subscribe
-fileprivate extension WordListPresenter {
+// MARK: - WordListPresenterInputProtocol
+extension WordListPresenter: WordListPresenterInputProtocol {
     
-    func subscribe() {
-        
+    var tableViewDelegate: UITableViewDelegate {
+        return interactor.tableViewDelegate
     }
     
-}
+    var tableViewDataSource: UITableViewDataSource {
+        return interactor.tableViewDataSource
+    }
+    
+    var searchBarDelegate: MDSearchBarDelegate {
+        return interactor.searchBarDelegate
+    }
+    
+    func viewDidLoad() {
+        interactor.viewDidLoad()
+    }
 
-// MARK: - Actions
-fileprivate extension WordListPresenter {       
+    func addNewWordButtonClicked() {
+        interactor.addNewWordButtonClicked()
+    }
     
 }

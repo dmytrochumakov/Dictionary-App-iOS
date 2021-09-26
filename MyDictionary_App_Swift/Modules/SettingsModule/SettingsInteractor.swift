@@ -14,7 +14,6 @@ protocol SettingsInteractorInputProtocol {
 }
 
 protocol SettingsInteractorOutputProtocol: AnyObject,
-                                           AppearanceHasBeenUpdatedProtocol,
                                            MDShowErrorProtocol {
     
     func showAbout()
@@ -54,8 +53,7 @@ final class SettingsInteractor: NSObject,
     }
     
     deinit {
-        debugPrint(#function, Self.self)
-        unsubscribe()
+        debugPrint(#function, Self.self)        
     }
     
 }
@@ -90,7 +88,6 @@ extension SettingsInteractor {
 fileprivate extension SettingsInteractor {
     
     func subscribe() {
-        didChangeAppearanceObservable_Subscribe()
         didSelectItemAtIndexPath_Subscribe()
     }
     
@@ -128,28 +125,4 @@ fileprivate extension SettingsInteractor {
         
     }
     
-    func didChangeAppearanceObservable_Subscribe() {
-        
-        Appearance
-            .current
-            .didChangeAppearanceObservable
-            .addObserver(self) { [weak self] (value) in
-                self?.interactorOutput?.appearanceHasBeenUpdated(value)
-            }
-        
-    }
-    
 }
-
-// MARK: - Unsubscribe
-fileprivate extension SettingsInteractor {
-    
-    func unsubscribe() {
-        Appearance
-            .current
-            .didChangeAppearanceObservable
-            .removeObserver(self)
-    }
-    
-}
-

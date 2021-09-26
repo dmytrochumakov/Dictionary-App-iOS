@@ -209,23 +209,26 @@ extension MDAppDependencies {
         self.appSettings = appSettings
         
         //
+        // Bridge
+        let bridge: MDBridgeProtocol = MDBridge.init()
+        self.bridge = bridge
+        //
+        //
+        
+        //
         // Fill Memory Service
         let fillMemoryService: MDFillMemoryServiceProtocol = MDFillMemoryService.init(isLoggedIn: appSettings.isLoggedIn,
                                                                                       jwtStorage: jwtStorage,
                                                                                       userStorage: userStorage,
                                                                                       languageStorage: languageStorage,
                                                                                       courseStorage: courseStorage,
-                                                                                      wordStorage: wordStorage)
+                                                                                      wordStorage: wordStorage,
+                                                                                      bridge: bridge)
         // Fill Memory If Needed
         fillMemoryService.fillMemoryFromCoreDataIfNeeded(completionHandler: nil)
         //
         self.fillMemoryService = fillMemoryService
         //
-        
-        //
-        // Bridge
-        let bridge: MDBridgeProtocol = MDBridge.init()
-        self.bridge = bridge
         //
         
         // Configure FirebaseApp

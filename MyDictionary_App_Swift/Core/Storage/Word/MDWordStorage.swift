@@ -9,6 +9,8 @@ import Foundation
 
 protocol MDWordStorageProtocol: MDStorageProtocol {
     
+    var memoryStorage: MDWordMemoryStorageProtocol { get }
+    
     func createWord(_ wordModel: WordResponse,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>))
@@ -21,11 +23,14 @@ protocol MDWordStorageProtocol: MDStorageProtocol {
                   storageType: MDStorageType,
                   _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>))
     
+    func readAllWords(byCourseID courseID: Int64,
+                      storageType: MDStorageType,
+                      _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>))
+    
     func readAllWords(storageType: MDStorageType,
                       _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>))
     
     func updateWord(byWordID wordId: Int64,
-                    newWordText: String,
                     newWordDescription: String,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
@@ -41,7 +46,7 @@ protocol MDWordStorageProtocol: MDStorageProtocol {
 
 final class MDWordStorage: MDStorage, MDWordStorageProtocol {
     
-    fileprivate let memoryStorage: MDWordMemoryStorageProtocol
+    let memoryStorage: MDWordMemoryStorageProtocol
     fileprivate let coreDataStorage: MDWordCoreDataStorageProtocol
     
     init(memoryStorage: MDWordMemoryStorageProtocol,
@@ -69,7 +74,7 @@ extension MDWordStorage {
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
             memoryStorage.createWord(wordModel) { result in
@@ -128,7 +133,7 @@ extension MDWordStorage {
                      _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
             memoryStorage.createWords(wordModels) { result in
@@ -187,7 +192,7 @@ extension MDWordStorage {
                   _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<WordResponse>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
             memoryStorage.readWord(fromWordID: wordId) { (result) in
@@ -246,7 +251,7 @@ extension MDWordStorage {
                       _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
             memoryStorage.readAllWords { (result) in
@@ -301,18 +306,76 @@ extension MDWordStorage {
         
     }
     
+    func readAllWords(byCourseID courseID: Int64,
+                      storageType: MDStorageType,
+                      _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>)) {
+        
+        switch storageType {
+            
+        case .memory:
+            
+            memoryStorage.readAllWords(byCourseID: courseID) { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .coreData:
+            
+            coreDataStorage.readAllWords(byCourseID: courseID) { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<WordResponse>> = []
+            
+            // Read From Memory
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.readAllWords(byCourseID: courseID) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+                
+            }
+            
+            // Read From Core Data
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.readAllWords(byCourseID: courseID) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
+            }
+            
+        }
+        
+    }
+    
     func updateWord(byWordID wordId: Int64,
-                    newWordText: String,
                     newWordDescription: String,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
             memoryStorage.updateWord(byWordID: wordId,
-                                     newWordText: newWordText,
                                      newWordDescription: newWordDescription) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
@@ -320,7 +383,6 @@ extension MDWordStorage {
         case .coreData:
             
             coreDataStorage.updateWord(byWordID: wordId,
-                                       newWordText: newWordText,
                                        newWordDescription: newWordDescription) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
@@ -337,7 +399,6 @@ extension MDWordStorage {
             // Dispatch Group Enter
             dispatchGroup.enter()
             memoryStorage.updateWord(byWordID: wordId,
-                                     newWordText: newWordText,
                                      newWordDescription: newWordDescription) { result in
                 
                 // Append Result
@@ -352,7 +413,6 @@ extension MDWordStorage {
             // Dispatch Group Enter
             dispatchGroup.enter()
             coreDataStorage.updateWord(byWordID: wordId,
-                                       newWordText: newWordText,
                                        newWordDescription: newWordDescription) { result in
                 
                 // Append Result
@@ -376,7 +436,7 @@ extension MDWordStorage {
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
             memoryStorage.deleteWord(byWordId: wordId) { result in
@@ -433,7 +493,7 @@ extension MDWordStorage {
                         _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
             memoryStorage.deleteAllWords { result in

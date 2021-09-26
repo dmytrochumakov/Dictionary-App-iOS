@@ -25,11 +25,11 @@ final class ChoiceAuthenticationOrRegistrationRouter: ChoiceAuthenticationOrRegi
 extension ChoiceAuthenticationOrRegistrationRouter {
     
     func showAuthentication() {
-        presenter?.show(AuthenticationModule.init(sender: nil).module, sender: nil)
+        presenter?.show(AuthenticationModule.init().module, sender: nil)
     }
     
     func showRegistration() {
-        presenter?.show(RegistrationModule.init(sender: nil).module, sender: nil)
+        presenter?.show(RegistrationModule.init().module, sender: nil)
     }
     
 }

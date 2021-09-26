@@ -17,24 +17,16 @@ protocol MDCourseManagerProtocol {
     
 }
 
-struct MDUserAndJWT {
-    let user: UserResponse
-    let jwt: JWTResponse
-}
-
 final class MDCourseManager: MDCourseManagerProtocol {
     
-    fileprivate let userMemoryStorage: MDUserMemoryStorageProtocol
     fileprivate let jwtManager: MDJWTManagerProtocol
     fileprivate let apiCourse: MDAPICourseProtocol
     fileprivate let courseStorage: MDCourseStorageProtocol
     
-    init(userMemoryStorage: MDUserMemoryStorageProtocol,
-         jwtManager: MDJWTManagerProtocol,
+    init(jwtManager: MDJWTManagerProtocol,
          apiCourse: MDAPICourseProtocol,
          courseStorage: MDCourseStorageProtocol) {
         
-        self.userMemoryStorage = userMemoryStorage
         self.jwtManager = jwtManager
         self.apiCourse = apiCourse
         self.courseStorage = courseStorage
@@ -54,7 +46,7 @@ extension MDCourseManager {
         
         var resultCount: Int = .zero
         
-        fetchUserAndJWT { [unowned self] fetchUserAndJWTResult in
+        jwtManager.fetchUserAndJWT { [unowned self] fetchUserAndJWTResult in
             
             switch fetchUserAndJWTResult {
                 
@@ -141,7 +133,7 @@ extension MDCourseManager {
         
         var resultCount: Int = .zero
         
-        fetchUserAndJWT { [unowned self] fetchUserAndJWTResult in
+        jwtManager.fetchUserAndJWT { [unowned self] fetchUserAndJWTResult in
             
             switch fetchUserAndJWTResult {
                 
@@ -201,48 +193,6 @@ extension MDCourseManager {
                 //
             }
             
-        }
-        
-    }
-    
-}
-
-fileprivate extension MDCourseManager {
-    
-    func fetchUserAndJWT(_ completionHandler: @escaping(MDOperationResultWithCompletion<MDUserAndJWT>)) {
-        
-        userMemoryStorage.readFirstUser { [unowned self] readUserResult in
-            
-            switch readUserResult {
-                
-            case .success(let userResponse):
-                
-                jwtManager.fetchJWT(nickname: userResponse.nickname,
-                                    password: userResponse.password!,
-                                    userId: userResponse.userId) { (fetchResult) in
-                    
-                    switch fetchResult {
-                        
-                    case .success(let jwtResponse):
-                        
-                        completionHandler(.success(.init(user: userResponse,
-                                                         jwt: jwtResponse)))
-                        break
-                        
-                    case .failure(let error):
-                        
-                        completionHandler(.failure(error))
-                        break
-                        
-                    }
-                }
-                
-            case .failure(let error):
-                
-                completionHandler(.failure(error))
-                break
-                
-            }
         }
         
     }

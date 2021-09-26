@@ -7,21 +7,26 @@
 
 import Foundation
 
+struct MDUserAndJWT {
+    let user: UserResponse
+    let jwt: JWTResponse
+}
+
 protocol MDJWTManagerProtocol {
-    func fetchJWT(nickname: String,
-                  password: String,
-                  userId: Int64,
-                  _ completionHandler: @escaping MDOperationResultWithCompletion<JWTResponse>)
+    func fetchUserAndJWT(_ completionHandler: @escaping(MDOperationResultWithCompletion<MDUserAndJWT>))
 }
 
 final class MDJWTManager: MDJWTManagerProtocol {
     
+    fileprivate let userMemoryStorage: MDUserMemoryStorageProtocol
     fileprivate let jwtStorage: MDJWTStorageProtocol
     fileprivate let apiJWT: MDAPIJWTProtocol
     
-    init(jwtStorage: MDJWTStorageProtocol,
+    init(userMemoryStorage: MDUserMemoryStorageProtocol,
+         jwtStorage: MDJWTStorageProtocol,
          apiJWT: MDAPIJWTProtocol) {
         
+        self.userMemoryStorage = userMemoryStorage
         self.jwtStorage = jwtStorage
         self.apiJWT = apiJWT
         
@@ -34,6 +39,48 @@ final class MDJWTManager: MDJWTManagerProtocol {
 }
 
 extension MDJWTManager {
+    
+    func fetchUserAndJWT(_ completionHandler: @escaping(MDOperationResultWithCompletion<MDUserAndJWT>)) {
+        
+        userMemoryStorage.readFirstUser { [unowned self] readUserResult in
+            
+            switch readUserResult {
+                
+            case .success(let userResponse):
+                
+                fetchJWT(nickname: userResponse.nickname,
+                         password: userResponse.password!,
+                         userId: userResponse.userId) { (fetchResult) in
+                    
+                    switch fetchResult {
+                        
+                    case .success(let jwtResponse):
+                        
+                        completionHandler(.success(.init(user: userResponse,
+                                                         jwt: jwtResponse)))
+                        break
+                        
+                    case .failure(let error):
+                        
+                        completionHandler(.failure(error))
+                        break
+                        
+                    }
+                }
+                
+            case .failure(let error):
+                
+                completionHandler(.failure(error))
+                break
+                
+            }
+        }
+        
+    }
+    
+}
+
+fileprivate extension MDJWTManager {
     
     func fetchJWT(nickname: String,
                   password: String,
@@ -48,7 +95,7 @@ extension MDJWTManager {
                                             "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxLGEsYSIsImlzcyI6ImNvbS5kY2hwcm9qZWN0cy5teWRpY3Rpb25hcnlyZXN0YXBpIiwiaWF0IjoxNjMxNzkwNTI5LCJleHAiOjE2MzE3OTQxMjl9.GyX4FznJMKL2rnXmfE8xwzVSJ_pZ_tkR3eb-pB67D7_Vzu8zaXPxO9UIIOjNGHGpFo8_KzsoTdeYQCYQjRxB8g")) { fetchResult in
             
             switch fetchResult {
-            
+                
             case .success(let jwtResponse):
                 
                 completionHandler(.success(jwtResponse))
@@ -70,7 +117,7 @@ fileprivate extension MDJWTManager {
         jwtStorage.readFirstJWT(storageType: .memory) { [unowned self] readResults in
             
             switch readResults.first!.result {
-            
+                
             case .success(let readJWTResponse):
                 
                 if (isExpired(jwtExpirationDate: readJWTResponse.expDate)) {
@@ -78,7 +125,7 @@ fileprivate extension MDJWTManager {
                     apiJWT.accessToken(jwtApiRequest: jwtApiRequest) { [unowned self] accessTokenResult in
                         
                         switch accessTokenResult {
-                        
+                            
                         case .success(let fetchedJWTResponse):
                             
                             jwtStorage.updateJWT(storageType: .all,
@@ -86,7 +133,7 @@ fileprivate extension MDJWTManager {
                                                  newJWTResponse: fetchedJWTResponse) { updatedResult in
                                 
                                 switch updatedResult.first!.result {
-                                
+                                    
                                 case .success:
                                     
                                     completionHandler(.success(fetchedJWTResponse))

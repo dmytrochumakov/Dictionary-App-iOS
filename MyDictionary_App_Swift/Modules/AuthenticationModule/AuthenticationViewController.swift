@@ -247,7 +247,11 @@ fileprivate extension AuthenticationViewController {
 fileprivate extension AuthenticationViewController {
     
     func configureUI() {
-        configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
+        configureSelfView()
+    }
+    
+    func configureSelfView() {
+        self.view.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
     }
     
 }

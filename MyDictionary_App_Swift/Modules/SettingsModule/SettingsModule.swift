@@ -7,12 +7,11 @@
 
 import UIKit
 
-protocol SettingsModuleProtocol: ModuleProtocol {
+final class SettingsModule {
     
-}
-
-final class SettingsModule: SettingsModuleProtocol {
-    
+    deinit {
+        debugPrint(#function, Self.self)
+    }
     
 }
 

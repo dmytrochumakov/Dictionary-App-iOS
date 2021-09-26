@@ -9,22 +9,22 @@ import UIKit
 
 extension UITableView {
     
-    final func register<T: UITableViewCell>(_ cellType: T.Type) where T: ReuseIdentifierProtocol {
+    final func register<T: UITableViewCell>(_ cellType: T.Type) where T: MDReuseIdentifierProtocol {
         self.register(cellType.self, forCellReuseIdentifier: cellType.reuseIdentifier)
     }
     
-    final func register<T: UITableViewHeaderFooterView>(_ cellType: T.Type) where T: ReuseIdentifierProtocol {
+    final func register<T: UITableViewHeaderFooterView>(_ cellType: T.Type) where T: MDReuseIdentifierProtocol {
         self.register(cellType.self, forHeaderFooterViewReuseIdentifier: cellType.reuseIdentifier)
     }
     
-    final func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T where T: ReuseIdentifierProtocol {
+    final func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T where T: MDReuseIdentifierProtocol {
         guard let cell = dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
             fatalError("Impossible dequeue cell with identifier: \(T.reuseIdentifier)")
         }
         return cell
     }
     
-    final func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>(for indexPath: IndexPath) -> T where T: ReuseIdentifierProtocol {
+    final func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>() -> T where T: MDReuseIdentifierProtocol {
         guard let cell = dequeueReusableHeaderFooterView(withIdentifier: T.reuseIdentifier) as? T else {
             fatalError("Impossible dequeue cell with identifier: \(T.reuseIdentifier)")
         }

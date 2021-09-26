@@ -9,11 +9,13 @@ import Foundation
 
 protocol MDBridgeProtocol {
     var didAddCourse: ((CourseResponse) -> Void)? { get set }
+    var didChangeMemoryIsFilledResult: (((MDOperationResultWithoutCompletion<Void>)) -> Void)? { get set }
 }
 
 final class MDBridge: MDBridgeProtocol {
     
     public var didAddCourse: ((CourseResponse) -> Void)?
+    public var didChangeMemoryIsFilledResult: (((MDOperationResultWithoutCompletion<Void>)) -> Void)? 
     
     deinit {
         debugPrint(#function, Self.self)

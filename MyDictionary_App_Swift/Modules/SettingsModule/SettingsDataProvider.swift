@@ -6,8 +6,8 @@
 
 import Foundation
 
-protocol SettingsDataProviderProtocol: NumberOfSectionsProtocol,
-                                       NumberOfRowsInSectionProtocol {
+protocol SettingsDataProviderProtocol: MDNumberOfSectionsProtocol,
+                                       MDNumberOfRowsInSectionProtocol {
     
     func rowModel(atIndexPath indexPath: IndexPath) -> SettingsRowModel
 }

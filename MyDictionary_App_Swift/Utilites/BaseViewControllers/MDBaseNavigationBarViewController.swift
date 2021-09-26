@@ -152,8 +152,12 @@ fileprivate extension MDBaseNavigationBarViewController {
 fileprivate extension MDBaseNavigationBarViewController {
     
     func configureUI() {
-        configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
+        configureSelfView()
         setupNavigationBar()
+    }
+    
+    func configureSelfView() {
+        self.view.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
     }
     
 }

@@ -114,14 +114,24 @@ extension MDWordMemoryStorage {
         
     }
     
+    func readAllWords(byCourseID courseID: Int64,
+                      _ completionHandler: @escaping (MDOperationsResultWithCompletion<WordResponse>)) {
+        
+        let operation = MDReadAllWordsByCourseIDMemoryStorageOperation.init(memoryStorage: self,
+                                                                            courseID: courseID) { result in
+            completionHandler(result)
+        }
+        
+        operationQueueService.enqueue(operation)
+        
+    }
+    
     func updateWord(byWordID wordId: Int64,
-                    newWordText: String,
                     newWordDescription: String,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
         let operation = MDUpdateWordMemoryStorageOperation.init(wordStorage: self,
                                                                 wordId: wordId,
-                                                                newWordText: newWordText,
                                                                 newWordDescription: newWordDescription) { result in
             completionHandler(result)
         }

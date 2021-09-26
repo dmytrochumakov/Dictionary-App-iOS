@@ -189,8 +189,12 @@ fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
 fileprivate extension ChoiceAuthenticationOrRegistrationViewController {
     
     func configureUI() {
-        configureAppearance(fromAppearanceType: Appearance.current.appearanceType)
+        configureSelfView()
         updateLayoutSubviews()
+    }
+    
+    func configureSelfView() {
+        self.view.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
     }
     
     func updateLayoutSubviews() {

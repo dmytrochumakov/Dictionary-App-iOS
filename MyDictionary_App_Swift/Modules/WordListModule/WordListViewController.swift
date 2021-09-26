@@ -5,22 +5,39 @@
 //  Created by Dmytro Chumakov on 16.05.2021.
 //
 
-import UIKit
+import MBProgressHUD
 
-final class WordListViewController: UIViewController {
+final class WordListViewController: MDBaseLargeTitledBackNavigationBarViewController {
     
     fileprivate let presenter: WordListPresenterInputProtocol
-    fileprivate let collectionView: UICollectionView = {
-        let flowLayout: UICollectionViewFlowLayout = .init()
-        let collectionView = UICollectionView.init(frame: .zero,
-                                                   collectionViewLayout: flowLayout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
+    
+    fileprivate let searchBar: MDSearchBar = {
+        let searchBar: MDSearchBar = .init()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        return searchBar
+    }()
+    
+    fileprivate let tableView: UITableView = {
+        let tableView = UITableView.init()
+        tableView.register(MDWordListCell.self)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
+        return tableView
+    }()
+    
+    fileprivate static let addNewWordButtonSize: CGSize = .init(width: 40, height: 40)
+    fileprivate static let addNewWordButtonRightOffset: CGFloat = 8
+    fileprivate let addNewWordButton: UIButton = {
+        let button: UIButton = .init()
+        button.setImage(MDUIResources.Image.add.image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     init(presenter: WordListPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
+        super.init(title: LocalizedText.words.localized,
+                   navigationBarBackgroundImage: MDUIResources.Image.background_navigation_bar_1.image)
     }
     
     deinit {
@@ -38,6 +55,7 @@ final class WordListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.viewDidLoad()
         configureUI()
     }
     
@@ -52,12 +70,41 @@ final class WordListViewController: UIViewController {
 extension WordListViewController: WordListPresenterOutputProtocol {
     
     func reloadData() {
-        
-    }    
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
     
-    func appearanceHasBeenUpdated(_ newValue: AppearanceType) {
-        configureAppearance(fromAppearanceType: newValue,
-                            collectionView: collectionView)
+    func showError(_ error: Error) {
+        DispatchQueue.main.async {
+            UIAlertController.showAlertWithOkAction(title: LocalizedText.error.localized,
+                                                    message: error.localizedDescription,
+                                                    presenter: self)
+        }
+    }
+    
+    func hideKeyboard() {
+        DispatchQueue.main.async {
+            MDConstants.Keyboard.hideKeyboard(rootView: self.view)
+        }
+    }
+    
+    func deleteRow(at indexPath: IndexPath) {
+        DispatchQueue.main.async {
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    func showProgressHUD() {
+        DispatchQueue.main.async {
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+        }
+    }
+    
+    func hideProgressHUD() {
+        DispatchQueue.main.async {
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
     }
     
 }
@@ -66,11 +113,23 @@ extension WordListViewController: WordListPresenterOutputProtocol {
 fileprivate extension WordListViewController {
     
     func addViews() {
-        addCollectionView()
+        addSearchBar()
+        addTableView()
+        addAddNewWordButton()
     }
     
-    func addCollectionView() {
-        view.addSubview(collectionView)
+    func addSearchBar() {
+        searchBar.delegate = presenter.searchBarDelegate
+        view.addSubview(searchBar)
+    }
+    
+    func addTableView() {
+        view.addSubview(tableView)
+    }
+    
+    func addAddNewWordButton() {
+        addNewWordButton.addTarget(self, action: #selector(addNewWordButtonAction), for: .touchUpInside)
+        view.addSubview(addNewWordButton)
     }
     
 }
@@ -79,12 +138,70 @@ fileprivate extension WordListViewController {
 fileprivate extension WordListViewController {
     
     func addConstraints() {
-        addCollectionConstraints()
+        addSearchBarConstraints()
+        addTableViewConstraints()
+        addAddNewWordButtonConstraints()
     }
     
-    func addCollectionConstraints() {
-        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.collectionView,
-                                                         toItem: self.view)
+    func addSearchBarConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.searchBar,
+                                              attribute: .top,
+                                              toItem: self.navigationBarView,
+                                              attribute: .bottom,
+                                              constant: MDConstants.SearchBar.defaultTopOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.searchBar,
+                                                  toItem: self.view,
+                                                  constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.searchBar,
+                                                   toItem: self.view,
+                                                   constant: .zero)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.searchBar,
+                                                    constant: MDConstants.SearchBar.defaultHeight)
+        
+    }
+    
+    func addTableViewConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.tableView,
+                                              attribute: .top,
+                                              toItem: self.searchBar,
+                                              attribute: .bottom,
+                                              constant: .zero)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.tableView,
+                                                  toItem: self.view,
+                                                  constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.tableView,
+                                                   toItem: self.view,
+                                                   constant: .zero)
+        
+        NSLayoutConstraint.addEqualBottomConstraint(item: self.tableView,
+                                                    toItem: self.view,
+                                                    constant: .zero)
+        
+    }
+    
+    func addAddNewWordButtonConstraints() {
+        
+        NSLayoutConstraint.addEqualCenterYConstraint(item: self.addNewWordButton,
+                                                     toItem: self.backButton,
+                                                     constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.addNewWordButton,
+                                                   toItem: self.navigationBarView,
+                                                   constant: -Self.addNewWordButtonRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.addNewWordButton,
+                                                    constant: Self.addNewWordButtonSize.height)
+        
+        NSLayoutConstraint.addEqualWidthConstraint(item: self.addNewWordButton,
+                                                   constant: Self.addNewWordButtonSize.width)
+        
     }
     
 }
@@ -93,21 +210,22 @@ fileprivate extension WordListViewController {
 fileprivate extension WordListViewController {
     
     func configureUI() {
-        configureView()
-        configureCollectionView()
-        configureNavigationBarAppearance(fromAppearanceType: Appearance.current.appearanceType)        
+        configureTableView()
     }
     
-    func configureView() {
-        self.configureViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType)
-        self.title = LocalizedText.words.localized
+    func configureTableView() {
+        self.tableView.delegate = self.presenter.tableViewDelegate
+        self.tableView.dataSource = self.presenter.tableViewDataSource
+        self.tableView.backgroundColor = .clear
     }
     
-    func configureCollectionView() {
-        self.collectionView.delegate = self.presenter.collectionViewDelegate
-        self.collectionView.dataSource = self.presenter.collectionViewDataSource
-        self.configureCollectionViewBackgroundColor(fromAppearanceType: Appearance.current.appearanceType,
-                                                    collectionView: collectionView)
+}
+
+// MARK: - Actions
+fileprivate extension WordListViewController {
+    
+    @objc func addNewWordButtonAction() {
+        presenter.addNewWordButtonClicked()
     }
     
 }

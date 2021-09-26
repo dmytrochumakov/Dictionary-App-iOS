@@ -8,12 +8,14 @@
 import UIKit
 
 protocol CourseListTableViewDelegateProtocol: UITableViewDelegate {
-    
+    var didSelectCourse: ((CourseResponse) -> Void)? { get set }
 }
 
 final class CourseListTableViewDelegate: NSObject, CourseListTableViewDelegateProtocol {
     
     fileprivate let dataProvider: CourseListDataProviderProtocol
+    
+    public var didSelectCourse: ((CourseResponse) -> Void)?
     
     init(dataProvider: CourseListDataProviderProtocol) {
         self.dataProvider = dataProvider
@@ -22,6 +24,10 @@ final class CourseListTableViewDelegate: NSObject, CourseListTableViewDelegatePr
 }
 
 extension CourseListTableViewDelegate {            
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        didSelectCourse?(dataProvider.course(atIndexPath: indexPath))
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return MDCourseListCell.height

@@ -25,11 +25,11 @@ final class AuthenticationRouter: AuthenticationRouterProtocol {
 extension AuthenticationRouter {
     
     func showCourseList() {        
-        MDConstants.AppDependencies.dependencies.rootWindow.rootViewController = UINavigationController.init(rootViewController: CourseListModule.init(sender: nil).module)
+        MDConstants.AppDependencies.dependencies.rootWindow.rootViewController = UINavigationController.init(rootViewController: CourseListModule.init().module)
     }
     
     func showRegistration() {
-        presenter?.show(RegistrationModule.init(sender: nil).module, sender: nil)
+        presenter?.show(RegistrationModule.init().module, sender: nil)
     }
     
 }

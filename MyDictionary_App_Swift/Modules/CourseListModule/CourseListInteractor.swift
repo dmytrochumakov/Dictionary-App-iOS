@@ -6,18 +6,17 @@
 
 import UIKit
 
-protocol CourseListInteractorInputProtocol {
+protocol CourseListInteractorInputProtocol: MDViewDidLoadProtocol {
     
     var tableViewDelegate: CourseListTableViewDelegateProtocol { get }
     var tableViewDataSource: CourseListTableViewDataSourceProtocol { get }
     var searchBarDelegate: MDSearchBarDelegateImplementationProtocol { get }
-    
+        
     func deleteCourse(atIndexPath indexPath: IndexPath)
     
 }
 
 protocol CourseListInteractorOutputProtocol: AnyObject,
-                                             AppearanceHasBeenUpdatedProtocol,
                                              MDShowHideProgressHUD,
                                              MDHideKeyboardProtocol,
                                              MDReloadDataProtocol {
@@ -26,6 +25,7 @@ protocol CourseListInteractorOutputProtocol: AnyObject,
     func deleteCourseButtonClicked(_ cell: MDCourseListCell)
     func deleteRow(atIndexPath indexPath: IndexPath)
     func insertRow(atIndexPath indexPath: IndexPath)
+    func showWordList(withCourse course: CourseResponse)
     
 }
 
@@ -69,8 +69,7 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
     }
     
     deinit {
-        debugPrint(#function, Self.self)
-        unsubscribe()
+        debugPrint(#function, Self.self)        
     }
     
 }
@@ -94,6 +93,10 @@ extension CourseListInteractor {
 
 // MARK: - CourseListInteractorInputProtocol
 extension CourseListInteractor {
+    
+    func viewDidLoad() {
+        dataManager.readAndAddCoursesToDataProvider()
+    }
     
     func deleteCourse(atIndexPath indexPath: IndexPath) {
         
@@ -138,11 +141,7 @@ fileprivate extension CourseListInteractor {
     
     func subscribe() {
         //
-        didChangeAppearanceObservable_Subscribe()
-        //
-        didChangeMemoryIsFilledObservable_Subscribe()
-        //
-        readAndAddCoursesToDataProvider()
+        didChangeMemoryIsFilledAction_Subscribe()
         //
         searchBarCancelButtonAction_Subscribe()
         //
@@ -154,23 +153,15 @@ fileprivate extension CourseListInteractor {
         //
         deleteButtonAction_Subscribe()
         //
+        didAddCourseAction_Subscribe()
+        //
         didSelectCourseAction_Subscribe()
         //
     }
     
-    func didChangeAppearanceObservable_Subscribe() {
-        Appearance
-            .current
-            .didChangeAppearanceObservable
-            .addObserver(self) { [weak self] (value) in
-                self?.interactorOutput?.appearanceHasBeenUpdated(value)
-            }
-    }
-    
-    func didChangeMemoryIsFilledObservable_Subscribe() {
-        fillMemoryService
-            .didChangeMemoryIsFilledResultObservable
-            .addObserver(self) { [weak self] result in
+    func didChangeMemoryIsFilledAction_Subscribe() {
+        bridge
+            .didChangeMemoryIsFilledResult = { [weak self] result in
                 
                 switch result {
                     
@@ -180,9 +171,6 @@ fileprivate extension CourseListInteractor {
                     
                 case .failure(let error):
                     self?.interactorOutput?.showError(error)
-                    break
-                    
-                case .none:
                     break
                     
                 }
@@ -230,7 +218,7 @@ fileprivate extension CourseListInteractor {
         
     }
     
-    func didSelectCourseAction_Subscribe() {
+    func didAddCourseAction_Subscribe() {
         
         bridge.didAddCourse = { [unowned self] (courseResponse) in
             //
@@ -240,28 +228,14 @@ fileprivate extension CourseListInteractor {
         
     }
     
-}
-
-// MARK: - Unsubscribe
-fileprivate extension CourseListInteractor {
-    
-    func unsubscribe() {
-        didChangeAppearanceObservable_Unsubscribe()
-        didChangeMemoryIsFilledObservable_Unsubscribe()
-    }
-    
-    func didChangeAppearanceObservable_Unsubscribe() {
-        Appearance
-            .current
-            .didChangeAppearanceObservable
-            .removeObserver(self)
-    }
-    
-    
-    func didChangeMemoryIsFilledObservable_Unsubscribe() {
-        fillMemoryService
-            .didChangeMemoryIsFilledResultObservable
-            .removeObserver(self)
+    func didSelectCourseAction_Subscribe() {
+        
+        tableViewDelegate.didSelectCourse = { [unowned self] (course) in
+            //
+            interactorOutput?.showWordList(withCourse: course)
+            //
+        }
+        
     }
     
 }
