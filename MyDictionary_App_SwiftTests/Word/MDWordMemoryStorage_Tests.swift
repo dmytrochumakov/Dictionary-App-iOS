@@ -159,8 +159,7 @@ extension MDWordMemoryStorage_Tests {
                             switch readResult {
                             
                             case .success(let readWord):
-                                
-                                XCTAssertTrue(readWord.wordText == Constants_For_Tests.mockedWordForUpdate.wordText)
+                                                                
                                 XCTAssertTrue(readWord.wordDescription == Constants_For_Tests.mockedWordForUpdate.wordDescription)
                                 expectation.fulfill()
                                 
