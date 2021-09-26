@@ -57,9 +57,9 @@ final class MDWordListCell: MGSwipeTableCell,
 // MARK: - FillWithModelProtocol
 extension MDWordListCell: MDFillWithModelProtocol {
     
-    typealias Model = MDWordListRow?
+    typealias Model = MDWordListCellModel?
     
-    func fillWithModel(_ model: MDWordListRow?) {
+    func fillWithModel(_ model: MDWordListCellModel?) {
         self.titleLabel.text = model?.wordResponse.wordText
     }
     

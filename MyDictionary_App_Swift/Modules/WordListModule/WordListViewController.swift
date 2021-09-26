@@ -19,7 +19,7 @@ final class WordListViewController: MDBaseLargeTitledBackNavigationBarViewContro
     
     fileprivate let tableView: UITableView = {
         let tableView = UITableView.init()
-        tableView.register(MDWordListCell.self)
+        tableView.register(MDWordListCell.self)        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         return tableView
@@ -163,7 +163,7 @@ fileprivate extension WordListViewController {
     }
     
     func configureView() {
-        self.view.backgroundColor = MDUIResources.Color.md_FFFFFF.color()        
+        self.view.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
     }
     
     func configureTableView() {

@@ -29,7 +29,7 @@ extension WordListModule {
     
     var module: UIViewController {
         // Word List Module Classes
-        let wordListDataProvider: WordListDataProviderProcotol = WordListDataProvider.init(course: sender, sections: .init())
+        let wordListDataProvider: WordListDataProviderProcotol = WordListDataProvider.init(course: sender, words: .init())
         var wordListDataManager: WordListDataManagerProtocol = WordListDataManager.init(dataProvider: wordListDataProvider,
                                                                                         memoryStorage: MDConstants.AppDependencies.dependencies.wordStorage.memoryStorage)
         let wordListTableViewDelegate: WordListTableViewDelegateProtocol = WordListTableViewDelegate.init(dataProvider: wordListDataProvider)

@@ -24,7 +24,7 @@ extension UITableView {
         return cell
     }
     
-    final func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>(for indexPath: IndexPath) -> T where T: MDReuseIdentifierProtocol {
+    final func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>() -> T where T: MDReuseIdentifierProtocol {
         guard let cell = dequeueReusableHeaderFooterView(withIdentifier: T.reuseIdentifier) as? T else {
             fatalError("Impossible dequeue cell with identifier: \(T.reuseIdentifier)")
         }

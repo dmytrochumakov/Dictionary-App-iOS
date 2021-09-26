@@ -11,21 +11,21 @@ protocol WordListDataProviderProcotol: MDNumberOfSectionsProtocol,
                                        MDNumberOfRowsInSectionProtocol {
     
     var course: CourseResponse { get }
-    var sections: [MDWordListSection] { get set }
+    var words: [WordResponse] { get set }
     
-    func row(atIndexPath indexPath: IndexPath) -> MDWordListRow?
+    func wordListCellModel(atIndexPath indexPath: IndexPath) -> MDWordListCellModel?
     
 }
 
 final class WordListDataProvider: WordListDataProviderProcotol {
     
     var course: CourseResponse
-    var sections: [MDWordListSection]
+    var words: [WordResponse]
     
     init(course: CourseResponse,
-         sections: [MDWordListSection]) {
+         words: [WordResponse]) {
         self.course = course
-        self.sections = sections
+        self.words = words
     }
     
     deinit {
@@ -37,22 +37,22 @@ final class WordListDataProvider: WordListDataProviderProcotol {
 extension WordListDataProvider {
     
     var numberOfSections: Int {
-        return sections.count
+        return 1
     }
     
     func numberOfRowsInSection(_ section: Int) -> Int {
-        return sections[section].rows.count
+        return words.count
     }
     
 }
 
 extension WordListDataProvider {
     
-    func row(atIndexPath indexPath: IndexPath) -> MDWordListRow? {
-        if (sections.isEmpty) {
+    func wordListCellModel(atIndexPath indexPath: IndexPath) -> MDWordListCellModel? {
+        if (words.isEmpty) {
             return nil
         } else {
-            return sections[indexPath.section].rows[indexPath.row]
+            return .init(wordResponse: words[indexPath.row])
         }
     }
     
