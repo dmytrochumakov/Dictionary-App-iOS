@@ -11,6 +11,12 @@ final class WordListViewController: MDBaseLargeTitledBackNavigationBarViewContro
     
     fileprivate let presenter: WordListPresenterInputProtocol
     
+    fileprivate let searchBar: MDSearchBar = {
+        let searchBar: MDSearchBar = .init()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        return searchBar
+    }()
+    
     fileprivate let tableView: UITableView = {
         let tableView = UITableView.init()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,13 +62,25 @@ extension WordListViewController: WordListPresenterOutputProtocol {
         
     }
     
+    func hideKeyboard() {
+        DispatchQueue.main.async {
+            MDConstants.Keyboard.hideKeyboard(rootView: self.view)
+        }
+    }
+    
 }
 
 // MARK: - Add Views
 fileprivate extension WordListViewController {
     
     func addViews() {
+        addSearchBar()
         addTableView()
+    }
+    
+    func addSearchBar() {
+        searchBar.delegate = presenter.searchBarDelegate
+        view.addSubview(searchBar)
     }
     
     func addTableView() {
@@ -75,14 +93,36 @@ fileprivate extension WordListViewController {
 fileprivate extension WordListViewController {
     
     func addConstraints() {
+        addSearchBarConstraints()
         addTableViewConstraints()
+    }
+    
+    func addSearchBarConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.searchBar,
+                                              attribute: .top,
+                                              toItem: self.navigationBarView,
+                                              attribute: .bottom,
+                                              constant: MDConstants.SearchBar.defaultTopOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.searchBar,
+                                                  toItem: self.view,
+                                                  constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.searchBar,
+                                                   toItem: self.view,
+                                                   constant: .zero)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.searchBar,
+                                                    constant: MDConstants.SearchBar.defaultHeight)
+        
     }
     
     func addTableViewConstraints() {
         
         NSLayoutConstraint.addEqualConstraint(item: self.tableView,
                                               attribute: .top,
-                                              toItem: self.navigationBarView,
+                                              toItem: self.searchBar,
                                               attribute: .bottom,
                                               constant: .zero)
         

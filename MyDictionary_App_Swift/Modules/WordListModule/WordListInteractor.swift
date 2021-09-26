@@ -10,9 +10,11 @@ import Foundation
 protocol WordListInteractorInputProtocol: MDViewDidLoadProtocol {
     var tableViewDelegate: WordListTableViewDelegateProtocol { get }
     var tableViewDataSource: WordListTableViewDataSourceProtocol { get }
+    var searchBarDelegate: MDSearchBarDelegateImplementationProtocol { get }
 }
 
-protocol WordListInteractorOutputProtocol: AnyObject {
+protocol WordListInteractorOutputProtocol: AnyObject,
+                                           MDHideKeyboardProtocol {
     
 }
 
@@ -28,16 +30,19 @@ final class WordListInteractor: NSObject,
     
     internal var tableViewDelegate: WordListTableViewDelegateProtocol
     internal var tableViewDataSource: WordListTableViewDataSourceProtocol
+    internal var searchBarDelegate: MDSearchBarDelegateImplementationProtocol
     
     internal weak var interactorOutput: WordListInteractorOutputProtocol?
     
     init(dataManager: WordListDataManagerInputProtocol,
          tableViewDelegate: WordListTableViewDelegateProtocol,
-         tableViewDataSource: WordListTableViewDataSourceProtocol) {
+         tableViewDataSource: WordListTableViewDataSourceProtocol,
+         searchBarDelegate: MDSearchBarDelegateImplementationProtocol) {
         
         self.dataManager = dataManager
         self.tableViewDelegate = tableViewDelegate
         self.tableViewDataSource = tableViewDataSource
+        self.searchBarDelegate = searchBarDelegate
         
         super.init()
         subscribe()
@@ -57,7 +62,7 @@ extension WordListInteractor {
 
 // MARK: - WordListInteractorInputProtocol
 extension WordListInteractor {
- 
+    
     func viewDidLoad() {
         
     }
@@ -68,6 +73,46 @@ extension WordListInteractor {
 fileprivate extension WordListInteractor {
     
     func subscribe() {
+        //
+        searchBarCancelButtonAction_Subscribe()
+        //
+        searchBarSearchButtonAction_Subscribe()
+        //
+        searchBarTextDidChangeAction_Subscribe()
+        //
+        searchBarShouldClearAction_Subscribe()
+        //
+    }
+    
+    func searchBarCancelButtonAction_Subscribe() {
+        
+        searchBarDelegate.searchBarCancelButtonAction = { [weak self] in
+            self?.interactorOutput?.hideKeyboard()
+        }
+        
+    }
+    
+    func searchBarSearchButtonAction_Subscribe() {
+        
+        searchBarDelegate.searchBarSearchButtonAction = { [weak self] in
+            self?.interactorOutput?.hideKeyboard()
+        }
+        
+    }
+    
+    func searchBarTextDidChangeAction_Subscribe() {
+        
+        searchBarDelegate.searchBarTextDidChangeAction = { [weak self] (searchText) in
+            
+        }
+        
+    }
+    
+    func searchBarShouldClearAction_Subscribe() {
+        
+        searchBarDelegate.searchBarShouldClearAction = { [weak self] in
+            
+        }
         
     }
     

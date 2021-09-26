@@ -9,12 +9,14 @@ import UIKit
 
 protocol WordListPresenterInputProtocol: MDTableViewDelegatePropertyProtocol,
                                          MDTableViewDataSourcePropertyProtocol,
-                                         MDViewDidLoadProtocol {
+                                         MDViewDidLoadProtocol,
+                                         MDSearchBarDelegatePropertyProtocol {
     
 }
 
 protocol WordListPresenterOutputProtocol: AnyObject,
-                                          MDReloadDataProtocol {
+                                          MDReloadDataProtocol,
+                                          MDHideKeyboardProtocol {
     
 }
 
@@ -50,6 +52,10 @@ final class WordListPresenter: NSObject,
 // MARK: - WordListInteractorOutputProtocol
 extension WordListPresenter {
     
+    func hideKeyboard() {
+        presenterOutput?.hideKeyboard()
+    }
+    
 }
 
 // MARK: - WordListPresenterInputProtocol
@@ -61,6 +67,10 @@ extension WordListPresenter: WordListPresenterInputProtocol {
     
     var tableViewDataSource: UITableViewDataSource {
         return interactor.tableViewDataSource
+    }
+    
+    var searchBarDelegate: MDSearchBarDelegate {
+        return interactor.searchBarDelegate
     }
     
     func viewDidLoad() {

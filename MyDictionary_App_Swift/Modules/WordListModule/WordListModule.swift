@@ -36,7 +36,8 @@ extension WordListModule {
         
         let wordListInteractor: WordListInteractorProtocol = WordListInteractor.init(dataManager: wordListDataManager,
                                                                                      tableViewDelegate: wordListTableViewDelegate,
-                                                                                     tableViewDataSource: wordListTableViewDataSource)
+                                                                                     tableViewDataSource: wordListTableViewDataSource,
+                                                                                     searchBarDelegate: MDSearchBarDelegateImplementation.init())
         var wordListRouter: WordListRouterProtocol = WordListRouter.init()
         let wordListPresenter: WordListPresenterProtocol = WordListPresenter.init(interactor: wordListInteractor,
                                                                                   router: wordListRouter)
