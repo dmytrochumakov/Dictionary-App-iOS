@@ -46,7 +46,7 @@ extension WordListDataManager {
     
     func readAndAddWordsToDataProvider() {
      
-        memoryStorage.readAllWords { [unowned self] result in
+        memoryStorage.readAllWords(byCourseID: dataProvider.course.courseId) { [unowned self] result in
             
             switch result {
                 
