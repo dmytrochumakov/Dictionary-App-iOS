@@ -135,7 +135,12 @@ fileprivate extension MDCourseListCell {
 fileprivate extension MDCourseListCell {
     
     func configureUI() {
+        configureSelfView()
+    }
+    
+    func configureSelfView() {
         self.selectionStyle = .none
+        self.backgroundColor = .clear
     }
     
 }
