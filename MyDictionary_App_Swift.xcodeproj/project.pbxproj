@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		22014F7A2700756200D5250A /* MDWordListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22014F792700756200D5250A /* MDWordListCell.swift */; };
+		22014F7D27007C1600D5250A /* MDWordListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22014F7C27007C1600D5250A /* MDWordListCellModel.swift */; };
 		220793BB26C65965003D434B /* MDEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793BA26C65965003D434B /* MDEnvironment.swift */; };
 		220793BF26C65BF4003D434B /* AuthValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793BE26C65BF4003D434B /* AuthValidation.swift */; };
 		220793C126C66F2A003D434B /* AuthValidationLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220793C026C66F2A003D434B /* AuthValidationLogic.swift */; };
@@ -377,6 +378,7 @@
 
 /* Begin PBXFileReference section */
 		22014F792700756200D5250A /* MDWordListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordListCell.swift; sourceTree = "<group>"; };
+		22014F7C27007C1600D5250A /* MDWordListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordListCellModel.swift; sourceTree = "<group>"; };
 		220793BA26C65965003D434B /* MDEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEnvironment.swift; sourceTree = "<group>"; };
 		220793BE26C65BF4003D434B /* AuthValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthValidation.swift; sourceTree = "<group>"; };
 		220793C026C66F2A003D434B /* AuthValidationLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthValidationLogic.swift; sourceTree = "<group>"; };
@@ -773,6 +775,7 @@
 		22014F7B2700797100D5250A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				22014F7C27007C1600D5250A /* MDWordListCellModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2689,6 +2692,7 @@
 				2270F3A226D262F5006B46F4 /* CourseResponse.swift in Sources */,
 				2277FE1626F9DB7100001710 /* MDBaseTitledBackNavigationBarViewController.swift in Sources */,
 				22B8E6B226D38D6D001CCCA8 /* MDReadAllLanguagesMemoryStorageOperation.swift in Sources */,
+				22014F7D27007C1600D5250A /* MDWordListCellModel.swift in Sources */,
 				228964AE26F8AA2C00E23292 /* MDUpdateHUDProgressProtocol.swift in Sources */,
 				22014F7A2700756200D5250A /* MDWordListCell.swift in Sources */,
 				22C5863A26C7AFB80030B12D /* RegistrationModule.swift in Sources */,

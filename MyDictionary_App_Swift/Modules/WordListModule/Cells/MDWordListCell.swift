@@ -7,10 +7,6 @@
 
 import MGSwipeTableCell
 
-struct MDWordListCellModel {
-    let wordText: String
-}
-
 final class MDWordListCell: MGSwipeTableCell,
                             MDReuseIdentifierProtocol {
     
