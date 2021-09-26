@@ -11,7 +11,7 @@ protocol WordListDataProviderProcotol: MDNumberOfSectionsProtocol,
                                        MDNumberOfRowsInSectionProtocol {
     
     var course: CourseResponse { get }
-    var words: [WordResponse] { get set }
+    var filteredWords: [WordResponse] { get set }
     
     func wordListCellModel(atIndexPath indexPath: IndexPath) -> MDWordListCellModel?
     
@@ -20,12 +20,12 @@ protocol WordListDataProviderProcotol: MDNumberOfSectionsProtocol,
 final class WordListDataProvider: WordListDataProviderProcotol {
     
     var course: CourseResponse
-    var words: [WordResponse]
+    var filteredWords: [WordResponse]
     
     init(course: CourseResponse,
          words: [WordResponse]) {
         self.course = course
-        self.words = words
+        self.filteredWords = words
     }
     
     deinit {
@@ -41,7 +41,7 @@ extension WordListDataProvider {
     }
     
     func numberOfRowsInSection(_ section: Int) -> Int {
-        return words.count
+        return filteredWords.count
     }
     
 }
@@ -49,10 +49,10 @@ extension WordListDataProvider {
 extension WordListDataProvider {
     
     func wordListCellModel(atIndexPath indexPath: IndexPath) -> MDWordListCellModel? {
-        if (words.isEmpty) {
+        if (filteredWords.isEmpty) {
             return nil
         } else {
-            return .init(wordResponse: words[indexPath.row])
+            return .init(wordResponse: filteredWords[indexPath.row])
         }
     }
     

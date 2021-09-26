@@ -61,27 +61,15 @@ final class WordListInteractor: NSObject,
 extension WordListInteractor {
     
     func readAndAddWordsToDataProviderResult(_ result: MDOperationResultWithoutCompletion<Void>) {
-        
-        switch result {
-            
-        case .success:
-            
-            //
-            interactorOutput?.reloadData()
-            //
-            break
-            //
-            
-        case .failure(let error):
-            
-            //
-            interactorOutput?.showError(error)
-            //
-            break
-            //
-            
-        }
-        
+        checkResultAndExecuteReloadDataOrShowError(result)
+    }
+    
+    func filteredWordsResult(_ result: MDOperationResultWithoutCompletion<Void>) {
+        checkResultAndExecuteReloadDataOrShowError(result)
+    }
+    
+    func clearWordFilterResult(_ result: MDOperationResultWithoutCompletion<Void>) {
+        checkResultAndExecuteReloadDataOrShowError(result)
     }
     
 }
@@ -129,7 +117,7 @@ fileprivate extension WordListInteractor {
     func searchBarTextDidChangeAction_Subscribe() {
         
         searchBarDelegate.searchBarTextDidChangeAction = { [weak self] (searchText) in
-            
+            self?.dataManager.filterWords(searchText)
         }
         
     }
@@ -137,6 +125,35 @@ fileprivate extension WordListInteractor {
     func searchBarShouldClearAction_Subscribe() {
         
         searchBarDelegate.searchBarShouldClearAction = { [weak self] in
+            self?.dataManager.clearWordFilter()
+        }
+        
+    }
+    
+}
+
+// MARK: - Private Methods
+fileprivate extension WordListInteractor {
+    
+    func checkResultAndExecuteReloadDataOrShowError(_ result: MDOperationResultWithoutCompletion<Void>) {
+        
+        switch result {
+            
+        case .success:
+            
+            //
+            interactorOutput?.reloadData()
+            //
+            break
+            //
+            
+        case .failure(let error):
+            
+            //
+            interactorOutput?.showError(error)
+            //
+            break
+            //
             
         }
         
