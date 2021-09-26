@@ -136,6 +136,7 @@ fileprivate extension MDWordListCell {
     
     func configureUI() {
         self.selectionStyle = .none
+        self.backgroundColor = .clear
     }
     
 }
