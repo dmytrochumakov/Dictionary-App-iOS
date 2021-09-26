@@ -75,7 +75,7 @@ struct Constants_For_Tests {
         case .development:
             return .init(nickname: authRequest.nickname,
                          password: authRequest.password,
-                         userId: 1,
+                         userId: 6,
                          oldJWT: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxLGEsYSIsImlzcyI6ImNvbS5kY2hwcm9qZWN0cy5teWRpY3Rpb25hcnlyZXN0YXBpIiwiaWF0IjoxNjMxNzkwNTI5LCJleHAiOjE2MzE3OTQxMjl9.GyX4FznJMKL2rnXmfE8xwzVSJ_pZ_tkR3eb-pB67D7_Vzu8zaXPxO9UIIOjNGHGpFo8_KzsoTdeYQCYQjRxB8g")
         case .production:
             return .init(nickname: authRequest.nickname,
@@ -87,14 +87,7 @@ struct Constants_For_Tests {
     }
     
     public static var authRequest: AuthRequest {
-        
-        switch MDConstants.APIEnvironment.current {
-        case .development:
-            return .init(nickname: "a", password: "a")
-        case .production:
-            return .init(nickname: "test", password: "test")
-        }
-        
+        return .init(nickname: "test", password: "test")
     }
     
     public static func syncItem(accessToken: String) -> MDSync.Item {
