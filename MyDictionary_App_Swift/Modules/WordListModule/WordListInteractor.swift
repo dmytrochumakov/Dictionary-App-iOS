@@ -7,9 +7,9 @@
 
 import Foundation
 
-protocol WordListInteractorInputProtocol {
-    var collectionViewDelegate: WordListCollectionViewDelegateProtocol { get }
-    var collectionViewDataSource: WordListCollectionViewDataSourceProtocol { get }
+protocol WordListInteractorInputProtocol: MDViewDidLoadProtocol {
+    var tableViewDelegate: WordListTableViewDelegateProtocol { get }
+    var tableViewDataSource: WordListTableViewDataSourceProtocol { get }
 }
 
 protocol WordListInteractorOutputProtocol: AnyObject {
@@ -26,17 +26,18 @@ final class WordListInteractor: NSObject,
     
     fileprivate let dataManager: WordListDataManagerInputProtocol
     
-    internal var collectionViewDelegate: WordListCollectionViewDelegateProtocol
-    internal var collectionViewDataSource: WordListCollectionViewDataSourceProtocol
+    internal var tableViewDelegate: WordListTableViewDelegateProtocol
+    internal var tableViewDataSource: WordListTableViewDataSourceProtocol
+    
     internal weak var interactorOutput: WordListInteractorOutputProtocol?
     
     init(dataManager: WordListDataManagerInputProtocol,
-         collectionViewDelegate: WordListCollectionViewDelegateProtocol,
-         collectionViewDataSource: WordListCollectionViewDataSourceProtocol) {
+         tableViewDelegate: WordListTableViewDelegateProtocol,
+         tableViewDataSource: WordListTableViewDataSourceProtocol) {
         
         self.dataManager = dataManager
-        self.collectionViewDelegate = collectionViewDelegate
-        self.collectionViewDataSource = collectionViewDataSource
+        self.tableViewDelegate = tableViewDelegate
+        self.tableViewDataSource = tableViewDataSource
         
         super.init()
         subscribe()
@@ -44,13 +45,22 @@ final class WordListInteractor: NSObject,
     }
     
     deinit {
-        debugPrint(#function, Self.self)        
+        debugPrint(#function, Self.self)
     }
     
 }
 
 // MARK: - WordListDataManagerOutputProtocol
 extension WordListInteractor {
+    
+}
+
+// MARK: - WordListInteractorInputProtocol
+extension WordListInteractor {
+ 
+    func viewDidLoad() {
+        
+    }
     
 }
 

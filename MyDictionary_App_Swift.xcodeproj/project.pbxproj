@@ -130,7 +130,7 @@
 		227B91E426EF62F80086B9AA /* RegisterTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B91E326EF62F80086B9AA /* RegisterTextFieldDelegate.swift */; };
 		227D5E642652584700B54524 /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E632652584700B54524 /* NSLayoutConstraint+Extension.swift */; };
 		227D5E672652585C00B54524 /* MDCollectionViewDelegateFlowLayoutPropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E652652585C00B54524 /* MDCollectionViewDelegateFlowLayoutPropertyProtocol.swift */; };
-		227D5E6A2652586F00B54524 /* WordListCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E692652586F00B54524 /* WordListCollectionViewDelegate.swift */; };
+		227D5E6A2652586F00B54524 /* WordListTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D5E692652586F00B54524 /* WordListTableViewDelegate.swift */; };
 		227D8F0826D77594009CB94B /* CreateWordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D8F0726D77594009CB94B /* CreateWordRequest.swift */; };
 		227D8F1226D77A9B009CB94B /* UpdateWordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D8F1126D77A9B009CB94B /* UpdateWordRequest.swift */; };
 		227D8F1526D7A4FA009CB94B /* MDAppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D8F1426D7A4FA009CB94B /* MDAppSettings.swift */; };
@@ -202,7 +202,7 @@
 		229E08C02652C9E700DA56C4 /* MDRowTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BF2652C9E700DA56C4 /* MDRowTypeProtocol.swift */; };
 		229E08C22652CA1D00DA56C4 /* MDNumberOfSectionsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C12652CA1D00DA56C4 /* MDNumberOfSectionsProtocol.swift */; };
 		229E08C42652CA5100DA56C4 /* MDNumberOfRowsInSectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C32652CA5100DA56C4 /* MDNumberOfRowsInSectionProtocol.swift */; };
-		229E08C72652CB9000DA56C4 /* WordListCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */; };
+		229E08C72652CB9000DA56C4 /* WordListTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08C62652CB9000DA56C4 /* WordListTableViewDataSource.swift */; };
 		229E08CB2652CDB500DA56C4 /* MDCollectionViewDataSourcePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08CA2652CDB500DA56C4 /* MDCollectionViewDataSourcePropertyProtocol.swift */; };
 		229FFF3626F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3526F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift */; };
 		229FFF3826F5E3D90024B974 /* MDBaseLargeTitledBackNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FFF3726F5E3D90024B974 /* MDBaseLargeTitledBackNavigationBarViewController.swift */; };
@@ -498,7 +498,7 @@
 		227B91E326EF62F80086B9AA /* RegisterTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTextFieldDelegate.swift; sourceTree = "<group>"; };
 		227D5E632652584700B54524 /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
 		227D5E652652585C00B54524 /* MDCollectionViewDelegateFlowLayoutPropertyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDCollectionViewDelegateFlowLayoutPropertyProtocol.swift; sourceTree = "<group>"; };
-		227D5E692652586F00B54524 /* WordListCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordListCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		227D5E692652586F00B54524 /* WordListTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordListTableViewDelegate.swift; sourceTree = "<group>"; };
 		227D8F0726D77594009CB94B /* CreateWordRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWordRequest.swift; sourceTree = "<group>"; };
 		227D8F1126D77A9B009CB94B /* UpdateWordRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateWordRequest.swift; sourceTree = "<group>"; };
 		227D8F1426D7A4FA009CB94B /* MDAppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppSettings.swift; sourceTree = "<group>"; };
@@ -574,7 +574,7 @@
 		229E08BF2652C9E700DA56C4 /* MDRowTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDRowTypeProtocol.swift; sourceTree = "<group>"; };
 		229E08C12652CA1D00DA56C4 /* MDNumberOfSectionsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDNumberOfSectionsProtocol.swift; sourceTree = "<group>"; };
 		229E08C32652CA5100DA56C4 /* MDNumberOfRowsInSectionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDNumberOfRowsInSectionProtocol.swift; sourceTree = "<group>"; };
-		229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		229E08C62652CB9000DA56C4 /* WordListTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListTableViewDataSource.swift; sourceTree = "<group>"; };
 		229E08CA2652CDB500DA56C4 /* MDCollectionViewDataSourcePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCollectionViewDataSourcePropertyProtocol.swift; sourceTree = "<group>"; };
 		229FFF3526F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseLargeNavigationBarViewController.swift; sourceTree = "<group>"; };
 		229FFF3726F5E3D90024B974 /* MDBaseLargeTitledBackNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseLargeTitledBackNavigationBarViewController.swift; sourceTree = "<group>"; };
@@ -1668,7 +1668,7 @@
 		229C2B092652512700B270C1 /* CollectionViewDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				227D5E692652586F00B54524 /* WordListCollectionViewDelegate.swift */,
+				227D5E692652586F00B54524 /* WordListTableViewDelegate.swift */,
 			);
 			path = CollectionViewDelegate;
 			sourceTree = "<group>";
@@ -1698,7 +1698,7 @@
 		229E08C52652CB6900DA56C4 /* CollectionViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
-				229E08C62652CB9000DA56C4 /* WordListCollectionViewDataSource.swift */,
+				229E08C62652CB9000DA56C4 /* WordListTableViewDataSource.swift */,
 			);
 			path = CollectionViewDataSource;
 			sourceTree = "<group>";
@@ -2521,7 +2521,7 @@
 				22BD99A0266A4AB10063FEFC /* WordListModule.swift in Sources */,
 				22EF01EC269DA70300FE4435 /* Endpoint.swift in Sources */,
 				220793D326C6B303003D434B /* Encodable+Extension.swift in Sources */,
-				227D5E6A2652586F00B54524 /* WordListCollectionViewDelegate.swift in Sources */,
+				227D5E6A2652586F00B54524 /* WordListTableViewDelegate.swift in Sources */,
 				228964B026F8AA3E00E23292 /* MDShowHideProgressHUD.swift in Sources */,
 				22C5863F26C7AFB80030B12D /* RegistrationDataProvider.swift in Sources */,
 				229E08CB2652CDB500DA56C4 /* MDCollectionViewDataSourcePropertyProtocol.swift in Sources */,
@@ -2619,7 +2619,7 @@
 				228722DB26D117A900C9D1BC /* MDReadFirstJWTCoreDataStorageOperation.swift in Sources */,
 				22EF01FA269DA8E700FE4435 /* MDRequestType.swift in Sources */,
 				229572BD26FF319C0092817B /* MDAPICourseError.swift in Sources */,
-				229E08C72652CB9000DA56C4 /* WordListCollectionViewDataSource.swift in Sources */,
+				229E08C72652CB9000DA56C4 /* WordListTableViewDataSource.swift in Sources */,
 				22DB2F8D26C3D51500C1AADA /* MDTableViewDataSourcePropertyProtocol.swift in Sources */,
 				229707CA2700605300722EFF /* MDViewDidLoadProtocol.swift in Sources */,
 				227B91D026EF4A1E0086B9AA /* MDBaseLargeTitledBackViewControllerWithBackgroundImage.swift in Sources */,

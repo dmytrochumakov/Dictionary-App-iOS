@@ -31,12 +31,12 @@ extension WordListModule {
         // Word List Module Classes
         let wordListDataProvider: WordListDataProviderProcotol = WordListDataProvider.init(course: sender)
         var wordListDataManager: WordListDataManagerProtocol = WordListDataManager.init(dataProvider: wordListDataProvider)
-        let wordListCollectionViewDelegate: WordListCollectionViewDelegateProtocol = WordListCollectionViewDelegate.init(dataProvider: wordListDataProvider)
-        let wordListCollectionViewDataSource: WordListCollectionViewDataSourceProtocol = WordListCollectionViewDataSource.init(dataProvider: wordListDataProvider)
+        let wordListTableViewDelegate: WordListTableViewDelegateProtocol = WordListTableViewDelegate.init(dataProvider: wordListDataProvider)
+        let wordListTableViewDataSource: WordListTableViewDataSourceProtocol = WordListTableViewDataSource.init(dataProvider: wordListDataProvider)
         
         let wordListInteractor: WordListInteractorProtocol = WordListInteractor.init(dataManager: wordListDataManager,
-                                                                                     collectionViewDelegate: wordListCollectionViewDelegate,
-                                                                                     collectionViewDataSource: wordListCollectionViewDataSource)
+                                                                                     tableViewDelegate: wordListTableViewDelegate,
+                                                                                     tableViewDataSource: wordListTableViewDataSource)
         var wordListRouter: WordListRouterProtocol = WordListRouter.init()
         let wordListPresenter: WordListPresenterProtocol = WordListPresenter.init(interactor: wordListInteractor,
                                                                                   router: wordListRouter)

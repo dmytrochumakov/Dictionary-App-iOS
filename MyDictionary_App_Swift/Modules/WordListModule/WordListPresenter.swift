@@ -7,8 +7,9 @@
 
 import UIKit
 
-protocol WordListPresenterInputProtocol: MDCollectionViewDelegateFlowLayoutPropertyProtocol,
-                                         MDCollectionViewDataSourcePropertyProtocol {
+protocol WordListPresenterInputProtocol: MDTableViewDelegatePropertyProtocol,
+                                         MDTableViewDataSourcePropertyProtocol,
+                                         MDViewDidLoadProtocol {
     
 }
 
@@ -29,23 +30,18 @@ final class WordListPresenter: NSObject,
     fileprivate let router: WordListRouterProtocol
     
     internal weak var presenterOutput: WordListPresenterOutputProtocol?
-    internal var collectionViewDelegate: UICollectionViewDelegateFlowLayout {
-        return self.interactor.collectionViewDelegate
-    }
-    internal var collectionViewDataSource: UICollectionViewDataSource {
-        return self.interactor.collectionViewDataSource
-    }
     
     init(interactor: WordListInteractorInputProtocol,
          router: WordListRouterProtocol) {
+        
         self.interactor = interactor
         self.router = router
+        
         super.init()
-        subscribe()
+        
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
         debugPrint(#function, Self.self)
     }
     
@@ -56,16 +52,19 @@ extension WordListPresenter {
     
 }
 
-// MARK: - Subscribe
-fileprivate extension WordListPresenter {
+// MARK: - WordListPresenterInputProtocol
+extension WordListPresenter: WordListPresenterInputProtocol {
     
-    func subscribe() {
-        
+    var tableViewDelegate: UITableViewDelegate {
+        return interactor.tableViewDelegate
     }
     
-}
-
-// MARK: - Actions
-fileprivate extension WordListPresenter {       
+    var tableViewDataSource: UITableViewDataSource {
+        return interactor.tableViewDataSource
+    }
+    
+    func viewDidLoad() {
+        interactor.viewDidLoad()
+    }
     
 }

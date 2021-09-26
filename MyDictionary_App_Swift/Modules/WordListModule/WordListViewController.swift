@@ -7,20 +7,20 @@
 
 import UIKit
 
-final class WordListViewController: UIViewController {
+final class WordListViewController: MDBaseLargeTitledBackNavigationBarViewController {
     
     fileprivate let presenter: WordListPresenterInputProtocol
-    fileprivate let collectionView: UICollectionView = {
-        let flowLayout: UICollectionViewFlowLayout = .init()
-        let collectionView = UICollectionView.init(frame: .zero,
-                                                   collectionViewLayout: flowLayout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
+    
+    fileprivate let tableView: UITableView = {
+        let tableView = UITableView.init()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
     }()
     
     init(presenter: WordListPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
+        super.init(title: LocalizedText.words.localized,
+                   navigationBarBackgroundImage: MDUIResources.Image.background_navigation_bar_1.image)
     }
     
     deinit {
@@ -38,6 +38,7 @@ final class WordListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.viewDidLoad()
         configureUI()
     }
     
@@ -53,7 +54,7 @@ extension WordListViewController: WordListPresenterOutputProtocol {
     
     func reloadData() {
         
-    }    
+    }
     
 }
 
@@ -61,11 +62,11 @@ extension WordListViewController: WordListPresenterOutputProtocol {
 fileprivate extension WordListViewController {
     
     func addViews() {
-        addCollectionView()
+        addTableView()
     }
     
-    func addCollectionView() {
-        view.addSubview(collectionView)
+    func addTableView() {
+        view.addSubview(tableView)
     }
     
 }
@@ -74,12 +75,29 @@ fileprivate extension WordListViewController {
 fileprivate extension WordListViewController {
     
     func addConstraints() {
-        addCollectionConstraints()
+        addTableViewConstraints()
     }
     
-    func addCollectionConstraints() {
-        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.collectionView,
-                                                         toItem: self.view)
+    func addTableViewConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.tableView,
+                                              attribute: .top,
+                                              toItem: self.navigationBarView,
+                                              attribute: .bottom,
+                                              constant: .zero)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.tableView,
+                                                  toItem: self.view,
+                                                  constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.tableView,
+                                                   toItem: self.view,
+                                                   constant: .zero)
+        
+        NSLayoutConstraint.addEqualBottomConstraint(item: self.tableView,
+                                                    toItem: self.view,
+                                                    constant: .zero)
+        
     }
     
 }
@@ -89,7 +107,7 @@ fileprivate extension WordListViewController {
     
     func configureUI() {
         configureView()
-        configureCollectionView()
+        configureTableView()
     }
     
     func configureView() {
@@ -97,10 +115,10 @@ fileprivate extension WordListViewController {
         self.title = LocalizedText.words.localized
     }
     
-    func configureCollectionView() {
-        self.collectionView.delegate = self.presenter.collectionViewDelegate
-        self.collectionView.dataSource = self.presenter.collectionViewDataSource
-        self.collectionView.backgroundColor = .clear
+    func configureTableView() {
+        self.tableView.delegate = self.presenter.tableViewDelegate
+        self.tableView.dataSource = self.presenter.tableViewDataSource
+        self.tableView.backgroundColor = .clear
     }
     
 }
