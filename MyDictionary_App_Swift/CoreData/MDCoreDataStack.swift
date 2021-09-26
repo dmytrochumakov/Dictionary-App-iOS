@@ -48,13 +48,13 @@ extension MDCoreDataStack {
         
         managedObjectContext.performAndWait {
             
-            mainContext.performAndWait { 
+            mainContext.performAndWait {
                 
                 do {
                     if (managedObjectContext.hasChanges)  {
                         try managedObjectContext.save()
                     }
-                    if (self?.mainContext.hasChanges) {
+                    if (self.mainContext.hasChanges) {
                         try self.mainContext.save()
                     }
                     completionHandler(.success)
