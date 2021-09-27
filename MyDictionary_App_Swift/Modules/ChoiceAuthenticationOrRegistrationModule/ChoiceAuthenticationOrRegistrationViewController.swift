@@ -24,7 +24,7 @@ final class ChoiceAuthenticationOrRegistrationViewController: MDBaseLargeNavigat
     fileprivate let loginButton: UIButton = {
         let button: UIButton = .init()
         button.backgroundColor = MDUIResources.Color.md_4400D4.color()
-        button.setTitle(LocalizedText.login.localized, for: .normal)
+        button.setTitle(MDLocalizedText.login.localized, for: .normal)
         button.setTitleColor(MDUIResources.Color.md_FFFFFF.color(), for: .normal)
         button.titleLabel?.font = MDUIResources.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +38,7 @@ final class ChoiceAuthenticationOrRegistrationViewController: MDBaseLargeNavigat
     fileprivate let registrationButton: UIButton = {
         let button: UIButton = .init()
         button.backgroundColor = MDUIResources.Color.md_4400D4.color()
-        button.setTitle(LocalizedText.registration.localized, for: .normal)
+        button.setTitle(MDLocalizedText.registration.localized, for: .normal)
         button.setTitleColor(MDUIResources.Color.md_FFFFFF.color(), for: .normal)
         button.titleLabel?.font = MDUIResources.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false

@@ -51,7 +51,7 @@ final class CourseListViewController: MDBaseLargeTitledNavigationBarViewControll
     
     init(presenter: CourseListPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(title: LocalizedText.courses.localized,
+        super.init(title: MDLocalizedText.courses.localized,
                    navigationBarBackgroundImage: MDUIResources.Image.background_navigation_bar_1.image)
     }
     
@@ -86,7 +86,7 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     
     func showError(_ error: Error) {
         DispatchQueue.main.async {
-            UIAlertController.showAlertWithOkAction(title: LocalizedText.error.localized,
+            UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
                                                     message: error.localizedDescription,
                                                     presenter: self)
         }

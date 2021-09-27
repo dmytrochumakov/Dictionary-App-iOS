@@ -6,13 +6,14 @@
 
 import UIKit
 
-final class AddWordViewController: UIViewController {
+final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
 
     fileprivate let presenter: AddWordPresenterInputProtocol
 
     init(presenter: AddWordPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
+        super.init(title: MDLocalizedText.addWord.localized,
+                   navigationBarBackgroundImage: MDUIResources.Image.background_navigation_bar_1.image)
     }
     
     deinit {

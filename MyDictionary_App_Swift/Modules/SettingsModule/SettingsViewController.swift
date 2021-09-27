@@ -20,7 +20,7 @@ final class SettingsViewController: MDBaseTitledBackNavigationBarViewController 
     
     init(presenter: SettingsPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(title: LocalizedText.settings.localized,
+        super.init(title: MDLocalizedText.settings.localized,
                    navigationBarBackgroundImage: MDUIResources.Image.background_navigation_bar_2.image)
     }
     
@@ -53,27 +53,27 @@ final class SettingsViewController: MDBaseTitledBackNavigationBarViewController 
 extension SettingsViewController: SettingsPresenterOutputProtocol {
     
     func showError(_ error: Error) {
-        UIAlertController.showAlertWithOkAction(title: LocalizedText.error.localized,
+        UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
                                                 message: error.localizedDescription,
                                                 presenter: self)
     }
     
     func showShareFeedbackActionsSheet() {
         
-        UIAlertController.showActionSheet(title: LocalizedText.shareFeedback.localized,
+        UIAlertController.showActionSheet(title: MDLocalizedText.shareFeedback.localized,
                                           message: nil,
-                                          actions: [.init(title: LocalizedText.featureRequest.localized,
+                                          actions: [.init(title: MDLocalizedText.featureRequest.localized,
                                                           style: .default),
-                                                    .init(title: LocalizedText.bugReport.localized,
+                                                    .init(title: MDLocalizedText.bugReport.localized,
                                                           style: .default),
-                                                    .init(title: LocalizedText.cancel.localized,
+                                                    .init(title: MDLocalizedText.cancel.localized,
                                                           style: .cancel)
                                                    ],
                                           handler: { action in
             
-            if (action.title == LocalizedText.featureRequest.localized) {
+            if (action.title == MDLocalizedText.featureRequest.localized) {
                 self.presenter.shareFeedbackFeatureRequestClicked()
-            } else if (action.title == LocalizedText.bugReport.localized) {
+            } else if (action.title == MDLocalizedText.bugReport.localized) {
                 self.presenter.shareFeedbackBugReportClicked()
             } else {
                 return

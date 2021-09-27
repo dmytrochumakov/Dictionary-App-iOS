@@ -82,6 +82,10 @@ extension WordListPresenter {
         presenterOutput?.hideProgressHUD()
     }
     
+    func showAddWord() {
+        router.showAddWord()
+    }
+    
 }
 
 // MARK: - WordListPresenterInputProtocol

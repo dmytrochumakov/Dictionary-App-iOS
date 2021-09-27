@@ -19,7 +19,7 @@ extension UIAlertController {
                                                      message: message,
                                                      preferredStyle: .alert)
         
-        let okAction: UIAlertAction = .init(title: LocalizedText.ok.localized,
+        let okAction: UIAlertAction = .init(title: MDLocalizedText.ok.localized,
                                             style: .default,
                                             handler: okActionHandler)
         

@@ -33,7 +33,7 @@ final class AddCourseViewController: MDBaseLargeTitledBackNavigationBarViewContr
     fileprivate let addButton: UIButton = {
         let button: UIButton = .init()
         button.backgroundColor = MDUIResources.Color.md_4400D4.color()
-        button.setTitle(LocalizedText.add.localized, for: .normal)
+        button.setTitle(MDLocalizedText.add.localized, for: .normal)
         button.setTitleColor(MDUIResources.Color.md_FFFFFF.color(), for: .normal)
         button.titleLabel?.font = MDUIResources.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +42,7 @@ final class AddCourseViewController: MDBaseLargeTitledBackNavigationBarViewContr
     
     init(presenter: AddCoursePresenterInputProtocol) {
         self.presenter = presenter
-        super.init(title: LocalizedText.addCourse.localized,
+        super.init(title: MDLocalizedText.addCourse.localized,
                    navigationBarBackgroundImage: MDUIResources.Image.background_navigation_bar_1.image)
     }
     
@@ -79,7 +79,7 @@ extension AddCourseViewController: AddCoursePresenterOutputProtocol {
     
     func showError(_ error: Error) {
         DispatchQueue.main.async {
-            UIAlertController.showAlertWithOkAction(title: LocalizedText.error.localized,
+            UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
                                                     message: error.localizedDescription,
                                                     presenter: self)
         }

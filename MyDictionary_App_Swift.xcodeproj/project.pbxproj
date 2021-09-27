@@ -57,7 +57,7 @@
 		2223F8A826512C1A004F2FE9 /* MDLocalizableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8A726512C1A004F2FE9 /* MDLocalizableProtocol.swift */; };
 		2223F8AB26512C5A004F2FE9 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8AA26512C5A004F2FE9 /* String+Extension.swift */; };
 		2223F8AE26512DEB004F2FE9 /* MDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8AD26512DEB004F2FE9 /* MDConstants.swift */; };
-		2223F8B426512F01004F2FE9 /* LocalizedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8B326512F01004F2FE9 /* LocalizedText.swift */; };
+		2223F8B426512F01004F2FE9 /* MDLocalizedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8B326512F01004F2FE9 /* MDLocalizedText.swift */; };
 		2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8B626512F5B004F2FE9 /* AppLanguageType.swift */; };
 		2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */; };
 		2223F8BC26512FFD004F2FE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2223F8BE26512FFD004F2FE9 /* Localizable.strings */; };
@@ -435,7 +435,7 @@
 		2223F8A726512C1A004F2FE9 /* MDLocalizableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLocalizableProtocol.swift; sourceTree = "<group>"; };
 		2223F8AA26512C5A004F2FE9 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		2223F8AD26512DEB004F2FE9 /* MDConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDConstants.swift; sourceTree = "<group>"; };
-		2223F8B326512F01004F2FE9 /* LocalizedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedText.swift; sourceTree = "<group>"; };
+		2223F8B326512F01004F2FE9 /* MDLocalizedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLocalizedText.swift; sourceTree = "<group>"; };
 		2223F8B626512F5B004F2FE9 /* AppLanguageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageType.swift; sourceTree = "<group>"; };
 		2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageService.swift; sourceTree = "<group>"; };
 		2223F8BD26512FFD004F2FE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1112,7 +1112,7 @@
 		2223F8B226512EF2004F2FE9 /* KeysForTranslate */ = {
 			isa = PBXGroup;
 			children = (
-				2223F8B326512F01004F2FE9 /* LocalizedText.swift */,
+				2223F8B326512F01004F2FE9 /* MDLocalizedText.swift */,
 			);
 			path = KeysForTranslate;
 			sourceTree = "<group>";
@@ -2652,7 +2652,7 @@
 				22DB2F8D26C3D51500C1AADA /* MDTableViewDataSourcePropertyProtocol.swift in Sources */,
 				229707CA2700605300722EFF /* MDViewDidLoadProtocol.swift in Sources */,
 				227B91D026EF4A1E0086B9AA /* MDBaseLargeTitledBackViewControllerWithBackgroundImage.swift in Sources */,
-				2223F8B426512F01004F2FE9 /* LocalizedText.swift in Sources */,
+				2223F8B426512F01004F2FE9 /* MDLocalizedText.swift in Sources */,
 				221D281926C53356004BC4F7 /* AuthenticationTextFieldTag.swift in Sources */,
 				227B91DD26EF5F670086B9AA /* RegisterValidationError.swift in Sources */,
 				22DEA00626FA05A900892D78 /* AccountInteractor.swift in Sources */,

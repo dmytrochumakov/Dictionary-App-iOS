@@ -20,15 +20,15 @@ extension SettingsRowType: CustomStringConvertible {
     var description: String {
         switch self {
         case .about:
-            return LocalizedText.about.localized
+            return MDLocalizedText.about.localized
         case .account:
-            return LocalizedText.account.localized
+            return MDLocalizedText.account.localized
         case .privacyPolicy:
-            return LocalizedText.privacyPolicy.localized
+            return MDLocalizedText.privacyPolicy.localized
         case .termsOfService:
-            return LocalizedText.termsOfService.localized
+            return MDLocalizedText.termsOfService.localized
         case .shareFeedback:
-            return LocalizedText.shareFeedback.localized
+            return MDLocalizedText.shareFeedback.localized
         }
     }
     

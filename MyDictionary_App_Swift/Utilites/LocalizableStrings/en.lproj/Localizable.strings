@@ -42,6 +42,10 @@
 "mail_services_are_not_available" = "Sorry, mail services is not available. \n\n Please set up your Apple ID in System Preferences. \n\n Also, please, install the original Mail app from the App Store, if you don't have one.";
 "add_course" = "Add Course";
 "please_select_a_course" = "Please select a course";
+"add_word" = "Add Word";
+"word_text" = "Word text";
+"word_description" = "Word description";
+"update" = "Update";
 
 // Api Errors //
 "no_data_api_error" = "No Data";

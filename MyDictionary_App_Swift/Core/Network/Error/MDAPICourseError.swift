@@ -16,7 +16,7 @@ extension MDAPICourseError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .conflict:
-            return LocalizedText.conflictApiCourseError.localized
+            return MDLocalizedText.conflictApiCourseError.localized
         }
     }
     

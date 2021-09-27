@@ -21,6 +21,7 @@ protocol WordListInteractorOutputProtocol: AnyObject,
                                            MDShowHideProgressHUD {
     
     func deleteRow(at indexPath: IndexPath)
+    func showAddWord()
     
 }
 
@@ -89,7 +90,7 @@ extension WordListInteractor {
     }
     
     func addNewWordButtonClicked() {
-        debugPrint(#function, Self.self)
+        interactorOutput?.showAddWord()
     }
     
 }

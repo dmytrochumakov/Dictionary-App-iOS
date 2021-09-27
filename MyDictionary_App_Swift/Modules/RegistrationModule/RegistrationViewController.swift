@@ -31,7 +31,7 @@ final class RegistrationViewController: MDBaseLargeTitledBackViewControllerWithB
     fileprivate let nicknameTextField: MDCounterTextFieldWithToolBar = {
         let textField: MDCounterTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.defaultInset,
                                                              keyboardToolbar: .init())
-        textField.placeholder = LocalizedText.nickname.localized
+        textField.placeholder = MDLocalizedText.nickname.localized
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.textAlignment = .left
@@ -55,7 +55,7 @@ final class RegistrationViewController: MDBaseLargeTitledBackViewControllerWithB
         let textField: MDCounterPasswordTextFieldWithToolBar = .init(height: passwordTextFieldHeight,
                                                                      rectInset: MDConstants.Rect.passwordInset,
                                                                      keyboardToolbar: .init())
-        textField.placeholder = LocalizedText.password.localized
+        textField.placeholder = MDLocalizedText.password.localized
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.textAlignment = .left
@@ -79,7 +79,7 @@ final class RegistrationViewController: MDBaseLargeTitledBackViewControllerWithB
         let textField: MDCounterPasswordTextFieldWithToolBar = .init(height: confirmPasswordTextFieldHeight,
                                                                      rectInset: MDConstants.Rect.passwordInset,
                                                                      keyboardToolbar: .init())
-        textField.placeholder = LocalizedText.confirmPassword.localized
+        textField.placeholder = MDLocalizedText.confirmPassword.localized
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.textAlignment = .left
@@ -102,7 +102,7 @@ final class RegistrationViewController: MDBaseLargeTitledBackViewControllerWithB
     fileprivate let registerButton: UIButton = {
         let button: UIButton = .init()
         button.backgroundColor = MDUIResources.Color.md_4400D4.color()
-        button.setTitle(LocalizedText.register.localized, for: .normal)
+        button.setTitle(MDLocalizedText.register.localized, for: .normal)
         button.setTitleColor(MDUIResources.Color.md_FFFFFF.color(), for: .normal)
         button.titleLabel?.font = MDUIResources.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -112,7 +112,7 @@ final class RegistrationViewController: MDBaseLargeTitledBackViewControllerWithB
     fileprivate lazy var hud: MBProgressHUD = {
         let hud: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud.mode = .annularDeterminate
-        hud.label.text = LocalizedText.pleaseWaitForDataSync.localized
+        hud.label.text = MDLocalizedText.pleaseWaitForDataSync.localized
         hud.label.font = MDUIResources.Font.MyriadProRegular.font()
         hud.label.textColor = MDUIResources.Color.md_3C3C3C.color()
         return hud
@@ -120,7 +120,7 @@ final class RegistrationViewController: MDBaseLargeTitledBackViewControllerWithB
     
     init(presenter: RegistrationPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(title: LocalizedText.registration.localized,
+        super.init(title: MDLocalizedText.registration.localized,
                    navigationBarBackgroundImage: MDUIResources.Image.background_navigation_bar_0.image,
                    backgroundImage: MDUIResources.Image.background_typography_2.image)
     }
@@ -188,7 +188,7 @@ extension RegistrationViewController: RegistrationPresenterOutputProtocol {
     }
     
     func showValidationError(_ error: Error) {
-        UIAlertController.showAlertWithOkAction(title: LocalizedText.error.localized,
+        UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
                                                 message: error.localizedDescription,
                                                 presenter: self)
     }

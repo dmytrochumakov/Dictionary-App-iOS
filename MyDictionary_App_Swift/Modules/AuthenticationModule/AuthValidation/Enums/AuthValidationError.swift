@@ -17,9 +17,9 @@ extension AuthValidationError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .nicknameIsEmpty:
-            return LocalizedText.nicknameIsEmpty.localized
+            return MDLocalizedText.nicknameIsEmpty.localized
         case .passwordIsEmpty:
-            return LocalizedText.passwordIsEmpty.localized
+            return MDLocalizedText.passwordIsEmpty.localized
         }
     }
     

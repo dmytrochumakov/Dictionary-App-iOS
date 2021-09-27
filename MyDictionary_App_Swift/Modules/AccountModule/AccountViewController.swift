@@ -19,7 +19,7 @@ final class AccountViewController: MDBaseTitledBackNavigationBarViewController {
         label.font = nicknameTitleLabelFont
         label.textColor = MDUIResources.Color.md_C7C7CC.color()
         label.textAlignment = .left
-        label.text = LocalizedText.nickname.localized + MDConstants.StaticText.colon
+        label.text = MDLocalizedText.nickname.localized + MDConstants.StaticText.colon
         label.numberOfLines = nicknameTitleLabelNumberOfLines
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -38,7 +38,7 @@ final class AccountViewController: MDBaseTitledBackNavigationBarViewController {
     fileprivate let logOutButton: UIButton = {
         let button: UIButton = .init()
         button.backgroundColor = MDUIResources.Color.md_4400D4.color()
-        button.setTitle(LocalizedText.logOut.localized, for: .normal)
+        button.setTitle(MDLocalizedText.logOut.localized, for: .normal)
         button.setTitleColor(MDUIResources.Color.md_FFFFFF.color(), for: .normal)
         button.titleLabel?.font = MDUIResources.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +49,7 @@ final class AccountViewController: MDBaseTitledBackNavigationBarViewController {
     fileprivate let deleteAccountButton: UIButton = {
         let button: UIButton = .init()
         button.backgroundColor = MDUIResources.Color.md_FF3B30.color()
-        button.setTitle(LocalizedText.delete.localized, for: .normal)
+        button.setTitle(MDLocalizedText.delete.localized, for: .normal)
         button.setTitleColor(MDUIResources.Color.md_FFFFFF.color(), for: .normal)
         button.titleLabel?.font = MDUIResources.Font.MyriadProSemiBold.font()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -63,7 +63,7 @@ final class AccountViewController: MDBaseTitledBackNavigationBarViewController {
     
     init(presenter: AccountPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(title: LocalizedText.account.localized,
+        super.init(title: MDLocalizedText.account.localized,
                    navigationBarBackgroundImage: MDUIResources.Image.background_navigation_bar_2.image)
     }
     
@@ -106,7 +106,7 @@ extension AccountViewController: AccountPresenterOutputProtocol {
     
     func showError(_ error: Error) {
         DispatchQueue.main.async {
-            UIAlertController.showAlertWithOkAction(title: LocalizedText.error.localized,
+            UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
                                                     message: error.localizedDescription,
                                                     presenter: self)
         }
@@ -175,7 +175,7 @@ fileprivate extension AccountViewController {
                                                   constant: Self.nicknameTitleLabelLeftOffset)
         
         NSLayoutConstraint.addEqualWidthConstraint(item: self.nicknameTitleLabel,
-                                                   constant: Self.nicknameTitleLabelWidth(fromText: LocalizedText.nickname.localized))
+                                                   constant: Self.nicknameTitleLabelWidth(fromText: MDLocalizedText.nickname.localized))
         
         NSLayoutConstraint.addEqualHeightConstraint(item: self.nicknameTitleLabel,
                                                     constant: Self.nicknameTitleLabelHeight)

@@ -17,7 +17,7 @@ final class AuthenticationViewController: MDBaseLargeTitledBackViewControllerWit
     fileprivate let nicknameTextField: MDTextFieldWithToolBar = {
         let textField: MDTextFieldWithToolBar = .init(rectInset: MDConstants.Rect.defaultInset,
                                                       keyboardToolbar: .init())
-        textField.placeholder = LocalizedText.nickname.localized
+        textField.placeholder = MDLocalizedText.nickname.localized
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.textAlignment = .left
@@ -39,7 +39,7 @@ final class AuthenticationViewController: MDBaseLargeTitledBackViewControllerWit
         let textField: MDPasswordTextFieldWithToolBar = .init(height: passwordTextFieldHeight,
                                                               rectInset: MDConstants.Rect.passwordInset,
                                                               keyboardToolbar: .init())
-        textField.placeholder = LocalizedText.password.localized
+        textField.placeholder = MDLocalizedText.password.localized
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.textAlignment = .left
@@ -60,7 +60,7 @@ final class AuthenticationViewController: MDBaseLargeTitledBackViewControllerWit
     fileprivate let loginButton: UIButton = {
         let button: UIButton = .init()
         button.backgroundColor = MDUIResources.Color.md_4400D4.color()
-        button.setTitle(LocalizedText.login.localized, for: .normal)
+        button.setTitle(MDLocalizedText.login.localized, for: .normal)
         button.setTitleColor(MDUIResources.Color.md_FFFFFF.color(), for: .normal)
         button.titleLabel?.font = MDUIResources.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -70,7 +70,7 @@ final class AuthenticationViewController: MDBaseLargeTitledBackViewControllerWit
     fileprivate lazy var hud: MBProgressHUD = {
         let hud: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud.mode = .annularDeterminate
-        hud.label.text = LocalizedText.pleaseWaitForDataSync.localized
+        hud.label.text = MDLocalizedText.pleaseWaitForDataSync.localized
         hud.label.font = MDUIResources.Font.MyriadProRegular.font()
         hud.label.textColor = MDUIResources.Color.md_3C3C3C.color()
         return hud
@@ -78,7 +78,7 @@ final class AuthenticationViewController: MDBaseLargeTitledBackViewControllerWit
     
     init(presenter: AuthenticationPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(title: LocalizedText.login.localized,
+        super.init(title: MDLocalizedText.login.localized,
                    navigationBarBackgroundImage: MDUIResources.Image.background_navigation_bar_0.image,
                    backgroundImage: MDUIResources.Image.background_typography_1.image)        
     }
@@ -122,7 +122,7 @@ extension AuthenticationViewController: AuthenticationPresenterOutputProtocol {
     }
     
     func showValidationError(_ error: Error) {
-        UIAlertController.showAlertWithOkAction(title: LocalizedText.error.localized,
+        UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
                                                 message: error.localizedDescription,
                                                 presenter: self)
     }
