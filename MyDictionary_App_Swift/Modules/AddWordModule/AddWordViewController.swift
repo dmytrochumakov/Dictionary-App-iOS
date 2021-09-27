@@ -29,6 +29,22 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
         return textField
     }()
     
+    fileprivate static let wordDescriptionTextViewTopOffset: CGFloat = 10
+    fileprivate static let wordDescriptionTextViewLeftOffset: CGFloat = 16
+    fileprivate static let wordDescriptionTextViewRightOffset: CGFloat = 16
+    fileprivate static let wordDescriptionTextViewBottomOffset: CGFloat = .zero
+    fileprivate let wordDescriptionTextView: UITextView = {
+        let textView: UITextView = .init()
+        textView.autocorrectionType = .no
+        textView.textAlignment = .left
+        textView.font = MDUIResources.Font.MyriadProItalic.font()
+        textView.textColor = MDUIResources.Color.md_3C3C3C.color()
+        textView.returnKeyType = .done
+        textView.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
+    }()
+    
     init(presenter: AddWordPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: MDLocalizedText.addWord.localized,
@@ -67,10 +83,15 @@ fileprivate extension AddWordViewController {
     
     func addViews() {
         addWordTextField()
+        addWordDescriptionTextView()
     }
     
     func addWordTextField() {
         view.addSubview(wordTextField)
+    }
+    
+    func addWordDescriptionTextView() {
+        view.addSubview(wordDescriptionTextView)
     }
     
 }
@@ -80,6 +101,7 @@ fileprivate extension AddWordViewController {
     
     func addConstraints() {
         addWordTextFieldConstraints()
+        addWordDescriptionTextViewConstraints()
     }
     
     func addWordTextFieldConstraints() {
@@ -103,6 +125,29 @@ fileprivate extension AddWordViewController {
         
     }
     
+    func addWordDescriptionTextViewConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.wordDescriptionTextView,
+                                              attribute: .top,
+                                              toItem: self.wordTextField,
+                                              attribute: .bottom,
+                                              constant: Self.wordDescriptionTextViewTopOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.wordDescriptionTextView,
+                                                  toItem: self.view,
+                                                  constant: Self.wordDescriptionTextViewLeftOffset)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.wordDescriptionTextView,
+                                                   toItem: self.view,
+                                                   constant: -Self.wordDescriptionTextViewRightOffset)
+        
+        NSLayoutConstraint.addEqualBottomConstraint(item: self.wordDescriptionTextView,
+                                                    toItem: self.view,
+                                                    constant: Self.wordDescriptionTextViewBottomOffset)
+        
+        
+    }
+    
 }
 
 // MARK: - Drop Shadow
@@ -110,12 +155,19 @@ fileprivate extension AddWordViewController {
     
     func dropShadow() {
         dropShadowWordTextField()
+        dropShadowWordDescriptionTextView()
     }
     
     func dropShadowWordTextField() {
         wordTextField.dropShadow(color: MDUIResources.Color.md_5200FF.color(0.5),
                                  offSet: .init(width: 2, height: 4),
                                  radius: 15)
+    }
+    
+    func dropShadowWordDescriptionTextView() {
+        wordDescriptionTextView.dropShadow(color: MDUIResources.Color.md_5200FF.color(0.5),
+                                           offSet: .init(width: 2, height: 4),
+                                           radius: 15)
     }
     
 }
@@ -125,10 +177,15 @@ fileprivate extension AddWordViewController {
     
     func roundOffEdges() {
         roundOffEdgesWordTextField()
+        roundOffEdgesWordDescriptionTextView()
     }
     
     func roundOffEdgesWordTextField() {
         wordTextField.layer.cornerRadius = 10
+    }
+    
+    func roundOffEdgesWordDescriptionTextView() {
+        wordDescriptionTextView.layer.cornerRadius = 10
     }
     
 }
