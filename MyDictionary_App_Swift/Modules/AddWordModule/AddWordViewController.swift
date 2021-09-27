@@ -14,8 +14,8 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
     fileprivate static let wordTextFieldTopOffset: CGFloat = 24
     fileprivate static let wordTextFieldLeftOffset: CGFloat = 16
     fileprivate static let wordTextFieldRightOffset: CGFloat = 16
-    fileprivate let wordTextField: MDTextFieldWithToolBar = {
-        let textField: MDTextFieldWithToolBar = MDTextFieldWithToolBar.init(rectInset: MDConstants.Rect.defaultInset,
+    fileprivate let wordTextField: MDCounterTextFieldWithToolBar = {
+        let textField: MDCounterTextFieldWithToolBar = MDCounterTextFieldWithToolBar.init(rectInset: MDConstants.Rect.defaultInset,
                                                                             keyboardToolbar: MDKeyboardToolbar.init())
         textField.placeholder = MDLocalizedText.wordText.localized
         textField.autocorrectionType = .no
@@ -26,6 +26,7 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
         textField.returnKeyType = .next
         textField.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.updateCounter(currentCount: .zero, maxCount: MDConstants.Text.MaxCountCharacters.wordTextField)
         return textField
     }()
     
