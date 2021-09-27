@@ -152,7 +152,7 @@ fileprivate extension AddWordViewController {
     }
     
     func createKeyboardHandler() {
-        self.keyboardHandler = KeyboardHandler.createKeyboardHandler(scrollView: self.scrollView)
+        self.keyboardHandler = KeyboardHandler.createKeyboardHandler(scrollView: self.wordDescriptionTextView)
     }
     
     func addWordTextField() {
@@ -215,7 +215,7 @@ fileprivate extension AddWordViewController {
                                               toItem: self.contentView,
                                               attribute: .top,
                                               constant: MDConstants.NavigationBar.height(fromNavigationController: self.navigationController,
-                                                                                                            prefersLargeTitles: false) +  Self.wordTextFieldTopOffset)
+                                                                                         prefersLargeTitles: false) +  Self.wordTextFieldTopOffset)
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.wordTextField,
                                                   toItem: self.contentView,
