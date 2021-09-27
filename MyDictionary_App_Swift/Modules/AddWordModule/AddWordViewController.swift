@@ -50,6 +50,7 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
     fileprivate static let wordDescriptionTextViewBottomOffset: CGFloat = 16
     fileprivate let wordDescriptionTextView: MDTextViewWithToolBar = {
         let textView: MDTextViewWithToolBar = .init(keyboardToolbar: .init())
+        textView.placeholder = MDLocalizedText.wordDescription.localized
         textView.autocorrectionType = .no
         textView.textAlignment = .left
         textView.font = MDUIResources.Font.MyriadProItalic.font()

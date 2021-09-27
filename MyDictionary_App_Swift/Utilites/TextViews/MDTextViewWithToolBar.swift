@@ -5,9 +5,9 @@
 //  Created by Dmytro Chumakov on 27.09.2021.
 //
 
-import UIKit
+import KMPlaceholderTextView
 
-final class MDTextViewWithToolBar: UITextView {
+final class MDTextViewWithToolBar: KMPlaceholderTextView {
     
     fileprivate let keyboardToolbar: MDKeyboardToolbar
     
