@@ -62,6 +62,8 @@
 		2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */; };
 		2223F8BC26512FFD004F2FE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2223F8BE26512FFD004F2FE9 /* Localizable.strings */; };
 		222F52702701AD080070F546 /* MDTextViewWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222F526F2701AD080070F546 /* MDTextViewWithToolBar.swift */; };
+		222F52752701E1100070F546 /* MDAddWordTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222F52742701E1100070F546 /* MDAddWordTextFieldDelegate.swift */; };
+		222F52772701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222F52762701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift */; };
 		223648EA26DE38970071F271 /* MDSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223648E926DE38970071F271 /* MDSync.swift */; };
 		223EB28626F9FD030021D8E1 /* TermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223EB28526F9FD030021D8E1 /* TermsOfServiceViewController.swift */; };
 		224375AC26F33EA3006B90EB /* MDCourseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375AB26F33EA3006B90EB /* MDCourseListCell.swift */; };
@@ -441,6 +443,8 @@
 		2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageService.swift; sourceTree = "<group>"; };
 		2223F8BD26512FFD004F2FE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		222F526F2701AD080070F546 /* MDTextViewWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDTextViewWithToolBar.swift; sourceTree = "<group>"; };
+		222F52742701E1100070F546 /* MDAddWordTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAddWordTextFieldDelegate.swift; sourceTree = "<group>"; };
+		222F52762701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDTextFieldDelegatePropertyProtocol.swift; sourceTree = "<group>"; };
 		223648E926DE38970071F271 /* MDSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSync.swift; sourceTree = "<group>"; };
 		223EB28526F9FD030021D8E1 /* TermsOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceViewController.swift; sourceTree = "<group>"; };
 		224375AB26F33EA3006B90EB /* MDCourseListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseListCell.swift; sourceTree = "<group>"; };
@@ -1076,6 +1080,7 @@
 				22E327C626FB207C00445917 /* MDShowErrorProtocol.swift */,
 				22A2988B26FCB2F700E79843 /* MDHideKeyboardProtocol.swift */,
 				229707C92700605300722EFF /* MDViewDidLoadProtocol.swift */,
+				222F52762701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1158,6 +1163,14 @@
 				222F526F2701AD080070F546 /* MDTextViewWithToolBar.swift */,
 			);
 			path = TextViews;
+			sourceTree = "<group>";
+		};
+		222F52732701E0D20070F546 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				222F52742701E1100070F546 /* MDAddWordTextFieldDelegate.swift */,
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 		223648E826DE38050071F271 /* Sync */ = {
@@ -1675,6 +1688,7 @@
 		2291DACC27019D9200216B64 /* AddWordModule */ = {
 			isa = PBXGroup;
 			children = (
+				222F52732701E0D20070F546 /* Delegates */,
 				2291DACD27019DA900216B64 /* AddWordModule.swift */,
 				2291DACE27019DA900216B64 /* AddWordPresenter.swift */,
 				2291DACF27019DA900216B64 /* AddWordRouter.swift */,
@@ -2597,6 +2611,7 @@
 				22EF01F4269DA7C000FE4435 /* MDNetworkSession.swift in Sources */,
 				229D2D4926EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataManager.swift in Sources */,
 				22E17B1726FDAF92008CB714 /* MDAddCourseHeaderView.swift in Sources */,
+				222F52752701E1100070F546 /* MDAddWordTextFieldDelegate.swift in Sources */,
 				22E2B4E42664EB6900978E62 /* SettingsCollectionViewDataSource.swift in Sources */,
 				220FFE8C26C90B1F00702CCE /* MDReadUserProtocol.swift in Sources */,
 				2289CEF92678CC34007254C3 /* OperationQueueService.swift in Sources */,
@@ -2762,6 +2777,7 @@
 				22DB2F8B26C3D4D200C1AADA /* MDTableViewDelegatePropertyProtocol.swift in Sources */,
 				22A2988426FCA5AB00E79843 /* MDAddCourseCollectionViewDelegate.swift in Sources */,
 				227D8F1226D77A9B009CB94B /* UpdateWordRequest.swift in Sources */,
+				222F52772701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift in Sources */,
 				22493C4726972877000DA480 /* MDOperationsResultWithCompletion.swift in Sources */,
 				220FFE8026C9075100702CCE /* MDUserStorage.swift in Sources */,
 				221D281326C5064A004BC4F7 /* AuthenticationDataProvider.swift in Sources */,

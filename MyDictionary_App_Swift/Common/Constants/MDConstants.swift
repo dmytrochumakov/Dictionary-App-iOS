@@ -204,6 +204,31 @@ struct MDConstants {
             static let wordDescriptionTextView: Int = 500
         }
         
+        struct Counter {
+            
+            static func result(text: String?,
+                               rangeLength: Int,
+                               string: String,
+                               maxCountCharacters: Int) -> (count: Int, success: Bool) {
+                
+                let count: Int = computeCount(text: text,
+                                              rangeLength: rangeLength,
+                                              string: string)
+                
+                return (count, (count <= maxCountCharacters))
+                
+            }
+            
+            fileprivate static func computeCount(text: String?,
+                                                 rangeLength: Int,
+                                                 string: String) -> Int {
+                
+                return (text?.count ?? .zero) + (string.count - rangeLength)
+                
+            }
+            
+        }
+        
     }
     
     struct Keyboard {

@@ -68,10 +68,10 @@ extension RegisterTextFieldDelegate {
                    replacementString string: String) -> Bool {
         
         if (isNicknameTextField(textField)) {
-            let result = result(textFieldText: textField.text,
-                                rangeLength: range.length,
-                                string: string,
-                                maxCountCharacters: MDConstants.Text.MaxCountCharacters.nicknameTextField)
+            let result = MDConstants.Text.Counter.result(text: textField.text,
+                                                         rangeLength: range.length,
+                                                         string: string,
+                                                         maxCountCharacters: MDConstants.Text.MaxCountCharacters.nicknameTextField)
             
             if (result.success) {
                 updateNicknameTextFieldCounterAction?(result.count)
@@ -81,10 +81,10 @@ extension RegisterTextFieldDelegate {
         }
         
         if (isPasswordTextField(textField)) {
-            let result = result(textFieldText: textField.text,
-                                rangeLength: range.length,
-                                string: string,
-                                maxCountCharacters: MDConstants.Text.MaxCountCharacters.passwordTextField)
+            let result = MDConstants.Text.Counter.result(text: textField.text,
+                                                         rangeLength: range.length,
+                                                         string: string,
+                                                         maxCountCharacters: MDConstants.Text.MaxCountCharacters.passwordTextField)
             
             if (result.success) {
                 updatePasswordTextFieldCounterAction?(result.count)
@@ -94,10 +94,10 @@ extension RegisterTextFieldDelegate {
         }
         
         if (isConfirmPasswordTextField(textField)) {
-            let result = result(textFieldText: textField.text,
-                                rangeLength: range.length,
-                                string: string,
-                                maxCountCharacters: MDConstants.Text.MaxCountCharacters.passwordTextField)
+            let result = MDConstants.Text.Counter.result(text: textField.text,
+                                                         rangeLength: range.length,
+                                                         string: string,
+                                                         maxCountCharacters: MDConstants.Text.MaxCountCharacters.passwordTextField)
             
             if (result.success) {
                 updateConfirmPasswordTextFieldCounterAction?(result.count)
@@ -107,27 +107,6 @@ extension RegisterTextFieldDelegate {
         }
         
         return true
-        
-    }
-    
-    private func result(textFieldText: String?,
-                        rangeLength: Int,
-                        string: String,
-                        maxCountCharacters: Int) -> (count: Int, success: Bool) {
-        
-        let count: Int = computeCount(textFieldText: textFieldText,
-                                      rangeLength: rangeLength,
-                                      string: string)
-        
-        return (count, (count <= maxCountCharacters))
-        
-    }
-    
-    private func computeCount(textFieldText: String?,
-                              rangeLength: Int,
-                              string: String) -> Int {
-        
-        return (textFieldText?.count ?? .zero) + (string.count - rangeLength)
         
     }
     

@@ -47,7 +47,7 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
     fileprivate static let wordDescriptionTextViewTopOffset: CGFloat = 16
     fileprivate static let wordDescriptionTextViewLeftOffset: CGFloat = 16
     fileprivate static let wordDescriptionTextViewRightOffset: CGFloat = 16
-    fileprivate static let wordDescriptionTextViewBottomOffset: CGFloat = 16
+    fileprivate static let wordDescriptionTextViewHeightOffset: CGFloat = 128
     fileprivate let wordDescriptionTextView: MDTextViewWithToolBar = {
         let textView: MDTextViewWithToolBar = .init(keyboardToolbar: .init())
         textView.placeholder = MDLocalizedText.wordDescription.localized
@@ -122,6 +122,20 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
 // MARK: - AddWordPresenterOutputProtocol
 extension AddWordViewController: AddWordPresenterOutputProtocol {
     
+    func makeWordDescriptionTextViewActive() {
+        wordDescriptionTextView.becomeFirstResponder()
+    }
+    
+    func updateWordTextFieldCounter(_ count: Int) {
+        wordTextField.updateCounter(currentCount: count,
+                                    maxCount: MDConstants.Text.MaxCountCharacters.wordTextField)
+    }
+    
+    func wordTextFieldShouldClearAction() {
+        wordTextField.updateCounter(currentCount: .zero,
+                                    maxCount: MDConstants.Text.MaxCountCharacters.wordTextField)
+    }
+    
 }
 
 // MARK: - Add Views
@@ -157,6 +171,7 @@ fileprivate extension AddWordViewController {
     }
     
     func addWordTextField() {
+        wordTextField.delegate = presenter.textFieldDelegate
         contentView.addSubview(wordTextField)
     }
     
@@ -247,11 +262,8 @@ fileprivate extension AddWordViewController {
                                                    toItem: self.contentView,
                                                    constant: -Self.wordDescriptionTextViewRightOffset)
         
-        NSLayoutConstraint.addEqualConstraint(item: self.wordDescriptionTextView,
-                                              attribute: .bottom,
-                                              toItem: self.addButton,
-                                              attribute: .top,
-                                              constant: -Self.wordDescriptionTextViewBottomOffset)
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.wordDescriptionTextView,                                                    
+                                                    constant: Self.wordDescriptionTextViewHeightOffset)
         
     }
     
