@@ -34,16 +34,14 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
     fileprivate static let wordDescriptionTextViewLeftOffset: CGFloat = 16
     fileprivate static let wordDescriptionTextViewRightOffset: CGFloat = 16
     fileprivate static let wordDescriptionTextViewBottomOffset: CGFloat = 16
-    fileprivate let wordDescriptionTextView: MDCounterTextViewWithToolBar = {
-        let textView: MDCounterTextViewWithToolBar = .init(keyboardToolbar: .init())
+    fileprivate let wordDescriptionTextView: MDTextViewWithToolBar = {
+        let textView: MDTextViewWithToolBar = .init(keyboardToolbar: .init())
         textView.autocorrectionType = .no
-        textView.textAlignment = .left
-        textView.placeholder = NSString.init(string: MDLocalizedText.wordDescription.localized)
+        textView.textAlignment = .left        
         textView.font = MDUIResources.Font.MyriadProItalic.font()
         textView.textColor = MDUIResources.Color.md_3C3C3C.color()
         textView.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.updateCounter(currentCount: .zero, maxCount: MDConstants.Text.MaxCountCharacters.wordDescriptionTextView)
         return textView
     }()
     
