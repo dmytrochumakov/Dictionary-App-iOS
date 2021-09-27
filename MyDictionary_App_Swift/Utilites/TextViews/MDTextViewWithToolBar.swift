@@ -25,8 +25,6 @@ open class MDTextViewWithToolBar: RSKPlaceholderTextView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
 }
 
 // MARK: - Configure UI
@@ -34,7 +32,7 @@ fileprivate extension MDTextViewWithToolBar {
     
     func configureUI() {
         //
-        self.textContainerInset = .init(top: 8, left: 8, bottom: 8, right: 8)
+        self.textContainerInset = .init(top: 8, left: 9, bottom: 8, right: 8)
         //
         self.placeholderColor = MDUIResources.Color.md_C7C7CD.color()
         //
