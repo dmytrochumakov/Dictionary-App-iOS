@@ -131,12 +131,37 @@ struct MDConstants {
     
     struct NavigationBar {
         
-        static func height(fromNavigationController navigationController: UINavigationController?) -> CGFloat {
-            return navigationController?.navigationBar.bounds.height ?? .zero
+        fileprivate static var largeHeight: CGFloat? = nil
+        fileprivate static var smallHeight: CGFloat? = nil
+        
+        static func height(fromNavigationController navigationController: UINavigationController?,
+                           prefersLargeTitles: Bool) -> CGFloat {
+            if (navigationController == nil) {
+                return .zero
+            } else {
+                if (prefersLargeTitles) {
+                    if (largeHeight == nil) {
+                        navigationController!.navigationBar.prefersLargeTitles = true
+                        self.largeHeight = navigationController!.navigationBar.bounds.height
+                        return self.largeHeight!
+                    } else {
+                        return self.largeHeight!
+                    }
+                } else {
+                    if (smallHeight == nil) {
+                        navigationController!.navigationBar.prefersLargeTitles = false
+                        self.smallHeight = navigationController!.navigationBar.bounds.height
+                        return self.smallHeight!
+                    } else {
+                        return self.smallHeight!
+                    }
+                }
+            }
         }
         
-        static func heightPlusStatusBarHeight(fromNavigationController navigationController: UINavigationController?) -> CGFloat {
-            return height(fromNavigationController: navigationController) + StatusBar.height
+        static func heightPlusStatusBarHeight(fromNavigationController navigationController: UINavigationController?,
+                                              prefersLargeTitles: Bool) -> CGFloat {
+            return height(fromNavigationController: navigationController, prefersLargeTitles: prefersLargeTitles) + StatusBar.height
         }
         
     }

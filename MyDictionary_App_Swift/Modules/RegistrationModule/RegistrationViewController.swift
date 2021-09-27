@@ -305,7 +305,8 @@ fileprivate extension RegistrationViewController {
                                               attribute: .top,
                                               toItem: self.contentView,
                                               attribute: .top,
-                                              constant: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController) + Self.nicknameTextFieldTopOffset)
+                                              constant: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController,
+                                                                                                            prefersLargeTitles: true) + Self.nicknameTextFieldTopOffset)
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.nicknameTextField,
                                                   toItem: self.backgroundImageView,

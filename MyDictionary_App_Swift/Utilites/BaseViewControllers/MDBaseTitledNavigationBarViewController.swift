@@ -28,7 +28,8 @@ open class MDBaseTitledNavigationBarViewController: MDBaseNavigationBarViewContr
     init(title: String, navigationBarBackgroundImage: UIImage) {
         self.titleText = title
         titleLabel.text = title
-        super.init(navigationBarBackgroundImage: navigationBarBackgroundImage)
+        super.init(navigationBarBackgroundImage: navigationBarBackgroundImage,
+                   prefersLargeTitles: false)
     }
     
     deinit {

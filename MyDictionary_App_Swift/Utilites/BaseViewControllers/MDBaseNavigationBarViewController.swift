@@ -9,6 +9,8 @@ import UIKit
 
 open class MDBaseNavigationBarViewController: UIViewController {
     
+    fileprivate let prefersLargeTitles: Bool
+    
     internal let navigationBarView: UIView = {
         let view: UIView = .init()
         view.backgroundColor = MDUIResources.Color.md_4400D4.color()
@@ -23,7 +25,8 @@ open class MDBaseNavigationBarViewController: UIViewController {
         return imageView
     }()
     
-    init(navigationBarBackgroundImage: UIImage) {
+    init(navigationBarBackgroundImage: UIImage, prefersLargeTitles: Bool) {
+        self.prefersLargeTitles = prefersLargeTitles
         navigationBarBackgroundImageView.image = navigationBarBackgroundImage
         super.init(nibName: nil, bundle: nil)
     }
@@ -90,7 +93,8 @@ extension MDBaseNavigationBarViewController {
                                                    constant: .zero)
         
         NSLayoutConstraint.addEqualHeightConstraint(item: self.navigationBarView,
-                                                    constant: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController))
+                                                    constant: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController,
+                                                                                                                  prefersLargeTitles: prefersLargeTitles))
         
     }
     
