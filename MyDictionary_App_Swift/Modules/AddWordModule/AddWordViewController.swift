@@ -16,7 +16,7 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
     fileprivate static let wordTextFieldRightOffset: CGFloat = 16
     fileprivate let wordTextField: MDCounterTextFieldWithToolBar = {
         let textField: MDCounterTextFieldWithToolBar = MDCounterTextFieldWithToolBar.init(rectInset: MDConstants.Rect.defaultInset,
-                                                                            keyboardToolbar: MDKeyboardToolbar.init())
+                                                                                          keyboardToolbar: MDKeyboardToolbar.init())
         textField.placeholder = MDLocalizedText.wordText.localized
         textField.autocorrectionType = .no
         textField.textAlignment = .left
@@ -33,7 +33,7 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
     fileprivate static let wordDescriptionTextViewTopOffset: CGFloat = 10
     fileprivate static let wordDescriptionTextViewLeftOffset: CGFloat = 16
     fileprivate static let wordDescriptionTextViewRightOffset: CGFloat = 16
-    fileprivate static let wordDescriptionTextViewBottomOffset: CGFloat = .zero
+    fileprivate static let wordDescriptionTextViewBottomOffset: CGFloat = 16
     fileprivate let wordDescriptionTextView: MDTextViewWithToolBar = {
         let textView: MDTextViewWithToolBar = .init(keyboardToolbar: .init())
         textView.autocorrectionType = .no
@@ -44,6 +44,20 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
         textView.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
+    }()
+    
+    fileprivate static let addButtonHeight: CGFloat = 48
+    fileprivate static let addButtonLeftOffset: CGFloat = 16
+    fileprivate static let addButtonRightOffset: CGFloat = 16
+    fileprivate static let addButtonBottomOffset: CGFloat = 24
+    fileprivate let addButton: UIButton = {
+        let button: UIButton = .init()
+        button.backgroundColor = MDUIResources.Color.md_4400D4.color()
+        button.setTitle(MDLocalizedText.add.localized, for: .normal)
+        button.setTitleColor(MDUIResources.Color.md_FFFFFF.color(), for: .normal)
+        button.titleLabel?.font = MDUIResources.Font.MyriadProRegular.font()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     init(presenter: AddWordPresenterInputProtocol) {
@@ -85,6 +99,7 @@ fileprivate extension AddWordViewController {
     func addViews() {
         addWordTextField()
         addWordDescriptionTextView()
+        addAddButton()
     }
     
     func addWordTextField() {
@@ -95,6 +110,11 @@ fileprivate extension AddWordViewController {
         view.addSubview(wordDescriptionTextView)
     }
     
+    func addAddButton() {
+        addButton.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
+        view.addSubview(addButton)
+    }
+    
 }
 
 // MARK: - Add Constraints
@@ -103,6 +123,7 @@ fileprivate extension AddWordViewController {
     func addConstraints() {
         addWordTextFieldConstraints()
         addWordDescriptionTextViewConstraints()
+        addAddButtonConstraints()
     }
     
     func addWordTextFieldConstraints() {
@@ -142,10 +163,31 @@ fileprivate extension AddWordViewController {
                                                    toItem: self.view,
                                                    constant: -Self.wordDescriptionTextViewRightOffset)
         
-        NSLayoutConstraint.addEqualBottomConstraint(item: self.wordDescriptionTextView,
-                                                    toItem: self.view,
-                                                    constant: Self.wordDescriptionTextViewBottomOffset)
+        NSLayoutConstraint.addEqualConstraint(item: self.wordDescriptionTextView,
+                                              attribute: .bottom,
+                                              toItem: self.addButton,
+                                              attribute: .top,
+                                              constant: -Self.wordDescriptionTextViewBottomOffset)
         
+        
+    }
+    
+    func addAddButtonConstraints() {
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.addButton,
+                                                  toItem: self.view,
+                                                  constant: Self.addButtonLeftOffset)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.addButton,
+                                                   toItem: self.view,
+                                                   constant: -Self.addButtonRightOffset)
+        
+        NSLayoutConstraint.addEqualBottomConstraint(item: self.addButton,
+                                                    toItem: self.view,
+                                                    constant: -Self.addButtonBottomOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.addButton,
+                                                    constant: Self.addButtonHeight)
         
     }
     
@@ -157,6 +199,7 @@ fileprivate extension AddWordViewController {
     func dropShadow() {
         dropShadowWordTextField()
         dropShadowWordDescriptionTextView()
+        dropShadowAddButton()
     }
     
     func dropShadowWordTextField() {
@@ -171,6 +214,12 @@ fileprivate extension AddWordViewController {
                                            radius: 15)
     }
     
+    func dropShadowAddButton() {
+        addButton.dropShadow(color: MDUIResources.Color.md_4400D4.color(0.5),
+                             offSet: .init(width: 0, height: 4),
+                             radius: 10)
+    }
+    
 }
 
 // MARK: - Round Off Edges
@@ -179,6 +228,7 @@ fileprivate extension AddWordViewController {
     func roundOffEdges() {
         roundOffEdgesWordTextField()
         roundOffEdgesWordDescriptionTextView()
+        roundOffEdgesAddButton()
     }
     
     func roundOffEdgesWordTextField() {
@@ -189,11 +239,17 @@ fileprivate extension AddWordViewController {
         wordDescriptionTextView.layer.cornerRadius = 10
     }
     
+    func roundOffEdgesAddButton() {
+        addButton.layer.cornerRadius = 10
+    }
+    
 }
 
 // MARK: - Actions
 fileprivate extension AddWordViewController {
     
-    
+    @objc func addButtonAction() {
+        presenter.addButtonClicked()
+    }
     
 }

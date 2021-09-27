@@ -7,7 +7,7 @@
 import UIKit
 
 protocol AddWordInteractorInputProtocol {
-    
+    func addButtonClicked()
 }
 
 protocol AddWordInteractorOutputProtocol: AnyObject {
@@ -35,6 +35,15 @@ final class AddWordInteractor: AddWordInteractorProtocol {
 }
 
 // MARK: - AddWordDataManagerOutputProtocol
-extension AddWordInteractor {
+extension AddWordInteractor: AddWordDataManagerOutputProtocol {
+    
+}
+
+// MARK: - AddWordInteractorInputProtocol
+extension AddWordInteractor: AddWordInteractorInputProtocol {
+    
+    func addButtonClicked() {
+        debugPrint(#function, Self.self)
+    }
     
 }

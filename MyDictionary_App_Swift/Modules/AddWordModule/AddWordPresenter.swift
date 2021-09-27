@@ -7,7 +7,7 @@
 import UIKit
 
 protocol AddWordPresenterInputProtocol {
-    
+    func addButtonClicked()
 }
 
 protocol AddWordPresenterOutputProtocol: AnyObject {
@@ -41,5 +41,14 @@ final class AddWordPresenter: NSObject, AddWordPresenterProtocol {
 
 // MARK: - AddWordInteractorOutputProtocol
 extension AddWordPresenter {
+    
+}
+
+// MARK: - AddWordPresenterInputProtocol
+extension AddWordPresenter: AddWordPresenterInputProtocol {
+    
+    func addButtonClicked() {
+        interactor.addButtonClicked()
+    }
     
 }
