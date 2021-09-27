@@ -37,12 +37,24 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
     fileprivate let wordDescriptionTextView: MDTextViewWithToolBar = {
         let textView: MDTextViewWithToolBar = .init(keyboardToolbar: .init())
         textView.autocorrectionType = .no
-        textView.textAlignment = .left        
+        textView.textAlignment = .left
         textView.font = MDUIResources.Font.MyriadProItalic.font()
         textView.textColor = MDUIResources.Color.md_3C3C3C.color()
         textView.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
+    }()
+    
+    fileprivate static let wordDescriptionCounterLabelTopOffset: CGFloat = 4
+    fileprivate static let wordDescriptionCounterLabelLeftOffset: CGFloat = .zero
+    fileprivate static let wordDescriptionCounterLabelRightOffset: CGFloat = 4
+    fileprivate let wordDescriptionCounterLabel: UILabel = {
+        let label: UILabel = .init()
+        label.font = MDUIResources.Font.MyriadProRegular.font(ofSize: 11)
+        label.textColor = MDUIResources.Color.md_3C3C3C.color()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .right
+        return label
     }()
     
     fileprivate static let addButtonHeight: CGFloat = 48
@@ -78,6 +90,11 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
         addViews()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureUI()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         addConstraints()
@@ -98,6 +115,7 @@ fileprivate extension AddWordViewController {
     func addViews() {
         addWordTextField()
         addWordDescriptionTextView()
+        addWordDescriptionCounterLabel()
         addAddButton()
     }
     
@@ -107,6 +125,10 @@ fileprivate extension AddWordViewController {
     
     func addWordDescriptionTextView() {
         view.addSubview(wordDescriptionTextView)
+    }
+    
+    func addWordDescriptionCounterLabel() {
+        view.addSubview(wordDescriptionCounterLabel)
     }
     
     func addAddButton() {
@@ -122,6 +144,7 @@ fileprivate extension AddWordViewController {
     func addConstraints() {
         addWordTextFieldConstraints()
         addWordDescriptionTextViewConstraints()
+        addWordDescriptionCounterLabelConstraints()
         addAddButtonConstraints()
     }
     
@@ -167,7 +190,25 @@ fileprivate extension AddWordViewController {
                                               toItem: self.addButton,
                                               attribute: .top,
                                               constant: -Self.wordDescriptionTextViewBottomOffset)
-                
+        
+    }
+    
+    func addWordDescriptionCounterLabelConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.wordDescriptionCounterLabel,
+                                              attribute: .top,
+                                              toItem: self.wordDescriptionTextView,
+                                              attribute: .bottom,
+                                              constant: 4)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.wordDescriptionCounterLabel,
+                                                  toItem: self.wordDescriptionTextView,
+                                                  constant: .zero)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.wordDescriptionCounterLabel,
+                                                   toItem: self.wordDescriptionTextView,
+                                                   constant: -4)
+        
     }
     
     func addAddButtonConstraints() {
@@ -187,6 +228,20 @@ fileprivate extension AddWordViewController {
         NSLayoutConstraint.addEqualHeightConstraint(item: self.addButton,
                                                     constant: Self.addButtonHeight)
         
+    }
+    
+}
+
+// MARK: - Configure UI
+fileprivate extension AddWordViewController {
+
+    func configureUI() {
+        configureWordDescriptionCounterLabel()
+    }
+    
+    func configureWordDescriptionCounterLabel() {
+        updateWordDescriptionCounterLabel(currentCount: .zero,
+                                          maxCount: MDConstants.Text.MaxCountCharacters.wordDescriptionTextView)
     }
     
 }
@@ -248,6 +303,15 @@ fileprivate extension AddWordViewController {
     
     @objc func addButtonAction() {
         presenter.addButtonClicked()
+    }
+    
+}
+
+// MARK: - Update Counter
+fileprivate extension AddWordViewController {
+    
+    func updateWordDescriptionCounterLabel(currentCount: Int, maxCount: Int) {
+        wordDescriptionCounterLabel.text = String(currentCount) + MDConstants.StaticText.forwardSlash + String(maxCount)
     }
     
 }
