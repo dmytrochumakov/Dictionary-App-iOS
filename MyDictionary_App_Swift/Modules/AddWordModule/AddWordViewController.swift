@@ -30,7 +30,7 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
         return textField
     }()
     
-    fileprivate static let wordDescriptionTextViewTopOffset: CGFloat = 10
+    fileprivate static let wordDescriptionTextViewTopOffset: CGFloat = 16
     fileprivate static let wordDescriptionTextViewLeftOffset: CGFloat = 16
     fileprivate static let wordDescriptionTextViewRightOffset: CGFloat = 16
     fileprivate static let wordDescriptionTextViewBottomOffset: CGFloat = 16
