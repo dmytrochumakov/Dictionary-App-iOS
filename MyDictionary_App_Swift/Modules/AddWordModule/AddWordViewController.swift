@@ -214,7 +214,7 @@ fileprivate extension AddWordViewController {
                                               attribute: .top,
                                               toItem: self.contentView,
                                               attribute: .top,
-                                              constant: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: self.navigationController,
+                                              constant: MDConstants.NavigationBar.height(fromNavigationController: self.navigationController,
                                                                                                             prefersLargeTitles: false) +  Self.wordTextFieldTopOffset)
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.wordTextField,
