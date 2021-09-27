@@ -7,9 +7,28 @@
 import UIKit
 
 final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
-
+    
     fileprivate let presenter: AddWordPresenterInputProtocol
-
+    
+    fileprivate static let wordTextFieldHeight: CGFloat = 48
+    fileprivate static let wordTextFieldTopOffset: CGFloat = 24
+    fileprivate static let wordTextFieldLeftOffset: CGFloat = 16
+    fileprivate static let wordTextFieldRightOffset: CGFloat = 16
+    fileprivate let wordTextField: MDTextFieldWithToolBar = {
+        let textField: MDTextFieldWithToolBar = MDTextFieldWithToolBar.init(rectInset: MDConstants.Rect.defaultInset,
+                                                                            keyboardToolbar: MDKeyboardToolbar.init())
+        textField.placeholder = MDLocalizedText.wordText.localized
+        textField.autocorrectionType = .no
+        textField.textAlignment = .left
+        textField.clearButtonMode = .whileEditing
+        textField.font = MDUIResources.Font.MyriadProItalic.font()
+        textField.textColor = MDUIResources.Color.md_3C3C3C.color()
+        textField.returnKeyType = .next
+        textField.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
     init(presenter: AddWordPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: MDLocalizedText.addWord.localized,
@@ -26,22 +45,97 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
     
     override func loadView() {
         super.loadView()
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+        addViews()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        addConstraints()
+        roundOffEdges()
+        dropShadow()
     }
-
+    
 }
 
 // MARK: - AddWordPresenterOutputProtocol
 extension AddWordViewController: AddWordPresenterOutputProtocol {
-       
+    
+}
+
+// MARK: - Add Views
+fileprivate extension AddWordViewController {
+    
+    func addViews() {
+        addWordTextField()
+    }
+    
+    func addWordTextField() {
+        view.addSubview(wordTextField)
+    }
+    
+}
+
+// MARK: - Add Constraints
+fileprivate extension AddWordViewController {
+    
+    func addConstraints() {
+        addWordTextFieldConstraints()
+    }
+    
+    func addWordTextFieldConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.wordTextField,
+                                              attribute: .top,
+                                              toItem: self.navigationBarView,
+                                              attribute: .bottom,
+                                              constant: Self.wordTextFieldTopOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.wordTextField,
+                                                  toItem: self.view,
+                                                  constant: Self.wordTextFieldLeftOffset)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.wordTextField,
+                                                   toItem: self.view,
+                                                   constant: -Self.wordTextFieldRightOffset)
+        
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.wordTextField,
+                                                    constant: Self.wordTextFieldHeight)
+        
+    }
+    
+}
+
+// MARK: - Drop Shadow
+fileprivate extension AddWordViewController {
+    
+    func dropShadow() {
+        dropShadowWordTextField()
+    }
+    
+    func dropShadowWordTextField() {
+        wordTextField.dropShadow(color: MDUIResources.Color.md_5200FF.color(0.5),
+                                 offSet: .init(width: 2, height: 4),
+                                 radius: 15)
+    }
+    
+}
+
+// MARK: - Round Off Edges
+fileprivate extension AddWordViewController {
+    
+    func roundOffEdges() {
+        roundOffEdgesWordTextField()
+    }
+    
+    func roundOffEdgesWordTextField() {
+        wordTextField.layer.cornerRadius = 10
+    }
+    
+}
+
+// MARK: - Actions
+fileprivate extension AddWordViewController {
+    
+    
+    
 }
