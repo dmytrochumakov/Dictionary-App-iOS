@@ -64,11 +64,6 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
         addViews()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = .white
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         addConstraints()
