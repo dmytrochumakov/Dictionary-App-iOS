@@ -30,6 +30,21 @@ extension MDKeyboardToolbar {
     
 }
 
+extension MDKeyboardToolbar {
+    
+    func configureWithDoneButton(textView: UITextView,
+                                 target: Any?,
+                                 action: Selector?) {
+        
+        self.configureUIWithDoneButton(target: target,
+                                       action: action)
+        
+        textView.inputAccessoryView = self
+        
+    }
+    
+}
+
 fileprivate extension MDKeyboardToolbar {
     
     func configureUIWithDoneButton(target: Any?,

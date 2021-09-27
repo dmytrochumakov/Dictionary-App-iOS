@@ -33,13 +33,13 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
     fileprivate static let wordDescriptionTextViewLeftOffset: CGFloat = 16
     fileprivate static let wordDescriptionTextViewRightOffset: CGFloat = 16
     fileprivate static let wordDescriptionTextViewBottomOffset: CGFloat = .zero
-    fileprivate let wordDescriptionTextView: UITextView = {
-        let textView: UITextView = .init()
+    fileprivate let wordDescriptionTextView: MDTextViewWithToolBar = {
+        let textView: MDTextViewWithToolBar = .init(keyboardToolbar: .init())
         textView.autocorrectionType = .no
         textView.textAlignment = .left
+        textView.placeholder = NSString.init(string: MDLocalizedText.wordDescription.localized)
         textView.font = MDUIResources.Font.MyriadProItalic.font()
         textView.textColor = MDUIResources.Color.md_3C3C3C.color()
-        textView.returnKeyType = .done
         textView.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
@@ -62,6 +62,11 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
     override func loadView() {
         super.loadView()
         addViews()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = .white
     }
     
     override func viewDidLayoutSubviews() {

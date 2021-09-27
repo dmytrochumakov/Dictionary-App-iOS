@@ -16,6 +16,7 @@ struct MDUIResources {
         case md_4400D4
         case md_5200FF
         case md_C7C7CC
+        case md_C7C7CD
         case md_FF3B30
         
         
@@ -37,6 +38,9 @@ struct MDUIResources {
                 
             case.md_C7C7CC:
                 return .init(rgb: 0xC7C7CC, alpha: alpha)
+                
+            case .md_C7C7CD:
+                return .init(rgb: 0xC7C7CD, alpha: alpha)
                 
             case .md_FF3B30:
                 return .init(rgb: 0xFF3B30, alpha: alpha)
