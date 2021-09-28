@@ -89,9 +89,17 @@ extension WordListViewController: WordListPresenterOutputProtocol {
         }
     }
     
-    func deleteRow(at indexPath: IndexPath) {
+    func deleteRow(atIndexPath indexPath: IndexPath) {
         DispatchQueue.main.async {
             self.tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    func insertRow(atIndexPath indexPath: IndexPath) {
+        DispatchQueue.main.async {
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: [indexPath], with: .fade)
+            self.tableView.endUpdates()
         }
     }
     

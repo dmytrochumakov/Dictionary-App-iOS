@@ -20,9 +20,9 @@ protocol WordListPresenterOutputProtocol: AnyObject,
                                           MDReloadDataProtocol,
                                           MDHideKeyboardProtocol,
                                           MDShowErrorProtocol,
-                                          MDShowHideProgressHUD {
-    
-    func deleteRow(at indexPath: IndexPath)
+                                          MDShowHideProgressHUD,
+                                          MDDeleteRowProtocol,
+                                          MDInsertRowProtocol {
     
 }
 
@@ -70,8 +70,12 @@ extension WordListPresenter {
         presenterOutput?.showError(error)
     }
     
-    func deleteRow(at indexPath: IndexPath) {
-        presenterOutput?.deleteRow(at: indexPath)
+    func deleteRow(atIndexPath indexPath: IndexPath) {
+        presenterOutput?.deleteRow(atIndexPath: indexPath)
+    }
+    
+    func insertRow(atIndexPath indexPath: IndexPath) {
+        presenterOutput?.insertRow(atIndexPath: indexPath)
     }
     
     func showProgressHUD() {
@@ -106,7 +110,7 @@ extension WordListPresenter: WordListPresenterInputProtocol {
     func viewDidLoad() {
         interactor.viewDidLoad()
     }
-
+    
     func addNewWordButtonClicked() {
         interactor.addNewWordButtonClicked()
     }

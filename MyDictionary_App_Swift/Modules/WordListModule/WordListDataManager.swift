@@ -13,6 +13,7 @@ protocol WordListDataManagerInputProtocol {
     func filterWords(_ searchText: String?)
     func clearWordFilter()
     func deleteWord(atIndexPath indexPath: IndexPath)
+    func addWord(_ newValue: WordResponse) -> IndexPath
 }
 
 protocol WordListDataManagerOutputProtocol: AnyObject {
@@ -48,7 +49,7 @@ final class WordListDataManager: WordListDataManagerProtocol {
 }
 
 // MARK: - WordListDataManagerInputProtocol
-extension WordListDataManager {
+extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func readAndAddWordsToDataProvider() {
         
@@ -131,6 +132,16 @@ extension WordListDataManager {
     
     func deleteWord(atIndexPath indexPath: IndexPath) {
         dataProvider.deleteWord(atIndexPath: indexPath)
+    }
+    
+    func addWord(_ newValue: WordResponse) -> IndexPath {
+        //
+        self.dataProvider.filteredWords.append(newValue)
+        //
+        let section = (self.dataProvider.numberOfSections - 1)
+        let row = (self.dataProvider.numberOfRowsInSection(section) - 1)
+        //
+        return .init(row: row, section: section)
     }
     
 }

@@ -43,7 +43,8 @@ extension WordListModule {
                                                                                                                                                    jwtStorage: MDConstants.AppDependencies.dependencies.jwtStorage,
                                                                                                                                                    apiJWT: MDConstants.AppDependencies.dependencies.apiJWT),
                                                                                                                      apiWord: MDConstants.AppDependencies.dependencies.apiWord,
-                                                                                                                     wordStorage: MDConstants.AppDependencies.dependencies.wordStorage))
+                                                                                                                     wordStorage: MDConstants.AppDependencies.dependencies.wordStorage),
+                                                                                     bridge: MDConstants.AppDependencies.dependencies.bridge)
         var wordListRouter: WordListRouterProtocol = WordListRouter.init()
         let wordListPresenter: WordListPresenterProtocol = WordListPresenter.init(interactor: wordListInteractor,
                                                                                   router: wordListRouter)
