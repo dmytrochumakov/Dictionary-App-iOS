@@ -16,7 +16,7 @@ extension MDSettingsError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .mailServicesAreNotAvailable:
-            return LocalizedText.mailServicesAreNotAvailable.localized
+            return MDLocalizedText.mailServicesAreNotAvailable.localized
         }
     }
     

@@ -9,8 +9,9 @@ import UIKit
 
 open class MDBaseLargeNavigationBarViewController: MDBaseNavigationBarViewController {
     
-    override init(navigationBarBackgroundImage: UIImage) {
-        super.init(navigationBarBackgroundImage: navigationBarBackgroundImage)
+    init(navigationBarBackgroundImage: UIImage) {
+        super.init(navigationBarBackgroundImage: navigationBarBackgroundImage,
+                   prefersLargeTitles: true)
     }
     
     deinit {

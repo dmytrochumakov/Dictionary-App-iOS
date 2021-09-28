@@ -27,7 +27,7 @@ final class MDSearchBar: UIView {
     fileprivate static let searchTextFieldRightOffset: CGFloat = 16
     fileprivate let searchTextField: MDSearchTextField = {
         let textField: MDSearchTextField = .init()
-        textField.placeholder = LocalizedText.search.localized        
+        textField.placeholder = MDLocalizedText.search.localized        
         textField.autocorrectionType = .no
         textField.textAlignment = .left
         textField.clearButtonMode = .whileEditing
@@ -45,7 +45,7 @@ final class MDSearchBar: UIView {
     fileprivate let cancelButton: UIButton = {
         let button: UIButton = .init()
         button.backgroundColor = cancelButtonBackgroundColor(isActive: false)
-        button.setTitle(LocalizedText.cancel.localized, for: .normal)
+        button.setTitle(MDLocalizedText.cancel.localized, for: .normal)
         button.setTitleColor(MDUIResources.Color.md_FFFFFF.color(), for: .normal)
         button.titleLabel?.font = cancelButtonFont
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -177,7 +177,7 @@ fileprivate extension MDSearchBar {
                                                     constant: Self.cancelButtonHeight)
         
         NSLayoutConstraint.addEqualWidthConstraint(item: self.cancelButton,
-                                                   constant: Self.cancelButtonWidth(fromText: LocalizedText.cancel.localized))
+                                                   constant: Self.cancelButtonWidth(fromText: MDLocalizedText.cancel.localized))
         
     }
     

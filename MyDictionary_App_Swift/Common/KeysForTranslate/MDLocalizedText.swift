@@ -1,5 +1,5 @@
 //
-//  LocalizedText.swift
+//  MDLocalizedText.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 16.05.2021.
@@ -7,7 +7,8 @@
 
 import Foundation
 
-enum LocalizedText: String {
+enum MDLocalizedText: String {
+    
     case edit
     case cancel
     case done
@@ -44,6 +45,12 @@ enum LocalizedText: String {
     case mailServicesAreNotAvailable = "mail_services_are_not_available"
     case addCourse = "add_course"
     case pleaseSelectACourse = "please_select_a_course"
+    case addWord = "add_word"
+    case wordText = "word_text"
+    case wordDescription = "word_description"
+    case update
+    case wordTextIsEmpty = "word_text_is_empty"
+    case wordDescriptionIsEmpty = "word_description_is_empty"
     
     // Api Errors //
     case noDataApiError = "no_data_api_error"
@@ -74,7 +81,7 @@ enum LocalizedText: String {
 }
 
 // MARK: - LocalizableProtocol
-extension LocalizedText: MDLocalizableProtocol {
+extension MDLocalizedText: MDLocalizableProtocol {
     
     /// Default is Constants.StaticText.defaultTableName
     var tableName: String {

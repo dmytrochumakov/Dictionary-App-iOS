@@ -17,9 +17,9 @@ extension MDAPIAuthError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .unauthorized:
-            return LocalizedText.unauthorizedApiAuthError.localized
+            return MDLocalizedText.unauthorizedApiAuthError.localized
         case .conflict:
-            return LocalizedText.conflictApiAuthError.localized
+            return MDLocalizedText.conflictApiAuthError.localized
         }
     }
     

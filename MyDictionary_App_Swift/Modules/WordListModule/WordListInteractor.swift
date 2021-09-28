@@ -18,9 +18,11 @@ protocol WordListInteractorOutputProtocol: AnyObject,
                                            MDHideKeyboardProtocol,
                                            MDReloadDataProtocol,
                                            MDShowErrorProtocol,
-                                           MDShowHideProgressHUD {
+                                           MDShowHideProgressHUD,
+                                           MDDeleteRowProtocol,
+                                           MDInsertRowProtocol  {
     
-    func deleteRow(at indexPath: IndexPath)
+    func showAddWord(withCourse course: CourseResponse)
     
 }
 
@@ -34,6 +36,7 @@ final class WordListInteractor: NSObject,
     
     fileprivate let dataManager: WordListDataManagerInputProtocol
     fileprivate let wordManager: MDWordManagerProtocol
+    fileprivate var bridge: MDBridgeProtocol
     
     internal var tableViewDelegate: WordListTableViewDelegateProtocol
     internal var tableViewDataSource: WordListTableViewDataSourceProtocol
@@ -45,13 +48,15 @@ final class WordListInteractor: NSObject,
          tableViewDelegate: WordListTableViewDelegateProtocol,
          tableViewDataSource: WordListTableViewDataSourceProtocol,
          searchBarDelegate: MDSearchBarDelegateImplementationProtocol,
-         wordManager: MDWordManagerProtocol) {
+         wordManager: MDWordManagerProtocol,
+         bridge: MDBridgeProtocol) {
         
         self.dataManager = dataManager
         self.tableViewDelegate = tableViewDelegate
         self.tableViewDataSource = tableViewDataSource
         self.searchBarDelegate = searchBarDelegate
         self.wordManager = wordManager
+        self.bridge = bridge
         
         super.init()
         subscribe()
@@ -89,7 +94,7 @@ extension WordListInteractor {
     }
     
     func addNewWordButtonClicked() {
-        debugPrint(#function, Self.self)
+        interactorOutput?.showAddWord(withCourse: dataManager.dataProvider.course)
     }
     
 }
@@ -108,6 +113,8 @@ fileprivate extension WordListInteractor {
         searchBarShouldClearAction_Subscribe()
         //
         tableViewDataSourceDeleteButtonAction_Subscribe()
+        //
+        bridge_DidAddWord_Subscribe()
         //
     }
     
@@ -164,7 +171,7 @@ fileprivate extension WordListInteractor {
                     //
                     dataManager.deleteWord(atIndexPath: indexPath)
                     //
-                    interactorOutput?.deleteRow(at: indexPath)
+                    interactorOutput?.deleteRow(atIndexPath: indexPath)
                     //
                     break
                     //
@@ -182,6 +189,16 @@ fileprivate extension WordListInteractor {
             }
             
             
+        }
+        
+    }
+    
+    func bridge_DidAddWord_Subscribe() {
+        
+        bridge.didAddWord = { [unowned self] (word) in
+            //
+            interactorOutput?.insertRow(atIndexPath: dataManager.addWord(word))
+            //
         }
         
     }

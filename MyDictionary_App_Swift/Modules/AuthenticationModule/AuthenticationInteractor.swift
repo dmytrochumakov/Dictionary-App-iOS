@@ -16,12 +16,12 @@ protocol AuthenticationInteractorInputProtocol {
 
 protocol AuthenticationInteractorOutputProtocol: AnyObject,
                                                  MDShowHideUpdateProgressHUD,
-                                                 MDHideKeyboardProtocol {
+                                                 MDHideKeyboardProtocol,
+                                                 MDShowErrorProtocol {
     
     func makePasswordFieldActive()
     func showCourseList()
-    func showRegistration()
-    func showValidationError(_ error: Error)
+    func showRegistration()    
     
 }
 
@@ -147,7 +147,7 @@ fileprivate extension AuthenticationInteractor {
                     // Hide Progress HUD
                     self?.interactorOutput?.hideProgressHUD()
                     //
-                    self?.interactorOutput?.showValidationError(error)
+                    self?.interactorOutput?.showError(error)
                     //
                     break
                     
@@ -156,7 +156,7 @@ fileprivate extension AuthenticationInteractor {
             }
             
         } else {
-            interactorOutput?.showValidationError(authValidation.validationErrors.first!)
+            interactorOutput?.showError(authValidation.validationErrors.first!)
         }
         
     }

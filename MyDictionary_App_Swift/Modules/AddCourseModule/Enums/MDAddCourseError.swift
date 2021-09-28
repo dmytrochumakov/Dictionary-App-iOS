@@ -16,7 +16,7 @@ extension MDAddCourseError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .pleaseSelectACourse:
-            return LocalizedText.pleaseSelectACourse.localized
+            return MDLocalizedText.pleaseSelectACourse.localized
         }
     }
     

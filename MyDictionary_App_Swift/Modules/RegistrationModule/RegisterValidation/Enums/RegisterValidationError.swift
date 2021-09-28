@@ -19,13 +19,13 @@ extension RegisterValidationError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .nicknameIsEmpty:
-            return LocalizedText.nicknameIsEmpty.localized
+            return MDLocalizedText.nicknameIsEmpty.localized
         case .passwordIsEmpty:
-            return LocalizedText.passwordIsEmpty.localized
+            return MDLocalizedText.passwordIsEmpty.localized
         case .confirmPasswordIsEmpty:
-            return LocalizedText.confirmPasswordIsEmpty.localized
+            return MDLocalizedText.confirmPasswordIsEmpty.localized
         case .confirmPasswordAndPasswordDoNotMatch:
-            return LocalizedText.confirmPasswordAndPasswordDoNotMatch.localized
+            return MDLocalizedText.confirmPasswordAndPasswordDoNotMatch.localized
         }
     }
     

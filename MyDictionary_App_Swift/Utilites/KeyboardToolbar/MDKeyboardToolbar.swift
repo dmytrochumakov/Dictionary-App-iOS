@@ -30,6 +30,21 @@ extension MDKeyboardToolbar {
     
 }
 
+extension MDKeyboardToolbar {
+    
+    func configureWithDoneButton(textView: UITextView,
+                                 target: Any?,
+                                 action: Selector?) {
+        
+        self.configureUIWithDoneButton(target: target,
+                                       action: action)
+        
+        textView.inputAccessoryView = self
+        
+    }
+    
+}
+
 fileprivate extension MDKeyboardToolbar {
     
     func configureUIWithDoneButton(target: Any?,
@@ -41,7 +56,7 @@ fileprivate extension MDKeyboardToolbar {
                                                    target: nil,
                                                    action: nil)
         
-        let doneBarButton: UIBarButtonItem = .init(title: LocalizedText.done.localized,
+        let doneBarButton: UIBarButtonItem = .init(title: MDLocalizedText.done.localized,
                                                    style: .plain,
                                                    target: target,
                                                    action: action)

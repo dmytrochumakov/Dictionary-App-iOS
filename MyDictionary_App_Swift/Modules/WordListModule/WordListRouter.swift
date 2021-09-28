@@ -9,14 +9,23 @@ import UIKit
 
 protocol WordListRouterProtocol {
     var wordListViewController: UIViewController! { get set }
+    func showAddWord(withCourse course: CourseResponse)
 }
 
 final class WordListRouter: WordListRouterProtocol {
     
-    internal weak var wordListViewController: UIViewController!    
+    internal weak var wordListViewController: UIViewController!
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension WordListRouter {
+    
+    func showAddWord(withCourse course: CourseResponse) {
+        wordListViewController?.show(AddWordModule.init(sender: course).module, sender: nil)
     }
     
 }

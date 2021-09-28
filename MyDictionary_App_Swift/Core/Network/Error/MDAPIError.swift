@@ -27,29 +27,29 @@ extension MDAPIError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .noData:
-            return LocalizedText.noDataApiError.localized
+            return MDLocalizedText.noDataApiError.localized
         case .invalidResponse:
-            return LocalizedText.invalidResponseApiError.localized
+            return MDLocalizedText.invalidResponseApiError.localized
         case .badRequest:
-            return LocalizedText.badRequestApiError.localized
+            return MDLocalizedText.badRequestApiError.localized
         case .unauthorized:
-            return LocalizedText.unauthorizedApiError.localized
+            return MDLocalizedText.unauthorizedApiError.localized
         case .forbidden:
-            return LocalizedText.forbiddenApiError.localized
+            return MDLocalizedText.forbiddenApiError.localized
         case .notFound:
-            return LocalizedText.notFoundApiError.localized
+            return MDLocalizedText.notFoundApiError.localized
         case .methodNotAllowed:
-            return LocalizedText.methodNotAllowedApiError.localized
+            return MDLocalizedText.methodNotAllowedApiError.localized
         case .conflict:
-            return LocalizedText.conflictApiError.localized
+            return MDLocalizedText.conflictApiError.localized
         case .internalServerError:
-            return LocalizedText.internalServerErrorApiError.localized
+            return MDLocalizedText.internalServerErrorApiError.localized
         case .parseError:
-            return LocalizedText.parseErrorApiError.localized
+            return MDLocalizedText.parseErrorApiError.localized
         case .noInternetConnection:
-            return LocalizedText.noInternetConnection.localized
+            return MDLocalizedText.noInternetConnection.localized
         case .unknown:
-            return LocalizedText.unknownApiError.localized
+            return MDLocalizedText.unknownApiError.localized
         }
     }
     

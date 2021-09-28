@@ -12,7 +12,6 @@ struct JWTApiRequest {
     let nickname: String
     let password: String
     let userId: Int64
-    let oldJWT: String
     
 }
 
@@ -23,15 +22,13 @@ extension JWTApiRequest: Encodable {
         case nickname = "nickname"
         case password = "password"
         case userId = "user_id"
-        case oldJWT = "old_jwt"
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(nickname, forKey: .nickname)
         try container.encode(password, forKey: .password)
-        try container.encode(userId, forKey: .userId)
-        try container.encode(oldJWT, forKey: .oldJWT)
+        try container.encode(userId, forKey: .userId)        
     }
     
 }

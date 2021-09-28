@@ -12,6 +12,7 @@ target 'MyDictionary_App_Swift' do
 	pod 'ReachabilitySwift'
 	pod 'MBProgressHUD'
 	pod 'MGSwipeTableCell'
+	pod 'KMPlaceholderTextView'
 
 
   target 'MyDictionary_App_SwiftTests' do

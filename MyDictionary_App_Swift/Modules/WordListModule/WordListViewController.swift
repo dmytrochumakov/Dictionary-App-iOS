@@ -36,7 +36,7 @@ final class WordListViewController: MDBaseLargeTitledBackNavigationBarViewContro
     
     init(presenter: WordListPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(title: LocalizedText.words.localized,
+        super.init(title: MDLocalizedText.words.localized,
                    navigationBarBackgroundImage: MDUIResources.Image.background_navigation_bar_1.image)
     }
     
@@ -77,7 +77,7 @@ extension WordListViewController: WordListPresenterOutputProtocol {
     
     func showError(_ error: Error) {
         DispatchQueue.main.async {
-            UIAlertController.showAlertWithOkAction(title: LocalizedText.error.localized,
+            UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
                                                     message: error.localizedDescription,
                                                     presenter: self)
         }
@@ -89,9 +89,17 @@ extension WordListViewController: WordListPresenterOutputProtocol {
         }
     }
     
-    func deleteRow(at indexPath: IndexPath) {
+    func deleteRow(atIndexPath indexPath: IndexPath) {
         DispatchQueue.main.async {
             self.tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    func insertRow(atIndexPath indexPath: IndexPath) {
+        DispatchQueue.main.async {
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: [indexPath], with: .fade)
+            self.tableView.endUpdates()
         }
     }
     

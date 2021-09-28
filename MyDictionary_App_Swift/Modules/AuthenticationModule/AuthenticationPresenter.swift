@@ -16,10 +16,10 @@ protocol AuthenticationPresenterInputProtocol {
 
 protocol AuthenticationPresenterOutputProtocol: AnyObject,
                                                 MDShowHideUpdateProgressHUD,
-                                                MDHideKeyboardProtocol {
+                                                MDHideKeyboardProtocol,
+                                                MDShowErrorProtocol {
     
-    func makePasswordFieldActive()
-    func showValidationError(_ error: Error)
+    func makePasswordFieldActive()    
     
 }
 
@@ -70,8 +70,8 @@ extension AuthenticationPresenter {
         router.showRegistration()
     }
     
-    func showValidationError(_ error: Error) {
-        presenterOutput?.showValidationError(error)
+    func showError(_ error: Error) {
+        presenterOutput?.showError(error)
     }
     
     func showProgressHUD() {

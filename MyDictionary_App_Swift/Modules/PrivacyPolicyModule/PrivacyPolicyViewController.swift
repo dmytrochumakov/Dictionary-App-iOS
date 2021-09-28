@@ -10,7 +10,7 @@ final class PrivacyPolicyViewController: MDBaseTitledBackNavigationBarWebViewCon
     
     init() {        
         super.init(url: MDConstants.StaticURL.privacyPolicyURL,
-                   title: LocalizedText.privacyPolicy.localized,
+                   title: MDLocalizedText.privacyPolicy.localized,
                    navigationBarBackgroundImage: MDUIResources.Image.background_navigation_bar_2.image)
     }
     

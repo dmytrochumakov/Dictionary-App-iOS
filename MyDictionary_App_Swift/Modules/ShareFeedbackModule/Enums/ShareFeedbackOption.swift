@@ -18,9 +18,9 @@ extension ShareFeedbackOption: CustomStringConvertible {
         
         switch self {
         case .featureRequest:
-            return LocalizedText.featureRequest.localized
+            return MDLocalizedText.featureRequest.localized
         case .bugReport:
-            return LocalizedText.bugReport.localized
+            return MDLocalizedText.bugReport.localized
         }
         
     }

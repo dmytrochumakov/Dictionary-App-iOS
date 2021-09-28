@@ -20,7 +20,8 @@ protocol RegistrationInteractorInputProtocol {
 
 protocol RegistrationInteractorOutputProtocol: AnyObject,
                                                MDShowHideUpdateProgressHUD,
-                                               MDHideKeyboardProtocol {
+                                               MDHideKeyboardProtocol,
+                                               MDShowErrorProtocol {
     
     func makePasswordFieldActive()
     func makeConfirmPasswordFieldActive()
@@ -30,8 +31,7 @@ protocol RegistrationInteractorOutputProtocol: AnyObject,
     func updateConfirmPasswordFieldCounter(_ count: Int)
     
     func nicknameTextFieldShouldClearAction()
-        
-    func showValidationError(_ error: Error)
+            
     func showCourseList()
     
 }
@@ -199,7 +199,7 @@ fileprivate extension RegistrationInteractor {
                     // Hide Progress HUD
                     self?.interactorOutput?.hideProgressHUD()
                     //
-                    self?.interactorOutput?.showValidationError(error)
+                    self?.interactorOutput?.showError(error)
                     //
                     break
                     
@@ -207,7 +207,7 @@ fileprivate extension RegistrationInteractor {
                 
             }
         } else {
-            interactorOutput?.showValidationError(registerValidation.validationErrors.first!)
+            interactorOutput?.showError(registerValidation.validationErrors.first!)
         }
         
     }

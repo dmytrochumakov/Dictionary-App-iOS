@@ -9,7 +9,6 @@ import Foundation
 
 struct CreateWordRequest {
     let userId: Int64
-    let wordId: Int64
     let courseId: Int64
     let languageId: Int64
     let wordText: String
@@ -22,7 +21,6 @@ extension CreateWordRequest: Encodable {
     
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
-        case wordId = "word_id"
         case courseId = "course_id"
         case languageId = "language_id"
         case wordText = "word_text"
@@ -32,8 +30,7 @@ extension CreateWordRequest: Encodable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(userId, forKey: .userId)
-        try container.encode(wordId, forKey: .wordId)
+        try container.encode(userId, forKey: .userId)        
         try container.encode(courseId, forKey: .courseId)
         try container.encode(languageId, forKey: .languageId)
         try container.encode(wordText, forKey: .wordText)
