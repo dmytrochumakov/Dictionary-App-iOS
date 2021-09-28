@@ -155,6 +155,7 @@ fileprivate extension AddWordViewController {
     }
     
     func addWordTextField() {
+        wordTextField.addTarget(self, action: #selector(wordTextFieldDidChange), for: .editingChanged)
         wordTextField.delegate = presenter.textFieldDelegate
         view.addSubview(wordTextField)
     }
@@ -345,6 +346,10 @@ fileprivate extension AddWordViewController {
     
     @objc func addButtonAction() {
         presenter.addButtonClicked()
+    }
+    
+    @objc func wordTextFieldDidChange(_ sender: UITextField) {
+        presenter.wordTextFieldDidChange(sender.text)
     }
     
 }

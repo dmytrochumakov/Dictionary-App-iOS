@@ -9,6 +9,8 @@ import UIKit
 protocol AddWordPresenterInputProtocol: MDTextFieldDelegatePropertyProtocol,
                                         MDTextViewDelegatePropertyProtocol {
     func addButtonClicked()
+    func wordTextFieldDidChange(_ text: String?)
+    
 }
 
 protocol AddWordPresenterOutputProtocol: AnyObject {
@@ -73,6 +75,10 @@ extension AddWordPresenter: AddWordPresenterInputProtocol {
     
     func addButtonClicked() {
         interactor.addButtonClicked()
+    }
+    
+    func wordTextFieldDidChange(_ text: String?) {
+        interactor.wordTextFieldDidChange(text)
     }
     
     var textFieldDelegate: UITextFieldDelegate {

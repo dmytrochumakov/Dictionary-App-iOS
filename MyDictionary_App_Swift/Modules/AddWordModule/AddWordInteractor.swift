@@ -10,6 +10,7 @@ protocol AddWordInteractorInputProtocol {
     var textFieldDelegate: MDAddWordTextFieldDelegateProtocol { get }
     var textViewDelegate: MDAddWordTextViewDelegateProtocol { get }
     func addButtonClicked()
+    func wordTextFieldDidChange(_ text: String?)
 }
 
 protocol AddWordInteractorOutputProtocol: AnyObject {
@@ -65,6 +66,10 @@ extension AddWordInteractor: AddWordInteractorInputProtocol {
     
     func addButtonClicked() {
         debugPrint(#function, Self.self)
+    }
+    
+    func wordTextFieldDidChange(_ text: String?) {
+        dataManager.setWordText(text)
     }
     
 }
