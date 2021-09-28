@@ -75,13 +75,11 @@ struct Constants_For_Tests {
         case .development:
             return .init(nickname: authRequest.nickname,
                          password: authRequest.password,
-                         userId: 6,
-                         oldJWT: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxLGEsYSIsImlzcyI6ImNvbS5kY2hwcm9qZWN0cy5teWRpY3Rpb25hcnlyZXN0YXBpIiwiaWF0IjoxNjMxNzkwNTI5LCJleHAiOjE2MzE3OTQxMjl9.GyX4FznJMKL2rnXmfE8xwzVSJ_pZ_tkR3eb-pB67D7_Vzu8zaXPxO9UIIOjNGHGpFo8_KzsoTdeYQCYQjRxB8g")
+                         userId: 6)
         case .production:
             return .init(nickname: authRequest.nickname,
                          password: authRequest.password,
-                         userId: 1,
-                         oldJWT: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxLGEsYSIsImlzcyI6ImNvbS5kY2hwcm9qZWN0cy5teWRpY3Rpb25hcnlyZXN0YXBpIiwiaWF0IjoxNjMxNzkwNTI5LCJleHAiOjE2MzE3OTQxMjl9.GyX4FznJMKL2rnXmfE8xwzVSJ_pZ_tkR3eb-pB67D7_Vzu8zaXPxO9UIIOjNGHGpFo8_KzsoTdeYQCYQjRxB8g")
+                         userId: 1)
         }
         
     }
