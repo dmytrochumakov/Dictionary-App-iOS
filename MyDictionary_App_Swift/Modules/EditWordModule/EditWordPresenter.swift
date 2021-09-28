@@ -7,7 +7,7 @@
 import UIKit
 
 protocol EditWordPresenterInputProtocol {
-    
+    var getWordText: String { get }
 }
 
 protocol EditWordPresenterOutputProtocol: AnyObject {
@@ -46,5 +46,9 @@ extension EditWordPresenter: EditWordInteractorOutputProtocol {
 
 // MARK: - EditWordPresenterInputProtocol
 extension EditWordPresenter: EditWordPresenterInputProtocol {
+    
+    var getWordText: String {
+        return interactor.getWordText
+    }
     
 }

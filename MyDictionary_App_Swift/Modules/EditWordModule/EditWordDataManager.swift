@@ -7,7 +7,8 @@
 import Foundation
 
 protocol EditWordDataManagerInputProtocol {
-    
+    var getWord: WordResponse { get }
+    var getWordText: String { get }
 }
 
 protocol EditWordDataManagerOutputProtocol: AnyObject {
@@ -35,5 +36,13 @@ final class EditWordDataManager: EditWordDataManagerProtocol {
 
 // MARK: - EditWordDataManagerInputProtocol
 extension EditWordDataManager: EditWordDataManagerInputProtocol {
+
+    var getWord: WordResponse {
+        return dataProvider.word
+    }
+
+    var getWordText: String {
+        return getWord.wordText
+    }
     
 }

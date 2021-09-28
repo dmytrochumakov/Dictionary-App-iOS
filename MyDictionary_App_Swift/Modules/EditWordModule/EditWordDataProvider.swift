@@ -7,9 +7,15 @@
 import Foundation
 
 protocol EditWordDataProviderProtocol {
-    
+    var word: WordResponse { get set }
 }
 
 final class EditWordDataProvider: EditWordDataProviderProtocol {
+    
+    var word: WordResponse
+    
+    init(word: WordResponse) {
+        self.word = word
+    }
     
 }

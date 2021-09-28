@@ -23,7 +23,7 @@ final class EditWordModule {
 extension EditWordModule {
     
     var module: UIViewController {
-        let dataProvider: EditWordDataProviderProtocol = EditWordDataProvider.init()
+        let dataProvider: EditWordDataProviderProtocol = EditWordDataProvider.init(word: sender)
         var dataManager: EditWordDataManagerProtocol = EditWordDataManager.init(dataProvider: dataProvider)
         
         let interactor: EditWordInteractorProtocol = EditWordInteractor.init(dataManager: dataManager)

@@ -6,13 +6,14 @@
 
 import UIKit
 
-final class EditWordViewController: UIViewController {
-
+final class EditWordViewController: MDBaseTitledBackNavigationBarViewController {
+    
     fileprivate let presenter: EditWordPresenterInputProtocol
-
+    
     init(presenter: EditWordPresenterInputProtocol) {
         self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
+        super.init(title: presenter.getWordText,
+                   navigationBarBackgroundImage: MDUIResources.Image.background_navigation_bar_1.image)
     }
     
     deinit {
@@ -37,10 +38,10 @@ final class EditWordViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
     }
-
+    
 }
 
 // MARK: - EditWordPresenterOutputProtocol
 extension EditWordViewController: EditWordPresenterOutputProtocol {
-       
+    
 }
