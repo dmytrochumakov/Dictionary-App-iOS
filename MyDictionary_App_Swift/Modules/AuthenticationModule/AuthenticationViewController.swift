@@ -121,7 +121,7 @@ extension AuthenticationViewController: AuthenticationPresenterOutputProtocol {
         MDConstants.Keyboard.hideKeyboard(rootView: self.view)
     }
     
-    func showValidationError(_ error: Error) {
+    func showError(_ error: Error) {
         UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
                                                 message: error.localizedDescription,
                                                 presenter: self)

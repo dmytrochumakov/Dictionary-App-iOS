@@ -20,12 +20,12 @@ protocol CourseListPresenterInputProtocol: MDTableViewDelegatePropertyProtocol,
 protocol CourseListPresenterOutputProtocol: AnyObject,
                                             MDShowHideProgressHUD,
                                             MDHideKeyboardProtocol,
-                                            MDReloadDataProtocol {
-    
-    func showError(_ error: Error)    
+                                            MDReloadDataProtocol,
+                                            MDInsertRowProtocol,
+                                            MDDeleteRowProtocol,
+                                            MDShowErrorProtocol {
+            
     func deleteCourseButtonClicked(_ cell: MDCourseListCell)
-    func deleteRow(atIndexPath indexPath: IndexPath)
-    func insertRow(atIndexPath indexPath: IndexPath)
     
 }
 

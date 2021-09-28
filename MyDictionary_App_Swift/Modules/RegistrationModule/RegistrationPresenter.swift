@@ -20,7 +20,8 @@ protocol RegistrationPresenterInputProtocol {
 
 protocol RegistrationPresenterOutputProtocol: AnyObject,
                                               MDShowHideUpdateProgressHUD,
-                                              MDHideKeyboardProtocol {
+                                              MDHideKeyboardProtocol,
+                                              MDShowErrorProtocol {
     
     func updateNicknameFieldCounter(_ count: Int)
     func updatePasswordFieldCounter(_ count: Int)
@@ -30,8 +31,6 @@ protocol RegistrationPresenterOutputProtocol: AnyObject,
     
     func makePasswordFieldActive()
     func makeConfirmPasswordFieldActive()
-    
-    func showValidationError(_ error: Error)        
     
 }
 
@@ -94,8 +93,8 @@ extension RegistrationPresenter {
         presenterOutput?.hideKeyboard()
     }
     
-    func showValidationError(_ error: Error) {
-        presenterOutput?.showValidationError(error)
+    func showError(_ error: Error) {
+        presenterOutput?.showError(error)
     }
     
     func showCourseList() {

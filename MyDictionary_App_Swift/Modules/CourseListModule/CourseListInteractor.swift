@@ -19,12 +19,12 @@ protocol CourseListInteractorInputProtocol: MDViewDidLoadProtocol {
 protocol CourseListInteractorOutputProtocol: AnyObject,
                                              MDShowHideProgressHUD,
                                              MDHideKeyboardProtocol,
-                                             MDReloadDataProtocol {
-    
-    func showError(_ error: Error)
-    func deleteCourseButtonClicked(_ cell: MDCourseListCell)
-    func deleteRow(atIndexPath indexPath: IndexPath)
-    func insertRow(atIndexPath indexPath: IndexPath)
+                                             MDReloadDataProtocol,
+                                             MDInsertRowProtocol,
+                                             MDDeleteRowProtocol,
+                                             MDShowErrorProtocol {
+        
+    func deleteCourseButtonClicked(_ cell: MDCourseListCell)    
     func showWordList(withCourse course: CourseResponse)
     
 }
