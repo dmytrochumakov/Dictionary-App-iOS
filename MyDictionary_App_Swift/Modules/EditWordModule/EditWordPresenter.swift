@@ -6,8 +6,9 @@
 
 import UIKit
 
-protocol EditWordPresenterInputProtocol {
+protocol EditWordPresenterInputProtocol: MDViewDidLoadProtocol {
     var getWordText: String { get }
+    func editWordButtonClicked()
 }
 
 protocol EditWordPresenterOutputProtocol: AnyObject {
@@ -49,6 +50,14 @@ extension EditWordPresenter: EditWordPresenterInputProtocol {
     
     var getWordText: String {
         return interactor.getWordText
+    }
+    
+    func editWordButtonClicked() {
+        interactor.editWordButtonClicked()
+    }
+    
+    func viewDidLoad() {
+        interactor.viewDidLoad()
     }
     
 }

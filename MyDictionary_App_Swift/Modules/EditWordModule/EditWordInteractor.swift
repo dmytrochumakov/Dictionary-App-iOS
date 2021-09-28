@@ -6,8 +6,9 @@
 
 import UIKit
 
-protocol EditWordInteractorInputProtocol {
+protocol EditWordInteractorInputProtocol: MDViewDidLoadProtocol {
     var getWordText: String { get }
+    func editWordButtonClicked()
 }
 
 protocol EditWordInteractorOutputProtocol: AnyObject {
@@ -20,7 +21,7 @@ protocol EditWordInteractorProtocol: EditWordInteractorInputProtocol,
 }
 
 final class EditWordInteractor: EditWordInteractorProtocol {
-
+    
     fileprivate let dataManager: EditWordDataManagerInputProtocol
     internal weak var interactorOutput: EditWordInteractorOutputProtocol?
     
@@ -44,6 +45,14 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
     
     var getWordText: String {
         return dataManager.getWordText
+    }
+    
+    func editWordButtonClicked() {
+        debugPrint(#function, Self.self)
+    }
+    
+    func viewDidLoad() {
+        debugPrint(#function, Self.self)
     }
     
 }
