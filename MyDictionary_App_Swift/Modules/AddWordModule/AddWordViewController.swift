@@ -10,18 +10,6 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
     
     fileprivate let presenter: AddWordPresenterInputProtocol
     
-    fileprivate let scrollView: UIScrollView = {
-        let scrollView: UIScrollView = .init()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        return scrollView
-    }()
-    
-    fileprivate let contentView: UIView = {
-        let view: UIView = .init()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     fileprivate var keyboardHandler: KeyboardHandler!
     
     fileprivate static let wordTextFieldHeight: CGFloat = 48
@@ -56,6 +44,9 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
         textView.font = MDUIResources.Font.MyriadProItalic.font()
         textView.textColor = MDUIResources.Color.md_3C3C3C.color()
         textView.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
+        textView.isEditable = true
+        textView.isScrollEnabled = true
+        textView.isUserInteractionEnabled = true
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
@@ -137,8 +128,10 @@ extension AddWordViewController: AddWordPresenterOutputProtocol {
     }
     
     func updateWordTextViewCounter(_ count: Int) {
+        //
         updateWordDescriptionCounterLabel(currentCount: count,
                                           maxCount: MDConstants.Text.MaxCountCharacters.wordDescriptionTextView)
+        //
     }
     
 }
@@ -147,8 +140,6 @@ extension AddWordViewController: AddWordPresenterOutputProtocol {
 fileprivate extension AddWordViewController {
     
     func addViews() {
-        addScrollView()
-        addContentView()
         bringSubviewsToFront()
         addWordTextField()
         addWordDescriptionTextView()
@@ -163,35 +154,24 @@ fileprivate extension AddWordViewController {
         view.bringSubviewToFront(titleLabel)
     }
     
-    func addScrollView() {
-        view.addSubview(scrollView)
-    }
-    
-    func addContentView() {
-        scrollView.addSubview(contentView)
-    }
-    
-    func createKeyboardHandler() {
-        self.keyboardHandler = KeyboardHandler.createKeyboardHandler(scrollView: self.wordDescriptionTextView)
-    }
-    
     func addWordTextField() {
         wordTextField.delegate = presenter.textFieldDelegate
-        contentView.addSubview(wordTextField)
+        view.addSubview(wordTextField)
     }
     
     func addWordDescriptionTextView() {
         wordDescriptionTextView.delegate = presenter.textViewDelegate
-        contentView.addSubview(wordDescriptionTextView)
+        view.addSubview(wordDescriptionTextView)
+        view.sendSubviewToBack(wordDescriptionTextView)
     }
     
     func addWordDescriptionCounterLabel() {
-        contentView.addSubview(wordDescriptionCounterLabel)
+        view.addSubview(wordDescriptionCounterLabel)
     }
     
     func addAddButton() {
         addButton.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
-        contentView.addSubview(addButton)
+        view.addSubview(addButton)
     }
     
 }
@@ -200,51 +180,26 @@ fileprivate extension AddWordViewController {
 fileprivate extension AddWordViewController {
     
     func addConstraints() {
-        addScrollViewConstraints()
-        addContentViewConstraints()
         addWordTextFieldConstraints()
         addWordDescriptionTextViewConstraints()
         addWordDescriptionCounterLabelConstraints()
         addAddButtonConstraints()
     }
     
-    func addScrollViewConstraints() {
-        
-        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.scrollView,
-                                                         toItem: self.view)
-        
-    }
-    
-    func addContentViewConstraints() {
-        
-        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.contentView,
-                                                         toItem: self.scrollView)
-        
-        NSLayoutConstraint.addEqualCenterXConstraint(item: self.contentView,
-                                                     toItem: self.scrollView,
-                                                     constant: .zero)
-        
-        NSLayoutConstraint.addEqualCenterYConstraint(item: self.contentView,
-                                                     toItem: self.scrollView,
-                                                     constant: .zero)
-        
-    }
-    
     func addWordTextFieldConstraints() {
         
         NSLayoutConstraint.addEqualConstraint(item: self.wordTextField,
                                               attribute: .top,
-                                              toItem: self.contentView,
-                                              attribute: .top,
-                                              constant: MDConstants.NavigationBar.height(fromNavigationController: self.navigationController,
-                                                                                         prefersLargeTitles: false) +  Self.wordTextFieldTopOffset)
+                                              toItem: self.navigationBarView,
+                                              attribute: .bottom,
+                                              constant: Self.wordTextFieldTopOffset)
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.wordTextField,
-                                                  toItem: self.contentView,
+                                                  toItem: self.view,
                                                   constant: Self.wordTextFieldLeftOffset)
         
         NSLayoutConstraint.addEqualRightConstraint(item: self.wordTextField,
-                                                   toItem: self.contentView,
+                                                   toItem: self.view,
                                                    constant: -Self.wordTextFieldRightOffset)
         
         NSLayoutConstraint.addEqualHeightConstraint(item: self.wordTextField,
@@ -261,14 +216,14 @@ fileprivate extension AddWordViewController {
                                               constant: Self.wordDescriptionTextViewTopOffset)
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.wordDescriptionTextView,
-                                                  toItem: self.contentView,
+                                                  toItem: self.view,
                                                   constant: Self.wordDescriptionTextViewLeftOffset)
         
         NSLayoutConstraint.addEqualRightConstraint(item: self.wordDescriptionTextView,
-                                                   toItem: self.contentView,
+                                                   toItem: self.view,
                                                    constant: -Self.wordDescriptionTextViewRightOffset)
         
-        NSLayoutConstraint.addEqualHeightConstraint(item: self.wordDescriptionTextView,                                                    
+        NSLayoutConstraint.addEqualHeightConstraint(item: self.wordDescriptionTextView,
                                                     constant: Self.wordDescriptionTextViewHeightOffset)
         
     }
@@ -294,11 +249,11 @@ fileprivate extension AddWordViewController {
     func addAddButtonConstraints() {
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.addButton,
-                                                  toItem: self.contentView,
+                                                  toItem: self.view,
                                                   constant: Self.addButtonLeftOffset)
         
         NSLayoutConstraint.addEqualRightConstraint(item: self.addButton,
-                                                   toItem: self.contentView,
+                                                   toItem: self.view,
                                                    constant: -Self.addButtonRightOffset)
         
         NSLayoutConstraint.addEqualConstraint(item: self.addButton,
@@ -325,6 +280,10 @@ fileprivate extension AddWordViewController {
     func configureWordDescriptionCounterLabel() {
         updateWordDescriptionCounterLabel(currentCount: .zero,
                                           maxCount: MDConstants.Text.MaxCountCharacters.wordDescriptionTextView)
+    }
+    
+    func createKeyboardHandler() {
+        self.keyboardHandler = KeyboardHandler.createKeyboardHandler(scrollView: self.wordDescriptionTextView)
     }
     
 }
