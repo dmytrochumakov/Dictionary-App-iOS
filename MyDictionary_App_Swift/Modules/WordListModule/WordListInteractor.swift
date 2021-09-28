@@ -23,6 +23,7 @@ protocol WordListInteractorOutputProtocol: AnyObject,
                                            MDInsertRowProtocol  {
     
     func showAddWord(withCourse course: CourseResponse)
+    func showEditWord(withWord word: WordResponse)
     
 }
 
@@ -116,6 +117,8 @@ fileprivate extension WordListInteractor {
         //
         bridge_DidAddWord_Subscribe()
         //
+        tableViewDelegate_DidSelectWord_Subscribe()
+        //
     }
     
     func searchBarCancelButtonAction_Subscribe() {
@@ -198,6 +201,16 @@ fileprivate extension WordListInteractor {
         bridge.didAddWord = { [unowned self] (word) in
             //
             interactorOutput?.insertRow(atIndexPath: dataManager.addWord(word))
+            //
+        }
+        
+    }
+    
+    func tableViewDelegate_DidSelectWord_Subscribe() {
+        
+        tableViewDelegate.didSelectWord = { [weak self] (word) in
+            //
+            self?.interactorOutput?.showEditWord(withWord: word)
             //
         }
         

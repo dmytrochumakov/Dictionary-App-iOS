@@ -56,7 +56,7 @@ final class WordListPresenter: NSObject,
 }
 
 // MARK: - WordListInteractorOutputProtocol
-extension WordListPresenter {
+extension WordListPresenter: WordListInteractorOutputProtocol {
     
     func hideKeyboard() {
         presenterOutput?.hideKeyboard()
@@ -88,6 +88,10 @@ extension WordListPresenter {
     
     func showAddWord(withCourse course: CourseResponse) {
         router.showAddWord(withCourse: course)
+    }
+    
+    func showEditWord(withWord word: WordResponse) {
+        router.showEditWord(withWord: word)
     }
     
 }

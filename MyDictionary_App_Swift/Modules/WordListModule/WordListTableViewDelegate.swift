@@ -8,13 +8,15 @@
 import UIKit
 
 protocol WordListTableViewDelegateProtocol: UITableViewDelegate {
-    
+    var didSelectWord: ((WordResponse) -> Void)? { get set }
 }
 
 final class WordListTableViewDelegate: NSObject,
                                        WordListTableViewDelegateProtocol {
     
     fileprivate let dataProvider: WordListDataProviderProcotol
+    
+    var didSelectWord: ((WordResponse) -> Void)?
     
     init(dataProvider: WordListDataProviderProcotol) {
         self.dataProvider = dataProvider
@@ -23,6 +25,10 @@ final class WordListTableViewDelegate: NSObject,
 }
 
 extension WordListTableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        didSelectWord?(dataProvider.wordListCellModel(atIndexPath: indexPath)!.wordResponse)
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return MDWordListCell.height
