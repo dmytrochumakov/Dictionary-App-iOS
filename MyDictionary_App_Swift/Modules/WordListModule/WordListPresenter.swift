@@ -82,8 +82,8 @@ extension WordListPresenter {
         presenterOutput?.hideProgressHUD()
     }
     
-    func showAddWord() {
-        router.showAddWord()
+    func showAddWord(withCourse course: CourseResponse) {
+        router.showAddWord(withCourse: course)
     }
     
 }

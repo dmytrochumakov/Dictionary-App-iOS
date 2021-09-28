@@ -14,7 +14,8 @@ protocol AddWordInteractorInputProtocol {
 }
 
 protocol AddWordInteractorOutputProtocol: AnyObject,
-                                          MDShowErrorProtocol {
+                                          MDShowErrorProtocol,
+                                          MDShowHideProgressHUD {
     
     func makeWordDescriptionTextViewActive()
     
@@ -33,6 +34,9 @@ final class AddWordInteractor: NSObject,
                                AddWordInteractorProtocol {
     
     fileprivate let dataManager: AddWordDataManagerInputProtocol
+    fileprivate let wordManager: MDWordManagerProtocol
+    fileprivate let bridge: MDBridgeProtocol
+    
     var textFieldDelegate: MDAddWordTextFieldDelegateProtocol
     var textViewDelegate: MDAddWordTextViewDelegateProtocol
     
@@ -40,11 +44,15 @@ final class AddWordInteractor: NSObject,
     
     init(dataManager: AddWordDataManagerInputProtocol,
          textFieldDelegate: MDAddWordTextFieldDelegateProtocol,
-         textViewDelegate: MDAddWordTextViewDelegateProtocol) {
+         textViewDelegate: MDAddWordTextViewDelegateProtocol,
+         wordManager: MDWordManagerProtocol,
+         bridge: MDBridgeProtocol) {
         
         self.dataManager = dataManager
         self.textFieldDelegate = textFieldDelegate
         self.textViewDelegate = textViewDelegate
+        self.wordManager = wordManager
+        self.bridge = bridge
         
         super.init()
         subscribe()
@@ -66,7 +74,7 @@ extension AddWordInteractor: AddWordDataManagerOutputProtocol {
 extension AddWordInteractor: AddWordInteractorInputProtocol {
     
     func addButtonClicked() {
-
+        
         if (MDConstants.Text.textIsEmpty(dataManager.getWordText)) {
             interactorOutput?.showError(MDAddWordError.wordTextIsEmpty)
             return
@@ -77,7 +85,40 @@ extension AddWordInteractor: AddWordInteractorInputProtocol {
             return
         }
         
-        
+        // Show Progress HUD
+        interactorOutput?.showProgressHUD()
+        //
+        wordManager.addWord(courseId: dataManager.getCourse.courseId,
+                            languageId: dataManager.getCourse.languageId,
+                            wordText: dataManager.getWordText!,
+                            wordDescription: dataManager.getWordDescription!,
+                            languageName: dataManager.getCourse.languageName) { [unowned self] (result) in
+            
+            switch result {
+                
+            case .success(let wordResponse):
+                
+                // Hide Progress HUD
+                interactorOutput?.hideProgressHUD()
+                //
+                bridge.didAddWord?(wordResponse)
+                //
+                break
+                //
+                
+            case .failure(let error):
+                
+                // Hide Progress HUD
+                interactorOutput?.hideProgressHUD()
+                //
+                interactorOutput?.showError(error)
+                //
+                break
+                //
+                
+            }
+            
+        }
         
     }
     

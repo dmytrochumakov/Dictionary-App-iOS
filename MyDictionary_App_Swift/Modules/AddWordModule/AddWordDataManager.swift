@@ -11,6 +11,7 @@ protocol AddWordDataManagerInputProtocol {
     func setWordText(_ newValue: String?)
     var getWordDescription: String? { get }
     func setWordDescription(_ newValue: String?)
+    var getCourse: CourseResponse { get }
 }
 
 protocol AddWordDataManagerOutputProtocol: AnyObject {
@@ -53,6 +54,10 @@ extension AddWordDataManager: AddWordDataManagerInputProtocol {
     
     func setWordDescription(_ newValue: String?) {
         dataProvider.wordDescription = newValue
+    }
+    
+    var getCourse: CourseResponse {
+        return dataProvider.course
     }
     
 }

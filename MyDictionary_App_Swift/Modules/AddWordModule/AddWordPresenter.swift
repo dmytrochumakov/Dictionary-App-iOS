@@ -14,7 +14,8 @@ protocol AddWordPresenterInputProtocol: MDTextFieldDelegatePropertyProtocol,
 }
 
 protocol AddWordPresenterOutputProtocol: AnyObject,
-                                         MDShowErrorProtocol {
+                                         MDShowErrorProtocol,                                         
+                                         MDShowHideProgressHUD {
     
     func makeWordDescriptionTextViewActive()
 
@@ -71,6 +72,14 @@ extension AddWordPresenter: AddWordInteractorOutputProtocol {
     
     func showError(_ error: Error) {
         presenterOutput?.showError(error)
+    }
+    
+    func showProgressHUD() {
+        presenterOutput?.showProgressHUD()
+    }
+    
+    func hideProgressHUD() {
+        presenterOutput?.hideProgressHUD()
     }
     
 }
