@@ -7,9 +7,13 @@
 import Foundation
 
 protocol AddWordDataProviderProtocol {
-    
+    var wordText: String? { get set }
+    var wordDescription: String? { get set }
 }
 
 final class AddWordDataProvider: AddWordDataProviderProtocol {
+    
+    var wordText: String?
+    var wordDescription: String?
     
 }

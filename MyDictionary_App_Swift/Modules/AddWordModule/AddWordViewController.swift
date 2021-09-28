@@ -47,7 +47,7 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
     fileprivate static let wordDescriptionTextViewTopOffset: CGFloat = 16
     fileprivate static let wordDescriptionTextViewLeftOffset: CGFloat = 16
     fileprivate static let wordDescriptionTextViewRightOffset: CGFloat = 16
-    fileprivate static let wordDescriptionTextViewHeightOffset: CGFloat = 128
+    fileprivate static let wordDescriptionTextViewHeightOffset: CGFloat = 290
     fileprivate let wordDescriptionTextView: MDTextViewWithToolBar = {
         let textView: MDTextViewWithToolBar = .init(keyboardToolbar: .init())
         textView.placeholder = MDLocalizedText.wordDescription.localized
@@ -135,6 +135,11 @@ extension AddWordViewController: AddWordPresenterOutputProtocol {
         wordTextField.updateCounter(currentCount: .zero,
                                     maxCount: MDConstants.Text.MaxCountCharacters.wordTextField)
     }
+            
+    func updateWordTextViewCounter(_ count: Int) {
+        updateWordDescriptionCounterLabel(currentCount: count,
+                                          maxCount: MDConstants.Text.MaxCountCharacters.wordDescriptionTextView)
+    }
     
 }
 
@@ -176,6 +181,7 @@ fileprivate extension AddWordViewController {
     }
     
     func addWordDescriptionTextView() {
+        wordDescriptionTextView.delegate = presenter.textViewDelegate
         contentView.addSubview(wordDescriptionTextView)
     }
     

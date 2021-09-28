@@ -8,6 +8,7 @@ import UIKit
 
 protocol AddWordInteractorInputProtocol {
     var textFieldDelegate: MDAddWordTextFieldDelegateProtocol { get }
+    var textViewDelegate: MDAddWordTextViewDelegateProtocol { get }
     func addButtonClicked()
 }
 
@@ -16,6 +17,7 @@ protocol AddWordInteractorOutputProtocol: AnyObject {
     func makeWordDescriptionTextViewActive()
     
     func updateWordTextFieldCounter(_ count: Int)
+    func updateWordTextViewCounter(_ count: Int)
     func wordTextFieldShouldClearAction()
     
 }
@@ -30,14 +32,17 @@ final class AddWordInteractor: NSObject,
     
     fileprivate let dataManager: AddWordDataManagerInputProtocol
     var textFieldDelegate: MDAddWordTextFieldDelegateProtocol
+    var textViewDelegate: MDAddWordTextViewDelegateProtocol
     
     internal weak var interactorOutput: AddWordInteractorOutputProtocol?
     
     init(dataManager: AddWordDataManagerInputProtocol,
-         textFieldDelegate: MDAddWordTextFieldDelegateProtocol) {
+         textFieldDelegate: MDAddWordTextFieldDelegateProtocol,
+         textViewDelegate: MDAddWordTextViewDelegateProtocol) {
         
         self.dataManager = dataManager
         self.textFieldDelegate = textFieldDelegate
+        self.textViewDelegate = textViewDelegate
         
         super.init()
         subscribe()
@@ -69,15 +74,19 @@ fileprivate extension AddWordInteractor {
     
     func subscribe() {
         //
-        textFieldShouldReturnAction_Subscribe()
+        wordTextField_ShouldReturnAction_Subscribe()
         //
-        textFieldUpdateWordTextFieldCounterAction_Subscribe()
+        update_WordTextField_CounterAction_Subscribe()
         //
-        wordTextFieldShouldClearAction_Subscribe()
+        wordTextField_ShouldClearAction_Subscribe()
+        //
+        wordDescriptionTextView_DidChangeAction_Subscribe()
+        //
+        update_WordDescriptionTextView_CounterAction_Subscribe()
         //
     }
     
-    func textFieldShouldReturnAction_Subscribe() {
+    func wordTextField_ShouldReturnAction_Subscribe() {
         
         textFieldDelegate.wordTextFieldShouldReturnAction = { [weak self] in
             self?.interactorOutput?.makeWordDescriptionTextViewActive()
@@ -85,7 +94,7 @@ fileprivate extension AddWordInteractor {
         
     }
     
-    func textFieldUpdateWordTextFieldCounterAction_Subscribe() {
+    func update_WordTextField_CounterAction_Subscribe() {
         
         textFieldDelegate.updateWordTextFieldCounterAction = { [weak self] (count) in
             self?.interactorOutput?.updateWordTextFieldCounter(count)
@@ -93,10 +102,30 @@ fileprivate extension AddWordInteractor {
         
     }
     
-    func wordTextFieldShouldClearAction_Subscribe() {
+    func wordTextField_ShouldClearAction_Subscribe() {
         
         textFieldDelegate.wordTextFieldShouldClearAction = { [weak self] in
             self?.interactorOutput?.wordTextFieldShouldClearAction()
+        }
+        
+    }
+    
+    func wordDescriptionTextView_DidChangeAction_Subscribe() {
+        
+        textViewDelegate.wordDescriptionTextViewDidChangeAction = { [weak self] (text) in
+            //
+            self?.dataManager.setWordDescription(text)
+            //
+        }
+        
+    }
+    
+    func update_WordDescriptionTextView_CounterAction_Subscribe() {
+        
+        textViewDelegate.updateWordDescriptionTextViewCounterAction = { [weak self] (count) in
+            //
+            self?.interactorOutput?.updateWordTextViewCounter(count)
+            //
         }
         
     }

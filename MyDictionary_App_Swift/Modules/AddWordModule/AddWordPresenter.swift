@@ -6,7 +6,8 @@
 
 import UIKit
 
-protocol AddWordPresenterInputProtocol: MDTextFieldDelegatePropertyProtocol {
+protocol AddWordPresenterInputProtocol: MDTextFieldDelegatePropertyProtocol,
+                                        MDTextViewDelegatePropertyProtocol {
     func addButtonClicked()
 }
 
@@ -14,6 +15,7 @@ protocol AddWordPresenterOutputProtocol: AnyObject {
     
     func makeWordDescriptionTextViewActive()
 
+    func updateWordTextViewCounter(_ count: Int)
     func updateWordTextFieldCounter(_ count: Int)
     func wordTextFieldShouldClearAction()
     
@@ -52,6 +54,10 @@ extension AddWordPresenter: AddWordInteractorOutputProtocol {
         presenterOutput?.makeWordDescriptionTextViewActive()
     }
 
+    func updateWordTextViewCounter(_ count: Int) {
+        presenterOutput?.updateWordTextViewCounter(count)
+    }
+    
     func updateWordTextFieldCounter(_ count: Int) {
         presenterOutput?.updateWordTextFieldCounter(count)
     }
@@ -71,6 +77,10 @@ extension AddWordPresenter: AddWordPresenterInputProtocol {
     
     var textFieldDelegate: UITextFieldDelegate {
         return interactor.textFieldDelegate
+    }
+    
+    var textViewDelegate: UITextViewDelegate {
+        return interactor.textViewDelegate
     }
     
 }

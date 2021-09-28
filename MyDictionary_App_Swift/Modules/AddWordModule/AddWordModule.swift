@@ -28,7 +28,8 @@ extension AddWordModule {
         var dataManager: AddWordDataManagerProtocol = AddWordDataManager.init(dataProvider: dataProvider)
         
         let interactor: AddWordInteractorProtocol = AddWordInteractor.init(dataManager: dataManager,
-                                                                           textFieldDelegate: MDAddWordTextFieldDelegate.init())
+                                                                           textFieldDelegate: MDAddWordTextFieldDelegate.init(),
+                                                                           textViewDelegate: MDAddWordTextViewDelegate.init())
         var router: AddWordRouterProtocol = AddWordRouter.init()
         let presenter: AddWordPresenterProtocol = AddWordPresenter.init(interactor: interactor, router: router)
         let vc = AddWordViewController.init(presenter: presenter)

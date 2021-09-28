@@ -200,7 +200,7 @@ struct MDConstants {
         struct MaxCountCharacters {
             static let nicknameTextField: Int = 255
             static let passwordTextField: Int = 255
-            static let wordTextField: Int = 500
+            static let wordTextField: Int = 255
             static let wordDescriptionTextView: Int = 500
         }
         

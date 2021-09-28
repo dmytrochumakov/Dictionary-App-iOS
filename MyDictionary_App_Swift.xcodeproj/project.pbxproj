@@ -275,6 +275,8 @@
 		22B8E6EA26D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6E926D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift */; };
 		22B8E6EC26D3C9B7001CCCA8 /* MDReadCourseMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6EB26D3C9B7001CCCA8 /* MDReadCourseMemoryStorageOperation.swift */; };
 		22B9080926EB7DD6003848D6 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9080826EB7DD6003848D6 /* UIView+Extension.swift */; };
+		22BA7D592702FBE100068F7E /* MDAddWordTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA7D582702FBE100068F7E /* MDAddWordTextViewDelegate.swift */; };
+		22BA7D5B2702FDBC00068F7E /* MDTextViewDelegatePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA7D5A2702FDBC00068F7E /* MDTextViewDelegatePropertyProtocol.swift */; };
 		22BBA15B26E0B366002955A6 /* MDSyncError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BBA15A26E0B366002955A6 /* MDSyncError.swift */; };
 		22BBA15D26E0C0F0002955A6 /* MDProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BBA15C26E0C0F0002955A6 /* MDProgress.swift */; };
 		22BBA15F26E0DFC9002955A6 /* MDFillMemoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BBA15E26E0DFC9002955A6 /* MDFillMemoryService.swift */; };
@@ -660,6 +662,8 @@
 		22B8E6E926D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateCourseMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		22B8E6EB26D3C9B7001CCCA8 /* MDReadCourseMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadCourseMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		22B9080826EB7DD6003848D6 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		22BA7D582702FBE100068F7E /* MDAddWordTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAddWordTextViewDelegate.swift; sourceTree = "<group>"; };
+		22BA7D5A2702FDBC00068F7E /* MDTextViewDelegatePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDTextViewDelegatePropertyProtocol.swift; sourceTree = "<group>"; };
 		22BBA15A26E0B366002955A6 /* MDSyncError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncError.swift; sourceTree = "<group>"; };
 		22BBA15C26E0C0F0002955A6 /* MDProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDProgress.swift; sourceTree = "<group>"; };
 		22BBA15E26E0DFC9002955A6 /* MDFillMemoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDFillMemoryService.swift; sourceTree = "<group>"; };
@@ -1081,6 +1085,7 @@
 				22A2988B26FCB2F700E79843 /* MDHideKeyboardProtocol.swift */,
 				229707C92700605300722EFF /* MDViewDidLoadProtocol.swift */,
 				222F52762701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift */,
+				22BA7D5A2702FDBC00068F7E /* MDTextViewDelegatePropertyProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1169,6 +1174,7 @@
 			isa = PBXGroup;
 			children = (
 				222F52742701E1100070F546 /* MDAddWordTextFieldDelegate.swift */,
+				22BA7D582702FBE100068F7E /* MDAddWordTextViewDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -2548,6 +2554,7 @@
 				228964AC26F8AA2100E23292 /* MDHideProgressHUDProtocol.swift in Sources */,
 				227B91E426EF62F80086B9AA /* RegisterTextFieldDelegate.swift in Sources */,
 				220793D126C6B2D9003D434B /* AuthRequest.swift in Sources */,
+				22BA7D5B2702FDBC00068F7E /* MDTextViewDelegatePropertyProtocol.swift in Sources */,
 				2291BAF326F7265E0012504D /* MDSearchTextField.swift in Sources */,
 				22557FD326C95D5A00A4FF31 /* MDReadJWTMemoryStorageOperation.swift in Sources */,
 				227B91D726EF5F250086B9AA /* RegisterValidation.swift in Sources */,
@@ -2704,6 +2711,7 @@
 				229572B826FF1E900092817B /* MDAddCourseError.swift in Sources */,
 				22C5864026C7AFB80030B12D /* RegistrationDataManager.swift in Sources */,
 				2277FE1426F9DB2300001710 /* MDBaseTitledNavigationBarViewController.swift in Sources */,
+				22BA7D592702FBE100068F7E /* MDAddWordTextViewDelegate.swift in Sources */,
 				22493C41269726A4000DA480 /* CDWordResponseEntityAttributeName.swift in Sources */,
 				220793C126C66F2A003D434B /* AuthValidationLogic.swift in Sources */,
 				2289CEED2678CC34007254C3 /* MDWordStorage.swift in Sources */,

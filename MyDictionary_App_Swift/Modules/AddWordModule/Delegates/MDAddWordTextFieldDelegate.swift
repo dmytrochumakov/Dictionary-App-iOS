@@ -42,7 +42,7 @@ extension MDAddWordTextFieldDelegate {
         let result = MDConstants.Text.Counter.result(text: textField.text,
                                                      rangeLength: range.length,
                                                      string: string,
-                                                     maxCountCharacters: MDConstants.Text.MaxCountCharacters.nicknameTextField)
+                                                     maxCountCharacters: MDConstants.Text.MaxCountCharacters.wordTextField)
         
         if (result.success) {
             updateWordTextFieldCounterAction?(result.count)
