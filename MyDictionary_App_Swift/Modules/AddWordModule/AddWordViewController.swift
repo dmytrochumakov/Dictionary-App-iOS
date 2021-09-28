@@ -134,6 +134,16 @@ extension AddWordViewController: AddWordPresenterOutputProtocol {
         //
     }
     
+    func showError(_ error: Error) {
+        
+        DispatchQueue.main.async {
+            UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
+                                                    message: error.localizedDescription,
+                                                    presenter: self)
+        }
+        
+    }
+    
 }
 
 // MARK: - Add Views

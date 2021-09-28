@@ -13,7 +13,8 @@ protocol AddWordInteractorInputProtocol {
     func wordTextFieldDidChange(_ text: String?)
 }
 
-protocol AddWordInteractorOutputProtocol: AnyObject {
+protocol AddWordInteractorOutputProtocol: AnyObject,
+                                          MDShowErrorProtocol {
     
     func makeWordDescriptionTextViewActive()
     
@@ -65,7 +66,19 @@ extension AddWordInteractor: AddWordDataManagerOutputProtocol {
 extension AddWordInteractor: AddWordInteractorInputProtocol {
     
     func addButtonClicked() {
-        debugPrint(#function, Self.self)
+
+        if (MDConstants.Text.textIsEmpty(dataManager.getWordText)) {
+            interactorOutput?.showError(MDAddWordError.wordTextIsEmpty)
+            return
+        }
+        
+        if (MDConstants.Text.textIsEmpty(dataManager.getWordDescription)) {
+            interactorOutput?.showError(MDAddWordError.wordDescriptionIsEmpty)
+            return
+        }
+        
+        
+        
     }
     
     func wordTextFieldDidChange(_ text: String?) {

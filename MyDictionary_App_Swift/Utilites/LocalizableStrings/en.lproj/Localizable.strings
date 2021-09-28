@@ -46,6 +46,8 @@
 "word_text" = "Word text";
 "word_description" = "Word description";
 "update" = "Update";
+"word_text_is_empty" = "Word text is empty";
+"word_description_is_empty" = "Word description is empty";
 
 // Api Errors //
 "no_data_api_error" = "No Data";

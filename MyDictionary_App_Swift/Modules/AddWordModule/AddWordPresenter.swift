@@ -13,7 +13,8 @@ protocol AddWordPresenterInputProtocol: MDTextFieldDelegatePropertyProtocol,
     
 }
 
-protocol AddWordPresenterOutputProtocol: AnyObject {
+protocol AddWordPresenterOutputProtocol: AnyObject,
+                                         MDShowErrorProtocol {
     
     func makeWordDescriptionTextViewActive()
 
@@ -66,6 +67,10 @@ extension AddWordPresenter: AddWordInteractorOutputProtocol {
     
     func wordTextFieldShouldClearAction() {
         presenterOutput?.wordTextFieldShouldClearAction()
+    }
+    
+    func showError(_ error: Error) {
+        presenterOutput?.showError(error)
     }
     
 }
