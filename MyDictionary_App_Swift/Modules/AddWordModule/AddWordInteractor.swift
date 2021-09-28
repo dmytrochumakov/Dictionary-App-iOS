@@ -23,6 +23,8 @@ protocol AddWordInteractorOutputProtocol: AnyObject,
     func updateWordTextViewCounter(_ count: Int)
     func wordTextFieldShouldClearAction()
     
+    func closeModule()
+    
 }
 
 protocol AddWordInteractorProtocol: AddWordInteractorInputProtocol,
@@ -102,6 +104,8 @@ extension AddWordInteractor: AddWordInteractorInputProtocol {
                 interactorOutput?.hideProgressHUD()
                 //
                 bridge.didAddWord?(wordResponse)
+                //
+                interactorOutput?.closeModule()
                 //
                 break
                 //

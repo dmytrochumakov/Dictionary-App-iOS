@@ -8,6 +8,7 @@ import UIKit
 
 protocol AddWordRouterProtocol {
     var presenter: UIViewController? { get set }
+    func closeModule()
 }
 
 final class AddWordRouter: AddWordRouterProtocol {
@@ -16,6 +17,14 @@ final class AddWordRouter: AddWordRouterProtocol {
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension AddWordRouter {
+    
+    func closeModule() {
+        presenter?.navigationController?.popViewController(animated: true)
     }
     
 }

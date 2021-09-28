@@ -82,6 +82,10 @@ extension AddWordPresenter: AddWordInteractorOutputProtocol {
         presenterOutput?.hideProgressHUD()
     }
     
+    func closeModule() {
+        router.closeModule()
+    }
+    
 }
 
 // MARK: - AddWordPresenterInputProtocol
