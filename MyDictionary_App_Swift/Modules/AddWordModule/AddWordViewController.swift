@@ -73,9 +73,9 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
     }()
     
     fileprivate static let addButtonHeight: CGFloat = 48
+    fileprivate static let addButtonTopOffset: CGFloat = 16
     fileprivate static let addButtonLeftOffset: CGFloat = 16
     fileprivate static let addButtonRightOffset: CGFloat = 16
-    fileprivate static let addButtonBottomOffset: CGFloat = 24
     fileprivate let addButton: UIButton = {
         let button: UIButton = .init()
         button.backgroundColor = MDUIResources.Color.md_4400D4.color()
@@ -135,7 +135,7 @@ extension AddWordViewController: AddWordPresenterOutputProtocol {
         wordTextField.updateCounter(currentCount: .zero,
                                     maxCount: MDConstants.Text.MaxCountCharacters.wordTextField)
     }
-            
+    
     func updateWordTextViewCounter(_ count: Int) {
         updateWordDescriptionCounterLabel(currentCount: count,
                                           maxCount: MDConstants.Text.MaxCountCharacters.wordDescriptionTextView)
@@ -301,9 +301,11 @@ fileprivate extension AddWordViewController {
                                                    toItem: self.contentView,
                                                    constant: -Self.addButtonRightOffset)
         
-        NSLayoutConstraint.addEqualBottomConstraint(item: self.addButton,
-                                                    toItem: self.contentView,
-                                                    constant: -Self.addButtonBottomOffset)
+        NSLayoutConstraint.addEqualConstraint(item: self.addButton,
+                                              attribute: .top,
+                                              toItem: self.wordDescriptionTextView,
+                                              attribute: .bottom,
+                                              constant: Self.addButtonTopOffset)
         
         NSLayoutConstraint.addEqualHeightConstraint(item: self.addButton,
                                                     constant: Self.addButtonHeight)
