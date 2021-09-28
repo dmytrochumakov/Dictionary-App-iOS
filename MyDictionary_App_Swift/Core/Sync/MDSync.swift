@@ -255,8 +255,7 @@ fileprivate extension MDSync {
         
         apiJWT.accessToken(jwtApiRequest: .init(nickname: item.nickname,
                                                 password: item.password,
-                                                userId: item.userId,
-                                                oldJWT: item.accessToken)) { [unowned self] jwtResult in
+                                                userId: item.userId)) { [unowned self] jwtResult in
             
             switch jwtResult {
                 

@@ -9,6 +9,13 @@ import Foundation
 
 protocol MDWordManagerProtocol {
     
+    func addWord(courseId: Int64,
+                 languageId: Int64,
+                 wordText: String,
+                 wordDescription: String,
+                 languageName: String,
+                 _ completionHandler: @escaping(MDOperationResultWithCompletion<WordResponse>))
+    
     func deleteWordFromApiAndAllStorage(byUserId userId: Int64,
                                         byCourseId courseId: Int64,
                                         byWordId wordId: Int64,
@@ -34,6 +41,100 @@ final class MDWordManager: MDWordManagerProtocol {
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension MDWordManager {
+    
+    func addWord(courseId: Int64,
+                 languageId: Int64,
+                 wordText: String,
+                 wordDescription: String,
+                 languageName: String,
+                 _ completionHandler: @escaping (MDOperationResultWithCompletion<WordResponse>)) {
+        
+        var resultCount: Int = .zero
+        
+        jwtManager.fetchUserAndJWT { [unowned self] fetchUserAndJWTResult in
+            
+            switch fetchUserAndJWTResult {
+                
+            case .success(let userAndJWT):
+                
+                apiWord.createWord(accessToken: userAndJWT.jwt.accessToken,
+                                   createWordRequest: .init(userId: userAndJWT.user.userId,
+                                                            courseId: courseId,
+                                                            languageId: languageId,
+                                                            wordText: wordText,
+                                                            wordDescription: wordDescription,
+                                                            languageName: languageName)) { [unowned self] createApiWordResult in
+                    
+                    switch createApiWordResult {
+                        
+                    case .success(let wordResponse):
+                        
+                        wordStorage.createWord(wordResponse,
+                                               storageType: .all) { createStorageWordResults in
+                            
+                            createStorageWordResults.forEach { createStorageWordResult in
+                                
+                                switch createStorageWordResult.result {
+                                    
+                                case .success:
+                                    
+                                    //
+                                    resultCount += 1
+                                    //
+                                    
+                                    if (resultCount == createStorageWordResults.count) {
+                                        //
+                                        completionHandler(.success(wordResponse))
+                                        //
+                                        break
+                                        //
+                                    }
+                                    
+                                case .failure(let error):
+                                    
+                                    //
+                                    completionHandler(.failure(error))
+                                    //
+                                    break
+                                    //
+                                }
+                                
+                            }
+                            
+                        }
+                        break
+                        
+                    case .failure(let error):
+                        
+                        //
+                        completionHandler(.failure(error))
+                        //
+                        break
+                        //
+                        
+                    }
+                    
+                }
+                
+                break
+                
+            case .failure(let error):
+                
+                //
+                completionHandler(.failure(error))
+                //
+                break
+                //
+                
+            }
+            
+        }
+        
     }
     
 }
