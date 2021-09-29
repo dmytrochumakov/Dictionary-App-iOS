@@ -10,11 +10,9 @@ final class EditWordViewController: MDBaseTitledBackNavigationBarViewController 
     
     fileprivate let presenter: EditWordPresenterInputProtocol
     
-    fileprivate static let editWordButtonSize: CGSize = .init(width: 40, height: 40)
-    fileprivate static let editWordButtonRightOffset: CGFloat = 8
     fileprivate let editWordButton: UIButton = {
         let button: UIButton = .init()
-        button.setImage(MDUIResources.Image.edit.image, for: .normal)
+        button.setImage(MDEditWordViewControllerConfiguration.EditWordButton.image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -87,13 +85,13 @@ fileprivate extension EditWordViewController {
         
         NSLayoutConstraint.addEqualRightConstraint(item: self.editWordButton,
                                                    toItem: self.navigationBarView,
-                                                   constant: -Self.editWordButtonRightOffset)
+                                                   constant: -MDEditWordViewControllerConfiguration.EditWordButton.rightOffset)
         
         NSLayoutConstraint.addEqualHeightConstraint(item: self.editWordButton,
-                                                    constant: Self.editWordButtonSize.height)
+                                                    constant: MDEditWordViewControllerConfiguration.EditWordButton.size.height)
         
         NSLayoutConstraint.addEqualWidthConstraint(item: self.editWordButton,
-                                                   constant: Self.editWordButtonSize.width)
+                                                   constant: MDEditWordViewControllerConfiguration.EditWordButton.size.width)
         
     }
     

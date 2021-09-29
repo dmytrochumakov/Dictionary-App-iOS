@@ -295,6 +295,7 @@
 		22BD99A0266A4AB10063FEFC /* WordListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999F266A4AB10063FEFC /* WordListModule.swift */; };
 		22BD99A5266A58DE0063FEFC /* RootWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD99A4266A58DE0063FEFC /* RootWindow.swift */; };
 		22BD99A8266A58F40063FEFC /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD99A7266A58F40063FEFC /* RootViewController.swift */; };
+		22C49869270440AF003276FF /* MDEditWordViewControllerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C49868270440AF003276FF /* MDEditWordViewControllerConfiguration.swift */; };
 		22C5862D26C79D360030B12D /* MDAPIStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5862C26C79D360030B12D /* MDAPIStatusCode.swift */; };
 		22C5863126C7A5690030B12D /* MDAPIAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5863026C7A5690030B12D /* MDAPIAuthError.swift */; };
 		22C5863A26C7AFB80030B12D /* RegistrationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5863326C7AFB80030B12D /* RegistrationModule.swift */; };
@@ -693,6 +694,7 @@
 		22BD999F266A4AB10063FEFC /* WordListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListModule.swift; sourceTree = "<group>"; };
 		22BD99A4266A58DE0063FEFC /* RootWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWindow.swift; sourceTree = "<group>"; };
 		22BD99A7266A58F40063FEFC /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		22C49868270440AF003276FF /* MDEditWordViewControllerConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEditWordViewControllerConfiguration.swift; sourceTree = "<group>"; };
 		22C5862C26C79D360030B12D /* MDAPIStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIStatusCode.swift; sourceTree = "<group>"; };
 		22C5863026C7A5690030B12D /* MDAPIAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIAuthError.swift; sourceTree = "<group>"; };
 		22C5863326C7AFB80030B12D /* RegistrationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModule.swift; sourceTree = "<group>"; };
@@ -1696,6 +1698,7 @@
 		228C596627033CEB00DE6175 /* EditWordModule */ = {
 			isa = PBXGroup;
 			children = (
+				22C4986727043F0A003276FF /* Configuration */,
 				228C596727033D0800DE6175 /* EditWordModule.swift */,
 				228C596827033D0800DE6175 /* EditWordPresenter.swift */,
 				228C596927033D0800DE6175 /* EditWordRouter.swift */,
@@ -2015,6 +2018,14 @@
 				22BD99A7266A58F40063FEFC /* RootViewController.swift */,
 			);
 			path = RootViewController;
+			sourceTree = "<group>";
+		};
+		22C4986727043F0A003276FF /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				22C49868270440AF003276FF /* MDEditWordViewControllerConfiguration.swift */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 		22C5863226C7AFAC0030B12D /* RegistrationModule */ = {
@@ -2795,6 +2806,7 @@
 				223EB28626F9FD030021D8E1 /* TermsOfServiceViewController.swift in Sources */,
 				22493C3B269724CB000DA480 /* CoreDataEntityName.swift in Sources */,
 				220FFEA226C9150100702CCE /* MDCreateUserMemoryStorageOperation.swift in Sources */,
+				22C49869270440AF003276FF /* MDEditWordViewControllerConfiguration.swift in Sources */,
 				22493C542697420F000DA480 /* MDReadWordCoreDataStorageOperation.swift in Sources */,
 				221D280F26C5064A004BC4F7 /* AuthenticationPresenter.swift in Sources */,
 				22B8E6AC26D38A4D001CCCA8 /* MDCreateLanguageProtocol.swift in Sources */,
