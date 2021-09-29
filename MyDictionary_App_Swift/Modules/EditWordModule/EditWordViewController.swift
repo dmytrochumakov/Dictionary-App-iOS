@@ -4,6 +4,7 @@
 //
 //  Created Dmytro Chumakov on 28.09.2021.
 
+import MBProgressHUD
 import UIKit
 
 final class EditWordViewController: MDBaseTitledBackNavigationBarViewController {
@@ -166,6 +167,26 @@ extension EditWordViewController: EditWordPresenterOutputProtocol {
             
         }, completion: nil)
         
+    }
+    
+    func showProgressHUD() {
+        DispatchQueue.main.async {
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+        }
+    }
+    
+    func hideProgressHUD() {
+        DispatchQueue.main.async {
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
+    }
+    
+    func showError(_ error: Error) {
+        DispatchQueue.main.async {
+            UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
+                                                    message: error.localizedDescription,
+                                                    presenter: self)
+        }
     }
     
 }

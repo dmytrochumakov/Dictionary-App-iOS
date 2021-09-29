@@ -14,7 +14,9 @@ protocol EditWordInteractorInputProtocol: MDViewDidLoadProtocol {
     func deleteButtonClicked()
 }
 
-protocol EditWordInteractorOutputProtocol: AnyObject {
+protocol EditWordInteractorOutputProtocol: AnyObject,
+                                           MDShowHideProgressHUD,
+                                           MDShowErrorProtocol {
     func updateVisibilityViews()
     func updateWordDescriptionTextViewTopConstraint()
 }
@@ -62,7 +64,7 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
         interactorOutput?.updateWordDescriptionTextViewTopConstraint()
         //
         interactorOutput?.updateVisibilityViews()
-        //                
+        //
     }
     
     func viewDidLoad() {
