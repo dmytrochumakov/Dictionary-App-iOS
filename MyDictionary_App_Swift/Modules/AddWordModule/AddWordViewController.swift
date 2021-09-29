@@ -380,7 +380,7 @@ fileprivate extension AddWordViewController {
 fileprivate extension AddWordViewController {
     
     func updateWordDescriptionCounterLabel(currentCount: Int, maxCount: Int) {
-        wordDescriptionCounterLabel.text = String(currentCount) + MDConstants.StaticText.forwardSlash + String(maxCount)
+        wordDescriptionCounterLabel.text = MDConstants.Text.Counter.text(currentCount: currentCount, maxCount: maxCount)
     }
     
 }

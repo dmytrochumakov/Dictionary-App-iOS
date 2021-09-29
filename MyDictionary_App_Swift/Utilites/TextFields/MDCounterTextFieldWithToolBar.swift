@@ -45,7 +45,7 @@ final class MDCounterTextFieldWithToolBar: MDTextFieldWithToolBar {
 extension MDCounterTextFieldWithToolBar {
     
     func updateCounter(currentCount: Int, maxCount: Int) {
-        counterLabel.text = String(currentCount) + MDConstants.StaticText.forwardSlash + String(maxCount)
+        counterLabel.text = MDConstants.Text.Counter.text(currentCount: currentCount, maxCount: maxCount)
     }
     
 }

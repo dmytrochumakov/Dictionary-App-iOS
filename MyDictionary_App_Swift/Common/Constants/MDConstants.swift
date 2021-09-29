@@ -219,6 +219,10 @@ struct MDConstants {
                 
             }
             
+            static func text(currentCount: Int, maxCount: Int) -> String {
+                return String(currentCount) + MDConstants.StaticText.forwardSlash + String(maxCount)
+            }
+            
             fileprivate static func computeCount(text: String?,
                                                  rangeLength: Int,
                                                  string: String) -> Int {

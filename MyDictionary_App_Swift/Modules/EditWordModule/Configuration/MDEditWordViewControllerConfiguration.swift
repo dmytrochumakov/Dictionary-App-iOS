@@ -13,13 +13,15 @@ struct MDEditWordViewControllerConfiguration {
         
         static let rightOffset: CGFloat = 8
         static let size: CGSize = .init(width: 40, height: 40)
-        static let image: UIImage = MDUIResources.Image.edit.image        
+        static let image: UIImage = MDUIResources.Image.edit.image
         
     }
     
     struct WordTextField {
         
-        static let topOffset: CGFloat = 24
+        static func topOffset(fromNavigationController navigationController: UINavigationController?) -> CGFloat {
+            return MDConstants.NavigationBar.height(fromNavigationController: navigationController, prefersLargeTitles: false) + 24
+        }
         static let leftOffset: CGFloat = 16
         static let rightOffset: CGFloat = 16
         static let height: CGFloat = 48
@@ -28,11 +30,23 @@ struct MDEditWordViewControllerConfiguration {
     
     struct WordDescriptionTextView {
         
-        static let inactiveEditModeTopOffset: CGFloat = WordTextField.topOffset
-        static let activeEditModeTopOffset: CGFloat = WordTextField.topOffset + WordTextField.height + 16
+        static func inactiveEditModeTopOffset(fromNavigationController navigationController: UINavigationController?) -> CGFloat {
+            return WordTextField.topOffset(fromNavigationController: navigationController) + WordTextField.height + 16
+        }
+        static func activeEditModeTopOffset(fromNavigationController navigationController: UINavigationController?) -> CGFloat {
+            return WordTextField.topOffset(fromNavigationController: navigationController)
+        }
         static let leftOffset: CGFloat = 16
         static let rightOffset: CGFloat = 16
         static let height: CGFloat = 290
+        
+    }
+    
+    struct WordDescriptionCounterLabel {
+        
+        static let topOffset: CGFloat = 4
+        static let leftOffset: CGFloat = .zero
+        static let rightOffset: CGFloat = 4
         
     }
     
