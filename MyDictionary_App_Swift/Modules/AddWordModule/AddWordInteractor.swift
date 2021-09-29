@@ -15,15 +15,14 @@ protocol AddWordInteractorInputProtocol {
 
 protocol AddWordInteractorOutputProtocol: AnyObject,
                                           MDShowErrorProtocol,
-                                          MDShowHideProgressHUD {
+                                          MDShowHideProgressHUD,
+                                          MDCloseModuleProtocol {
     
     func makeWordDescriptionTextViewActive()
     
     func updateWordTextFieldCounter(_ count: Int)
     func updateWordTextViewCounter(_ count: Int)
-    func wordTextFieldShouldClearAction()
-    
-    func closeModule()
+    func wordTextFieldShouldClearAction()        
     
 }
 

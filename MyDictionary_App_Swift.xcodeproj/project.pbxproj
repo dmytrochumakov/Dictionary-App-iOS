@@ -296,6 +296,7 @@
 		22BD99A5266A58DE0063FEFC /* RootWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD99A4266A58DE0063FEFC /* RootWindow.swift */; };
 		22BD99A8266A58F40063FEFC /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD99A7266A58F40063FEFC /* RootViewController.swift */; };
 		22C49869270440AF003276FF /* MDEditWordViewControllerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C49868270440AF003276FF /* MDEditWordViewControllerConfiguration.swift */; };
+		22C4986B27048823003276FF /* MDCloseModuleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4986A27048822003276FF /* MDCloseModuleProtocol.swift */; };
 		22C5862D26C79D360030B12D /* MDAPIStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5862C26C79D360030B12D /* MDAPIStatusCode.swift */; };
 		22C5863126C7A5690030B12D /* MDAPIAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5863026C7A5690030B12D /* MDAPIAuthError.swift */; };
 		22C5863A26C7AFB80030B12D /* RegistrationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5863326C7AFB80030B12D /* RegistrationModule.swift */; };
@@ -695,6 +696,7 @@
 		22BD99A4266A58DE0063FEFC /* RootWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWindow.swift; sourceTree = "<group>"; };
 		22BD99A7266A58F40063FEFC /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		22C49868270440AF003276FF /* MDEditWordViewControllerConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEditWordViewControllerConfiguration.swift; sourceTree = "<group>"; };
+		22C4986A27048822003276FF /* MDCloseModuleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCloseModuleProtocol.swift; sourceTree = "<group>"; };
 		22C5862C26C79D360030B12D /* MDAPIStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIStatusCode.swift; sourceTree = "<group>"; };
 		22C5863026C7A5690030B12D /* MDAPIAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIAuthError.swift; sourceTree = "<group>"; };
 		22C5863326C7AFB80030B12D /* RegistrationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModule.swift; sourceTree = "<group>"; };
@@ -1113,6 +1115,7 @@
 				22BA7D6E270318CA00068F7E /* MDInsertRowProtocol.swift */,
 				22BA7D702703191400068F7E /* MDDeleteRowProtocol.swift */,
 				22BA7D722703192300068F7E /* MDUpdateRowProtocol.swift */,
+				22C4986A27048822003276FF /* MDCloseModuleProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2708,6 +2711,7 @@
 				22BD99A5266A58DE0063FEFC /* RootWindow.swift in Sources */,
 				22EF01F8269DA89E00FE4435 /* MDEnvironmentProtocol.swift in Sources */,
 				2289CEF62678CC34007254C3 /* MDDeleteWordProtocol.swift in Sources */,
+				22C4986B27048823003276FF /* MDCloseModuleProtocol.swift in Sources */,
 				220FFE7E26C9072600702CCE /* MDUserMemoryStorage.swift in Sources */,
 				2289CEE22678CC34007254C3 /* MDDeleteWordMemoryStorageOperation.swift in Sources */,
 				22DB2F7B26C3BE7900C1AADA /* CourseListInteractor.swift in Sources */,

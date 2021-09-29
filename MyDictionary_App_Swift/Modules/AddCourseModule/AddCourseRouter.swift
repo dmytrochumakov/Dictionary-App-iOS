@@ -6,9 +6,8 @@
 
 import UIKit
 
-protocol AddCourseRouterProtocol {
-    var presenter: UIViewController? { get set }
-    func closeModule()
+protocol AddCourseRouterProtocol: MDCloseModuleProtocol {
+    var presenter: UIViewController? { get set }    
 }
 
 final class AddCourseRouter: AddCourseRouterProtocol {

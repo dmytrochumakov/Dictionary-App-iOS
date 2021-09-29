@@ -6,9 +6,8 @@
 
 import UIKit
 
-protocol AddWordRouterProtocol {
-    var presenter: UIViewController? { get set }
-    func closeModule()
+protocol AddWordRouterProtocol: MDCloseModuleProtocol {
+    var presenter: UIViewController? { get set }    
 }
 
 final class AddWordRouter: AddWordRouterProtocol {
