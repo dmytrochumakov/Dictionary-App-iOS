@@ -17,4 +17,41 @@ struct MDEditWordViewControllerConfiguration {
         
     }
     
+    struct WordTextField {
+        
+        static let topOffset: CGFloat = 24
+        static let leftOffset: CGFloat = 16
+        static let rightOffset: CGFloat = 16
+        static let height: CGFloat = 48
+        
+    }
+    
+    struct WordDescriptionTextView {
+        
+        static let inactiveEditModeTopOffset: CGFloat = WordTextField.topOffset
+        static let activeEditModeTopOffset: CGFloat = WordTextField.topOffset + WordTextField.height + 16
+        static let leftOffset: CGFloat = 16
+        static let rightOffset: CGFloat = 16
+        static let height: CGFloat = 290
+        
+    }
+    
+    struct UpdateButton {
+        
+        static let topOffset: CGFloat = 16
+        static let leftOffset: CGFloat = 16
+        static let rightOffset: CGFloat = 16
+        static let height: CGFloat = 48
+        
+    }
+    
+    struct DeleteButton {
+        
+        static let topOffset: CGFloat = 16
+        static let leftOffset: CGFloat = 16
+        static let rightOffset: CGFloat = 16
+        static let height: CGFloat = 48
+        
+    }
+    
 }
