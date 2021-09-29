@@ -9,6 +9,8 @@ import UIKit
 protocol EditWordInteractorInputProtocol: MDViewDidLoadProtocol {
     var getWordText: String { get }
     func editWordButtonClicked()
+    func updateButtonClicked()
+    func deleteButtonClicked()
 }
 
 protocol EditWordInteractorOutputProtocol: AnyObject {
@@ -52,6 +54,14 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
     }
     
     func viewDidLoad() {
+        debugPrint(#function, Self.self)
+    }
+    
+    func updateButtonClicked() {
+        debugPrint(#function, Self.self)
+    }
+    
+    func deleteButtonClicked() {
         debugPrint(#function, Self.self)
     }
     

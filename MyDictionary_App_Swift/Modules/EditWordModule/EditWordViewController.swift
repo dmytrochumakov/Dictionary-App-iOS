@@ -182,12 +182,12 @@ fileprivate extension EditWordViewController {
     }
     
     func addUpdateButton() {
-        //        updateButton.addTarget(self, action: #selector(updateButtonAction), for: .touchUpInside)
+        updateButton.addTarget(self, action: #selector(updateButtonAction), for: .touchUpInside)
         contentView.addSubview(updateButton)
     }
     
     func addDeleteButton() {
-        //        deleteButton.addTarget(self, action: #selector(deleteButtonAction), for: .touchUpInside)
+        deleteButton.addTarget(self, action: #selector(deleteButtonAction), for: .touchUpInside)
         contentView.addSubview(deleteButton)
     }
     
@@ -439,6 +439,14 @@ fileprivate extension EditWordViewController {
     
     @objc func editWordButtonAction() {
         presenter.editWordButtonClicked()
+    }
+    
+    @objc func updateButtonAction() {
+        presenter.updateButtonClicked()
+    }
+    
+    @objc func deleteButtonAction() {        
+        presenter.deleteButtonClicked()
     }
     
 }
