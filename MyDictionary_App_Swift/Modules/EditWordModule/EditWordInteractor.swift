@@ -8,13 +8,15 @@ import UIKit
 
 protocol EditWordInteractorInputProtocol: MDViewDidLoadProtocol {
     var getWordText: String { get }
+    var editButtonIsSelected: Bool { get }
     func editWordButtonClicked()
     func updateButtonClicked()
     func deleteButtonClicked()
 }
 
 protocol EditWordInteractorOutputProtocol: AnyObject {
-    
+    func updateVisibilityViews()
+    func updateWordDescriptionTextViewTopConstraint()
 }
 
 protocol EditWordInteractorProtocol: EditWordInteractorInputProtocol,
@@ -49,12 +51,24 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
         return dataManager.getWordText
     }
     
+    var editButtonIsSelected: Bool {
+        return dataManager.getEditButtonIsSelected
+    }
+    
     func editWordButtonClicked() {
-        debugPrint(#function, Self.self)
+        //
+        dataManager.setTrueSelectedEditButton()
+        //
+        interactorOutput?.updateWordDescriptionTextViewTopConstraint()
+        //
+        interactorOutput?.updateVisibilityViews()
+        //                
     }
     
     func viewDidLoad() {
-        debugPrint(#function, Self.self)
+        //
+        interactorOutput?.updateVisibilityViews()
+        //
     }
     
     func updateButtonClicked() {

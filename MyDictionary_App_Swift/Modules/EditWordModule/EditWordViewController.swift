@@ -47,6 +47,7 @@ final class EditWordViewController: MDBaseTitledBackNavigationBarViewController 
         return textField
     }()
     
+    fileprivate var wordDescriptionTextViewTopConstraint: NSLayoutConstraint!
     fileprivate let wordDescriptionTextView: MDTextViewWithToolBar = {
         let textView: MDTextViewWithToolBar = .init(keyboardToolbar: .init())
         textView.placeholder = MDLocalizedText.wordDescription.localized
@@ -127,6 +128,42 @@ final class EditWordViewController: MDBaseTitledBackNavigationBarViewController 
 
 // MARK: - EditWordPresenterOutputProtocol
 extension EditWordViewController: EditWordPresenterOutputProtocol {
+    
+    func updateVisibilityViews() {
+        
+        UIView.animate(withDuration: 0.25,
+                       delay: 0.0,
+                       options: [.curveEaseInOut],
+                       animations: {
+            
+            //
+            self.wordTextField.isHidden = MDEditWordViewControllerConfiguration.WordTextField.isHidden(editButtonIsSelected: self.presenter.editButtonIsSelected)
+            //
+            self.updateButton.isHidden = MDEditWordViewControllerConfiguration.UpdateButton.isHidden(editButtonIsSelected: self.presenter.editButtonIsSelected)
+            //
+            self.deleteButton.isHidden = MDEditWordViewControllerConfiguration.DeleteButton.isHidden(editButtonIsSelected: self.presenter.editButtonIsSelected)
+            //
+            self.editWordButton.isHidden = MDEditWordViewControllerConfiguration.EditWordButton.isHidden(editButtonIsSelected: self.presenter.editButtonIsSelected)
+            //
+            
+        }, completion: nil)
+        
+    }
+    
+    func updateWordDescriptionTextViewTopConstraint() {
+        
+        UIView.animate(withDuration: 0.25,
+                       delay: 0.0,
+                       options: [.curveEaseInOut],
+                       animations: {
+            
+            //
+            
+            //
+            
+        }, completion: nil)
+        
+    }
     
 }
 
@@ -270,11 +307,12 @@ fileprivate extension EditWordViewController {
     
     func addWordDescriptionTextViewConstraints() {
         
-        NSLayoutConstraint.addEqualConstraint(item: self.wordDescriptionTextView,
-                                              attribute: .top,
-                                              toItem: self.contentView,
-                                              attribute: .top,
-                                              constant: MDEditWordViewControllerConfiguration.WordDescriptionTextView.inactiveEditModeTopOffset(fromNavigationController: navigationController))
+        self.wordDescriptionTextViewTopConstraint = NSLayoutConstraint.addEqualConstraint(item: self.wordDescriptionTextView,
+                                                                                          attribute: .top,
+                                                                                          toItem: self.contentView,
+                                                                                          attribute: .top,
+                                                                                          constant: MDEditWordViewControllerConfiguration.WordDescriptionTextView.topOffset(editButtonIsSelected: presenter.editButtonIsSelected,
+                                                                                                                                                                            navigationController: navigationController))
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.wordDescriptionTextView,
                                                   toItem: self.contentView,
@@ -355,8 +393,11 @@ fileprivate extension EditWordViewController {
 fileprivate extension EditWordViewController {
     
     func configureUI() {
+        //
         configureWordDescriptionCounterLabel()
+        //
         createKeyboardHandler()
+        //
     }
     
     func configureWordDescriptionCounterLabel() {
@@ -445,7 +486,7 @@ fileprivate extension EditWordViewController {
         presenter.updateButtonClicked()
     }
     
-    @objc func deleteButtonAction() {        
+    @objc func deleteButtonAction() {
         presenter.deleteButtonClicked()
     }
     

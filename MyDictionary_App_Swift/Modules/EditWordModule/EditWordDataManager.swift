@@ -9,6 +9,8 @@ import Foundation
 protocol EditWordDataManagerInputProtocol {
     var getWord: WordResponse { get }
     var getWordText: String { get }
+    var getEditButtonIsSelected: Bool { get }
+    func setTrueSelectedEditButton()
 }
 
 protocol EditWordDataManagerOutputProtocol: AnyObject {
@@ -21,7 +23,7 @@ protocol EditWordDataManagerProtocol: EditWordDataManagerInputProtocol {
 
 final class EditWordDataManager: EditWordDataManagerProtocol {
     
-    fileprivate let dataProvider: EditWordDataProviderProtocol
+    fileprivate var dataProvider: EditWordDataProviderProtocol
     internal weak var dataManagerOutput: EditWordDataManagerOutputProtocol?
     
     init(dataProvider: EditWordDataProviderProtocol) {
@@ -43,6 +45,14 @@ extension EditWordDataManager: EditWordDataManagerInputProtocol {
 
     var getWordText: String {
         return getWord.wordText
+    }
+    
+    var getEditButtonIsSelected: Bool {
+        return dataProvider.editButtonIsSelected
+    }
+    
+    func setTrueSelectedEditButton() {
+        dataProvider.editButtonIsSelected = true
     }
     
 }

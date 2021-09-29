@@ -8,13 +8,15 @@ import UIKit
 
 protocol EditWordPresenterInputProtocol: MDViewDidLoadProtocol {
     var getWordText: String { get }
+    var editButtonIsSelected: Bool { get }
     func editWordButtonClicked()
     func updateButtonClicked()
     func deleteButtonClicked()
 }
 
 protocol EditWordPresenterOutputProtocol: AnyObject {
-    
+    func updateVisibilityViews()
+    func updateWordDescriptionTextViewTopConstraint()
 }
 
 protocol EditWordPresenterProtocol: EditWordPresenterInputProtocol,
@@ -45,6 +47,14 @@ final class EditWordPresenter: NSObject, EditWordPresenterProtocol {
 // MARK: - EditWordInteractorOutputProtocol
 extension EditWordPresenter: EditWordInteractorOutputProtocol {
     
+    func updateVisibilityViews() {
+        presenterOutput?.updateVisibilityViews()
+    }
+    
+    func updateWordDescriptionTextViewTopConstraint() {
+        presenterOutput?.updateWordDescriptionTextViewTopConstraint()
+    }
+    
 }
 
 // MARK: - EditWordPresenterInputProtocol
@@ -52,6 +62,10 @@ extension EditWordPresenter: EditWordPresenterInputProtocol {
     
     var getWordText: String {
         return interactor.getWordText
+    }
+    
+    var editButtonIsSelected: Bool {
+        return interactor.editButtonIsSelected
     }
     
     func editWordButtonClicked() {
