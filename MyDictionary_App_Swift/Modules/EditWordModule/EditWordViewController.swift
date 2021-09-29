@@ -109,6 +109,7 @@ final class EditWordViewController: MDBaseTitledBackNavigationBarViewController 
     override func loadView() {
         super.loadView()
         addViews()
+        addConstraints()
     }
     
     override func viewDidLoad() {
@@ -119,7 +120,6 @@ final class EditWordViewController: MDBaseTitledBackNavigationBarViewController 
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        addConstraints()
         roundOffEdges()
         dropShadow()
     }
@@ -152,13 +152,16 @@ extension EditWordViewController: EditWordPresenterOutputProtocol {
     
     func updateWordDescriptionTextViewTopConstraint() {
         
-        UIView.animate(withDuration: 0.25,
+        UIView.animate(withDuration: 0.05,
                        delay: 0.0,
                        options: [.curveEaseInOut],
                        animations: {
             
             //
-            
+            self.wordDescriptionTextViewTopConstraint.constant =  MDEditWordViewControllerConfiguration.WordDescriptionTextView.topOffset(editButtonIsSelected: self.presenter.editButtonIsSelected,
+                                                                                                                                          navigationController: self.navigationController)
+            //
+            self.view.layoutIfNeeded()
             //
             
         }, completion: nil)
