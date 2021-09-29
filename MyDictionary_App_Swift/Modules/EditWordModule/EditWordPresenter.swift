@@ -27,6 +27,9 @@ protocol EditWordPresenterOutputProtocol: AnyObject,
     func fillWordTextField(_ text: String)
     func fillWordDescriptionTextView(_ text: String)
     
+    func updateWordTextFieldCounter(_ count: Int)
+    func updateWordDescriptionTextViewCounter(_ count: Int)
+    
 }
 
 protocol EditWordPresenterProtocol: EditWordPresenterInputProtocol,
@@ -87,6 +90,14 @@ extension EditWordPresenter: EditWordInteractorOutputProtocol {
     
     func fillWordDescriptionTextView(_ text: String) {
         presenterOutput?.fillWordDescriptionTextView(text)
+    }
+    
+    func updateWordTextFieldCounter(_ count: Int) {
+        presenterOutput?.updateWordTextFieldCounter(count)
+    }
+    
+    func updateWordDescriptionTextViewCounter(_ count: Int) {
+        presenterOutput?.updateWordDescriptionTextViewCounter(count)
     }
     
 }

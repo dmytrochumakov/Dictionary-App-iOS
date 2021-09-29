@@ -197,6 +197,16 @@ extension EditWordViewController: EditWordPresenterOutputProtocol {
         self.wordDescriptionTextView.text = text
     }
     
+    func updateWordTextFieldCounter(_ count: Int) {
+        wordTextField.updateCounter(currentCount: count,
+                                    maxCount: MDConstants.Text.MaxCountCharacters.wordTextField)
+    }
+    
+    func updateWordDescriptionTextViewCounter(_ count: Int) {
+        updateWordDescriptionCounterLabel(currentCount: count,
+                                          maxCount: MDConstants.Text.MaxCountCharacters.wordDescriptionTextView)
+    }
+    
 }
 
 // MARK: - Add Views

@@ -28,6 +28,9 @@ protocol EditWordInteractorOutputProtocol: AnyObject,
     func fillWordTextField(_ text: String)
     func fillWordDescriptionTextView(_ text: String)
     
+    func updateWordTextFieldCounter(_ count: Int)
+    func updateWordDescriptionTextViewCounter(_ count: Int)
+    
 }
 
 protocol EditWordInteractorProtocol: EditWordInteractorInputProtocol,
@@ -67,17 +70,33 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
     }
     
     func editWordButtonClicked() {
+        
+        // Update editButtonIsSelected property
         //
         dataManager.setTrueSelectedEditButton()
+        //
+        
+        // Fill Fields
         //
         interactorOutput?.fillWordTextField(dataManager.getWordText)
         //
         interactorOutput?.fillWordDescriptionTextView(dataManager.getWordDescription)
         //
+        
+        // Update Counters
+        //
+        interactorOutput?.updateWordTextFieldCounter(dataManager.getWordText.count)
+        //
+        interactorOutput?.updateWordDescriptionTextViewCounter(dataManager.getWordDescription.count)
+        //
+        
+        // Update Top Constraint And isHidden in Views
+        //
         interactorOutput?.updateWordDescriptionTextViewTopConstraint()
         //
         interactorOutput?.updateVisibilityViews()
         //
+        
     }
     
     func viewDidLoad() {
@@ -90,7 +109,7 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
         debugPrint(#function, Self.self)
     }
     
-    func deleteButtonClicked() {        
+    func deleteButtonClicked() {
         debugPrint(#function, Self.self)
     }
     
