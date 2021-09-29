@@ -16,7 +16,8 @@ protocol EditWordInteractorInputProtocol: MDViewDidLoadProtocol {
 
 protocol EditWordInteractorOutputProtocol: AnyObject,
                                            MDShowHideProgressHUD,
-                                           MDShowErrorProtocol {
+                                           MDShowErrorProtocol,
+                                           MDCloseModuleProtocol {
     func updateVisibilityViews()
     func updateWordDescriptionTextViewTopConstraint()
 }

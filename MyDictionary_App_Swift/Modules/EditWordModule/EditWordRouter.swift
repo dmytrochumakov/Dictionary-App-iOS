@@ -6,7 +6,7 @@
 
 import UIKit
 
-protocol EditWordRouterProtocol {
+protocol EditWordRouterProtocol: MDCloseModuleProtocol {
     var presenter: UIViewController? { get set }
 }
 
@@ -16,6 +16,14 @@ final class EditWordRouter: EditWordRouterProtocol {
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension EditWordRouter {
+
+    func closeModule() {
+        presenter?.navigationController?.popViewController(animated: true)
     }
     
 }

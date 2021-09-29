@@ -69,6 +69,10 @@ extension EditWordPresenter: EditWordInteractorOutputProtocol {
         presenterOutput?.showError(error)
     }
     
+    func closeModule() {
+        router.closeModule()
+    }
+    
 }
 
 // MARK: - EditWordPresenterInputProtocol
