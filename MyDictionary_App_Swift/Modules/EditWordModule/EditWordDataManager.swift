@@ -7,8 +7,8 @@
 import Foundation
 
 protocol EditWordDataManagerInputProtocol {
-    var getWord: WordResponse { get }
     var getWordText: String { get }
+    var getWordDescription: String { get }
     var getEditButtonIsSelected: Bool { get }
     func setTrueSelectedEditButton()
 }
@@ -39,12 +39,12 @@ final class EditWordDataManager: EditWordDataManagerProtocol {
 // MARK: - EditWordDataManagerInputProtocol
 extension EditWordDataManager: EditWordDataManagerInputProtocol {
 
-    var getWord: WordResponse {
-        return dataProvider.word
-    }
-
     var getWordText: String {
-        return getWord.wordText
+        return dataProvider.word.wordText
+    }
+    
+    var getWordDescription: String {
+        return dataProvider.word.wordDescription
     }
     
     var getEditButtonIsSelected: Bool {

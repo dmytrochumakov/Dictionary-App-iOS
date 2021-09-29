@@ -7,18 +7,26 @@
 import UIKit
 
 protocol EditWordPresenterInputProtocol: MDViewDidLoadProtocol {
+    
     var getWordText: String { get }
     var editButtonIsSelected: Bool { get }
+    
     func editWordButtonClicked()
     func updateButtonClicked()
     func deleteButtonClicked()
+    
 }
 
 protocol EditWordPresenterOutputProtocol: AnyObject,
                                           MDShowErrorProtocol,
                                           MDShowHideProgressHUD {
+    
     func updateVisibilityViews()
     func updateWordDescriptionTextViewTopConstraint()
+    
+    func fillWordTextField(_ text: String)
+    func fillWordDescriptionTextView(_ text: String)
+    
 }
 
 protocol EditWordPresenterProtocol: EditWordPresenterInputProtocol,
@@ -71,6 +79,14 @@ extension EditWordPresenter: EditWordInteractorOutputProtocol {
     
     func closeModule() {
         router.closeModule()
+    }
+    
+    func fillWordTextField(_ text: String) {
+        presenterOutput?.fillWordTextField(text)
+    }
+    
+    func fillWordDescriptionTextView(_ text: String) {
+        presenterOutput?.fillWordDescriptionTextView(text)
     }
     
 }

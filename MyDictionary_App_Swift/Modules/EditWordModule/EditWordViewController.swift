@@ -189,6 +189,14 @@ extension EditWordViewController: EditWordPresenterOutputProtocol {
         }
     }
     
+    func fillWordTextField(_ text: String) {
+        self.wordTextField.text = text
+    }
+    
+    func fillWordDescriptionTextView(_ text: String) {
+        self.wordDescriptionTextView.text = text
+    }
+    
 }
 
 // MARK: - Add Views
