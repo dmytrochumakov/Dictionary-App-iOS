@@ -30,6 +30,8 @@ protocol EditWordPresenterOutputProtocol: AnyObject,
     func updateWordTextFieldCounter(_ count: Int)
     func updateWordDescriptionTextViewCounter(_ count: Int)
     
+    func updateIsEditableWordDescriptionTextView(_ isEditable: Bool)
+    
 }
 
 protocol EditWordPresenterProtocol: EditWordPresenterInputProtocol,
@@ -98,6 +100,10 @@ extension EditWordPresenter: EditWordInteractorOutputProtocol {
     
     func updateWordDescriptionTextViewCounter(_ count: Int) {
         presenterOutput?.updateWordDescriptionTextViewCounter(count)
+    }
+    
+    func updateIsEditableWordDescriptionTextView(_ isEditable: Bool) {
+        presenterOutput?.updateIsEditableWordDescriptionTextView(isEditable)
     }
     
 }

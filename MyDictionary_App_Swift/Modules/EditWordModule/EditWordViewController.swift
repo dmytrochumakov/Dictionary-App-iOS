@@ -57,7 +57,6 @@ final class EditWordViewController: MDBaseTitledBackNavigationBarViewController 
         textView.font = MDUIResources.Font.MyriadProItalic.font()
         textView.textColor = MDUIResources.Color.md_3C3C3C.color()
         textView.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
-        textView.isEditable = true
         textView.isScrollEnabled = true
         textView.isUserInteractionEnabled = true
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -205,6 +204,10 @@ extension EditWordViewController: EditWordPresenterOutputProtocol {
     func updateWordDescriptionTextViewCounter(_ count: Int) {
         updateWordDescriptionCounterLabel(currentCount: count,
                                           maxCount: MDConstants.Text.MaxCountCharacters.wordDescriptionTextView)
+    }
+    
+    func updateIsEditableWordDescriptionTextView(_ isEditable: Bool) {
+        wordDescriptionTextView.isEditable = isEditable
     }
     
 }

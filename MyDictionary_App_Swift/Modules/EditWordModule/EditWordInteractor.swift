@@ -31,6 +31,8 @@ protocol EditWordInteractorOutputProtocol: AnyObject,
     func updateWordTextFieldCounter(_ count: Int)
     func updateWordDescriptionTextViewCounter(_ count: Int)
     
+    func updateIsEditableWordDescriptionTextView(_ isEditable: Bool)
+    
 }
 
 protocol EditWordInteractorProtocol: EditWordInteractorInputProtocol,
@@ -98,6 +100,10 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
         interactorOutput?.updateWordDescriptionTextViewCounter(dataManager.getWord.wordDescription.count)
         //
         
+        // Update Is Editable Word Description Text View
+        interactorOutput?.updateIsEditableWordDescriptionTextView(MDEditWordViewControllerConfiguration.WordDescriptionTextView.isEditable(editButtonIsSelected: dataManager.getEditButtonIsSelected))
+        //
+        
         // Update Top Constraint And isHidden in Views
         //
         interactorOutput?.updateWordDescriptionTextViewTopConstraint()
@@ -108,9 +114,23 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
     }
     
     func viewDidLoad() {
+        
+        // Fill Description
+        interactorOutput?.fillWordDescriptionTextView(dataManager.getWord.wordDescription)
         //
+        
+        // Update Counter        
+        interactorOutput?.updateWordDescriptionTextViewCounter(dataManager.getWord.wordDescription.count)
+        //
+        
+        // Update Is Editable Word Description Text View
+        interactorOutput?.updateIsEditableWordDescriptionTextView(MDEditWordViewControllerConfiguration.WordDescriptionTextView.isEditable(editButtonIsSelected: dataManager.getEditButtonIsSelected))
+        //
+        
+        // Update isHidden property in Views
         interactorOutput?.updateVisibilityViews()
         //
+        
     }
     
     func updateButtonClicked() {

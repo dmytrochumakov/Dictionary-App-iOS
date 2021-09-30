@@ -52,6 +52,10 @@ struct MDEditWordViewControllerConfiguration {
             }
         }
         
+        static func isEditable(editButtonIsSelected isSelected: Bool) -> Bool {
+            return isSelected
+        }
+        
         fileprivate static func inactiveEditModeTopOffset(fromNavigationController navigationController: UINavigationController?) -> CGFloat {
             return WordTextField.topOffset(fromNavigationController: navigationController)
         }
