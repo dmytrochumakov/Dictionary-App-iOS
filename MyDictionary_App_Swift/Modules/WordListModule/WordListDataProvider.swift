@@ -15,6 +15,7 @@ protocol WordListDataProviderProcotol: MDNumberOfSectionsProtocol,
     
     func wordListCellModel(atIndexPath indexPath: IndexPath) -> MDWordListCellModel?
     func deleteWord(atIndexPath indexPath: IndexPath)
+    func updateWord(atIndexPath indexPath: IndexPath, updatedWord: WordResponse)
     
 }
 
@@ -59,6 +60,10 @@ extension WordListDataProvider {
     
     func deleteWord(atIndexPath indexPath: IndexPath) {
         filteredWords.remove(at: indexPath.row)
+    }
+    
+    func updateWord(atIndexPath indexPath: IndexPath, updatedWord: WordResponse) {
+        filteredWords[indexPath.row] = updatedWord
     }
     
 }

@@ -14,6 +14,8 @@ protocol WordListDataManagerInputProtocol {
     func clearWordFilter()
     func deleteWord(atIndexPath indexPath: IndexPath)
     func addWord(_ newValue: WordResponse) -> IndexPath
+    func deleteWord(atWordResponse word: WordResponse) -> IndexPath
+    func updateWord(atWordResponse word: WordResponse) -> IndexPath
 }
 
 protocol WordListDataManagerOutputProtocol: AnyObject {
@@ -138,16 +140,42 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
         //
         self.dataProvider.filteredWords.append(newValue)
         //
-        let section = (self.dataProvider.numberOfSections - 1)
         let row = (self.dataProvider.numberOfRowsInSection(section) - 1)
         //
         return .init(row: row, section: section)
+    }
+    
+    func deleteWord(atWordResponse word: WordResponse) -> IndexPath {
+        //
+        let row = dataProvider.filteredWords.firstIndex(where: { $0.wordId == word.wordId })!
+        let indexPath: IndexPath = .init(row: row,
+                                         section: section)
+        // Delete Word
+        deleteWord(atIndexPath: indexPath)
+        //
+        return indexPath
+    }
+    
+    func updateWord(atWordResponse word: WordResponse) -> IndexPath {
+        //
+        let row = dataProvider.filteredWords.firstIndex(where: { $0.wordId == word.wordId })!
+        let indexPath: IndexPath = .init(row: row,
+                                         section: section)
+        // Update Word
+        dataProvider.updateWord(atIndexPath: indexPath,
+                                updatedWord: word)
+        //
+        return indexPath
     }
     
 }
 
 // MARK: - Private Methods
 fileprivate extension WordListDataManager {
+    
+    var section: Int {
+        return (self.dataProvider.numberOfSections - 1)
+    }
     
     func filteredWords(input words: [WordResponse],
                        searchText: String?) -> [WordResponse] {

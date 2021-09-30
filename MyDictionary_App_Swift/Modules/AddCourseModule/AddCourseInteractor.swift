@@ -20,10 +20,10 @@ protocol AddCourseInteractorOutputProtocol: AnyObject,
                                             MDShowErrorProtocol,
                                             MDReloadDataProtocol,
                                             MDHideKeyboardProtocol,
-                                            MDShowHideProgressHUD {
+                                            MDShowHideProgressHUD,
+                                            MDCloseModuleProtocol {
     
-    func selectAndDeselectRow(at results: [Bool : IndexPath])
-    func closeModule()
+    func selectAndDeselectRow(at results: [Bool : IndexPath])    
     
 }
 

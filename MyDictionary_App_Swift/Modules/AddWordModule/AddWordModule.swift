@@ -28,8 +28,8 @@ extension AddWordModule {
         var dataManager: AddWordDataManagerProtocol = AddWordDataManager.init(dataProvider: dataProvider)
         
         let interactor: AddWordInteractorProtocol = AddWordInteractor.init(dataManager: dataManager,
-                                                                           textFieldDelegate: MDAddWordTextFieldDelegate.init(),
-                                                                           textViewDelegate: MDAddWordTextViewDelegate.init(),
+                                                                           textFieldDelegate: MDWordTextFieldDelegateImplementation.init(),
+                                                                           textViewDelegate: MDWordTextViewDelegateImplementation.init(),
                                                                            wordManager: MDWordManager.init(jwtManager: MDJWTManager.init(userMemoryStorage: MDConstants.AppDependencies.dependencies.userStorage.memoryStorage,
                                                                                                                                          jwtStorage: MDConstants.AppDependencies.dependencies.jwtStorage,
                                                                                                                                          apiJWT: MDConstants.AppDependencies.dependencies.apiJWT),

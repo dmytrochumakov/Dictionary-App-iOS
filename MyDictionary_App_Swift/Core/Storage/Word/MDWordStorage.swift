@@ -31,6 +31,7 @@ protocol MDWordStorageProtocol: MDStorageProtocol {
                       _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>))
     
     func updateWord(byWordID wordId: Int64,
+                    newWordText: String,
                     newWordDescription: String,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
@@ -367,6 +368,7 @@ extension MDWordStorage {
     }
     
     func updateWord(byWordID wordId: Int64,
+                    newWordText: String,
                     newWordDescription: String,
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
@@ -376,6 +378,7 @@ extension MDWordStorage {
         case .memory:
             
             memoryStorage.updateWord(byWordID: wordId,
+                                     newWordText: newWordText,
                                      newWordDescription: newWordDescription) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
@@ -383,6 +386,7 @@ extension MDWordStorage {
         case .coreData:
             
             coreDataStorage.updateWord(byWordID: wordId,
+                                       newWordText: newWordText,
                                        newWordDescription: newWordDescription) { (result) in
                 completionHandler([.init(storageType: storageType, result: result)])
             }
@@ -399,6 +403,7 @@ extension MDWordStorage {
             // Dispatch Group Enter
             dispatchGroup.enter()
             memoryStorage.updateWord(byWordID: wordId,
+                                     newWordText: newWordText,
                                      newWordDescription: newWordDescription) { result in
                 
                 // Append Result
@@ -413,6 +418,7 @@ extension MDWordStorage {
             // Dispatch Group Enter
             dispatchGroup.enter()
             coreDataStorage.updateWord(byWordID: wordId,
+                                       newWordText: newWordText,
                                        newWordDescription: newWordDescription) { result in
                 
                 // Append Result

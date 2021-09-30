@@ -140,6 +140,7 @@ extension MDWordCoreDataStorage {
 extension MDWordCoreDataStorage {
     
     func updateWord(byWordID wordId: Int64,
+                    newWordText: String,
                     newWordDescription: String,
                     _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
@@ -147,6 +148,7 @@ extension MDWordCoreDataStorage {
                                                                   wordStorage: self,
                                                                   coreDataStack: self.coreDataStack,
                                                                   wordId: wordId,
+                                                                  newWordText: newWordText,
                                                                   newWordDescription: newWordDescription) { result in
             completionHandler(result)
         }

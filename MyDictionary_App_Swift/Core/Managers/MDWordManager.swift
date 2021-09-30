@@ -16,6 +16,14 @@ protocol MDWordManagerProtocol {
                  languageName: String,
                  _ completionHandler: @escaping(MDOperationResultWithCompletion<WordResponse>))
     
+    func updateWordInApiAndAllStorage(courseId: Int64,
+                                      wordId: Int64,
+                                      languageId: Int64,
+                                      newWordText: String,
+                                      newWordDescription: String,
+                                      languageName: String,
+                                      _ completionHandler: @escaping(MDOperationResultWithCompletion<WordResponse>))
+    
     func deleteWordFromApiAndAllStorage(byUserId userId: Int64,
                                         byCourseId courseId: Int64,
                                         byWordId wordId: Int64,
@@ -90,6 +98,104 @@ extension MDWordManager {
                                     if (resultCount == createStorageWordResults.count) {
                                         //
                                         completionHandler(.success(wordResponse))
+                                        //
+                                        break
+                                        //
+                                    }
+                                    
+                                case .failure(let error):
+                                    
+                                    //
+                                    completionHandler(.failure(error))
+                                    //
+                                    break
+                                    //
+                                }
+                                
+                            }
+                            
+                        }
+                        break
+                        
+                    case .failure(let error):
+                        
+                        //
+                        completionHandler(.failure(error))
+                        //
+                        break
+                        //
+                        
+                    }
+                    
+                }
+                
+                break
+                
+            case .failure(let error):
+                
+                //
+                completionHandler(.failure(error))
+                //
+                break
+                //
+                
+            }
+            
+        }
+        
+    }
+    
+}
+
+extension MDWordManager {
+    
+    func updateWordInApiAndAllStorage(courseId: Int64,
+                                      wordId: Int64,
+                                      languageId: Int64,
+                                      newWordText: String,
+                                      newWordDescription: String,
+                                      languageName: String,
+                                      _ completionHandler: @escaping (MDOperationResultWithCompletion<WordResponse>)) {
+        
+        var resultCount: Int = .zero
+        
+        jwtManager.fetchUserAndJWT { [unowned self] fetchUserAndJWTResult in
+            
+            switch fetchUserAndJWTResult {
+                
+            case .success(let userAndJWT):
+                
+                apiWord.updateWord(accessToken: userAndJWT.jwt.accessToken,
+                                   updateWordRequest: .init(userId: userAndJWT.user.userId,
+                                                            wordId: wordId,
+                                                            courseId: courseId,
+                                                            languageId: languageId,
+                                                            wordText: newWordText,
+                                                            wordDescription: newWordDescription,
+                                                            languageName: languageName)) { [unowned self] updateApiWordResult in
+                    
+                    switch updateApiWordResult {
+                        
+                    case .success(let updatedWordResponse):
+                        
+                        wordStorage.updateWord(byWordID: wordId,
+                                               newWordText: newWordText,
+                                               newWordDescription: newWordDescription,
+                                               storageType: .all) { updateStorageWordResults in
+                            
+                            updateStorageWordResults.forEach { updateStorageWordResult in
+                                
+                                switch updateStorageWordResult.result {
+                                    
+                                case .success:
+                                    
+                                    //
+                                    resultCount += 1
+                                    //
+                                    
+                                    if (resultCount == updateStorageWordResults.count) {
+                                        //
+                                        completionHandler(.success(updatedWordResponse))
                                         //
                                         break
                                         //

@@ -62,7 +62,6 @@
 		2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */; };
 		2223F8BC26512FFD004F2FE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2223F8BE26512FFD004F2FE9 /* Localizable.strings */; };
 		222F52702701AD080070F546 /* MDTextViewWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222F526F2701AD080070F546 /* MDTextViewWithToolBar.swift */; };
-		222F52752701E1100070F546 /* MDAddWordTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222F52742701E1100070F546 /* MDAddWordTextFieldDelegate.swift */; };
 		222F52772701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222F52762701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift */; };
 		223648EA26DE38970071F271 /* MDSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223648E926DE38970071F271 /* MDSync.swift */; };
 		223EB28626F9FD030021D8E1 /* TermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223EB28526F9FD030021D8E1 /* TermsOfServiceViewController.swift */; };
@@ -176,6 +175,13 @@
 		228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 228BC440264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld */; };
 		228BC444264979FE0030FB30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228BC443264979FE0030FB30 /* Assets.xcassets */; };
 		228BC447264979FE0030FB30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228BC445264979FE0030FB30 /* LaunchScreen.storyboard */; };
+		228C596E27033D0800DE6175 /* EditWordModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228C596727033D0800DE6175 /* EditWordModule.swift */; };
+		228C596F27033D0800DE6175 /* EditWordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228C596827033D0800DE6175 /* EditWordPresenter.swift */; };
+		228C597027033D0800DE6175 /* EditWordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228C596927033D0800DE6175 /* EditWordRouter.swift */; };
+		228C597127033D0800DE6175 /* EditWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228C596A27033D0800DE6175 /* EditWordViewController.swift */; };
+		228C597227033D0800DE6175 /* EditWordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228C596B27033D0800DE6175 /* EditWordInteractor.swift */; };
+		228C597327033D0800DE6175 /* EditWordDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228C596C27033D0800DE6175 /* EditWordDataProvider.swift */; };
+		228C597427033D0800DE6175 /* EditWordDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228C596D27033D0800DE6175 /* EditWordDataManager.swift */; };
 		2291BAF026F714DD0012504D /* MDSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291BAEF26F714DD0012504D /* MDSearchBar.swift */; };
 		2291BAF326F7265E0012504D /* MDSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291BAF226F7265E0012504D /* MDSearchTextField.swift */; };
 		2291BAF526F754CF0012504D /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291BAF426F754CF0012504D /* UITableView+Extension.swift */; };
@@ -243,6 +249,9 @@
 		22A31B5C26ECBB1A00676E55 /* MyriadProSemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A31B5826ECBB1A00676E55 /* MyriadProSemiBold.ttf */; };
 		22AF541B26F9ED1D00556225 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AF541426F9ED1D00556225 /* PrivacyPolicyViewController.swift */; };
 		22AF542026F9F1BB00556225 /* MDBaseTitledBackNavigationBarWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AF541F26F9F1BB00556225 /* MDBaseTitledBackNavigationBarWebViewController.swift */; };
+		22B5C63027059EB700185954 /* MDWordTextFieldDelegateImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B5C62F27059EB700185954 /* MDWordTextFieldDelegateImplementation.swift */; };
+		22B5C63227059F2000185954 /* MDWordTextViewDelegateImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B5C63127059F2000185954 /* MDWordTextViewDelegateImplementation.swift */; };
+		22B5C6352705A84200185954 /* MDEditWordError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B5C6342705A84200185954 /* MDEditWordError.swift */; };
 		22B6B9E426958F4E0076B003 /* MDAppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6B9E326958F4D0076B003 /* MDAppDependencies.swift */; };
 		22B8E69F26D38059001CCCA8 /* MDLanguageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E69E26D38059001CCCA8 /* MDLanguageStorage.swift */; };
 		22B8E6A126D380CE001CCCA8 /* MDLanguageMemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6A026D380CE001CCCA8 /* MDLanguageMemoryStorage.swift */; };
@@ -275,7 +284,6 @@
 		22B8E6EA26D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6E926D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift */; };
 		22B8E6EC26D3C9B7001CCCA8 /* MDReadCourseMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6EB26D3C9B7001CCCA8 /* MDReadCourseMemoryStorageOperation.swift */; };
 		22B9080926EB7DD6003848D6 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9080826EB7DD6003848D6 /* UIView+Extension.swift */; };
-		22BA7D592702FBE100068F7E /* MDAddWordTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA7D582702FBE100068F7E /* MDAddWordTextViewDelegate.swift */; };
 		22BA7D5B2702FDBC00068F7E /* MDTextViewDelegatePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA7D5A2702FDBC00068F7E /* MDTextViewDelegatePropertyProtocol.swift */; };
 		22BA7D5E2703125D00068F7E /* MDAddWordError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA7D5D2703125D00068F7E /* MDAddWordError.swift */; };
 		22BA7D6F270318CA00068F7E /* MDInsertRowProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA7D6E270318CA00068F7E /* MDInsertRowProtocol.swift */; };
@@ -288,6 +296,8 @@
 		22BD99A0266A4AB10063FEFC /* WordListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999F266A4AB10063FEFC /* WordListModule.swift */; };
 		22BD99A5266A58DE0063FEFC /* RootWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD99A4266A58DE0063FEFC /* RootWindow.swift */; };
 		22BD99A8266A58F40063FEFC /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD99A7266A58F40063FEFC /* RootViewController.swift */; };
+		22C49869270440AF003276FF /* MDEditWordViewControllerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C49868270440AF003276FF /* MDEditWordViewControllerConfiguration.swift */; };
+		22C4986B27048823003276FF /* MDCloseModuleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4986A27048822003276FF /* MDCloseModuleProtocol.swift */; };
 		22C5862D26C79D360030B12D /* MDAPIStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5862C26C79D360030B12D /* MDAPIStatusCode.swift */; };
 		22C5863126C7A5690030B12D /* MDAPIAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5863026C7A5690030B12D /* MDAPIAuthError.swift */; };
 		22C5863A26C7AFB80030B12D /* RegistrationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5863326C7AFB80030B12D /* RegistrationModule.swift */; };
@@ -449,7 +459,6 @@
 		2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageService.swift; sourceTree = "<group>"; };
 		2223F8BD26512FFD004F2FE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		222F526F2701AD080070F546 /* MDTextViewWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDTextViewWithToolBar.swift; sourceTree = "<group>"; };
-		222F52742701E1100070F546 /* MDAddWordTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAddWordTextFieldDelegate.swift; sourceTree = "<group>"; };
 		222F52762701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDTextFieldDelegatePropertyProtocol.swift; sourceTree = "<group>"; };
 		223648E926DE38970071F271 /* MDSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSync.swift; sourceTree = "<group>"; };
 		223EB28526F9FD030021D8E1 /* TermsOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceViewController.swift; sourceTree = "<group>"; };
@@ -567,6 +576,13 @@
 		228BC448264979FE0030FB30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		228BC44D264979FF0030FB30 /* MyDictionary_App_SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyDictionary_App_SwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		228BC453264979FF0030FB30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		228C596727033D0800DE6175 /* EditWordModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWordModule.swift; sourceTree = "<group>"; };
+		228C596827033D0800DE6175 /* EditWordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWordPresenter.swift; sourceTree = "<group>"; };
+		228C596927033D0800DE6175 /* EditWordRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWordRouter.swift; sourceTree = "<group>"; };
+		228C596A27033D0800DE6175 /* EditWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWordViewController.swift; sourceTree = "<group>"; };
+		228C596B27033D0800DE6175 /* EditWordInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWordInteractor.swift; sourceTree = "<group>"; };
+		228C596C27033D0800DE6175 /* EditWordDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWordDataProvider.swift; sourceTree = "<group>"; };
+		228C596D27033D0800DE6175 /* EditWordDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWordDataManager.swift; sourceTree = "<group>"; };
 		2291BAEF26F714DD0012504D /* MDSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSearchBar.swift; sourceTree = "<group>"; };
 		2291BAF226F7265E0012504D /* MDSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSearchTextField.swift; sourceTree = "<group>"; };
 		2291BAF426F754CF0012504D /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
@@ -634,6 +650,9 @@
 		22A31B5826ECBB1A00676E55 /* MyriadProSemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProSemiBold.ttf; sourceTree = "<group>"; };
 		22AF541426F9ED1D00556225 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		22AF541F26F9F1BB00556225 /* MDBaseTitledBackNavigationBarWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseTitledBackNavigationBarWebViewController.swift; sourceTree = "<group>"; };
+		22B5C62F27059EB700185954 /* MDWordTextFieldDelegateImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordTextFieldDelegateImplementation.swift; sourceTree = "<group>"; };
+		22B5C63127059F2000185954 /* MDWordTextViewDelegateImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordTextViewDelegateImplementation.swift; sourceTree = "<group>"; };
+		22B5C6342705A84200185954 /* MDEditWordError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEditWordError.swift; sourceTree = "<group>"; };
 		22B6B9E326958F4D0076B003 /* MDAppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppDependencies.swift; sourceTree = "<group>"; };
 		22B8E69E26D38059001CCCA8 /* MDLanguageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLanguageStorage.swift; sourceTree = "<group>"; };
 		22B8E6A026D380CE001CCCA8 /* MDLanguageMemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLanguageMemoryStorage.swift; sourceTree = "<group>"; };
@@ -666,7 +685,6 @@
 		22B8E6E926D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateCourseMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		22B8E6EB26D3C9B7001CCCA8 /* MDReadCourseMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadCourseMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		22B9080826EB7DD6003848D6 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		22BA7D582702FBE100068F7E /* MDAddWordTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAddWordTextViewDelegate.swift; sourceTree = "<group>"; };
 		22BA7D5A2702FDBC00068F7E /* MDTextViewDelegatePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDTextViewDelegatePropertyProtocol.swift; sourceTree = "<group>"; };
 		22BA7D5D2703125D00068F7E /* MDAddWordError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAddWordError.swift; sourceTree = "<group>"; };
 		22BA7D6E270318CA00068F7E /* MDInsertRowProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDInsertRowProtocol.swift; sourceTree = "<group>"; };
@@ -679,6 +697,8 @@
 		22BD999F266A4AB10063FEFC /* WordListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListModule.swift; sourceTree = "<group>"; };
 		22BD99A4266A58DE0063FEFC /* RootWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWindow.swift; sourceTree = "<group>"; };
 		22BD99A7266A58F40063FEFC /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		22C49868270440AF003276FF /* MDEditWordViewControllerConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEditWordViewControllerConfiguration.swift; sourceTree = "<group>"; };
+		22C4986A27048822003276FF /* MDCloseModuleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCloseModuleProtocol.swift; sourceTree = "<group>"; };
 		22C5862C26C79D360030B12D /* MDAPIStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIStatusCode.swift; sourceTree = "<group>"; };
 		22C5863026C7A5690030B12D /* MDAPIAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIAuthError.swift; sourceTree = "<group>"; };
 		22C5863326C7AFB80030B12D /* RegistrationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModule.swift; sourceTree = "<group>"; };
@@ -1097,6 +1117,7 @@
 				22BA7D6E270318CA00068F7E /* MDInsertRowProtocol.swift */,
 				22BA7D702703191400068F7E /* MDDeleteRowProtocol.swift */,
 				22BA7D722703192300068F7E /* MDUpdateRowProtocol.swift */,
+				22C4986A27048822003276FF /* MDCloseModuleProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1179,15 +1200,6 @@
 				222F526F2701AD080070F546 /* MDTextViewWithToolBar.swift */,
 			);
 			path = TextViews;
-			sourceTree = "<group>";
-		};
-		222F52732701E0D20070F546 /* Delegates */ = {
-			isa = PBXGroup;
-			children = (
-				222F52742701E1100070F546 /* MDAddWordTextFieldDelegate.swift */,
-				22BA7D582702FBE100068F7E /* MDAddWordTextViewDelegate.swift */,
-			);
-			path = Delegates;
 			sourceTree = "<group>";
 		};
 		223648E826DE38050071F271 /* Sync */ = {
@@ -1340,6 +1352,7 @@
 		226FEE7E266B735B0044A5F9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				22B5C62E27059E5C00185954 /* DelegatesImplementation */,
 				229572B926FF1FAD0092817B /* MDBridge */,
 				2291BAEE26F714C90012504D /* SearchBar */,
 				229D2D4A26EB68340047B518 /* NavigationController */,
@@ -1679,11 +1692,26 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		228C596627033CEB00DE6175 /* EditWordModule */ = {
+			isa = PBXGroup;
+			children = (
+				22B5C6332705A82E00185954 /* Enums */,
+				22C4986727043F0A003276FF /* Configuration */,
+				228C596727033D0800DE6175 /* EditWordModule.swift */,
+				228C596827033D0800DE6175 /* EditWordPresenter.swift */,
+				228C596927033D0800DE6175 /* EditWordRouter.swift */,
+				228C596A27033D0800DE6175 /* EditWordViewController.swift */,
+				228C596B27033D0800DE6175 /* EditWordInteractor.swift */,
+				228C596C27033D0800DE6175 /* EditWordDataProvider.swift */,
+				228C596D27033D0800DE6175 /* EditWordDataManager.swift */,
+			);
+			path = EditWordModule;
+			sourceTree = "<group>";
+		};
 		2291BAEE26F714C90012504D /* SearchBar */ = {
 			isa = PBXGroup;
 			children = (
 				2291BAEF26F714DD0012504D /* MDSearchBar.swift */,
-				22A2988926FCB14000E79843 /* MDSearchBarDelegateImplementation.swift */,
 			);
 			path = SearchBar;
 			sourceTree = "<group>";
@@ -1706,7 +1734,6 @@
 			isa = PBXGroup;
 			children = (
 				22BA7D5C2703124F00068F7E /* Enums */,
-				222F52732701E0D20070F546 /* Delegates */,
 				2291DACD27019DA900216B64 /* AddWordModule.swift */,
 				2291DACE27019DA900216B64 /* AddWordPresenter.swift */,
 				2291DACF27019DA900216B64 /* AddWordRouter.swift */,
@@ -1862,6 +1889,24 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		22B5C62E27059E5C00185954 /* DelegatesImplementation */ = {
+			isa = PBXGroup;
+			children = (
+				22A2988926FCB14000E79843 /* MDSearchBarDelegateImplementation.swift */,
+				22B5C62F27059EB700185954 /* MDWordTextFieldDelegateImplementation.swift */,
+				22B5C63127059F2000185954 /* MDWordTextViewDelegateImplementation.swift */,
+			);
+			path = DelegatesImplementation;
+			sourceTree = "<group>";
+		};
+		22B5C6332705A82E00185954 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				22B5C6342705A84200185954 /* MDEditWordError.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		22B8E69D26D38031001CCCA8 /* Language */ = {
 			isa = PBXGroup;
 			children = (
@@ -1989,6 +2034,14 @@
 			path = RootViewController;
 			sourceTree = "<group>";
 		};
+		22C4986727043F0A003276FF /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				22C49868270440AF003276FF /* MDEditWordViewControllerConfiguration.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
 		22C5863226C7AFAC0030B12D /* RegistrationModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -2009,6 +2062,7 @@
 		22CA086F26515D240052D169 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				228C596627033CEB00DE6175 /* EditWordModule */,
 				2291DACC27019D9200216B64 /* AddWordModule */,
 				22A2986C26FC84D500E79843 /* AddCourseModule */,
 				22E327D326FB5ECB00445917 /* ShareFeedbackModule */,
@@ -2500,6 +2554,7 @@
 				2258921D26CA389C00AD6F18 /* MDCreateJWTCoreDataStorageOperation.swift in Sources */,
 				22E2B4F02664EF3200978E62 /* UICollectionView+Extension.swift in Sources */,
 				2220FCB426D50E6100B22515 /* CreateCourseRequest.swift in Sources */,
+				228C597327033D0800DE6175 /* EditWordDataProvider.swift in Sources */,
 				22561C9F26D4DEE200A6135B /* MDStorage.swift in Sources */,
 				228722CE26D0DE7500C9D1BC /* MDUpdateJWTMemoryStorageOperation.swift in Sources */,
 				22561C8826D4CDB200A6135B /* MDReadCourseCoreDataStorageOperation.swift in Sources */,
@@ -2518,6 +2573,7 @@
 				2299587126F486FD003DF092 /* MDFillMemoryServiceError.swift in Sources */,
 				225C349526D6746800F3BC9A /* JWTApiRequest.swift in Sources */,
 				227B91DB26EF5F5E0086B9AA /* RegisterValidationType.swift in Sources */,
+				22B5C63027059EB700185954 /* MDWordTextFieldDelegateImplementation.swift in Sources */,
 				2220FCB026D50ABF00B22515 /* MDAPICourse.swift in Sources */,
 				2270F3A426D264E6006B46F4 /* CDCourseResponseEntity+Extension.swift in Sources */,
 				228AE05926EE05120088B4CF /* HideShowPasswordTextField.swift in Sources */,
@@ -2535,6 +2591,7 @@
 				22E17B1926FDB544008CB714 /* MDAddCourseSection.swift in Sources */,
 				220793CB26C67432003D434B /* UIAlertController+Extension.swift in Sources */,
 				22E2B4F9266509CA00978E62 /* SettingsRowModel.swift in Sources */,
+				228C597427033D0800DE6175 /* EditWordDataManager.swift in Sources */,
 				22557FC726C9589000A4FF31 /* MDJWTMemoryStorage.swift in Sources */,
 				221D281C26C533AF004BC4F7 /* AuthTextFieldDelegate.swift in Sources */,
 				22E327E426FB6C7C00445917 /* ShareFeedbackOption.swift in Sources */,
@@ -2602,6 +2659,7 @@
 				227D5E6A2652586F00B54524 /* WordListTableViewDelegate.swift in Sources */,
 				228964B026F8AA3E00E23292 /* MDShowHideProgressHUD.swift in Sources */,
 				22C5863F26C7AFB80030B12D /* RegistrationDataProvider.swift in Sources */,
+				228C597127033D0800DE6175 /* EditWordViewController.swift in Sources */,
 				229E08CB2652CDB500DA56C4 /* MDCollectionViewDataSourcePropertyProtocol.swift in Sources */,
 				22A2521626CFE5230013FCF5 /* MDEntitiesCountProtocol.swift in Sources */,
 				22B8E6D626D3BAC1001CCCA8 /* MDDeleteAllWordsMemoryStorageOperation.swift in Sources */,
@@ -2614,6 +2672,7 @@
 				229E08C42652CA5100DA56C4 /* MDNumberOfRowsInSectionProtocol.swift in Sources */,
 				2289CEDE2678CC34007254C3 /* MDWordMemoryStorage.swift in Sources */,
 				220FFE9B26C912B300702CCE /* MDDeleteUserMemoryStorageOperation.swift in Sources */,
+				22B5C6352705A84200185954 /* MDEditWordError.swift in Sources */,
 				2289CEE32678CC34007254C3 /* MDReadWordMemoryStorageOperation.swift in Sources */,
 				22561C8326D4BA5C00A6135B /* MDCreateCourseCoreDataStorageOperation.swift in Sources */,
 				2289CEF52678CC34007254C3 /* MDReadWordProtocol.swift in Sources */,
@@ -2639,7 +2698,6 @@
 				22EF01F4269DA7C000FE4435 /* MDNetworkSession.swift in Sources */,
 				229D2D4926EB53A60047B518 /* ChoiceAuthenticationOrRegistrationDataManager.swift in Sources */,
 				22E17B1726FDAF92008CB714 /* MDAddCourseHeaderView.swift in Sources */,
-				222F52752701E1100070F546 /* MDAddWordTextFieldDelegate.swift in Sources */,
 				22E2B4E42664EB6900978E62 /* SettingsCollectionViewDataSource.swift in Sources */,
 				220FFE8C26C90B1F00702CCE /* MDReadUserProtocol.swift in Sources */,
 				2289CEF92678CC34007254C3 /* OperationQueueService.swift in Sources */,
@@ -2664,7 +2722,9 @@
 				22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */,
 				22BD99A5266A58DE0063FEFC /* RootWindow.swift in Sources */,
 				22EF01F8269DA89E00FE4435 /* MDEnvironmentProtocol.swift in Sources */,
+				22B5C63227059F2000185954 /* MDWordTextViewDelegateImplementation.swift in Sources */,
 				2289CEF62678CC34007254C3 /* MDDeleteWordProtocol.swift in Sources */,
+				22C4986B27048823003276FF /* MDCloseModuleProtocol.swift in Sources */,
 				220FFE7E26C9072600702CCE /* MDUserMemoryStorage.swift in Sources */,
 				2289CEE22678CC34007254C3 /* MDDeleteWordMemoryStorageOperation.swift in Sources */,
 				22DB2F7B26C3BE7900C1AADA /* CourseListInteractor.swift in Sources */,
@@ -2706,6 +2766,7 @@
 				22DB2F8D26C3D51500C1AADA /* MDTableViewDataSourcePropertyProtocol.swift in Sources */,
 				229707CA2700605300722EFF /* MDViewDidLoadProtocol.swift in Sources */,
 				227B91D026EF4A1E0086B9AA /* MDBaseLargeTitledBackViewControllerWithBackgroundImage.swift in Sources */,
+				228C597227033D0800DE6175 /* EditWordInteractor.swift in Sources */,
 				2223F8B426512F01004F2FE9 /* MDLocalizedText.swift in Sources */,
 				221D281926C53356004BC4F7 /* AuthenticationTextFieldTag.swift in Sources */,
 				227B91DD26EF5F670086B9AA /* RegisterValidationError.swift in Sources */,
@@ -2734,7 +2795,6 @@
 				229572B826FF1E900092817B /* MDAddCourseError.swift in Sources */,
 				22C5864026C7AFB80030B12D /* RegistrationDataManager.swift in Sources */,
 				2277FE1426F9DB2300001710 /* MDBaseTitledNavigationBarViewController.swift in Sources */,
-				22BA7D592702FBE100068F7E /* MDAddWordTextViewDelegate.swift in Sources */,
 				22493C41269726A4000DA480 /* CDWordResponseEntityAttributeName.swift in Sources */,
 				220793C126C66F2A003D434B /* AuthValidationLogic.swift in Sources */,
 				2289CEED2678CC34007254C3 /* MDWordStorage.swift in Sources */,
@@ -2749,6 +2809,7 @@
 				22C5863B26C7AFB80030B12D /* RegistrationPresenter.swift in Sources */,
 				2294D6C326A2F1B60066BE77 /* CDUserResponseEntity+Extension.swift in Sources */,
 				22DE582826C9548B0032A94C /* MDCRUDJWTProtocol.swift in Sources */,
+				228C597027033D0800DE6175 /* EditWordRouter.swift in Sources */,
 				22E327D026FB31A900445917 /* MDStorageServiceOperationResultWithCompletion.swift in Sources */,
 				22DEA00526FA05A900892D78 /* AccountViewController.swift in Sources */,
 				2289CEE12678CC34007254C3 /* MDCreateWordMemoryStorageOperation.swift in Sources */,
@@ -2761,6 +2822,7 @@
 				223EB28626F9FD030021D8E1 /* TermsOfServiceViewController.swift in Sources */,
 				22493C3B269724CB000DA480 /* CoreDataEntityName.swift in Sources */,
 				220FFEA226C9150100702CCE /* MDCreateUserMemoryStorageOperation.swift in Sources */,
+				22C49869270440AF003276FF /* MDEditWordViewControllerConfiguration.swift in Sources */,
 				22493C542697420F000DA480 /* MDReadWordCoreDataStorageOperation.swift in Sources */,
 				221D280F26C5064A004BC4F7 /* AuthenticationPresenter.swift in Sources */,
 				22B8E6AC26D38A4D001CCCA8 /* MDCreateLanguageProtocol.swift in Sources */,
@@ -2770,6 +2832,7 @@
 				22B8E6EA26D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift in Sources */,
 				2270F39E26D26132006B46F4 /* CDLanguageResponseEntityAttributeName.swift in Sources */,
 				227B91E126EF607A0086B9AA /* RegisterValidationLogic.swift in Sources */,
+				228C596E27033D0800DE6175 /* EditWordModule.swift in Sources */,
 				227D5E642652584700B54524 /* NSLayoutConstraint+Extension.swift in Sources */,
 				22AF541B26F9ED1D00556225 /* PrivacyPolicyViewController.swift in Sources */,
 				22561C9D26D4DEA800A6135B /* MDStorageInterface.swift in Sources */,
@@ -2818,6 +2881,7 @@
 				22493C33269715A9000DA480 /* CDResultSavedEnum.swift in Sources */,
 				22E327CA26FB2CEE00445917 /* MDStorageCleanupService.swift in Sources */,
 				225C349726D6774500F3BC9A /* MDAPIAccount.swift in Sources */,
+				228C596F27033D0800DE6175 /* EditWordPresenter.swift in Sources */,
 				229D2D4326EB53A60047B518 /* ChoiceAuthenticationOrRegistrationModule.swift in Sources */,
 				229FFF4026F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift in Sources */,
 				22EF020D269DAFC000FE4435 /* MDAPIEnvironment.swift in Sources */,

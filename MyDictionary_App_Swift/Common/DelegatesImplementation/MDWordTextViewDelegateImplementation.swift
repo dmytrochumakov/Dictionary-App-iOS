@@ -1,26 +1,26 @@
 //
-//  MDAddWordTextViewDelegate.swift
+//  MDWordTextViewDelegateImplementation.swift
 //  MyDictionary_App_Swift
 //
-//  Created by Dmytro Chumakov on 28.09.2021.
+//  Created by Dmytro Chumakov on 30.09.2021.
 //
 
 import UIKit
 
-protocol MDAddWordTextViewDelegateProtocol: UITextViewDelegate {
+protocol MDWordTextViewDelegateImplementationProtocol: UITextViewDelegate {
     var wordDescriptionTextViewDidChangeAction: ((String?) -> Void)? { get set }
     var updateWordDescriptionTextViewCounterAction: ((Int) -> Void)? { get set }
 }
 
-final class MDAddWordTextViewDelegate: NSObject,
-                                       MDAddWordTextViewDelegateProtocol {
+final class MDWordTextViewDelegateImplementation: NSObject,
+                                                  MDWordTextViewDelegateImplementationProtocol {
     
     var wordDescriptionTextViewDidChangeAction: ((String?) -> Void)?
     var updateWordDescriptionTextViewCounterAction: ((Int) -> Void)?
     
 }
 
-extension MDAddWordTextViewDelegate {
+extension MDWordTextViewDelegateImplementation {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
