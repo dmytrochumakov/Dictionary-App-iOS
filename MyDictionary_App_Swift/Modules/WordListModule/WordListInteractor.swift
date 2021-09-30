@@ -20,7 +20,8 @@ protocol WordListInteractorOutputProtocol: AnyObject,
                                            MDShowErrorProtocol,
                                            MDShowHideProgressHUD,
                                            MDDeleteRowProtocol,
-                                           MDInsertRowProtocol  {
+                                           MDInsertRowProtocol,
+                                           MDUpdateRowProtocol  {
     
     func showAddWord(withCourse course: CourseResponse)
     func showEditWord(withWord word: WordResponse)
@@ -119,6 +120,8 @@ fileprivate extension WordListInteractor {
         //
         bridge_DidDeleteWord_Subscribe()
         //
+        bridge_DidUpdateWord_Subscribe()
+        //
         tableViewDelegate_DidSelectWord_Subscribe()
         //
     }
@@ -213,6 +216,16 @@ fileprivate extension WordListInteractor {
         bridge.didDeleteWord = { [unowned self] (deleteWord) in
             //
             interactorOutput?.deleteRow(atIndexPath: dataManager.deleteWord(atWordResponse: deleteWord))
+            //
+        }
+        
+    }
+    
+    func bridge_DidUpdateWord_Subscribe() {
+        
+        bridge.didUpdateWord = { [unowned self] (updatedWord) in
+            //
+            interactorOutput?.updateRow(atIndexPath: dataManager.updateWord(atWordResponse: updatedWord))
             //
         }
         

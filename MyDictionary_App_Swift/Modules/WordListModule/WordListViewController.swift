@@ -115,6 +115,12 @@ extension WordListViewController: WordListPresenterOutputProtocol {
         }
     }
     
+    func updateRow(atIndexPath indexPath: IndexPath) {
+        DispatchQueue.main.async {
+            self.tableView.reloadRows(at: [indexPath], with: .fade)
+        }
+    }
+    
 }
 
 // MARK: - Add Views

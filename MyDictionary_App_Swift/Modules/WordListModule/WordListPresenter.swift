@@ -22,7 +22,8 @@ protocol WordListPresenterOutputProtocol: AnyObject,
                                           MDShowErrorProtocol,
                                           MDShowHideProgressHUD,
                                           MDDeleteRowProtocol,
-                                          MDInsertRowProtocol {
+                                          MDInsertRowProtocol,
+                                          MDUpdateRowProtocol {
     
 }
 
@@ -92,6 +93,10 @@ extension WordListPresenter: WordListInteractorOutputProtocol {
     
     func showEditWord(withWord word: WordResponse) {
         router.showEditWord(withWord: word)
+    }
+    
+    func updateRow(atIndexPath indexPath: IndexPath) {
+        presenterOutput?.updateRow(atIndexPath: indexPath)
     }
     
 }
