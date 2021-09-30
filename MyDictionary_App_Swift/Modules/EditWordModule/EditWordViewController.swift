@@ -16,6 +16,7 @@ final class EditWordViewController: MDBaseTitledBackNavigationBarViewController 
     fileprivate let scrollView: UIScrollView = {
         let scrollView: UIScrollView = .init()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.keyboardDismissMode = .interactive
         return scrollView
     }()
     

@@ -15,6 +15,7 @@ final class CourseListViewController: MDBaseLargeTitledNavigationBarViewControll
         tableView.register(MDCourseListCell.self)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
+        tableView.keyboardDismissMode = .interactive
         return tableView
     }()
     

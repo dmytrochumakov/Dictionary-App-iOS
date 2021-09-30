@@ -48,6 +48,7 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
         textView.isScrollEnabled = true
         textView.isUserInteractionEnabled = true
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.keyboardDismissMode = .interactive
         return textView
     }()
     

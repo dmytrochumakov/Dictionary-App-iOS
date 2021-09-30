@@ -17,6 +17,7 @@ final class AddCourseViewController: MDBaseLargeTitledBackNavigationBarViewContr
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(MDAddCourseCell.self)
         collectionView.register(MDAddCourseHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
+        collectionView.keyboardDismissMode = .interactive
         return collectionView
     }()
     
