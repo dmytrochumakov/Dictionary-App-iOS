@@ -201,13 +201,22 @@ extension EditWordViewController: EditWordPresenterOutputProtocol {
                                     maxCount: MDConstants.Text.MaxCountCharacters.wordTextField)
     }
     
-    func updateWordDescriptionTextViewCounter(_ count: Int) {        
+    func updateWordDescriptionTextViewCounter(_ count: Int) {
         updateWordDescriptionCounterLabel(currentCount: count,
                                           maxCount: MDConstants.Text.MaxCountCharacters.wordDescriptionTextView)
     }
     
     func updateIsEditableWordDescriptionTextView(_ isEditable: Bool) {
         wordDescriptionTextView.isEditable = isEditable
+    }
+    
+    func makeWordDescriptionTextViewActive() {
+        wordDescriptionTextView.becomeFirstResponder()
+    }
+    
+    func wordTextFieldShouldClearAction() {
+        wordTextField.updateCounter(currentCount: .zero,
+                                    maxCount: MDConstants.Text.MaxCountCharacters.wordTextField)
     }
     
 }
@@ -248,13 +257,13 @@ fileprivate extension EditWordViewController {
     }
     
     func addWordTextField() {
-        //        wordTextField.addTarget(self, action: #selector(wordTextFieldDidChange), for: .editingChanged)
-        //        wordTextField.delegate = presenter.textFieldDelegate
+        wordTextField.addTarget(self, action: #selector(wordTextFieldDidChange), for: .editingChanged)
+        wordTextField.delegate = presenter.textFieldDelegate
         contentView.addSubview(wordTextField)
     }
     
     func addWordDescriptionTextView() {
-        //        wordDescriptionTextView.delegate = presenter.textViewDelegate
+        wordDescriptionTextView.delegate = presenter.textViewDelegate
         contentView.addSubview(wordDescriptionTextView)
         contentView.sendSubviewToBack(wordDescriptionTextView)
     }
@@ -526,6 +535,10 @@ fileprivate extension EditWordViewController {
     
     @objc func deleteButtonAction() {
         presenter.deleteButtonClicked()
+    }
+    
+    @objc func wordTextFieldDidChange(_ sender: UITextField) {
+        presenter.wordTextFieldDidChange(sender.text)
     }
     
 }

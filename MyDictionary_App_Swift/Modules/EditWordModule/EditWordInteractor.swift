@@ -10,10 +10,14 @@ protocol EditWordInteractorInputProtocol: MDViewDidLoadProtocol {
     
     var getWordText: String { get }
     var editButtonIsSelected: Bool { get }
+    var textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol { get }
+    var textViewDelegate: MDWordTextViewDelegateImplementationProtocol { get }
     
     func editWordButtonClicked()
     func updateButtonClicked()
     func deleteButtonClicked()
+    
+    func wordTextFieldDidChange(_ text: String?)
     
 }
 
@@ -33,6 +37,9 @@ protocol EditWordInteractorOutputProtocol: AnyObject,
     
     func updateIsEditableWordDescriptionTextView(_ isEditable: Bool)
     
+    func makeWordDescriptionTextViewActive()
+    func wordTextFieldShouldClearAction()
+    
 }
 
 protocol EditWordInteractorProtocol: EditWordInteractorInputProtocol,
@@ -40,21 +47,33 @@ protocol EditWordInteractorProtocol: EditWordInteractorInputProtocol,
     var interactorOutput: EditWordInteractorOutputProtocol? { get set }
 }
 
-final class EditWordInteractor: EditWordInteractorProtocol {
+final class EditWordInteractor: NSObject,
+                                EditWordInteractorProtocol {
     
     fileprivate let dataManager: EditWordDataManagerInputProtocol
     fileprivate let wordManager: MDWordManagerProtocol
     fileprivate let bridge: MDBridgeProtocol
     
+    var textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol
+    var textViewDelegate: MDWordTextViewDelegateImplementationProtocol
+    
     internal weak var interactorOutput: EditWordInteractorOutputProtocol?
     
     init(dataManager: EditWordDataManagerInputProtocol,
          wordManager: MDWordManagerProtocol,
-         bridge: MDBridgeProtocol) {
+         bridge: MDBridgeProtocol,
+         textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol,
+         textViewDelegate: MDWordTextViewDelegateImplementationProtocol) {
         
         self.dataManager = dataManager
         self.wordManager = wordManager
         self.bridge = bridge
+        self.textFieldDelegate = textFieldDelegate
+        self.textViewDelegate = textViewDelegate
+        
+        super.init()
+        subscribe()
+        
     }
     
     deinit {
@@ -119,7 +138,7 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
         interactorOutput?.fillWordDescriptionTextView(dataManager.getWord.wordDescription)
         //
         
-        // Update Counter        
+        // Update Counter
         interactorOutput?.updateWordDescriptionTextViewCounter(dataManager.getWord.wordDescription.count)
         //
         
@@ -174,6 +193,73 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
             
         }
         //
+    }
+    
+    func wordTextFieldDidChange(_ text: String?) {
+        dataManager.setWordText(text)
+    }
+    
+}
+
+// MARK: - Subscribe
+fileprivate extension EditWordInteractor {
+    
+    func subscribe() {
+        //
+        wordTextField_ShouldReturnAction_Subscribe()
+        //
+        update_WordTextField_CounterAction_Subscribe()
+        //
+        wordTextField_ShouldClearAction_Subscribe()
+        //
+        wordDescriptionTextView_DidChangeAction_Subscribe()
+        //
+        update_WordDescriptionTextView_CounterAction_Subscribe()
+        //
+    }
+    
+    func wordTextField_ShouldReturnAction_Subscribe() {
+        
+        textFieldDelegate.wordTextFieldShouldReturnAction = { [weak self] in
+            self?.interactorOutput?.makeWordDescriptionTextViewActive()
+        }
+        
+    }
+    
+    func update_WordTextField_CounterAction_Subscribe() {
+        
+        textFieldDelegate.updateWordTextFieldCounterAction = { [weak self] (count) in
+            self?.interactorOutput?.updateWordTextFieldCounter(count)
+        }
+        
+    }
+    
+    func wordTextField_ShouldClearAction_Subscribe() {
+        
+        textFieldDelegate.wordTextFieldShouldClearAction = { [weak self] in
+            self?.interactorOutput?.wordTextFieldShouldClearAction()
+        }
+        
+    }
+    
+    func wordDescriptionTextView_DidChangeAction_Subscribe() {
+        
+        textViewDelegate.wordDescriptionTextViewDidChangeAction = { [weak self] (text) in
+            //
+            self?.dataManager.setWordDescription(text)
+            //
+        }
+        
+    }
+    
+    func update_WordDescriptionTextView_CounterAction_Subscribe() {
+        
+        textViewDelegate.updateWordDescriptionTextViewCounterAction = { [weak self] (count) in
+            //
+            self?.interactorOutput?.updateWordDescriptionTextViewCounter(count)
+            //
+        }
+        
     }
     
 }

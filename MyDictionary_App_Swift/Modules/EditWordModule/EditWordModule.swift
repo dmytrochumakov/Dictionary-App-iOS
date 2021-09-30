@@ -33,7 +33,10 @@ extension EditWordModule {
                                                                                                                                            apiJWT: MDConstants.AppDependencies.dependencies.apiJWT),
                                                                                                              apiWord: MDConstants.AppDependencies.dependencies.apiWord,
                                                                                                              wordStorage: MDConstants.AppDependencies.dependencies.wordStorage),
-                                                                             bridge: MDConstants.AppDependencies.dependencies.bridge)
+                                                                             bridge: MDConstants.AppDependencies.dependencies.bridge,
+                                                                             textFieldDelegate: MDWordTextFieldDelegateImplementation.init(),
+                                                                             textViewDelegate: MDWordTextViewDelegateImplementation.init())
+        
         var router: EditWordRouterProtocol = EditWordRouter.init()
         let presenter: EditWordPresenterProtocol = EditWordPresenter.init(interactor: interactor, router: router)
         let vc = EditWordViewController.init(presenter: presenter)

@@ -10,6 +10,8 @@ protocol EditWordDataManagerInputProtocol {
     var getWord: WordResponse { get }
     var getEditButtonIsSelected: Bool { get }
     func setTrueSelectedEditButton()
+    func setWordText(_ text: String?)
+    func setWordDescription(_ text: String?)
 }
 
 protocol EditWordDataManagerOutputProtocol: AnyObject {
@@ -37,7 +39,7 @@ final class EditWordDataManager: EditWordDataManagerProtocol {
 
 // MARK: - EditWordDataManagerInputProtocol
 extension EditWordDataManager: EditWordDataManagerInputProtocol {
-
+    
     var getEditButtonIsSelected: Bool {
         return dataProvider.editButtonIsSelected
     }
@@ -48,6 +50,16 @@ extension EditWordDataManager: EditWordDataManagerInputProtocol {
     
     func setTrueSelectedEditButton() {
         dataProvider.editButtonIsSelected = true
+    }
+    
+    func setWordText(_ text: String?) {
+        guard let text = text else { return }
+        dataProvider.word.wordText = text
+    }
+    
+    func setWordDescription(_ text: String?) {
+        guard let text = text else { return }
+        dataProvider.word.wordDescription = text
     }
     
 }

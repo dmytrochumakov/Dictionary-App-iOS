@@ -6,7 +6,9 @@
 
 import UIKit
 
-protocol EditWordPresenterInputProtocol: MDViewDidLoadProtocol {
+protocol EditWordPresenterInputProtocol: MDViewDidLoadProtocol,
+                                         MDTextFieldDelegatePropertyProtocol,
+                                         MDTextViewDelegatePropertyProtocol {
     
     var getWordText: String { get }
     var editButtonIsSelected: Bool { get }
@@ -14,6 +16,8 @@ protocol EditWordPresenterInputProtocol: MDViewDidLoadProtocol {
     func editWordButtonClicked()
     func updateButtonClicked()
     func deleteButtonClicked()
+    
+    func wordTextFieldDidChange(_ text: String?)
     
 }
 
@@ -31,6 +35,9 @@ protocol EditWordPresenterOutputProtocol: AnyObject,
     func updateWordDescriptionTextViewCounter(_ count: Int)
     
     func updateIsEditableWordDescriptionTextView(_ isEditable: Bool)
+    
+    func makeWordDescriptionTextViewActive()
+    func wordTextFieldShouldClearAction()
     
 }
 
@@ -106,6 +113,14 @@ extension EditWordPresenter: EditWordInteractorOutputProtocol {
         presenterOutput?.updateIsEditableWordDescriptionTextView(isEditable)
     }
     
+    func makeWordDescriptionTextViewActive() {
+        presenterOutput?.makeWordDescriptionTextViewActive()
+    }
+    
+    func wordTextFieldShouldClearAction() {
+        presenterOutput?.wordTextFieldShouldClearAction()
+    }
+    
 }
 
 // MARK: - EditWordPresenterInputProtocol
@@ -117,6 +132,14 @@ extension EditWordPresenter: EditWordPresenterInputProtocol {
     
     var editButtonIsSelected: Bool {
         return interactor.editButtonIsSelected
+    }
+    
+    var textFieldDelegate: UITextFieldDelegate {
+        return interactor.textFieldDelegate
+    }
+    
+    var textViewDelegate: UITextViewDelegate {
+        return interactor.textViewDelegate
     }
     
     func editWordButtonClicked() {
@@ -133,6 +156,10 @@ extension EditWordPresenter: EditWordPresenterInputProtocol {
     
     func deleteButtonClicked() {
         interactor.deleteButtonClicked()
+    }
+    
+    func wordTextFieldDidChange(_ text: String?) {
+        interactor.wordTextFieldDidChange(text)
     }
     
 }
