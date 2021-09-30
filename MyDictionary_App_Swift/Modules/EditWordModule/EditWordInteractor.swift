@@ -154,18 +154,35 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
     
     func updateButtonClicked() {
         
+        // Check If Word Text Is Empty
         //
         if (MDConstants.Text.textIsEmpty(dataManager.getWord.wordText)) {
             interactorOutput?.showError(MDEditWordError.wordTextIsEmpty)
             return
         }
+        
+        // Check If Word Description Text Is Empty
         //
         if (MDConstants.Text.textIsEmpty(dataManager.getWord.wordDescription)) {
             interactorOutput?.showError(MDEditWordError.wordDescriptionIsEmpty)
             return
         }
+        
+        // Check If Updated Word Text And Description is Equal Initial Value
         //
-        //
+        if (dataManager.updatedWordTextAndDescriptionIsEqualToInitialValue) {
+            
+            // Close Module
+            interactorOutput?.closeModule()
+            //
+            
+        } else {
+            
+            //
+            
+            //
+            
+        }
         
     }
     
