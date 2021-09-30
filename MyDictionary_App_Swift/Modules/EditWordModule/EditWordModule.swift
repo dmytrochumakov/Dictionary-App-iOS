@@ -27,7 +27,13 @@ extension EditWordModule {
                                                                                    editButtonIsSelected: false)
         var dataManager: EditWordDataManagerProtocol = EditWordDataManager.init(dataProvider: dataProvider)
         
-        let interactor: EditWordInteractorProtocol = EditWordInteractor.init(dataManager: dataManager)
+        let interactor: EditWordInteractorProtocol = EditWordInteractor.init(dataManager: dataManager,
+                                                                             wordManager: MDWordManager.init(jwtManager: MDJWTManager.init(userMemoryStorage: MDConstants.AppDependencies.dependencies.userStorage.memoryStorage,
+                                                                                                                                           jwtStorage: MDConstants.AppDependencies.dependencies.jwtStorage,
+                                                                                                                                           apiJWT: MDConstants.AppDependencies.dependencies.apiJWT),
+                                                                                                             apiWord: MDConstants.AppDependencies.dependencies.apiWord,
+                                                                                                             wordStorage: MDConstants.AppDependencies.dependencies.wordStorage),
+                                                                             bridge: MDConstants.AppDependencies.dependencies.bridge)
         var router: EditWordRouterProtocol = EditWordRouter.init()
         let presenter: EditWordPresenterProtocol = EditWordPresenter.init(interactor: interactor, router: router)
         let vc = EditWordViewController.init(presenter: presenter)

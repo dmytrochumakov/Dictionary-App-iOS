@@ -41,10 +41,18 @@ protocol EditWordInteractorProtocol: EditWordInteractorInputProtocol,
 final class EditWordInteractor: EditWordInteractorProtocol {
     
     fileprivate let dataManager: EditWordDataManagerInputProtocol
+    fileprivate let wordManager: MDWordManagerProtocol
+    fileprivate let bridge: MDBridgeProtocol
+    
     internal weak var interactorOutput: EditWordInteractorOutputProtocol?
     
-    init(dataManager: EditWordDataManagerInputProtocol) {
+    init(dataManager: EditWordDataManagerInputProtocol,
+         wordManager: MDWordManagerProtocol,
+         bridge: MDBridgeProtocol) {
+        
         self.dataManager = dataManager
+        self.wordManager = wordManager
+        self.bridge = bridge
     }
     
     deinit {
@@ -62,7 +70,7 @@ extension EditWordInteractor: EditWordDataManagerOutputProtocol {
 extension EditWordInteractor: EditWordInteractorInputProtocol {
     
     var getWordText: String {
-        return dataManager.getWordText
+        return dataManager.getWord.wordText
     }
     
     var editButtonIsSelected: Bool {
@@ -78,16 +86,16 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
         
         // Fill Fields
         //
-        interactorOutput?.fillWordTextField(dataManager.getWordText)
+        interactorOutput?.fillWordTextField(dataManager.getWord.wordText)
         //
-        interactorOutput?.fillWordDescriptionTextView(dataManager.getWordDescription)
+        interactorOutput?.fillWordDescriptionTextView(dataManager.getWord.wordDescription)
         //
         
         // Update Counters
         //
-        interactorOutput?.updateWordTextFieldCounter(dataManager.getWordText.count)
+        interactorOutput?.updateWordTextFieldCounter(dataManager.getWord.wordText.count)
         //
-        interactorOutput?.updateWordDescriptionTextViewCounter(dataManager.getWordDescription.count)
+        interactorOutput?.updateWordDescriptionTextViewCounter(dataManager.getWord.wordDescription.count)
         //
         
         // Update Top Constraint And isHidden in Views
@@ -110,7 +118,42 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
     }
     
     func deleteButtonClicked() {
-        debugPrint(#function, Self.self)
+        
+        // Show Progress HUD
+        interactorOutput?.showProgressHUD()
+        //
+        wordManager.deleteWordFromApiAndAllStorage(byUserId: dataManager.getWord.userId,
+                                                   byCourseId: dataManager.getWord.courseId,
+                                                   byWordId: dataManager.getWord.wordId) { [unowned self] result in
+            
+            switch result {
+                
+            case .success:
+                
+                // Hide Progress HUD
+                interactorOutput?.hideProgressHUD()
+                // Pass Deleted Word
+                bridge.didDeleteWord?(dataManager.getWord)
+                // Close Module
+                interactorOutput?.closeModule()
+                //
+                break
+                //
+                
+            case .failure(let error):
+                
+                // Hide Progress HUD
+                interactorOutput?.hideProgressHUD()
+                // Display Error
+                interactorOutput?.showError(error)
+                //
+                break
+                //
+                
+            }
+            
+        }
+        //
     }
     
 }
