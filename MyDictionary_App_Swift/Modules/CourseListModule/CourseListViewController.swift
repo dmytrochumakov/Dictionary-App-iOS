@@ -44,12 +44,6 @@ final class CourseListViewController: MDBaseLargeTitledNavigationBarViewControll
         return searchBar
     }()
     
-    fileprivate lazy var hud: MBProgressHUD = {
-        let hud: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
-        hud.mode = .indeterminate
-        return hud
-    }()
-    
     init(presenter: CourseListPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: MDLocalizedText.courses.localized,
@@ -117,13 +111,13 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     
     func showProgressHUD() {
         DispatchQueue.main.async {
-            self.hud.show(animated: true)
+            MBProgressHUD.showAdded(to: self.view, animated: true)
         }
     }
     
     func hideProgressHUD() {
         DispatchQueue.main.async {
-            self.hud.hide(animated: true)
+            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
     
