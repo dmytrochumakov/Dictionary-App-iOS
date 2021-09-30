@@ -7,8 +7,8 @@
 import UIKit
 
 protocol AddWordInteractorInputProtocol {
-    var textFieldDelegate: MDAddWordTextFieldDelegateProtocol { get }
-    var textViewDelegate: MDAddWordTextViewDelegateProtocol { get }
+    var textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol { get }
+    var textViewDelegate: MDWordTextViewDelegateImplementationProtocol { get }
     func addButtonClicked()
     func wordTextFieldDidChange(_ text: String?)
 }
@@ -38,14 +38,14 @@ final class AddWordInteractor: NSObject,
     fileprivate let wordManager: MDWordManagerProtocol
     fileprivate let bridge: MDBridgeProtocol
     
-    var textFieldDelegate: MDAddWordTextFieldDelegateProtocol
-    var textViewDelegate: MDAddWordTextViewDelegateProtocol
+    var textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol
+    var textViewDelegate: MDWordTextViewDelegateImplementationProtocol
     
     internal weak var interactorOutput: AddWordInteractorOutputProtocol?
     
     init(dataManager: AddWordDataManagerInputProtocol,
-         textFieldDelegate: MDAddWordTextFieldDelegateProtocol,
-         textViewDelegate: MDAddWordTextViewDelegateProtocol,
+         textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol,
+         textViewDelegate: MDWordTextViewDelegateImplementationProtocol,
          wordManager: MDWordManagerProtocol,
          bridge: MDBridgeProtocol) {
         

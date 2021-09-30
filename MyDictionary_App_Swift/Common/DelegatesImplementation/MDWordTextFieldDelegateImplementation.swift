@@ -1,20 +1,20 @@
 //
-//  MDAddWordTextFieldDelegate.swift
+//  MDWordTextFieldDelegateImplementation.swift
 //  MyDictionary_App_Swift
 //
-//  Created by Dmytro Chumakov on 27.09.2021.
+//  Created by Dmytro Chumakov on 30.09.2021.
 //
 
 import UIKit
 
-protocol MDAddWordTextFieldDelegateProtocol: UITextFieldDelegate {
+protocol MDWordTextFieldDelegateImplementationProtocol: UITextFieldDelegate {
     var wordTextFieldShouldReturnAction: (() -> Void)? { get set }
     var updateWordTextFieldCounterAction: ((Int) -> Void)? { get set }
     var wordTextFieldShouldClearAction: (() -> Void)? { get set }
 }
 
-final class MDAddWordTextFieldDelegate: NSObject,
-                                        MDAddWordTextFieldDelegateProtocol {
+final class MDWordTextFieldDelegateImplementation: NSObject,
+                                                   MDWordTextFieldDelegateImplementationProtocol {
     
     
     var wordTextFieldShouldReturnAction: (() -> Void)?
@@ -23,7 +23,7 @@ final class MDAddWordTextFieldDelegate: NSObject,
     
 }
 
-extension MDAddWordTextFieldDelegate {
+extension MDWordTextFieldDelegateImplementation {
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         wordTextFieldShouldClearAction?()
