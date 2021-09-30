@@ -7,11 +7,16 @@
 import Foundation
 
 protocol EditWordDataManagerInputProtocol {
+    
     var getWord: WordResponse { get }
     var getEditButtonIsSelected: Bool { get }
+    
+    var updatedWordTextAndDescriptionIsEqualToInitialValue: Bool { get }
+    
     func setTrueSelectedEditButton()
     func setWordText(_ text: String?)
     func setWordDescription(_ text: String?)
+    
 }
 
 protocol EditWordDataManagerOutputProtocol: AnyObject {
@@ -48,6 +53,10 @@ extension EditWordDataManager: EditWordDataManagerInputProtocol {
         return dataProvider.word
     }
     
+    var updatedWordTextAndDescriptionIsEqualToInitialValue: Bool {
+        return (updatedWordTextIsEqualToInitialValue && updatedWordDescriptionIsEqualToInitialValue)
+    }
+    
     func setTrueSelectedEditButton() {
         dataProvider.editButtonIsSelected = true
     }
@@ -60,6 +69,19 @@ extension EditWordDataManager: EditWordDataManagerInputProtocol {
     func setWordDescription(_ text: String?) {
         guard let text = text else { return }
         dataProvider.word.wordDescription = text
+    }
+    
+}
+
+// MARK: - Private Methods
+fileprivate extension EditWordDataManager {
+    
+    var updatedWordTextIsEqualToInitialValue: Bool {
+        return (dataProvider.word.wordText == dataProvider.copiedWord.wordText)
+    }
+    
+    var updatedWordDescriptionIsEqualToInitialValue: Bool {
+        return (dataProvider.word.wordDescription == dataProvider.copiedWord.wordDescription)
     }
     
 }
