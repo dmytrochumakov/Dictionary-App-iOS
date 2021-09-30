@@ -178,7 +178,47 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
             
         } else {
             
+            // Show Progress HUD
+            interactorOutput?.showProgressHUD()
             //
+            
+            // Update Word In Api And All Storage
+            //
+            wordManager.updateWordInApiAndAllStorage(courseId: dataManager.getWord.courseId,
+                                                     wordId: dataManager.getWord.wordId,
+                                                     languageId: dataManager.getWord.languageId,
+                                                     newWordText: dataManager.getWord.wordText,
+                                                     newWordDescription: dataManager.getWord.wordDescription,
+                                                     languageName: dataManager.getWord.languageName) { [unowned self] result in
+                
+                switch result {
+                    
+                case .success:
+                    
+                    // Hide Progress HUD
+                    interactorOutput?.hideProgressHUD()
+                    // Pass Updated Word
+                    bridge.didUpdateWord?(dataManager.getWord)
+                    // Close Module
+                    interactorOutput?.closeModule()
+                    //
+                    break
+                    //
+                    
+                case .failure(let error):
+                    
+                    // Hide Progress HUD
+                    interactorOutput?.hideProgressHUD()
+                    // Display Error
+                    interactorOutput?.showError(error)
+                    //
+                    break
+                    //
+                    
+                }
+                
+            }
+            
             
             //
             
