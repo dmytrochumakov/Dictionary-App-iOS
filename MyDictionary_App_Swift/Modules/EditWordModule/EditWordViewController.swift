@@ -201,7 +201,7 @@ extension EditWordViewController: EditWordPresenterOutputProtocol {
                                     maxCount: MDConstants.Text.MaxCountCharacters.wordTextField)
     }
     
-    func updateWordDescriptionTextViewCounter(_ count: Int) {
+    func updateWordDescriptionTextViewCounter(_ count: Int) {        
         updateWordDescriptionCounterLabel(currentCount: count,
                                           maxCount: MDConstants.Text.MaxCountCharacters.wordDescriptionTextView)
     }
@@ -439,15 +439,8 @@ fileprivate extension EditWordViewController {
     
     func configureUI() {
         //
-        configureWordDescriptionCounterLabel()
-        //
         createKeyboardHandler()
         //
-    }
-    
-    func configureWordDescriptionCounterLabel() {
-        updateWordDescriptionCounterLabel(currentCount: .zero,
-                                          maxCount: MDConstants.Text.MaxCountCharacters.wordDescriptionTextView)
     }
     
     func createKeyboardHandler() {
