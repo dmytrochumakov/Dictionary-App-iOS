@@ -56,11 +56,6 @@ final class AccountViewController: MDBaseTitledBackNavigationBarViewController {
         return button
     }()
     
-    fileprivate lazy var hud: MBProgressHUD = {
-        let hud: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
-        return hud
-    }()
-    
     init(presenter: AccountPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: MDLocalizedText.account.localized,
@@ -113,11 +108,15 @@ extension AccountViewController: AccountPresenterOutputProtocol {
     }
     
     func showProgressHUD() {
-        hud.show(animated: true)
+        DispatchQueue.main.async {
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+        }
     }
     
     func hideProgressHUD() {
-        hud.show(animated: true)
+        DispatchQueue.main.async {
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
     }
     
 }

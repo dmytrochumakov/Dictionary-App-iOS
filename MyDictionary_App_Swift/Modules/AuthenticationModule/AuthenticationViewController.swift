@@ -82,14 +82,7 @@ final class AuthenticationViewController: MDBaseLargeTitledBackViewControllerWit
         return button
     }()
     
-    fileprivate lazy var hud: MBProgressHUD = {
-        let hud: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
-        hud.mode = .annularDeterminate
-        hud.label.text = MDLocalizedText.pleaseWaitForDataSync.localized
-        hud.label.font = MDUIResources.Font.MyriadProRegular.font()
-        hud.label.textColor = MDUIResources.Color.md_3C3C3C.color()
-        return hud
-    }()
+    fileprivate var hud: MBProgressHUD!
     
     init(presenter: AuthenticationPresenterInputProtocol) {
         self.presenter = presenter
@@ -133,25 +126,35 @@ extension AuthenticationViewController: AuthenticationPresenterOutputProtocol {
     }
     
     func hideKeyboard() {
-        MDConstants.Keyboard.hideKeyboard(rootView: self.view)
+        DispatchQueue.main.async {
+            MDConstants.Keyboard.hideKeyboard(rootView: self.view)
+        }
     }
     
     func showError(_ error: Error) {
-        UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
-                                                message: error.localizedDescription,
-                                                presenter: self)
+        DispatchQueue.main.async {
+            UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
+                                                    message: error.localizedDescription,
+                                                    presenter: self)
+        }
     }
     
     func showProgressHUD() {
-        hud.show(animated: true)
+        DispatchQueue.main.async {
+            self.showHUD()
+        }
     }
     
     func hideProgressHUD() {
-        hud.hide(animated: true)
+        DispatchQueue.main.async {
+            self.hideHUD()
+        }
     }
     
     func updateHUDProgress(_ progress: Float) {
-        hud.progress = progress
+        DispatchQueue.main.async {
+            self.hud.progress = progress
+        }
     }
     
 }
@@ -385,6 +388,42 @@ fileprivate extension AuthenticationViewController {
     
     @objc func passwordTextFieldEditingDidChangeAction() {
         presenter.passwordTextFieldEditingDidChangeAction(passwordTextField.text)
+    }
+    
+}
+
+// MARK: - Create HUD
+fileprivate extension AuthenticationViewController {
+    
+    func createHUD() {
+        let hud: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.mode = .annularDeterminate
+        hud.label.text = MDLocalizedText.pleaseWaitForDataSync.localized
+        hud.label.font = MDUIResources.Font.MyriadProRegular.font()
+        hud.label.textColor = MDUIResources.Color.md_3C3C3C.color()
+        self.hud = hud
+    }
+    
+    func showHUD() {
+        if (self.hud == nil) {
+            //
+            self.createHUD()
+            //
+            self.hud.show(animated: true)
+            //
+        } else {
+            //
+            self.hud.show(animated: true)
+            //
+        }
+    }
+    
+    func hideHUD() {
+        //
+        self.hud.hide(animated: true)
+        //
+        self.hud = nil
+        //
     }
     
 }

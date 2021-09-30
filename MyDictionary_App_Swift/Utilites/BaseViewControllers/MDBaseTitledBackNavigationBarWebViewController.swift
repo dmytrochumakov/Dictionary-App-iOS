@@ -18,12 +18,6 @@ open class MDBaseTitledBackNavigationBarWebViewController: MDBaseTitledBackNavig
         return webView
     }()
     
-    fileprivate lazy var hud: MBProgressHUD = {
-        let hud: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
-        hud.mode = .indeterminate
-        return hud
-    }()
-    
     init(url: URL,
          title: String,
          navigationBarBackgroundImage: UIImage) {
@@ -72,11 +66,15 @@ extension MDBaseTitledBackNavigationBarWebViewController: WKNavigationDelegate {
 extension MDBaseTitledBackNavigationBarWebViewController: MDShowHideProgressHUD {
     
     func showProgressHUD() {
-        hud.show(animated: true)
+        DispatchQueue.main.async {
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+        }
     }
     
     func hideProgressHUD() {
-        hud.hide(animated: true)
+        DispatchQueue.main.async {
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
     }
     
 }
