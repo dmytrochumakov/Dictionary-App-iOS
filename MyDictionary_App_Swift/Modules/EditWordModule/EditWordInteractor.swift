@@ -153,7 +153,20 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
     }
     
     func updateButtonClicked() {
-        debugPrint(#function, Self.self)
+        
+        //
+        if (MDConstants.Text.textIsEmpty(dataManager.getWord.wordText)) {
+            interactorOutput?.showError(MDEditWordError.wordTextIsEmpty)
+            return
+        }
+        //
+        if (MDConstants.Text.textIsEmpty(dataManager.getWord.wordDescription)) {
+            interactorOutput?.showError(MDEditWordError.wordDescriptionIsEmpty)
+            return
+        }
+        //
+        //
+        
     }
     
     func deleteButtonClicked() {
