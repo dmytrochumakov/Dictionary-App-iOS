@@ -212,7 +212,7 @@ fileprivate extension WordListInteractor {
         
         bridge.didDeleteWord = { [unowned self] (deleteWord) in
             //
-            interactorOutput?.deleteRow(atIndexPath: dataManager.indexPath(atWordResponse: deleteWord))
+            interactorOutput?.deleteRow(atIndexPath: dataManager.deleteWord(atWordResponse: deleteWord))
             //
         }
         
