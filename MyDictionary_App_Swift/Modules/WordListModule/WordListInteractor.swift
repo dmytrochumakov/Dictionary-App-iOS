@@ -117,6 +117,8 @@ fileprivate extension WordListInteractor {
         //
         bridge_DidAddWord_Subscribe()
         //
+        bridge_DidDeleteWord_Subscribe()
+        //
         tableViewDelegate_DidSelectWord_Subscribe()
         //
     }
@@ -201,6 +203,16 @@ fileprivate extension WordListInteractor {
         bridge.didAddWord = { [unowned self] (word) in
             //
             interactorOutput?.insertRow(atIndexPath: dataManager.addWord(word))
+            //
+        }
+        
+    }
+    
+    func bridge_DidDeleteWord_Subscribe() {
+        
+        bridge.didDeleteWord = { [unowned self] (deleteWord) in
+            //
+            interactorOutput?.deleteRow(atIndexPath: dataManager.indexPath(atWordResponse: deleteWord))
             //
         }
         
