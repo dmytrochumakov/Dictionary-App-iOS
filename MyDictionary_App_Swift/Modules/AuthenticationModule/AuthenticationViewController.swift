@@ -10,6 +10,20 @@ final class AuthenticationViewController: MDBaseLargeTitledBackViewControllerWit
     
     fileprivate let presenter: AuthenticationPresenterInputProtocol
     
+    fileprivate let scrollView: UIScrollView = {
+        let scrollView: UIScrollView = .init()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    fileprivate let contentView: UIView = {
+        let view: UIView = .init()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    fileprivate var keyboardHandler: KeyboardHandler!
+    
     fileprivate static let nicknameTextFieldHeight: CGFloat = 48
     fileprivate static let nicknameTextFieldTopOffset: CGFloat = 24
     fileprivate static let nicknameTextFieldLeftOffset: CGFloat = 16
@@ -80,7 +94,7 @@ final class AuthenticationViewController: MDBaseLargeTitledBackViewControllerWit
         self.presenter = presenter
         super.init(title: MDLocalizedText.login.localized,
                    navigationBarBackgroundImage: MDUIResources.Image.background_navigation_bar_0.image,
-                   backgroundImage: MDUIResources.Image.background_typography_1.image)        
+                   backgroundImage: MDUIResources.Image.background_typography_1.image)
     }
     
     deinit {
@@ -145,26 +159,44 @@ extension AuthenticationViewController: AuthenticationPresenterOutputProtocol {
 fileprivate extension AuthenticationViewController {
     
     func addViews() {
+        addScrollView()
+        addContentView()
+        bringSubviewsToFront()
         addNicknameTextField()
         addPasswordTextField()
         addLoginButton()
     }
     
+    func bringSubviewsToFront() {
+        view.bringSubviewToFront(navigationBarView)
+        view.bringSubviewToFront(navigationBarBackgroundImageView)
+        view.bringSubviewToFront(backButton)
+        view.bringSubviewToFront(titleLabel)
+    }
+    
+    func addScrollView() {
+        view.addSubview(scrollView)
+    }
+    
+    func addContentView() {
+        scrollView.addSubview(contentView)
+    }
+    
     func addNicknameTextField() {
         nicknameTextField.delegate = presenter.textFieldDelegate
         nicknameTextField.addTarget(self, action: #selector(nicknameTextFieldEditingDidChangeAction), for: .editingChanged)
-        view.addSubview(nicknameTextField)
+        contentView.addSubview(nicknameTextField)
     }
     
     func addPasswordTextField() {
         passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingDidChangeAction), for: .editingChanged)
         passwordTextField.delegate = presenter.textFieldDelegate
-        view.addSubview(passwordTextField)
+        contentView.addSubview(passwordTextField)
     }
     
     func addLoginButton() {
         loginButton.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
-        view.addSubview(loginButton)
+        contentView.addSubview(loginButton)
     }
     
 }
@@ -173,18 +205,43 @@ fileprivate extension AuthenticationViewController {
 fileprivate extension AuthenticationViewController {
     
     func addConstraints() {
+        addScrollViewConstraints()
+        addContentViewConstraints()
         addNicknameTextFieldConstraints()
         addPasswordTextFieldConstraints()
         addLoginButtonConstraints()
+    }
+    
+    func addScrollViewConstraints() {
+        
+        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.scrollView,
+                                                         toItem: self.view)
+        
+    }
+    
+    func addContentViewConstraints() {
+        
+        NSLayoutConstraint.addItemEqualToItemAndActivate(item: self.contentView,
+                                                         toItem: self.scrollView)
+        
+        NSLayoutConstraint.addEqualCenterXConstraint(item: self.contentView,
+                                                     toItem: self.scrollView,
+                                                     constant: .zero)
+        
+        NSLayoutConstraint.addEqualCenterYConstraint(item: self.contentView,
+                                                     toItem: self.scrollView,
+                                                     constant: .zero)
+        
     }
     
     func addNicknameTextFieldConstraints() {
         
         NSLayoutConstraint.addEqualConstraint(item: self.nicknameTextField,
                                               attribute: .top,
-                                              toItem: self.navigationBarView,
-                                              attribute: .bottom,
-                                              constant: Self.nicknameTextFieldTopOffset)
+                                              toItem: self.contentView,
+                                              attribute: .top,
+                                              constant: MDConstants.NavigationBar.heightPlusStatusBarHeight(fromNavigationController: navigationController,
+                                                                                                            prefersLargeTitles: true) + Self.nicknameTextFieldTopOffset)
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.nicknameTextField,
                                                   toItem: self.backgroundImageView,
@@ -248,10 +305,15 @@ fileprivate extension AuthenticationViewController {
     
     func configureUI() {
         configureSelfView()
+        createKeyboardHandler()
     }
     
     func configureSelfView() {
         self.view.backgroundColor = MDUIResources.Color.md_FFFFFF.color()
+    }
+    
+    func createKeyboardHandler() {
+        self.keyboardHandler = KeyboardHandler.createKeyboardHandler(scrollView: self.scrollView)
     }
     
 }
