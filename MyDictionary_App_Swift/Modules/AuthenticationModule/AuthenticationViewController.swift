@@ -12,6 +12,7 @@ final class AuthenticationViewController: MDBaseLargeTitledBackViewControllerWit
     
     fileprivate let scrollView: UIScrollView = {
         let scrollView: UIScrollView = .init()
+        scrollView.keyboardDismissMode = .interactive
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()

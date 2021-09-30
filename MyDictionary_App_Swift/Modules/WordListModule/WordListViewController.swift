@@ -22,6 +22,7 @@ final class WordListViewController: MDBaseLargeTitledBackNavigationBarViewContro
         tableView.register(MDWordListCell.self)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
+        tableView.keyboardDismissMode = .interactive
         return tableView
     }()
     
