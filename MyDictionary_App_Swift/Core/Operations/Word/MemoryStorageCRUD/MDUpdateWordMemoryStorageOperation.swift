@@ -11,16 +11,19 @@ final class MDUpdateWordMemoryStorageOperation: MDOperation {
     
     fileprivate let wordStorage: MDWordMemoryStorage
     fileprivate let wordId: Int64
+    fileprivate let newWordText: String
     fileprivate let newWordDescription: String
     fileprivate let result: MDOperationResultWithCompletion<Void>?
     
     init(wordStorage: MDWordMemoryStorage,
          wordId: Int64,
+         newWordText: String,
          newWordDescription: String,
          result: MDOperationResultWithCompletion<Void>?) {
         
         self.wordStorage = wordStorage
         self.wordId = wordId
+        self.newWordText = newWordText
         self.newWordDescription = newWordDescription
         self.result = result
         
@@ -33,7 +36,8 @@ final class MDUpdateWordMemoryStorageOperation: MDOperation {
             self.result?(.failure(MDEntityOperationError.cantFindEntity));
             self.finish();
             return
-        }        
+        }
+        self.wordStorage.arrayWords[index].wordText = self.newWordText
         self.wordStorage.arrayWords[index].wordDescription = self.newWordDescription
         self.result?(.success(()))
         self.finish()

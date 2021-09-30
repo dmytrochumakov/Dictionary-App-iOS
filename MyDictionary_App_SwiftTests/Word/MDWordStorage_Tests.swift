@@ -178,7 +178,8 @@ extension MDWordStorage_Tests {
             
             case .success(let createdWord):
                 
-                self.wordStorage.updateWord(byWordID: createdWord.wordId,                                            
+                self.wordStorage.updateWord(byWordID: createdWord.wordId,
+                                            newWordText: Constants_For_Tests.mockedWordForUpdate.wordText,
                                             newWordDescription: Constants_For_Tests.mockedWordForUpdate.wordDescription,
                                             storageType: storageType) { updateResults in
                     

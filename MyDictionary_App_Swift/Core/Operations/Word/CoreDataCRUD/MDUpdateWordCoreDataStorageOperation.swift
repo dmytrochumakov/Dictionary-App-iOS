@@ -14,6 +14,7 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
     fileprivate let coreDataStack: MDCoreDataStack
     fileprivate let wordStorage: MDWordCoreDataStorage
     fileprivate let wordId: Int64
+    fileprivate let newWordText: String
     fileprivate let newWordDescription: String
     fileprivate let result: MDOperationResultWithCompletion<Void>?
     
@@ -21,6 +22,7 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
          wordStorage: MDWordCoreDataStorage,
          coreDataStack: MDCoreDataStack,
          wordId: Int64,
+         newWordText: String,
          newWordDescription: String,
          result: MDOperationResultWithCompletion<Void>?) {
         
@@ -28,6 +30,7 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
         self.coreDataStack = coreDataStack
         self.wordStorage = wordStorage
         self.wordId = wordId
+        self.newWordText = newWordText
         self.newWordDescription = newWordDescription
         self.result = result
         
@@ -38,7 +41,9 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
         
         let batchUpdateRequest = NSBatchUpdateRequest(entityName: CoreDataEntityName.CDWordResponseEntity)
         
-        batchUpdateRequest.propertiesToUpdate = [CDWordResponseEntityAttributeName.wordDescription : self.newWordDescription]
+        batchUpdateRequest.propertiesToUpdate = [CDWordResponseEntityAttributeName.wordText : self.newWordText,
+                                                 CDWordResponseEntityAttributeName.wordDescription : self.newWordDescription
+        ]
         
         batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordResponseEntityAttributeName.wordId) == %i", self.wordId)
         
@@ -49,7 +54,7 @@ final class MDUpdateWordCoreDataStorageOperation: MDOperation {
             coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
                 
                 switch result {
-                
+                    
                 case .success:
                     self?.result?(.success(()))
                     self?.finish()
