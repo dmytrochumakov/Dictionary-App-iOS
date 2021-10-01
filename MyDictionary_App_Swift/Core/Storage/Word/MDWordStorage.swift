@@ -40,6 +40,10 @@ protocol MDWordStorageProtocol: MDStorageProtocol {
                     storageType: MDStorageType,
                     _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
     
+    func deleteAllWords(byCourseId courseId: Int64,
+                        storageType: MDStorageType,
+                        _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
+    
     func deleteAllWords(storageType: MDStorageType,
                         _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>))
     
@@ -493,6 +497,65 @@ extension MDWordStorage {
             }
             
         }
+    }
+    
+    func deleteAllWords(byCourseId courseId: Int64,
+                        storageType: MDStorageType,
+                        _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
+        
+        switch storageType {
+            
+        case .memory:
+            
+            memoryStorage.deleteAllWords(byCourseId: courseId) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .coreData:
+            
+            coreDataStorage.deleteAllWords(byCourseId: courseId) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            
+        case .all:
+            
+            // Initialize Dispatch Group
+            let dispatchGroup: DispatchGroup = .init()
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
+            
+            // Delete From Memory
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            memoryStorage.deleteAllWords(byCourseId: courseId) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Delete From Core Data
+            // Dispatch Group Enter
+            dispatchGroup.enter()
+            coreDataStorage.deleteAllWords(byCourseId: courseId) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                // Dispatch Group Leave
+                dispatchGroup.leave()
+                
+            }
+            
+            // Notify And Pass Final Result
+            dispatchGroup.notify(queue: .main) {
+                completionHandler(finalResult)
+            }
+            
+        }
+        
     }
     
     func deleteAllWords(storageType: MDStorageType,

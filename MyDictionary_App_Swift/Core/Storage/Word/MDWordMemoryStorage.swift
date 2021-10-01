@@ -154,6 +154,18 @@ extension MDWordMemoryStorage {
         
     }
     
+    func deleteAllWords(byCourseId courseId: Int64,
+                        _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+        
+        let operation: MDDeleteAllWordsByCourseIdMemoryStorageOperation = .init(wordStorage: self,
+                                                                                courseId: courseId) { result in
+            completionHandler(result)
+        }
+        
+        operationQueueService.enqueue(operation)
+        
+    }
+    
     func deleteAllWords(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         let operation: MDDeleteAllWordsMemoryStorageOperation = .init(wordStorage: self) { result in

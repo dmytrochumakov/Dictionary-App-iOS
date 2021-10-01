@@ -173,6 +173,17 @@ extension MDWordCoreDataStorage {
         operationQueueService.enqueue(operation)
     }
     
+    func deleteAllWords(byCourseId courseId: Int64,
+                        _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+        let operation: MDDeleteAllWordsByCourseIdCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
+                                                                                  coreDataStack: self.coreDataStack,
+                                                                                  coreDataStorage: self,
+                                                                                  courseId: courseId) { result in
+            completionHandler(result)
+        }
+        operationQueueService.enqueue(operation)
+    }
+    
     func deleteAllWords(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         let operation: MDDeleteAllWordsCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
                                                                         coreDataStack: self.coreDataStack,
