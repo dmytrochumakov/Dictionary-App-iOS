@@ -29,7 +29,8 @@ extension CourseListModule {
         
         let interactor: CourseListInteractorProtocol = CourseListInteractor.init(courseManager: MDCourseManager.init(jwtManager: jwtManager,
                                                                                                                      apiCourse: MDConstants.AppDependencies.dependencies.apiCourse,
-                                                                                                                     courseStorage: MDConstants.AppDependencies.dependencies.courseStorage),
+                                                                                                                     courseStorage: MDConstants.AppDependencies.dependencies.courseStorage,
+                                                                                                                     wordStorage: MDConstants.AppDependencies.dependencies.wordStorage),
                                                                                  dataManager: dataManager,
                                                                                  fillMemoryService: MDConstants.AppDependencies.dependencies.fillMemoryService,
                                                                                  collectionViewDelegate: CourseListTableViewDelegate.init(dataProvider: dataProvider),

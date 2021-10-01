@@ -22,14 +22,17 @@ final class MDCourseManager: MDCourseManagerProtocol {
     fileprivate let jwtManager: MDJWTManagerProtocol
     fileprivate let apiCourse: MDAPICourseProtocol
     fileprivate let courseStorage: MDCourseStorageProtocol
+    fileprivate let wordStorage: MDWordStorageProtocol
     
     init(jwtManager: MDJWTManagerProtocol,
          apiCourse: MDAPICourseProtocol,
-         courseStorage: MDCourseStorageProtocol) {
+         courseStorage: MDCourseStorageProtocol,
+         wordStorage: MDWordStorageProtocol) {
         
         self.jwtManager = jwtManager
         self.apiCourse = apiCourse
         self.courseStorage = courseStorage
+        self.wordStorage = wordStorage
         
     }
     
@@ -148,7 +151,7 @@ extension MDCourseManager {
                     case .success:
                         //
                         courseStorage.deleteCourse(storageType: .all,
-                                                   fromCourseId: courseId) { (storageDeleteCourseResults) in
+                                                   fromCourseId: courseId) { [unowned self] (storageDeleteCourseResults) in
                             
                             storageDeleteCourseResults.forEach { storageDeleteCourseResult in
                                 
@@ -156,10 +159,33 @@ extension MDCourseManager {
                                     
                                 case .success:
                                     
-                                    resultCount += 1
-                                    
-                                    if (resultCount == storageDeleteCourseResults.count) {
-                                        completionHandler(.success(()))
+                                    wordStorage.deleteAllWords(byCourseId: courseId,
+                                                               storageType: storageDeleteCourseResult.storageType) { (deleteAllWordsResults) in
+                                        
+                                        deleteAllWordsResults.forEach { deleteAllWordsResult in
+                                            
+                                            switch deleteAllWordsResult.result {
+                                                
+                                            case .success:
+                                                
+                                                resultCount += 1
+                                                
+                                                if (resultCount == deleteAllWordsResults.count) {
+                                                    completionHandler(.success(()))
+                                                }
+                                                
+                                            case .failure(let error):
+                                                
+                                                //
+                                                completionHandler(.failure(error))
+                                                //
+                                                break
+                                                //
+                                                
+                                            }
+                                            
+                                        }
+                                        
                                     }
                                     
                                 case .failure(let error):

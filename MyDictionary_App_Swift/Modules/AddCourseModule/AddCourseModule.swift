@@ -32,7 +32,8 @@ extension AddCourseModule {
                                                                                                                                                  jwtStorage: MDConstants.AppDependencies.dependencies.jwtStorage,
                                                                                                                                                  apiJWT: MDConstants.AppDependencies.dependencies.apiJWT),
                                                                                                                    apiCourse: MDConstants.AppDependencies.dependencies.apiCourse,
-                                                                                                                   courseStorage: MDConstants.AppDependencies.dependencies.courseStorage))
+                                                                                                                   courseStorage: MDConstants.AppDependencies.dependencies.courseStorage,
+                                                                                                                   wordStorage: MDConstants.AppDependencies.dependencies.wordStorage))
         
         var router: AddCourseRouterProtocol = AddCourseRouter.init()
         let presenter: AddCoursePresenterProtocol = AddCoursePresenter.init(interactor: interactor, router: router)
