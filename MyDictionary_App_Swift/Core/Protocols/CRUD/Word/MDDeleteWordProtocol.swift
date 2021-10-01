@@ -12,6 +12,9 @@ protocol MDDeleteWordProtocol {
     func deleteWord(byWordId wordId: Int64,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
     
+    func deleteAllWords(byCourseId courseId: Int64,
+                        _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    
     func deleteAllWords(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
     
 }
