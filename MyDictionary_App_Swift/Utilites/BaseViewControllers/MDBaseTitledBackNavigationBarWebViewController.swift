@@ -6,7 +6,6 @@
 //
 
 import WebKit
-import MBProgressHUD
 
 open class MDBaseTitledBackNavigationBarWebViewController: MDBaseTitledBackNavigationBarViewController {
     
@@ -16,6 +15,10 @@ open class MDBaseTitledBackNavigationBarWebViewController: MDBaseTitledBackNavig
         webView.backgroundColor = .clear
         webView.allowsBackForwardNavigationGestures = true
         return webView
+    }()
+    
+    fileprivate let hud: MDProgressHUDHelperProtocol = {
+        return MDProgressHUDHelper.init()
     }()
     
     init(url: URL,
@@ -49,7 +52,7 @@ open class MDBaseTitledBackNavigationBarWebViewController: MDBaseTitledBackNavig
 extension MDBaseTitledBackNavigationBarWebViewController: WKNavigationDelegate {
     
     public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        showProgressHUD()        
+        showProgressHUD()
     }
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -67,13 +70,13 @@ extension MDBaseTitledBackNavigationBarWebViewController: MDShowHideProgressHUD 
     
     func showProgressHUD() {
         DispatchQueue.main.async {
-            MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.hud.showProgressHUD(withConfiguration: .init(view: self.view))
         }
     }
     
     func hideProgressHUD() {
         DispatchQueue.main.async {
-            MBProgressHUD.hide(for: self.view, animated: true)
+            self.hud.hideProgressHUD(animated: true)
         }
     }
     

@@ -5,7 +5,7 @@
 //  Created by Dmytro Chumakov on 16.05.2021.
 //
 
-import MBProgressHUD
+import UIKit
 
 final class WordListViewController: MDBaseLargeTitledBackNavigationBarViewController {
     
@@ -33,6 +33,10 @@ final class WordListViewController: MDBaseLargeTitledBackNavigationBarViewContro
         button.setImage(MDUIResources.Image.add.image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    fileprivate let hud: MDProgressHUDHelperProtocol = {
+        return MDProgressHUDHelper.init()
     }()
     
     init(presenter: WordListPresenterInputProtocol) {
@@ -106,13 +110,13 @@ extension WordListViewController: WordListPresenterOutputProtocol {
     
     func showProgressHUD() {
         DispatchQueue.main.async {
-            MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.hud.showProgressHUD(withConfiguration: .init(view: self.view))
         }
     }
     
     func hideProgressHUD() {
         DispatchQueue.main.async {
-            MBProgressHUD.hide(for: self.view, animated: true)
+            self.hud.hideProgressHUD(animated: true)
         }
     }
     

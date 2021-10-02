@@ -4,7 +4,7 @@
 //
 //  Created Dmytro Chumakov on 23.09.2021.
 
-import MBProgressHUD
+import UIKit
 
 final class AddCourseViewController: MDBaseLargeTitledBackNavigationBarViewController {
     
@@ -39,6 +39,10 @@ final class AddCourseViewController: MDBaseLargeTitledBackNavigationBarViewContr
         button.titleLabel?.font = MDUIResources.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    fileprivate let hud: MDProgressHUDHelperProtocol = {
+        return MDProgressHUDHelper.init()
     }()
     
     init(presenter: AddCoursePresenterInputProtocol) {
@@ -112,13 +116,13 @@ extension AddCourseViewController: AddCoursePresenterOutputProtocol {
     
     func showProgressHUD() {
         DispatchQueue.main.async {
-            MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.hud.showProgressHUD(withConfiguration: .init(view: self.view))
         }
     }
     
     func hideProgressHUD() {
         DispatchQueue.main.async {
-            MBProgressHUD.hide(for: self.view, animated: true)
+            self.hud.hideProgressHUD(animated: true)
         }
     }
     

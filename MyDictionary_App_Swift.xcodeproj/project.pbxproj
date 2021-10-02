@@ -318,6 +318,7 @@
 		22CA088E265167620052D169 /* MDReloadDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088D265167620052D169 /* MDReloadDataProtocol.swift */; };
 		22CD45F026F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */; };
 		22CD45F226F090F20060978D /* MDCounterTextFieldWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */; };
+		22D6D01027082EBC002CA1B2 /* MDProgressHUDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D6D00F27082EBC002CA1B2 /* MDProgressHUDHelper.swift */; };
 		22DB2F7726C3BE7900C1AADA /* CourseListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7026C3BE7900C1AADA /* CourseListModule.swift */; };
 		22DB2F7826C3BE7900C1AADA /* CourseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7126C3BE7900C1AADA /* CourseListPresenter.swift */; };
 		22DB2F7926C3BE7900C1AADA /* CourseListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7226C3BE7900C1AADA /* CourseListRouter.swift */; };
@@ -719,6 +720,7 @@
 		22CA088D265167620052D169 /* MDReloadDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReloadDataProtocol.swift; sourceTree = "<group>"; };
 		22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCounterPasswordTextFieldWithToolBar.swift; sourceTree = "<group>"; };
 		22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCounterTextFieldWithToolBar.swift; sourceTree = "<group>"; };
+		22D6D00F27082EBC002CA1B2 /* MDProgressHUDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDProgressHUDHelper.swift; sourceTree = "<group>"; };
 		22DB2F7026C3BE7900C1AADA /* CourseListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListModule.swift; sourceTree = "<group>"; };
 		22DB2F7126C3BE7900C1AADA /* CourseListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListPresenter.swift; sourceTree = "<group>"; };
 		22DB2F7226C3BE7900C1AADA /* CourseListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListRouter.swift; sourceTree = "<group>"; };
@@ -1352,6 +1354,7 @@
 		226FEE7E266B735B0044A5F9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				22D6D00E27082EAC002CA1B2 /* MDProgressHUDHelper */,
 				22B5C62E27059E5C00185954 /* DelegatesImplementation */,
 				229572B926FF1FAD0092817B /* MDBridge */,
 				2291BAEE26F714C90012504D /* SearchBar */,
@@ -2106,6 +2109,14 @@
 			path = UIResources;
 			sourceTree = "<group>";
 		};
+		22D6D00E27082EAC002CA1B2 /* MDProgressHUDHelper */ = {
+			isa = PBXGroup;
+			children = (
+				22D6D00F27082EBC002CA1B2 /* MDProgressHUDHelper.swift */,
+			);
+			path = MDProgressHUDHelper;
+			sourceTree = "<group>";
+		};
 		22DB2F6F26C3BE3C00C1AADA /* CourseListModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -2604,6 +2615,7 @@
 				2291BAF026F714DD0012504D /* MDSearchBar.swift in Sources */,
 				224375AC26F33EA3006B90EB /* MDCourseListCell.swift in Sources */,
 				22CA088726515F6A0052D169 /* WordListDataManager.swift in Sources */,
+				22D6D01027082EBC002CA1B2 /* MDProgressHUDHelper.swift in Sources */,
 				22E2B4E12664E43B00978E62 /* SettingsDataProvider.swift in Sources */,
 				22DEA00826FA05A900892D78 /* AccountDataManager.swift in Sources */,
 				221D281426C5064A004BC4F7 /* AuthenticationDataManager.swift in Sources */,

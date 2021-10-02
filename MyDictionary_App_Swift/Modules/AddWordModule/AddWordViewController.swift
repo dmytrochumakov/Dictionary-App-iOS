@@ -4,7 +4,7 @@
 //
 //  Created Dmytro Chumakov on 27.09.2021.
 
-import MBProgressHUD
+import UIKit
 
 final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
     
@@ -78,6 +78,10 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
         return button
     }()
     
+    fileprivate let hud: MDProgressHUDHelperProtocol = {
+        return MDProgressHUDHelper.init()
+    }()
+    
     init(presenter: AddWordPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: MDLocalizedText.addWord.localized,
@@ -147,13 +151,13 @@ extension AddWordViewController: AddWordPresenterOutputProtocol {
     
     func showProgressHUD() {
         DispatchQueue.main.async {
-            MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.hud.showProgressHUD(withConfiguration: .init(view: self.view))
         }
     }
     
     func hideProgressHUD() {
         DispatchQueue.main.async {
-            MBProgressHUD.hide(for: self.view, animated: true)
+            self.hud.hideProgressHUD(animated: true)
         }
     }
     
