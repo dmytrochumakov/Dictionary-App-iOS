@@ -4,7 +4,7 @@
 //
 //  Created Dmytro Chumakov on 11.08.2021.
 
-import MBProgressHUD
+import UIKit
 
 final class CourseListViewController: MDBaseLargeTitledNavigationBarViewController {
     
@@ -42,6 +42,10 @@ final class CourseListViewController: MDBaseLargeTitledNavigationBarViewControll
         let searchBar: MDSearchBar = .init()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         return searchBar
+    }()
+    
+    fileprivate let hud: MDProgressHUDHelperProtocol = {
+        return MDProgressHUDHelper.init()
     }()
     
     init(presenter: CourseListPresenterInputProtocol) {
@@ -111,13 +115,13 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     
     func showProgressHUD() {
         DispatchQueue.main.async {
-            MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.hud.showProgressHUD(withConfiguration: .init(view: self.view))
         }
     }
     
     func hideProgressHUD() {
         DispatchQueue.main.async {
-            MBProgressHUD.hide(for: self.view, animated: true)
+            hud.hideProgressHUD(animated: true)
         }
     }
     
