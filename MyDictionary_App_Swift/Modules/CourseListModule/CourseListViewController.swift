@@ -121,7 +121,7 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     
     func hideProgressHUD() {
         DispatchQueue.main.async {
-            hud.hideProgressHUD(animated: true)
+            self.hud.hideProgressHUD(animated: true)
         }
     }
     
