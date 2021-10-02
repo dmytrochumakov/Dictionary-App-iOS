@@ -271,4 +271,11 @@ struct MDConstants {
                                                      "Y", "Z"]
     }
     
+    struct MDBundle {
+        static var bundleIdentifier: String {
+            guard let bundleIdentifier = Bundle.main.bundleIdentifier else { fatalError("Please Set bundleIdentifier") }
+            return bundleIdentifier
+        }
+    }
+    
 }
