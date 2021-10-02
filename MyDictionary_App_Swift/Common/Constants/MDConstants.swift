@@ -278,4 +278,14 @@ struct MDConstants {
         }
     }
     
+    struct QueueName {
+        
+        static let operationQueueService: String = bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: "MDOperationQueueService")
+        
+        fileprivate static func bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: String) -> String {
+            return MDBundle.bundleIdentifier + MDConstants.StaticText.dot + queueName
+        }
+        
+    }
+    
 }
