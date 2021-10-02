@@ -17,7 +17,7 @@ final class MDUserStorage_Tests: XCTestCase {
         
         let operationQueue: OperationQueue = .init()
         
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
+        let operationQueueService: MDOperationQueueServiceProtocol = MDOperationQueueService.init(operationQueue: operationQueue)
         
         let memoryStorage: MDUserMemoryStorageProtocol = MDUserMemoryStorage.init(operationQueueService: operationQueueService,
                                                                                   array: .init())

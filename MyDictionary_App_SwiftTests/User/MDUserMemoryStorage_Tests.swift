@@ -16,7 +16,7 @@ final class MDUserMemoryStorage_Tests: XCTestCase {
         try super.setUpWithError()
         
         let operationQueue: OperationQueue = .init()
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
+        let operationQueueService: MDOperationQueueServiceProtocol = MDOperationQueueService.init(operationQueue: operationQueue)
         
         let userMemoryStorage: MDUserMemoryStorage = MDUserMemoryStorage.init(operationQueueService: operationQueueService,
                                                                               array: .init())

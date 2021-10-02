@@ -20,7 +20,7 @@ final class MDAPIWord_Tests: XCTestCase {
         
         let operationQueue: OperationQueue = .init()
         
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
+        let operationQueueService: MDOperationQueueServiceProtocol = MDOperationQueueService.init(operationQueue: operationQueue)
         
         self.apiWord = MDAPIWord.init(requestDispatcher: requestDispatcher,
                                       operationQueueService: operationQueueService)

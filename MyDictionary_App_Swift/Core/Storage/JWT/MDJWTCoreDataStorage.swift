@@ -16,11 +16,11 @@ protocol MDJWTCoreDataStorageProtocol: MDCRUDJWTProtocol,
 final class MDJWTCoreDataStorage: NSObject,
                                   MDJWTCoreDataStorageProtocol {
     
-    fileprivate let operationQueueService: OperationQueueServiceProtocol
+    fileprivate let operationQueueService: MDOperationQueueServiceProtocol
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStack: MDCoreDataStack
     
-    init(operationQueueService: OperationQueueServiceProtocol,
+    init(operationQueueService: MDOperationQueueServiceProtocol,
          managedObjectContext: NSManagedObjectContext,
          coreDataStack: MDCoreDataStack) {
         

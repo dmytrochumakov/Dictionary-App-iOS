@@ -15,10 +15,10 @@ protocol MDAPILanguageProtocol {
 final class MDAPILanguage: MDAPILanguageProtocol {
     
     fileprivate let requestDispatcher: MDRequestDispatcherProtocol
-    fileprivate let operationQueueService: OperationQueueServiceProtocol
+    fileprivate let operationQueueService: MDOperationQueueServiceProtocol
     
     init(requestDispatcher: MDRequestDispatcherProtocol,
-         operationQueueService: OperationQueueServiceProtocol) {
+         operationQueueService: MDOperationQueueServiceProtocol) {
         
         self.requestDispatcher = requestDispatcher
         self.operationQueueService = operationQueueService

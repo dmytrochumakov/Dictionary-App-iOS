@@ -20,7 +20,7 @@ final class MDAPICourse_Tests: XCTestCase {
         
         let operationQueue: OperationQueue = .init()
         
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
+        let operationQueueService: MDOperationQueueServiceProtocol = MDOperationQueueService.init(operationQueue: operationQueue)
         
         self.apiCourse = MDAPICourse.init(requestDispatcher: requestDispatcher,
                                           operationQueueService: operationQueueService)

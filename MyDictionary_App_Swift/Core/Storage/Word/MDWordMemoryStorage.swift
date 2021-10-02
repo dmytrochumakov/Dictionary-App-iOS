@@ -14,11 +14,11 @@ protocol MDWordMemoryStorageProtocol: MDCRUDWordProtocol,
 
 final class MDWordMemoryStorage: MDWordMemoryStorageProtocol {
     
-    fileprivate let operationQueueService: OperationQueueServiceProtocol
+    fileprivate let operationQueueService: MDOperationQueueServiceProtocol
     
     var arrayWords: [WordResponse]
     
-    init(operationQueueService: OperationQueueServiceProtocol,
+    init(operationQueueService: MDOperationQueueServiceProtocol,
          arrayWords: [WordResponse]) {
         
         self.operationQueueService = operationQueueService

@@ -19,7 +19,7 @@ final class MDAPIAuth_Tests: XCTestCase {
         
         let operationQueue: OperationQueue = .init()
         
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
+        let operationQueueService: MDOperationQueueServiceProtocol = MDOperationQueueService.init(operationQueue: operationQueue)
         
         self.apiAuth = MDAPIAuth.init(requestDispatcher: requestDispatcher,
                                       operationQueueService: operationQueueService)

@@ -14,7 +14,7 @@ protocol MDAppDependenciesProtocol {
     var rootWindow: UIWindow! { get set }
     var reachability: Reachability! { get }
     var operationQueue: OperationQueue! { get }
-    var operationQueueService: OperationQueueServiceProtocol! { get }
+    var operationQueueService: MDOperationQueueServiceProtocol! { get }
     var coreDataStack: MDCoreDataStack! { get }
     
     // API //
@@ -47,7 +47,7 @@ final class MDAppDependencies: NSObject,
     var rootWindow: UIWindow!
     var reachability: Reachability!
     var operationQueue: OperationQueue!
-    var operationQueueService: OperationQueueServiceProtocol!
+    var operationQueueService: MDOperationQueueServiceProtocol!
     var coreDataStack: MDCoreDataStack!
     
     // API //
@@ -94,7 +94,7 @@ extension MDAppDependencies {
         let operationQueue: OperationQueue = .init()
         self.operationQueue = operationQueue
         //
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
+        let operationQueueService: MDOperationQueueServiceProtocol = MDOperationQueueService.init(operationQueue: operationQueue)
         self.operationQueueService = operationQueueService
         //
         let coreDataStack: MDCoreDataStack = .init()

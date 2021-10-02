@@ -16,11 +16,11 @@ protocol MDUserCoreDataStorageProtocol: MDCRUDUserProtocol,
 final class MDUserCoreDataStorage: NSObject,
                                    MDUserCoreDataStorageProtocol {
     
-    fileprivate let operationQueueService: OperationQueueServiceProtocol
+    fileprivate let operationQueueService: MDOperationQueueServiceProtocol
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStack: MDCoreDataStack
     
-    init(operationQueueService: OperationQueueServiceProtocol,
+    init(operationQueueService: MDOperationQueueServiceProtocol,
          managedObjectContext: NSManagedObjectContext,
          coreDataStack: MDCoreDataStack) {
         

@@ -14,11 +14,11 @@ protocol MDJWTMemoryStorageProtocol: MDCRUDJWTProtocol,
 
 final class MDJWTMemoryStorage: MDJWTMemoryStorageProtocol {
     
-    fileprivate let operationQueueService: OperationQueueServiceProtocol
+    fileprivate let operationQueueService: MDOperationQueueServiceProtocol
     
     var array: [JWTResponse]
     
-    init(operationQueueService: OperationQueueServiceProtocol,
+    init(operationQueueService: MDOperationQueueServiceProtocol,
          array: [JWTResponse]) {
         
         self.operationQueueService = operationQueueService

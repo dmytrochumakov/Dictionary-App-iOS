@@ -165,7 +165,7 @@
 		2289CEF52678CC34007254C3 /* MDReadWordProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CED72678CC34007254C3 /* MDReadWordProtocol.swift */; };
 		2289CEF62678CC34007254C3 /* MDDeleteWordProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CED82678CC34007254C3 /* MDDeleteWordProtocol.swift */; };
 		2289CEF72678CC34007254C3 /* MDCreateWordProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CED92678CC34007254C3 /* MDCreateWordProtocol.swift */; };
-		2289CEF92678CC34007254C3 /* OperationQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEDC2678CC34007254C3 /* OperationQueueService.swift */; };
+		2289CEF92678CC34007254C3 /* MDOperationQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEDC2678CC34007254C3 /* MDOperationQueueService.swift */; };
 		2289CEFA2678CC34007254C3 /* MDOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEDD2678CC34007254C3 /* MDOperation.swift */; };
 		2289CEFC2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2289CEFB2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift */; };
 		228AE05626EDDFC20088B4CF /* MDBaseLargeNavigationBarAndBackgroundImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228AE05526EDDFC20088B4CF /* MDBaseLargeNavigationBarAndBackgroundImageViewController.swift */; };
@@ -563,7 +563,7 @@
 		2289CED72678CC34007254C3 /* MDReadWordProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDReadWordProtocol.swift; sourceTree = "<group>"; };
 		2289CED82678CC34007254C3 /* MDDeleteWordProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDDeleteWordProtocol.swift; sourceTree = "<group>"; };
 		2289CED92678CC34007254C3 /* MDCreateWordProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDCreateWordProtocol.swift; sourceTree = "<group>"; };
-		2289CEDC2678CC34007254C3 /* OperationQueueService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueueService.swift; sourceTree = "<group>"; };
+		2289CEDC2678CC34007254C3 /* MDOperationQueueService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDOperationQueueService.swift; sourceTree = "<group>"; };
 		2289CEDD2678CC34007254C3 /* MDOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDOperation.swift; sourceTree = "<group>"; };
 		2289CEFB2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDWordMemoryStorage_Tests.swift; sourceTree = "<group>"; };
 		228AE05526EDDFC20088B4CF /* MDBaseLargeNavigationBarAndBackgroundImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseLargeNavigationBarAndBackgroundImageViewController.swift; sourceTree = "<group>"; };
@@ -1557,7 +1557,7 @@
 			children = (
 				22E327C826FB2BC600445917 /* MDStorageCleanupService */,
 				2299586C26F486CF003DF092 /* MDFillMemoryService */,
-				2289CEDC2678CC34007254C3 /* OperationQueueService.swift */,
+				2289CEDC2678CC34007254C3 /* MDOperationQueueService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2712,7 +2712,7 @@
 				22E17B1726FDAF92008CB714 /* MDAddCourseHeaderView.swift in Sources */,
 				22E2B4E42664EB6900978E62 /* SettingsCollectionViewDataSource.swift in Sources */,
 				220FFE8C26C90B1F00702CCE /* MDReadUserProtocol.swift in Sources */,
-				2289CEF92678CC34007254C3 /* OperationQueueService.swift in Sources */,
+				2289CEF92678CC34007254C3 /* MDOperationQueueService.swift in Sources */,
 				22B8E6D926D3C4F4001CCCA8 /* MDCourseStorage.swift in Sources */,
 				22E2B4DE2664E43B00978E62 /* SettingsRouter.swift in Sources */,
 				22DEA00726FA05A900892D78 /* AccountDataProvider.swift in Sources */,

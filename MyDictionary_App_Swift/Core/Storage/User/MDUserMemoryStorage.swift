@@ -14,11 +14,11 @@ protocol MDUserMemoryStorageProtocol: MDCRUDUserProtocol,
 
 final class MDUserMemoryStorage: MDUserMemoryStorageProtocol {
     
-    fileprivate let operationQueueService: OperationQueueServiceProtocol
+    fileprivate let operationQueueService: MDOperationQueueServiceProtocol
     
     var array: [UserResponse]
     
-    init(operationQueueService: OperationQueueServiceProtocol,
+    init(operationQueueService: MDOperationQueueServiceProtocol,
          array: [UserResponse]) {
         
         self.operationQueueService = operationQueueService

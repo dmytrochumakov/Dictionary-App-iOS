@@ -25,7 +25,7 @@ final class MDFillMemoryService_Tests: XCTestCase {
         
         let coreDataStack: MDCoreDataStack = TestCoreDataStack.init()
         
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
+        let operationQueueService: MDOperationQueueServiceProtocol = MDOperationQueueService.init(operationQueue: operationQueue)
         
         self.jwtCoreDataStorage = MDJWTCoreDataStorage.init(operationQueueService: operationQueueService,
                                                             managedObjectContext: coreDataStack.privateContext,

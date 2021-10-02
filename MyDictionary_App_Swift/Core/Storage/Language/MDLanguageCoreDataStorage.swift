@@ -15,11 +15,11 @@ protocol MDLanguageCoreDataStorageProtocol: MDCRUDLanguageProtocol,
 
 final class MDLanguageCoreDataStorage: MDLanguageCoreDataStorageProtocol {
     
-    fileprivate let operationQueueService: OperationQueueServiceProtocol
+    fileprivate let operationQueueService: MDOperationQueueServiceProtocol
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStack: MDCoreDataStack
     
-    init(operationQueueService: OperationQueueServiceProtocol,
+    init(operationQueueService: MDOperationQueueServiceProtocol,
          managedObjectContext: NSManagedObjectContext,
          coreDataStack: MDCoreDataStack) {
         
