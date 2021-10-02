@@ -14,33 +14,39 @@ protocol MDOperationProtocol {
 open class MDAsyncOperation: Operation,
                              MDOperationProtocol {
     
-    fileprivate enum State: String {
-        case ready = "isReady"
-        case executing = "isExecuting"
-        case finished = "isFinished"
-    }
+    fileprivate let lockQueue = DispatchQueue(label: MDConstants.QueueName.asyncOperation,
+                                              attributes: .concurrent)
     
-    fileprivate var state = State.ready {
-        willSet {
-            willChangeValue(forKey: newValue.rawValue)
-            willChangeValue(forKey: state.rawValue)
+    fileprivate var _isExecuting: Bool = false
+    open override private(set) var isExecuting: Bool {
+        get {
+            return lockQueue.sync { () -> Bool in
+                return _isExecuting
+            }
         }
-        didSet {
-            didChangeValue(forKey: oldValue.rawValue)
-            didChangeValue(forKey: state.rawValue)
+        set {
+            willChangeValue(forKey: "isExecuting")
+            lockQueue.sync(flags: [.barrier]) {
+                _isExecuting = newValue
+            }
+            didChangeValue(forKey: "isExecuting")
         }
     }
     
-    override open var isReady: Bool {
-        return super.isReady && state == .ready
-    }
-    
-    override open var isExecuting: Bool {
-        return state == .executing
-    }
-    
-    override open var isFinished: Bool {
-        return state == .finished
+    fileprivate var _isFinished: Bool = false
+    open override private(set) var isFinished: Bool {
+        get {
+            return lockQueue.sync { () -> Bool in
+                return _isFinished
+            }
+        }
+        set {
+            willChangeValue(forKey: "isFinished")
+            lockQueue.sync(flags: [.barrier]) {
+                _isFinished = newValue
+            }
+            didChangeValue(forKey: "isFinished")
+        }
     }
     
     override open var isAsynchronous: Bool {
@@ -48,18 +54,18 @@ open class MDAsyncOperation: Operation,
     }
     
     open override func start() {
-        
+        //
         guard !isCancelled else {
             finish()
             return
         }
-        
-        if !isExecuting {
-            state = .executing
-        }
-        
+        //
+        isFinished = false
+        //
+        isExecuting = true
+        //
         main()
-        
+        //
     }
     
     open override func cancel() {
@@ -68,7 +74,7 @@ open class MDAsyncOperation: Operation,
     }
     
     open override func main() {
-        fatalError()
+        fatalError("Subclasses must implement `main` without overriding super.")
     }
     
 }
@@ -76,9 +82,11 @@ open class MDAsyncOperation: Operation,
 extension MDAsyncOperation {
     
     func finish() {
-        if isExecuting {
-            state = .finished
-        }
+        //
+        isExecuting = false
+        //
+        isFinished = true
+        //
     }
     
 }

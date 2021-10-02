@@ -280,7 +280,7 @@ struct MDConstants {
     
     struct QueueName {
         
-        static let operationQueueService: String = bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: "MDOperationQueueService")
+        static let asyncOperation: String = bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: String(describing: MDAsyncOperation.self))
         
         fileprivate static func bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: String) -> String {
             return MDBundle.bundleIdentifier + MDConstants.StaticText.dot + queueName
