@@ -7,7 +7,7 @@
 
 import CoreData
 
-final class MDReadFirstJWTCoreDataStorageOperation: MDOperation {
+final class MDReadFirstJWTCoreDataStorageOperation: MDAsyncOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDJWTCoreDataStorage

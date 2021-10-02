@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDReadAllLanguagesMemoryStorageOperation: MDOperation {
+final class MDReadAllLanguagesMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDLanguageMemoryStorage
     fileprivate let result: MDOperationResultWithCompletion<[LanguageResponse]>?

@@ -7,7 +7,7 @@
 
 import CoreData
 
-final class MDUpdateJWTCoreDataStorageOperation: MDOperation {
+final class MDUpdateJWTCoreDataStorageOperation: MDAsyncOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStack: MDCoreDataStack

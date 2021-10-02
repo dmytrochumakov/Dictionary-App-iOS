@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDDeleteAllWordsMemoryStorageOperation: MDOperation {
+final class MDDeleteAllWordsMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let wordStorage: MDWordMemoryStorage
     fileprivate let result: MDOperationResultWithCompletion<Void>?
@@ -34,7 +34,7 @@ final class MDDeleteAllWordsMemoryStorageOperation: MDOperation {
     
 }
 
-final class MDDeleteAllWordsByCourseIdMemoryStorageOperation: MDOperation {
+final class MDDeleteAllWordsByCourseIdMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let wordStorage: MDWordMemoryStorage
     fileprivate let courseId: Int64

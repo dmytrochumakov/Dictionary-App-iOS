@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDCreateCourseMemoryStorageOperation: MDOperation {
+final class MDCreateCourseMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDCourseMemoryStorage
     fileprivate let courseEntity: CourseResponse
@@ -37,7 +37,7 @@ final class MDCreateCourseMemoryStorageOperation: MDOperation {
     
 }
 
-final class MDCreateCoursesMemoryStorageOperation: MDOperation {
+final class MDCreateCoursesMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDCourseMemoryStorage
     fileprivate let courseEntities: [CourseResponse]

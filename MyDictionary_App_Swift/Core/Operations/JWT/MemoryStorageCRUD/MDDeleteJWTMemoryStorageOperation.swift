@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDDeleteJWTMemoryStorageOperation: MDOperation {
+final class MDDeleteJWTMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDJWTMemoryStorage
     fileprivate let accessToken: String

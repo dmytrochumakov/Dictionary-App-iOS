@@ -7,7 +7,7 @@
 
 import CoreData
 
-final class MDDeleteAllWordsCoreDataStorageOperation: MDOperation {
+final class MDDeleteAllWordsCoreDataStorageOperation: MDAsyncOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStack: MDCoreDataStack
@@ -69,7 +69,7 @@ final class MDDeleteAllWordsCoreDataStorageOperation: MDOperation {
     
 }
 
-final class MDDeleteAllWordsByCourseIdCoreDataStorageOperation: MDOperation {
+final class MDDeleteAllWordsByCourseIdCoreDataStorageOperation: MDAsyncOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStack: MDCoreDataStack

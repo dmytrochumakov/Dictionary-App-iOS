@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDReadFirstJWTMemoryStorageOperation: MDOperation {
+final class MDReadFirstJWTMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDJWTMemoryStorage
     fileprivate let result: MDOperationResultWithCompletion<JWTResponse>?

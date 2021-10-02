@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDCreateUserMemoryStorageOperation: MDOperation {
+final class MDCreateUserMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDUserMemoryStorage
     fileprivate var userEntity: UserResponse

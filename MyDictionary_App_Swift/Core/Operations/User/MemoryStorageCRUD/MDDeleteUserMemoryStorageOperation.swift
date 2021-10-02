@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDDeleteUserMemoryStorageOperation: MDOperation {
+final class MDDeleteUserMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDUserMemoryStorage
     fileprivate let userId: Int64
@@ -44,7 +44,7 @@ final class MDDeleteUserMemoryStorageOperation: MDOperation {
     
 }
 
-final class MDDeleteAllUsersMemoryStorageOperation: MDOperation {
+final class MDDeleteAllUsersMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDUserMemoryStorage
     fileprivate let result: MDOperationResultWithCompletion<Void>?

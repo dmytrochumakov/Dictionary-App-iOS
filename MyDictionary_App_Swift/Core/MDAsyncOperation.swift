@@ -1,5 +1,5 @@
 //
-//  MDOperation.swift
+//  MDAsyncOperation.swift
 //  MyDictionary_App_Swift
 //
 //  Created by Dmytro Chumakov on 21.05.2021.
@@ -11,8 +11,8 @@ protocol MDOperationProtocol {
     func finish()
 }
 
-open class MDOperation: Operation,
-                        MDOperationProtocol {
+open class MDAsyncOperation: Operation,
+                             MDOperationProtocol {
     
     fileprivate enum State: String {
         case ready = "isReady"
@@ -73,7 +73,7 @@ open class MDOperation: Operation,
     
 }
 
-extension MDOperation {
+extension MDAsyncOperation {
     
     func finish() {
         if isExecuting {

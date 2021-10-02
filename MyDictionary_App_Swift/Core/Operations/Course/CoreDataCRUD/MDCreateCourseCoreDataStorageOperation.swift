@@ -7,7 +7,7 @@
 
 import CoreData
 
-final class MDCreateCourseCoreDataStorageOperation: MDOperation {
+final class MDCreateCourseCoreDataStorageOperation: MDAsyncOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStack: MDCoreDataStack
@@ -61,7 +61,7 @@ final class MDCreateCourseCoreDataStorageOperation: MDOperation {
     
 }
 
-final class MDCreateCoursesCoreDataStorageOperation: MDOperation {
+final class MDCreateCoursesCoreDataStorageOperation: MDAsyncOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStack: MDCoreDataStack

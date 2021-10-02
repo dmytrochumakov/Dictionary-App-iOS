@@ -7,7 +7,7 @@
 
 import CoreData
 
-final class MDDeleteAllLanguagesCoreDataStorageOperation: MDOperation {
+final class MDDeleteAllLanguagesCoreDataStorageOperation: MDAsyncOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStack: MDCoreDataStack
