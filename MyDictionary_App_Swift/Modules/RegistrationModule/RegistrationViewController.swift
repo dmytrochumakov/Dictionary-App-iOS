@@ -4,7 +4,7 @@
 //
 //  Created Dmytro Chumakov on 14.08.2021.
 
-import MBProgressHUD
+import UIKit
 
 final class RegistrationViewController: MDBaseLargeTitledBackViewControllerWithBackgroundImage {
     
@@ -110,7 +110,9 @@ final class RegistrationViewController: MDBaseLargeTitledBackViewControllerWithB
         return button
     }()
     
-    fileprivate var hud: MBProgressHUD!
+    fileprivate let hud: MDProgressHUDHelperProtocol = {
+        return MDProgressHUDHelper.init()
+    }()
     
     init(presenter: RegistrationPresenterInputProtocol) {
         self.presenter = presenter
@@ -193,19 +195,26 @@ extension RegistrationViewController: RegistrationPresenterOutputProtocol {
     
     func showProgressHUD() {
         DispatchQueue.main.async {
-            self.showHUD()
+            
+            self.hud.showProgressHUD(withConfiguration: .init(view: self.view,
+                                                              animated: true,
+                                                              mode: .annularDeterminate,
+                                                              labelText: MDLocalizedText.pleaseWaitForDataSync.localized,
+                                                              labelFont: MDUIResources.Font.MyriadProRegular.font(),
+                                                              labelTextColor: MDUIResources.Color.md_3C3C3C.color()))
+            
         }
     }
     
     func hideProgressHUD() {
         DispatchQueue.main.async {
-            self.hideHUD()
+            self.hud.hideProgressHUD(animated: true)
         }
     }
     
     func updateHUDProgress(_ progress: Float) {
         DispatchQueue.main.async {
-            self.hud.progress = progress
+            self.hud.updateHUDProgress(progress) 
         }
     }
     
@@ -485,42 +494,6 @@ fileprivate extension RegistrationViewController {
     
     @objc func registerButtonAction() {
         presenter.registerButtonClicked()
-    }
-    
-}
-
-// MARK: - Create HUD
-fileprivate extension RegistrationViewController {
-    
-    func createHUD() {
-        let hud: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
-        hud.mode = .annularDeterminate
-        hud.label.text = MDLocalizedText.pleaseWaitForDataSync.localized
-        hud.label.font = MDUIResources.Font.MyriadProRegular.font()
-        hud.label.textColor = MDUIResources.Color.md_3C3C3C.color()
-        self.hud = hud
-    }
-    
-    func showHUD() {
-        if (self.hud == nil) {
-            //
-            self.createHUD()
-            //
-            self.hud.show(animated: true)
-            //
-        } else {
-            //
-            self.hud.show(animated: true)
-            //
-        }
-    }
-    
-    func hideHUD() {
-        //
-        self.hud.hide(animated: true)
-        //
-        self.hud = nil
-        //
     }
     
 }
