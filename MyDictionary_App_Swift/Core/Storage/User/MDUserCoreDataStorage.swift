@@ -16,15 +16,15 @@ protocol MDUserCoreDataStorageProtocol: MDCRUDUserProtocol,
 final class MDUserCoreDataStorage: NSObject,
                                    MDUserCoreDataStorageProtocol {
     
-    fileprivate let operationQueueService: MDOperationQueueServiceProtocol
+    fileprivate let operationQueue: OperationQueue
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStack: MDCoreDataStack
     
-    init(operationQueueService: MDOperationQueueServiceProtocol,
+    init(operationQueue: OperationQueue,
          managedObjectContext: NSManagedObjectContext,
          coreDataStack: MDCoreDataStack) {
         
-        self.operationQueueService = operationQueueService
+        self.operationQueue = operationQueue
         self.managedObjectContext = managedObjectContext
         self.coreDataStack = coreDataStack
         
@@ -76,7 +76,7 @@ extension MDUserCoreDataStorage {
                                                                   password: password) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
 }
@@ -91,7 +91,7 @@ extension MDUserCoreDataStorage {
                                                                 userId: userId) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func readFirstUser(_ completionHandler: @escaping (MDOperationResultWithCompletion<UserResponse>)) {
@@ -99,7 +99,7 @@ extension MDUserCoreDataStorage {
                                                                      coreDataStorage: self) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func readAllUsers(_ completionHandler: @escaping(MDOperationsResultWithCompletion<UserResponse>)) {
@@ -107,7 +107,7 @@ extension MDUserCoreDataStorage {
                                                                  coreDataStorage: self) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
 }
@@ -129,7 +129,7 @@ extension MDUserCoreDataStorage {
                                                                   userId: userId) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func deleteAllUsers(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
@@ -138,7 +138,7 @@ extension MDUserCoreDataStorage {
                                                                       coreDataStorage: self) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
 }

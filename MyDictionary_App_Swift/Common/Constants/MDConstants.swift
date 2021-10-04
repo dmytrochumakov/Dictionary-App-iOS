@@ -280,8 +280,72 @@ struct MDConstants {
     
     struct QueueName {
         
+        // Async Operation
+        //
         static let asyncOperation: String = bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: String(describing: MDAsyncOperation.self))
         
+        
+        // Language
+        //
+        fileprivate static let languageShortQueueName: String = "Language"
+        static let languageMemoryStorageOperationQueue: String = mdMemoryStorageOperationQueue(shortQueueName: languageShortQueueName)
+        static let languageCoreDataStorageOperationQueue: String = mdCoreDataStorageOperationQueue(shortQueueName: languageShortQueueName)
+        static let languageAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: languageShortQueueName)
+        
+        // Course
+        //
+        fileprivate static let courseShortQueueName: String = "Course"
+        static let courseMemoryStorageOperationQueue: String = mdMemoryStorageOperationQueue(shortQueueName: courseShortQueueName)
+        static let courseCoreDataStorageOperationQueue: String = mdCoreDataStorageOperationQueue(shortQueueName: courseShortQueueName)
+        static let courseAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: courseShortQueueName)
+        
+        // JWT
+        //
+        fileprivate static let jwtShortQueueName: String = "JWT"
+        static let jwtMemoryStorageOperationQueue: String = mdMemoryStorageOperationQueue(shortQueueName: jwtShortQueueName)
+        static let jwtCoreDataStorageOperationQueue: String = mdCoreDataStorageOperationQueue(shortQueueName: jwtShortQueueName)
+        static let jwtAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: jwtShortQueueName)
+        
+        // User
+        //
+        fileprivate static let userShortQueueName: String = "User"
+        static let userMemoryStorageOperationQueue: String = mdMemoryStorageOperationQueue(shortQueueName: userShortQueueName)
+        static let userCoreDataStorageOperationQueue: String = mdCoreDataStorageOperationQueue(shortQueueName: userShortQueueName)
+        static let userAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: userShortQueueName)
+        
+        // Word
+        //
+        fileprivate static let wordShortQueueName: String = "Word"
+        static let wordMemoryStorageOperationQueue: String = mdMemoryStorageOperationQueue(shortQueueName: wordShortQueueName)
+        static let wordCoreDataStorageOperationQueue: String = mdCoreDataStorageOperationQueue(shortQueueName: wordShortQueueName)
+        static let wordAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: wordShortQueueName)
+        //
+        
+        // Auth
+        //
+        fileprivate static let authShortQueueName: String = "Auth"
+        static let authAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: authShortQueueName)
+        
+        // Account
+        //
+        fileprivate static let accountShortQueueName: String = "Account"
+        static let accountAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: accountShortQueueName)
+        
+        
+        //
+        fileprivate static func mdAPIOperationQueue(shortQueueName: String) -> String {
+            return bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: "MD" + shortQueueName + "APIOperationQueue")
+        }
+        
+        fileprivate static func mdMemoryStorageOperationQueue(shortQueueName: String) -> String {
+            return bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: "MD" + shortQueueName + "MemoryStorageOperationQueue")
+        }
+        
+        fileprivate static func mdCoreDataStorageOperationQueue(shortQueueName: String) -> String {
+            return bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: "MD" + shortQueueName + "CoreDataStorageOperationQueue")
+        }
+        
+        //
         fileprivate static func bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: String) -> String {
             return MDBundle.bundleIdentifier + MDConstants.StaticText.dot + queueName
         }

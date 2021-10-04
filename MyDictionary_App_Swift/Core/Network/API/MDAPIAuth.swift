@@ -15,13 +15,13 @@ protocol MDAPIAuthProtocol {
 final class MDAPIAuth: MDAPIAuthProtocol {
     
     fileprivate let requestDispatcher: MDRequestDispatcherProtocol
-    fileprivate let operationQueueService: MDOperationQueueServiceProtocol
+    fileprivate let operationQueue: OperationQueue
     
     init(requestDispatcher: MDRequestDispatcherProtocol,
-         operationQueueService: MDOperationQueueServiceProtocol) {
+         operationQueue: OperationQueue) {
         
         self.requestDispatcher = requestDispatcher
-        self.operationQueueService = operationQueueService
+        self.operationQueue = operationQueue
         
     }
     
@@ -65,7 +65,7 @@ extension MDAPIAuth {
         var httpParameters: HTTPParameters? {
             switch self {
             case .login(let authRequest),
-                 .register(let authRequest):
+                    .register(let authRequest):
                 return authRequest.data
             }
         }
@@ -97,7 +97,7 @@ extension MDAPIAuth {
                                               endpoint: MDAPIAuthEndpoint.login(authRequest: authRequest)) { result in
             
             switch result {
-            
+                
             case .data(let data, _):
                 
                 guard let data = data else { completionHandler(.failure(MDAPIError.noData)) ; return }
@@ -127,7 +127,7 @@ extension MDAPIAuth {
             }
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     
@@ -138,7 +138,7 @@ extension MDAPIAuth {
                                               endpoint: MDAPIAuthEndpoint.register(authRequest: authRequest)) { result in
             
             switch result {
-            
+                
             case .data(let data, _):
                 
                 guard let data = data else { completionHandler(.failure(MDAPIError.noData)) ; return }
@@ -168,7 +168,7 @@ extension MDAPIAuth {
             }
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
 }

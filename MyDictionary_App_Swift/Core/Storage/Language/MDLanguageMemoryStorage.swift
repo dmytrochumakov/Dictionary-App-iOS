@@ -14,14 +14,14 @@ protocol MDLanguageMemoryStorageProtocol: MDCRUDLanguageProtocol,
 
 final class MDLanguageMemoryStorage: MDLanguageMemoryStorageProtocol {
     
-    fileprivate let operationQueueService: MDOperationQueueServiceProtocol
+    fileprivate let operationQueue: OperationQueue
     
     var array: [LanguageResponse]
     
-    init(operationQueueService: MDOperationQueueServiceProtocol,
+    init(operationQueue: OperationQueue,
          array: [LanguageResponse]) {
         
-        self.operationQueueService = operationQueueService
+        self.operationQueue = operationQueue
         self.array = array
         
     }
@@ -67,21 +67,21 @@ extension MDLanguageMemoryStorage {
                                                                        languageEntities: languageEntities) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func readAllLanguages(_ completionHandler: @escaping (MDOperationResultWithCompletion<[LanguageResponse]>)) {
         let operation: MDReadAllLanguagesMemoryStorageOperation = .init(memoryStorage: self) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func deleteAllLanguages(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         let operation: MDDeleteAllLanguagesMemoryStorageOperation = .init(memoryStorage: self) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
 }

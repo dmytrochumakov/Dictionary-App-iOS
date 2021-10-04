@@ -27,13 +27,13 @@ protocol MDAPICourseProtocol {
 final class MDAPICourse: MDAPICourseProtocol {
     
     fileprivate let requestDispatcher: MDRequestDispatcherProtocol
-    fileprivate let operationQueueService: MDOperationQueueServiceProtocol
+    fileprivate let operationQueue: OperationQueue
     
     init(requestDispatcher: MDRequestDispatcherProtocol,
-         operationQueueService: MDOperationQueueServiceProtocol) {
+         operationQueue: OperationQueue) {
         
         self.requestDispatcher = requestDispatcher
-        self.operationQueueService = operationQueueService
+        self.operationQueue = operationQueue
         
     }
     
@@ -84,8 +84,8 @@ extension MDAPICourse {
         var httpHeaders: HTTPHeader {
             switch self {
             case .getCourses(let accessToken, _),
-                 .createCourse(let accessToken, _ ),
-                 .deleteCourse(let accessToken, _, _):
+                    .createCourse(let accessToken, _ ),
+                    .deleteCourse(let accessToken, _, _):
                 return MDConstants
                     .HTTPHeaderConstants
                     .authorizationHeaders(accessToken: accessToken)
@@ -95,7 +95,7 @@ extension MDAPICourse {
         var httpParameters: HTTPParameters? {
             switch self {
             case .getCourses,
-                 .deleteCourse:
+                    .deleteCourse:
                 return nil
             case .createCourse(_, let createCourseRequest):
                 return createCourseRequest.data
@@ -105,8 +105,8 @@ extension MDAPICourse {
         var requestType: MDRequestType {
             switch self {
             case .getCourses,
-                 .createCourse,
-                 .deleteCourse:
+                    .createCourse,
+                    .deleteCourse:
                 return .data
             }
         }
@@ -114,8 +114,8 @@ extension MDAPICourse {
         var responseType: MDResponseType {
             switch self {
             case .getCourses,
-                 .createCourse,
-                 .deleteCourse:
+                    .createCourse,
+                    .deleteCourse:
                 return .data
             }
         }
@@ -135,7 +135,7 @@ extension MDAPICourse {
                                                                                          createCourseRequest: createCourseRequest)) { result in
             
             switch result {
-            
+                
             case .data(let data, _):
                 
                 guard let data = data else { completionHandler(.failure(MDAPIError.noData)) ; return }
@@ -166,7 +166,7 @@ extension MDAPICourse {
             
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     
@@ -179,7 +179,7 @@ extension MDAPICourse {
                                                                                        userId: userId)) { result in
             
             switch result {
-            
+                
             case .data(let data, _):
                 
                 guard let data = data else { completionHandler(.failure(MDAPIError.noData)) ; return }
@@ -206,7 +206,7 @@ extension MDAPICourse {
             
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     
@@ -221,7 +221,7 @@ extension MDAPICourse {
                                                                                          courseId: courseId)) { result in
             
             switch result {
-            
+                
             case .data:
                 
                 completionHandler(.success(()))
@@ -239,7 +239,7 @@ extension MDAPICourse {
             
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     

@@ -26,10 +26,6 @@ extension AuthenticationModule {
         let validationTypes: [AuthValidationType] = [.nickname, .password]
         let authValidation: AuthValidationProtocol = AuthValidation.init(dataProvider: dataProvider,
                                                                          validationTypes: validationTypes)
-        
-        let apiAuth: MDAPIAuthProtocol = MDAPIAuth.init(requestDispatcher: MDConstants.RequestDispatcher.defaultRequestDispatcher(reachability: MDConstants.AppDependencies.dependencies.reachability),
-                                                        operationQueueService: MDConstants.AppDependencies.dependencies.operationQueueService)
-        
         let sync: MDSyncProtocol = MDSync.init(apiJWT: MDConstants.AppDependencies.dependencies.apiJWT,
                                                jwtStorage: MDConstants.AppDependencies.dependencies.jwtStorage,
                                                apiUser: MDConstants.AppDependencies.dependencies.apiUser,
@@ -47,7 +43,7 @@ extension AuthenticationModule {
                                                                                                    wordStorage: MDConstants.AppDependencies.dependencies.wordStorage))
         
         let syncManager: MDSyncManagerProtocol = MDSyncManager.init(sync: sync)
-        let authManager: MDAuthManagerProtocol = MDAuthManager.init(apiAuth: apiAuth,
+        let authManager: MDAuthManagerProtocol = MDAuthManager.init(apiAuth: MDConstants.AppDependencies.dependencies.apiAuth,
                                                                     appSettings: MDConstants.AppDependencies.dependencies.appSettings,
                                                                     syncManager: syncManager)
         

@@ -14,14 +14,14 @@ protocol MDCourseMemoryStorageProtocol: MDCRUDCourseProtocol,
 
 final class MDCourseMemoryStorage: MDCourseMemoryStorageProtocol {
     
-    fileprivate let operationQueueService: MDOperationQueueServiceProtocol
+    fileprivate let operationQueue: OperationQueue
     
     var array: [CourseResponse]
     
-    init(operationQueueService: MDOperationQueueServiceProtocol,
+    init(operationQueue: OperationQueue,
          array: [CourseResponse]) {
         
-        self.operationQueueService = operationQueueService
+        self.operationQueue = operationQueue
         self.array = array
         
     }
@@ -67,7 +67,7 @@ extension MDCourseMemoryStorage {
                                                                     courseEntity: courseEntity) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func createCourses(_ courseEntities: [CourseResponse], _ completionHandler: @escaping (MDOperationsResultWithCompletion<CourseResponse>)) {
@@ -75,7 +75,7 @@ extension MDCourseMemoryStorage {
                                                                      courseEntities: courseEntities) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func readCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
@@ -83,14 +83,14 @@ extension MDCourseMemoryStorage {
                                                                   courseId: courseId) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func readAllCourses(_ completionHandler: @escaping (MDOperationResultWithCompletion<[CourseResponse]>)) {
         let operation: MDReadAllCoursesMemoryStorageOperation = .init(memoryStorage: self) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func deleteCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
@@ -98,14 +98,14 @@ extension MDCourseMemoryStorage {
                                                                     courseId: courseId) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func deleteAllCourses(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         let operation: MDDeleteAllCoursesMemoryStorageOperation = .init(memoryStorage: self) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
 }

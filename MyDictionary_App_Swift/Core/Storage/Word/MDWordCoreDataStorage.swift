@@ -16,15 +16,15 @@ protocol MDWordCoreDataStorageProtocol: MDCRUDWordProtocol,
 final class MDWordCoreDataStorage: NSObject,
                                    MDWordCoreDataStorageProtocol {
     
-    fileprivate let operationQueueService: MDOperationQueueServiceProtocol
+    fileprivate let operationQueue: OperationQueue
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStack: MDCoreDataStack
     
-    init(operationQueueService: MDOperationQueueServiceProtocol,
+    init(operationQueue: OperationQueue,
          managedObjectContext: NSManagedObjectContext,
          coreDataStack: MDCoreDataStack) {
         
-        self.operationQueueService = operationQueueService
+        self.operationQueue = operationQueue
         self.managedObjectContext = managedObjectContext
         self.coreDataStack = coreDataStack
         
@@ -73,7 +73,7 @@ extension MDWordCoreDataStorage {
                                                                   word: wordModel) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func createWords(_ wordModels: [WordResponse],
@@ -84,7 +84,7 @@ extension MDWordCoreDataStorage {
                                                                    words: wordModels) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
 }
@@ -99,7 +99,7 @@ extension MDWordCoreDataStorage {
                                                                 wordId: wordId) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func readWords(fetchLimit: Int,
@@ -111,7 +111,7 @@ extension MDWordCoreDataStorage {
                                                                  fetchOffset: fetchOffset) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func readAllWords(_ completionHandler: @escaping (MDOperationsResultWithCompletion<WordResponse>)) {
@@ -121,7 +121,7 @@ extension MDWordCoreDataStorage {
                                                                  fetchOffset: .zero) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func readAllWords(byCourseID courseID: Int64,
@@ -131,7 +131,7 @@ extension MDWordCoreDataStorage {
                                                                               courseId: courseID) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
 }
@@ -153,7 +153,7 @@ extension MDWordCoreDataStorage {
             completionHandler(result)
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     
@@ -170,7 +170,7 @@ extension MDWordCoreDataStorage {
                                                                   wordId: wordId) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func deleteAllWords(byCourseId courseId: Int64,
@@ -181,7 +181,7 @@ extension MDWordCoreDataStorage {
                                                                                   courseId: courseId) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func deleteAllWords(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
@@ -190,7 +190,7 @@ extension MDWordCoreDataStorage {
                                                                         coreDataStorage: self) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
 }

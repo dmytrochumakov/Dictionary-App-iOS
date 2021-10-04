@@ -18,13 +18,13 @@ protocol MDAPIAccountProtocol {
 final class MDAPIAccount: MDAPIAccountProtocol {
     
     fileprivate let requestDispatcher: MDRequestDispatcherProtocol
-    fileprivate let operationQueueService: MDOperationQueueServiceProtocol
+    fileprivate let operationQueue: OperationQueue
     
     init(requestDispatcher: MDRequestDispatcherProtocol,
-         operationQueueService: MDOperationQueueServiceProtocol) {
+         operationQueue: OperationQueue) {
         
         self.requestDispatcher = requestDispatcher
-        self.operationQueueService = operationQueueService
+        self.operationQueue = operationQueue
         
     }
     
@@ -44,7 +44,7 @@ extension MDAPIAccount {
         
         var path: String {
             switch self {
-            case .deleteAccount(_, let userId):                
+            case .deleteAccount(_, let userId):
                 return "account/deleteAccount/userId/\(userId)"
             }
         }
@@ -101,7 +101,7 @@ extension MDAPIAccount {
                                                                                            userId: userId)) { result in
             
             switch result {
-            
+                
             case .data:
                 
                 completionHandler(.success(()))
@@ -119,7 +119,7 @@ extension MDAPIAccount {
             }
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     
