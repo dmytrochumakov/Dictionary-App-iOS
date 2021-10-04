@@ -186,36 +186,29 @@ extension RegistrationViewController: RegistrationPresenterOutputProtocol {
     }
     
     func showError(_ error: Error) {
-        DispatchQueue.main.async {
-            UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
-                                                    message: error.localizedDescription,
-                                                    presenter: self)
-        }
+        UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
+                                                message: error.localizedDescription,
+                                                presenter: self)        
     }
     
     func showProgressHUD() {
-        DispatchQueue.main.async {
-            
-            self.hud.showProgressHUD(withConfiguration: .init(view: self.view,
-                                                              animated: true,
-                                                              mode: .annularDeterminate,
-                                                              labelText: MDLocalizedText.pleaseWaitForDataSync.localized,
-                                                              labelFont: MDUIResources.Font.MyriadProRegular.font(),
-                                                              labelTextColor: MDUIResources.Color.md_3C3C3C.color()))
-            
-        }
+        
+        self.hud.showProgressHUD(withConfiguration: .init(view: self.view,
+                                                          animated: true,
+                                                          mode: .annularDeterminate,
+                                                          labelText: MDLocalizedText.pleaseWaitForDataSync.localized,
+                                                          labelFont: MDUIResources.Font.MyriadProRegular.font(),
+                                                          labelTextColor: MDUIResources.Color.md_3C3C3C.color()))
+        
+        
     }
     
     func hideProgressHUD() {
-        DispatchQueue.main.async {
-            self.hud.hideProgressHUD(animated: true)
-        }
+        self.hud.hideProgressHUD(animated: true)
     }
     
     func updateHUDProgress(_ progress: Float) {
-        DispatchQueue.main.async {
-            self.hud.updateHUDProgress(progress) 
-        }
+        self.hud.updateHUDProgress(progress)
     }
     
 }

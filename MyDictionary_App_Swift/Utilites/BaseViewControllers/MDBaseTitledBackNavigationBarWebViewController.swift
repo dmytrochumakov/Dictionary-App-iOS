@@ -69,15 +69,11 @@ extension MDBaseTitledBackNavigationBarWebViewController: WKNavigationDelegate {
 extension MDBaseTitledBackNavigationBarWebViewController: MDShowHideProgressHUD {
     
     func showProgressHUD() {
-        DispatchQueue.main.async {
-            self.hud.showProgressHUD(withConfiguration: .init(view: self.view))
-        }
+        self.hud.showProgressHUD(withConfiguration: .init(view: self.view))
     }
     
     func hideProgressHUD() {
-        DispatchQueue.main.async {
-            self.hud.hideProgressHUD(animated: true)
-        }
+        self.hud.hideProgressHUD(animated: true)        
     }
     
 }

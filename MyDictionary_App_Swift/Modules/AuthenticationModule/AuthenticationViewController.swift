@@ -142,27 +142,22 @@ extension AuthenticationViewController: AuthenticationPresenterOutputProtocol {
     }
     
     func showProgressHUD() {
-        DispatchQueue.main.async {
-            
-            self.hud.showProgressHUD(withConfiguration: .init(view: self.view,
-                                                              mode: .annularDeterminate,
-                                                              labelText: MDLocalizedText.pleaseWaitForDataSync.localized,
-                                                              labelFont: MDUIResources.Font.MyriadProRegular.font(),
-                                                              labelTextColor: MDUIResources.Color.md_3C3C3C.color()))
-            
-        }
+        
+        self.hud.showProgressHUD(withConfiguration: .init(view: self.view,
+                                                          mode: .annularDeterminate,
+                                                          labelText: MDLocalizedText.pleaseWaitForDataSync.localized,
+                                                          labelFont: MDUIResources.Font.MyriadProRegular.font(),
+                                                          labelTextColor: MDUIResources.Color.md_3C3C3C.color()))
+        
+        
     }
     
     func hideProgressHUD() {
-        DispatchQueue.main.async {
-            self.hud.hideProgressHUD(animated: true)
-        }
+        self.hud.hideProgressHUD(animated: true)
     }
     
     func updateHUDProgress(_ progress: Float) {
-        DispatchQueue.main.async {
-            self.hud.updateHUDProgress(progress)
-        }
+        self.hud.updateHUDProgress(progress)        
     }
     
 }

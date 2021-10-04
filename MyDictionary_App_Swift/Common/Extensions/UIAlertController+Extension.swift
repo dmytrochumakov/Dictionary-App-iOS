@@ -15,17 +15,21 @@ extension UIAlertController {
                                       okActionHandler: ((UIAlertAction) -> Void)? = nil,
                                       presenter: UIViewController) {
         
-        let alertController = UIAlertController.init(title: title,
-                                                     message: message,
-                                                     preferredStyle: .alert)
-        
-        let okAction: UIAlertAction = .init(title: MDLocalizedText.ok.localized,
-                                            style: .default,
-                                            handler: okActionHandler)
-        
-        alertController.addAction(okAction)
-        
-        presenter.present(alertController, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            //
+            let alertController = UIAlertController.init(title: title,
+                                                         message: message,
+                                                         preferredStyle: .alert)
+            //
+            let okAction: UIAlertAction = .init(title: MDLocalizedText.ok.localized,
+                                                style: .default,
+                                                handler: okActionHandler)
+            //
+            alertController.addAction(okAction)
+            //
+            presenter.present(alertController, animated: true, completion: nil)
+            //
+        }
         
     }
     
