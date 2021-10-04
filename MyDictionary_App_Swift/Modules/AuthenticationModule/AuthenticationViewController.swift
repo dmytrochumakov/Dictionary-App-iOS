@@ -134,11 +134,9 @@ extension AuthenticationViewController: AuthenticationPresenterOutputProtocol {
     }
     
     func showError(_ error: Error) {
-        DispatchQueue.main.async {
-            UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
-                                                    message: error.localizedDescription,
-                                                    presenter: self)
-        }
+        UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
+                                                message: error.localizedDescription,
+                                                presenter: self)
     }
     
     func showProgressHUD() {
@@ -157,7 +155,7 @@ extension AuthenticationViewController: AuthenticationPresenterOutputProtocol {
     }
     
     func updateHUDProgress(_ progress: Float) {
-        self.hud.updateHUDProgress(progress)        
+        self.hud.updateHUDProgress(progress)
     }
     
 }
