@@ -9,7 +9,7 @@ import XCTest
 @testable import MyDictionary_App_Swift
 
 final class MDAPIJWT_Tests: XCTestCase {
-        
+    
     fileprivate var apiJWT: MDAPIJWTProtocol!
     
     override func setUpWithError() throws {
@@ -17,12 +17,8 @@ final class MDAPIJWT_Tests: XCTestCase {
         
         let requestDispatcher: MDRequestDispatcherProtocol = MDConstants.RequestDispatcher.defaultRequestDispatcher(reachability: try! .init())
         
-        let operationQueue: OperationQueue = .init()
-        
-        let operationQueueService: MDOperationQueueServiceProtocol = MDOperationQueueService.init(operationQueue: operationQueue)
-                
         self.apiJWT = MDAPIJWT.init(requestDispatcher: requestDispatcher,
-                                    operationQueueService: operationQueueService)
+                                    operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtAPIOperationQueue)!)
         
     }
     
@@ -37,7 +33,7 @@ extension MDAPIJWT_Tests {
         apiJWT.accessToken(jwtApiRequest: Constants_For_Tests.jwtApiRequest) { result in
             
             switch result {
-            
+                
             case .success:
                 
                 expectation.fulfill()
@@ -48,7 +44,7 @@ extension MDAPIJWT_Tests {
             }
             
         }
-
+        
         wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
         
     }

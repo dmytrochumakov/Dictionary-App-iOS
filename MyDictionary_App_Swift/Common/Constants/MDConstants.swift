@@ -352,4 +352,14 @@ struct MDConstants {
         
     }
     
+    struct MDOperationQueue {
+        
+        static func createOperationQueue(byName name: String) -> OperationQueue {
+            let operationQueue: OperationQueue = .init()
+            operationQueue.name = name
+            return operationQueue
+        }
+        
+    }
+    
 }

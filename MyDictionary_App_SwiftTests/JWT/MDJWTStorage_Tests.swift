@@ -15,16 +15,12 @@ final class MDJWTStorage_Tests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        let operationQueue: OperationQueue = .init()
-        
-        let operationQueueService: MDOperationQueueServiceProtocol = MDOperationQueueService.init(operationQueue: operationQueue)
-        
-        let memoryStorage: MDJWTMemoryStorageProtocol = MDJWTMemoryStorage.init(operationQueueService: operationQueueService,
+        let memoryStorage: MDJWTMemoryStorageProtocol = MDJWTMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtMemoryStorageOperationQueue)!,
                                                                                 array: .init())
         
         let coreDataStack: MDCoreDataStack = TestCoreDataStack.init()
         
-        let coreDataStorage: MDJWTCoreDataStorageProtocol = MDJWTCoreDataStorage.init(operationQueueService: operationQueueService,
+        let coreDataStorage: MDJWTCoreDataStorageProtocol = MDJWTCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtCoreDataStorageOperationQueue)!,
                                                                                       managedObjectContext: coreDataStack.privateContext,
                                                                                       coreDataStack: coreDataStack)
         
@@ -86,7 +82,7 @@ extension MDJWTStorage_Tests {
         jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResults in
             
             switch createResults.first!.result {
-            
+                
             case .success(let createJWT):
                 
                 jwtStorage.readFirstJWT(storageType: storageType) { readResults in
@@ -135,7 +131,7 @@ extension MDJWTStorage_Tests {
         jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResults in
             
             switch createResults.first!.result {
-            
+                
             case .success(let createJWT):
                 
                 jwtStorage.readJWT(storageType: storageType, fromAccessToken: createJWT.accessToken) { readResults in
@@ -184,7 +180,7 @@ extension MDJWTStorage_Tests {
         jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResults in
             
             switch createResults.first!.result {
-            
+                
             case .success(let createdJWT):
                 
                 self.jwtStorage.updateJWT(storageType: storageType,
@@ -194,7 +190,7 @@ extension MDJWTStorage_Tests {
                     updateResults.forEach { updateResult in
                         
                         switch updateResult.result {
-                        
+                            
                         case .success:
                             
                             resultCount += 1
@@ -239,8 +235,8 @@ extension MDJWTStorage_Tests {
                     deleteResults.forEach { deleteResult in
                         
                         switch deleteResult.result {
-                        
-                        case .success:                                                        
+                            
+                        case .success:
                             
                             resultCount += 1
                             
@@ -277,7 +273,7 @@ extension MDJWTStorage_Tests {
         jwtStorage.createJWT(storageType: storageType, jwtResponse: Constants_For_Tests.mockedJWT) { [unowned self] createResults in
             
             switch createResults.first!.result {
-            
+                
             case .success(let createJWT):
                 
                 XCTAssertTrue(createJWT.accessToken == Constants_For_Tests.mockedJWT.accessToken)
@@ -287,7 +283,7 @@ extension MDJWTStorage_Tests {
                     deleteResults.forEach { deleteResult in
                         
                         switch deleteResult.result {
-                        
+                            
                         case .success:
                             
                             resultCount += 1

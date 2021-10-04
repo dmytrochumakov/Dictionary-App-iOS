@@ -15,10 +15,7 @@ final class MDJWTMemoryStorage_Tests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        let operationQueue: OperationQueue = .init()
-        let operationQueueService: MDOperationQueueServiceProtocol = MDOperationQueueService.init(operationQueue: operationQueue)
-        
-        let jwtMemoryStorage: MDJWTMemoryStorageProtocol = MDJWTMemoryStorage.init(operationQueueService: operationQueueService,
+        let jwtMemoryStorage: MDJWTMemoryStorageProtocol = MDJWTMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtMemoryStorageOperationQueue)!,
                                                                                    array: .init())
         
         self.jwtMemoryStorage = jwtMemoryStorage
@@ -36,7 +33,7 @@ extension MDJWTMemoryStorage_Tests {
         jwtMemoryStorage.createJWT(Constants_For_Tests.mockedJWT) { result in
             
             switch result {
-            
+                
             case .success(let createdJWT):
                 
                 XCTAssertTrue(createdJWT.accessToken == Constants_For_Tests.mockedJWT.accessToken)
@@ -60,13 +57,13 @@ extension MDJWTMemoryStorage_Tests {
         jwtMemoryStorage.createJWT(Constants_For_Tests.mockedJWT) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createdJWT):
                 
                 jwtMemoryStorage.readFirstJWT() { readResult in
                     
                     switch readResult {
-                    
+                        
                     case .success(let readJWT):
                         
                         XCTAssertTrue(createdJWT.accessToken == readJWT.accessToken)
@@ -95,13 +92,13 @@ extension MDJWTMemoryStorage_Tests {
         jwtMemoryStorage.createJWT(Constants_For_Tests.mockedJWT) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createdJWT):
                 
                 jwtMemoryStorage.readJWT(fromAccessToken: createdJWT.accessToken) { readResult in
                     
                     switch readResult {
-                    
+                        
                     case .success(let readJWT):
                         
                         XCTAssertTrue(createdJWT.accessToken == readJWT.accessToken)
@@ -121,7 +118,7 @@ extension MDJWTMemoryStorage_Tests {
         
         wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
         
-    }       
+    }
     
     func test_Update_JWT_Functionality() {
         
@@ -130,7 +127,7 @@ extension MDJWTMemoryStorage_Tests {
         jwtMemoryStorage.createJWT(Constants_For_Tests.mockedJWT) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createdJWT):
                 
                 XCTAssertTrue(createdJWT.accessToken == Constants_For_Tests.mockedJWT.accessToken)
@@ -139,13 +136,13 @@ extension MDJWTMemoryStorage_Tests {
                                            newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { [unowned self] updatedResult in
                     
                     switch updatedResult {
-                    
+                        
                     case .success:
                         
                         jwtMemoryStorage.readJWT(fromAccessToken: Constants_For_Tests.mockedJWTForUpdate.accessToken) { readResult in
                             
                             switch readResult {
-                            
+                                
                             case .success(let readJWT):
                                 
                                 XCTAssertTrue(readJWT.accessToken == Constants_For_Tests.mockedJWTForUpdate.accessToken)
@@ -183,19 +180,19 @@ extension MDJWTMemoryStorage_Tests {
         jwtMemoryStorage.createJWT(Constants_For_Tests.mockedJWT) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createdJWT):
                 
                 self.jwtMemoryStorage.deleteJWT(createdJWT.accessToken) { deleteResult in
                     
                     switch deleteResult {
-                    
+                        
                     case .success:
                         
                         self.jwtMemoryStorage.entitiesIsEmpty { (entitiesIsEmptyResult) in
                             
                             switch entitiesIsEmptyResult {
-                            
+                                
                             case .success(let entitiesIsEmpty):
                                 
                                 XCTAssertTrue(entitiesIsEmpty)

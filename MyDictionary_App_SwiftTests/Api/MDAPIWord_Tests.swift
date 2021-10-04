@@ -18,15 +18,11 @@ final class MDAPIWord_Tests: XCTestCase {
         
         let requestDispatcher: MDRequestDispatcherProtocol = MDConstants.RequestDispatcher.defaultRequestDispatcher(reachability: try! .init())
         
-        let operationQueue: OperationQueue = .init()
-        
-        let operationQueueService: MDOperationQueueServiceProtocol = MDOperationQueueService.init(operationQueue: operationQueue)
-        
         self.apiWord = MDAPIWord.init(requestDispatcher: requestDispatcher,
-                                      operationQueueService: operationQueueService)
+                                      operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordAPIOperationQueue)!)
         
         self.apiJWT = MDAPIJWT.init(requestDispatcher: requestDispatcher,
-                                    operationQueueService: operationQueueService)
+                                    operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtAPIOperationQueue)!)
         
     }
     
@@ -41,14 +37,14 @@ extension MDAPIWord_Tests {
         apiJWT.accessToken(jwtApiRequest: Constants_For_Tests.jwtApiRequest) { [unowned self] jwtResult in
             
             switch jwtResult {
-            
+                
             case .success(let jwtResponse):
                 
                 apiWord.getWords(accessToken: jwtResponse.accessToken,
                                  byUserId: Constants_For_Tests.jwtApiRequest.userId) { courseResult in
                     
                     switch courseResult {
-                    
+                        
                     case .success:
                         
                         expectation.fulfill()

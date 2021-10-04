@@ -15,12 +15,9 @@ final class MDLanguageCoreDataStorage_Tests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        let operationQueue: OperationQueue = .init()
-        let operationQueueService: MDOperationQueueServiceProtocol = MDOperationQueueService.init(operationQueue: operationQueue)
-        
         let coreDataStack: MDCoreDataStack = TestCoreDataStack()
         
-        let languageCoreDataStorage: MDLanguageCoreDataStorageProtocol = MDLanguageCoreDataStorage.init(operationQueueService: operationQueueService,
+        let languageCoreDataStorage: MDLanguageCoreDataStorageProtocol = MDLanguageCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.languageCoreDataStorageOperationQueue)!,
                                                                                                         managedObjectContext: coreDataStack.privateContext,
                                                                                                         coreDataStack: coreDataStack)
         
@@ -40,7 +37,7 @@ extension MDLanguageCoreDataStorage_Tests {
         languageCoreDataStorage.createLanguages(Constants_For_Tests.mockedLanguages) { createResult in
             
             switch createResult {
-            
+                
             case .success(let createLanguages):
                 
                 XCTAssertTrue(createLanguages.count == Constants_For_Tests.mockedLanguages.count)
@@ -64,7 +61,7 @@ extension MDLanguageCoreDataStorage_Tests {
         languageCoreDataStorage.createLanguages(Constants_For_Tests.mockedLanguages) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createLanguages):
                 
                 XCTAssertTrue(createLanguages.count == Constants_For_Tests.mockedLanguages.count)
@@ -72,7 +69,7 @@ extension MDLanguageCoreDataStorage_Tests {
                 self.languageCoreDataStorage.readAllLanguages { readResult in
                     
                     switch readResult {
-                    
+                        
                     case .success(let readLanguages):
                         
                         XCTAssertTrue(readLanguages.count == createLanguages.count)
@@ -102,7 +99,7 @@ extension MDLanguageCoreDataStorage_Tests {
         languageCoreDataStorage.createLanguages(Constants_For_Tests.mockedLanguages) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createLanguages):
                 
                 XCTAssertTrue(createLanguages.count == Constants_For_Tests.mockedLanguages.count)
@@ -110,7 +107,7 @@ extension MDLanguageCoreDataStorage_Tests {
                 self.languageCoreDataStorage.deleteAllLanguages { deleteResult in
                     
                     switch deleteResult {
-                    
+                        
                     case .success:
                         
                         expectation.fulfill()

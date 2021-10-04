@@ -106,29 +106,29 @@ extension MDAppDependencies {
         // Manager //
         //
         
-        let operationQueues: [OperationQueue] = [createOperationQueue(byName: MDConstants.QueueName.jwtMemoryStorageOperationQueue),
-                                                 createOperationQueue(byName: MDConstants.QueueName.jwtCoreDataStorageOperationQueue),
-                                                 createOperationQueue(byName: MDConstants.QueueName.jwtAPIOperationQueue),
+        let operationQueues: [OperationQueue] = [MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.jwtMemoryStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.jwtCoreDataStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.jwtAPIOperationQueue),
                                                  
-                                                 createOperationQueue(byName: MDConstants.QueueName.userMemoryStorageOperationQueue),
-                                                 createOperationQueue(byName: MDConstants.QueueName.userCoreDataStorageOperationQueue),
-                                                 createOperationQueue(byName: MDConstants.QueueName.userAPIOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.userMemoryStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.userCoreDataStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.userAPIOperationQueue),
                                                  
-                                                 createOperationQueue(byName: MDConstants.QueueName.languageMemoryStorageOperationQueue),
-                                                 createOperationQueue(byName: MDConstants.QueueName.languageCoreDataStorageOperationQueue),
-                                                 createOperationQueue(byName: MDConstants.QueueName.languageAPIOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.languageMemoryStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.languageCoreDataStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.languageAPIOperationQueue),
                                                  
-                                                 createOperationQueue(byName: MDConstants.QueueName.courseMemoryStorageOperationQueue),
-                                                 createOperationQueue(byName: MDConstants.QueueName.courseCoreDataStorageOperationQueue),
-                                                 createOperationQueue(byName: MDConstants.QueueName.courseAPIOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.courseMemoryStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.courseCoreDataStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.courseAPIOperationQueue),
                                                  
-                                                 createOperationQueue(byName: MDConstants.QueueName.wordMemoryStorageOperationQueue),
-                                                 createOperationQueue(byName: MDConstants.QueueName.wordCoreDataStorageOperationQueue),
-                                                 createOperationQueue(byName: MDConstants.QueueName.wordAPIOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.wordMemoryStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.wordCoreDataStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.wordAPIOperationQueue),
                                                  
-                                                 createOperationQueue(byName: MDConstants.QueueName.authAPIOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.authAPIOperationQueue),
                                                  
-                                                 createOperationQueue(byName: MDConstants.QueueName.accountAPIOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.accountAPIOperationQueue)
                                                  
         ]
         //
@@ -272,17 +272,6 @@ extension MDAppDependencies {
         // Configure FirebaseApp
         FirebaseApp.configure()
         
-    }
-    
-}
-
-// MARK: - Private Methods
-fileprivate extension MDAppDependencies {
-    
-    func createOperationQueue(byName name: String) -> OperationQueue {
-        let operationQueue: OperationQueue = .init()
-        operationQueue.name = name
-        return operationQueue
     }
     
 }

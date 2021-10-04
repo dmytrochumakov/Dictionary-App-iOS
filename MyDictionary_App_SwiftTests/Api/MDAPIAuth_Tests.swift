@@ -17,12 +17,8 @@ final class MDAPIAuth_Tests: XCTestCase {
         
         let requestDispatcher: MDRequestDispatcherProtocol = MDConstants.RequestDispatcher.defaultRequestDispatcher(reachability: try! .init())
         
-        let operationQueue: OperationQueue = .init()
-        
-        let operationQueueService: MDOperationQueueServiceProtocol = MDOperationQueueService.init(operationQueue: operationQueue)
-        
         self.apiAuth = MDAPIAuth.init(requestDispatcher: requestDispatcher,
-                                      operationQueueService: operationQueueService)
+                                      operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.authAPIOperationQueue)!)
         
     }
     
@@ -37,7 +33,7 @@ extension MDAPIAuth_Tests {
         apiAuth.login(authRequest: Constants_For_Tests.authRequest) { authResult in
             
             switch authResult {
-            
+                
             case .success:
                 
                 expectation.fulfill()

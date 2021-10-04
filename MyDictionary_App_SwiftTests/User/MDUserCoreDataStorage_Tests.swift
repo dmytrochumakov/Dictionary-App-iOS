@@ -15,12 +15,9 @@ final class MDUserCoreDataStorage_Tests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        let operationQueue: OperationQueue = .init()
-        let operationQueueService: MDOperationQueueServiceProtocol = MDOperationQueueService.init(operationQueue: operationQueue)
-        
         let coreDataStack: MDCoreDataStack = TestCoreDataStack()
         
-        let userCoreDataStorage: MDUserCoreDataStorageProtocol = MDUserCoreDataStorage.init(operationQueueService: operationQueueService,
+        let userCoreDataStorage: MDUserCoreDataStorageProtocol = MDUserCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.userCoreDataStorageOperationQueue)!,
                                                                                             managedObjectContext: coreDataStack.privateContext,
                                                                                             coreDataStack: coreDataStack)
         
@@ -40,7 +37,7 @@ extension MDUserCoreDataStorage_Tests {
                                        password: Constants_For_Tests.mockedUserPassword) { result in
             
             switch result {
-            
+                
             case .success(let createdUser):
                 
                 XCTAssertTrue(createdUser.userId == Constants_For_Tests.mockedUser.userId)
@@ -68,13 +65,13 @@ extension MDUserCoreDataStorage_Tests {
                                        password: Constants_For_Tests.mockedUserPassword) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createdUser):
                 
                 userCoreDataStorage.readFirstUser() { readResult in
                     
                     switch readResult {
-                    
+                        
                     case .success(let readUser):
                         
                         XCTAssertTrue(createdUser.userId == readUser.userId)
@@ -107,13 +104,13 @@ extension MDUserCoreDataStorage_Tests {
                                        password: Constants_For_Tests.mockedUserPassword) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createdUser):
                 
                 userCoreDataStorage.readUser(fromUserID: createdUser.userId) { readResult in
                     
                     switch readResult {
-                    
+                        
                     case .success(let readUser):
                         
                         XCTAssertTrue(createdUser.userId == readUser.userId)
@@ -146,13 +143,13 @@ extension MDUserCoreDataStorage_Tests {
                                        password: Constants_For_Tests.mockedUserPassword) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createdUser):
                 
                 self.userCoreDataStorage.deleteUser(createdUser.userId) { deleteResult in
                     
                     switch deleteResult {
-                    
+                        
                     case .success:
                         
                         expectation.fulfill()

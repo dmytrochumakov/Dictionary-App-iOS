@@ -18,59 +18,55 @@ final class MDSyncManager_Tests: XCTestCase {
         
         let requestDispatcher: MDRequestDispatcherProtocol = MDConstants.RequestDispatcher.defaultRequestDispatcher(reachability: try! .init())
         
-        let operationQueue: OperationQueue = .init()
-        
-        let operationQueueService: MDOperationQueueServiceProtocol = MDOperationQueueService.init(operationQueue: operationQueue)
-        
         let coreDataStack: MDCoreDataStack = TestCoreDataStack.init()
         
         let apiJWT: MDAPIJWTProtocol = MDAPIJWT.init(requestDispatcher: requestDispatcher,
-                                                     operationQueueService: operationQueueService)
+                                                     operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtAPIOperationQueue)!)
         self.apiJWT = apiJWT
         
-        let jwtStorage: MDJWTStorageProtocol = MDJWTStorage.init(memoryStorage: MDJWTMemoryStorage.init(operationQueueService: operationQueueService,
+        let jwtStorage: MDJWTStorageProtocol = MDJWTStorage.init(memoryStorage: MDJWTMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtMemoryStorageOperationQueue)!,
                                                                                                         array: .init()),
-                                                                 coreDataStorage: MDJWTCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                 coreDataStorage: MDJWTCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtCoreDataStorageOperationQueue)!,
                                                                                                             managedObjectContext: coreDataStack.privateContext,
                                                                                                             coreDataStack: coreDataStack))
         
-        let userStorage: MDUserStorageProtocol = MDUserStorage.init(memoryStorage: MDUserMemoryStorage.init(operationQueueService: operationQueueService,
+        let userStorage: MDUserStorageProtocol = MDUserStorage.init(memoryStorage: MDUserMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.userMemoryStorageOperationQueue)!,
                                                                                                             array: .init()),
-                                                                    coreDataStorage: MDUserCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                    coreDataStorage: MDUserCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.userCoreDataStorageOperationQueue)!,
                                                                                                                 managedObjectContext: coreDataStack.privateContext,
                                                                                                                 coreDataStack: coreDataStack))
         
-        let languageStorage: MDLanguageStorageProtocol = MDLanguageStorage.init(memoryStorage: MDLanguageMemoryStorage.init(operationQueueService: operationQueueService,
+        let languageStorage: MDLanguageStorageProtocol = MDLanguageStorage.init(memoryStorage: MDLanguageMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.languageMemoryStorageOperationQueue)!,
                                                                                                                             array: .init()),
-                                                                                coreDataStorage: MDLanguageCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                                coreDataStorage: MDLanguageCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.languageCoreDataStorageOperationQueue)!,
                                                                                                                                 managedObjectContext: coreDataStack.privateContext,
                                                                                                                                 coreDataStack: coreDataStack))
         
-        let courseStorage: MDCourseStorageProtocol = MDCourseStorage.init(memoryStorage: MDCourseMemoryStorage.init(operationQueueService: operationQueueService,
+        let courseStorage: MDCourseStorageProtocol = MDCourseStorage.init(memoryStorage: MDCourseMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseMemoryStorageOperationQueue)!,
                                                                                                                     array: .init()),
-                                                                          coreDataStorage: MDCourseCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                          coreDataStorage: MDCourseCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseCoreDataStorageOperationQueue)!,
                                                                                                                         managedObjectContext: coreDataStack.privateContext,
                                                                                                                         coreDataStack: coreDataStack))
         
-        let wordStorage: MDWordStorageProtocol = MDWordStorage.init(memoryStorage: MDWordMemoryStorage.init(operationQueueService: operationQueueService,
+        let wordStorage: MDWordStorageProtocol = MDWordStorage.init(memoryStorage: MDWordMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordMemoryStorageOperationQueue)!,
                                                                                                             arrayWords: .init()),
-                                                                    coreDataStorage: MDWordCoreDataStorage.init(operationQueueService: operationQueueService,
+                                                                    coreDataStorage: MDWordCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordCoreDataStorageOperationQueue)!,
                                                                                                                 managedObjectContext: coreDataStack.privateContext,
                                                                                                                 coreDataStack: coreDataStack))
         
         self.syncManager = MDSyncManager.init(sync: MDSync.init(apiJWT: apiJWT,
                                                                 jwtStorage: jwtStorage,
                                                                 apiUser: MDAPIUser.init(requestDispatcher: requestDispatcher,
-                                                                                        operationQueueService: operationQueueService),
+                                                                                        operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.userAPIOperationQueue)!),
                                                                 userStorage: userStorage,
                                                                 apiLanguage: MDAPILanguage.init(requestDispatcher: requestDispatcher,
-                                                                                                operationQueueService: operationQueueService),
+                                                                                                operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.languageAPIOperationQueue)!),
                                                                 languageStorage: languageStorage,
                                                                 apiCourse: MDAPICourse.init(requestDispatcher: requestDispatcher,
-                                                                                            operationQueueService: operationQueueService),
+                                                                                            operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseAPIOperationQueue)!),
                                                                 courseStorage: courseStorage,
                                                                 apiWord: MDAPIWord.init(requestDispatcher: requestDispatcher,
-                                                                                        operationQueueService: operationQueueService),
+                                                                                        operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordAPIOperationQueue)!),
                                                                 wordStorage: wordStorage,
                                                                 
                                                                 storageCleanupService: MDStorageCleanupService.init(jwtStorage: jwtStorage,
