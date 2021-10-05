@@ -40,15 +40,19 @@ final class MDJWTStorage: MDStorage, MDJWTStorageProtocol {
     
     let memoryStorage: MDJWTMemoryStorageProtocol
     fileprivate let coreDataStorage: MDJWTCoreDataStorageProtocol
+    fileprivate let operationQueue: OperationQueue
     
     init(memoryStorage: MDJWTMemoryStorageProtocol,
-         coreDataStorage: MDJWTCoreDataStorageProtocol) {
+         coreDataStorage: MDJWTCoreDataStorageProtocol,
+         operationQueue: OperationQueue) {
         
         self.memoryStorage = memoryStorage
         self.coreDataStorage = coreDataStorage
+        self.operationQueue = operationQueue
         
         super.init(memoryStorage: memoryStorage,
-                   coreDataStorage: coreDataStorage)
+                   coreDataStorage: coreDataStorage,
+                   operationQueue: operationQueue)
         
     }
     

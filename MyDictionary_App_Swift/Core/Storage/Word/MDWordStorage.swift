@@ -53,15 +53,19 @@ final class MDWordStorage: MDStorage, MDWordStorageProtocol {
     
     let memoryStorage: MDWordMemoryStorageProtocol
     fileprivate let coreDataStorage: MDWordCoreDataStorageProtocol
+    fileprivate let operationQueue: OperationQueue
     
     init(memoryStorage: MDWordMemoryStorageProtocol,
-         coreDataStorage: MDWordCoreDataStorageProtocol) {
+         coreDataStorage: MDWordCoreDataStorageProtocol,
+         operationQueue: OperationQueue) {
         
         self.memoryStorage = memoryStorage
         self.coreDataStorage = coreDataStorage
+        self.operationQueue = operationQueue
         
         super.init(memoryStorage: memoryStorage,
-                   coreDataStorage: coreDataStorage)
+                   coreDataStorage: coreDataStorage,
+                   operationQueue: operationQueue)
         
     }
     

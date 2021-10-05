@@ -25,7 +25,8 @@ final class MDJWTStorage_Tests: XCTestCase {
                                                                                       coreDataStack: coreDataStack)
         
         let jwtStorage: MDJWTStorageProtocol = MDJWTStorage.init(memoryStorage: memoryStorage,
-                                                                 coreDataStorage: coreDataStorage)
+                                                                 coreDataStorage: coreDataStorage,
+                                                                 operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtStorageOperationQueue)!)
         
         self.jwtStorage = jwtStorage
         

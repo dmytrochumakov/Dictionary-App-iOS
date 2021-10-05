@@ -49,7 +49,8 @@ final class MDCourseStorage: MDStorage, MDCourseStorageProtocol {
         self.operationQueue = operationQueue
         
         super.init(memoryStorage: memoryStorage,
-                   coreDataStorage: coreDataStorage)
+                   coreDataStorage: coreDataStorage,
+                   operationQueue: operationQueue)
         
     }
     

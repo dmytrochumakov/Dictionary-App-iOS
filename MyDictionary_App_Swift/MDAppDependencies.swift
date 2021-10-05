@@ -193,7 +193,8 @@ extension MDAppDependencies {
                                                                                          coreDataStack: coreDataStack)
         
         let jwtStorage: MDJWTStorageProtocol = MDJWTStorage.init(memoryStorage: jwtMemoryStorage,
-                                                                 coreDataStorage: jwtCoreDataStorage)
+                                                                 coreDataStorage: jwtCoreDataStorage,
+                                                                 operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtStorageOperationQueue)!)
         
         self.jwtStorage = jwtStorage
         // End JWT //
@@ -207,7 +208,8 @@ extension MDAppDependencies {
                                                                                             coreDataStack: coreDataStack)
         
         let userStorage: MDUserStorageProtocol = MDUserStorage.init(memoryStorage: userMemoryStorage,
-                                                                    coreDataStorage: userCoreDataStorage)
+                                                                    coreDataStorage: userCoreDataStorage,
+                                                                    operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.userStorageOperationQueue)!)
         
         self.userStorage = userStorage
         // End User //
@@ -221,7 +223,8 @@ extension MDAppDependencies {
                                                                                                         coreDataStack: coreDataStack)
         
         let languageStorage: MDLanguageStorageProtocol = MDLanguageStorage.init(memoryStorage: languageMemoryStorage,
-                                                                                coreDataStorage: languageCoreDataStorage)
+                                                                                coreDataStorage: languageCoreDataStorage,
+                                                                                operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.languageStorageOperationQueue)!)
         
         self.languageStorage = languageStorage
         // End Language //
@@ -250,7 +253,8 @@ extension MDAppDependencies {
                                                                                             coreDataStack: coreDataStack)
         
         let wordStorage: MDWordStorageProtocol = MDWordStorage.init(memoryStorage: wordMemoryStorage,
-                                                                    coreDataStorage: wordCoreDataStorage)
+                                                                    coreDataStorage: wordCoreDataStorage,
+                                                                    operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordStorageOperationQueue)!)
         
         self.wordStorage = wordStorage
         // End Word //

@@ -36,15 +36,19 @@ final class MDUserStorage: MDStorage, MDUserStorageProtocol {
     
     let memoryStorage: MDUserMemoryStorageProtocol
     fileprivate let coreDataStorage: MDUserCoreDataStorageProtocol
+    fileprivate let operationQueue: OperationQueue
     
     init(memoryStorage: MDUserMemoryStorageProtocol,
-         coreDataStorage: MDUserCoreDataStorageProtocol) {
+         coreDataStorage: MDUserCoreDataStorageProtocol,
+         operationQueue: OperationQueue) {
         
         self.memoryStorage = memoryStorage
         self.coreDataStorage = coreDataStorage
+        self.operationQueue = operationQueue
         
         super.init(memoryStorage: memoryStorage,
-                   coreDataStorage: coreDataStorage)
+                   coreDataStorage: coreDataStorage,
+                   operationQueue: operationQueue)
         
     }
     
