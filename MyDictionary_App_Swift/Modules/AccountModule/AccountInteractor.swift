@@ -31,6 +31,7 @@ final class AccountInteractor: NSObject,
     fileprivate let appSettings: MDAppSettingsProtocol
     fileprivate let apiAccount: MDAPIAccountProtocol
     fileprivate let jwtMemoryStorage: MDJWTMemoryStorageProtocol
+    fileprivate let operationQueueManager: MDOperationQueueManagerProtocol
     
     internal weak var interactorOutput: AccountInteractorOutputProtocol?
     
@@ -38,13 +39,15 @@ final class AccountInteractor: NSObject,
          storageCleanupService: MDStorageCleanupServiceProtocol,
          appSettings: MDAppSettingsProtocol,
          apiAccount: MDAPIAccountProtocol,
-         jwtMemoryStorage: MDJWTMemoryStorageProtocol) {
+         jwtMemoryStorage: MDJWTMemoryStorageProtocol,
+         operationQueueManager: MDOperationQueueManagerProtocol) {
         
         self.dataManager = dataManager
         self.storageCleanupService = storageCleanupService
         self.appSettings = appSettings
         self.apiAccount = apiAccount
         self.jwtMemoryStorage = jwtMemoryStorage
+        self.operationQueueManager = operationQueueManager
         
         super.init()
         
@@ -163,6 +166,8 @@ fileprivate extension AccountInteractor {
                 interactorOutput?.hideProgressHUD()
                 // Set Is Logged False
                 appSettings.setIsLoggedFalse()
+                // Cancel All Operations
+                operationQueueManager.cancelAllOperations()
                 //
                 interactorOutput?.didCompleteLogout()
                 //
