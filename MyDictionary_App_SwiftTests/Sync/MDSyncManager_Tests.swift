@@ -73,7 +73,9 @@ final class MDSyncManager_Tests: XCTestCase {
                                                                                                                     userStorage: userStorage,
                                                                                                                     languageStorage: languageStorage,
                                                                                                                     courseStorage: courseStorage,
-                                                                                                                    wordStorage: wordStorage)))
+                                                                                                                    wordStorage: wordStorage,
+                                                                                                                    operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.storageCleanupServiceOperationQueue)!),
+                                                                operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.synchronizationServiceOperationQueue)!))
         
     }
     
