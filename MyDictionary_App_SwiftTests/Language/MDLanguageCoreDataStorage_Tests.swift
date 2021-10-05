@@ -43,8 +43,8 @@ extension MDLanguageCoreDataStorage_Tests {
                 XCTAssertTrue(createLanguages.count == Constants_For_Tests.mockedLanguages.count)
                 expectation.fulfill()
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -75,14 +75,14 @@ extension MDLanguageCoreDataStorage_Tests {
                         XCTAssertTrue(readLanguages.count == createLanguages.count)
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                     
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -112,13 +112,13 @@ extension MDLanguageCoreDataStorage_Tests {
                         
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             

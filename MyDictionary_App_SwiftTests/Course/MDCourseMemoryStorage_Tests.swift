@@ -44,8 +44,8 @@ extension MDCourseMemoryStorage_Tests {
                 
                 expectation.fulfill()
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -69,8 +69,8 @@ extension MDCourseMemoryStorage_Tests {
                 
                 expectation.fulfill()
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -104,14 +104,14 @@ extension MDCourseMemoryStorage_Tests {
                         
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                     
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -146,19 +146,19 @@ extension MDCourseMemoryStorage_Tests {
                                 XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
                                 
-                            case .failure:
-                                XCTExpectFailure()
+                            case .failure(let error):
+                                XCTExpectFailure(error.localizedDescription)
                                 expectation.fulfill()
                             }
                         }
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                     
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -193,19 +193,19 @@ extension MDCourseMemoryStorage_Tests {
                                 XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
                                 
-                            case .failure:
-                                XCTExpectFailure()
+                            case .failure(let error):
+                                XCTExpectFailure(error.localizedDescription)
                                 expectation.fulfill()
                             }
                         }
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                     
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             

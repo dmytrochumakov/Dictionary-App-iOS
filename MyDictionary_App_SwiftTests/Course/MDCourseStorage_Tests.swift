@@ -64,8 +64,8 @@ extension MDCourseStorage_Tests {
                         expectation.fulfill()
                     }
                     
-                case .failure:
-                    XCTExpectFailure()
+                case .failure(let error):
+                    XCTExpectFailure(error.localizedDescription)
                     expectation.fulfill()
                 }
                 
@@ -100,8 +100,8 @@ extension MDCourseStorage_Tests {
                         expectation.fulfill()
                     }
                     
-                case .failure:
-                    XCTExpectFailure()
+                case .failure(let error):
+                    XCTExpectFailure(error.localizedDescription)
                     expectation.fulfill()
                 }
                 
@@ -148,8 +148,8 @@ extension MDCourseStorage_Tests {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                         
@@ -157,8 +157,8 @@ extension MDCourseStorage_Tests {
                     
                 }
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -197,16 +197,16 @@ extension MDCourseStorage_Tests {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                         
                     }
                 }
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -244,15 +244,15 @@ extension MDCourseStorage_Tests {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                         
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             

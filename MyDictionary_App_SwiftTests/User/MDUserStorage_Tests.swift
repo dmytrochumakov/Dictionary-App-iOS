@@ -65,8 +65,8 @@ extension MDUserStorage_Tests {
                         expectation.fulfill()
                     }
                     
-                case .failure:
-                    XCTExpectFailure()
+                case .failure(let error):
+                    XCTExpectFailure(error.localizedDescription)
                     expectation.fulfill()
                 }
                 
@@ -111,15 +111,15 @@ extension MDUserStorage_Tests {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                     }
                 }
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -163,15 +163,15 @@ extension MDUserStorage_Tests {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                     }
                 }
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -210,14 +210,14 @@ extension MDUserStorage_Tests {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }

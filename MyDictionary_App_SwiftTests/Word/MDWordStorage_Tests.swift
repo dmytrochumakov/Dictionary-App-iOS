@@ -62,8 +62,8 @@ extension MDWordStorage_Tests {
                         expectation.fulfill()
                     }
                     
-                case .failure:
-                    XCTExpectFailure()
+                case .failure(let error):
+                    XCTExpectFailure(error.localizedDescription)
                     expectation.fulfill()
                 }
                 
@@ -97,8 +97,8 @@ extension MDWordStorage_Tests {
                         expectation.fulfill()
                     }
                     
-                case .failure:
-                    XCTExpectFailure()
+                case .failure(let error):
+                    XCTExpectFailure(error.localizedDescription)
                     expectation.fulfill()
                 }
                 
@@ -142,8 +142,8 @@ extension MDWordStorage_Tests {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                         
@@ -151,8 +151,8 @@ extension MDWordStorage_Tests {
                     
                 }
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -191,16 +191,16 @@ extension MDWordStorage_Tests {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                         
                     }
                 }
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -238,16 +238,16 @@ extension MDWordStorage_Tests {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                         
                     }
                 }
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             

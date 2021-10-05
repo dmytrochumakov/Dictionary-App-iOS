@@ -43,8 +43,8 @@ extension MDJWTCoreDataStorage_Tests {
                 XCTAssertTrue(createdJWT.expirationDate == Constants_For_Tests.mockedJWT.expirationDate)
                 expectation.fulfill()
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
@@ -73,13 +73,13 @@ extension MDJWTCoreDataStorage_Tests {
                         XCTAssertTrue(createdJWT.expirationDate == readJWT.expirationDate)
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
@@ -108,13 +108,13 @@ extension MDJWTCoreDataStorage_Tests {
                         XCTAssertTrue(createdJWT.expirationDate == readJWT.expirationDate)
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
@@ -142,13 +142,13 @@ extension MDJWTCoreDataStorage_Tests {
                         
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
@@ -175,13 +175,13 @@ extension MDJWTCoreDataStorage_Tests {
                         
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
@@ -208,14 +208,14 @@ extension MDJWTCoreDataStorage_Tests {
                         
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
