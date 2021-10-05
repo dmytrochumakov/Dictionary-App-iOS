@@ -331,6 +331,16 @@ struct MDConstants {
         fileprivate static let accountShortQueueName: String = "Account"
         static let accountAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: accountShortQueueName)
         
+        // Sync
+        //
+        fileprivate static let synchronizationServiceShortQueueName: String = "Synchronization_Service"
+        static let synchronizationServiceOperationQueue: String = mdOperationQueue(shortQueueName: synchronizationServiceShortQueueName)
+        
+        // Storage Cleanup
+        //
+        fileprivate static let storageCleanupServiceShortQueueName: String = "Storage_Cleanup_Service"
+        static let storageCleanupServiceOperationQueue: String = mdOperationQueue(shortQueueName: storageCleanupServiceShortQueueName)
+        
         
         //
         fileprivate static func mdAPIOperationQueue(shortQueueName: String) -> String {
@@ -343,6 +353,10 @@ struct MDConstants {
         
         fileprivate static func mdCoreDataStorageOperationQueue(shortQueueName: String) -> String {
             return bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: "MD" + shortQueueName + "CoreDataStorageOperationQueue")
+        }
+        
+        fileprivate static func mdOperationQueue(shortQueueName: String) -> String {
+            return bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: "MD" + shortQueueName + "OperationQueue")
         }
         
         //

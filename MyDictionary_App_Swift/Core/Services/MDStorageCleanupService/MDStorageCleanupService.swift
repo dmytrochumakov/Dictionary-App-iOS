@@ -8,28 +8,32 @@
 import Foundation
 
 protocol MDStorageCleanupServiceProtocol {
-    func clearAllStorages(completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void))
+    func clearAllStorages(completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void)) -> BlockOperation
 }
 
 final class MDStorageCleanupService: MDStorageCleanupServiceProtocol {
     
+    fileprivate static let allServicesCount: Int = MDStorageServiceType.allCases.count
     fileprivate let jwtStorage: MDJWTStorageProtocol
     fileprivate let userStorage: MDUserStorageProtocol
     fileprivate let languageStorage: MDLanguageStorageProtocol
     fileprivate let courseStorage: MDCourseStorageProtocol
     fileprivate let wordStorage: MDWordStorageProtocol
+    fileprivate let operationQueue: OperationQueue
     
     init(jwtStorage: MDJWTStorageProtocol,
          userStorage: MDUserStorageProtocol,
          languageStorage: MDLanguageStorageProtocol,
          courseStorage: MDCourseStorageProtocol,
-         wordStorage: MDWordStorageProtocol) {
+         wordStorage: MDWordStorageProtocol,
+         operationQueue: OperationQueue) {
         
         self.jwtStorage = jwtStorage
         self.userStorage = userStorage
         self.languageStorage = languageStorage
         self.courseStorage = courseStorage
         self.wordStorage = wordStorage
+        self.operationQueue = operationQueue
         
     }
     
@@ -42,8 +46,8 @@ final class MDStorageCleanupService: MDStorageCleanupServiceProtocol {
 // MARK: - Clear All Storages
 extension MDStorageCleanupService {
     
-    func clearAllStorages(completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void)) {
-        deleteAllData(completionHandler: completionHandler)
+    func clearAllStorages(completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void)) -> BlockOperation {
+        return deleteAllData(completionHandler: completionHandler)
     }
     
 }
@@ -51,213 +55,255 @@ extension MDStorageCleanupService {
 // MARK: - Delete Data
 fileprivate extension MDStorageCleanupService {
     
-    func deleteAllData(completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void)) {
+    func deleteAllData(completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void)) -> BlockOperation {
         
-        // Initialize Sync Results
-        var syncResults: [MDStorageServiceOperationResult] = []
-        
-        // Initialize Dispatch Group
-        let dispatchGroup: DispatchGroup = .init()
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        // Delete All JWT
-        deleteAllJWT { result in
-            // Append Sync Result
-            syncResults.append(result)
-            // Dispatch Group Leave
-            dispatchGroup.leave()
+        let operation: BlockOperation = .init {
+            
+            // Initialize Sync Results
+            var results: [MDStorageServiceOperationResult] = []
+            
+            // Delete All JWT
+            let deleteAllJWTOperation = self.deleteAllJWT { result in
+                // Append Sync Result
+                results.append(result)
+                // Notify And Pass Final Result
+                if (results.count == Self.allServicesCount) {
+                    completionHandler(results)
+                }
+                //
+            }
+            
+            // Delete All Users
+            let deleteAllUsersOperation = self.deleteAllUsers { result in
+                // Append Sync Result
+                results.append(result)
+                // Notify And Pass Final Result
+                if (results.count == Self.allServicesCount) {
+                    completionHandler(results)
+                }
+                //
+            }
+            
+            // Delete All Languages
+            let deleteAllLanguagesOperation = self.deleteAllLanguages { result in
+                // Append Sync Result
+                results.append(result)
+                // Notify And Pass Final Result
+                if (results.count == Self.allServicesCount) {
+                    completionHandler(results)
+                }
+                //
+            }
+            
+            // Delete All Courses
+            let deleteAllCoursesOperation = self.deleteAllCourses { result in
+                // Append Sync Result
+                results.append(result)
+                // Notify And Pass Final Result
+                if (results.count == Self.allServicesCount) {
+                    completionHandler(results)
+                }
+                //
+            }
+            
+            // Delete All Words
+            let deleteAllWordsOperation = self.deleteAllWords { result in
+                // Append Sync Result
+                results.append(result)
+                // Notify And Pass Final Result
+                if (results.count == Self.allServicesCount) {
+                    completionHandler(results)
+                }
+                //
+            }
+            
+            // Add Operations
+            self.operationQueue.addOperations([deleteAllJWTOperation,
+                                               deleteAllUsersOperation,
+                                               deleteAllLanguagesOperation,
+                                               deleteAllCoursesOperation,
+                                               deleteAllWordsOperation],
+                                              waitUntilFinished: true)
+            //
+            
         }
         
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        // Delete All Users
-        deleteAllUsers { result in
-            // Append Sync Result
-            syncResults.append(result)
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        // Delete All Languages
-        deleteAllLanguages { result in
-            // Append Sync Result
-            syncResults.append(result)
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        // Delete All Courses
-        deleteAllCourses { result in
-            // Append Sync Result
-            syncResults.append(result)
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        // Delete All Words
-        deleteAllWords { result in
-            // Append Sync Result
-            syncResults.append(result)
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Notify And Pass Final Result
-        dispatchGroup.notify(queue: .main) {
-            completionHandler(syncResults)
-        }
+        return operation
         
     }
     
-    func deleteAllJWT(completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
+    func deleteAllJWT(completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
         
-        let storageServiceType: MDStorageServiceType = .jwt
-        var countResult: Int = .zero
-        
-        jwtStorage.deleteAllJWT(storageType: .all) { deleteJWTsResults in
+        let operation: BlockOperation = .init {
             
-            deleteJWTsResults.forEach { deleteJWTsResult in
+            let storageServiceType: MDStorageServiceType = .jwt
+            var countResult: Int = .zero
+            
+            self.jwtStorage.deleteAllJWT(storageType: .all) { deleteJWTsResults in
                 
-                switch deleteJWTsResult.result {
+                deleteJWTsResults.forEach { deleteJWTsResult in
                     
-                case .success:
-                    
-                    countResult += 1
-                    
-                    if (countResult == deleteJWTsResults.count) {
-                        completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                    switch deleteJWTsResult.result {
+                        
+                    case .success:
+                        
+                        countResult += 1
+                        
+                        if (countResult == deleteJWTsResults.count) {
+                            completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                        }
+                        
+                    case .failure(let error):
+                        completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                     }
                     
-                case .failure(let error):
-                    completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                 }
                 
             }
             
         }
         
+        return operation
+        
     }
     
-    func deleteAllUsers(completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
+    func deleteAllUsers(completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
         
-        let storageServiceType: MDStorageServiceType = .user
-        var countResult: Int = .zero
-        
-        userStorage.deleteAllUsers(storageType: .all) { deleteUsersResults in
+        let operation: BlockOperation = .init {
             
-            deleteUsersResults.forEach { deleteUsersResult in
+            let storageServiceType: MDStorageServiceType = .user
+            var countResult: Int = .zero
+            
+            self.userStorage.deleteAllUsers(storageType: .all) { deleteUsersResults in
                 
-                switch deleteUsersResult.result {
+                deleteUsersResults.forEach { deleteUsersResult in
                     
-                case .success:
-                    
-                    countResult += 1
-                    
-                    if (countResult == deleteUsersResults.count) {
-                        completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                    switch deleteUsersResult.result {
+                        
+                    case .success:
+                        
+                        countResult += 1
+                        
+                        if (countResult == deleteUsersResults.count) {
+                            completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                        }
+                        
+                    case .failure(let error):
+                        completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                     }
                     
-                case .failure(let error):
-                    completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                 }
                 
             }
             
         }
         
+        return operation
+        
     }
     
-    func deleteAllLanguages(completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
+    func deleteAllLanguages(completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
         
-        let storageServiceType: MDStorageServiceType = .language
-        var countResult: Int = .zero
-        
-        languageStorage.deleteAllLanguages(storageType: .all) { deleteLanguagesResults in
+        let operation: BlockOperation = .init {
             
-            deleteLanguagesResults.forEach { deleteLanguagesResult in
+            let storageServiceType: MDStorageServiceType = .language
+            var countResult: Int = .zero
+            
+            self.languageStorage.deleteAllLanguages(storageType: .all) { deleteLanguagesResults in
                 
-                switch deleteLanguagesResult.result {
+                deleteLanguagesResults.forEach { deleteLanguagesResult in
                     
-                case .success:
-                    
-                    countResult += 1
-                    
-                    if (countResult == deleteLanguagesResults.count) {
-                        completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                    switch deleteLanguagesResult.result {
+                        
+                    case .success:
+                        
+                        countResult += 1
+                        
+                        if (countResult == deleteLanguagesResults.count) {
+                            completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                        }
+                        
+                    case .failure(let error):
+                        completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                     }
                     
-                case .failure(let error):
-                    completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                 }
                 
             }
             
         }
         
+        return operation
+        
     }
     
-    func deleteAllCourses(completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
+    func deleteAllCourses(completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
         
-        let storageServiceType: MDStorageServiceType = .course
-        var countResult: Int = .zero
-        
-        courseStorage.deleteAllCourses(storageType: .all) { deleteCoursesResults in
+        let operation: BlockOperation = .init {
             
-            deleteCoursesResults.forEach { deleteCoursesResult in
+            let storageServiceType: MDStorageServiceType = .course
+            var countResult: Int = .zero
+            
+            self.courseStorage.deleteAllCourses(storageType: .all) { deleteCoursesResults in
                 
-                switch deleteCoursesResult.result {
+                deleteCoursesResults.forEach { deleteCoursesResult in
                     
-                case .success:
-                    
-                    countResult += 1
-                    
-                    if (countResult == deleteCoursesResults.count) {
-                        completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                    switch deleteCoursesResult.result {
+                        
+                    case .success:
+                        
+                        countResult += 1
+                        
+                        if (countResult == deleteCoursesResults.count) {
+                            completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                        }
+                        
+                    case .failure(let error):
+                        completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                     }
                     
-                case .failure(let error):
-                    completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                 }
                 
             }
             
         }
         
+        return operation
+        
     }
     
-    func deleteAllWords(completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
+    func deleteAllWords(completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
         
-        let storageServiceType: MDStorageServiceType = .word
-        var countResult: Int = .zero
-        
-        wordStorage.deleteAllWords(storageType: .all) { deleteWordsResults in
+        let operation: BlockOperation = .init {
             
-            deleteWordsResults.forEach { deleteWordsResult in
+            let storageServiceType: MDStorageServiceType = .word
+            var countResult: Int = .zero
+            
+            self.wordStorage.deleteAllWords(storageType: .all) { deleteWordsResults in
                 
-                switch deleteWordsResult.result {
+                deleteWordsResults.forEach { deleteWordsResult in
                     
-                case .success:
-                    
-                    countResult += 1
-                    
-                    if (countResult == deleteWordsResults.count) {
-                        completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                    switch deleteWordsResult.result {
+                        
+                    case .success:
+                        
+                        countResult += 1
+                        
+                        if (countResult == deleteWordsResults.count) {
+                            completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                        }
+                        
+                    case .failure(let error):
+                        completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                     }
                     
-                case .failure(let error):
-                    completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                 }
                 
             }
             
         }
+        
+        return operation
         
     }
     

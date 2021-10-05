@@ -41,7 +41,10 @@ extension RegistrationModule {
                                                                                                    userStorage: MDConstants.AppDependencies.dependencies.userStorage,
                                                                                                    languageStorage: MDConstants.AppDependencies.dependencies.languageStorage,
                                                                                                    courseStorage: MDConstants.AppDependencies.dependencies.courseStorage,
-                                                                                                   wordStorage: MDConstants.AppDependencies.dependencies.wordStorage))
+                                                                                                   wordStorage: MDConstants.AppDependencies.dependencies.wordStorage,
+                                                                                                   operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.storageCleanupServiceOperationQueue)!),
+                                               
+                                               operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.synchronizationServiceOperationQueue)!)
         
         let syncManager: MDSyncManagerProtocol = MDSyncManager.init(sync: sync)
         let authManager: MDAuthManagerProtocol = MDAuthManager.init(apiAuth: MDConstants.AppDependencies.dependencies.apiAuth,

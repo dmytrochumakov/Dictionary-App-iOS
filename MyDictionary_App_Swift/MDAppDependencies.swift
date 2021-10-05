@@ -128,7 +128,11 @@ extension MDAppDependencies {
                                                  
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.authAPIOperationQueue),
                                                  
-                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.accountAPIOperationQueue)
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.accountAPIOperationQueue),
+                                                 
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.synchronizationServiceOperationQueue),
+                                                 
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.storageCleanupServiceOperationQueue)
                                                  
         ]
         //
