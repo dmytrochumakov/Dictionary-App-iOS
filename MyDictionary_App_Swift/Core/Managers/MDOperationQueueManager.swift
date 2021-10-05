@@ -11,7 +11,7 @@ protocol MDOperationQueueManagerProtocol {
     func appendOperationQueue(_ oq: OperationQueue)
     func operationQueue(byName name: String) -> OperationQueue?
     func cancelAllOperations()
-    func removeAllOperationQueues()
+    func cancelAllOperationsAndRemoveAllOperationQueues()
 }
 
 final class MDOperationQueueManager: MDOperationQueueManagerProtocol {
@@ -24,7 +24,7 @@ final class MDOperationQueueManager: MDOperationQueueManagerProtocol {
     
     deinit {
         //
-        removeAllOperationQueues()
+        cancelAllOperationsAndRemoveAllOperationQueues()
         //
         debugPrint(#function, Self.self)
     }
@@ -52,7 +52,7 @@ extension MDOperationQueueManager {
         //
     }
     
-    func removeAllOperationQueues() {
+    func cancelAllOperationsAndRemoveAllOperationQueues() {
         //
         cancelAllOperations()
         //
