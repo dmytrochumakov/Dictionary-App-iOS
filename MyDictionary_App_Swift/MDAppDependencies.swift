@@ -139,7 +139,9 @@ extension MDAppDependencies {
                                                  
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.storageCleanupServiceOperationQueue),
                                                  
-                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.synchronizationManagerOperationQueue)
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.synchronizationManagerOperationQueue),
+                                                 
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.fillMemoryServiceOperationQueue)
                                                  
         ]
         //
@@ -273,7 +275,8 @@ extension MDAppDependencies {
                                                                                       languageStorage: languageStorage,
                                                                                       courseStorage: courseStorage,
                                                                                       wordStorage: wordStorage,
-                                                                                      bridge: bridge)
+                                                                                      bridge: bridge,
+                                                                                      operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.fillMemoryServiceOperationQueue)!)
         // Fill Memory If Needed
         fillMemoryService.fillMemoryFromCoreDataIfNeeded(completionHandler: nil)
         //

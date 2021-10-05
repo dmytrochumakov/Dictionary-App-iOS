@@ -22,6 +22,7 @@ final class MDFillMemoryService: MDFillMemoryServiceProtocol {
     fileprivate let courseStorage: MDCourseStorageProtocol
     fileprivate let wordStorage: MDWordStorageProtocol
     fileprivate var bridge: MDBridgeProtocol
+    fileprivate let operationQueue: OperationQueue
     
     // Default is .coreData
     fileprivate let fromCoreData: MDStorageType = .coreData
@@ -48,7 +49,8 @@ final class MDFillMemoryService: MDFillMemoryServiceProtocol {
          languageStorage: MDLanguageStorageProtocol,
          courseStorage: MDCourseStorageProtocol,
          wordStorage: MDWordStorageProtocol,
-         bridge: MDBridgeProtocol) {
+         bridge: MDBridgeProtocol,
+         operationQueue: OperationQueue) {
         //
         self.isLoggedIn = isLoggedIn
         self.jwtStorage = jwtStorage
@@ -57,6 +59,7 @@ final class MDFillMemoryService: MDFillMemoryServiceProtocol {
         self.courseStorage = courseStorage
         self.wordStorage = wordStorage
         self.bridge = bridge
+        self.operationQueue = operationQueue
         //
         self.internalIsRunning = false
         self.internalIsFilled = false
@@ -73,67 +76,79 @@ extension MDFillMemoryService {
     
     func fillMemoryFromCoreDataIfNeeded(completionHandler: (MDOperationResultWithCompletion<Void>)? = nil) {
         
-        if (isLoggedIn) {
+        let operation: BlockOperation = .init {
             
-            // Check If Service Not Running
-            guard !isRunning else { completionHandler?(.failure(MDFillMemoryServiceError.serviceIsRunning)) ; return }
-            
-            // Set In Running
-            setInternalIsRunningTrue()
-            
-            // Initialize Count Result
-            var countResult: Int = .zero
-            
-            // Fill Memory
-            fillMemory() { [unowned self] results in
+            if (self.isLoggedIn) {
                 
-                results.forEach { result in
+                // Check If Service Not Running
+                guard !self.isRunning else { completionHandler?(.failure(MDFillMemoryServiceError.serviceIsRunning)) ; return }
+                
+                // Set In Running
+                self.setInternalIsRunningTrue()
+                
+                // Initialize Count Result
+                var countResult: Int = .zero
+                
+                // Fill Memory
+                let fillMemoryOperation = self.fillMemory() { [unowned self] results in
                     
-                    debugPrint(#function, Self.self, "step: ", result.storageServiceType)
-                    
-                    switch result.result {
+                    results.forEach { result in
                         
-                    case .success:
-                        //
-                        debugPrint(#function, Self.self, "step: ", result.storageServiceType, "Success")
-                        //
-                        countResult += 1
-                        //
-                        if (countResult == results.count) {
+                        debugPrint(#function, Self.self, "step: ", result.storageServiceType)
+                        
+                        switch result.result {
+                            
+                        case .success:
+                            //
+                            debugPrint(#function, Self.self, "step: ", result.storageServiceType, "Success")
+                            //
+                            countResult += 1
+                            //
+                            if (countResult == results.count) {
+                                //
+                                setInternalIsRunningFalse()
+                                //
+                                setInternalIsFilledTrue()
+                                //
+                                setDidChangeMemoryIsFilledResult(.success(()))
+                                //
+                                completionHandler?(.success(()))
+                                //
+                                break
+                                //
+                            }
+                            //
+                        case .failure(let error):
+                            //
+                            debugPrint(#function, Self.self, "step: ", result.storageServiceType, "Failure: ", error)
                             //
                             setInternalIsRunningFalse()
                             //
-                            setInternalIsFilledTrue()
+                            setInternalIsFilledFalse()
                             //
-                            setDidChangeMemoryIsFilledResult(.success(()))
+                            setDidChangeMemoryIsFilledResult(.failure(error))
                             //
-                            completionHandler?(.success(()))
+                            completionHandler?(.failure(error))
                             //
-                            break
-                            //
+                            return
                         }
-                        //
-                    case .failure(let error):
-                        //
-                        debugPrint(#function, Self.self, "step: ", result.storageServiceType, "Failure: ", error)
-                        //
-                        setInternalIsRunningFalse()
-                        //
-                        setInternalIsFilledFalse()
-                        //
-                        setDidChangeMemoryIsFilledResult(.failure(error))
-                        //
-                        completionHandler?(.failure(error))
-                        //
-                        return
                     }
+                    
                 }
                 
+                // Add Operation
+                self.operationQueue.addOperation(fillMemoryOperation)
+                //
+                
+            } else {
+                return
             }
             
-        } else {
-            return
         }
+        
+        // Add Operation
+        operationQueue.addOperation(operation)
+        //
         
     }
     
@@ -142,237 +157,298 @@ extension MDFillMemoryService {
 // MARK: - Fill
 fileprivate extension MDFillMemoryService {
     
-    func fillMemory(completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void)) {
+    func fillMemory(completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void)) -> BlockOperation {
         
-        var results: [MDStorageServiceOperationResult] = .init()
-        
-        // Initialize Dispatch Group
-        let dispatchGroup: DispatchGroup = .init()
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        fillJWTMemoryFromCoreData() { result in
-            // Append Result
-            results.append(result)
-            // Dispatch Group Leave
-            dispatchGroup.leave()
+        let operation: BlockOperation = .init {
+            
+            //
+            let countNeeded: Int = MDStorageServiceType.allCases.count
+            //
+            
+            var results: [MDStorageServiceOperationResult] = .init()
+            
+            let fillJWTMemoryFromCoreDataOperation = self.fillJWTMemoryFromCoreData() { result in
+                
+                // Append Result
+                results.append(result)
+                
+                // Pass Final Result If Needed
+                if (results.count == countNeeded) {
+                    completionHandler(results)
+                }
+                //
+                
+            }
+            
+            let fillUserMemoryFromCoreDataOperation = self.fillUserMemoryFromCoreData() { result in
+                
+                // Append Result
+                results.append(result)
+                
+                // Pass Final Result If Needed
+                if (results.count == countNeeded) {
+                    completionHandler(results)
+                }
+                //
+                
+            }
+            
+            let fillLanguageMemoryFromCoreDataOperation = self.fillLanguageMemoryFromCoreData() { result in
+                
+                // Append Result
+                results.append(result)
+                
+                // Pass Final Result If Needed
+                if (results.count == countNeeded) {
+                    completionHandler(results)
+                }
+                //
+                
+            }
+            
+            let fillCourseMemoryFromCoreDataOperation = self.fillCourseMemoryFromCoreData() { result in
+                
+                // Append Result
+                results.append(result)
+                
+                // Pass Final Result If Needed
+                if (results.count == countNeeded) {
+                    completionHandler(results)
+                }
+                //
+                
+            }
+            
+            let fillWordMemoryFromCoreDataOperation = self.fillWordMemoryFromCoreData() { result in
+                
+                // Append Result
+                results.append(result)
+                
+                // Pass Final Result If Needed
+                if (results.count == countNeeded) {
+                    completionHandler(results)
+                }
+                //
+                
+            }
+            
+            // Add Operation
+            self.operationQueue.addOperations([fillJWTMemoryFromCoreDataOperation,
+                                               fillUserMemoryFromCoreDataOperation,
+                                               fillLanguageMemoryFromCoreDataOperation,
+                                               fillCourseMemoryFromCoreDataOperation,
+                                               fillWordMemoryFromCoreDataOperation],
+                                              waitUntilFinished: true)
+            //
+            
         }
         
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        fillUserMemoryFromCoreData() { result in
-            // Append Result
-            results.append(result)
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        fillLanguageMemoryFromCoreData() { result in
-            // Append Result
-            results.append(result)
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        fillCourseMemoryFromCoreData() { result in
-            // Append Result
-            results.append(result)
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        fillWordMemoryFromCoreData() { result in
-            // Append Result
-            results.append(result)
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Notify And Pass Final Result
-        dispatchGroup.notify(queue: .main) {
-            completionHandler(results)
-        }
+        return operation
         
     }
     
-    func fillJWTMemoryFromCoreData(_ completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
+    func fillJWTMemoryFromCoreData(_ completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
         
-        let storageServiceType: MDStorageServiceType = .jwt
-        
-        jwtStorage.readFirstJWT(storageType: fromCoreData) { [unowned self] readResults in
+        let operation: BlockOperation = .init {
             
-            switch readResults.first!.result {
+            let storageServiceType: MDStorageServiceType = .jwt
+            
+            self.jwtStorage.readFirstJWT(storageType: self.fromCoreData) { [unowned self] readResults in
                 
-            case .success(let jwt):
-                
-                jwtStorage.createJWT(storageType: toMemory,
-                                     jwtResponse: jwt) { createResults in
+                switch readResults.first!.result {
                     
-                    switch createResults.first!.result {
+                case .success(let jwt):
+                    
+                    jwtStorage.createJWT(storageType: toMemory,
+                                         jwtResponse: jwt) { createResults in
                         
-                    case .success:
-                        completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
-                        break
-                    case .failure(let error):
-                        completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                        return
+                        switch createResults.first!.result {
+                            
+                        case .success:
+                            completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                            break
+                        case .failure(let error):
+                            completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
+                            return
+                        }
+                        
                     }
                     
+                    break
+                case .failure(let error):
+                    completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
+                    return
                 }
                 
-                break
-            case .failure(let error):
-                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                return
             }
             
         }
         
+        return operation
+        
     }
     
-    func fillUserMemoryFromCoreData(_ completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
+    func fillUserMemoryFromCoreData(_ completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
         
-        let storageServiceType: MDStorageServiceType = .user
-        
-        userStorage.readFirstUser(storageType: fromCoreData) { [unowned self] readResults in
+        let operation: BlockOperation = .init {
             
-            switch readResults.first!.result {
+            let storageServiceType: MDStorageServiceType = .user
+            
+            self.userStorage.readFirstUser(storageType: self.fromCoreData) { [unowned self] readResults in
                 
-            case .success(let user):
-                
-                userStorage.createUser(user,
-                                       password: user.password!,
-                                       storageType: toMemory) { createResults in
+                switch readResults.first!.result {
                     
-                    switch createResults.first!.result {
+                case .success(let user):
+                    
+                    userStorage.createUser(user,
+                                           password: user.password!,
+                                           storageType: toMemory) { createResults in
                         
-                    case .success:
-                        completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
-                        break
-                    case .failure(let error):
-                        completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                        return
+                        switch createResults.first!.result {
+                            
+                        case .success:
+                            completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                            break
+                        case .failure(let error):
+                            completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
+                            return
+                        }
+                        
                     }
                     
+                    break
+                case .failure(let error):
+                    completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
+                    return
                 }
                 
-                break
-            case .failure(let error):
-                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                return
             }
             
         }
         
+        return operation
+        
     }
     
-    func fillLanguageMemoryFromCoreData(_ completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
+    func fillLanguageMemoryFromCoreData(_ completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
         
-        let storageServiceType: MDStorageServiceType = .language
-        
-        languageStorage.readAllLanguages(storageType: fromCoreData) { [unowned self] readResults in
+        let operation: BlockOperation = .init {
             
-            switch readResults.first!.result {
+            let storageServiceType: MDStorageServiceType = .language
+            
+            self.languageStorage.readAllLanguages(storageType: self.fromCoreData) { [unowned self] readResults in
                 
-            case .success(let languages):
-                
-                languageStorage.createLanguages(storageType: toMemory,
-                                                languageEntities: languages) { createResults in
+                switch readResults.first!.result {
                     
-                    switch createResults.first!.result {
+                case .success(let languages):
+                    
+                    languageStorage.createLanguages(storageType: toMemory,
+                                                    languageEntities: languages) { createResults in
                         
-                    case .success:
-                        completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
-                        break
-                    case .failure(let error):
-                        completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                        return
+                        switch createResults.first!.result {
+                            
+                        case .success:
+                            completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                            break
+                        case .failure(let error):
+                            completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
+                            return
+                        }
+                        
                     }
                     
+                    break
+                case .failure(let error):
+                    completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
+                    return
                 }
                 
-                break
-            case .failure(let error):
-                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                return
             }
             
         }
         
+        return operation
+        
     }
     
-    func fillCourseMemoryFromCoreData(_ completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
+    func fillCourseMemoryFromCoreData(_ completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
         
-        let storageServiceType: MDStorageServiceType = .course
-        
-        courseStorage.readAllCourses(storageType: fromCoreData) { [unowned self] readResults in
+        let operation: BlockOperation = .init {
             
-            switch readResults.first!.result {
+            let storageServiceType: MDStorageServiceType = .course
+            
+            self.courseStorage.readAllCourses(storageType: self.fromCoreData) { [unowned self] readResults in
                 
-            case .success(let courses):
-                
-                courseStorage.createCourses(storageType: toMemory,
-                                            courseEntities: courses) { createResults in
+                switch readResults.first!.result {
                     
-                    switch createResults.first!.result {
+                case .success(let courses):
+                    
+                    courseStorage.createCourses(storageType: toMemory,
+                                                courseEntities: courses) { createResults in
                         
-                    case .success:
-                        completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
-                        break
-                    case .failure(let error):
-                        completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                        return
+                        switch createResults.first!.result {
+                            
+                        case .success:
+                            completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                            break
+                        case .failure(let error):
+                            completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
+                            return
+                        }
+                        
                     }
                     
+                    break
+                case .failure(let error):
+                    completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
+                    return
                 }
                 
-                break
-            case .failure(let error):
-                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                return
             }
             
         }
         
+        return operation
+        
     }
     
-    func fillWordMemoryFromCoreData(_ completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
+    func fillWordMemoryFromCoreData(_ completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
         
-        let storageServiceType: MDStorageServiceType = .word
-        
-        wordStorage.readAllWords(storageType: fromCoreData) { [unowned self] readResults in
+        let operation: BlockOperation = .init {
             
-            switch readResults.first!.result {
+            let storageServiceType: MDStorageServiceType = .word
+            
+            self.wordStorage.readAllWords(storageType: self.fromCoreData) { [unowned self] readResults in
                 
-            case .success(let words):
-                
-                wordStorage.createWords(words, storageType: toMemory) { createResults in
+                switch readResults.first!.result {
                     
-                    switch createResults.first!.result {
+                case .success(let words):
+                    
+                    wordStorage.createWords(words, storageType: toMemory) { createResults in
                         
-                    case .success:
-                        completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
-                        break
-                    case .failure(let error):
-                        completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                        return
+                        switch createResults.first!.result {
+                            
+                        case .success:
+                            completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                            break
+                        case .failure(let error):
+                            completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
+                            return
+                        }
+                        
                     }
                     
+                    break
+                case .failure(let error):
+                    completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
+                    return
                 }
                 
-                break
-            case .failure(let error):
-                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                return
             }
             
         }
+        
+        return operation
         
     }
     
@@ -409,7 +485,7 @@ fileprivate extension MDFillMemoryService {
     
     // didChangeMemoryIsFilledResult
     func setDidChangeMemoryIsFilledResult(_ newValue: MDOperationResultWithoutCompletion<Void>) {
-        bridge.didChangeMemoryIsFilledResult?(newValue)        
+        bridge.didChangeMemoryIsFilledResult?(newValue)
     }
     
 }
