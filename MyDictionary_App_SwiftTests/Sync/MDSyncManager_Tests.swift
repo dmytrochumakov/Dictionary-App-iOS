@@ -46,7 +46,8 @@ final class MDSyncManager_Tests: XCTestCase {
                                                                                                                     array: .init()),
                                                                           coreDataStorage: MDCourseCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseCoreDataStorageOperationQueue)!,
                                                                                                                         managedObjectContext: coreDataStack.privateContext,
-                                                                                                                        coreDataStack: coreDataStack))
+                                                                                                                        coreDataStack: coreDataStack),
+                                                                          operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseStorageOperationQueue)!)
         
         let wordStorage: MDWordStorageProtocol = MDWordStorage.init(memoryStorage: MDWordMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordMemoryStorageOperationQueue)!,
                                                                                                             arrayWords: .init()),

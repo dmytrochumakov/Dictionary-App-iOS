@@ -288,6 +288,7 @@ struct MDConstants {
         // Language
         //
         fileprivate static let languageShortQueueName: String = "Language"
+        static let languageStorageOperationQueue: String = mdStorageOperationQueue(shortQueueName: languageShortQueueName)
         static let languageMemoryStorageOperationQueue: String = mdMemoryStorageOperationQueue(shortQueueName: languageShortQueueName)
         static let languageCoreDataStorageOperationQueue: String = mdCoreDataStorageOperationQueue(shortQueueName: languageShortQueueName)
         static let languageAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: languageShortQueueName)
@@ -295,6 +296,7 @@ struct MDConstants {
         // Course
         //
         fileprivate static let courseShortQueueName: String = "Course"
+        static let courseStorageOperationQueue: String = mdStorageOperationQueue(shortQueueName: courseShortQueueName)
         static let courseMemoryStorageOperationQueue: String = mdMemoryStorageOperationQueue(shortQueueName: courseShortQueueName)
         static let courseCoreDataStorageOperationQueue: String = mdCoreDataStorageOperationQueue(shortQueueName: courseShortQueueName)
         static let courseAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: courseShortQueueName)
@@ -302,6 +304,7 @@ struct MDConstants {
         // JWT
         //
         fileprivate static let jwtShortQueueName: String = "JWT"
+        static let jwtStorageOperationQueue: String = mdStorageOperationQueue(shortQueueName: jwtShortQueueName)
         static let jwtMemoryStorageOperationQueue: String = mdMemoryStorageOperationQueue(shortQueueName: jwtShortQueueName)
         static let jwtCoreDataStorageOperationQueue: String = mdCoreDataStorageOperationQueue(shortQueueName: jwtShortQueueName)
         static let jwtAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: jwtShortQueueName)
@@ -309,6 +312,7 @@ struct MDConstants {
         // User
         //
         fileprivate static let userShortQueueName: String = "User"
+        static let userStorageOperationQueue: String = mdStorageOperationQueue(shortQueueName: userShortQueueName)
         static let userMemoryStorageOperationQueue: String = mdMemoryStorageOperationQueue(shortQueueName: userShortQueueName)
         static let userCoreDataStorageOperationQueue: String = mdCoreDataStorageOperationQueue(shortQueueName: userShortQueueName)
         static let userAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: userShortQueueName)
@@ -316,6 +320,7 @@ struct MDConstants {
         // Word
         //
         fileprivate static let wordShortQueueName: String = "Word"
+        static let wordStorageOperationQueue: String = mdStorageOperationQueue(shortQueueName: wordShortQueueName)
         static let wordMemoryStorageOperationQueue: String = mdMemoryStorageOperationQueue(shortQueueName: wordShortQueueName)
         static let wordCoreDataStorageOperationQueue: String = mdCoreDataStorageOperationQueue(shortQueueName: wordShortQueueName)
         static let wordAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: wordShortQueueName)
@@ -358,6 +363,10 @@ struct MDConstants {
         
         fileprivate static func mdCoreDataStorageOperationQueue(shortQueueName: String) -> String {
             return bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: "MD" + shortQueueName + "CoreDataStorageOperationQueue")
+        }
+        
+        fileprivate static func mdStorageOperationQueue(shortQueueName: String) -> String {
+            return bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: "MD" + shortQueueName + "StorageOperationQueue")
         }
         
         fileprivate static func mdOperationQueue(shortQueueName: String) -> String {

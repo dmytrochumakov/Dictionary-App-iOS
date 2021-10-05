@@ -38,12 +38,15 @@ final class MDCourseStorage: MDStorage, MDCourseStorageProtocol {
     
     let memoryStorage: MDCourseMemoryStorageProtocol
     fileprivate let coreDataStorage: MDCourseCoreDataStorageProtocol
+    fileprivate let operationQueue: OperationQueue
     
     init(memoryStorage: MDCourseMemoryStorageProtocol,
-         coreDataStorage: MDCourseCoreDataStorageProtocol) {
+         coreDataStorage: MDCourseCoreDataStorageProtocol,
+         operationQueue: OperationQueue) {
         
         self.memoryStorage = memoryStorage
         self.coreDataStorage = coreDataStorage
+        self.operationQueue = operationQueue
         
         super.init(memoryStorage: memoryStorage,
                    coreDataStorage: coreDataStorage)
@@ -64,55 +67,84 @@ extension MDCourseStorage {
                       _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<CourseResponse>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
-            memoryStorage.createCourse(courseEntity) { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.memoryStorage.createCourse(courseEntity) { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .coreData:
             
-            coreDataStorage.createCourse(courseEntity) { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.coreDataStorage.createCourse(courseEntity) { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .all:
             
-            // Initialize Dispatch Group
-            let dispatchGroup: DispatchGroup = .init()
-            
-            // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<CourseResponse>> = []
-            
-            // Create in Memory
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            memoryStorage.createCourse(courseEntity) { result in
+            let operation: BlockOperation = .init {
                 
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
+                //
+                let countNeeded: Int = 2
+                //
+                
+                // Initialize final result
+                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<CourseResponse>> = []
+                
+                // Create in Memory
+                self.memoryStorage.createCourse(courseEntity) { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .memory, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    
+                }
+                
+                // Create in Core Data
+                self.coreDataStorage.createCourse(courseEntity) { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .coreData, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
                 
             }
             
-            // Create in Core Data
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            coreDataStorage.createCourse(courseEntity) { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .coreData, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
-                
-            }
-            
-            // Notify And Pass Final Result
-            dispatchGroup.notify(queue: .main) {
-                completionHandler(finalResult)
-            }
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         }
         
@@ -123,55 +155,87 @@ extension MDCourseStorage {
                        _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<CourseResponse>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
-            memoryStorage.createCourses(courseEntities) { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.memoryStorage.createCourses(courseEntities) { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .coreData:
             
-            coreDataStorage.createCourses(courseEntities) { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.coreDataStorage.createCourses(courseEntities) { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .all:
             
-            // Initialize Dispatch Group
-            let dispatchGroup: DispatchGroup = .init()
-            
-            // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<CourseResponse>> = []
-            
-            // Create in Memory
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            memoryStorage.createCourses(courseEntities) { result in
+            let operation: BlockOperation = .init {
                 
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
+                //
+                let countNeeded: Int = 2
+                //
+                
+                // Initialize final result
+                var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<CourseResponse>> = []
+                
+                // Create in Memory
+                self.memoryStorage.createCourses(courseEntities) { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .memory, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                    
+                }
+                
+                // Create in Core Data
+                self.coreDataStorage.createCourses(courseEntities) { result in
+                    
+                    // Append Result
+                    
+                    finalResult.append(.init(storageType: .coreData, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
                 
             }
             
-            // Create in Core Data
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            coreDataStorage.createCourses(courseEntities) { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .coreData, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
-                
-            }
-            
-            // Notify And Pass Final Result
-            dispatchGroup.notify(queue: .main) {
-                completionHandler(finalResult)
-            }
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         }
         
@@ -182,56 +246,86 @@ extension MDCourseStorage {
                     _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<CourseResponse>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
-            memoryStorage.readCourse(fromCourseId: courseId) { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.memoryStorage.readCourse(fromCourseId: courseId) { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                    //
+                }
+                
             }
             
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .coreData:
             
-            coreDataStorage.readCourse(fromCourseId: courseId) { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.coreDataStorage.readCourse(fromCourseId: courseId) { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .all:
             
-            // Initialize Dispatch Group
-            let dispatchGroup: DispatchGroup = .init()
-            
-            // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<CourseResponse>> = []
-            
-            // Read From Memory
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            memoryStorage.readCourse(fromCourseId: courseId) { result in
+            let operation: BlockOperation = .init {
                 
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
+                //
+                let countNeeded: Int = 2
+                //
+                
+                // Initialize final result
+                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<CourseResponse>> = []
+                
+                // Read From Memory
+                self.memoryStorage.readCourse(fromCourseId: courseId) { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .memory, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
+                
+                // Read From Core Data
+                self.coreDataStorage.readCourse(fromCourseId: courseId) { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .coreData, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
                 
             }
             
-            // Read From Core Data
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            coreDataStorage.readCourse(fromCourseId: courseId) { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .coreData, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
-                
-            }
-            
-            // Notify And Pass Final Result
-            dispatchGroup.notify(queue: .main) {
-                completionHandler(finalResult)
-            }
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         }
         
@@ -241,56 +335,85 @@ extension MDCourseStorage {
                         _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<CourseResponse>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
-            memoryStorage.readAllCourses { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.memoryStorage.readAllCourses { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
             
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .coreData:
             
-            coreDataStorage.readAllCourses { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.coreDataStorage.readAllCourses { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .all:
             
-            // Initialize Dispatch Group
-            let dispatchGroup: DispatchGroup = .init()
-            
-            // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<CourseResponse>> = []
-            
-            // Read From Memory
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            memoryStorage.readAllCourses { result in
+            let operation: BlockOperation = .init {
                 
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
+                //
+                let countNeeded: Int = 2
+                //
+                
+                // Initialize final result
+                var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<CourseResponse>> = []
+                
+                // Read From Memory
+                self.memoryStorage.readAllCourses { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .memory, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
+                
+                // Read From Core Data
+                self.coreDataStorage.readAllCourses { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .coreData, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
                 
             }
             
-            // Read From Core Data
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            coreDataStorage.readAllCourses { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .coreData, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
-                
-            }
-            
-            // Notify And Pass Final Result
-            dispatchGroup.notify(queue: .main) {
-                completionHandler(finalResult)
-            }
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         }
         
@@ -301,55 +424,85 @@ extension MDCourseStorage {
                       _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
-            memoryStorage.deleteCourse(fromCourseId: courseId) { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.memoryStorage.deleteCourse(fromCourseId: courseId) { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .coreData:
             
-            coreDataStorage.deleteCourse(fromCourseId: courseId) { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.coreDataStorage.deleteCourse(fromCourseId: courseId) { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .all:
             
-            // Initialize Dispatch Group
-            let dispatchGroup: DispatchGroup = .init()
-            
-            // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
-            
-            // Delete From Memory
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            memoryStorage.deleteCourse(fromCourseId: courseId) { result in
+            let operation: BlockOperation = .init {
                 
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
+                //
+                let countNeeded: Int = 2
+                //
+                
+                // Initialize final result
+                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
+                
+                // Delete From Memory
+                self.memoryStorage.deleteCourse(fromCourseId: courseId) { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .memory, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
+                
+                // Delete From Core Data
+                self.coreDataStorage.deleteCourse(fromCourseId: courseId) { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .coreData, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
                 
             }
             
-            // Delete From Core Data
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            coreDataStorage.deleteCourse(fromCourseId: courseId) { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .coreData, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
-                
-            }
-            
-            // Notify And Pass Final Result
-            dispatchGroup.notify(queue: .main) {
-                completionHandler(finalResult)
-            }
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         }
         
@@ -359,55 +512,85 @@ extension MDCourseStorage {
                           _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
-            memoryStorage.deleteAllCourses { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.memoryStorage.deleteAllCourses { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .coreData:
             
-            coreDataStorage.deleteAllCourses { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.coreDataStorage.deleteAllCourses { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .all:
             
-            // Initialize Dispatch Group
-            let dispatchGroup: DispatchGroup = .init()
-            
-            // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
-            
-            // Delete From Memory
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            memoryStorage.deleteAllCourses { result in
+            let operation: BlockOperation = .init {
                 
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
+                //
+                let countNeeded: Int = 2
+                //
+                
+                // Initialize final result
+                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
+                
+                // Delete From Memory
+                self.memoryStorage.deleteAllCourses { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .memory, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
+                
+                // Delete From Core Data
+                self.coreDataStorage.deleteAllCourses { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .coreData, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
                 
             }
             
-            // Delete From Core Data
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            coreDataStorage.deleteAllCourses { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .coreData, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
-                
-            }
-            
-            // Notify And Pass Final Result
-            dispatchGroup.notify(queue: .main) {
-                completionHandler(finalResult)
-            }
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         }
         
