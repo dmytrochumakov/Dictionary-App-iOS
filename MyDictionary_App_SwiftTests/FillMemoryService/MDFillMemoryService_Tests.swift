@@ -21,49 +21,57 @@ final class MDFillMemoryService_Tests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        let operationQueue: OperationQueue = .init()
-        
         let coreDataStack: MDCoreDataStack = TestCoreDataStack.init()
         
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
-        
-        self.jwtCoreDataStorage = MDJWTCoreDataStorage.init(operationQueueService: operationQueueService,
+        self.jwtCoreDataStorage = MDJWTCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtCoreDataStorageOperationQueue)!,
                                                             managedObjectContext: coreDataStack.privateContext,
                                                             coreDataStack: coreDataStack)
         
-        self.userCoreDataStorage = MDUserCoreDataStorage.init(operationQueueService: operationQueueService,
+        self.userCoreDataStorage = MDUserCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.userCoreDataStorageOperationQueue)!,
                                                               managedObjectContext: coreDataStack.privateContext,
                                                               coreDataStack: coreDataStack)
         
-        self.languageCoreDataStorage = MDLanguageCoreDataStorage.init(operationQueueService: operationQueueService,
+        self.languageCoreDataStorage = MDLanguageCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.languageCoreDataStorageOperationQueue)!,
                                                                       managedObjectContext: coreDataStack.privateContext,
                                                                       coreDataStack: coreDataStack)
         
-        self.courseCoreDataStorage = MDCourseCoreDataStorage.init(operationQueueService: operationQueueService,
+        self.courseCoreDataStorage = MDCourseCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseCoreDataStorageOperationQueue)!,
                                                                   managedObjectContext: coreDataStack.privateContext,
                                                                   coreDataStack: coreDataStack)
         
-        self.wordCoreDataStorage = MDWordCoreDataStorage.init(operationQueueService: operationQueueService,
+        self.wordCoreDataStorage = MDWordCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordCoreDataStorageOperationQueue)!,
                                                               managedObjectContext: coreDataStack.privateContext,
                                                               coreDataStack: coreDataStack)
         
         self.fillMemoryService = MDFillMemoryService.init(isLoggedIn: true,
-                                                          jwtStorage: MDJWTStorage.init(memoryStorage: MDJWTMemoryStorage.init(operationQueueService: operationQueueService,
+                                                          jwtStorage: MDJWTStorage.init(memoryStorage: MDJWTMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtMemoryStorageOperationQueue)!,
                                                                                                                                array: .init()),
-                                                                                        coreDataStorage: jwtCoreDataStorage),
-                                                          userStorage: MDUserStorage.init(memoryStorage: MDUserMemoryStorage.init(operationQueueService: operationQueueService,
+                                                                                        coreDataStorage: jwtCoreDataStorage,
+                                                                                        operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtStorageOperationQueue)!),
+                                                          
+                                                          userStorage: MDUserStorage.init(memoryStorage: MDUserMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.userCoreDataStorageOperationQueue)!,
                                                                                                                                   array: .init()),
-                                                                                          coreDataStorage: userCoreDataStorage),
-                                                          languageStorage: MDLanguageStorage.init(memoryStorage: MDLanguageMemoryStorage.init(operationQueueService: operationQueueService,
+                                                                                          coreDataStorage: userCoreDataStorage,
+                                                                                          operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.userStorageOperationQueue)!),
+                                                          
+                                                          languageStorage: MDLanguageStorage.init(memoryStorage: MDLanguageMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.languageMemoryStorageOperationQueue)!,
                                                                                                                                               array: .init()),
-                                                                                                  coreDataStorage: languageCoreDataStorage),
-                                                          courseStorage: MDCourseStorage.init(memoryStorage: MDCourseMemoryStorage.init(operationQueueService: operationQueueService,
+                                                                                                  coreDataStorage: languageCoreDataStorage,
+                                                                                                  operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.languageStorageOperationQueue)!),
+                                                          
+                                                          courseStorage: MDCourseStorage.init(memoryStorage: MDCourseMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseMemoryStorageOperationQueue)!,
                                                                                                                                         array: .init()),
-                                                                                              coreDataStorage: courseCoreDataStorage),
-                                                          wordStorage: MDWordStorage.init(memoryStorage: MDWordMemoryStorage.init(operationQueueService: operationQueueService,
+                                                                                              coreDataStorage: courseCoreDataStorage,
+                                                                                              operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseStorageOperationQueue)!),
+                                                          
+                                                          wordStorage: MDWordStorage.init(memoryStorage: MDWordMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordMemoryStorageOperationQueue)!,
                                                                                                                                   arrayWords: .init()),
-                                                                                          coreDataStorage: wordCoreDataStorage),
-                                                          bridge: MDBridge.init())
+                                                                                          coreDataStorage: wordCoreDataStorage,
+                                                                                          operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordStorageOperationQueue)!),
+                                                          
+                                                          bridge: MDBridge.init(),
+                                                          
+                                                          operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.fillMemoryServiceOperationQueue)!)
         
     }
     
@@ -77,7 +85,7 @@ extension MDFillMemoryService_Tests {
         
         // Initialize Dispatch Group
         let dispatchGroup: DispatchGroup = .init()
-                
+        
         // Dispatch Group Enter
         dispatchGroup.enter()
         jwtCoreDataStorage.createJWT(Constants_For_Tests.mockedJWT) { createJWTResult in
@@ -113,14 +121,14 @@ extension MDFillMemoryService_Tests {
             // Dispatch Group Leave
             dispatchGroup.leave()
         }
-                
+        
         // Notify And Pass Final Result
         dispatchGroup.notify(queue: .main) {
-        
+            
             self.fillMemoryService.fillMemoryFromCoreDataIfNeeded { result in
                 
                 switch result {
-                
+                    
                 case .success:
                     
                     expectation.fulfill()

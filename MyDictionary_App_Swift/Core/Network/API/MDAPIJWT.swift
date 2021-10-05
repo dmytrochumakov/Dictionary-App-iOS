@@ -14,13 +14,13 @@ protocol MDAPIJWTProtocol {
 final class MDAPIJWT: MDAPIJWTProtocol {
     
     fileprivate let requestDispatcher: MDRequestDispatcherProtocol
-    fileprivate let operationQueueService: OperationQueueServiceProtocol
+    fileprivate let operationQueue: OperationQueue
     
     init(requestDispatcher: MDRequestDispatcherProtocol,
-         operationQueueService: OperationQueueServiceProtocol) {
+         operationQueue: OperationQueue) {
         
         self.requestDispatcher = requestDispatcher
-        self.operationQueueService = operationQueueService
+        self.operationQueue = operationQueue
         
     }
     
@@ -92,7 +92,7 @@ extension MDAPIJWT {
                                               endpoint: MDAPIJWTEndpoint.accessToken(jwtApiRequest: jwtApiRequest)) { result in
             
             switch result {
-            
+                
             case .data(let data, _):
                 
                 guard let data = data else { completionHandler(.failure(MDAPIError.noData)) ; return }
@@ -118,7 +118,7 @@ extension MDAPIJWT {
             }
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     

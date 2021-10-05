@@ -14,14 +14,14 @@ protocol MDUserMemoryStorageProtocol: MDCRUDUserProtocol,
 
 final class MDUserMemoryStorage: MDUserMemoryStorageProtocol {
     
-    fileprivate let operationQueueService: OperationQueueServiceProtocol
+    fileprivate let operationQueue: OperationQueue
     
     var array: [UserResponse]
     
-    init(operationQueueService: OperationQueueServiceProtocol,
+    init(operationQueue: OperationQueue,
          array: [UserResponse]) {
         
-        self.operationQueueService = operationQueueService
+        self.operationQueue = operationQueue
         self.array = array
         
     }
@@ -68,7 +68,7 @@ extension MDUserMemoryStorage {
                                                                 password: password) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func readUser(fromUserID userId: Int64,
@@ -77,21 +77,21 @@ extension MDUserMemoryStorage {
                                                               userId: userId) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func readFirstUser(_ completionHandler: @escaping (MDOperationResultWithCompletion<UserResponse>)) {
         let operation = MDReadFirstUserMemoryStorageOperation.init(memoryStorage: self) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func readAllUsers(_ completionHandler: @escaping (MDOperationsResultWithCompletion<UserResponse>)) {
         let operation = MDReadAllUsersMemoryStorageOperation.init(memoryStorage: self) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func deleteUser(_ userId: Int64,
@@ -100,14 +100,14 @@ extension MDUserMemoryStorage {
                                                                 userId: userId) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func deleteAllUsers(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         let operation = MDDeleteAllUsersMemoryStorageOperation.init(memoryStorage: self) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
 }

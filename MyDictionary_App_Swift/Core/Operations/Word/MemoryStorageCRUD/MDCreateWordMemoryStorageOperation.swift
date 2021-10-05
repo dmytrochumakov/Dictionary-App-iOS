@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDCreateWordMemoryStorageOperation: MDOperation {
+final class MDCreateWordMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let wordStorage: MDWordMemoryStorage
     fileprivate let word: WordResponse
@@ -37,7 +37,7 @@ final class MDCreateWordMemoryStorageOperation: MDOperation {
     
 }
 
-final class MDCreateWordsMemoryStorageOperation: MDOperation {
+final class MDCreateWordsMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDWordMemoryStorage
     fileprivate let words: [WordResponse]

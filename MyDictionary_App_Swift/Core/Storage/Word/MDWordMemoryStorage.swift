@@ -14,14 +14,14 @@ protocol MDWordMemoryStorageProtocol: MDCRUDWordProtocol,
 
 final class MDWordMemoryStorage: MDWordMemoryStorageProtocol {
     
-    fileprivate let operationQueueService: OperationQueueServiceProtocol
+    fileprivate let operationQueue: OperationQueue
     
     var arrayWords: [WordResponse]
     
-    init(operationQueueService: OperationQueueServiceProtocol,
+    init(operationQueue: OperationQueue,
          arrayWords: [WordResponse]) {
         
-        self.operationQueueService = operationQueueService
+        self.operationQueue = operationQueue
         self.arrayWords = arrayWords
         
     }
@@ -69,7 +69,7 @@ extension MDWordMemoryStorage {
             completionHandler(result)
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     
@@ -81,7 +81,7 @@ extension MDWordMemoryStorage {
             completionHandler(result)
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     
@@ -92,7 +92,7 @@ extension MDWordMemoryStorage {
             completionHandler(result)
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     
@@ -110,7 +110,7 @@ extension MDWordMemoryStorage {
             completionHandler(result)
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     
@@ -122,7 +122,7 @@ extension MDWordMemoryStorage {
             completionHandler(result)
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     
@@ -138,7 +138,7 @@ extension MDWordMemoryStorage {
             completionHandler(result)
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     
@@ -150,7 +150,7 @@ extension MDWordMemoryStorage {
             completionHandler(result)
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     
@@ -162,7 +162,7 @@ extension MDWordMemoryStorage {
             completionHandler(result)
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     
@@ -172,7 +172,7 @@ extension MDWordMemoryStorage {
             completionHandler(result)
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     

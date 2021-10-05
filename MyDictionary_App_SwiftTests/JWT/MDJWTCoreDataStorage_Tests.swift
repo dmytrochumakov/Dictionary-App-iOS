@@ -15,12 +15,9 @@ final class MDJWTCoreDataStorage_Tests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        let operationQueue: OperationQueue = .init()
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
-        
         let coreDataStack: MDCoreDataStack = TestCoreDataStack()
         
-        let jwtCoreDataStorage: MDJWTCoreDataStorageProtocol = MDJWTCoreDataStorage.init(operationQueueService: operationQueueService,
+        let jwtCoreDataStorage: MDJWTCoreDataStorageProtocol = MDJWTCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtCoreDataStorageOperationQueue)!,
                                                                                          managedObjectContext: coreDataStack.privateContext,
                                                                                          coreDataStack: coreDataStack)
         
@@ -39,15 +36,15 @@ extension MDJWTCoreDataStorage_Tests {
         jwtCoreDataStorage.createJWT(Constants_For_Tests.mockedJWT) { result in
             
             switch result {
-            
+                
             case .success(let createdJWT):
                 
                 XCTAssertTrue(createdJWT.accessToken == Constants_For_Tests.mockedJWT.accessToken)
                 XCTAssertTrue(createdJWT.expirationDate == Constants_For_Tests.mockedJWT.expirationDate)
                 expectation.fulfill()
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
@@ -63,26 +60,26 @@ extension MDJWTCoreDataStorage_Tests {
         jwtCoreDataStorage.createJWT(Constants_For_Tests.mockedJWT) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createdJWT):
                 
                 jwtCoreDataStorage.readFirstJWT() { readResult in
                     
                     switch readResult {
-                    
+                        
                     case .success(let readJWT):
                         
                         XCTAssertTrue(createdJWT.accessToken == readJWT.accessToken)
                         XCTAssertTrue(createdJWT.expirationDate == readJWT.expirationDate)
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
@@ -98,33 +95,33 @@ extension MDJWTCoreDataStorage_Tests {
         jwtCoreDataStorage.createJWT(Constants_For_Tests.mockedJWT) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createdJWT):
                 
                 jwtCoreDataStorage.readJWT(fromAccessToken: createdJWT.accessToken) { readResult in
                     
                     switch readResult {
-                    
+                        
                     case .success(let readJWT):
                         
                         XCTAssertTrue(createdJWT.accessToken == readJWT.accessToken)
                         XCTAssertTrue(createdJWT.expirationDate == readJWT.expirationDate)
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
         
         wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
         
-    }        
+    }
     
     func test_Update_JWT_Functionality() {
         
@@ -133,25 +130,25 @@ extension MDJWTCoreDataStorage_Tests {
         jwtCoreDataStorage.createJWT(Constants_For_Tests.mockedJWT) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createdJWT):
                 
                 self.jwtCoreDataStorage.updateJWT(oldAccessToken: createdJWT.accessToken,
                                                   newJWTResponse: Constants_For_Tests.mockedJWTForUpdate) { updateResult in
                     
                     switch updateResult {
-                    
+                        
                     case .success:
                         
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
@@ -167,24 +164,24 @@ extension MDJWTCoreDataStorage_Tests {
         jwtCoreDataStorage.createJWT(Constants_For_Tests.mockedJWT) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createdJWT):
                 
                 self.jwtCoreDataStorage.deleteJWT(createdJWT.accessToken) { deleteResult in
                     
                     switch deleteResult {
-                    
-                    case .success:                                                
+                        
+                    case .success:
                         
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
@@ -200,25 +197,25 @@ extension MDJWTCoreDataStorage_Tests {
         jwtCoreDataStorage.createJWT(Constants_For_Tests.mockedJWT) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success:
                 
                 self.jwtCoreDataStorage.deleteAllJWT { deleteResult in
                     
                     switch deleteResult {
-                    
+                        
                     case .success:
                         
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }

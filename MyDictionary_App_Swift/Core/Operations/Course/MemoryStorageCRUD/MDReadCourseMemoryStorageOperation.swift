@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDReadCourseMemoryStorageOperation: MDOperation {
+final class MDReadCourseMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDCourseMemoryStorage
     fileprivate let courseId: Int64

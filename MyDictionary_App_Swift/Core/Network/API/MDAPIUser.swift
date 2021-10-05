@@ -16,13 +16,13 @@ protocol MDAPIUserProtocol {
 final class MDAPIUser: MDAPIUserProtocol {
     
     fileprivate let requestDispatcher: MDRequestDispatcherProtocol
-    fileprivate let operationQueueService: OperationQueueServiceProtocol
+    fileprivate let operationQueue: OperationQueue
     
     init(requestDispatcher: MDRequestDispatcherProtocol,
-         operationQueueService: OperationQueueServiceProtocol) {
+         operationQueue: OperationQueue) {
         
         self.requestDispatcher = requestDispatcher
-        self.operationQueueService = operationQueueService
+        self.operationQueue = operationQueue
         
     }
     
@@ -98,7 +98,7 @@ extension MDAPIUser {
                                                                                   userId: userId)) { result in
             
             switch result {
-            
+                
             case .data(let data, _):
                 
                 guard let data = data else { completionHandler(.failure(MDAPIError.noData)) ; return }
@@ -124,7 +124,7 @@ extension MDAPIUser {
             }
             
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
 }

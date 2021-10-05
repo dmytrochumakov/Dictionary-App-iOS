@@ -15,21 +15,18 @@ final class MDLanguageStorage_Tests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        let operationQueue: OperationQueue = .init()
-        
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
-        
-        let memoryStorage: MDLanguageMemoryStorageProtocol = MDLanguageMemoryStorage.init(operationQueueService: operationQueueService,
+        let memoryStorage: MDLanguageMemoryStorageProtocol = MDLanguageMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.languageMemoryStorageOperationQueue)!,
                                                                                           array: .init())
         
         let coreDataStack: MDCoreDataStack = TestCoreDataStack.init()
         
-        let coreDataStorage: MDLanguageCoreDataStorageProtocol = MDLanguageCoreDataStorage.init(operationQueueService: operationQueueService,
+        let coreDataStorage: MDLanguageCoreDataStorageProtocol = MDLanguageCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.languageCoreDataStorageOperationQueue)!,
                                                                                                 managedObjectContext: coreDataStack.privateContext,
                                                                                                 coreDataStack: coreDataStack)
         
         let languageStorage: MDLanguageStorageProtocol = MDLanguageStorage.init(memoryStorage: memoryStorage,
-                                                                                coreDataStorage: coreDataStorage)
+                                                                                coreDataStorage: coreDataStorage,
+                                                                                operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.languageStorageOperationQueue)!)
         
         self.languageStorage = languageStorage
         
@@ -52,7 +49,7 @@ extension MDLanguageStorage_Tests {
             createResults.forEach { createResult in
                 
                 switch createResult.result {
-                
+                    
                 case .success(let createLanguages):
                     
                     resultCount += 1
@@ -63,8 +60,8 @@ extension MDLanguageStorage_Tests {
                         expectation.fulfill()
                     }
                     
-                case .failure:
-                    XCTExpectFailure()
+                case .failure(let error):
+                    XCTExpectFailure(error.localizedDescription)
                     expectation.fulfill()
                 }
                 
@@ -86,7 +83,7 @@ extension MDLanguageStorage_Tests {
         languageStorage.createLanguages(storageType: storageType, languageEntities: Constants_For_Tests.mockedLanguages) { [unowned self] createResults in
             
             switch createResults.first!.result {
-            
+                
             case .success(let createLanguages):
                 
                 XCTAssertTrue(createLanguages.count == Constants_For_Tests.mockedLanguages.count)
@@ -96,7 +93,7 @@ extension MDLanguageStorage_Tests {
                     readResults.forEach { readResult in
                         
                         switch readResult.result {
-                        
+                            
                         case .success(let readLanguages):
                             
                             resultCount += 1
@@ -107,15 +104,15 @@ extension MDLanguageStorage_Tests {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                         
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -135,7 +132,7 @@ extension MDLanguageStorage_Tests {
         languageStorage.createLanguages(storageType: storageType, languageEntities: Constants_For_Tests.mockedLanguages) { [unowned self] createResults in
             
             switch createResults.first!.result {
-            
+                
             case .success(let createLanguages):
                 
                 XCTAssertTrue(createLanguages.count == Constants_For_Tests.mockedLanguages.count)
@@ -145,7 +142,7 @@ extension MDLanguageStorage_Tests {
                     deleteResults.forEach { deleteResult in
                         
                         switch deleteResult.result {
-                        
+                            
                         case .success:
                             
                             resultCount += 1
@@ -154,15 +151,15 @@ extension MDLanguageStorage_Tests {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                         
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             

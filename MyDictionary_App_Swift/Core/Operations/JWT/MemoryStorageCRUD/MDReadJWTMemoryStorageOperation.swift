@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDReadJWTMemoryStorageOperation: MDOperation {
+final class MDReadJWTMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDJWTMemoryStorage
     fileprivate let accessToken: String
@@ -42,7 +42,7 @@ final class MDReadJWTMemoryStorageOperation: MDOperation {
     
 }
 
-final class MDReadAllJWTMemoryStorageOperation: MDOperation {
+final class MDReadAllJWTMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDJWTMemoryStorage
     fileprivate let result: MDOperationsResultWithCompletion<JWTResponse>?

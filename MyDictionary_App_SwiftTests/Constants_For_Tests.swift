@@ -95,4 +95,49 @@ struct Constants_For_Tests {
                      nickname: authRequest.nickname)
     }
     
+    static var operationQueueManager: MDOperationQueueManagerProtocol {
+        
+        let operationQueues: [OperationQueue] = [MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.jwtStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.jwtMemoryStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.jwtCoreDataStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.jwtAPIOperationQueue),
+                                                 
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.userStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.userMemoryStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.userCoreDataStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.userAPIOperationQueue),
+                                                 
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.languageStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.languageMemoryStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.languageCoreDataStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.languageAPIOperationQueue),
+                                                 
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.courseStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.courseMemoryStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.courseCoreDataStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.courseAPIOperationQueue),
+                                                 
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.wordStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.wordMemoryStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.wordCoreDataStorageOperationQueue),
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.wordAPIOperationQueue),
+                                                 
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.authAPIOperationQueue),
+                                                 
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.accountAPIOperationQueue),
+                                                 
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.synchronizationServiceOperationQueue),
+                                                 
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.storageCleanupServiceOperationQueue),
+                                                 
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.synchronizationManagerOperationQueue),
+                                                 
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.fillMemoryServiceOperationQueue)
+                                                 
+        ]
+        
+        return MDOperationQueueManager.init(operationQueues: operationQueues)
+        
+    }
+    
 }

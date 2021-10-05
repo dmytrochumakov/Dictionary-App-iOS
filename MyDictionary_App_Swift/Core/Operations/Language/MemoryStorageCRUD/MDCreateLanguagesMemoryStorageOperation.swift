@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDCreateLanguagesMemoryStorageOperation: MDOperation {
+final class MDCreateLanguagesMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDLanguageMemoryStorage
     fileprivate let languageEntities: [LanguageResponse]

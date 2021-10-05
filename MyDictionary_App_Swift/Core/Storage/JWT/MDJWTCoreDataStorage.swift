@@ -16,15 +16,15 @@ protocol MDJWTCoreDataStorageProtocol: MDCRUDJWTProtocol,
 final class MDJWTCoreDataStorage: NSObject,
                                   MDJWTCoreDataStorageProtocol {
     
-    fileprivate let operationQueueService: OperationQueueServiceProtocol
+    fileprivate let operationQueue: OperationQueue
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStack: MDCoreDataStack
     
-    init(operationQueueService: OperationQueueServiceProtocol,
+    init(operationQueue: OperationQueue,
          managedObjectContext: NSManagedObjectContext,
          coreDataStack: MDCoreDataStack) {
         
-        self.operationQueueService = operationQueueService
+        self.operationQueue = operationQueue
         self.managedObjectContext = managedObjectContext
         self.coreDataStack = coreDataStack
         
@@ -73,7 +73,7 @@ extension MDJWTCoreDataStorage {
                                                                  jwtResponse: jwtResponse) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
 }
@@ -87,7 +87,7 @@ extension MDJWTCoreDataStorage {
                                                                accessToken: accessToken) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func readFirstJWT(_ completionHandler: @escaping (MDOperationResultWithCompletion<JWTResponse>)) {
@@ -95,7 +95,7 @@ extension MDJWTCoreDataStorage {
                                                                     coreDataStorage: self) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func readAllJWTs(_ completionHandler: @escaping (MDOperationsResultWithCompletion<JWTResponse>)) {
@@ -103,7 +103,7 @@ extension MDJWTCoreDataStorage {
                                                                 coreDataStorage: self) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
 }
@@ -124,7 +124,7 @@ extension MDJWTCoreDataStorage {
             completionHandler(result)
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     
@@ -140,7 +140,7 @@ extension MDJWTCoreDataStorage {
                                                                  accessToken: byAccessToken) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func deleteAllJWT(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
@@ -149,7 +149,7 @@ extension MDJWTCoreDataStorage {
                                                                       coreDataStorage: self) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
 }

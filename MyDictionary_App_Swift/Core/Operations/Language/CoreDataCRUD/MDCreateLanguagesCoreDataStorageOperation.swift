@@ -7,7 +7,7 @@
 
 import CoreData
 
-final class MDCreateLanguagesCoreDataStorageOperation: MDOperation {
+final class MDCreateLanguagesCoreDataStorageOperation: MDAsyncOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStack: MDCoreDataStack
@@ -32,32 +32,42 @@ final class MDCreateLanguagesCoreDataStorageOperation: MDOperation {
     
     override func main() {
         
-        var resultCount: Int = .zero
-        
-        languageEntities.forEach { languageEntity in
+        if (languageEntities.isEmpty) {
             
-            let _ = CDLanguageResponseEntity.init(languageResponse: languageEntity,
-                                                  insertIntoManagedObjectContext: self.managedObjectContext)
+            self.result?(.success(self.languageEntities))
+            self.finish()
+            return
             
-            coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
+        } else {
+            
+            var resultCount: Int = .zero
+            
+            languageEntities.forEach { languageEntity in
                 
-                switch result {
+                let _ = CDLanguageResponseEntity.init(languageResponse: languageEntity,
+                                                      insertIntoManagedObjectContext: self.managedObjectContext)
                 
-                case .success:
+                coreDataStack.save(managedObjectContext: managedObjectContext) { [weak self] result in
                     
-                    resultCount += 1
-                    
-                    if (resultCount == self?.languageEntities.count) {
-                        self?.result?(.success(self?.languageEntities ?? []))
+                    switch result {
+                        
+                    case .success:
+                        
+                        resultCount += 1
+                        
+                        if (resultCount == self?.languageEntities.count) {
+                            self?.result?(.success(self?.languageEntities ?? []))
+                            self?.finish()
+                            break
+                        }
+                        
+                    case .failure(let error):
+                        
+                        self?.result?(.failure(error))
                         self?.finish()
                         break
+                        
                     }
-                    
-                case .failure(let error):
-                    
-                    self?.result?(.failure(error))
-                    self?.finish()
-                    break
                     
                 }
                 

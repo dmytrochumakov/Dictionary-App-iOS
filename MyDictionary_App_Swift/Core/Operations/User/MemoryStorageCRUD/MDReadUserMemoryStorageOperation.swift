@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDReadUserMemoryStorageOperation: MDOperation {
+final class MDReadUserMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDUserMemoryStorage
     fileprivate let userId: Int64
@@ -42,7 +42,7 @@ final class MDReadUserMemoryStorageOperation: MDOperation {
     
 }
 
-final class MDReadFirstUserMemoryStorageOperation: MDOperation {
+final class MDReadFirstUserMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDUserMemoryStorage
     fileprivate let result: MDOperationResultWithCompletion<UserResponse>?
@@ -74,7 +74,7 @@ final class MDReadFirstUserMemoryStorageOperation: MDOperation {
     
 }
 
-final class MDReadAllUsersMemoryStorageOperation: MDOperation {
+final class MDReadAllUsersMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDUserMemoryStorage
     fileprivate let result: MDOperationsResultWithCompletion<UserResponse>?

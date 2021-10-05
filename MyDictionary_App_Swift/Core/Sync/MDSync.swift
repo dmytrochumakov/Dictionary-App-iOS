@@ -11,11 +11,11 @@ protocol MDSyncProtocol {
     
     func startFullSyncWithDeleteAllData(withSyncItem item: MDSync.Item,
                                         progressCompletionHandler: @escaping((Float) -> Void),
-                                        completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void))
+                                        completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void)) -> BlockOperation
     
     func startWithJWTAndUserAndLanguageSync(withSyncItem item: MDSync.Item,
                                             progressCompletionHandler: @escaping((Float) -> Void),
-                                            completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void))
+                                            completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void)) -> BlockOperation
     
 }
 
@@ -28,6 +28,9 @@ final class MDSync: MDSyncProtocol {
         let nickname: String
     }
     
+    fileprivate static let fullSyncCount: Int = MDStorageServiceType.allCases.count
+    fileprivate static let jwtAndUserAndLanguageSyncCount: Int = 3
+    
     fileprivate let apiJWT: MDAPIJWTProtocol
     fileprivate let jwtStorage: MDJWTStorageProtocol
     fileprivate let apiUser: MDAPIUserProtocol
@@ -39,6 +42,7 @@ final class MDSync: MDSyncProtocol {
     fileprivate let apiWord: MDAPIWordProtocol
     fileprivate let wordStorage: MDWordStorageProtocol
     fileprivate let storageCleanupService: MDStorageCleanupServiceProtocol
+    fileprivate let operationQueue: OperationQueue
     
     init(apiJWT: MDAPIJWTProtocol,
          jwtStorage: MDJWTStorageProtocol,
@@ -50,7 +54,8 @@ final class MDSync: MDSyncProtocol {
          courseStorage: MDCourseStorageProtocol,
          apiWord: MDAPIWordProtocol,
          wordStorage: MDWordStorageProtocol,
-         storageCleanupService: MDStorageCleanupServiceProtocol) {
+         storageCleanupService: MDStorageCleanupServiceProtocol,
+         operationQueue: OperationQueue) {
         
         self.apiJWT = apiJWT
         self.jwtStorage = jwtStorage
@@ -63,6 +68,7 @@ final class MDSync: MDSyncProtocol {
         self.apiWord = apiWord
         self.wordStorage = wordStorage
         self.storageCleanupService = storageCleanupService
+        self.operationQueue = operationQueue
         
     }
     
@@ -76,27 +82,37 @@ extension MDSync {
     
     func startFullSyncWithDeleteAllData(withSyncItem item: MDSync.Item,
                                         progressCompletionHandler: @escaping((Float) -> Void),
-                                        completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void)) {
+                                        completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void)) -> BlockOperation {
         
-        storageCleanupService.clearAllStorages { [unowned self] clearAllStoragesResults in
+        let operation: BlockOperation = .init {
             
-            startFullSync(withSyncItem: item) { progress in
-                progressCompletionHandler(progress)
-            } completionHandler: { syncResults in
-                completionHandler(clearAllStoragesResults + syncResults)
+            let clearAllStoragesOperation = self.storageCleanupService.clearAllStorages { [unowned self] clearAllStoragesResults in
+                
+                let startFullSyncOperation = startFullSync(withSyncItem: item) { progress in
+                    progressCompletionHandler(progress)
+                } completionHandler: { syncResults in
+                    completionHandler(clearAllStoragesResults + syncResults)
+                }
+                
+                self.operationQueue.addOperation(startFullSyncOperation)
+                
             }
             
+            self.operationQueue.addOperation(clearAllStoragesOperation)
+            
         }
+        
+        return operation
         
     }
     
     func startWithJWTAndUserAndLanguageSync(withSyncItem item: Item,
                                             progressCompletionHandler: @escaping((Float) -> Void),
-                                            completionHandler: @escaping (([MDStorageServiceOperationResult]) -> Void)) {
+                                            completionHandler: @escaping (([MDStorageServiceOperationResult]) -> Void)) -> BlockOperation  {
         
-        jwtAndUserAndLanguageSync(withSyncItem: item,
-                                  progressCompletionHandler: progressCompletionHandler,
-                                  completionHandler: completionHandler)
+        return jwtAndUserAndLanguageSync(withSyncItem: item,
+                                         progressCompletionHandler: progressCompletionHandler,
+                                         completionHandler: completionHandler)
         
     }
     
@@ -106,140 +122,160 @@ fileprivate extension MDSync {
     
     func startFullSync(withSyncItem item: MDSync.Item,
                        progressCompletionHandler: @escaping((Float) -> Void),
-                       completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void)) {
+                       completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void)) -> BlockOperation {
         
-        // Initialize Sync Results
-        var syncResults: [MDStorageServiceOperationResult] = []
-        
-        // Initialize Dispatch Group
-        let dispatchGroup: DispatchGroup = .init()
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        // Get API And Save JWT
-        apiGetAndSaveJWT(withSyncItem: item) { [unowned self] result in
-            // Append Sync Result
-            syncResults.append(result)
-            // Compute And Pass Progress
-            progressCompletionHandler(computeProgressForFullSync(finishedOperationsCount: syncResults.count))
-            // Dispatch Group Leave
-            dispatchGroup.leave()
+        let operation: BlockOperation = .init {
+            
+            // Initialize Sync Results
+            var syncResults: [MDStorageServiceOperationResult] = []
+            
+            // Get API And Save JWT
+            let apiGetAndSaveJWTOperation = self.apiGetAndSaveJWT(withSyncItem: item) { [unowned self] result in
+                // Append Sync Result
+                syncResults.append(result)
+                // Compute And Pass Progress
+                progressCompletionHandler(computeProgressForFullSync(finishedOperationsCount: syncResults.count))
+                // Notify And Pass Final Result
+                if (syncResults.count == Self.fullSyncCount) {
+                    completionHandler(syncResults)
+                }
+                //
+            }
+            
+            // Get API And Save User
+            let apiGetAndSaveUserOperation = self.apiGetAndSaveUser(withSyncItem: item) { [unowned self] result in
+                // Append Sync Result
+                syncResults.append(result)
+                // Compute And Pass Progress
+                progressCompletionHandler(computeProgressForFullSync(finishedOperationsCount: syncResults.count))
+                // Notify And Pass Final Result
+                if (syncResults.count == Self.fullSyncCount) {
+                    completionHandler(syncResults)
+                }
+                //
+            }
+            
+            // Get API And Save Languages
+            let apiGetAndSaveLanguagesOperation = self.apiGetAndSaveLanguages(withSyncItem: item) { [unowned self] result in
+                // Append Sync Result
+                syncResults.append(result)
+                // Compute And Pass Progress
+                progressCompletionHandler(computeProgressForFullSync(finishedOperationsCount: syncResults.count))
+                // Notify And Pass Final Result
+                if (syncResults.count == Self.fullSyncCount) {
+                    completionHandler(syncResults)
+                }
+                //
+            }
+            
+            // Get API And Save Courses
+            let apiGetAndSaveCoursesOperation = self.apiGetAndSaveCourses(withSyncItem: item) { [unowned self] result in
+                // Append Sync Result
+                syncResults.append(result)
+                // Compute And Pass Progress
+                progressCompletionHandler(computeProgressForFullSync(finishedOperationsCount: syncResults.count))
+                // Notify And Pass Final Result
+                if (syncResults.count == Self.fullSyncCount) {
+                    completionHandler(syncResults)
+                }
+                //
+            }
+            
+            // Get API And Save Words
+            let apiGetAndSaveWordsOperation = self.apiGetAndSaveWords(withSyncItem: item) { [unowned self] result in
+                // Append Sync Result
+                syncResults.append(result)
+                // Compute And Pass Progress
+                progressCompletionHandler(computeProgressForFullSync(finishedOperationsCount: syncResults.count))
+                // Notify And Pass Final Result
+                if (syncResults.count == Self.fullSyncCount) {
+                    completionHandler(syncResults)
+                }
+                //
+            }
+            
+            // Add Operations
+            self.operationQueue.addOperations([apiGetAndSaveJWTOperation,
+                                               apiGetAndSaveUserOperation,
+                                               apiGetAndSaveLanguagesOperation,
+                                               apiGetAndSaveCoursesOperation,
+                                               apiGetAndSaveWordsOperation],
+                                              waitUntilFinished: true)
+            //
+            
         }
         
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        // Get API And Save User
-        apiGetAndSaveUser(withSyncItem: item) { [unowned self] result in
-            // Append Sync Result
-            syncResults.append(result)
-            // Compute And Pass Progress
-            progressCompletionHandler(computeProgressForFullSync(finishedOperationsCount: syncResults.count))
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        // Get API And Save Languages
-        apiGetAndSaveLanguages(withSyncItem: item) { [unowned self] result in
-            // Append Sync Result
-            syncResults.append(result)
-            // Compute And Pass Progress
-            progressCompletionHandler(computeProgressForFullSync(finishedOperationsCount: syncResults.count))
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        // Get API And Save Courses
-        apiGetAndSaveCourses(withSyncItem: item) { [unowned self] result in
-            // Append Sync Result
-            syncResults.append(result)
-            // Compute And Pass Progress
-            progressCompletionHandler(computeProgressForFullSync(finishedOperationsCount: syncResults.count))
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        // Get API And Save Words
-        apiGetAndSaveWords(withSyncItem: item) { [unowned self] result in
-            // Append Sync Result
-            syncResults.append(result)
-            // Compute And Pass Progress
-            progressCompletionHandler(computeProgressForFullSync(finishedOperationsCount: syncResults.count))
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Notify And Pass Final Result
-        dispatchGroup.notify(queue: .main) {
-            completionHandler(syncResults)
-        }
+        return operation
         
     }
     
     func jwtAndUserAndLanguageSync(withSyncItem item: Item,
                                    progressCompletionHandler: @escaping((Float) -> Void),
-                                   completionHandler: @escaping (([MDStorageServiceOperationResult]) -> Void)) {
+                                   completionHandler: @escaping (([MDStorageServiceOperationResult]) -> Void)) -> BlockOperation {
         
-        // Initialize Sync Results
-        var syncResults: [MDStorageServiceOperationResult] = []
-        
-        // Initialize Dispatch Group
-        let dispatchGroup: DispatchGroup = .init()
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        // Get API And Save JWT
-        apiGetAndSaveJWT(withSyncItem: item) { [unowned self] result in
-            // Append Sync Result
-            syncResults.append(result)
-            // Compute And Pass Progress
-            progressCompletionHandler(computeProgressForJWTAndUserAndLanguageSync(finishedOperationsCount: syncResults.count))
-            // Dispatch Group Leave
-            dispatchGroup.leave()
+        let operation: BlockOperation = .init {
+            
+            // Initialize Sync Results
+            var syncResults: [MDStorageServiceOperationResult] = []
+            
+            // Get API And Save JWT
+            let apiGetAndSaveJWTOperation = self.apiGetAndSaveJWT(withSyncItem: item) { [unowned self] result in
+                // Append Sync Result
+                syncResults.append(result)
+                // Compute And Pass Progress
+                progressCompletionHandler(computeProgressForJWTAndUserAndLanguageSync(finishedOperationsCount: syncResults.count))
+                // Notify And Pass Final Result
+                if (syncResults.count == Self.jwtAndUserAndLanguageSyncCount) {
+                    completionHandler(syncResults)
+                }
+                //
+            }
+            
+            // Get API And Save User
+            let apiGetAndSaveUserOperation = self.apiGetAndSaveUser(withSyncItem: item) { [unowned self] result in
+                // Append Sync Result
+                syncResults.append(result)
+                // Compute And Pass Progress
+                progressCompletionHandler(computeProgressForJWTAndUserAndLanguageSync(finishedOperationsCount: syncResults.count))
+                // Notify And Pass Final Result
+                if (syncResults.count == Self.jwtAndUserAndLanguageSyncCount) {
+                    completionHandler(syncResults)
+                }
+                //
+            }
+            
+            // Get API And Save Languages
+            let apiGetAndSaveLanguagesOperation = self.apiGetAndSaveLanguages(withSyncItem: item) { [unowned self] result in
+                // Append Sync Result
+                syncResults.append(result)
+                // Compute And Pass Progress
+                progressCompletionHandler(computeProgressForJWTAndUserAndLanguageSync(finishedOperationsCount: syncResults.count))
+                // Notify And Pass Final Result
+                if (syncResults.count == Self.jwtAndUserAndLanguageSyncCount) {
+                    completionHandler(syncResults)
+                }
+                //
+            }
+            
+            // Add Operations
+            self.operationQueue.addOperations([apiGetAndSaveJWTOperation,
+                                               apiGetAndSaveUserOperation,
+                                               apiGetAndSaveLanguagesOperation],
+                                              waitUntilFinished: true)
+            //
+            
         }
         
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        // Get API And Save User
-        apiGetAndSaveUser(withSyncItem: item) { [unowned self] result in
-            // Append Sync Result
-            syncResults.append(result)
-            // Compute And Pass Progress
-            progressCompletionHandler(computeProgressForJWTAndUserAndLanguageSync(finishedOperationsCount: syncResults.count))
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        // Get API And Save Languages
-        apiGetAndSaveLanguages(withSyncItem: item) { [unowned self] result in
-            // Append Sync Result
-            syncResults.append(result)
-            // Compute And Pass Progress
-            progressCompletionHandler(computeProgressForJWTAndUserAndLanguageSync(finishedOperationsCount: syncResults.count))
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Notify And Pass Final Result
-        dispatchGroup.notify(queue: .main) {
-            completionHandler(syncResults)
-        }
+        return operation
         
     }
     
     func computeProgressForFullSync(finishedOperationsCount: Int) -> Float {
-        return Float(finishedOperationsCount) / Float(MDStorageServiceType.allCases.count)
+        return Float(finishedOperationsCount) / Float(Self.fullSyncCount)
     }
     
     func computeProgressForJWTAndUserAndLanguageSync(finishedOperationsCount: Int) -> Float {
-        return Float(finishedOperationsCount) / Float(3)
+        return Float(finishedOperationsCount) / Float(Self.jwtAndUserAndLanguageSyncCount)
     }
     
 }
@@ -248,236 +284,265 @@ fileprivate extension MDSync {
 fileprivate extension MDSync {
     
     // JWT
-    func apiGetAndSaveJWT(withSyncItem item: MDSync.Item, completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
+    func apiGetAndSaveJWT(withSyncItem item: MDSync.Item, completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
         
-        let storageServiceType: MDStorageServiceType = .jwt
-        var countResult: Int = .zero
-        
-        apiJWT.accessToken(jwtApiRequest: .init(nickname: item.nickname,
-                                                password: item.password,
-                                                userId: item.userId)) { [unowned self] jwtResult in
-            
-            switch jwtResult {
-                
-            case .success(let jwt):
-                
-                jwtStorage.createJWT(storageType: .all,
-                                     jwtResponse: jwt) { createJWTResults in
+        let operation: BlockOperation = .init {
+            //
+            let storageServiceType: MDStorageServiceType = .jwt
+            var countResult: Int = .zero
+            //
+            self.apiJWT.accessToken(jwtApiRequest: .init(nickname: item.nickname,
+                                                         password: item.password,
+                                                         userId: item.userId)) { [unowned self] jwtResult in
+                //
+                switch jwtResult {
+                    //
+                case .success(let jwt):
                     
-                    createJWTResults.forEach { createJWTResult in
-                        
-                        switch createJWTResult.result {
-                            
-                        case .success:
-                            
-                            countResult += 1
-                            
-                            if (countResult == createJWTResults.count) {
-                                completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                    jwtStorage.createJWT(storageType: .all,
+                                         jwtResponse: jwt) { createJWTResults in
+                        //
+                        createJWTResults.forEach { createJWTResult in
+                            //
+                            switch createJWTResult.result {
+                                //
+                            case .success:
+                                //
+                                countResult += 1
+                                //
+                                if (countResult == createJWTResults.count) {
+                                    completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                                    break
+                                }
+                                //
+                            case .failure(let error):
+                                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                                 break
                             }
                             
-                        case .failure(let error):
-                            completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                            break
                         }
                         
                     }
                     
+                case .failure(let error):
+                    completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
+                    break
+                    
                 }
                 
-            case .failure(let error):
-                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                break
-                
             }
-            
         }
+        
+        return operation
         
     }
     
     // User
-    func apiGetAndSaveUser(withSyncItem item: MDSync.Item, completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
+    func apiGetAndSaveUser(withSyncItem item: MDSync.Item, completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
         
-        let storageServiceType: MDStorageServiceType = .user
-        var countResult: Int = .zero
-        
-        apiUser.getUser(accessToken: item.accessToken,
-                        byUserId: item.userId) { [unowned self] userResult in
-            
-            switch userResult {
-                
-            case .success(let user):
-                
-                userStorage.createUser(user,
-                                       password: item.password,
-                                       storageType: .all) { createUserResults in
-                    
-                    createUserResults.forEach { createUserResult in
-                        
-                        switch createUserResult.result {
-                            
-                        case .success:
-                            
-                            countResult += 1
-                            
-                            if (countResult == createUserResults.count) {
-                                completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+        let operation: BlockOperation = .init {
+            //
+            let storageServiceType: MDStorageServiceType = .user
+            var countResult: Int = .zero
+            //
+            self.apiUser.getUser(accessToken: item.accessToken,
+                                 byUserId: item.userId) { [unowned self] userResult in
+                //
+                switch userResult {
+                    //
+                case .success(let user):
+                    //
+                    userStorage.createUser(user,
+                                           password: item.password,
+                                           storageType: .all) { createUserResults in
+                        //
+                        createUserResults.forEach { createUserResult in
+                            //
+                            switch createUserResult.result {
+                                //
+                            case .success:
+                                //
+                                countResult += 1
+                                //
+                                if (countResult == createUserResults.count) {
+                                    completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                                    break
+                                }
+                                
+                            case .failure(let error):
+                                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                                 break
                             }
                             
-                        case .failure(let error):
-                            completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                            break
                         }
                         
                     }
                     
+                case .failure(let error):
+                    completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
+                    break
+                    
                 }
-                
-            case .failure(let error):
-                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                break
                 
             }
             
         }
+        
+        return operation
         
     }
     
     // Language
-    func apiGetAndSaveLanguages(withSyncItem item: MDSync.Item, completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
+    func apiGetAndSaveLanguages(withSyncItem item: MDSync.Item, completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
         
-        let storageServiceType: MDStorageServiceType = .language
-        var countResult: Int = .zero
-        
-        apiLanguage.getLanguages(accessToken: item.accessToken) { [unowned self] languagesResult in
+        let operation: BlockOperation = .init {
             
-            switch languagesResult {
+            let storageServiceType: MDStorageServiceType = .language
+            var countResult: Int = .zero
+            
+            self.apiLanguage.getLanguages(accessToken: item.accessToken) { [unowned self] languagesResult in
                 
-            case .success(let languages):
-                
-                languageStorage.createLanguages(storageType: .all,
-                                                languageEntities: languages) { createLanguagesResults in
+                switch languagesResult {
                     
-                    createLanguagesResults.forEach { createLanguagesResult in
+                case .success(let languages):
+                    
+                    languageStorage.createLanguages(storageType: .all,
+                                                    languageEntities: languages) { createLanguagesResults in
                         
-                        switch createLanguagesResult.result {
+                        createLanguagesResults.forEach { createLanguagesResult in
                             
-                        case .success:
-                            
-                            countResult += 1
-                            
-                            if (countResult == createLanguagesResults.count) {
-                                completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                            switch createLanguagesResult.result {
+                                
+                            case .success:
+                                
+                                countResult += 1
+                                
+                                if (countResult == createLanguagesResults.count) {
+                                    completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                                    break
+                                }
+                                
+                            case .failure(let error):
+                                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                                 break
                             }
                             
-                        case .failure(let error):
-                            completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                            break
                         }
                         
                     }
                     
+                case .failure(let error):
+                    completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
+                    break
                 }
                 
-            case .failure(let error):
-                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                break
             }
             
         }
+        
+        return operation
         
     }
     
     // Course
-    func apiGetAndSaveCourses(withSyncItem item: MDSync.Item, completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
+    func apiGetAndSaveCourses(withSyncItem item: MDSync.Item, completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
         
-        let storageServiceType: MDStorageServiceType = .course
-        var countResult: Int = .zero
-        
-        apiCourse.getCourses(accessToken: item.accessToken, byUserId: item.userId) { [unowned self] coursesResult in
+        let operation: BlockOperation = .init {
             
-            switch coursesResult {
+            let storageServiceType: MDStorageServiceType = .course
+            var countResult: Int = .zero
+            
+            self.apiCourse.getCourses(accessToken: item.accessToken, byUserId: item.userId) { [unowned self] coursesResult in
                 
-            case .success(let courses):
-                
-                courseStorage.createCourses(storageType: .all, courseEntities: courses) { createCoursesResults in
+                switch coursesResult {
                     
-                    createCoursesResults.forEach { createCoursesResult in
+                case .success(let courses):
+                    
+                    courseStorage.createCourses(storageType: .all, courseEntities: courses) { createCoursesResults in
                         
-                        switch createCoursesResult.result {
+                        createCoursesResults.forEach { createCoursesResult in
                             
-                        case .success:
-                            
-                            countResult += 1
-                            
-                            if (countResult == createCoursesResults.count) {
-                                completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                            switch createCoursesResult.result {
+                                
+                            case .success:
+                                
+                                countResult += 1
+                                
+                                if (countResult == createCoursesResults.count) {
+                                    completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                                    break
+                                }
+                                
+                            case .failure(let error):
+                                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                                 break
                             }
                             
-                        case .failure(let error):
-                            completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                            break
                         }
                         
                     }
                     
+                case .failure(let error):
+                    completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
+                    break
                 }
                 
-            case .failure(let error):
-                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                break
             }
             
         }
+        
+        return operation
         
     }
     
     // Word
-    func apiGetAndSaveWords(withSyncItem item: MDSync.Item, completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) {
+    func apiGetAndSaveWords(withSyncItem item: MDSync.Item, completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
         
-        let storageServiceType: MDStorageServiceType = .word
-        var countResult: Int = .zero
-        
-        apiWord.getWords(accessToken: item.accessToken, byUserId: item.userId) { [unowned self] wordsResult in
+        let operation: BlockOperation = .init {
             
-            switch wordsResult {
+            let storageServiceType: MDStorageServiceType = .word
+            var countResult: Int = .zero
+            
+            self.apiWord.getWords(accessToken: item.accessToken, byUserId: item.userId) { [unowned self] wordsResult in
                 
-            case .success(let words):
-                
-                wordStorage.createWords(words, storageType: .all) { createWordsResults in
+                switch wordsResult {
                     
-                    createWordsResults.forEach { createWordsResult in
+                case .success(let words):
+                    
+                    wordStorage.createWords(words, storageType: .all) { createWordsResults in
                         
-                        switch createWordsResult.result {
+                        createWordsResults.forEach { createWordsResult in
                             
-                        case .success:
-                            
-                            countResult += 1
-                            
-                            if (countResult == createWordsResults.count) {
-                                completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                            switch createWordsResult.result {
+                                
+                            case .success:
+                                
+                                countResult += 1
+                                
+                                if (countResult == createWordsResults.count) {
+                                    completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
+                                    break
+                                }
+                                
+                            case .failure(let error):
+                                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                                 break
                             }
                             
-                        case .failure(let error):
-                            completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                            break
                         }
                         
                     }
                     
+                case .failure(let error):
+                    completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
+                    break
                 }
                 
-            case .failure(let error):
-                completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
-                break
             }
             
         }
+        
+        return operation
         
     }
     

@@ -15,10 +15,7 @@ final class MDUserMemoryStorage_Tests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        let operationQueue: OperationQueue = .init()
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
-        
-        let userMemoryStorage: MDUserMemoryStorage = MDUserMemoryStorage.init(operationQueueService: operationQueueService,
+        let userMemoryStorage: MDUserMemoryStorage = MDUserMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.userMemoryStorageOperationQueue)!,
                                                                               array: .init())
         
         self.userMemoryStorage = userMemoryStorage
@@ -37,7 +34,7 @@ extension MDUserMemoryStorage_Tests {
                                      password: Constants_For_Tests.mockedUserPassword) { result in
             
             switch result {
-            
+                
             case .success(let createdUser):
                 
                 XCTAssertTrue(createdUser.userId == Constants_For_Tests.mockedUser.userId)
@@ -47,8 +44,8 @@ extension MDUserMemoryStorage_Tests {
                 
                 expectation.fulfill()
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
@@ -65,13 +62,13 @@ extension MDUserMemoryStorage_Tests {
                                      password: Constants_For_Tests.mockedUserPassword) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createdUser):
                 
                 userMemoryStorage.readFirstUser() { readResult in
                     
                     switch readResult {
-                    
+                        
                     case .success(let readUser):
                         
                         XCTAssertTrue(createdUser.userId == readUser.userId)
@@ -81,13 +78,13 @@ extension MDUserMemoryStorage_Tests {
                         
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
@@ -104,13 +101,13 @@ extension MDUserMemoryStorage_Tests {
                                      password: Constants_For_Tests.mockedUserPassword) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createdUser):
                 
                 userMemoryStorage.readUser(fromUserID: createdUser.userId) { readResult in
                     
                     switch readResult {
-                    
+                        
                     case .success(let readUser):
                         
                         XCTAssertTrue(createdUser.userId == readUser.userId)
@@ -120,13 +117,13 @@ extension MDUserMemoryStorage_Tests {
                         
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
@@ -143,24 +140,24 @@ extension MDUserMemoryStorage_Tests {
                                      password: Constants_For_Tests.mockedUserPassword) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createdUser):
                 
                 self.userMemoryStorage.deleteUser(createdUser.userId) { deleteResult in
                     
                     switch deleteResult {
-                    
+                        
                     case .success:
                         
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }

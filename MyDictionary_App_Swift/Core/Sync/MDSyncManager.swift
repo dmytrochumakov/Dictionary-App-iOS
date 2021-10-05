@@ -27,14 +27,19 @@ final class MDSyncManager: MDSyncManagerProtocol {
     
     // Default is false
     fileprivate var internalIsRunning: Bool
+    fileprivate var operationQueue: OperationQueue
     
     public var isRunning: Bool {
         return self.internalIsRunning
     }
     
-    init(sync: MDSyncProtocol) {
+    init(sync: MDSyncProtocol,
+         operationQueue: OperationQueue) {
+        
         self.internalIsRunning = false
         self.sync = sync
+        self.operationQueue = operationQueue
+        
     }
     
     deinit {
@@ -59,7 +64,7 @@ extension MDSyncManager {
         var countResult: Int = .zero
         
         // Start Sync
-        sync.startFullSyncWithDeleteAllData(withSyncItem: item) { progress in
+        let startFullSyncWithDeleteAllDataOperation = sync.startFullSyncWithDeleteAllData(withSyncItem: item) { progress in
             progressCompletionHandler(progress)
         } completionHandler: { [unowned self] results in
             
@@ -99,6 +104,10 @@ extension MDSyncManager {
             
         }
         
+        //
+        operationQueue.addOperation(startFullSyncWithDeleteAllDataOperation)
+        //
+        
     }
     
     func startWithJWTAndUserAndLanguageSync(withSyncItem item: MDSync.Item,
@@ -115,7 +124,7 @@ extension MDSyncManager {
         var countResult: Int = .zero
         
         // Start Sync
-        sync.startWithJWTAndUserAndLanguageSync(withSyncItem: item) { progress in
+        let startWithJWTAndUserAndLanguageSyncOperation = sync.startWithJWTAndUserAndLanguageSync(withSyncItem: item) { progress in
             
             // Pass Progress
             progressCompletionHandler(progress)
@@ -157,6 +166,10 @@ extension MDSyncManager {
             }
             
         }
+        
+        //
+        operationQueue.addOperation(startWithJWTAndUserAndLanguageSyncOperation)
+        //
         
     }
     

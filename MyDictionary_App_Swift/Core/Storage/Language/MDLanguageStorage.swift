@@ -27,15 +27,19 @@ final class MDLanguageStorage: MDStorage, MDLanguageStorageProtocol {
     
     let memoryStorage: MDLanguageMemoryStorageProtocol
     fileprivate let coreDataStorage: MDLanguageCoreDataStorageProtocol
+    fileprivate let operationQueue: OperationQueue
     
     init(memoryStorage: MDLanguageMemoryStorageProtocol,
-         coreDataStorage: MDLanguageCoreDataStorageProtocol) {
+         coreDataStorage: MDLanguageCoreDataStorageProtocol,
+         operationQueue: OperationQueue) {
         
         self.memoryStorage = memoryStorage
         self.coreDataStorage = coreDataStorage
+        self.operationQueue = operationQueue
         
         super.init(memoryStorage: memoryStorage,
-                   coreDataStorage: coreDataStorage)
+                   coreDataStorage: coreDataStorage,
+                   operationQueue: operationQueue)
         
     }
     
@@ -53,55 +57,84 @@ extension MDLanguageStorage {
                          _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
-            memoryStorage.createLanguages(languageEntities) { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.memoryStorage.createLanguages(languageEntities) { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .coreData:
             
-            coreDataStorage.createLanguages(languageEntities) { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.coreDataStorage.createLanguages(languageEntities) { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .all:
             
-            // Initialize Dispatch Group
-            let dispatchGroup: DispatchGroup = .init()
-            
-            // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>> = []
-            
-            // Create in Memory
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            memoryStorage.createLanguages(languageEntities) { result in
+            let operation: BlockOperation = .init {
                 
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
+                //
+                let countNeeded: Int = 2
+                //
+                
+                // Initialize final result
+                var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>> = []
+                
+                // Create in Memory
+                self.memoryStorage.createLanguages(languageEntities) { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .memory, result: result))
+                    
+                    // Pass Final Result If Needed
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    
+                }
+                
+                // Create in Core Data
+                self.coreDataStorage.createLanguages(languageEntities) { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .coreData, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    
+                }
                 
             }
             
-            // Create in Core Data
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            coreDataStorage.createLanguages(languageEntities) { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .coreData, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
-                
-            }
-            
-            // Notify And Pass Final Result
-            dispatchGroup.notify(queue: .main) {
-                completionHandler(finalResult)
-            }
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         }
         
@@ -111,56 +144,87 @@ extension MDLanguageStorage {
                           _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
-            memoryStorage.readAllLanguages { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.memoryStorage.readAllLanguages { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
             
         case .coreData:
             
-            coreDataStorage.readAllLanguages { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.coreDataStorage.readAllLanguages { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
+            
             
         case .all:
             
-            // Initialize Dispatch Group
-            let dispatchGroup: DispatchGroup = .init()
-            
-            // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>> = []
-            
-            // Read From Memory
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            memoryStorage.readAllLanguages { result in
+            let operation: BlockOperation = .init {
                 
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
+                //
+                let countNeeded: Int = 2
+                //
+                
+                // Initialize final result
+                var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>> = []
+                
+                // Read From Memory
+                self.memoryStorage.readAllLanguages { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .memory, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
+                
+                // Read From Core Data
+                self.coreDataStorage.readAllLanguages { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .coreData, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
                 
             }
             
-            // Read From Core Data
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            coreDataStorage.readAllLanguages { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .coreData, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
-                
-            }
-            
-            // Notify And Pass Final Result
-            dispatchGroup.notify(queue: .main) {
-                completionHandler(finalResult)
-            }
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         }
         
@@ -170,55 +234,85 @@ extension MDLanguageStorage {
                             _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
-            memoryStorage.deleteAllLanguages { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.memoryStorage.deleteAllLanguages { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .coreData:
             
-            coreDataStorage.deleteAllLanguages { result in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.coreDataStorage.deleteAllLanguages { result in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .all:
             
-            // Initialize Dispatch Group
-            let dispatchGroup: DispatchGroup = .init()
-            
-            // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
-            
-            // Delete From Memory
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            memoryStorage.deleteAllLanguages { result in
+            let operation: BlockOperation = .init {
                 
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
+                //
+                let countNeeded: Int = 2
+                //
+                
+                // Initialize final result
+                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
+                
+                // Delete From Memory
+                self.memoryStorage.deleteAllLanguages { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .memory, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
+                
+                // Delete From Core Data
+                self.coreDataStorage.deleteAllLanguages { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .coreData, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
                 
             }
             
-            // Delete From Core Data
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            coreDataStorage.deleteAllLanguages { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .coreData, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
-                
-            }
-            
-            // Notify And Pass Final Result
-            dispatchGroup.notify(queue: .main) {
-                completionHandler(finalResult)
-            }
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         }
         

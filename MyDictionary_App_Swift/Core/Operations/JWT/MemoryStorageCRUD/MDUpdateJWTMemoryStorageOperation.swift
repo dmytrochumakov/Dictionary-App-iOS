@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDUpdateJWTMemoryStorageOperation: MDOperation {
+final class MDUpdateJWTMemoryStorageOperation: MDAsyncOperation {
 
     fileprivate let memoryStorage: MDJWTMemoryStorage
     fileprivate let oldAccessToken: String

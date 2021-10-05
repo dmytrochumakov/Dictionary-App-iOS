@@ -26,10 +26,12 @@ extension AccountModule {
                                                                                                                                userStorage: MDConstants.AppDependencies.dependencies.userStorage,
                                                                                                                                languageStorage: MDConstants.AppDependencies.dependencies.languageStorage,
                                                                                                                                courseStorage: MDConstants.AppDependencies.dependencies.courseStorage,
-                                                                                                                               wordStorage: MDConstants.AppDependencies.dependencies.wordStorage),
+                                                                                                                               wordStorage: MDConstants.AppDependencies.dependencies.wordStorage,
+                                                                                                                               operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.storageCleanupServiceOperationQueue)!),
                                                                            appSettings: MDConstants.AppDependencies.dependencies.appSettings,
                                                                            apiAccount: MDConstants.AppDependencies.dependencies.apiAccount,
-                                                                           jwtMemoryStorage: MDConstants.AppDependencies.dependencies.jwtStorage.memoryStorage)
+                                                                           jwtMemoryStorage: MDConstants.AppDependencies.dependencies.jwtStorage.memoryStorage,
+                                                                           operationQueueManager: MDConstants.AppDependencies.dependencies.operationQueueManager)
         
         var router: AccountRouterProtocol = AccountRouter.init()
         let presenter: AccountPresenterProtocol = AccountPresenter.init(interactor: interactor, router: router)

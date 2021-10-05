@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-final class MDUpdateWordCoreDataStorageOperation: MDOperation {
+final class MDUpdateWordCoreDataStorageOperation: MDAsyncOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStack: MDCoreDataStack

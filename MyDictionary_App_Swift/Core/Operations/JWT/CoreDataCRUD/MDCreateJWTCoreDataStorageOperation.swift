@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-final class MDCreateJWTCoreDataStorageOperation: MDOperation {
+final class MDCreateJWTCoreDataStorageOperation: MDAsyncOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStack: MDCoreDataStack

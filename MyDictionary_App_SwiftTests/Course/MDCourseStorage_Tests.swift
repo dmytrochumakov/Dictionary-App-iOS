@@ -15,21 +15,18 @@ final class MDCourseStorage_Tests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        let operationQueue: OperationQueue = .init()
-        
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
-        
-        let memoryStorage: MDCourseMemoryStorageProtocol = MDCourseMemoryStorage.init(operationQueueService: operationQueueService,
+        let memoryStorage: MDCourseMemoryStorageProtocol = MDCourseMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseMemoryStorageOperationQueue)!,
                                                                                       array: .init())
         
         let coreDataStack: MDCoreDataStack = TestCoreDataStack.init()
         
-        let coreDataStorage: MDCourseCoreDataStorageProtocol = MDCourseCoreDataStorage.init(operationQueueService: operationQueueService,
+        let coreDataStorage: MDCourseCoreDataStorageProtocol = MDCourseCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseCoreDataStorageOperationQueue)!,
                                                                                             managedObjectContext: coreDataStack.privateContext,
                                                                                             coreDataStack: coreDataStack)
         
         let courseStorage: MDCourseStorageProtocol = MDCourseStorage.init(memoryStorage: memoryStorage,
-                                                                          coreDataStorage: coreDataStorage)
+                                                                          coreDataStorage: coreDataStorage,
+                                                                          operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseStorageOperationQueue)!)
         
         self.courseStorage = courseStorage
         
@@ -61,14 +58,14 @@ extension MDCourseStorage_Tests {
                     XCTAssertTrue(createdCourseEntity.courseId == Constants_For_Tests.mockedCourse.courseId)
                     XCTAssertTrue(createdCourseEntity.languageId == Constants_For_Tests.mockedCourse.languageId)
                     XCTAssertTrue(createdCourseEntity.languageName == Constants_For_Tests.mockedCourse.languageName)
-                    XCTAssertTrue(createdCourseEntity.createdAt == Constants_For_Tests.mockedCourse.createdAt)                    
+                    XCTAssertTrue(createdCourseEntity.createdAt == Constants_For_Tests.mockedCourse.createdAt)
                     
                     if (resultCount == createResults.count) {
                         expectation.fulfill()
                     }
                     
-                case .failure:
-                    XCTExpectFailure()
+                case .failure(let error):
+                    XCTExpectFailure(error.localizedDescription)
                     expectation.fulfill()
                 }
                 
@@ -103,8 +100,8 @@ extension MDCourseStorage_Tests {
                         expectation.fulfill()
                     }
                     
-                case .failure:
-                    XCTExpectFailure()
+                case .failure(let error):
+                    XCTExpectFailure(error.localizedDescription)
                     expectation.fulfill()
                 }
                 
@@ -127,7 +124,7 @@ extension MDCourseStorage_Tests {
                                    courseEntity: Constants_For_Tests.mockedCourse) { [unowned self] createResults in
             
             switch createResults.first!.result {
-            
+                
             case .success(let createCourseEntity):
                 
                 courseStorage.readCourse(storageType: storageType,
@@ -136,7 +133,7 @@ extension MDCourseStorage_Tests {
                     readResults.forEach { readResult in
                         
                         switch readResult.result {
-                        
+                            
                         case .success(let readCourseEntity):
                             
                             resultCount += 1
@@ -145,14 +142,14 @@ extension MDCourseStorage_Tests {
                             XCTAssertTrue(readCourseEntity.courseId == createCourseEntity.courseId)
                             XCTAssertTrue(readCourseEntity.languageId == createCourseEntity.languageId)
                             XCTAssertTrue(readCourseEntity.languageName == createCourseEntity.languageName)
-                            XCTAssertTrue(readCourseEntity.createdAt == createCourseEntity.createdAt)                            
+                            XCTAssertTrue(readCourseEntity.createdAt == createCourseEntity.createdAt)
                             
                             if (resultCount == readResults.count) {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                         
@@ -160,8 +157,8 @@ extension MDCourseStorage_Tests {
                     
                 }
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -182,7 +179,7 @@ extension MDCourseStorage_Tests {
                                    courseEntity: Constants_For_Tests.mockedCourse) { [unowned self] createResults in
             
             switch createResults.first!.result {
-            
+                
             case .success(let createCourseEntity):
                 
                 self.courseStorage.deleteCourse(storageType: storageType,
@@ -191,7 +188,7 @@ extension MDCourseStorage_Tests {
                     deleteResults.forEach { deleteResult in
                         
                         switch deleteResult.result {
-                        
+                            
                         case .success:
                             
                             resultCount += 1
@@ -200,16 +197,16 @@ extension MDCourseStorage_Tests {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                         
                     }
                 }
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -230,7 +227,7 @@ extension MDCourseStorage_Tests {
                                    courseEntity: Constants_For_Tests.mockedCourse) { [unowned self] createResults in
             
             switch createResults.first!.result {
-            
+                
             case .success:
                 
                 self.courseStorage.deleteAllCourses(storageType: storageType) { deleteResults in
@@ -238,7 +235,7 @@ extension MDCourseStorage_Tests {
                     deleteResults.forEach { deleteResult in
                         
                         switch deleteResult.result {
-                        
+                            
                         case .success:
                             
                             resultCount += 1
@@ -247,15 +244,15 @@ extension MDCourseStorage_Tests {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                         
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             

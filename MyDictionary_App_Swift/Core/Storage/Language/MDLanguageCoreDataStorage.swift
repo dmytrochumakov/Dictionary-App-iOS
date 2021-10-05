@@ -15,15 +15,15 @@ protocol MDLanguageCoreDataStorageProtocol: MDCRUDLanguageProtocol,
 
 final class MDLanguageCoreDataStorage: MDLanguageCoreDataStorageProtocol {
     
-    fileprivate let operationQueueService: OperationQueueServiceProtocol
+    fileprivate let operationQueue: OperationQueue
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStack: MDCoreDataStack
     
-    init(operationQueueService: OperationQueueServiceProtocol,
+    init(operationQueue: OperationQueue,
          managedObjectContext: NSManagedObjectContext,
          coreDataStack: MDCoreDataStack) {
         
-        self.operationQueueService = operationQueueService
+        self.operationQueue = operationQueue
         self.managedObjectContext = managedObjectContext
         self.coreDataStack = coreDataStack
         
@@ -72,7 +72,7 @@ extension MDLanguageCoreDataStorage {
                                                                          languageEntities: languageEntities) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func readLanguage(fromLanguageID languageID: Int64, _ completionHandler: @escaping(MDOperationResultWithCompletion<LanguageResponse>)) {
@@ -81,7 +81,7 @@ extension MDLanguageCoreDataStorage {
                                                                       languageId: languageID) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func readAllLanguages(_ completionHandler: @escaping(MDOperationResultWithCompletion<[LanguageResponse]>)) {
@@ -89,7 +89,7 @@ extension MDLanguageCoreDataStorage {
                                                                           coreDataStorage: self) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
     func deleteAllLanguages(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
@@ -98,7 +98,7 @@ extension MDLanguageCoreDataStorage {
                                                                             coreDataStorage: self) { result in
             completionHandler(result)
         }
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
     }
     
 }

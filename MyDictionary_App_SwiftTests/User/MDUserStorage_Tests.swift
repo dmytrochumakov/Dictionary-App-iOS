@@ -15,21 +15,18 @@ final class MDUserStorage_Tests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        let operationQueue: OperationQueue = .init()
-        
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
-        
-        let memoryStorage: MDUserMemoryStorageProtocol = MDUserMemoryStorage.init(operationQueueService: operationQueueService,
+        let memoryStorage: MDUserMemoryStorageProtocol = MDUserMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.userMemoryStorageOperationQueue)!,
                                                                                   array: .init())
         
         let coreDataStack: MDCoreDataStack = TestCoreDataStack.init()
         
-        let coreDataStorage: MDUserCoreDataStorageProtocol = MDUserCoreDataStorage.init(operationQueueService: operationQueueService,
+        let coreDataStorage: MDUserCoreDataStorageProtocol = MDUserCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.userCoreDataStorageOperationQueue)!,
                                                                                         managedObjectContext: coreDataStack.privateContext,
                                                                                         coreDataStack: coreDataStack)
         
         let userStorage: MDUserStorageProtocol = MDUserStorage.init(memoryStorage: memoryStorage,
-                                                                    coreDataStorage: coreDataStorage)
+                                                                    coreDataStorage: coreDataStorage,
+                                                                    operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.userStorageOperationQueue)!)
         
         self.userStorage = userStorage
         
@@ -54,7 +51,7 @@ extension MDUserStorage_Tests {
             createResults.forEach { createResult in
                 
                 switch createResult.result {
-                
+                    
                 case .success(let createdUser):
                     
                     resultCount += 1
@@ -68,8 +65,8 @@ extension MDUserStorage_Tests {
                         expectation.fulfill()
                     }
                     
-                case .failure:
-                    XCTExpectFailure()
+                case .failure(let error):
+                    XCTExpectFailure(error.localizedDescription)
                     expectation.fulfill()
                 }
                 
@@ -92,7 +89,7 @@ extension MDUserStorage_Tests {
                                storageType: storageType) { [unowned self] createResults in
             
             switch createResults.first!.result {
-            
+                
             case .success(let createdUser):
                 
                 userStorage.readFirstUser(storageType: storageType) { readResults in
@@ -100,7 +97,7 @@ extension MDUserStorage_Tests {
                     readResults.forEach { readResult in
                         
                         switch readResult.result {
-                        
+                            
                         case .success(let readUser):
                             
                             resultCount += 1
@@ -114,15 +111,15 @@ extension MDUserStorage_Tests {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                     }
                 }
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -144,7 +141,7 @@ extension MDUserStorage_Tests {
                                storageType: storageType) { [unowned self] createResults in
             
             switch createResults.first!.result {
-            
+                
             case .success(let createdUser):
                 
                 userStorage.readUser(fromUserID: createdUser.userId, storageType: storageType) { readResults in
@@ -152,7 +149,7 @@ extension MDUserStorage_Tests {
                     readResults.forEach { readResult in
                         
                         switch readResult.result {
-                        
+                            
                         case .success(let readUser):
                             
                             resultCount += 1
@@ -160,21 +157,21 @@ extension MDUserStorage_Tests {
                             XCTAssertTrue(createdUser.userId == readUser.userId)
                             XCTAssertTrue(createdUser.nickname == readUser.nickname)
                             XCTAssertTrue(createdUser.password == readUser.password)
-                            XCTAssertTrue(createdUser.createdAt == readUser.createdAt)                            
+                            XCTAssertTrue(createdUser.createdAt == readUser.createdAt)
                             
                             if (resultCount == readResults.count) {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                     }
                 }
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -196,7 +193,7 @@ extension MDUserStorage_Tests {
                                storageType: storageType) { [unowned self] createResults in
             
             switch createResults.first!.result {
-            
+                
             case .success(let createdUser):
                 
                 self.userStorage.deleteUser(createdUser.userId, storageType: storageType) { deleteResults in
@@ -204,7 +201,7 @@ extension MDUserStorage_Tests {
                     deleteResults.forEach { deleteResult in
                         
                         switch deleteResult.result {
-                        
+                            
                         case .success:
                             
                             resultCount += 1
@@ -213,14 +210,14 @@ extension MDUserStorage_Tests {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }

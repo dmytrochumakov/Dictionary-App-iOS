@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDCreateJWTMemoryStorageOperation: MDOperation {
+final class MDCreateJWTMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDJWTMemoryStorage
     fileprivate let jwtResponse: JWTResponse

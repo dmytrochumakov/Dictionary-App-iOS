@@ -15,13 +15,13 @@ protocol MDAPILanguageProtocol {
 final class MDAPILanguage: MDAPILanguageProtocol {
     
     fileprivate let requestDispatcher: MDRequestDispatcherProtocol
-    fileprivate let operationQueueService: OperationQueueServiceProtocol
+    fileprivate let operationQueue: OperationQueue
     
     init(requestDispatcher: MDRequestDispatcherProtocol,
-         operationQueueService: OperationQueueServiceProtocol) {
+         operationQueue: OperationQueue) {
         
         self.requestDispatcher = requestDispatcher
-        self.operationQueueService = operationQueueService
+        self.operationQueue = operationQueue
         
     }
     
@@ -92,7 +92,7 @@ extension MDAPILanguage {
                                               endpoint: MDAPILanguageEndpoint.getLanguages(accessToken: accessToken)) { result in
             
             switch result {
-            
+                
             case .data(let data, _):
                 
                 guard let data = data else { completionHandler(.failure(MDAPIError.noData)) ; return }
@@ -119,7 +119,7 @@ extension MDAPILanguage {
             
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     

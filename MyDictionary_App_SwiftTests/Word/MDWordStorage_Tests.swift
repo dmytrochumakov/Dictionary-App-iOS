@@ -15,21 +15,18 @@ final class MDWordStorage_Tests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        let operationQueue: OperationQueue = .init()
-        
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
-        
-        let memoryStorage: MDWordMemoryStorageProtocol = MDWordMemoryStorage.init(operationQueueService: operationQueueService,
+        let memoryStorage: MDWordMemoryStorageProtocol = MDWordMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordMemoryStorageOperationQueue)!,
                                                                                   arrayWords: [])
         
         let coreDataStack: MDCoreDataStack = TestCoreDataStack.init()
         
-        let coreDataStorage: MDWordCoreDataStorageProtocol = MDWordCoreDataStorage.init(operationQueueService: operationQueueService,
+        let coreDataStorage: MDWordCoreDataStorageProtocol = MDWordCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordCoreDataStorageOperationQueue)!,
                                                                                         managedObjectContext: coreDataStack.privateContext,
                                                                                         coreDataStack: coreDataStack)
         
         let wordStorage: MDWordStorageProtocol = MDWordStorage.init(memoryStorage: memoryStorage,
-                                                                    coreDataStorage: coreDataStorage)
+                                                                    coreDataStorage: coreDataStorage,
+                                                                    operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordStorageOperationQueue)!)
         self.wordStorage = wordStorage
         
     }
@@ -59,14 +56,14 @@ extension MDWordStorage_Tests {
                     XCTAssertTrue(createdWord.courseId == Constants_For_Tests.mockedWord0.courseId)
                     XCTAssertTrue(createdWord.languageId == Constants_For_Tests.mockedWord0.languageId)
                     XCTAssertTrue(createdWord.languageName == Constants_For_Tests.mockedWord0.languageName)
-                    XCTAssertTrue(createdWord.createdAt == Constants_For_Tests.mockedWord0.createdAt)                    
+                    XCTAssertTrue(createdWord.createdAt == Constants_For_Tests.mockedWord0.createdAt)
                     
                     if (resultCount == createResults.count) {
                         expectation.fulfill()
                     }
                     
-                case .failure:
-                    XCTExpectFailure()
+                case .failure(let error):
+                    XCTExpectFailure(error.localizedDescription)
                     expectation.fulfill()
                 }
                 
@@ -94,14 +91,14 @@ extension MDWordStorage_Tests {
                     
                     resultCount += 1
                     
-                    XCTAssertTrue(createdWords.count == Constants_For_Tests.mockedWords.count)                    
+                    XCTAssertTrue(createdWords.count == Constants_For_Tests.mockedWords.count)
                     
                     if (resultCount == createResults.count) {
                         expectation.fulfill()
                     }
                     
-                case .failure:
-                    XCTExpectFailure()
+                case .failure(let error):
+                    XCTExpectFailure(error.localizedDescription)
                     expectation.fulfill()
                 }
                 
@@ -123,7 +120,7 @@ extension MDWordStorage_Tests {
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResults in
             
             switch createResults.first!.result {
-            
+                
             case .success(let createdWord):
                 
                 wordStorage.readWord(fromWordID: createdWord.wordId, storageType: storageType) { readResults in
@@ -139,14 +136,14 @@ extension MDWordStorage_Tests {
                             XCTAssertTrue(readWord.wordText == createdWord.wordText)
                             XCTAssertTrue(readWord.wordDescription == createdWord.wordDescription)
                             XCTAssertTrue(readWord.languageName == createdWord.languageName)
-                            XCTAssertTrue(readWord.createdAt == createdWord.createdAt)                            
+                            XCTAssertTrue(readWord.createdAt == createdWord.createdAt)
                             
                             if (resultCount == readResults.count) {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                         
@@ -154,8 +151,8 @@ extension MDWordStorage_Tests {
                     
                 }
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -175,7 +172,7 @@ extension MDWordStorage_Tests {
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResults in
             
             switch createResults.first!.result {
-            
+                
             case .success(let createdWord):
                 
                 self.wordStorage.updateWord(byWordID: createdWord.wordId,
@@ -194,16 +191,16 @@ extension MDWordStorage_Tests {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                         
                     }
                 }
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -223,7 +220,7 @@ extension MDWordStorage_Tests {
         wordStorage.createWord(Constants_For_Tests.mockedWord0, storageType: storageType) { [unowned self] createResults in
             
             switch createResults.first!.result {
-            
+                
             case .success(let createdWord):
                 
                 self.wordStorage.deleteWord(byWordId: createdWord.wordId,
@@ -232,7 +229,7 @@ extension MDWordStorage_Tests {
                     deleteResults.forEach { deleteResult in
                         
                         switch deleteResult.result {
-                        
+                            
                         case .success:
                             
                             resultCount += 1
@@ -241,16 +238,16 @@ extension MDWordStorage_Tests {
                                 expectation.fulfill()
                             }
                             
-                        case .failure:
-                            XCTExpectFailure()
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
                             expectation.fulfill()
                         }
                         
                     }
                 }
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             

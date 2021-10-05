@@ -7,7 +7,7 @@
 
 import CoreData
 
-final class MDReadCourseCoreDataStorageOperation: MDOperation {
+final class MDReadCourseCoreDataStorageOperation: MDAsyncOperation {
     
     fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let coreDataStorage: MDCourseCoreDataStorage

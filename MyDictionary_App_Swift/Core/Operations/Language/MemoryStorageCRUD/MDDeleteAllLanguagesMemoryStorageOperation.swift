@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDDeleteAllLanguagesMemoryStorageOperation: MDOperation {
+final class MDDeleteAllLanguagesMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let memoryStorage: MDLanguageMemoryStorage
     fileprivate let result: MDOperationResultWithCompletion<Void>?

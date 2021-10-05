@@ -15,11 +15,7 @@ final class MDWordMemoryStorage_Tests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        let operationQueue: OperationQueue = .init()
-        
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
-        
-        let wordMemoryStorage: MDWordMemoryStorageProtocol = MDWordMemoryStorage.init(operationQueueService: operationQueueService,
+        let wordMemoryStorage: MDWordMemoryStorageProtocol = MDWordMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordMemoryStorageOperationQueue)!,
                                                                                       arrayWords: .init())
         
         self.wordMemoryStorage = wordMemoryStorage
@@ -50,13 +46,13 @@ extension MDWordMemoryStorage_Tests {
                         XCTAssertFalse(entitiesIsEmpty)
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
@@ -78,8 +74,8 @@ extension MDWordMemoryStorage_Tests {
                 XCTAssertTrue(createdWords.count == Constants_For_Tests.mockedWords.count)
                 expectation.fulfill()
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
@@ -117,18 +113,18 @@ extension MDWordMemoryStorage_Tests {
                                 XCTAssertTrue(fetchedWord.wordId == createdWord.wordId)
                                 expectation.fulfill()
                                 
-                            case .failure:
-                                XCTExpectFailure()
+                            case .failure(let error):
+                                XCTExpectFailure(error.localizedDescription)
                                 expectation.fulfill()
                             }
                         }
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
@@ -165,20 +161,20 @@ extension MDWordMemoryStorage_Tests {
                                 XCTAssertTrue(readWord.wordDescription == Constants_For_Tests.mockedWordForUpdate.wordDescription)
                                 expectation.fulfill()
                                 
-                            case .failure:
-                                XCTExpectFailure()
+                            case .failure(let error):
+                                XCTExpectFailure(error.localizedDescription)
                                 expectation.fulfill()
                             }
                             
                         }
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }
@@ -212,18 +208,18 @@ extension MDWordMemoryStorage_Tests {
                                 XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
                                 
-                            case .failure:
-                                XCTExpectFailure()
+                            case .failure(let error):
+                                XCTExpectFailure(error.localizedDescription)
                                 expectation.fulfill()
                             }
                         }
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
         }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MDDeleteWordMemoryStorageOperation: MDOperation {
+final class MDDeleteWordMemoryStorageOperation: MDAsyncOperation {
     
     fileprivate let wordStorage: MDWordMemoryStorage
     fileprivate let wordId: Int64

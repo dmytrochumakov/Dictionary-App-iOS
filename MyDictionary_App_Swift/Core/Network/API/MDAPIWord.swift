@@ -32,13 +32,13 @@ protocol MDAPIWordProtocol {
 final class MDAPIWord: MDAPIWordProtocol {
     
     fileprivate let requestDispatcher: MDRequestDispatcherProtocol
-    fileprivate let operationQueueService: OperationQueueServiceProtocol
+    fileprivate let operationQueue: OperationQueue
     
     init(requestDispatcher: MDRequestDispatcherProtocol,
-         operationQueueService: OperationQueueServiceProtocol) {
+         operationQueue: OperationQueue) {
         
         self.requestDispatcher = requestDispatcher
-        self.operationQueueService = operationQueueService
+        self.operationQueue = operationQueue
         
     }
     
@@ -101,11 +101,11 @@ extension MDAPIWord {
         var httpHeaders: HTTPHeader {
             
             switch self {
-            
+                
             case .createWord(let accessToken, _),
-                 .readAllWords(let accessToken, _),
-                 .updateWord(let accessToken, _),
-                 .deleteWord(let accessToken, _, _, _):
+                    .readAllWords(let accessToken, _),
+                    .updateWord(let accessToken, _),
+                    .deleteWord(let accessToken, _, _, _):
                 
                 return MDConstants
                     .HTTPHeaderConstants
@@ -175,7 +175,7 @@ extension MDAPIWord {
                                               endpoint: MDAPIWordEndpoint.createWord(accessToken: accessToken,
                                                                                      createWordRequest: createWordRequest)) { result in
             switch result {
-            
+                
             case .data(let data, _):
                 
                 guard let data = data else { completionHandler(.failure(MDAPIError.noData)) ; return }
@@ -202,7 +202,7 @@ extension MDAPIWord {
             
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     
@@ -214,7 +214,7 @@ extension MDAPIWord {
                                               endpoint: MDAPIWordEndpoint.readAllWords(accessToken: accessToken,
                                                                                        userId: userId)) { result in
             switch result {
-            
+                
             case .data(let data, _):
                 
                 guard let data = data else { completionHandler(.failure(MDAPIError.noData)) ; return }
@@ -241,7 +241,7 @@ extension MDAPIWord {
             
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     
@@ -253,7 +253,7 @@ extension MDAPIWord {
                                               endpoint: MDAPIWordEndpoint.updateWord(accessToken: accessToken,
                                                                                      updateWordRequest: updateWordRequest)) { result in
             switch result {
-            
+                
             case .data(let data, _):
                 
                 guard let data = data else { completionHandler(.failure(MDAPIError.noData)) ; return }
@@ -280,7 +280,7 @@ extension MDAPIWord {
             
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     
@@ -296,7 +296,7 @@ extension MDAPIWord {
                                                                                      courseId: courseId,
                                                                                      wordId: wordId)) { result in
             switch result {
-            
+                
             case .data:
                 
                 completionHandler(.success(()))
@@ -315,7 +315,7 @@ extension MDAPIWord {
             
         }
         
-        operationQueueService.enqueue(operation)
+        operationQueue.addOperation(operation)
         
     }
     

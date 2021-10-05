@@ -18,15 +18,11 @@ final class MDAPIUser_Tests: XCTestCase {
         
         let requestDispatcher: MDRequestDispatcherProtocol = MDConstants.RequestDispatcher.defaultRequestDispatcher(reachability: try! .init())
         
-        let operationQueue: OperationQueue = .init()
-        
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
-        
         self.apiUser = MDAPIUser.init(requestDispatcher: requestDispatcher,
-                                      operationQueueService: operationQueueService)
+                                      operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.userAPIOperationQueue)!)
         
         self.apiJWT = MDAPIJWT.init(requestDispatcher: requestDispatcher,
-                                    operationQueueService: operationQueueService)
+                                    operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtAPIOperationQueue)!)
         
     }
     
@@ -41,14 +37,14 @@ extension MDAPIUser_Tests {
         apiJWT.accessToken(jwtApiRequest: Constants_For_Tests.jwtApiRequest) { [unowned self] jwtResult in
             
             switch jwtResult {
-            
+                
             case .success(let jwtResponse):
                 
                 apiUser.getUser(accessToken: jwtResponse.accessToken,
                                 byUserId: Constants_For_Tests.jwtApiRequest.userId) { userResult in
                     
                     switch userResult {
-                    
+                        
                     case .success:
                         
                         expectation.fulfill()

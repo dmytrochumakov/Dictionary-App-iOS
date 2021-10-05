@@ -9,7 +9,7 @@ import Foundation
 
 typealias MDAPIOperationResult = ((MDAPIOperation.Output) -> Void)
 
-final class MDAPIOperation: MDOperation {
+final class MDAPIOperation: MDAsyncOperation {
     
     typealias Output = MDResponseOperationResult
     

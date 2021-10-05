@@ -84,11 +84,9 @@ final class CourseListViewController: MDBaseLargeTitledNavigationBarViewControll
 extension CourseListViewController: CourseListPresenterOutputProtocol {
     
     func showError(_ error: Error) {
-        DispatchQueue.main.async {
-            UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
-                                                    message: error.localizedDescription,
-                                                    presenter: self)
-        }
+        UIAlertController.showAlertWithOkAction(title: MDLocalizedText.error.localized,
+                                                message: error.localizedDescription,
+                                                presenter: self)        
     }
     
     func reloadData() {
@@ -114,15 +112,11 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     }
     
     func showProgressHUD() {
-        DispatchQueue.main.async {
-            self.hud.showProgressHUD(withConfiguration: .init(view: self.view))
-        }
+        self.hud.showProgressHUD(withConfiguration: .init(view: self.view))
     }
     
     func hideProgressHUD() {
-        DispatchQueue.main.async {
-            self.hud.hideProgressHUD(animated: true)
-        }
+        self.hud.hideProgressHUD(animated: true)
     }
     
     func insertRow(atIndexPath indexPath: IndexPath) {

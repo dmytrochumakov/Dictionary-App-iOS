@@ -15,10 +15,7 @@ final class MDLanguageMemoryStorage_Tests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        let operationQueue: OperationQueue = .init()
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
-        
-        let languageMemoryStorage: MDLanguageMemoryStorageProtocol = MDLanguageMemoryStorage.init(operationQueueService: operationQueueService,
+        let languageMemoryStorage: MDLanguageMemoryStorageProtocol = MDLanguageMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.languageMemoryStorageOperationQueue)!,
                                                                                                   array: [])
         
         self.languageMemoryStorage = languageMemoryStorage
@@ -37,14 +34,14 @@ extension MDLanguageMemoryStorage_Tests {
         languageMemoryStorage.createLanguages(Constants_For_Tests.mockedLanguages) { createResult in
             
             switch createResult {
-            
+                
             case .success(let createLanguages):
                 
                 XCTAssertTrue(createLanguages.count == Constants_For_Tests.mockedLanguages.count)
                 expectation.fulfill()
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -61,7 +58,7 @@ extension MDLanguageMemoryStorage_Tests {
         languageMemoryStorage.createLanguages(Constants_For_Tests.mockedLanguages) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createLanguages):
                 
                 XCTAssertTrue(createLanguages.count == Constants_For_Tests.mockedLanguages.count)
@@ -69,20 +66,20 @@ extension MDLanguageMemoryStorage_Tests {
                 self.languageMemoryStorage.readAllLanguages { readResult in
                     
                     switch readResult {
-                    
+                        
                     case .success(let readLanguages):
                         
                         XCTAssertTrue(readLanguages.count == createLanguages.count)
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                     
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -99,7 +96,7 @@ extension MDLanguageMemoryStorage_Tests {
         languageMemoryStorage.createLanguages(Constants_For_Tests.mockedLanguages) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createLanguages):
                 
                 XCTAssertTrue(createLanguages.count == Constants_For_Tests.mockedLanguages.count)
@@ -107,30 +104,30 @@ extension MDLanguageMemoryStorage_Tests {
                 self.languageMemoryStorage.deleteAllLanguages { [unowned self] deleteResult in
                     
                     switch deleteResult {
-                    
+                        
                     case .success:
                         
                         self.languageMemoryStorage.entitiesIsEmpty { entitiesIsEmptyResult in
                             
                             switch entitiesIsEmptyResult {
-                            
+                                
                             case .success(let entitiesIsEmpty):
                                 
                                 XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
-                                                                                               
-                            case .failure:
-                                XCTExpectFailure()
+                                
+                            case .failure(let error):
+                                XCTExpectFailure(error.localizedDescription)
                                 expectation.fulfill()
                             }
                         }
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             

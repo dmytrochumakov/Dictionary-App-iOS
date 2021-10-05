@@ -36,15 +36,19 @@ final class MDUserStorage: MDStorage, MDUserStorageProtocol {
     
     let memoryStorage: MDUserMemoryStorageProtocol
     fileprivate let coreDataStorage: MDUserCoreDataStorageProtocol
+    fileprivate let operationQueue: OperationQueue
     
     init(memoryStorage: MDUserMemoryStorageProtocol,
-         coreDataStorage: MDUserCoreDataStorageProtocol) {
+         coreDataStorage: MDUserCoreDataStorageProtocol,
+         operationQueue: OperationQueue) {
         
         self.memoryStorage = memoryStorage
         self.coreDataStorage = coreDataStorage
+        self.operationQueue = operationQueue
         
         super.init(memoryStorage: memoryStorage,
-                   coreDataStorage: coreDataStorage)
+                   coreDataStorage: coreDataStorage,
+                   operationQueue: operationQueue)
         
     }
     
@@ -63,55 +67,85 @@ extension MDUserStorage {
                     _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<UserResponse>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
-            memoryStorage.createUser(userEntity, password: password) { (result) in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.memoryStorage.createUser(userEntity, password: password) { (result) in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
+            
             
         case .coreData:
             
-            coreDataStorage.createUser(userEntity, password: password) { (result) in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.coreDataStorage.createUser(userEntity, password: password) { (result) in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
+            
             
         case .all:
             
-            // Initialize Dispatch Group
-            let dispatchGroup: DispatchGroup = .init()
-            
-            // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<UserResponse>> = []
-            
-            // Create in Memory
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            memoryStorage.createUser(userEntity, password: password) { result in
+            let operation: BlockOperation = .init {
                 
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
+                let countNeeded: Int = 2
+                
+                // Initialize final result
+                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<UserResponse>> = []
+                
+                // Create in Memory
+                self.memoryStorage.createUser(userEntity, password: password) { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .memory, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
+                
+                // Create in Core Data
+                self.coreDataStorage.createUser(userEntity, password: password) { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .coreData, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
                 
             }
             
-            // Create in Core Data
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            coreDataStorage.createUser(userEntity, password: password) { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .coreData, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
-                
-            }
-            
-            // Notify And Pass Final Result
-            dispatchGroup.notify(queue: .main) {
-                completionHandler(finalResult)
-            }
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         }
     }
@@ -121,55 +155,86 @@ extension MDUserStorage {
                   _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<UserResponse>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
-            memoryStorage.readUser(fromUserID: userId) { (result) in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.memoryStorage.readUser(fromUserID: userId) { (result) in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
+            
             
         case .coreData:
             
-            coreDataStorage.readUser(fromUserID: userId) { (result) in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.coreDataStorage.readUser(fromUserID: userId) { (result) in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .all:
             
-            // Initialize Dispatch Group
-            let dispatchGroup: DispatchGroup = .init()
-            
-            // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<UserResponse>> = []
-            
-            // Read From Memory
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            memoryStorage.readUser(fromUserID: userId) { result in
+            let operation: BlockOperation = .init {
                 
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
+                //
+                let countNeeded: Int = 2
+                //
+                
+                // Initialize final result
+                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<UserResponse>> = []
+                
+                // Read From Memory
+                self.memoryStorage.readUser(fromUserID: userId) { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .memory, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
+                
+                // Read From Core Data
+                self.coreDataStorage.readUser(fromUserID: userId) { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .coreData, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
                 
             }
             
-            // Read From Core Data
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            coreDataStorage.readUser(fromUserID: userId) { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .coreData, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
-                
-            }
-            
-            // Notify And Pass Final Result
-            dispatchGroup.notify(queue: .main) {
-                completionHandler(finalResult)
-            }
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         }
         
@@ -179,55 +244,85 @@ extension MDUserStorage {
                        _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<UserResponse>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
-            memoryStorage.readFirstUser { (result) in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.memoryStorage.readFirstUser { (result) in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .coreData:
             
-            coreDataStorage.readFirstUser { (result) in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.coreDataStorage.readFirstUser { (result) in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .all:
             
-            // Initialize Dispatch Group
-            let dispatchGroup: DispatchGroup = .init()
-            
-            // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<UserResponse>> = []
-            
-            // Read From Memory
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            memoryStorage.readFirstUser { result in
+            let operation: BlockOperation = .init {
                 
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
+                //
+                let countNeeded: Int = 2
+                //
+                
+                // Initialize final result
+                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<UserResponse>> = []
+                
+                // Read From Memory
+                self.memoryStorage.readFirstUser { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .memory, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
+                
+                // Read From Core Data
+                self.coreDataStorage.readFirstUser { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .coreData, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
                 
             }
             
-            // Read From Core Data
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            coreDataStorage.readFirstUser { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .coreData, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
-                
-            }
-            
-            // Notify And Pass Final Result
-            dispatchGroup.notify(queue: .main) {
-                completionHandler(finalResult)
-            }
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         }
         
@@ -238,55 +333,86 @@ extension MDUserStorage {
                     _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
-            memoryStorage.deleteUser(userId) { (result) in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.memoryStorage.deleteUser(userId) { (result) in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
+            
             
         case .coreData:
             
-            coreDataStorage.deleteUser(userId) { (result) in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.coreDataStorage.deleteUser(userId) { (result) in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .all:
             
-            // Initialize Dispatch Group
-            let dispatchGroup: DispatchGroup = .init()
-            
-            // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
-            
-            // Delete From Memory
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            memoryStorage.deleteUser(userId) { result in
+            let operation: BlockOperation = .init {
                 
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
+                //
+                let countNeeded: Int = 2
+                //
+                
+                // Initialize final result
+                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
+                
+                // Delete From Memory
+                self.memoryStorage.deleteUser(userId) { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .memory, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
+                
+                // Delete From Core Data
+                self.coreDataStorage.deleteUser(userId) { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .coreData, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
                 
             }
             
-            // Delete From Core Data
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            coreDataStorage.deleteUser(userId) { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .coreData, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
-                
-            }
-            
-            // Notify And Pass Final Result
-            dispatchGroup.notify(queue: .main) {
-                completionHandler(finalResult)
-            }
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         }
         
@@ -296,55 +422,85 @@ extension MDUserStorage {
                         _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
-        
+            
         case .memory:
             
-            memoryStorage.deleteAllUsers { (result) in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.memoryStorage.deleteAllUsers { (result) in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .coreData:
             
-            coreDataStorage.deleteAllUsers { (result) in
-                completionHandler([.init(storageType: storageType, result: result)])
+            let operation: BlockOperation = .init {
+                //
+                self.coreDataStorage.deleteAllUsers { (result) in
+                    completionHandler([.init(storageType: storageType, result: result)])
+                }
+                //
             }
+            
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         case .all:
             
-            // Initialize Dispatch Group
-            let dispatchGroup: DispatchGroup = .init()
-            
-            // Initialize final result
-            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
-            
-            // Delete From Memory
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            memoryStorage.deleteAllUsers { result in
+            let operation: BlockOperation = .init {
                 
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
+                //
+                let countNeeded: Int = 2
+                //
+                
+                // Initialize final result
+                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
+                
+                // Delete From Memory
+                self.memoryStorage.deleteAllUsers { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .memory, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
+                
+                // Delete From Core Data
+                self.coreDataStorage.deleteAllUsers { result in
+                    
+                    // Append Result
+                    finalResult.append(.init(storageType: .coreData, result: result))
+                    
+                    // Pass Final Result If Needed
+                    if (finalResult.count == countNeeded) {
+                        completionHandler(finalResult)
+                    }
+                    //
+                    
+                }
                 
             }
             
-            // Delete From Core Data
-            // Dispatch Group Enter
-            dispatchGroup.enter()
-            coreDataStorage.deleteAllUsers { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .coreData, result: result))
-                // Dispatch Group Leave
-                dispatchGroup.leave()
-                
-            }
-            
-            // Notify And Pass Final Result
-            dispatchGroup.notify(queue: .main) {
-                completionHandler(finalResult)
-            }
+            // Add Operation
+            operationQueue.addOperation(operation)
+            //
+            break
+            //
             
         }
         

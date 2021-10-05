@@ -15,10 +15,7 @@ final class MDCourseMemoryStorage_Tests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        let operationQueue: OperationQueue = .init()
-        let operationQueueService: OperationQueueServiceProtocol = OperationQueueService.init(operationQueue: operationQueue)
-        
-        let courseMemoryStorage: MDCourseMemoryStorageProtocol = MDCourseMemoryStorage.init(operationQueueService: operationQueueService,
+        let courseMemoryStorage: MDCourseMemoryStorageProtocol = MDCourseMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseMemoryStorageOperationQueue)!,
                                                                                             array: .init())
         
         self.courseMemoryStorage = courseMemoryStorage
@@ -36,7 +33,7 @@ extension MDCourseMemoryStorage_Tests {
         courseMemoryStorage.createCourse(Constants_For_Tests.mockedCourse) { createResult in
             
             switch createResult {
-            
+                
             case .success(let courseEntity):
                 
                 XCTAssertTrue(courseEntity.userId == Constants_For_Tests.mockedCourse.userId)
@@ -47,9 +44,9 @@ extension MDCourseMemoryStorage_Tests {
                 
                 expectation.fulfill()
                 
-            case .failure:
-                XCTExpectFailure()
-                expectation.fulfill()            
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
+                expectation.fulfill()
             }
             
         }
@@ -65,15 +62,15 @@ extension MDCourseMemoryStorage_Tests {
         courseMemoryStorage.createCourses(Constants_For_Tests.mockedCourses) { createResult in
             
             switch createResult {
-            
+                
             case .success(let courseEntities):
                 
-                XCTAssertTrue(courseEntities.count == Constants_For_Tests.mockedCourses.count)                
+                XCTAssertTrue(courseEntities.count == Constants_For_Tests.mockedCourses.count)
                 
                 expectation.fulfill()
                 
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -90,13 +87,13 @@ extension MDCourseMemoryStorage_Tests {
         courseMemoryStorage.createCourse(Constants_For_Tests.mockedCourse) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createCourseEntity):
                 
                 courseMemoryStorage.readCourse(fromCourseId: createCourseEntity.courseId) { readResult in
                     
                     switch readResult {
-                    
+                        
                     case .success(let readCourseEntity):
                         
                         XCTAssertTrue(readCourseEntity.userId == createCourseEntity.userId)
@@ -107,14 +104,14 @@ extension MDCourseMemoryStorage_Tests {
                         
                         expectation.fulfill()
                         
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                     
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -131,37 +128,37 @@ extension MDCourseMemoryStorage_Tests {
         courseMemoryStorage.createCourse(Constants_For_Tests.mockedCourse) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success(let createCourseEntity):
                 
                 courseMemoryStorage.deleteCourse(fromCourseId: createCourseEntity.courseId) { [unowned self] deleteResult in
                     
                     switch deleteResult {
-                    
+                        
                     case .success:
                         
                         self.courseMemoryStorage.entitiesIsEmpty { entitiesIsEmptyResult in
                             
                             switch entitiesIsEmptyResult {
-                            
+                                
                             case .success(let entitiesIsEmpty):
                                 
                                 XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
                                 
-                            case .failure:
-                                XCTExpectFailure()
+                            case .failure(let error):
+                                XCTExpectFailure(error.localizedDescription)
                                 expectation.fulfill()
                             }
                         }
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                     
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -178,37 +175,37 @@ extension MDCourseMemoryStorage_Tests {
         courseMemoryStorage.createCourse(Constants_For_Tests.mockedCourse) { [unowned self] createResult in
             
             switch createResult {
-            
+                
             case .success:
                 
                 courseMemoryStorage.deleteAllCourses() { [unowned self] deleteResult in
                     
                     switch deleteResult {
-                    
+                        
                     case .success:
                         
                         self.courseMemoryStorage.entitiesIsEmpty { entitiesIsEmptyResult in
                             
                             switch entitiesIsEmptyResult {
-                            
+                                
                             case .success(let entitiesIsEmpty):
                                 
                                 XCTAssertTrue(entitiesIsEmpty)
                                 expectation.fulfill()
                                 
-                            case .failure:
-                                XCTExpectFailure()
+                            case .failure(let error):
+                                XCTExpectFailure(error.localizedDescription)
                                 expectation.fulfill()
                             }
                         }
-                    case .failure:
-                        XCTExpectFailure()
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
                     
                 }
-            case .failure:
-                XCTExpectFailure()
+            case .failure(let error):
+                XCTExpectFailure(error.localizedDescription)
                 expectation.fulfill()
             }
             
@@ -217,6 +214,6 @@ extension MDCourseMemoryStorage_Tests {
         wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
         
     }
-       
+    
     
 }
