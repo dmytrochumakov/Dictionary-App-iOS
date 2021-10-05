@@ -341,6 +341,11 @@ struct MDConstants {
         fileprivate static let storageCleanupServiceShortQueueName: String = "Storage_Cleanup_Service"
         static let storageCleanupServiceOperationQueue: String = mdOperationQueue(shortQueueName: storageCleanupServiceShortQueueName)
         
+        // Sync Manager
+        //
+        fileprivate static let synchronizationManagerShortQueueName: String = "Synchronization_Manager"
+        static let synchronizationManagerOperationQueue: String = mdOperationQueue(shortQueueName: synchronizationManagerShortQueueName)
+        
         
         //
         fileprivate static func mdAPIOperationQueue(shortQueueName: String) -> String {

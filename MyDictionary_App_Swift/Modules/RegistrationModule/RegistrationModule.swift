@@ -46,7 +46,9 @@ extension RegistrationModule {
                                                
                                                operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.synchronizationServiceOperationQueue)!)
         
-        let syncManager: MDSyncManagerProtocol = MDSyncManager.init(sync: sync)
+        let syncManager: MDSyncManagerProtocol = MDSyncManager.init(sync: sync,
+                                                                    operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.synchronizationManagerOperationQueue)!)
+        
         let authManager: MDAuthManagerProtocol = MDAuthManager.init(apiAuth: MDConstants.AppDependencies.dependencies.apiAuth,
                                                                     appSettings: MDConstants.AppDependencies.dependencies.appSettings,
                                                                     syncManager: syncManager)
