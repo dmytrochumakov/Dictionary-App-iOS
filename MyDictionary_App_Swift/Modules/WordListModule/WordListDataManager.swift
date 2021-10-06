@@ -60,19 +60,35 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
             switch result {
                 
             case .success(let words):
-                // Set Words
-                dataProvider.filteredWords = words
-                // Pass Result
-                dataManagerOutput?.readAndAddWordsToDataProviderResult(.success(()))
+                
+                DispatchQueue.main.async {
+                    
+                    // Set Words
+                    self.dataProvider.filteredWords = words
+                    // Pass Result
+                    self.dataManagerOutput?.readAndAddWordsToDataProviderResult(.success(()))
+                    //
+                    
+                }
+                
                 //
                 break
                 //
+                
             case .failure(let error):
-                // Pass Result
-                dataManagerOutput?.readAndAddWordsToDataProviderResult(.failure(error))
+                
+                DispatchQueue.main.async {
+                    
+                    // Pass Result
+                    self.dataManagerOutput?.readAndAddWordsToDataProviderResult(.failure(error))
+                    //
+                    
+                }
+                
                 //
                 break
                 //
+                
             }
             
         }
@@ -86,20 +102,36 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
             switch readResult {
                 
             case .success(let readWords):
-                // Set Filtered Result
-                self?.dataProvider.filteredWords = self?.filteredWords(input: readWords,
-                                                                       searchText: searchText) ?? []
-                // Pass Result
-                self?.dataManagerOutput?.filteredWordsResult(.success(()))
+                
+                DispatchQueue.main.async {
+                    
+                    // Set Filtered Result
+                    self?.dataProvider.filteredWords = self?.filteredWords(input: readWords,
+                                                                           searchText: searchText) ?? []
+                    // Pass Result
+                    self?.dataManagerOutput?.filteredWordsResult(.success(()))
+                    //
+                    
+                }
+                
                 //
                 break
                 //
+                
             case .failure(let error):
-                // Pass Result
-                self?.dataManagerOutput?.filteredWordsResult(.failure(error))
+                
+                DispatchQueue.main.async {
+                    
+                    // Pass Result
+                    self?.dataManagerOutput?.filteredWordsResult(.failure(error))
+                    //
+                    
+                }
+                
                 //
                 break
                 //
+                
             }
             
         }
@@ -113,19 +145,35 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
             switch readResult {
                 
             case .success(let readWords):
-                // Set Read Results
-                self?.dataProvider.filteredWords = readWords
-                // Pass Result
-                self?.dataManagerOutput?.clearWordFilterResult(.success(()))
+                
+                DispatchQueue.main.async {
+                    
+                    // Set Read Results
+                    self?.dataProvider.filteredWords = readWords
+                    // Pass Result
+                    self?.dataManagerOutput?.clearWordFilterResult(.success(()))
+                    //
+                    
+                }
+                
                 //
                 break
                 //
+                
             case .failure(let error):
-                // Pass Result
-                self?.dataManagerOutput?.clearWordFilterResult(.failure(error))
+                
+                DispatchQueue.main.async {
+                    
+                    // Pass Result
+                    self?.dataManagerOutput?.clearWordFilterResult(.failure(error))
+                    //
+                    
+                }
+                
                 //
                 break
                 //
+                
             }
             
         }

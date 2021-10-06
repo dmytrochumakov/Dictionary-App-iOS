@@ -174,24 +174,39 @@ fileprivate extension WordListInteractor {
                 switch deleteWordResult {
                     
                 case .success:
-                    // Hide Progress HUD
-                    interactorOutput?.hideProgressHUD()
-                    //
-                    dataManager.deleteWord(atIndexPath: indexPath)
-                    //
-                    interactorOutput?.deleteRow(atIndexPath: indexPath)
+                    
+                    DispatchQueue.main.async {
+                        
+                        // Hide Progress HUD
+                        self.interactorOutput?.hideProgressHUD()
+                        //
+                        self.dataManager.deleteWord(atIndexPath: indexPath)
+                        //
+                        self.interactorOutput?.deleteRow(atIndexPath: indexPath)
+                        //
+                        
+                    }
+                    
                     //
                     break
                     //
                     
                 case .failure(let error):
-                    // Hide Progress HUD
-                    interactorOutput?.hideProgressHUD()
-                    //
-                    interactorOutput?.showError(error)
+                    
+                    DispatchQueue.main.async {
+                        
+                        // Hide Progress HUD
+                        self.interactorOutput?.hideProgressHUD()
+                        //
+                        self.interactorOutput?.showError(error)
+                        //
+                        
+                    }
+                    
                     //
                     break
                     //
+                    
                 }
                 
             }

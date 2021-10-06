@@ -36,11 +36,9 @@ final class MDReadFirstJWTCoreDataStorageOperation: MDAsyncOperation {
                 self.result?(.failure(MDEntityOperationError.cantFindEntity))
                 self.finish()
             }
-        } catch let error {
-            DispatchQueue.main.async {
-                self.result?(.failure(error))
-                self.finish()
-            }
+        } catch {
+            self.result?(.failure(error))
+            self.finish()
         }
         
     }

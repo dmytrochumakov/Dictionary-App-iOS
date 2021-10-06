@@ -125,10 +125,17 @@ fileprivate extension AccountInteractor {
                         break
                         //
                     case .failure(let error):
-                        // Hide Progress HUD
-                        interactorOutput?.hideProgressHUD()
-                        //
-                        interactorOutput?.showError(error)
+                        
+                        DispatchQueue.main.async {
+                            
+                            // Hide Progress HUD
+                            self.interactorOutput?.hideProgressHUD()
+                            //
+                            self.interactorOutput?.showError(error)
+                            //
+                            
+                        }
+                        
                         //
                         break
                         //
@@ -138,10 +145,17 @@ fileprivate extension AccountInteractor {
                 //
                 
             case .failure(let error):
-                // Hide Progress HUD
-                interactorOutput?.hideProgressHUD()
-                //
-                interactorOutput?.showError(error)
+                
+                DispatchQueue.main.async {
+                    
+                    // Hide Progress HUD
+                    self.interactorOutput?.hideProgressHUD()
+                    //
+                    self.interactorOutput?.showError(error)
+                    //
+                    
+                }
+                
                 //
                 break
                 //
@@ -162,24 +176,36 @@ fileprivate extension AccountInteractor {
                 
             case .success:
                 
-                // Hide Progress HUD
-                interactorOutput?.hideProgressHUD()
-                // Set Is Logged False
-                appSettings.setIsLoggedFalse()
-                // Cancel All Operations
-                operationQueueManager.cancelAllOperations()
-                //
-                interactorOutput?.didCompleteLogout()
+                DispatchQueue.main.async {
+                    
+                    // Hide Progress HUD
+                    self.interactorOutput?.hideProgressHUD()
+                    // Set Is Logged False
+                    self.appSettings.setIsLoggedFalse()
+                    // Cancel All Operations
+                    self.operationQueueManager.cancelAllOperations()
+                    //
+                    self.interactorOutput?.didCompleteLogout()
+                    //
+                    
+                }
+                
                 //
                 break
                 //
                 
             case .failure(let error):
                 
-                // Hide Progress HUD
-                interactorOutput?.hideProgressHUD()
-                //
-                interactorOutput?.showError(error)
+                DispatchQueue.main.async {
+                    
+                    // Hide Progress HUD
+                    self.interactorOutput?.hideProgressHUD()
+                    //
+                    self.interactorOutput?.showError(error)
+                    //
+                    
+                }
+                
                 //
                 break
                 //

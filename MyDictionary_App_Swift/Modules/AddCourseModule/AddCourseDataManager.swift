@@ -58,18 +58,35 @@ extension AddCourseDataManager {
             switch readResult {
                 
             case .success(let languages):
-                // Set Languages
-                self?.dataProvider.sections = self?.configuredSections(byLanguages: languages) ?? []
-                // Pass Result
-                self?.dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.success(()))
+                
+                DispatchQueue.main.async {
+                    
+                    // Set Languages
+                    self?.dataProvider.sections = self?.configuredSections(byLanguages: languages) ?? []
+                    // Pass Result
+                    self?.dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.success(()))
+                    //
+                    
+                }
+                
                 //
                 break
+                //
                 
             case .failure(let error):
-                // Pass Result
-                self?.dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.failure(error))
+                
+                DispatchQueue.main.async {
+                    
+                    // Pass Result
+                    self?.dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.failure(error))
+                    //
+                    
+                }
+                
                 //
                 break
+                //
+                
             }
             
         }
@@ -83,17 +100,31 @@ extension AddCourseDataManager {
             switch readResult {
                 
             case .success(let readLanguages):
-                // Set Filtered Result
-                self?.dataProvider.sections = self?.filteredLanguages(input: readLanguages,
-                                                                      searchText: searchText) ?? []
-                // Pass Result
-                self?.dataManagerOutput?.filteredLanguagesResult(.success(()))
+                
+                DispatchQueue.main.async {
+                    
+                    // Set Filtered Result
+                    self?.dataProvider.sections = self?.filteredLanguages(input: readLanguages,
+                                                                          searchText: searchText) ?? []
+                    // Pass Result
+                    self?.dataManagerOutput?.filteredLanguagesResult(.success(()))
+                    //
+                    
+                }
+                
                 //
                 break
                 //
+                
             case .failure(let error):
-                // Pass Result
-                self?.dataManagerOutput?.filteredLanguagesResult(.failure(error))
+                
+                DispatchQueue.main.async {
+                    
+                    // Pass Result
+                    self?.dataManagerOutput?.filteredLanguagesResult(.failure(error))
+                    //
+                }
+                
                 //
                 break
                 //
@@ -110,18 +141,35 @@ extension AddCourseDataManager {
             switch readResult {
                 
             case .success(let languages):
-                // Set Sections
-                self?.dataProvider.sections = self?.configuredSections(byLanguages: languages) ?? []
-                // Pass Result
-                self?.dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.success(()))
+                
+                DispatchQueue.main.async {
+                    
+                    // Set Sections
+                    self?.dataProvider.sections = self?.configuredSections(byLanguages: languages) ?? []
+                    // Pass Result
+                    self?.dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.success(()))
+                    //
+                    
+                }
+                
                 //
                 break
+                //
                 
             case .failure(let error):
-                // Pass Result
-                self?.dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.failure(error))
+                
+                DispatchQueue.main.async {
+                    
+                    // Pass Result
+                    self?.dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.failure(error))
+                    //
+                    
+                }
+                
                 //
                 break
+                //
+                
             }
             
         }

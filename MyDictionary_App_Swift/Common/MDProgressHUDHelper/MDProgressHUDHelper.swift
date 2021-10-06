@@ -63,48 +63,41 @@ final class MDProgressHUDHelper: MDProgressHUDHelperProtocol {
 extension MDProgressHUDHelper {
     
     func showProgressHUD(withConfiguration configuration: MDProgressHUDHelperConfiguration) {
-        DispatchQueue.main.async {
+        //
+        if (self.hud == nil) {
             //
-            if (self.hud == nil) {
-                //
-                self.hud = self.createHUD(withConfiguration: configuration)
-                //
-                self.hud.show(animated: configuration.animated)
-                //
-            } else {
-                //
-                self.hud.show(animated: configuration.animated)
-                //
-            }
+            self.hud = self.createHUD(withConfiguration: configuration)
+            //
+            self.hud.show(animated: configuration.animated)
+            //
+        } else {
+            //
+            self.hud.show(animated: configuration.animated)
             //
         }
+        //
     }
     
     /// - Parameter animated: true
     func hideProgressHUD(animated: Bool = true) {
-        DispatchQueue.main.async {
+        //
+        if (self.hud == nil) {
             //
-            if (self.hud == nil) {
-                //
-                return
-                //
-            } else {
-                //
-                self.hud.hide(animated: animated)
-                //
-                self.hud = nil
-                //
-            }
+            return
+            //
+        } else {
+            //
+            self.hud.hide(animated: animated)
+            //
+            self.hud = nil
             //
         }
     }
     
     func updateHUDProgress(_ progress: Float) {
-        DispatchQueue.main.async {
-            //
-            self.hud.progress = progress
-            //
-        }
+        //
+        self.hud.progress = progress
+        //
     }
     
 }

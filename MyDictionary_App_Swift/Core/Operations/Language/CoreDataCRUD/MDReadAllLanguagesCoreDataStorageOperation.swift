@@ -31,11 +31,9 @@ final class MDReadAllLanguagesCoreDataStorageOperation: MDAsyncOperation {
         do {
             self.result?(.success(try managedObjectContext.fetch(fetchRequest).map({ $0.languageResponse })))
             self.finish()
-        } catch let error {
-            DispatchQueue.main.async {
-                self.result?(.failure(error))
-                self.finish()
-            }
+        } catch {
+            self.result?(.failure(error))
+            self.finish()            
         }
         
     }

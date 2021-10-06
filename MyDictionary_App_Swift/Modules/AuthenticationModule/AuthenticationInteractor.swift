@@ -128,28 +128,42 @@ fileprivate extension AuthenticationInteractor {
             authManager.login(authRequest: .init(nickname: dataManager.getNickname()!,
                                                  password: dataManager.getPassword()!)) { [weak self] progress in
                 
-                self?.interactorOutput?.updateHUDProgress(progress)
+                DispatchQueue.main.async {
+                    self?.interactorOutput?.updateHUDProgress(progress)
+                }
                 
             } completionHandler: { [weak self] (result) in
                 
                 switch result {
                 case .success:
                     
-                    // Hide Progress HUD
-                    self?.interactorOutput?.hideProgressHUD()
-                    //
-                    self?.interactorOutput?.showCourseList()
+                    DispatchQueue.main.async {
+                        
+                        // Hide Progress HUD
+                        self?.interactorOutput?.hideProgressHUD()
+                        //
+                        self?.interactorOutput?.showCourseList()
+                        //
+                        
+                    }
                     //
                     break
                     
                 case .failure(let error):
                     
-                    // Hide Progress HUD
-                    self?.interactorOutput?.hideProgressHUD()
-                    //
-                    self?.interactorOutput?.showError(error)
+                    DispatchQueue.main.async {
+                        
+                        // Hide Progress HUD
+                        self?.interactorOutput?.hideProgressHUD()
+                        //
+                        self?.interactorOutput?.showError(error)
+                        //
+                        
+                    }
+                    
                     //
                     break
+                    //
                     
                 }
                 

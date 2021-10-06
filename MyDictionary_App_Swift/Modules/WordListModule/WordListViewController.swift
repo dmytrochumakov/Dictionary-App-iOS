@@ -75,9 +75,7 @@ final class WordListViewController: MDBaseLargeTitledBackNavigationBarViewContro
 extension WordListViewController: WordListPresenterOutputProtocol {
     
     func reloadData() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        self.tableView.reloadData()
     }
     
     func showError(_ error: Error) {
@@ -87,23 +85,17 @@ extension WordListViewController: WordListPresenterOutputProtocol {
     }
     
     func hideKeyboard() {
-        DispatchQueue.main.async {
-            MDConstants.Keyboard.hideKeyboard(rootView: self.view)
-        }
+        MDConstants.Keyboard.hideKeyboard(rootView: self.view)
     }
     
     func deleteRow(atIndexPath indexPath: IndexPath) {
-        DispatchQueue.main.async {
-            self.tableView.deleteRows(at: [indexPath], with: .fade)
-        }
+        self.tableView.deleteRows(at: [indexPath], with: .fade)
     }
     
     func insertRow(atIndexPath indexPath: IndexPath) {
-        DispatchQueue.main.async {
-            self.tableView.beginUpdates()
-            self.tableView.insertRows(at: [indexPath], with: .fade)
-            self.tableView.endUpdates()
-        }
+        self.tableView.beginUpdates()
+        self.tableView.insertRows(at: [indexPath], with: .fade)
+        self.tableView.endUpdates()
     }
     
     func showProgressHUD() {
@@ -115,9 +107,7 @@ extension WordListViewController: WordListPresenterOutputProtocol {
     }
     
     func updateRow(atIndexPath indexPath: IndexPath) {
-        DispatchQueue.main.async {
-            self.tableView.reloadRows(at: [indexPath], with: .fade)
-        }
+        self.tableView.reloadRows(at: [indexPath], with: .fade)        
     }
     
 }

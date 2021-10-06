@@ -128,9 +128,7 @@ extension AuthenticationViewController: AuthenticationPresenterOutputProtocol {
     }
     
     func hideKeyboard() {
-        DispatchQueue.main.async {
-            MDConstants.Keyboard.hideKeyboard(rootView: self.view)
-        }
+        MDConstants.Keyboard.hideKeyboard(rootView: self.view)        
     }
     
     func showError(_ error: Error) {
