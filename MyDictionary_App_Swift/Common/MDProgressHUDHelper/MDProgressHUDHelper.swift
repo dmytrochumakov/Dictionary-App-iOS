@@ -84,9 +84,17 @@ extension MDProgressHUDHelper {
     func hideProgressHUD(animated: Bool = true) {
         DispatchQueue.main.async {
             //
-            self.hud.hide(animated: animated)
-            //
-            self.hud = nil
+            if (self.hud == nil) {
+                //
+                return
+                //
+            } else {
+                //
+                self.hud.hide(animated: animated)
+                //
+                self.hud = nil
+                //
+            }
             //
         }
     }
