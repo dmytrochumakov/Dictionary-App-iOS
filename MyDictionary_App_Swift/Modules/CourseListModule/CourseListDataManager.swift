@@ -53,21 +53,36 @@ extension CourseListDataManager {
         memoryStorage.readAllCourses { [weak self] readResult in
             
             switch readResult {
-            
+                
             case .success(let readCourses):
-                // Set Read Courses
-                self?.dataProvider.filteredCourses = readCourses
-                // Pass Result
-                self?.dataManagerOutput?.readAndAddCoursesToDataProviderResult(.success(()))
+                
+                DispatchQueue.main.async {
+                    
+                    // Set Read Courses
+                    self?.dataProvider.filteredCourses = readCourses
+                    // Pass Result
+                    self?.dataManagerOutput?.readAndAddCoursesToDataProviderResult(.success(()))
+                    //
+                }
+                
                 //
                 break
-            //
+                //
+                
             case .failure(let error):
-                // Pass Result
-                self?.dataManagerOutput?.readAndAddCoursesToDataProviderResult(.failure(error))
+                
+                DispatchQueue.main.async {
+                    
+                    // Pass Result
+                    self?.dataManagerOutput?.readAndAddCoursesToDataProviderResult(.failure(error))
+                    //
+                    
+                }
+                
                 //
                 break
-            //
+                //
+                
             }
             
         }
@@ -79,22 +94,36 @@ extension CourseListDataManager {
         memoryStorage.readAllCourses { [weak self] readResult in
             
             switch readResult {
-            
+                
             case .success(let readCourses):
-                // Set Filtered Result
-                self?.dataProvider.filteredCourses = self?.filteredCourses(input: readCourses,
-                                                                           searchText: searchText) ?? []
-                // Pass Result
-                self?.dataManagerOutput?.filteredCoursesResult(.success(()))
+                
+                DispatchQueue.main.async {
+                    
+                    // Set Filtered Result
+                    self?.dataProvider.filteredCourses = self?.filteredCourses(input: readCourses,
+                                                                               searchText: searchText) ?? []
+                    // Pass Result
+                    self?.dataManagerOutput?.filteredCoursesResult(.success(()))
+                    //
+                }
+                
                 //
                 break
-            //
+                //
+                
             case .failure(let error):
-                // Pass Result
-                self?.dataManagerOutput?.filteredCoursesResult(.failure(error))
+                
+                DispatchQueue.main.async {
+                    
+                    // Pass Result
+                    self?.dataManagerOutput?.filteredCoursesResult(.failure(error))
+                    //
+                    
+                }
+                
                 //
                 break
-            //
+                //
             }
             
         }
@@ -106,21 +135,37 @@ extension CourseListDataManager {
         memoryStorage.readAllCourses { [weak self] readResult in
             
             switch readResult {
-            
+                
             case .success(let readCourses):
-                // Set Read Courses
-                self?.dataProvider.filteredCourses = readCourses
-                // Pass Result
-                self?.dataManagerOutput?.clearCourseFilterResult(.success(()))
+                
+                DispatchQueue.main.async {
+                    
+                    // Set Read Courses
+                    self?.dataProvider.filteredCourses = readCourses
+                    // Pass Result
+                    self?.dataManagerOutput?.clearCourseFilterResult(.success(()))
+                    //
+                    
+                }
+                
                 //
                 break
-            //
+                //
+                
             case .failure(let error):
-                // Pass Result
-                self?.dataManagerOutput?.clearCourseFilterResult(.failure(error))
+                
+                DispatchQueue.main.async {
+                    
+                    // Pass Result
+                    self?.dataManagerOutput?.clearCourseFilterResult(.failure(error))
+                    //
+                    
+                }
+                
                 //
                 break
-            //
+                //
+                
             }
             
         }

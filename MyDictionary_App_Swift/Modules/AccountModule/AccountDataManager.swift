@@ -50,14 +50,30 @@ extension AccountDataManager {
                 
             case .success(let userResponse):
                 
-                self?.dataProvider.user = userResponse
-                self?.dataManagerOutput?.loadAndPassUserToDataProviderResult(.success(()))
+                DispatchQueue.main.async {
+                    //
+                    self?.dataProvider.user = userResponse
+                    //
+                    self?.dataManagerOutput?.loadAndPassUserToDataProviderResult(.success(()))
+                    //
+                }
+                
+                //
                 break
+                //
+                
                 
             case .failure(let error):
                 
-                self?.dataManagerOutput?.loadAndPassUserToDataProviderResult(.failure(error))
+                DispatchQueue.main.async {
+                    //
+                    self?.dataManagerOutput?.loadAndPassUserToDataProviderResult(.failure(error))
+                    //
+                }
+                
+                //
                 break
+                //
                 
             }
             
