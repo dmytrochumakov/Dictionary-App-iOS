@@ -64,7 +64,7 @@
 // End Api Errors //
 
 // Api Auth Errors //
-"unauthorized_api_auth_error" = "User with this nickname does not exist. \n Please check the entered data or create a new account.";
+"unauthorized_api_auth_error" = "User with this nickname or password does not exist. \n\n Please check the entered data or create a new account.";
 "conflict_api_auth_error" = "Nickname exists. \n Please try another nickname.";
 "conflict_api_course_error" = "Course exists. \n Please select another course.";
 // End Api Auth Errors //

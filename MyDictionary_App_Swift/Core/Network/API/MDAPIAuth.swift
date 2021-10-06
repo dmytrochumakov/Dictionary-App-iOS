@@ -118,6 +118,8 @@ extension MDAPIAuth {
                 
                 if (httpURLResponse?.statusCode == MDAPIStatusCode.unauthorized.rawValue) {
                     completionHandler(.failure(MDAPIAuthError.unauthorized))
+                } else if (httpURLResponse?.statusCode == MDAPIStatusCode.internalServerError.rawValue) {
+                    completionHandler(.failure(MDAPIAuthError.unauthorized))
                 } else {
                     completionHandler(.failure(error))
                 }
