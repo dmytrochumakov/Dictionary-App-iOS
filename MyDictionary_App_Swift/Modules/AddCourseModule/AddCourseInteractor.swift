@@ -11,7 +11,7 @@ protocol AddCourseInteractorInputProtocol: MDViewDidLoadProtocol {
     var collectionViewDelegate: MDAddCourseCollectionViewDelegateProtocol { get }
     var collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol { get }
     var searchBarDelegate: MDSearchBarDelegateImplementationProtocol { get }
-        
+    
     func addButtonClicked()
     
 }
@@ -108,22 +108,34 @@ extension AddCourseInteractor {
                     
                 case .success(let courseResponse):
                     
-                    //
-                    interactorOutput?.hideProgressHUD()
-                    //
-                    bridge.didAddCourse?(courseResponse)
-                    //
-                    interactorOutput?.closeModule()
+                    DispatchQueue.main.async {
+                        
+                        //
+                        self.interactorOutput?.hideProgressHUD()
+                        //
+                        self.bridge.didAddCourse?(courseResponse)
+                        //
+                        self.interactorOutput?.closeModule()
+                        //
+                        
+                    }
+                    
                     //
                     break
                     //
                     
                 case .failure(let error):
                     
-                    //
-                    interactorOutput?.hideProgressHUD()
-                    //
-                    interactorOutput?.showError(error)
+                    DispatchQueue.main.async {
+                        
+                        //
+                        self.interactorOutput?.hideProgressHUD()
+                        //
+                        self.interactorOutput?.showError(error)
+                        //
+                        
+                    }
+                    
                     //
                     break
                     //

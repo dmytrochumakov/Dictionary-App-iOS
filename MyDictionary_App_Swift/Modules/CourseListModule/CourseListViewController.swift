@@ -90,15 +90,11 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     }
     
     func reloadData() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        self.tableView.reloadData()
     }
     
     func hideKeyboard() {
-        DispatchQueue.main.async {
-            MDConstants.Keyboard.hideKeyboard(rootView: self.view)
-        }
+        MDConstants.Keyboard.hideKeyboard(rootView: self.view)
     }
     
     func deleteCourseButtonClicked(_ cell: MDCourseListCell) {
@@ -106,9 +102,7 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     }
     
     func deleteRow(atIndexPath indexPath: IndexPath) {
-        DispatchQueue.main.async {
-            self.tableView.deleteRows(at: [indexPath], with: .fade)
-        }
+        self.tableView.deleteRows(at: [indexPath], with: .fade)
     }
     
     func showProgressHUD() {
@@ -120,11 +114,9 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     }
     
     func insertRow(atIndexPath indexPath: IndexPath) {
-        DispatchQueue.main.async {
-            self.tableView.beginUpdates()
-            self.tableView.insertRows(at: [indexPath], with: .fade)
-            self.tableView.endUpdates()
-        }
+        self.tableView.beginUpdates()
+        self.tableView.insertRows(at: [indexPath], with: .fade)
+        self.tableView.endUpdates()        
     }
     
 }

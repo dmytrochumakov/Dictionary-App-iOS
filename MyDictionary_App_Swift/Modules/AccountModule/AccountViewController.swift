@@ -98,9 +98,7 @@ final class AccountViewController: MDBaseTitledBackNavigationBarViewController {
 extension AccountViewController: AccountPresenterOutputProtocol {
     
     func updateNicknameText(_ text: String) {
-        DispatchQueue.main.async {
-            self.nicknameDetailLabel.text = text
-        }
+        self.nicknameDetailLabel.text = text        
     }
     
     func showError(_ error: Error) {

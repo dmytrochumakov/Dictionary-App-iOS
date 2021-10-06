@@ -27,15 +27,13 @@ final class MDReadUsersCoreDataStorageOperation: MDAsyncOperation {
     override func main() {
         
         let fetchRequest = NSFetchRequest<CDUserResponseEntity>(entityName: CoreDataEntityName.CDUserResponseEntity)
-                
+        
         do {
             self.result?(.success(try managedObjectContext.fetch(fetchRequest).map({ $0.userResponse })))
             self.finish()
-        } catch let error {
-            DispatchQueue.main.async {
-                self.result?(.failure(error))
-                self.finish()
-            }
+        } catch {
+            self.result?(.failure(error))
+            self.finish()            
         }
         
     }

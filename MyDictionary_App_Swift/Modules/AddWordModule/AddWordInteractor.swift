@@ -99,22 +99,34 @@ extension AddWordInteractor: AddWordInteractorInputProtocol {
                 
             case .success(let wordResponse):
                 
-                // Hide Progress HUD
-                interactorOutput?.hideProgressHUD()
-                //
-                bridge.didAddWord?(wordResponse)
-                //
-                interactorOutput?.closeModule()
+                DispatchQueue.main.async {
+                    
+                    // Hide Progress HUD
+                    self.interactorOutput?.hideProgressHUD()
+                    //
+                    self.bridge.didAddWord?(wordResponse)
+                    //
+                    self.interactorOutput?.closeModule()
+                    //
+                    
+                }
+                
                 //
                 break
                 //
                 
             case .failure(let error):
                 
-                // Hide Progress HUD
-                interactorOutput?.hideProgressHUD()
-                //
-                interactorOutput?.showError(error)
+                DispatchQueue.main.async {
+                    
+                    // Hide Progress HUD
+                    self.interactorOutput?.hideProgressHUD()
+                    //
+                    self.interactorOutput?.showError(error)
+                    //
+                    
+                }
+                
                 //
                 break
                 //

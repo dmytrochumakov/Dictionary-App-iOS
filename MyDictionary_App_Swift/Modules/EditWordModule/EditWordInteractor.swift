@@ -195,22 +195,34 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
                     
                 case .success:
                     
-                    // Hide Progress HUD
-                    interactorOutput?.hideProgressHUD()
-                    // Pass Updated Word
-                    bridge.didUpdateWord?(dataManager.getWord)
-                    // Close Module
-                    interactorOutput?.closeModule()
+                    DispatchQueue.main.async {
+                        
+                        // Hide Progress HUD
+                        self.interactorOutput?.hideProgressHUD()
+                        // Pass Updated Word
+                        self.bridge.didUpdateWord?(dataManager.getWord)
+                        // Close Module
+                        self.interactorOutput?.closeModule()
+                        //
+                        
+                    }
+                    
                     //
                     break
                     //
                     
                 case .failure(let error):
                     
-                    // Hide Progress HUD
-                    interactorOutput?.hideProgressHUD()
-                    // Display Error
-                    interactorOutput?.showError(error)
+                    DispatchQueue.main.async {
+                        
+                        // Hide Progress HUD
+                        self.interactorOutput?.hideProgressHUD()
+                        // Display Error
+                        self.interactorOutput?.showError(error)
+                        //
+                        
+                    }
+                    
                     //
                     break
                     //
@@ -239,22 +251,33 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
                 
             case .success:
                 
-                // Hide Progress HUD
-                interactorOutput?.hideProgressHUD()
-                // Pass Deleted Word
-                bridge.didDeleteWord?(dataManager.getWord)
-                // Close Module
-                interactorOutput?.closeModule()
+                DispatchQueue.main.async {
+                    
+                    // Hide Progress HUD
+                    self.interactorOutput?.hideProgressHUD()
+                    // Pass Deleted Word
+                    self.bridge.didDeleteWord?(dataManager.getWord)
+                    // Close Module
+                    self.interactorOutput?.closeModule()
+                    //
+                    
+                }
+                
                 //
                 break
                 //
                 
             case .failure(let error):
                 
-                // Hide Progress HUD
-                interactorOutput?.hideProgressHUD()
-                // Display Error
-                interactorOutput?.showError(error)
+                DispatchQueue.main.async {
+                    
+                    // Hide Progress HUD
+                    self.interactorOutput?.hideProgressHUD()
+                    // Display Error
+                    self.interactorOutput?.showError(error)
+                    //
+                }
+                
                 //
                 break
                 //

@@ -11,7 +11,7 @@ protocol CourseListInteractorInputProtocol: MDViewDidLoadProtocol {
     var tableViewDelegate: CourseListTableViewDelegateProtocol { get }
     var tableViewDataSource: CourseListTableViewDataSourceProtocol { get }
     var searchBarDelegate: MDSearchBarDelegateImplementationProtocol { get }
-        
+    
     func deleteCourse(atIndexPath indexPath: IndexPath)
     
 }
@@ -23,7 +23,7 @@ protocol CourseListInteractorOutputProtocol: AnyObject,
                                              MDInsertRowProtocol,
                                              MDDeleteRowProtocol,
                                              MDShowErrorProtocol {
-        
+    
     func deleteCourseButtonClicked(_ cell: MDCourseListCell)    
     func showWordList(withCourse course: CourseResponse)
     
@@ -110,21 +110,35 @@ extension CourseListInteractor {
             switch deleteCourseResult {
                 
             case .success:
-                // Hide Progress HUD
-                interactorOutput?.hideProgressHUD()
-                //
-                dataManager.deleteCourse(atIndexPath: indexPath)
-                //
-                interactorOutput?.deleteRow(atIndexPath: indexPath)
+                
+                DispatchQueue.main.async {
+                    
+                    // Hide Progress HUD
+                    self.interactorOutput?.hideProgressHUD()
+                    //
+                    self.dataManager.deleteCourse(atIndexPath: indexPath)
+                    //
+                    self.interactorOutput?.deleteRow(atIndexPath: indexPath)
+                    //
+                    
+                }
+                
                 //
                 break
                 //
                 
             case .failure(let error):
-                // Hide Progress HUD
-                interactorOutput?.hideProgressHUD()
-                //
-                interactorOutput?.showError(error)
+                
+                DispatchQueue.main.async {
+                    
+                    // Hide Progress HUD
+                    self.interactorOutput?.hideProgressHUD()
+                    //
+                    self.interactorOutput?.showError(error)
+                    //
+                    
+                }
+                
                 //
                 break
                 //
