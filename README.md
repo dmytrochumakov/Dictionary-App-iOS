@@ -17,3 +17,6 @@ A simple iOS application for saving words and descriptions.
 
 ## Viper-Template
 - https://github.com/d9d9vs9/Viper-Template
+
+## License
+Dictionary_App_Swift is licensed under the MIT License, please see the [LICENSE](LICENSE) file.
