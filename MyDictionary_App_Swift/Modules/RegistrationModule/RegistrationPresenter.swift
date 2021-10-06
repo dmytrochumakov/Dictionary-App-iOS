@@ -106,7 +106,7 @@ extension RegistrationPresenter {
     }
     
     func hideProgressHUD() {
-        presenterOutput?.hideKeyboard()
+        presenterOutput?.hideProgressHUD()
     }
     
     func updateHUDProgress(_ progress: Float) {
