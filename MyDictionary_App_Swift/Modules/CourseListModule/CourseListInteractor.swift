@@ -24,7 +24,7 @@ protocol CourseListInteractorOutputProtocol: AnyObject,
                                              MDDeleteRowProtocol,
                                              MDShowErrorProtocol {
     
-    func deleteCourseButtonClicked(_ cell: MDCourseListCell)    
+    func deleteCourseButtonClicked(_ cell: MDCourseListCell)
     func showWordList(withCourse course: CourseResponse)
     
 }
@@ -38,7 +38,6 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
     
     fileprivate let courseManager: MDCourseManagerProtocol
     fileprivate let dataManager: CourseListDataManagerInputProtocol
-    fileprivate let fillMemoryService: MDFillMemoryServiceProtocol
     fileprivate var bridge: MDBridgeProtocol
     
     internal var tableViewDelegate: CourseListTableViewDelegateProtocol
@@ -49,7 +48,6 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
     
     init(courseManager: MDCourseManagerProtocol,
          dataManager: CourseListDataManagerInputProtocol,
-         fillMemoryService: MDFillMemoryServiceProtocol,
          collectionViewDelegate: CourseListTableViewDelegateProtocol,
          collectionViewDataSource: CourseListTableViewDataSourceProtocol,
          searchBarDelegate: MDSearchBarDelegateImplementationProtocol,
@@ -57,7 +55,6 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
         
         self.courseManager = courseManager
         self.dataManager = dataManager
-        self.fillMemoryService = fillMemoryService
         self.tableViewDelegate = collectionViewDelegate
         self.tableViewDataSource = collectionViewDataSource
         self.searchBarDelegate = searchBarDelegate
@@ -69,7 +66,7 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
     }
     
     deinit {
-        debugPrint(#function, Self.self)        
+        debugPrint(#function, Self.self)
     }
     
 }
@@ -180,12 +177,28 @@ fileprivate extension CourseListInteractor {
                 switch result {
                     
                 case .success:
-                    self?.readAndAddCoursesToDataProvider()
+                    
+                    DispatchQueue.main.async {
+                        //
+                        self?.readAndAddCoursesToDataProvider()
+                        //
+                    }
+                    
+                    //
                     break
+                    //
                     
                 case .failure(let error):
-                    self?.interactorOutput?.showError(error)
+                    
+                    DispatchQueue.main.async {
+                        //
+                        self?.interactorOutput?.showError(error)
+                        //
+                    }
+                    
+                    //
                     break
+                    //
                     
                 }
                 

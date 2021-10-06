@@ -32,7 +32,6 @@ extension CourseListModule {
                                                                                                                      courseStorage: MDConstants.AppDependencies.dependencies.courseStorage,
                                                                                                                      wordStorage: MDConstants.AppDependencies.dependencies.wordStorage),
                                                                                  dataManager: dataManager,
-                                                                                 fillMemoryService: MDConstants.AppDependencies.dependencies.fillMemoryService,
                                                                                  collectionViewDelegate: CourseListTableViewDelegate.init(dataProvider: dataProvider),
                                                                                  collectionViewDataSource: CourseListTableViewDataSource.init(dataProvider: dataProvider),
                                                                                  searchBarDelegate: MDSearchBarDelegateImplementation.init(),
