@@ -67,3 +67,12 @@ extension WordResponse: Equatable {
     }
     
 }
+
+// MARK: - MDTextForSearchProtocol
+extension WordResponse: MDTextForSearchProtocol {
+    
+    var textForSearch: String {
+        return wordText
+    }
+    
+}

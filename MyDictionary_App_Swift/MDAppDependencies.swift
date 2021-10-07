@@ -140,7 +140,9 @@ extension MDAppDependencies {
                                                  
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.synchronizationManagerOperationQueue),
                                                  
-                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.fillMemoryServiceOperationQueue)
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.fillMemoryServiceOperationQueue),
+                                                 
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.filterSearchTextServiceOperationQueue)                                                 
                                                  
         ]
         //

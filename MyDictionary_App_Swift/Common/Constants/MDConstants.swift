@@ -355,6 +355,11 @@ struct MDConstants {
         fileprivate static let fillMemoryServiceQueueName: String = "Fill_Memory_Service"
         static let fillMemoryServiceOperationQueue: String = mdOperationQueue(shortQueueName: fillMemoryServiceQueueName)
         
+        // Filter Search Text Service
+        //
+        fileprivate static let filterSearchTextServiceQueueName: String = "Filter_Search_Text_Service"
+        static let filterSearchTextServiceOperationQueue: String = mdOperationQueue(shortQueueName: filterSearchTextServiceQueueName)
+        
         
         //
         fileprivate static func mdAPIOperationQueue(shortQueueName: String) -> String {

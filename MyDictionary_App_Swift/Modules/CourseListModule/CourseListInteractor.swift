@@ -58,7 +58,7 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
         self.tableViewDelegate = collectionViewDelegate
         self.tableViewDataSource = collectionViewDataSource
         self.searchBarDelegate = searchBarDelegate
-        self.bridge = bridge
+        self.bridge = bridge        
         
         super.init()
         subscribe()

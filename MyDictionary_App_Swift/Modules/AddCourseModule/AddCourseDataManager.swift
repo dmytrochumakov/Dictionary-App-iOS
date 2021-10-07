@@ -28,6 +28,7 @@ protocol AddCourseDataManagerProtocol: AddCourseDataManagerInputProtocol {
 final class AddCourseDataManager: AddCourseDataManagerProtocol {
     
     fileprivate let memoryStorage: MDLanguageMemoryStorageProtocol
+    fileprivate let filterSearchTextService: MDFilterSearchTextService<LanguageResponse>
     
     var selectedRow: MDAddCourseRow? {
         guard let selectedIndexPath = self.firstSelectedIndexPath else { return nil }
@@ -38,9 +39,13 @@ final class AddCourseDataManager: AddCourseDataManagerProtocol {
     internal weak var dataManagerOutput: AddCourseDataManagerOutputProtocol?
     
     init(memoryStorage: MDLanguageMemoryStorageProtocol,
-         dataProvider: AddCourseDataProviderProtocol) {
+         dataProvider: AddCourseDataProviderProtocol,
+         filterSearchTextService: MDFilterSearchTextService<LanguageResponse>) {
+        
         self.memoryStorage = memoryStorage
         self.dataProvider = dataProvider
+        self.filterSearchTextService = filterSearchTextService
+        
     }
     
     deinit {
@@ -101,14 +106,21 @@ extension AddCourseDataManager {
                 
             case .success(let readLanguages):
                 
-                DispatchQueue.main.async {
+                self?.filterSearchTextService.filter(input: readLanguages,
+                                                     searchText: searchText) { [weak self] (filteredResult) in
                     
-                    // Set Filtered Result
-                    self?.dataProvider.sections = self?.filteredLanguages(input: readLanguages,
-                                                                          searchText: searchText) ?? []
-                    // Pass Result
-                    self?.dataManagerOutput?.filteredLanguagesResult(.success(()))
-                    //
+                    let configuredSections = self?.configuredSections(byLanguages: filteredResult) ?? []
+                    
+                    DispatchQueue.main.async {
+                        
+                        // Set Filtered Result
+                        self?.dataProvider.sections = configuredSections
+                        
+                        // Pass Result
+                        self?.dataManagerOutput?.filteredLanguagesResult(.success(()))
+                        //
+                        
+                    }
                     
                 }
                 
@@ -218,15 +230,6 @@ extension AddCourseDataManager {
 
 // MARK: - Private Methods
 fileprivate extension AddCourseDataManager {
-    
-    func filteredLanguages(input array: [LanguageResponse],
-                           searchText: String?) -> [MDAddCourseSection] {
-        if (MDConstants.Text.textIsEmpty(searchText)) {
-            return configuredSections(byLanguages: array)
-        } else {
-            return configuredSections(byLanguages: array.filter({ $0.languageName.lowercased().contains(searchText!.lowercased()) }))
-        }
-    }
     
     func sortAlphabeticallyLanguages(_ array: [LanguageResponse]) -> [LanguageResponse] {
         return array.sorted(by: { $0.languageName.localizedCaseInsensitiveCompare($1.languageName) == ComparisonResult.orderedAscending })

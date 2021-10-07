@@ -32,15 +32,18 @@ protocol WordListDataManagerProtocol: WordListDataManagerInputProtocol {
 final class WordListDataManager: WordListDataManagerProtocol {
     
     fileprivate let memoryStorage: MDWordMemoryStorageProtocol
-    var dataProvider: WordListDataProviderProcotol
+    fileprivate let filterSearchTextService: MDFilterSearchTextService<WordResponse>
     
+    var dataProvider: WordListDataProviderProcotol
     internal weak var dataManagerOutput: WordListDataManagerOutputProtocol?
     
     init(dataProvider: WordListDataProviderProcotol,
-         memoryStorage: MDWordMemoryStorageProtocol) {
+         memoryStorage: MDWordMemoryStorageProtocol,
+         filterSearchTextService: MDFilterSearchTextService<WordResponse>) {
         
         self.dataProvider = dataProvider
         self.memoryStorage = memoryStorage
+        self.filterSearchTextService = filterSearchTextService
         
     }
     
@@ -103,14 +106,20 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
                 
             case .success(let readWords):
                 
-                DispatchQueue.main.async {
+                
+                self?.filterSearchTextService.filter(input: readWords,
+                                                     searchText: searchText) { [weak self] (filteredResult) in
                     
-                    // Set Filtered Result
-                    self?.dataProvider.filteredWords = self?.filteredWords(input: readWords,
-                                                                           searchText: searchText) ?? []
-                    // Pass Result
-                    self?.dataManagerOutput?.filteredWordsResult(.success(()))
-                    //
+                    DispatchQueue.main.async {
+                        
+                        // Set Filtered Result
+                        self?.dataProvider.filteredWords = filteredResult
+                        
+                        // Pass Result
+                        self?.dataManagerOutput?.filteredWordsResult(.success(()))
+                        //
+                        
+                    }
                     
                 }
                 
@@ -223,15 +232,6 @@ fileprivate extension WordListDataManager {
     
     var section: Int {
         return (self.dataProvider.numberOfSections - 1)
-    }
-    
-    func filteredWords(input words: [WordResponse],
-                       searchText: String?) -> [WordResponse] {
-        if (MDConstants.Text.textIsEmpty(searchText)) {
-            return words
-        } else {
-            return words.filter({ $0.wordText.lowercased().contains(searchText!.lowercased()) })
-        }
     }
     
 }
