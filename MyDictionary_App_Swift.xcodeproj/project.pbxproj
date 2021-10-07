@@ -318,6 +318,7 @@
 		22CA088E265167620052D169 /* MDReloadDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088D265167620052D169 /* MDReloadDataProtocol.swift */; };
 		22CD45F026F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */; };
 		22CD45F226F090F20060978D /* MDCounterTextFieldWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */; };
+		22D54B6C270EE06100DEE843 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D54B6B270EE06100DEE843 /* Reachability.swift */; };
 		22D6D01027082EBC002CA1B2 /* MDProgressHUDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D6D00F27082EBC002CA1B2 /* MDProgressHUDHelper.swift */; };
 		22DB2F7726C3BE7900C1AADA /* CourseListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7026C3BE7900C1AADA /* CourseListModule.swift */; };
 		22DB2F7826C3BE7900C1AADA /* CourseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7126C3BE7900C1AADA /* CourseListPresenter.swift */; };
@@ -720,6 +721,7 @@
 		22CA088D265167620052D169 /* MDReloadDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReloadDataProtocol.swift; sourceTree = "<group>"; };
 		22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCounterPasswordTextFieldWithToolBar.swift; sourceTree = "<group>"; };
 		22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCounterTextFieldWithToolBar.swift; sourceTree = "<group>"; };
+		22D54B6B270EE06100DEE843 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		22D6D00F27082EBC002CA1B2 /* MDProgressHUDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDProgressHUDHelper.swift; sourceTree = "<group>"; };
 		22DB2F7026C3BE7900C1AADA /* CourseListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListModule.swift; sourceTree = "<group>"; };
 		22DB2F7126C3BE7900C1AADA /* CourseListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListPresenter.swift; sourceTree = "<group>"; };
@@ -1354,6 +1356,7 @@
 		226FEE7E266B735B0044A5F9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				22D54B6A270EE05900DEE843 /* Reachability */,
 				22D6D00E27082EAC002CA1B2 /* MDProgressHUDHelper */,
 				22B5C62E27059E5C00185954 /* DelegatesImplementation */,
 				229572B926FF1FAD0092817B /* MDBridge */,
@@ -2109,6 +2112,14 @@
 			path = UIResources;
 			sourceTree = "<group>";
 		};
+		22D54B6A270EE05900DEE843 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				22D54B6B270EE06100DEE843 /* Reachability.swift */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		22D6D00E27082EAC002CA1B2 /* MDProgressHUDHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -2742,6 +2753,7 @@
 				22DB2F7B26C3BE7900C1AADA /* CourseListInteractor.swift in Sources */,
 				220793BB26C65965003D434B /* MDEnvironment.swift in Sources */,
 				2291DADA27019DA900216B64 /* AddWordDataManager.swift in Sources */,
+				22D54B6C270EE06100DEE843 /* Reachability.swift in Sources */,
 				22E691B626CE5E5200641DFA /* MDStorageResult.swift in Sources */,
 				2289CEE42678CC34007254C3 /* MDUpdateWordMemoryStorageOperation.swift in Sources */,
 				22EDF02826C7E8B900D19DA1 /* CDJWTResponseEntityAttributeName.swift in Sources */,

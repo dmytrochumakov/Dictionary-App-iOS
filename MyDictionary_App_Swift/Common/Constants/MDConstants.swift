@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Reachability
 
 struct MDConstants {
     
@@ -391,6 +390,22 @@ struct MDConstants {
             let operationQueue: OperationQueue = .init()
             operationQueue.name = name
             return operationQueue
+        }
+        
+    }
+    
+    struct MDNetworkActivityIndicator {
+        
+        static func show() {
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            }
+        }
+        
+        static func hide() {
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            }
         }
         
     }

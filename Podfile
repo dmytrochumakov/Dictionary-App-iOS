@@ -8,8 +8,7 @@ target 'MyDictionary_App_Swift' do
   # Pods for MyDictionary_App_Swift
 
 	pod 'Firebase/Analytics'	
-	pod 'Firebase/Crashlytics'
-	pod 'ReachabilitySwift'
+	pod 'Firebase/Crashlytics'	
 	pod 'MBProgressHUD'
 	pod 'MGSwipeTableCell'
 	pod 'KMPlaceholderTextView'
