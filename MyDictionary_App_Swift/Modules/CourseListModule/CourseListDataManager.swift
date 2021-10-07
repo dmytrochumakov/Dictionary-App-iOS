@@ -28,14 +28,18 @@ protocol CourseListDataManagerProtocol: CourseListDataManagerInputProtocol {
 final class CourseListDataManager: CourseListDataManagerProtocol {
     
     fileprivate let memoryStorage: MDCourseMemoryStorageProtocol
+    fileprivate let filterSearchTextService: MDFilterSearchTextService<CourseResponse>
+    
     internal var dataProvider: CourseListDataProviderProtocol
     internal weak var dataManagerOutput: CourseListDataManagerOutputProtocol?
     
     init(memoryStorage: MDCourseMemoryStorageProtocol,
-         dataProvider: CourseListDataProviderProtocol) {
+         dataProvider: CourseListDataProviderProtocol,
+         filterSearchTextService: MDFilterSearchTextService<CourseResponse>) {
         
         self.memoryStorage = memoryStorage
         self.dataProvider = dataProvider
+        self.filterSearchTextService = filterSearchTextService
         
     }
     
@@ -97,14 +101,20 @@ extension CourseListDataManager {
                 
             case .success(let readCourses):
                 
-                DispatchQueue.main.async {
+                self?.filterSearchTextService.filter(input: readCourses,
+                                                     searchText: searchText) { [weak self] (filteredResult) in
                     
-                    // Set Filtered Result
-                    self?.dataProvider.filteredCourses = self?.filteredCourses(input: readCourses,
-                                                                               searchText: searchText) ?? []
-                    // Pass Result
-                    self?.dataManagerOutput?.filteredCoursesResult(.success(()))
-                    //
+                    DispatchQueue.main.async {
+                        
+                        // Set Filtered Result
+                        self?.dataProvider.filteredCourses = filteredResult
+                        
+                        // Pass Result
+                        self?.dataManagerOutput?.filteredCoursesResult(.success(()))
+                        //
+                        
+                    }
+                    
                 }
                 
                 //
@@ -183,19 +193,6 @@ extension CourseListDataManager {
         let section = (dataProvider.numberOfSections - 1)
         let row = (dataProvider.numberOfRowsInSection(section) - 1)
         return .init(row: row, section: section)
-    }
-    
-}
-
-fileprivate extension CourseListDataManager {
-    
-    func filteredCourses(input courses: [CourseResponse],
-                         searchText: String?) -> [CourseResponse] {
-        if (MDConstants.Text.textIsEmpty(searchText)) {
-            return courses
-        } else {
-            return courses.filter({ $0.languageName.lowercased().contains(searchText!.lowercased()) })
-        }
     }
     
 }

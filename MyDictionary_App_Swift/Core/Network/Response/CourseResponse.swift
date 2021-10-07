@@ -49,3 +49,12 @@ extension CourseResponse: Decodable {
     }
     
 }
+
+// MARK: - MDTextForSearchProtocol
+extension CourseResponse: MDTextForSearchProtocol {
+    
+    var textForSearch: String {
+        return languageName
+    }
+    
+}
