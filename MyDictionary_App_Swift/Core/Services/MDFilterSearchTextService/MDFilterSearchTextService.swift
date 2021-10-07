@@ -33,6 +33,11 @@ final class MDFilterSearchTextService<T : MDTextForSearchProtocol>: NSObject,
         debugPrint(#function, Self.self)
     }
     
+}
+
+// MARK: - Filter
+extension MDFilterSearchTextService {
+    
     func filter(input: [FilterInput],
                 searchText: String?,
                 _ completionHandler: @escaping(([FilterInput]) -> Void)) {
