@@ -50,3 +50,12 @@ extension LanguageResponse: Equatable {
     }
     
 }
+
+// MARK: - MDTextForSearchProtocol
+extension LanguageResponse: MDTextForSearchProtocol {
+    
+    var textForSearch: String {
+        return languageName
+    }
+    
+}
