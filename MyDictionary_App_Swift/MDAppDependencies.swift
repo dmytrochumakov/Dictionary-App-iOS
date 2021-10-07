@@ -7,7 +7,6 @@
 
 import UIKit
 import Firebase
-import Reachability
 
 protocol MDAppDependenciesProtocol {
     
@@ -94,7 +93,7 @@ extension MDAppDependencies {
     
     func configureDependencies() {
         
-        guard let reachability = try? Reachability.init() else { fatalError("Impossible initialize Reachability Service") }
+        let reachability = Reachability.init()
         self.reachability = reachability
         //
         let coreDataStack: MDCoreDataStack = .init()
