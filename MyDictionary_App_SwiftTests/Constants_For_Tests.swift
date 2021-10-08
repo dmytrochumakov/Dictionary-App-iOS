@@ -79,7 +79,7 @@ struct Constants_For_Tests {
         case .production:
             return .init(nickname: authRequest.nickname,
                          password: authRequest.password,
-                         userId: 6)
+                         userId: 1)
         }
         
     }
