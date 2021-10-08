@@ -64,12 +64,13 @@ enum MDLocalizedText: String {
     case internalServerErrorApiError = "internal_server_error_api_error"
     case parseErrorApiError = "parse_error_api_error"
     case unknownApiError = "unknown_api_error"
+    case conflictApiCourseError = "conflict_api_course_error"
+    case conflictApiWordError = "conflict_api_word_error"
     // End Api Errors //
     
     // Api Auth Errors //
     case unauthorizedApiAuthError = "unauthorized_api_auth_error"
     case conflictApiAuthError = "conflict_api_auth_error"
-    case conflictApiCourseError = "conflict_api_course_error"
     // End Api Auth Errors //
     
     case registration
