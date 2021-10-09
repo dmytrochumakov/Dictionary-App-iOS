@@ -217,12 +217,9 @@ fileprivate extension AccountInteractor {
     
     func clearAllStorages(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
-        let operationQueue: OperationQueue = .init()
-        operationQueue.name = String("MD\(#function)\(Self.self)")
-        
         var resultCount: Int = .zero
         
-        let clearAllStoragesOperation = storageCleanupService.clearAllStorages { cleanupResults in
+        storageCleanupService.clearAllStorages { cleanupResults in
             
             cleanupResults.forEach { cleanupResult in
                 
@@ -247,9 +244,7 @@ fileprivate extension AccountInteractor {
                 
             }
             
-        }
-        
-        operationQueue.addOperation(clearAllStoragesOperation)
+        }        
         
     }
     

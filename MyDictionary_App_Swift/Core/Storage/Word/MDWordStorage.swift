@@ -53,19 +53,15 @@ final class MDWordStorage: MDStorage, MDWordStorageProtocol {
     
     let memoryStorage: MDWordMemoryStorageProtocol
     fileprivate let coreDataStorage: MDWordCoreDataStorageProtocol
-    fileprivate let operationQueue: OperationQueue
     
     init(memoryStorage: MDWordMemoryStorageProtocol,
-         coreDataStorage: MDWordCoreDataStorageProtocol,
-         operationQueue: OperationQueue) {
+         coreDataStorage: MDWordCoreDataStorageProtocol) {
         
         self.memoryStorage = memoryStorage
         self.coreDataStorage = coreDataStorage
-        self.operationQueue = operationQueue
         
         super.init(memoryStorage: memoryStorage,
-                   coreDataStorage: coreDataStorage,
-                   operationQueue: operationQueue)
+                   coreDataStorage: coreDataStorage)
         
     }
     
@@ -86,16 +82,12 @@ extension MDWordStorage {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.createWord(wordModel) { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.memoryStorage.createWord(wordModel) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
@@ -103,62 +95,52 @@ extension MDWordStorage {
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.createWord(wordModel) { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.coreDataStorage.createWord(wordModel) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<WordResponse>> = []
+            
+            // Create in Memory
+            self.memoryStorage.createWord(wordModel) { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<WordResponse>> = []
-                
-                // Create in Memory
-                self.memoryStorage.createWord(wordModel) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    
-                }
-                
-                // Create in Core Data
-                self.coreDataStorage.createWord(wordModel) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
                 }
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Create in Core Data
+            self.coreDataStorage.createWord(wordModel) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
+                }
+                //
+                
+            }
+            
             //
             break
             //
@@ -171,83 +153,75 @@ extension MDWordStorage {
                      storageType: MDStorageType,
                      _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<WordResponse>>)) {
         
+        debugPrint(#function, Self.self, "Start")
+        
         switch storageType {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.createWords(wordModels) { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.memoryStorage.createWords(wordModels) { result in
+                debugPrint(#function, Self.self, "memory -> with result:", result)
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.createWords(wordModels) { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.coreDataStorage.createWords(wordModels) { result in
+                debugPrint(#function, Self.self, "coredata -> with result:", result)
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<WordResponse>> = []
+            
+            // Create in Memory
+            self.memoryStorage.createWords(wordModels) { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<WordResponse>> = []
-                
-                // Create in Memory
-                self.memoryStorage.createWords(wordModels) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    debugPrint(#function, Self.self, "all -> memory -> with result:", result)
+                    completionHandler(finalResult)
                 }
-                
-                // Create in Core Data
-                self.coreDataStorage.createWords(wordModels) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                }
+                //
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Create in Core Data
+            self.coreDataStorage.createWords(wordModels) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    debugPrint(#function, Self.self, "all -> coredata -> with result:", result)
+                    completionHandler(finalResult)
+                }
+                //
+                
+            }
+            
             //
             break
             //
@@ -264,80 +238,66 @@ extension MDWordStorage {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.readWord(fromWordID: wordId) { (result) in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.memoryStorage.readWord(fromWordID: wordId) { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.readWord(fromWordID: wordId) { (result) in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.coreDataStorage.readWord(fromWordID: wordId) { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<WordResponse>> = []
+            
+            // Read From Memory
+            self.memoryStorage.readWord(fromWordID: wordId) { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<WordResponse>> = []
-                
-                // Read From Memory
-                self.memoryStorage.readWord(fromWordID: wordId) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                    
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
                 }
+                //
                 
-                // Read From Core Data
-                self.coreDataStorage.readWord(fromWordID: wordId) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                }
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Read From Core Data
+            self.coreDataStorage.readWord(fromWordID: wordId) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
+                }
+                //
+                
+            }
+            
             //
             break
             //
@@ -353,80 +313,66 @@ extension MDWordStorage {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.readAllWords { (result) in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.memoryStorage.readAllWords { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.readAllWords { (result) in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.coreDataStorage.readAllWords { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<WordResponse>> = []
+            
+            // Read From Memory
+            self.memoryStorage.readAllWords { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<WordResponse>> = []
-                
-                // Read From Memory
-                self.memoryStorage.readAllWords { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                    
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
                 }
+                //
                 
-                // Read From Core Data
-                self.coreDataStorage.readAllWords { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                }
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Read From Core Data
+            self.coreDataStorage.readAllWords { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
+                }
+                //
+                
+            }
+            
             //
             break
             //
@@ -443,79 +389,65 @@ extension MDWordStorage {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.readAllWords(byCourseID: courseID) { (result) in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.memoryStorage.readAllWords(byCourseID: courseID) { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.readAllWords(byCourseID: courseID) { (result) in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.coreDataStorage.readAllWords(byCourseID: courseID) { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<WordResponse>> = []
+            
+            // Read From Memory
+            self.memoryStorage.readAllWords(byCourseID: courseID) { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<WordResponse>> = []
-                
-                // Read From Memory
-                self.memoryStorage.readAllWords(byCourseID: courseID) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
                 }
-                
-                // Read From Core Data
-                self.coreDataStorage.readAllWords(byCourseID: courseID) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                }
+                //
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Read From Core Data
+            self.coreDataStorage.readAllWords(byCourseID: courseID) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
+                }
+                //
+                
+            }
+            
             //
             break
             //
@@ -534,88 +466,74 @@ extension MDWordStorage {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.updateWord(byWordID: wordId,
-                                              newWordText: newWordText,
-                                              newWordDescription: newWordDescription) { (result) in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.memoryStorage.updateWord(byWordID: wordId,
+                                          newWordText: newWordText,
+                                          newWordDescription: newWordDescription) { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.updateWord(byWordID: wordId,
-                                                newWordText: newWordText,
-                                                newWordDescription: newWordDescription) { (result) in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.coreDataStorage.updateWord(byWordID: wordId,
+                                            newWordText: newWordText,
+                                            newWordDescription: newWordDescription) { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
+            
+            // Update In Memory
+            self.memoryStorage.updateWord(byWordID: wordId,
+                                          newWordText: newWordText,
+                                          newWordDescription: newWordDescription) { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
-                
-                // Update In Memory
-                self.memoryStorage.updateWord(byWordID: wordId,
-                                              newWordText: newWordText,
-                                              newWordDescription: newWordDescription) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                    
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
                 }
+                //
                 
-                // Update In Core Data
-                self.coreDataStorage.updateWord(byWordID: wordId,
-                                                newWordText: newWordText,
-                                                newWordDescription: newWordDescription) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                }
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Update In Core Data
+            self.coreDataStorage.updateWord(byWordID: wordId,
+                                            newWordText: newWordText,
+                                            newWordDescription: newWordDescription) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
+                }
+                //
+                
+            }
+            
             //
             break
             //
@@ -632,79 +550,65 @@ extension MDWordStorage {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.deleteWord(byWordId: wordId) { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.memoryStorage.deleteWord(byWordId: wordId) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.deleteWord(byWordId: wordId) { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.coreDataStorage.deleteWord(byWordId: wordId) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
+            
+            // Delete From Memory
+            self.memoryStorage.deleteWord(byWordId: wordId) { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
-                
-                // Delete From Memory
-                self.memoryStorage.deleteWord(byWordId: wordId) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
                 }
-                
-                // Delete From Core Data
-                self.coreDataStorage.deleteWord(byWordId: wordId) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                }
+                //
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Delete From Core Data
+            self.coreDataStorage.deleteWord(byWordId: wordId) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
+                }
+                //
+                
+            }
+            
             //
             break
             //
@@ -720,79 +624,65 @@ extension MDWordStorage {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.deleteAllWords(byCourseId: courseId) { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.memoryStorage.deleteAllWords(byCourseId: courseId) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.deleteAllWords(byCourseId: courseId) { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.coreDataStorage.deleteAllWords(byCourseId: courseId) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
+            
+            // Delete From Memory
+            self.memoryStorage.deleteAllWords(byCourseId: courseId) { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
-                
-                // Delete From Memory
-                self.memoryStorage.deleteAllWords(byCourseId: courseId) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
                 }
-                
-                // Delete From Core Data
-                self.coreDataStorage.deleteAllWords(byCourseId: courseId) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                }
+                //
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Delete From Core Data
+            self.coreDataStorage.deleteAllWords(byCourseId: courseId) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
+                }
+                //
+                
+            }
+            
             //
             break
             //
@@ -808,79 +698,65 @@ extension MDWordStorage {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.deleteAllWords { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.memoryStorage.deleteAllWords { result in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.deleteAllWords { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.coreDataStorage.deleteAllWords { result in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
+            
+            // Delete From Memory
+            self.memoryStorage.deleteAllWords { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
-                
-                // Delete From Memory
-                self.memoryStorage.deleteAllWords { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
                 }
-                
-                // Delete From Core Data
-                self.coreDataStorage.deleteAllWords { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                }
+                //
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Delete From Core Data
+            self.coreDataStorage.deleteAllWords { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
+                }
+                //
+                
+            }
+            
             //
             break
             //

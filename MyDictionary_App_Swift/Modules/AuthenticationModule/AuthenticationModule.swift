@@ -41,12 +41,9 @@ extension AuthenticationModule {
                                                                                                    languageStorage: MDConstants.AppDependencies.dependencies.languageStorage,
                                                                                                    courseStorage: MDConstants.AppDependencies.dependencies.courseStorage,
                                                                                                    wordStorage: MDConstants.AppDependencies.dependencies.wordStorage,
-                                                                                                   operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.storageCleanupServiceOperationQueue)!),
-                                               
-                                               operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.synchronizationServiceOperationQueue)!)
+                                                                                                   operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.storageCleanupServiceOperationQueue)!))
         
-        let syncManager: MDSyncManagerProtocol = MDSyncManager.init(sync: sync,
-                                                                    operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.synchronizationManagerOperationQueue)!)
+        let syncManager: MDSyncManagerProtocol = MDSyncManager.init(sync: sync)
         
         let authManager: MDAuthManagerProtocol = MDAuthManager.init(apiAuth: MDConstants.AppDependencies.dependencies.apiAuth,
                                                                     appSettings: MDConstants.AppDependencies.dependencies.appSettings,
