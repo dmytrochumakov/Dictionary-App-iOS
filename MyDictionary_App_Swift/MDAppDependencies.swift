@@ -105,27 +105,22 @@ extension MDAppDependencies {
         // Manager //
         //
         
-        let operationQueues: [OperationQueue] = [MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.jwtStorageOperationQueue),
-                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.jwtMemoryStorageOperationQueue),
+        let operationQueues: [OperationQueue] = [MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.jwtMemoryStorageOperationQueue),
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.jwtCoreDataStorageOperationQueue),
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.jwtAPIOperationQueue),
                                                  
-                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.userStorageOperationQueue),
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.userMemoryStorageOperationQueue),
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.userCoreDataStorageOperationQueue),
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.userAPIOperationQueue),
                                                  
-                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.languageStorageOperationQueue),
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.languageMemoryStorageOperationQueue),
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.languageCoreDataStorageOperationQueue),
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.languageAPIOperationQueue),
                                                  
-                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.courseStorageOperationQueue),
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.courseMemoryStorageOperationQueue),
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.courseCoreDataStorageOperationQueue),
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.courseAPIOperationQueue),
                                                  
-                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.wordStorageOperationQueue),
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.wordMemoryStorageOperationQueue),
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.wordCoreDataStorageOperationQueue),
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.wordAPIOperationQueue),
@@ -134,15 +129,11 @@ extension MDAppDependencies {
                                                  
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.accountAPIOperationQueue),
                                                  
-                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.synchronizationServiceOperationQueue),
-                                                 
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.storageCleanupServiceOperationQueue),
-                                                 
-                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.synchronizationManagerOperationQueue),
                                                  
                                                  MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.fillMemoryServiceOperationQueue),
                                                  
-                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.filterSearchTextServiceOperationQueue)                                                 
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.filterSearchTextServiceOperationQueue)
                                                  
         ]
         //
@@ -194,8 +185,7 @@ extension MDAppDependencies {
                                                                                          coreDataStack: coreDataStack)
         
         let jwtStorage: MDJWTStorageProtocol = MDJWTStorage.init(memoryStorage: jwtMemoryStorage,
-                                                                 coreDataStorage: jwtCoreDataStorage,
-                                                                 operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtStorageOperationQueue)!)
+                                                                 coreDataStorage: jwtCoreDataStorage)
         
         self.jwtStorage = jwtStorage
         // End JWT //
@@ -209,8 +199,7 @@ extension MDAppDependencies {
                                                                                             coreDataStack: coreDataStack)
         
         let userStorage: MDUserStorageProtocol = MDUserStorage.init(memoryStorage: userMemoryStorage,
-                                                                    coreDataStorage: userCoreDataStorage,
-                                                                    operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.userStorageOperationQueue)!)
+                                                                    coreDataStorage: userCoreDataStorage)
         
         self.userStorage = userStorage
         // End User //
@@ -224,8 +213,7 @@ extension MDAppDependencies {
                                                                                                         coreDataStack: coreDataStack)
         
         let languageStorage: MDLanguageStorageProtocol = MDLanguageStorage.init(memoryStorage: languageMemoryStorage,
-                                                                                coreDataStorage: languageCoreDataStorage,
-                                                                                operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.languageStorageOperationQueue)!)
+                                                                                coreDataStorage: languageCoreDataStorage)
         
         self.languageStorage = languageStorage
         // End Language //
@@ -239,8 +227,7 @@ extension MDAppDependencies {
                                                                                                   coreDataStack: coreDataStack)
         
         let courseStorage: MDCourseStorageProtocol = MDCourseStorage.init(memoryStorage: courseMemoryStorage,
-                                                                          coreDataStorage: courseCoreDataStorage,
-                                                                          operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseStorageOperationQueue)!)
+                                                                          coreDataStorage: courseCoreDataStorage)
         
         self.courseStorage = courseStorage
         // End Language //
@@ -254,8 +241,7 @@ extension MDAppDependencies {
                                                                                             coreDataStack: coreDataStack)
         
         let wordStorage: MDWordStorageProtocol = MDWordStorage.init(memoryStorage: wordMemoryStorage,
-                                                                    coreDataStorage: wordCoreDataStorage,
-                                                                    operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordStorageOperationQueue)!)
+                                                                    coreDataStorage: wordCoreDataStorage)
         
         self.wordStorage = wordStorage
         // End Word //

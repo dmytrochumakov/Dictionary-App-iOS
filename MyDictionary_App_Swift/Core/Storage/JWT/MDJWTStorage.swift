@@ -40,19 +40,15 @@ final class MDJWTStorage: MDStorage, MDJWTStorageProtocol {
     
     let memoryStorage: MDJWTMemoryStorageProtocol
     fileprivate let coreDataStorage: MDJWTCoreDataStorageProtocol
-    fileprivate let operationQueue: OperationQueue
     
     init(memoryStorage: MDJWTMemoryStorageProtocol,
-         coreDataStorage: MDJWTCoreDataStorageProtocol,
-         operationQueue: OperationQueue) {
+         coreDataStorage: MDJWTCoreDataStorageProtocol) {
         
         self.memoryStorage = memoryStorage
         self.coreDataStorage = coreDataStorage
-        self.operationQueue = operationQueue
         
         super.init(memoryStorage: memoryStorage,
-                   coreDataStorage: coreDataStorage,
-                   operationQueue: operationQueue)
+                   coreDataStorage: coreDataStorage)
         
     }
     
@@ -69,82 +65,76 @@ extension MDJWTStorage {
                    jwtResponse: JWTResponse,
                    _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<JWTResponse>>)) {
         
+        debugPrint(#function, Self.self, "Start")
+        
         switch storageType {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.createJWT(jwtResponse) { (result) in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.memoryStorage.createJWT(jwtResponse) { (result) in
+                debugPrint(#function, Self.self, "memory -> finish -> with result:", result)
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.createJWT(jwtResponse) { (result) in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
-            }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            //
+            self.coreDataStorage.createJWT(jwtResponse) { (result) in
+                debugPrint(#function, Self.self, "coredata -> finish -> with result:", result)
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            //
+            
             //
             break
             //
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<JWTResponse>> = []
+            
+            // Create in Memory
+            self.memoryStorage.createJWT(jwtResponse) { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<JWTResponse>> = []
-                
-                // Create in Memory
-                self.memoryStorage.createJWT(jwtResponse) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    
-                }
-                
-                // Create in Core Data
-                self.coreDataStorage.createJWT(jwtResponse) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    debugPrint(#function, Self.self, "all -> memory -> finish -> with result:", result)
+                    completionHandler(finalResult)
                 }
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Create in Core Data
+            self.coreDataStorage.createJWT(jwtResponse) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    debugPrint(#function, Self.self, "all -> coredata -> with result:", result)
+                    completionHandler(finalResult)
+                }
+                //
+                
+            }
+            
+            
             //
             break
             //
@@ -160,79 +150,66 @@ extension MDJWTStorage {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.readFirstJWT() { (result) in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
-            }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            //
+            self.memoryStorage.readFirstJWT() { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
+            }
+            //
+            
             //
             break
             //
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.readFirstJWT() { (result) in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.coreDataStorage.readFirstJWT() { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<JWTResponse>> = []
+            
+            // Read From Memory
+            self.memoryStorage.readFirstJWT() { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<JWTResponse>> = []
-                
-                // Read From Memory
-                self.memoryStorage.readFirstJWT() { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
                 }
-                
-                // Read From Core Data
-                self.coreDataStorage.readFirstJWT() { (result) in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                }
+                //
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Read From Core Data
+            self.coreDataStorage.readFirstJWT() { (result) in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
+                }
+                //
+                
+            }
+            
             //
             break
             //
@@ -249,79 +226,65 @@ extension MDJWTStorage {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.readJWT(fromAccessToken: accessToken) { (result) in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.memoryStorage.readJWT(fromAccessToken: accessToken) { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.readJWT(fromAccessToken: accessToken) { (result) in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.coreDataStorage.readJWT(fromAccessToken: accessToken) { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<JWTResponse>> = []
+            
+            // Read From Memory
+            self.memoryStorage.readJWT(fromAccessToken: accessToken) { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<JWTResponse>> = []
-                
-                // Read From Memory
-                self.memoryStorage.readJWT(fromAccessToken: accessToken) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
                 }
-                
-                // Read From Core Data
-                self.coreDataStorage.readJWT(fromAccessToken: accessToken) { (result) in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                }
+                //
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Read From Core Data
+            self.coreDataStorage.readJWT(fromAccessToken: accessToken) { (result) in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
+                }
+                //
+                
+            }
+            
             //
             break
             //
@@ -339,82 +302,68 @@ extension MDJWTStorage {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.updateJWT(oldAccessToken: accessToken,
-                                             newJWTResponse: jwtResponse) { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.memoryStorage.updateJWT(oldAccessToken: accessToken,
+                                         newJWTResponse: jwtResponse) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.updateJWT(oldAccessToken: accessToken, newJWTResponse: jwtResponse) { (result) in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.coreDataStorage.updateJWT(oldAccessToken: accessToken, newJWTResponse: jwtResponse) { (result) in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
+            
+            // Update In Memory
+            self.memoryStorage.updateJWT(oldAccessToken: accessToken,
+                                         newJWTResponse: jwtResponse) { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
-                
-                // Update In Memory
-                self.memoryStorage.updateJWT(oldAccessToken: accessToken,
-                                             newJWTResponse: jwtResponse) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
                 }
-                
-                // Update In Core Data
-                self.coreDataStorage.updateJWT(oldAccessToken: accessToken,
-                                               newJWTResponse: jwtResponse) { (result) in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                }
+                //
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Update In Core Data
+            self.coreDataStorage.updateJWT(oldAccessToken: accessToken,
+                                           newJWTResponse: jwtResponse) { (result) in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
+                }
+                //
+                
+            }
+            
             //
             break
             //
@@ -431,79 +380,66 @@ extension MDJWTStorage {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.deleteJWT(accessToken) { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.memoryStorage.deleteJWT(accessToken) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.deleteJWT(accessToken) { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.coreDataStorage.deleteJWT(accessToken) { result in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
+            
+            // Delete From Memory
+            self.memoryStorage.deleteJWT(accessToken) { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
-                
-                // Delete From Memory
-                self.memoryStorage.deleteJWT(accessToken) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
                 }
-                
-                // Delete From Core Data
-                self.coreDataStorage.deleteJWT(accessToken) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                }
+                //
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Delete From Core Data
+            self.coreDataStorage.deleteJWT(accessToken) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
+                }
+                //
+                
+            }
+            
+            
             //
             break
             //
@@ -518,79 +454,66 @@ extension MDJWTStorage {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.deleteAllJWT { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.memoryStorage.deleteAllJWT { result in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.deleteAllJWT { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.coreDataStorage.deleteAllJWT { result in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
+            
+            // Delete From Memory
+            self.memoryStorage.deleteAllJWT { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
-                
-                // Delete From Memory
-                self.memoryStorage.deleteAllJWT { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
                 }
-                
-                // Delete From Core Data
-                self.coreDataStorage.deleteAllJWT { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                }
+                //
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Delete From Core Data
+            self.coreDataStorage.deleteAllJWT { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
+                }
+                //
+                
+            }
+            
+            
             //
             break
             //

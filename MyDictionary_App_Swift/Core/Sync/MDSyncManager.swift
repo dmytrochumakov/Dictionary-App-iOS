@@ -27,18 +27,15 @@ final class MDSyncManager: MDSyncManagerProtocol {
     
     // Default is false
     fileprivate var internalIsRunning: Bool
-    fileprivate var operationQueue: OperationQueue
     
     public var isRunning: Bool {
         return self.internalIsRunning
     }
     
-    init(sync: MDSyncProtocol,
-         operationQueue: OperationQueue) {
+    init(sync: MDSyncProtocol) {
         
         self.internalIsRunning = false
         self.sync = sync
-        self.operationQueue = operationQueue
         
     }
     
@@ -55,16 +52,16 @@ extension MDSyncManager {
                        completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
         // Check Is Sync Not Running
-        guard !isRunning else { completionHandler(.failure(MDSyncError.syncIsRunning)) ; return }
+        guard !self.isRunning else { completionHandler(.failure(MDSyncError.syncIsRunning)) ; return }
         
         // Set In Running
-        setInternalIsRunningTrue()
+        self.setInternalIsRunningTrue()
         
         // Initialize Count Result
         var countResult: Int = .zero
         
         // Start Sync
-        let startFullSyncWithDeleteAllDataOperation = sync.startFullSyncWithDeleteAllData(withSyncItem: item) { progress in
+        self.sync.startFullSyncWithDeleteAllData(withSyncItem: item) { progress in
             progressCompletionHandler(progress)
         } completionHandler: { [unowned self] results in
             
@@ -104,9 +101,6 @@ extension MDSyncManager {
             
         }
         
-        //
-        operationQueue.addOperation(startFullSyncWithDeleteAllDataOperation)
-        //
         
     }
     
@@ -115,16 +109,16 @@ extension MDSyncManager {
                                             completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         // Check Is Sync Not Running
-        guard !isRunning else { completionHandler(.failure(MDSyncError.syncIsRunning)) ; return }
+        guard !self.isRunning else { completionHandler(.failure(MDSyncError.syncIsRunning)) ; return }
         
         // Set In Running
-        setInternalIsRunningTrue()
+        self.setInternalIsRunningTrue()
         
         // Initialize Count Result
         var countResult: Int = .zero
         
         // Start Sync
-        let startWithJWTAndUserAndLanguageSyncOperation = sync.startWithJWTAndUserAndLanguageSync(withSyncItem: item) { progress in
+        self.sync.startWithJWTAndUserAndLanguageSync(withSyncItem: item) { progress in
             
             // Pass Progress
             progressCompletionHandler(progress)
@@ -166,10 +160,6 @@ extension MDSyncManager {
             }
             
         }
-        
-        //
-        operationQueue.addOperation(startWithJWTAndUserAndLanguageSyncOperation)
-        //
         
     }
     

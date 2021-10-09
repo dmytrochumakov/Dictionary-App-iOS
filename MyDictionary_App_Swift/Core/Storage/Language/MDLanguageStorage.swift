@@ -27,19 +27,15 @@ final class MDLanguageStorage: MDStorage, MDLanguageStorageProtocol {
     
     let memoryStorage: MDLanguageMemoryStorageProtocol
     fileprivate let coreDataStorage: MDLanguageCoreDataStorageProtocol
-    fileprivate let operationQueue: OperationQueue
     
     init(memoryStorage: MDLanguageMemoryStorageProtocol,
-         coreDataStorage: MDLanguageCoreDataStorageProtocol,
-         operationQueue: OperationQueue) {
+         coreDataStorage: MDLanguageCoreDataStorageProtocol) {
         
         self.memoryStorage = memoryStorage
         self.coreDataStorage = coreDataStorage
-        self.operationQueue = operationQueue
         
         super.init(memoryStorage: memoryStorage,
-                   coreDataStorage: coreDataStorage,
-                   operationQueue: operationQueue)
+                   coreDataStorage: coreDataStorage)
         
     }
     
@@ -56,82 +52,74 @@ extension MDLanguageStorage {
                          languageEntities: [LanguageResponse],
                          _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>>)) {
         
+        debugPrint(#function, Self.self, "Start")
+        
         switch storageType {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.createLanguages(languageEntities) { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.memoryStorage.createLanguages(languageEntities) { result in
+                debugPrint(#function, Self.self, "memory -> with result:", result)
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.createLanguages(languageEntities) { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.coreDataStorage.createLanguages(languageEntities) { result in
+                debugPrint(#function, Self.self, "coredata -> with result:", result)
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>> = []
+            
+            // Create in Memory
+            self.memoryStorage.createLanguages(languageEntities) { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>> = []
-                
-                // Create in Memory
-                self.memoryStorage.createLanguages(languageEntities) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    
-                }
-                
-                // Create in Core Data
-                self.coreDataStorage.createLanguages(languageEntities) { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    
+                // Pass Final Result If Needed
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    debugPrint(#function, Self.self, "all -> memory -> with result:", result)
+                    completionHandler(finalResult)
                 }
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Create in Core Data
+            self.coreDataStorage.createLanguages(languageEntities) { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    debugPrint(#function, Self.self, "all -> coredata -> with result:", result)
+                    completionHandler(finalResult)
+                }
+                
+            }
+            
             //
             break
             //
@@ -147,16 +135,12 @@ extension MDLanguageStorage {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.readAllLanguages { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.memoryStorage.readAllLanguages { result in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
@@ -164,16 +148,12 @@ extension MDLanguageStorage {
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.readAllLanguages { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.coreDataStorage.readAllLanguages { result in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
@@ -181,47 +161,41 @@ extension MDLanguageStorage {
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>> = []
+            
+            // Read From Memory
+            self.memoryStorage.readAllLanguages { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<LanguageResponse>> = []
-                
-                // Read From Memory
-                self.memoryStorage.readAllLanguages { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
                 }
-                
-                // Read From Core Data
-                self.coreDataStorage.readAllLanguages { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                }
+                //
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Read From Core Data
+            self.coreDataStorage.readAllLanguages { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
+                }
+                //
+                
+            }
+            
             //
             break
             //
@@ -237,79 +211,65 @@ extension MDLanguageStorage {
             
         case .memory:
             
-            let operation: BlockOperation = .init {
-                //
-                self.memoryStorage.deleteAllLanguages { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.memoryStorage.deleteAllLanguages { result in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .coreData:
             
-            let operation: BlockOperation = .init {
-                //
-                self.coreDataStorage.deleteAllLanguages { result in
-                    completionHandler([.init(storageType: storageType, result: result)])
-                }
-                //
+            //
+            self.coreDataStorage.deleteAllLanguages { result in
+                completionHandler([.init(storageType: storageType, result: result)])
             }
+            //
             
-            // Add Operation
-            operationQueue.addOperation(operation)
             //
             break
             //
             
         case .all:
             
-            let operation: BlockOperation = .init {
+            //
+            let countNeeded: Int = 2
+            //
+            
+            // Initialize final result
+            var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
+            
+            // Delete From Memory
+            self.memoryStorage.deleteAllLanguages { result in
                 
-                //
-                let countNeeded: Int = 2
-                //
+                // Append Result
+                finalResult.append(.init(storageType: .memory, result: result))
                 
-                // Initialize final result
-                var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
-                
-                // Delete From Memory
-                self.memoryStorage.deleteAllLanguages { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .memory, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
                 }
-                
-                // Delete From Core Data
-                self.coreDataStorage.deleteAllLanguages { result in
-                    
-                    // Append Result
-                    finalResult.append(.init(storageType: .coreData, result: result))
-                    
-                    // Pass Final Result If Needed
-                    if (finalResult.count == countNeeded) {
-                        completionHandler(finalResult)
-                    }
-                    //
-                    
-                }
+                //
                 
             }
             
-            // Add Operation
-            operationQueue.addOperation(operation)
+            // Delete From Core Data
+            self.coreDataStorage.deleteAllLanguages { result in
+                
+                // Append Result
+                finalResult.append(.init(storageType: .coreData, result: result))
+                
+                // Pass Final Result If Needed
+                if (finalResult.count == countNeeded) {
+                    completionHandler(finalResult)
+                }
+                //
+                
+            }
+            
             //
             break
             //

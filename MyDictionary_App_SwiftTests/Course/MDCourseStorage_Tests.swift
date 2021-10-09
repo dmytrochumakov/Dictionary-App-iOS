@@ -25,8 +25,7 @@ final class MDCourseStorage_Tests: XCTestCase {
                                                                                             coreDataStack: coreDataStack)
         
         let courseStorage: MDCourseStorageProtocol = MDCourseStorage.init(memoryStorage: memoryStorage,
-                                                                          coreDataStorage: coreDataStorage,
-                                                                          operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseStorageOperationQueue)!)
+                                                                          coreDataStorage: coreDataStorage)
         
         self.courseStorage = courseStorage
         

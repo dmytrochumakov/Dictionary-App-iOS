@@ -25,8 +25,7 @@ final class MDLanguageStorage_Tests: XCTestCase {
                                                                                                 coreDataStack: coreDataStack)
         
         let languageStorage: MDLanguageStorageProtocol = MDLanguageStorage.init(memoryStorage: memoryStorage,
-                                                                                coreDataStorage: coreDataStorage,
-                                                                                operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.languageStorageOperationQueue)!)
+                                                                                coreDataStorage: coreDataStorage)
         
         self.languageStorage = languageStorage
         

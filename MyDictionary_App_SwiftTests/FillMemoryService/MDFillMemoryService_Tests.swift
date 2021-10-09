@@ -46,28 +46,23 @@ final class MDFillMemoryService_Tests: XCTestCase {
         self.fillMemoryService = MDFillMemoryService.init(isLoggedIn: true,
                                                           jwtStorage: MDJWTStorage.init(memoryStorage: MDJWTMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtMemoryStorageOperationQueue)!,
                                                                                                                                array: .init()),
-                                                                                        coreDataStorage: jwtCoreDataStorage,
-                                                                                        operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtStorageOperationQueue)!),
+                                                                                        coreDataStorage: jwtCoreDataStorage),
                                                           
                                                           userStorage: MDUserStorage.init(memoryStorage: MDUserMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.userCoreDataStorageOperationQueue)!,
                                                                                                                                   array: .init()),
-                                                                                          coreDataStorage: userCoreDataStorage,
-                                                                                          operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.userStorageOperationQueue)!),
+                                                                                          coreDataStorage: userCoreDataStorage),
                                                           
                                                           languageStorage: MDLanguageStorage.init(memoryStorage: MDLanguageMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.languageMemoryStorageOperationQueue)!,
                                                                                                                                               array: .init()),
-                                                                                                  coreDataStorage: languageCoreDataStorage,
-                                                                                                  operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.languageStorageOperationQueue)!),
+                                                                                                  coreDataStorage: languageCoreDataStorage),
                                                           
                                                           courseStorage: MDCourseStorage.init(memoryStorage: MDCourseMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseMemoryStorageOperationQueue)!,
                                                                                                                                         array: .init()),
-                                                                                              coreDataStorage: courseCoreDataStorage,
-                                                                                              operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseStorageOperationQueue)!),
+                                                                                              coreDataStorage: courseCoreDataStorage),
                                                           
                                                           wordStorage: MDWordStorage.init(memoryStorage: MDWordMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordMemoryStorageOperationQueue)!,
                                                                                                                                   arrayWords: .init()),
-                                                                                          coreDataStorage: wordCoreDataStorage,
-                                                                                          operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordStorageOperationQueue)!),
+                                                                                          coreDataStorage: wordCoreDataStorage),
                                                           
                                                           bridge: MDBridge.init(),
                                                           

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MDStorageCleanupServiceProtocol {
-    func clearAllStorages(completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void)) -> BlockOperation
+    func clearAllStorages(completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void))
 }
 
 final class MDStorageCleanupService: MDStorageCleanupServiceProtocol {
@@ -46,8 +46,10 @@ final class MDStorageCleanupService: MDStorageCleanupServiceProtocol {
 // MARK: - Clear All Storages
 extension MDStorageCleanupService {
     
-    func clearAllStorages(completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void)) -> BlockOperation {
-        return deleteAllData(completionHandler: completionHandler)
+    func clearAllStorages(completionHandler: @escaping(([MDStorageServiceOperationResult]) -> Void)) {
+        operationQueue.addOperation(   deleteAllData() { result in
+            completionHandler(result)
+        })
     }
     
 }
@@ -123,7 +125,7 @@ fileprivate extension MDStorageCleanupService {
                                                deleteAllLanguagesOperation,
                                                deleteAllCoursesOperation,
                                                deleteAllWordsOperation],
-                                              waitUntilFinished: true)
+                                              waitUntilFinished: false)
             //
             
         }
@@ -133,6 +135,8 @@ fileprivate extension MDStorageCleanupService {
     }
     
     func deleteAllJWT(completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
+        
+        debugPrint(#function, Self.self, "Start")
         
         let operation: BlockOperation = .init {
             
@@ -150,10 +154,12 @@ fileprivate extension MDStorageCleanupService {
                         countResult += 1
                         
                         if (countResult == deleteJWTsResults.count) {
+                            debugPrint(#function, Self.self, "Success")
                             completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
                         }
                         
                     case .failure(let error):
+                        debugPrint(#function, Self.self, "Failure: ", "with error", error)
                         completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                     }
                     
@@ -168,6 +174,8 @@ fileprivate extension MDStorageCleanupService {
     }
     
     func deleteAllUsers(completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
+        
+        debugPrint(#function, Self.self, "Start")
         
         let operation: BlockOperation = .init {
             
@@ -185,10 +193,12 @@ fileprivate extension MDStorageCleanupService {
                         countResult += 1
                         
                         if (countResult == deleteUsersResults.count) {
+                            debugPrint(#function, Self.self, "Success")
                             completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
                         }
                         
                     case .failure(let error):
+                        debugPrint(#function, Self.self, "Failure: ", "with error", error)
                         completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                     }
                     
@@ -203,6 +213,8 @@ fileprivate extension MDStorageCleanupService {
     }
     
     func deleteAllLanguages(completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
+        
+        debugPrint(#function, Self.self, "Start")
         
         let operation: BlockOperation = .init {
             
@@ -220,10 +232,12 @@ fileprivate extension MDStorageCleanupService {
                         countResult += 1
                         
                         if (countResult == deleteLanguagesResults.count) {
+                            debugPrint(#function, Self.self, "Success")
                             completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
                         }
                         
                     case .failure(let error):
+                        debugPrint(#function, Self.self, "Failure: ", "with error", error)
                         completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                     }
                     
@@ -238,6 +252,8 @@ fileprivate extension MDStorageCleanupService {
     }
     
     func deleteAllCourses(completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
+        
+        debugPrint(#function, Self.self, "Start")
         
         let operation: BlockOperation = .init {
             
@@ -255,10 +271,12 @@ fileprivate extension MDStorageCleanupService {
                         countResult += 1
                         
                         if (countResult == deleteCoursesResults.count) {
+                            debugPrint(#function, Self.self, "Success")
                             completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
                         }
                         
                     case .failure(let error):
+                        debugPrint(#function, Self.self, "Failure: ", "with error", error)
                         completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                     }
                     
@@ -273,6 +291,8 @@ fileprivate extension MDStorageCleanupService {
     }
     
     func deleteAllWords(completionHandler: @escaping(MDStorageServiceOperationResultWithCompletion)) -> BlockOperation {
+        
+        debugPrint(#function, Self.self, "Start")
         
         let operation: BlockOperation = .init {
             
@@ -290,10 +310,12 @@ fileprivate extension MDStorageCleanupService {
                         countResult += 1
                         
                         if (countResult == deleteWordsResults.count) {
+                            debugPrint(#function, Self.self, "Success")
                             completionHandler(.init(storageServiceType: storageServiceType, result: .success(())))
                         }
                         
                     case .failure(let error):
+                        debugPrint(#function, Self.self, "Failure: ", "with error", error)
                         completionHandler(.init(storageServiceType: storageServiceType, result: .failure(error)))
                     }
                     

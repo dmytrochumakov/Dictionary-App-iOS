@@ -25,8 +25,7 @@ final class MDUserStorage_Tests: XCTestCase {
                                                                                         coreDataStack: coreDataStack)
         
         let userStorage: MDUserStorageProtocol = MDUserStorage.init(memoryStorage: memoryStorage,
-                                                                    coreDataStorage: coreDataStorage,
-                                                                    operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.userStorageOperationQueue)!)
+                                                                    coreDataStorage: coreDataStorage)
         
         self.userStorage = userStorage
         
