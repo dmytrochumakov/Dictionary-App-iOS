@@ -12,6 +12,11 @@
 
 This application provides maximum convenience when adding, updating, deleting words.
 
+## Features
+
+- Create, Read, Update, Delete words
+- Synchronization of words with an individual account on the server
+
 ## Architecture 
 - Viper 
 
