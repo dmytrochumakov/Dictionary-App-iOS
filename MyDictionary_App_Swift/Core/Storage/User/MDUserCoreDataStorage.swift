@@ -69,6 +69,7 @@ extension MDUserCoreDataStorage {
     func createUser(_ userEntity: UserResponse,
                     password: String,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<UserResponse>)) {
+        
         let operation = MDCreateUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                   coreDataStack: self.coreDataStack,
                                                                   coreDataStorage: self,
@@ -76,7 +77,11 @@ extension MDUserCoreDataStorage {
                                                                   password: password) { result in
             completionHandler(result)
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
 }
@@ -86,35 +91,44 @@ extension MDUserCoreDataStorage {
     
     func readUser(fromUserID userId: Int64,
                   _ completionHandler: @escaping(MDOperationResultWithCompletion<UserResponse>)) {
+        
         let operation = MDReadUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                 coreDataStorage: self,
                                                                 userId: userId) { result in
             completionHandler(result)
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
     func readFirstUser(_ completionHandler: @escaping (MDOperationResultWithCompletion<UserResponse>)) {
+        
         let operation = MDReadFirstUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                      coreDataStorage: self) { result in
             completionHandler(result)
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
     func readAllUsers(_ completionHandler: @escaping(MDOperationsResultWithCompletion<UserResponse>)) {
+        
         let operation = MDReadUsersCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                  coreDataStorage: self) { result in
             completionHandler(result)
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
-    
-}
-
-// MARK: - Update
-extension MDUserCoreDataStorage {
-    
     
 }
 
@@ -123,22 +137,32 @@ extension MDUserCoreDataStorage {
     
     func deleteUser(_ userId: Int64,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
+        
         let operation = MDDeleteUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                   coreDataStack: self.coreDataStack,
                                                                   coreDataStorage: self,
                                                                   userId: userId) { result in
             completionHandler(result)
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
     func deleteAllUsers(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+        
         let operation = MDDeleteAllUsersCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
                                                                       coreDataStack: self.coreDataStack,
                                                                       coreDataStorage: self) { result in
             completionHandler(result)
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
 }
