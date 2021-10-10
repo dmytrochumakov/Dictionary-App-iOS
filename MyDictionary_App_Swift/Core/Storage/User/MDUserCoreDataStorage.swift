@@ -69,14 +69,48 @@ extension MDUserCoreDataStorage {
     func createUser(_ userEntity: UserResponse,
                     password: String,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<UserResponse>)) {
-        let operation = MDCreateUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
-                                                                  coreDataStack: self.coreDataStack,
-                                                                  coreDataStorage: self,
-                                                                  userEntity: userEntity,
-                                                                  password: password) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            
+            let newUser = CDUserResponseEntity.init(userResponse: userEntity,
+                                                    password: password,
+                                                    insertIntoManagedObjectContext: self.managedObjectContext)
+            
+            
+            self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
+                
+                switch result {
+                    
+                case .success:
+                    
+                    //
+                    completionHandler(.success(newUser.userResponse))
+                    //
+                    
+                    //
+                    break
+                    //
+                    
+                case .failure(let error):
+                    
+                    //
+                    completionHandler(.failure(error))
+                    //
+                    
+                    //
+                    break
+                    //
+                    
+                }
+                
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
 }
@@ -86,35 +120,138 @@ extension MDUserCoreDataStorage {
     
     func readUser(fromUserID userId: Int64,
                   _ completionHandler: @escaping(MDOperationResultWithCompletion<UserResponse>)) {
-        let operation = MDReadUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
-                                                                coreDataStorage: self,
-                                                                userId: userId) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            
+            let fetchRequest = NSFetchRequest<CDUserResponseEntity>(entityName: CoreDataEntityName.CDUserResponseEntity)
+            fetchRequest.predicate = NSPredicate(format: "\(CDUserResponseEntityAttributeName.userId) == %i", userId)
+            
+            do {
+                if let result = try self.managedObjectContext.fetch(fetchRequest).map({ $0.userResponse }).first {
+                    
+                    //
+                    completionHandler(.success(result))
+                    //
+                    
+                    //
+                    return
+                    //
+                    
+                } else {
+                    
+                    //
+                    completionHandler(.failure(MDEntityOperationError.cantFindEntity))
+                    //
+                    
+                    //
+                    return
+                    //
+                    
+                }
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
     func readFirstUser(_ completionHandler: @escaping (MDOperationResultWithCompletion<UserResponse>)) {
-        let operation = MDReadFirstUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
-                                                                     coreDataStorage: self) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            
+            let fetchRequest = NSFetchRequest<CDUserResponseEntity>(entityName: CoreDataEntityName.CDUserResponseEntity)
+            
+            do {
+                if let result = try self.managedObjectContext.fetch(fetchRequest).map({ $0.userResponse }).first {
+                    
+                    //
+                    completionHandler(.success(result))
+                    //
+                    
+                    //
+                    return
+                    //
+                    
+                } else {
+                    
+                    //
+                    completionHandler(.failure(MDEntityOperationError.cantFindEntity))
+                    //
+                    
+                    //
+                    return
+                    //
+                    
+                }
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
     func readAllUsers(_ completionHandler: @escaping(MDOperationsResultWithCompletion<UserResponse>)) {
-        let operation = MDReadUsersCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
-                                                                 coreDataStorage: self) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            
+            let fetchRequest = NSFetchRequest<CDUserResponseEntity>(entityName: CoreDataEntityName.CDUserResponseEntity)
+            
+            do {
+                
+                //
+                completionHandler(.success(try self.managedObjectContext.fetch(fetchRequest).map({ $0.userResponse })))
+                //
+                
+                //
+                return
+                //
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
-    
-}
-
-// MARK: - Update
-extension MDUserCoreDataStorage {
-    
     
 }
 
@@ -123,22 +260,124 @@ extension MDUserCoreDataStorage {
     
     func deleteUser(_ userId: Int64,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
-        let operation = MDDeleteUserCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
-                                                                  coreDataStack: self.coreDataStack,
-                                                                  coreDataStorage: self,
-                                                                  userId: userId) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDUserResponseEntity)
+            fetchRequest.predicate = NSPredicate(format: "\(CDUserResponseEntityAttributeName.userId) == %i", userId)
+            
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            
+            do {
+                
+                try self.managedObjectContext.execute(batchDeleteRequest)
+                
+                self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
+                    
+                    switch result {
+                        
+                    case .success:
+                        
+                        //
+                        completionHandler(.success(()))
+                        //
+                        
+                        //
+                        break
+                        //
+                        
+                    case .failure(let error):
+                        
+                        //
+                        completionHandler(.failure(error))
+                        //
+                        
+                        //
+                        break
+                        //
+                        
+                    }
+                    
+                }
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
     func deleteAllUsers(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
-        let operation = MDDeleteAllUsersCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
-                                                                      coreDataStack: self.coreDataStack,
-                                                                      coreDataStorage: self) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDUserResponseEntity)
+            
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            
+            do {
+                
+                try self.managedObjectContext.execute(batchDeleteRequest)
+                
+                self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
+                    
+                    switch result {
+                        
+                    case .success:
+                        
+                        //
+                        completionHandler(.success(()))
+                        //
+                        
+                        //
+                        break
+                        //
+                        
+                    case .failure(let error):
+                        
+                        //
+                        completionHandler(.failure(error))
+                        
+                        //
+                        break
+                        //
+                        
+                    }
+                    
+                }
+                
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
 }

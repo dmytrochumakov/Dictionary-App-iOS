@@ -15,8 +15,7 @@ protocol MDLanguageMemoryStorageProtocol: MDCRUDLanguageProtocol,
 final class MDLanguageMemoryStorage: MDLanguageMemoryStorageProtocol {
     
     fileprivate let operationQueue: OperationQueue
-    
-    var array: [LanguageResponse]
+    fileprivate var array: [LanguageResponse]
     
     init(operationQueue: OperationQueue,
          array: [LanguageResponse]) {
@@ -59,29 +58,67 @@ extension MDLanguageMemoryStorage {
     
 }
 
-// MARK: - CRUD
+// MARK: - Create
 extension MDLanguageMemoryStorage {
     
-    func createLanguages(_ languageEntities: [LanguageResponse], _ completionHandler: @escaping (MDOperationResultWithCompletion<[LanguageResponse]>)) {
-        let operation: MDCreateLanguagesMemoryStorageOperation = .init(memoryStorage: self,
-                                                                       languageEntities: languageEntities) { result in
-            completionHandler(result)
+    func createLanguages(_ languageEntities: [LanguageResponse],
+                         _ completionHandler: @escaping (MDOperationResultWithCompletion<[LanguageResponse]>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            if (languageEntities.isEmpty) {
+                completionHandler(.success(languageEntities))
+            } else {
+                
+                languageEntities.forEach { languageEntity in
+                    self.array.append(languageEntity)
+                }
+                
+                completionHandler(.success(self.array))
+                
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
+    
+}
+
+// MARK: - Read
+extension MDLanguageMemoryStorage {
     
     func readAllLanguages(_ completionHandler: @escaping (MDOperationResultWithCompletion<[LanguageResponse]>)) {
-        let operation: MDReadAllLanguagesMemoryStorageOperation = .init(memoryStorage: self) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            completionHandler(.success(self.array))
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
+}
+
+// MARK: - Delete
+extension MDLanguageMemoryStorage {
+    
     func deleteAllLanguages(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
-        let operation: MDDeleteAllLanguagesMemoryStorageOperation = .init(memoryStorage: self) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            self.array.removeAll()
+            completionHandler(.success(()))
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
 }

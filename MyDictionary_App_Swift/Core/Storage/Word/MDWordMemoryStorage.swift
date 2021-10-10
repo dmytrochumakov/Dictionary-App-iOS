@@ -15,14 +15,13 @@ protocol MDWordMemoryStorageProtocol: MDCRUDWordProtocol,
 final class MDWordMemoryStorage: MDWordMemoryStorageProtocol {
     
     fileprivate let operationQueue: OperationQueue
-    
-    var arrayWords: [WordResponse]
+    fileprivate var array: [WordResponse]
     
     init(operationQueue: OperationQueue,
-         arrayWords: [WordResponse]) {
+         array: [WordResponse]) {
         
         self.operationQueue = operationQueue
-        self.arrayWords = arrayWords
+        self.array = array
         
     }
     
@@ -32,6 +31,7 @@ final class MDWordMemoryStorage: MDWordMemoryStorageProtocol {
     
 }
 
+// MARK: - Entities
 extension MDWordMemoryStorage {
     
     func entitiesCount(_ completionHandler: @escaping (MDEntitiesCountResultWithCompletion)) {
@@ -58,41 +58,111 @@ extension MDWordMemoryStorage {
     
 }
 
-// MARK: - CRUD
+// MARK: - Create
 extension MDWordMemoryStorage {
     
     func createWord(_ wordModel: WordResponse,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<WordResponse>)) {
         
-        let operation = MDCreateWordMemoryStorageOperation.init(wordStorage: self,
-                                                                word: wordModel) { result in
-            completionHandler(result)
+        let operation: BlockOperation = .init {
+            
+            //
+            self.array.append(wordModel)
+            //
+            
+            //
+            completionHandler(.success(wordModel))
+            //
+            
+            //
+            return
+            //
+            
         }
         
+        //
         operationQueue.addOperation(operation)
+        //
         
     }
     
     func createWords(_ wordModels: [WordResponse],
                      _ completionHandler: @escaping (MDOperationsResultWithCompletion<WordResponse>)) {
         
-        let operation = MDCreateWordsMemoryStorageOperation.init(memoryStorage: self,
-                                                                 words: wordModels) { result in
-            completionHandler(result)
+        let operation: BlockOperation = .init {
+            
+            
+            if (wordModels.isEmpty) {
+                
+                //
+                completionHandler(.success(wordModels))
+                //
+                
+                //
+                return
+                //
+                
+            } else {
+                
+                wordModels.forEach { word in
+                    //
+                    self.array.append(word)
+                    //
+                }
+                
+                //
+                completionHandler(.success(wordModels))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
         }
         
+        //
         operationQueue.addOperation(operation)
+        //
         
     }
+    
+}
+// MARK: - Read
+extension MDWordMemoryStorage {
     
     func readWord(fromWordID wordId: Int64,
                   _ completionHandler: @escaping(MDOperationResultWithCompletion<WordResponse>)) {
         
-        let operation = MDReadWordMemoryStorageOperation.init(wordStorage: self, wordId: wordId) { result in
-            completionHandler(result)
+        let operation: BlockOperation = .init {
+            
+            guard let word = self.array.first(where: { $0.wordId == wordId })
+            else {
+                
+                //
+                completionHandler(.failure(MDEntityOperationError.cantFindEntity));
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+            //
+            completionHandler(.success(word))
+            //
+            
+            //
+            return
+            //
+            
         }
         
+        //
         operationQueue.addOperation(operation)
+        //
         
     }
     
@@ -106,73 +176,183 @@ extension MDWordMemoryStorage {
     
     func readAllWords(_ completionHandler: @escaping (MDOperationsResultWithCompletion<WordResponse>)) {
         
-        let operation = MDReadAllWordsMemoryStorageOperation.init(memoryStorage: self) { result in
-            completionHandler(result)
+        let operation: BlockOperation = .init {
+            
+            //
+            completionHandler(.success(self.array))
+            //
+            
+            //
+            return
+            //
+            
         }
         
+        //
         operationQueue.addOperation(operation)
+        //
         
     }
     
     func readAllWords(byCourseID courseID: Int64,
                       _ completionHandler: @escaping (MDOperationsResultWithCompletion<WordResponse>)) {
         
-        let operation = MDReadAllWordsByCourseIDMemoryStorageOperation.init(memoryStorage: self,
-                                                                            courseID: courseID) { result in
-            completionHandler(result)
+        let operation: BlockOperation = .init {
+            
+            //
+            completionHandler(.success(self.array.filter({ $0.courseId == courseID })))
+            //
+            
+            //
+            return
+            //
+            
         }
         
+        //
         operationQueue.addOperation(operation)
+        //
         
     }
+    
+}
+
+// MARK: - Update
+extension MDWordMemoryStorage {
     
     func updateWord(byWordID wordId: Int64,
                     newWordText: String,
                     newWordDescription: String,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
-        let operation = MDUpdateWordMemoryStorageOperation.init(wordStorage: self,
-                                                                wordId: wordId,
-                                                                newWordText: newWordText,
-                                                                newWordDescription: newWordDescription) { result in
-            completionHandler(result)
+        let operation: BlockOperation = .init {
+            
+            guard let index = self.array.firstIndex(where: { $0.wordId == wordId })
+            else {
+                
+                //
+                completionHandler(.failure(MDEntityOperationError.cantFindEntity));
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+            //
+            self.array[index].wordText = newWordText
+            //
+            
+            //
+            self.array[index].wordDescription = newWordDescription
+            //
+            
+            //
+            completionHandler(.success(()))
+            //
+            
+            //
+            return
+            //
+            
         }
         
+        //
         operationQueue.addOperation(operation)
+        //
         
     }
+    
+}
+
+// MARK: - Delete
+extension MDWordMemoryStorage {
     
     func deleteWord(byWordId wordId: Int64,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
-        let operation = MDDeleteWordMemoryStorageOperation.init(wordStorage: self,
-                                                                wordId: wordId) { result in
-            completionHandler(result)
+        let operation: BlockOperation = .init {
+            
+            guard let index = self.array.firstIndex(where: { $0.wordId == wordId })
+            else {
+                
+                //
+                completionHandler(.failure(MDEntityOperationError.cantFindEntity));
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+            //
+            self.array.remove(at: index)
+            //
+            
+            //
+            completionHandler(.success(()))
+            //
+            
+            //
+            return
+            //
+            
         }
         
+        //
         operationQueue.addOperation(operation)
+        //
         
     }
     
     func deleteAllWords(byCourseId courseId: Int64,
                         _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
-        let operation: MDDeleteAllWordsByCourseIdMemoryStorageOperation = .init(wordStorage: self,
-                                                                                courseId: courseId) { result in
-            completionHandler(result)
+        let operation: BlockOperation = .init {
+            
+            //
+            self.array.removeAll(where: { $0.courseId == courseId })
+            //
+            
+            //
+            completionHandler(.success(()))
+            //
+            
+            //
+            return
+            //
+            
         }
         
+        //
         operationQueue.addOperation(operation)
+        //
         
     }
     
     func deleteAllWords(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
-        let operation: MDDeleteAllWordsMemoryStorageOperation = .init(wordStorage: self) { result in
-            completionHandler(result)
+        let operation: BlockOperation = .init {
+            
+            //
+            self.array.removeAll()
+            //
+            
+            //
+            completionHandler(.success(()))
+            //
+            
+            //
+            return
+            //
+            
         }
         
+        //
         operationQueue.addOperation(operation)
+        //
         
     }
     

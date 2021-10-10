@@ -36,7 +36,7 @@ final class MDJWTCoreDataStorage: NSObject,
     
 }
 
-// MARK: - Is Empty
+// MARK: - Entities
 extension MDJWTCoreDataStorage {
     
     func entitiesCount(_ completionHandler: @escaping(MDEntitiesCountResultWithCompletion)) {
@@ -66,14 +66,48 @@ extension MDJWTCoreDataStorage {
 // MARK: - Create
 extension MDJWTCoreDataStorage {
     
-    func createJWT(_ jwtResponse: JWTResponse, _ completionHandler: @escaping(MDOperationResultWithCompletion<JWTResponse>)) {
-        let operation = MDCreateJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
-                                                                 coreDataStack: self.coreDataStack,
-                                                                 coreDataStorage: self,
-                                                                 jwtResponse: jwtResponse) { result in
-            completionHandler(result)
+    func createJWT(_ jwtResponse: JWTResponse,
+                   _ completionHandler: @escaping(MDOperationResultWithCompletion<JWTResponse>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            let newJWTResponse = CDJWTResponseEntity.init(jwtResponse: jwtResponse,
+                                                          insertIntoManagedObjectContext: self.managedObjectContext)
+            
+            self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
+                
+                switch result {
+                    
+                case .success:
+                    
+                    //
+                    completionHandler(.success(newJWTResponse.jwtResponse))
+                    //
+                    
+                    //
+                    break
+                    //
+                    
+                case .failure(let error):
+                    
+                    //
+                    completionHandler(.failure(error))
+                    //
+                    
+                    //
+                    break
+                    //
+                    
+                }
+                
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
 }
@@ -81,29 +115,139 @@ extension MDJWTCoreDataStorage {
 // MARK: - Read
 extension MDJWTCoreDataStorage {
     
-    func readJWT(fromAccessToken accessToken: String, _ completionHandler: @escaping(MDOperationResultWithCompletion<JWTResponse>)) {
-        let operation = MDReadJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
-                                                               coreDataStorage: self,
-                                                               accessToken: accessToken) { result in
-            completionHandler(result)
+    func readJWT(fromAccessToken accessToken: String,
+                 _ completionHandler: @escaping(MDOperationResultWithCompletion<JWTResponse>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            let fetchRequest = NSFetchRequest<CDJWTResponseEntity>(entityName: CoreDataEntityName.CDJWTResponseEntity)
+            fetchRequest.predicate = NSPredicate(format: "\(CDJWTResponseEntityAttributeName.accessToken) == %@", accessToken)
+            
+            do {
+                if let result = try self.managedObjectContext.fetch(fetchRequest).map({ $0.jwtResponse }).first {
+                    
+                    //
+                    completionHandler(.success(result))
+                    //
+                    
+                    //
+                    return
+                    //
+                    
+                } else {
+                    
+                    //
+                    completionHandler(.failure(MDEntityOperationError.cantFindEntity))
+                    //
+                    
+                    //
+                    return
+                    //
+                    
+                }
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                
+                //
+                return
+                //
+                
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
     func readFirstJWT(_ completionHandler: @escaping (MDOperationResultWithCompletion<JWTResponse>)) {
-        let operation = MDReadFirstJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
-                                                                    coreDataStorage: self) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            
+            let fetchRequest = NSFetchRequest<CDJWTResponseEntity>(entityName: CoreDataEntityName.CDJWTResponseEntity)
+            
+            do {
+                if let result = try self.managedObjectContext.fetch(fetchRequest).map({ $0.jwtResponse }).first {
+                    
+                    //
+                    completionHandler(.success(result))
+                    //
+                    
+                    //
+                    return
+                    //
+                    
+                } else {
+                    
+                    //
+                    completionHandler(.failure(MDEntityOperationError.cantFindEntity))
+                    //
+                    
+                    //
+                    return
+                    //
+                    
+                }
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
     func readAllJWTs(_ completionHandler: @escaping (MDOperationsResultWithCompletion<JWTResponse>)) {
-        let operation = MDReadJWTsCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
-                                                                coreDataStorage: self) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            
+            let fetchRequest = NSFetchRequest<CDJWTResponseEntity>(entityName: CoreDataEntityName.CDJWTResponseEntity)
+            
+            do {
+                
+                //
+                completionHandler(.success(try self.managedObjectContext.fetch(fetchRequest).map({ $0.jwtResponse })))
+                //
+                
+                //
+                return
+                //
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
 }
@@ -116,15 +260,64 @@ extension MDJWTCoreDataStorage {
                    newJWTResponse jwtResponse: JWTResponse,
                    _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
-        let operation = MDUpdateJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
-                                                                 coreDataStack: self.coreDataStack,
-                                                                 coreDataStorage: self,
-                                                                 oldAccessToken: accessToken,
-                                                                 newJWTResponse: jwtResponse) { result in
-            completionHandler(result)
+        let operation: BlockOperation = .init {
+            
+            let batchUpdateRequest = NSBatchUpdateRequest(entityName: CoreDataEntityName.CDJWTResponseEntity)
+            batchUpdateRequest.propertiesToUpdate = [CDJWTResponseEntityAttributeName.accessToken : jwtResponse.accessToken,
+                                                     CDJWTResponseEntityAttributeName.expirationDate : jwtResponse.expirationDate
+            ]
+            
+            batchUpdateRequest.predicate = NSPredicate(format: "\(CDJWTResponseEntityAttributeName.accessToken) == %@", accessToken)
+            
+            do {
+                
+                try self.managedObjectContext.execute(batchUpdateRequest)
+                
+                self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
+                    
+                    switch result {
+                        
+                    case .success:
+                        
+                        //
+                        completionHandler(.success(()))
+                        //
+                        
+                        //
+                        break
+                        //
+                        
+                    case .failure(let error):
+                        
+                        //
+                        completionHandler(.failure(error))
+                        //
+                        
+                        //
+                        break
+                        //
+                        
+                    }
+                    
+                }
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
         }
         
+        //
         operationQueue.addOperation(operation)
+        //
         
     }
     
@@ -133,23 +326,126 @@ extension MDJWTCoreDataStorage {
 // MARK: - Delete
 extension MDJWTCoreDataStorage {
     
-    func deleteJWT(_ byAccessToken: String, _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
-        let operation = MDDeleteJWTCoreDataStorageOperation.init(managedObjectContext: self.managedObjectContext,
-                                                                 coreDataStack: self.coreDataStack,
-                                                                 coreDataStorage: self,
-                                                                 accessToken: byAccessToken) { result in
-            completionHandler(result)
+    func deleteJWT(_ byAccessToken: String,
+                   _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDJWTResponseEntity)
+            fetchRequest.predicate = NSPredicate(format: "\(CDJWTResponseEntityAttributeName.accessToken) == %@", byAccessToken)
+            
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            
+            do {
+                
+                try self.managedObjectContext.execute(batchDeleteRequest)
+                
+                self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
+                    
+                    switch result {
+                        
+                    case .success:
+                        
+                        //
+                        completionHandler(.success(()))
+                        //
+                        
+                        //
+                        break
+                        //
+                        
+                    case .failure(let error):
+                        
+                        //
+                        completionHandler(.failure(error))
+                        //
+                        
+                        //
+                        break
+                        //
+                        
+                    }
+                    
+                }
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
     func deleteAllJWT(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
-        let operation: MDDeleteAllJWTCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
-                                                                      coreDataStack: self.coreDataStack,
-                                                                      coreDataStorage: self) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDJWTResponseEntity)
+            
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            
+            do {
+                
+                try self.managedObjectContext.execute(batchDeleteRequest)
+                
+                self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
+                    
+                    switch result {
+                        
+                    case .success:
+                        
+                        //
+                        completionHandler(.success(()))
+                        //
+                        
+                        //
+                        break
+                        //
+                        
+                    case .failure(let error):
+                        
+                        //
+                        completionHandler(.failure(error))
+                        //
+                        
+                        //
+                        break
+                        //
+                        
+                    }
+                    
+                }
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
 }

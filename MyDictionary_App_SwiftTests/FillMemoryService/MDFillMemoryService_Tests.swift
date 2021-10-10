@@ -61,7 +61,7 @@ final class MDFillMemoryService_Tests: XCTestCase {
                                                                                               coreDataStorage: courseCoreDataStorage),
                                                           
                                                           wordStorage: MDWordStorage.init(memoryStorage: MDWordMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordMemoryStorageOperationQueue)!,
-                                                                                                                                  arrayWords: .init()),
+                                                                                                                                  array: .init()),
                                                                                           coreDataStorage: wordCoreDataStorage),
                                                           
                                                           bridge: MDBridge.init(),
@@ -78,55 +78,73 @@ extension MDFillMemoryService_Tests {
         
         let expectation = XCTestExpectation(description: "Fill Memory Expectation")
         
-        // Initialize Dispatch Group
-        let dispatchGroup: DispatchGroup = .init()
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        jwtCoreDataStorage.createJWT(Constants_For_Tests.mockedJWT) { createJWTResult in
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        userCoreDataStorage.createUser(Constants_For_Tests.mockedUser,
-                                       password: Constants_For_Tests.mockedUserPassword) { createUserResult in
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        languageCoreDataStorage.createLanguages(Constants_For_Tests.mockedLanguages) { createLanguagesResult in
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        courseCoreDataStorage.createCourse(Constants_For_Tests.mockedCourse) { createCourseResult in
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Dispatch Group Enter
-        dispatchGroup.enter()
-        wordCoreDataStorage.createWord(Constants_For_Tests.mockedWord0) { createWordResult in
-            // Dispatch Group Leave
-            dispatchGroup.leave()
-        }
-        
-        // Notify And Pass Final Result
-        dispatchGroup.notify(queue: .main) {
+        //
+        jwtCoreDataStorage.createJWT(Constants_For_Tests.mockedJWT) { [unowned self] createJWTResult in
             
-            self.fillMemoryService.fillMemoryFromCoreDataIfNeeded { result in
-                
-                switch result {
+            //
+            userCoreDataStorage.createUser(Constants_For_Tests.mockedUser,
+                                           password: Constants_For_Tests.mockedUserPassword) { [unowned self] createUserResult in
+            
+                switch createUserResult {
                     
                 case .success:
                     
-                    expectation.fulfill()
+                    //
+                    languageCoreDataStorage.createLanguages(Constants_For_Tests.mockedLanguages) { [unowned self] createLanguagesResult in
+                        
+                        switch createLanguagesResult {
+                            
+                        case .success:
+                            
+                            //
+                            courseCoreDataStorage.createCourse(Constants_For_Tests.mockedCourse) { [unowned self] createCourseResult in
+                                
+                                switch createCourseResult {
+                                    
+                                case .success:
+                                    
+                                    //
+                                    wordCoreDataStorage.createWord(Constants_For_Tests.mockedWord0) { [unowned self] createWordResult in
+                                        
+                                        switch createWordResult {
+                                            
+                                        case .success:
+                                            
+                                            fillMemoryService.fillMemoryFromCoreDataIfNeeded { result in
+                                                
+                                                switch result {
+                                                    
+                                                case .success:
+                                                    
+                                                    expectation.fulfill()
+                                                    
+                                                case .failure(let error):
+                                                    XCTExpectFailure(error.localizedDescription)
+                                                    expectation.fulfill()
+                                                }
+                                                
+                                            }
+                                            
+                                        case .failure(let error):
+                                            XCTExpectFailure(error.localizedDescription)
+                                            expectation.fulfill()
+                                        }
+                                        
+                                    }
+                                    
+                                case .failure(let error):
+                                    XCTExpectFailure(error.localizedDescription)
+                                    expectation.fulfill()
+                                }
+                                
+                            }
+                            
+                        case .failure(let error):
+                            XCTExpectFailure(error.localizedDescription)
+                            expectation.fulfill()
+                        }
+                        
+                    }
                     
                 case .failure(let error):
                     XCTExpectFailure(error.localizedDescription)
