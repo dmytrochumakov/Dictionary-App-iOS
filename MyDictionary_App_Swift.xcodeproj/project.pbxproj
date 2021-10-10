@@ -85,9 +85,6 @@
 		22557FCF26C95A5100A4FF31 /* MDJWTMemoryStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22557FCE26C95A5100A4FF31 /* MDJWTMemoryStorage_Tests.swift */; };
 		22557FD326C95D5A00A4FF31 /* MDReadJWTMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22557FD226C95D5A00A4FF31 /* MDReadJWTMemoryStorageOperation.swift */; };
 		22557FD726C9660F00A4FF31 /* MDDeleteJWTMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22557FD626C9660F00A4FF31 /* MDDeleteJWTMemoryStorageOperation.swift */; };
-		22561C7C26D4B5AF00A6135B /* MDReadAllCoursesMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C7B26D4B5AF00A6135B /* MDReadAllCoursesMemoryStorageOperation.swift */; };
-		22561C7E26D4B67300A6135B /* MDDeleteCourseMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C7D26D4B67300A6135B /* MDDeleteCourseMemoryStorageOperation.swift */; };
-		22561C8026D4B82300A6135B /* MDDeleteAllCoursesMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C7F26D4B82300A6135B /* MDDeleteAllCoursesMemoryStorageOperation.swift */; };
 		22561C8326D4BA5C00A6135B /* MDCreateCourseCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C8226D4BA5C00A6135B /* MDCreateCourseCoreDataStorageOperation.swift */; };
 		22561C8626D4BB8C00A6135B /* MDCourseMemoryStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C8526D4BB8C00A6135B /* MDCourseMemoryStorage_Tests.swift */; };
 		22561C8826D4CDB200A6135B /* MDReadCourseCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C8726D4CDB200A6135B /* MDReadCourseCoreDataStorageOperation.swift */; };
@@ -268,8 +265,6 @@
 		22B8E6E226D3C782001CCCA8 /* MDCreateCourseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6E126D3C782001CCCA8 /* MDCreateCourseProtocol.swift */; };
 		22B8E6E426D3C7B7001CCCA8 /* MDReadCourseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6E326D3C7B7001CCCA8 /* MDReadCourseProtocol.swift */; };
 		22B8E6E626D3C7C3001CCCA8 /* MDDeleteCourseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6E526D3C7C3001CCCA8 /* MDDeleteCourseProtocol.swift */; };
-		22B8E6EA26D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6E926D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift */; };
-		22B8E6EC26D3C9B7001CCCA8 /* MDReadCourseMemoryStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6EB26D3C9B7001CCCA8 /* MDReadCourseMemoryStorageOperation.swift */; };
 		22B9080926EB7DD6003848D6 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9080826EB7DD6003848D6 /* UIView+Extension.swift */; };
 		22BA7D5B2702FDBC00068F7E /* MDTextViewDelegatePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA7D5A2702FDBC00068F7E /* MDTextViewDelegatePropertyProtocol.swift */; };
 		22BA7D5E2703125D00068F7E /* MDAddWordError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA7D5D2703125D00068F7E /* MDAddWordError.swift */; };
@@ -473,9 +468,6 @@
 		22557FCE26C95A5100A4FF31 /* MDJWTMemoryStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTMemoryStorage_Tests.swift; sourceTree = "<group>"; };
 		22557FD226C95D5A00A4FF31 /* MDReadJWTMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadJWTMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		22557FD626C9660F00A4FF31 /* MDDeleteJWTMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteJWTMemoryStorageOperation.swift; sourceTree = "<group>"; };
-		22561C7B26D4B5AF00A6135B /* MDReadAllCoursesMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadAllCoursesMemoryStorageOperation.swift; sourceTree = "<group>"; };
-		22561C7D26D4B67300A6135B /* MDDeleteCourseMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteCourseMemoryStorageOperation.swift; sourceTree = "<group>"; };
-		22561C7F26D4B82300A6135B /* MDDeleteAllCoursesMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteAllCoursesMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		22561C8226D4BA5C00A6135B /* MDCreateCourseCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateCourseCoreDataStorageOperation.swift; sourceTree = "<group>"; };
 		22561C8526D4BB8C00A6135B /* MDCourseMemoryStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseMemoryStorage_Tests.swift; sourceTree = "<group>"; };
 		22561C8726D4CDB200A6135B /* MDReadCourseCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadCourseCoreDataStorageOperation.swift; sourceTree = "<group>"; };
@@ -660,8 +652,6 @@
 		22B8E6E126D3C782001CCCA8 /* MDCreateCourseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateCourseProtocol.swift; sourceTree = "<group>"; };
 		22B8E6E326D3C7B7001CCCA8 /* MDReadCourseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadCourseProtocol.swift; sourceTree = "<group>"; };
 		22B8E6E526D3C7C3001CCCA8 /* MDDeleteCourseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteCourseProtocol.swift; sourceTree = "<group>"; };
-		22B8E6E926D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateCourseMemoryStorageOperation.swift; sourceTree = "<group>"; };
-		22B8E6EB26D3C9B7001CCCA8 /* MDReadCourseMemoryStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadCourseMemoryStorageOperation.swift; sourceTree = "<group>"; };
 		22B9080826EB7DD6003848D6 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		22BA7D5A2702FDBC00068F7E /* MDTextViewDelegatePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDTextViewDelegatePropertyProtocol.swift; sourceTree = "<group>"; };
 		22BA7D5D2703125D00068F7E /* MDAddWordError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAddWordError.swift; sourceTree = "<group>"; };
@@ -1917,21 +1907,8 @@
 			isa = PBXGroup;
 			children = (
 				22561C8126D4BA4800A6135B /* CoreDataCRUD */,
-				22B8E6E826D3C8B7001CCCA8 /* MemoryStorageCRUD */,
 			);
 			path = Course;
-			sourceTree = "<group>";
-		};
-		22B8E6E826D3C8B7001CCCA8 /* MemoryStorageCRUD */ = {
-			isa = PBXGroup;
-			children = (
-				22B8E6E926D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift */,
-				22B8E6EB26D3C9B7001CCCA8 /* MDReadCourseMemoryStorageOperation.swift */,
-				22561C7B26D4B5AF00A6135B /* MDReadAllCoursesMemoryStorageOperation.swift */,
-				22561C7D26D4B67300A6135B /* MDDeleteCourseMemoryStorageOperation.swift */,
-				22561C7F26D4B82300A6135B /* MDDeleteAllCoursesMemoryStorageOperation.swift */,
-			);
-			path = MemoryStorageCRUD;
 			sourceTree = "<group>";
 		};
 		22BA7D5C2703124F00068F7E /* Enums */ = {
@@ -2486,9 +2463,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22561C8026D4B82300A6135B /* MDDeleteAllCoursesMemoryStorageOperation.swift in Sources */,
 				22493C4926972A03000DA480 /* CDWordResponseEntity+Extension.swift in Sources */,
-				22561C7C26D4B5AF00A6135B /* MDReadAllCoursesMemoryStorageOperation.swift in Sources */,
 				22493C312697159E000DA480 /* CDResultSaved.swift in Sources */,
 				2291DAD627019DA900216B64 /* AddWordRouter.swift in Sources */,
 				2281AD93270AF34600EBE114 /* MDOperationQueueManager.swift in Sources */,
@@ -2683,7 +2658,6 @@
 				22E2B4DF2664E43B00978E62 /* SettingsViewController.swift in Sources */,
 				22E327CC26FB318A00445917 /* MDStorageServiceType.swift in Sources */,
 				22BD99A8266A58F40063FEFC /* RootViewController.swift in Sources */,
-				22561C7E26D4B67300A6135B /* MDDeleteCourseMemoryStorageOperation.swift in Sources */,
 				229572BB26FF1FCF0092817B /* MDBridge.swift in Sources */,
 				22557FCC26C959D100A4FF31 /* MDCreateJWTMemoryStorageOperation.swift in Sources */,
 				22A2987926FC84F000E79843 /* AddCourseInteractor.swift in Sources */,
@@ -2741,7 +2715,6 @@
 				22493C41269726A4000DA480 /* CDWordResponseEntityAttributeName.swift in Sources */,
 				220793C126C66F2A003D434B /* AuthValidationLogic.swift in Sources */,
 				2289CEED2678CC34007254C3 /* MDWordStorage.swift in Sources */,
-				22B8E6EC26D3C9B7001CCCA8 /* MDReadCourseMemoryStorageOperation.swift in Sources */,
 				228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */,
 				22A2985C26FC635100E79843 /* MDSettingsError.swift in Sources */,
 				22DE582A26C9549B0032A94C /* MDCreateJWTProtocol.swift in Sources */,
@@ -2772,7 +2745,6 @@
 				220FFE7726C9031800702CCE /* MDTextFieldWithToolBar.swift in Sources */,
 				22A2987B26FC84F000E79843 /* AddCourseDataManager.swift in Sources */,
 				22EDF02A26C7E91D00D19DA1 /* CDUserResponseEntityAttributeName.swift in Sources */,
-				22B8E6EA26D3C8E2001CCCA8 /* MDCreateCourseMemoryStorageOperation.swift in Sources */,
 				2270F39E26D26132006B46F4 /* CDLanguageResponseEntityAttributeName.swift in Sources */,
 				227B91E126EF607A0086B9AA /* RegisterValidationLogic.swift in Sources */,
 				228C596E27033D0800DE6175 /* EditWordModule.swift in Sources */,

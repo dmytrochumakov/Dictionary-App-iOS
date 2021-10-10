@@ -59,53 +59,197 @@ extension MDCourseMemoryStorage {
     
 }
 
-// MARK: - CRUD
+// MARK: - Create
 extension MDCourseMemoryStorage {
     
-    func createCourse(_ courseEntity: CourseResponse, _ completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
-        let operation: MDCreateCourseMemoryStorageOperation = .init(memoryStorage: self,
-                                                                    courseEntity: courseEntity) { result in
-            completionHandler(result)
+    func createCourse(_ courseEntity: CourseResponse,
+                      _ completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            //
+            self.array.append(courseEntity)
+            //
+            
+            //
+            completionHandler(.success(courseEntity))
+            //
+            
+            //
+            return
+            //
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
-    func createCourses(_ courseEntities: [CourseResponse], _ completionHandler: @escaping (MDOperationsResultWithCompletion<CourseResponse>)) {
-        let operation: MDCreateCoursesMemoryStorageOperation = .init(memoryStorage: self,
-                                                                     courseEntities: courseEntities) { result in
-            completionHandler(result)
+    func createCourses(_ courseEntities: [CourseResponse],
+                       _ completionHandler: @escaping (MDOperationsResultWithCompletion<CourseResponse>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            if (courseEntities.isEmpty) {
+                
+                //
+                completionHandler(.success(courseEntities))
+                //
+                
+                //
+                return
+                //
+                
+            } else {
+                
+                courseEntities.forEach { courseEntity in
+                    self.array.append(courseEntity)
+                }
+                
+                //
+                completionHandler(.success(self.array))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
-    func readCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
-        let operation: MDReadCourseMemoryStorageOperation = .init(memoryStorage: self,
-                                                                  courseId: courseId) { result in
-            completionHandler(result)
+}
+
+// MARK: - Read
+extension MDCourseMemoryStorage {
+    
+    func readCourse(fromCourseId courseId: Int64,
+                    _ completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            guard let course = self.array.first(where: { $0.courseId == courseId })
+            else {
+                
+                //
+                completionHandler(.failure(MDEntityOperationError.cantFindEntity))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+            //
+            completionHandler(.success(course))
+            //
+            
+            //
+            return
+            //
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
     func readAllCourses(_ completionHandler: @escaping (MDOperationResultWithCompletion<[CourseResponse]>)) {
-        let operation: MDReadAllCoursesMemoryStorageOperation = .init(memoryStorage: self) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            
+            //
+            completionHandler(.success(self.array))
+            //
+            
+            //
+            return
+            //
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
-    func deleteCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
-        let operation: MDDeleteCourseMemoryStorageOperation = .init(memoryStorage: self,
-                                                                    courseId: courseId) { result in
-            completionHandler(result)
+}
+
+// MARK: - Delete
+extension MDCourseMemoryStorage {
+    
+    func deleteCourse(fromCourseId courseId: Int64,
+                      _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            guard let index = self.array.firstIndex(where: { $0.courseId == courseId })
+            else {
+                
+                //
+                completionHandler(.failure(MDEntityOperationError.cantFindEntity));
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+            //
+            self.array.remove(at: index)
+            //
+            
+            //
+            completionHandler(.success(()))
+            //
+            
+            //
+            return
+            //
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
     func deleteAllCourses(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
-        let operation: MDDeleteAllCoursesMemoryStorageOperation = .init(memoryStorage: self) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            
+            //
+            self.array.removeAll()
+            //
+            
+            //
+            completionHandler(.success(()))
+            //
+            
+            //
+            return
+            //
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
 }

@@ -62,63 +62,107 @@ extension MDCourseCoreDataStorage {
     
 }
 
-// MARK: - CRUD
+// MARK: - Create
 extension MDCourseCoreDataStorage {
     
-    func createCourse(_ courseEntity: CourseResponse, _ completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
+    func createCourse(_ courseEntity: CourseResponse,
+                      _ completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
+        
         let operation: MDCreateCourseCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
                                                                       coreDataStack: self.coreDataStack,
                                                                       coreDataStorage: self,
                                                                       courseEntity: courseEntity) { result in
             completionHandler(result)
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
-    func createCourses(_ courseEntities: [CourseResponse], _ completionHandler: @escaping (MDOperationsResultWithCompletion<CourseResponse>)) {
+    func createCourses(_ courseEntities: [CourseResponse],
+                       _ completionHandler: @escaping (MDOperationsResultWithCompletion<CourseResponse>)) {
+        
         let operation: MDCreateCoursesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
                                                                        coreDataStack: self.coreDataStack,
                                                                        coreDataStorage: self,
                                                                        courseEntities: courseEntities) { result in
             completionHandler(result)
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
-    func readCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
+}
+    
+// MARK: - Read
+extension MDCourseCoreDataStorage {
+    
+    func readCourse(fromCourseId courseId: Int64,
+                    _ completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
+        
         let operation: MDReadCourseCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
                                                                     coreDataStorage: self,
                                                                     courseId: courseId) { result in
             completionHandler(result)
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
     func readAllCourses(_ completionHandler: @escaping (MDOperationResultWithCompletion<[CourseResponse]>)) {
+        
         let operation: MDReadAllCoursesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
                                                                         coreDataStorage: self) { result in
             completionHandler(result)
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
-    func deleteCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+}
+
+// MARK: - Delete
+extension MDCourseCoreDataStorage {
+    
+    func deleteCourse(fromCourseId courseId: Int64,
+                      _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+        
         let operation: MDDeleteCourseCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
                                                                       coreDataStack: self.coreDataStack,
                                                                       coreDataStorage: self,
                                                                       courseId: courseId) { result in
             completionHandler(result)
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
     func deleteAllCourses(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+        
         let operation: MDDeleteAllCoursesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
                                                                           coreDataStack: self.coreDataStack,
                                                                           coreDataStorage: self) { result in
             completionHandler(result)
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
 }
