@@ -61,7 +61,7 @@ final class MDFillMemoryService_Tests: XCTestCase {
                                                                                               coreDataStorage: courseCoreDataStorage),
                                                           
                                                           wordStorage: MDWordStorage.init(memoryStorage: MDWordMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordMemoryStorageOperationQueue)!,
-                                                                                                                                  arrayWords: .init()),
+                                                                                                                                  array: .init()),
                                                                                           coreDataStorage: wordCoreDataStorage),
                                                           
                                                           bridge: MDBridge.init(),

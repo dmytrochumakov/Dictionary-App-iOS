@@ -16,7 +16,7 @@ final class MDWordMemoryStorage_Tests: XCTestCase {
         try super.setUpWithError()
         
         let wordMemoryStorage: MDWordMemoryStorageProtocol = MDWordMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordMemoryStorageOperationQueue)!,
-                                                                                      arrayWords: .init())
+                                                                                      array: .init())
         
         self.wordMemoryStorage = wordMemoryStorage
     }
