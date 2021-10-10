@@ -33,11 +33,7 @@
 		220FFE9026C90B3700702CCE /* MDDeleteUserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFE8F26C90B3700702CCE /* MDDeleteUserProtocol.swift */; };
 		220FFE9226C90B5000702CCE /* MDCRUDUserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFE9126C90B5000702CCE /* MDCRUDUserProtocol.swift */; };
 		220FFEA826C9168700702CCE /* MDUserMemoryStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFEA726C9168700702CCE /* MDUserMemoryStorage_Tests.swift */; };
-		220FFEAD26C91C3000702CCE /* MDCreateUserCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFEAC26C91C3000702CCE /* MDCreateUserCoreDataStorageOperation.swift */; };
-		220FFEAF26C91DD400702CCE /* MDReadUserCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFEAE26C91DD400702CCE /* MDReadUserCoreDataStorageOperation.swift */; };
-		220FFEB126C91EF000702CCE /* MDDeleteUserCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFEB026C91EF000702CCE /* MDDeleteUserCoreDataStorageOperation.swift */; };
 		220FFEB326C91F6600702CCE /* MDUserCoreDataStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFEB226C91F6600702CCE /* MDUserCoreDataStorage_Tests.swift */; };
-		220FFEB526C9298200702CCE /* MDReadUsersCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFEB426C9298200702CCE /* MDReadUsersCoreDataStorageOperation.swift */; };
 		220FFEBA26C93A0000702CCE /* MDUserStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FFEB926C93A0000702CCE /* MDUserStorage_Tests.swift */; };
 		221D280E26C5064A004BC4F7 /* AuthenticationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280726C5064A004BC4F7 /* AuthenticationModule.swift */; };
 		221D280F26C5064A004BC4F7 /* AuthenticationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D280826C5064A004BC4F7 /* AuthenticationPresenter.swift */; };
@@ -425,11 +421,7 @@
 		220FFE8F26C90B3700702CCE /* MDDeleteUserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteUserProtocol.swift; sourceTree = "<group>"; };
 		220FFE9126C90B5000702CCE /* MDCRUDUserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCRUDUserProtocol.swift; sourceTree = "<group>"; };
 		220FFEA726C9168700702CCE /* MDUserMemoryStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUserMemoryStorage_Tests.swift; sourceTree = "<group>"; };
-		220FFEAC26C91C3000702CCE /* MDCreateUserCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateUserCoreDataStorageOperation.swift; sourceTree = "<group>"; };
-		220FFEAE26C91DD400702CCE /* MDReadUserCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadUserCoreDataStorageOperation.swift; sourceTree = "<group>"; };
-		220FFEB026C91EF000702CCE /* MDDeleteUserCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteUserCoreDataStorageOperation.swift; sourceTree = "<group>"; };
 		220FFEB226C91F6600702CCE /* MDUserCoreDataStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUserCoreDataStorage_Tests.swift; sourceTree = "<group>"; };
-		220FFEB426C9298200702CCE /* MDReadUsersCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadUsersCoreDataStorageOperation.swift; sourceTree = "<group>"; };
 		220FFEB926C93A0000702CCE /* MDUserStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUserStorage_Tests.swift; sourceTree = "<group>"; };
 		221D280726C5064A004BC4F7 /* AuthenticationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModule.swift; sourceTree = "<group>"; };
 		221D280826C5064A004BC4F7 /* AuthenticationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationPresenter.swift; sourceTree = "<group>"; };
@@ -978,14 +970,6 @@
 			path = Word;
 			sourceTree = "<group>";
 		};
-		220FFE9426C9125400702CCE /* User */ = {
-			isa = PBXGroup;
-			children = (
-				220FFEAB26C91B5D00702CCE /* CoreDataCRUD */,
-			);
-			path = User;
-			sourceTree = "<group>";
-		};
 		220FFEA526C9165700702CCE /* Word */ = {
 			isa = PBXGroup;
 			children = (
@@ -1004,17 +988,6 @@
 				220FFEB226C91F6600702CCE /* MDUserCoreDataStorage_Tests.swift */,
 			);
 			path = User;
-			sourceTree = "<group>";
-		};
-		220FFEAB26C91B5D00702CCE /* CoreDataCRUD */ = {
-			isa = PBXGroup;
-			children = (
-				220FFEAC26C91C3000702CCE /* MDCreateUserCoreDataStorageOperation.swift */,
-				220FFEAE26C91DD400702CCE /* MDReadUserCoreDataStorageOperation.swift */,
-				220FFEB426C9298200702CCE /* MDReadUsersCoreDataStorageOperation.swift */,
-				220FFEB026C91EF000702CCE /* MDDeleteUserCoreDataStorageOperation.swift */,
-			);
-			path = CoreDataCRUD;
 			sourceTree = "<group>";
 		};
 		221D280626C5062A004BC4F7 /* AuthenticationModule */ = {
@@ -1473,7 +1446,6 @@
 			children = (
 				22B8E6E726D3C8B3001CCCA8 /* Course */,
 				22DE582526C9537C0032A94C /* JWT */,
-				220FFE9426C9125400702CCE /* User */,
 				220FFE9326C9124C00702CCE /* Word */,
 				22493C4A26972E0E000DA480 /* Error */,
 			);
@@ -2591,7 +2563,6 @@
 				22EF01FF269DA99800FE4435 /* MDAPIError.swift in Sources */,
 				2270F3A626D2663F006B46F4 /* CDCourseResponseEntityAttributeName.swift in Sources */,
 				2258922526CA3DC600AD6F18 /* MDDeleteJWTCoreDataStorageOperation.swift in Sources */,
-				220FFEAF26C91DD400702CCE /* MDReadUserCoreDataStorageOperation.swift in Sources */,
 				227F8AB326CAB0DC00375A38 /* JWTResponse.swift in Sources */,
 				22DB2F7C26C3BE7900C1AADA /* CourseListDataProvider.swift in Sources */,
 				22B8E6E626D3C7C3001CCCA8 /* MDDeleteCourseProtocol.swift in Sources */,
@@ -2620,7 +2591,6 @@
 				22DB2F8926C3D3F400C1AADA /* CourseListTableViewDelegate.swift in Sources */,
 				220793C526C66F6A003D434B /* AuthValidationType.swift in Sources */,
 				22DE583026C954C00032A94C /* MDDeleteJWTProtocol.swift in Sources */,
-				220FFEB526C9298200702CCE /* MDReadUsersCoreDataStorageOperation.swift in Sources */,
 				228AE05D26EE07880088B4CF /* MDPasswordTextFieldWithToolBar.swift in Sources */,
 				22A2521426CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift in Sources */,
 				2291BAF526F754CF0012504D /* UITableView+Extension.swift in Sources */,
@@ -2658,7 +2628,6 @@
 				228722CC26D0DDC500C9D1BC /* MDUpdateJWTCoreDataStorageOperation.swift in Sources */,
 				2289CEDF2678CC34007254C3 /* MDStorageType.swift in Sources */,
 				229D2D4726EB53A60047B518 /* ChoiceAuthenticationOrRegistrationInteractor.swift in Sources */,
-				220FFEAD26C91C3000702CCE /* MDCreateUserCoreDataStorageOperation.swift in Sources */,
 				22B8E6E026D3C774001CCCA8 /* MDCRUDCourseProtocol.swift in Sources */,
 				22E2B4DD2664E43B00978E62 /* SettingsPresenter.swift in Sources */,
 				220793CE26C68081003D434B /* MDAPIAuth.swift in Sources */,
@@ -2730,7 +2699,6 @@
 				22DB2F7D26C3BE7900C1AADA /* CourseListDataManager.swift in Sources */,
 				229D2D4E26EB706E0047B518 /* UINavigationController+Extension.swift in Sources */,
 				22E17B1D26FDB565008CB714 /* MDAddCourseHeaderViewCellModel.swift in Sources */,
-				220FFEB126C91EF000702CCE /* MDDeleteUserCoreDataStorageOperation.swift in Sources */,
 				22014F872700980900D5250A /* MDWordListCellModel.swift in Sources */,
 				22E2B4EA2664EDA200978E62 /* SettingsCell.swift in Sources */,
 				2258922326CA3C8F00AD6F18 /* MDReadJWTsCoreDataStorageOperation.swift in Sources */,
