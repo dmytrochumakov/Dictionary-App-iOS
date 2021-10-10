@@ -73,10 +73,6 @@
 		22493C4726972877000DA480 /* MDOperationsResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C4626972877000DA480 /* MDOperationsResultWithCompletion.swift */; };
 		22493C4926972A03000DA480 /* CDWordResponseEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C4826972A03000DA480 /* CDWordResponseEntity+Extension.swift */; };
 		22493C4C26972E27000DA480 /* MDEntityOperationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C4B26972E26000DA480 /* MDEntityOperationError.swift */; };
-		22493C50269741D0000DA480 /* MDCreateWordCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C4F269741D0000DA480 /* MDCreateWordCoreDataStorageOperation.swift */; };
-		22493C52269741FF000DA480 /* MDDeleteWordCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C51269741FF000DA480 /* MDDeleteWordCoreDataStorageOperation.swift */; };
-		22493C542697420F000DA480 /* MDReadWordCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C532697420F000DA480 /* MDReadWordCoreDataStorageOperation.swift */; };
-		22493C562697421C000DA480 /* MDUpdateWordCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C552697421C000DA480 /* MDUpdateWordCoreDataStorageOperation.swift */; };
 		22493C5826974F4C000DA480 /* MDWordCoreDataStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C5726974F4C000DA480 /* MDWordCoreDataStorage_Tests.swift */; };
 		22557FC526C9587100A4FF31 /* MDJWTStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22557FC426C9587100A4FF31 /* MDJWTStorage.swift */; };
 		22557FC726C9589000A4FF31 /* MDJWTMemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22557FC626C9589000A4FF31 /* MDJWTMemoryStorage.swift */; };
@@ -234,7 +230,6 @@
 		22B8E6B726D3917C001CCCA8 /* MDLanguageMemoryStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6B626D3917C001CCCA8 /* MDLanguageMemoryStorage_Tests.swift */; };
 		22B8E6C226D39F30001CCCA8 /* MDLanguageCoreDataStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6C126D39F30001CCCA8 /* MDLanguageCoreDataStorage_Tests.swift */; };
 		22B8E6CA26D3A53E001CCCA8 /* MDLanguageStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6C926D3A53E001CCCA8 /* MDLanguageStorage_Tests.swift */; };
-		22B8E6D426D3B9EA001CCCA8 /* MDDeleteAllWordsCoreDataStorageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6D326D3B9EA001CCCA8 /* MDDeleteAllWordsCoreDataStorageOperation.swift */; };
 		22B8E6D926D3C4F4001CCCA8 /* MDCourseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6D826D3C4F4001CCCA8 /* MDCourseStorage.swift */; };
 		22B8E6DB26D3C519001CCCA8 /* MDCourseMemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6DA26D3C519001CCCA8 /* MDCourseMemoryStorage.swift */; };
 		22B8E6DD26D3C54B001CCCA8 /* MDCourseCoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6DC26D3C54B001CCCA8 /* MDCourseCoreDataStorage.swift */; };
@@ -433,10 +428,6 @@
 		22493C4626972877000DA480 /* MDOperationsResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDOperationsResultWithCompletion.swift; sourceTree = "<group>"; };
 		22493C4826972A03000DA480 /* CDWordResponseEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDWordResponseEntity+Extension.swift"; sourceTree = "<group>"; };
 		22493C4B26972E26000DA480 /* MDEntityOperationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntityOperationError.swift; sourceTree = "<group>"; };
-		22493C4F269741D0000DA480 /* MDCreateWordCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateWordCoreDataStorageOperation.swift; sourceTree = "<group>"; };
-		22493C51269741FF000DA480 /* MDDeleteWordCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteWordCoreDataStorageOperation.swift; sourceTree = "<group>"; };
-		22493C532697420F000DA480 /* MDReadWordCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadWordCoreDataStorageOperation.swift; sourceTree = "<group>"; };
-		22493C552697421C000DA480 /* MDUpdateWordCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUpdateWordCoreDataStorageOperation.swift; sourceTree = "<group>"; };
 		22493C5726974F4C000DA480 /* MDWordCoreDataStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordCoreDataStorage_Tests.swift; sourceTree = "<group>"; };
 		22557FC426C9587100A4FF31 /* MDJWTStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTStorage.swift; sourceTree = "<group>"; };
 		22557FC626C9589000A4FF31 /* MDJWTMemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTMemoryStorage.swift; sourceTree = "<group>"; };
@@ -598,7 +589,6 @@
 		22B8E6B626D3917C001CCCA8 /* MDLanguageMemoryStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLanguageMemoryStorage_Tests.swift; sourceTree = "<group>"; };
 		22B8E6C126D39F30001CCCA8 /* MDLanguageCoreDataStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLanguageCoreDataStorage_Tests.swift; sourceTree = "<group>"; };
 		22B8E6C926D3A53E001CCCA8 /* MDLanguageStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLanguageStorage_Tests.swift; sourceTree = "<group>"; };
-		22B8E6D326D3B9EA001CCCA8 /* MDDeleteAllWordsCoreDataStorageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteAllWordsCoreDataStorageOperation.swift; sourceTree = "<group>"; };
 		22B8E6D826D3C4F4001CCCA8 /* MDCourseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseStorage.swift; sourceTree = "<group>"; };
 		22B8E6DA26D3C519001CCCA8 /* MDCourseMemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseMemoryStorage.swift; sourceTree = "<group>"; };
 		22B8E6DC26D3C54B001CCCA8 /* MDCourseCoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseCoreDataStorage.swift; sourceTree = "<group>"; };
@@ -905,14 +895,6 @@
 			path = User;
 			sourceTree = "<group>";
 		};
-		220FFE9326C9124C00702CCE /* Word */ = {
-			isa = PBXGroup;
-			children = (
-				22493C4E2697419F000DA480 /* CoreDataCRUD */,
-			);
-			path = Word;
-			sourceTree = "<group>";
-		};
 		220FFEA526C9165700702CCE /* Word */ = {
 			isa = PBXGroup;
 			children = (
@@ -1174,18 +1156,6 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
-		22493C4E2697419F000DA480 /* CoreDataCRUD */ = {
-			isa = PBXGroup;
-			children = (
-				22493C4F269741D0000DA480 /* MDCreateWordCoreDataStorageOperation.swift */,
-				22493C532697420F000DA480 /* MDReadWordCoreDataStorageOperation.swift */,
-				22493C552697421C000DA480 /* MDUpdateWordCoreDataStorageOperation.swift */,
-				22493C51269741FF000DA480 /* MDDeleteWordCoreDataStorageOperation.swift */,
-				22B8E6D326D3B9EA001CCCA8 /* MDDeleteAllWordsCoreDataStorageOperation.swift */,
-			);
-			path = CoreDataCRUD;
-			sourceTree = "<group>";
-		};
 		22557FCD26C95A4200A4FF31 /* JWT */ = {
 			isa = PBXGroup;
 			children = (
@@ -1348,7 +1318,6 @@
 		2289CEBC2678CC34007254C3 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				220FFE9326C9124C00702CCE /* Word */,
 				22493C4A26972E0E000DA480 /* Error */,
 			);
 			path = Operations;
@@ -2356,7 +2325,6 @@
 				229D2D4526EB53A60047B518 /* ChoiceAuthenticationOrRegistrationRouter.swift in Sources */,
 				22E861BD26F9FF7F00AB1755 /* AboutApplicationViewController.swift in Sources */,
 				2291DAD727019DA900216B64 /* AddWordViewController.swift in Sources */,
-				22493C52269741FF000DA480 /* MDDeleteWordCoreDataStorageOperation.swift in Sources */,
 				228964B226F8AA4A00E23292 /* MDShowHideUpdateProgressHUD.swift in Sources */,
 				22E2B4F02664EF3200978E62 /* UICollectionView+Extension.swift in Sources */,
 				2220FCB426D50E6100B22515 /* CreateCourseRequest.swift in Sources */,
@@ -2397,7 +2365,6 @@
 				22557FC726C9589000A4FF31 /* MDJWTMemoryStorage.swift in Sources */,
 				221D281C26C533AF004BC4F7 /* AuthTextFieldDelegate.swift in Sources */,
 				22E327E426FB6C7C00445917 /* ShareFeedbackOption.swift in Sources */,
-				22B8E6D426D3B9EA001CCCA8 /* MDDeleteAllWordsCoreDataStorageOperation.swift in Sources */,
 				22DB2F8326C3D28900C1AADA /* CourseListTableViewDataSource.swift in Sources */,
 				227D5E672652585C00B54524 /* MDCollectionViewDelegateFlowLayoutPropertyProtocol.swift in Sources */,
 				22557FC526C9587100A4FF31 /* MDJWTStorage.swift in Sources */,
@@ -2421,7 +2388,6 @@
 				22C5862D26C79D360030B12D /* MDAPIStatusCode.swift in Sources */,
 				2289410C27102A6F00AEB08E /* MDAPIWordError.swift in Sources */,
 				22A2988C26FCB2F700E79843 /* MDHideKeyboardProtocol.swift in Sources */,
-				22493C562697421C000DA480 /* MDUpdateWordCoreDataStorageOperation.swift in Sources */,
 				22C5863D26C7AFB80030B12D /* RegistrationViewController.swift in Sources */,
 				2270F3A926D27606006B46F4 /* MDAPILanguage.swift in Sources */,
 				22493C4C26972E27000DA480 /* MDEntityOperationError.swift in Sources */,
@@ -2461,7 +2427,6 @@
 				22EDF02626C7E6A100D19DA1 /* CDJWTResponseEntity+Extension.swift in Sources */,
 				221D281026C5064A004BC4F7 /* AuthenticationRouter.swift in Sources */,
 				22CA088326515F020052D169 /* WordListRouter.swift in Sources */,
-				22493C50269741D0000DA480 /* MDCreateWordCoreDataStorageOperation.swift in Sources */,
 				229E08C42652CA5100DA56C4 /* MDNumberOfRowsInSectionProtocol.swift in Sources */,
 				2289CEDE2678CC34007254C3 /* MDWordMemoryStorage.swift in Sources */,
 				22B5C6352705A84200185954 /* MDEditWordError.swift in Sources */,
@@ -2601,7 +2566,6 @@
 				22D54B6F270EF06600DEE843 /* MDFilterSearchTextService.swift in Sources */,
 				22493C3B269724CB000DA480 /* CoreDataEntityName.swift in Sources */,
 				22C49869270440AF003276FF /* MDEditWordViewControllerConfiguration.swift in Sources */,
-				22493C542697420F000DA480 /* MDReadWordCoreDataStorageOperation.swift in Sources */,
 				221D280F26C5064A004BC4F7 /* AuthenticationPresenter.swift in Sources */,
 				22B8E6AC26D38A4D001CCCA8 /* MDCreateLanguageProtocol.swift in Sources */,
 				220FFE7726C9031800702CCE /* MDTextFieldWithToolBar.swift in Sources */,
