@@ -62,43 +62,184 @@ extension MDLanguageCoreDataStorage {
     
 }
 
-// MARK: - CRUD
+// MARK: - Create
 extension MDLanguageCoreDataStorage {
     
-    func createLanguages(_ languageEntities: [LanguageResponse], _ completionHandler: @escaping(MDOperationResultWithCompletion<[LanguageResponse]>)) {
-        let operation: MDCreateLanguagesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
-                                                                         coreDataStack: self.coreDataStack,
-                                                                         coreDataStorage: self,
-                                                                         languageEntities: languageEntities) { result in
-            completionHandler(result)
+    func createLanguages(_ languageEntities: [LanguageResponse],
+                         _ completionHandler: @escaping(MDOperationResultWithCompletion<[LanguageResponse]>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            if (languageEntities.isEmpty) {
+                
+                completionHandler(.success(languageEntities))
+                return
+                
+            } else {
+                
+                var resultCount: Int = .zero
+                
+                languageEntities.forEach { languageEntity in
+                    
+                    let _ = CDLanguageResponseEntity.init(languageResponse: languageEntity,
+                                                          insertIntoManagedObjectContext: self.managedObjectContext)
+                    
+                    self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
+                        
+                        switch result {
+                            
+                        case .success:
+                            
+                            //
+                            resultCount += 1
+                            //
+                            
+                            if (resultCount == languageEntities.count) {
+                                completionHandler(.success(languageEntities))
+                            }
+                            
+                            //
+                            break
+                            //
+                            
+                        case .failure(let error):
+                            
+                            //
+                            completionHandler(.failure(error))
+                            //
+                            
+                            //
+                            break
+                            //
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
-    func readLanguage(fromLanguageID languageID: Int64, _ completionHandler: @escaping(MDOperationResultWithCompletion<LanguageResponse>)) {
-        let operation: MDReadLanguageCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
-                                                                      coreDataStorage: self,
-                                                                      languageId: languageID) { result in
-            completionHandler(result)
+}
+
+// MARK: - Read
+extension MDLanguageCoreDataStorage {
+    
+    func readLanguage(fromLanguageID languageID: Int64,
+                      _ completionHandler: @escaping(MDOperationResultWithCompletion<LanguageResponse>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            let fetchRequest = NSFetchRequest<CDLanguageResponseEntity>(entityName: CoreDataEntityName.CDLanguageResponseEntity)
+            fetchRequest.predicate = NSPredicate(format: "\(CDLanguageResponseEntityAttributeName.languageId) == %i", languageID)
+            
+            do {
+                if let result = try self.managedObjectContext.fetch(fetchRequest).map({ $0.languageResponse }).first {
+                    completionHandler(.success(result))
+                    return
+                } else {
+                    completionHandler(.failure(MDEntityOperationError.cantFindEntity))
+                    return
+                }
+            } catch {
+                completionHandler(.failure(error))
+                return
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
     func readAllLanguages(_ completionHandler: @escaping(MDOperationResultWithCompletion<[LanguageResponse]>)) {
-        let operation: MDReadAllLanguagesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
-                                                                          coreDataStorage: self) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            
+            let fetchRequest = NSFetchRequest<CDLanguageResponseEntity>(entityName: CoreDataEntityName.CDLanguageResponseEntity)
+            
+            do {
+                completionHandler(.success(try self.managedObjectContext.fetch(fetchRequest).map({ $0.languageResponse })))
+                return
+            } catch {
+                completionHandler(.failure(error))
+                return
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
+}
+
+// MARK: - Delete
+extension MDLanguageCoreDataStorage {
+    
     func deleteAllLanguages(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
-        let operation: MDDeleteAllLanguagesCoreDataStorageOperation = .init(managedObjectContext: self.managedObjectContext,
-                                                                            coreDataStack: self.coreDataStack,
-                                                                            coreDataStorage: self) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDLanguageResponseEntity)
+            
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            
+            do {
+                
+                try self.managedObjectContext.execute(batchDeleteRequest)
+                
+                self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
+                    
+                    switch result {
+                        
+                    case .success:
+                        
+                        //
+                        completionHandler(.success(()))
+                        //
+                        
+                        //
+                        break
+                        //
+                        
+                    case .failure(let error):
+                        
+                        //
+                        completionHandler(.failure(error))
+                        //
+                        
+                        //
+                        break
+                        //
+                        
+                    }
+                    
+                }
+                
+            } catch {
+                completionHandler(.failure(error))
+                return
+            }
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
 }
