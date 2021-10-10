@@ -36,7 +36,7 @@ final class MDJWTCoreDataStorage: NSObject,
     
 }
 
-// MARK: - Is Empty
+// MARK: - Entities
 extension MDJWTCoreDataStorage {
     
     func entitiesCount(_ completionHandler: @escaping(MDEntitiesCountResultWithCompletion)) {

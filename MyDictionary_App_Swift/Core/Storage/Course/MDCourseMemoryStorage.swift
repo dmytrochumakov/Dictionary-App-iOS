@@ -14,9 +14,8 @@ protocol MDCourseMemoryStorageProtocol: MDCRUDCourseProtocol,
 
 final class MDCourseMemoryStorage: MDCourseMemoryStorageProtocol {
     
-    fileprivate let operationQueue: OperationQueue
-    
-    var array: [CourseResponse]
+    fileprivate let operationQueue: OperationQueue    
+    fileprivate var array: [CourseResponse]
     
     init(operationQueue: OperationQueue,
          array: [CourseResponse]) {

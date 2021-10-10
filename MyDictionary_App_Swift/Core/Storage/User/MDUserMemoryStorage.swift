@@ -14,9 +14,8 @@ protocol MDUserMemoryStorageProtocol: MDCRUDUserProtocol,
 
 final class MDUserMemoryStorage: MDUserMemoryStorageProtocol {
     
-    fileprivate let operationQueue: OperationQueue
-    
-    var array: [UserResponse]
+    fileprivate let operationQueue: OperationQueue    
+    fileprivate var array: [UserResponse]
     
     init(operationQueue: OperationQueue,
          array: [UserResponse]) {

@@ -15,8 +15,7 @@ protocol MDJWTMemoryStorageProtocol: MDCRUDJWTProtocol,
 final class MDJWTMemoryStorage: MDJWTMemoryStorageProtocol {
     
     fileprivate let operationQueue: OperationQueue
-    
-    var array: [JWTResponse]
+    fileprivate var array: [JWTResponse]
     
     init(operationQueue: OperationQueue,
          array: [JWTResponse]) {
@@ -32,6 +31,7 @@ final class MDJWTMemoryStorage: MDJWTMemoryStorageProtocol {
     
 }
 
+// MARK: - Entities
 extension MDJWTMemoryStorage {
     
     func entitiesCount(_ completionHandler: @escaping (MDEntitiesCountResultWithCompletion)) {
@@ -58,65 +58,236 @@ extension MDJWTMemoryStorage {
     
 }
 
+// MARK: - Create
 extension MDJWTMemoryStorage {
     
-    func createJWT(_ jwtResponse: JWTResponse, _ completionHandler: @escaping(MDOperationResultWithCompletion<JWTResponse>)) {
-        let operation = MDCreateJWTMemoryStorageOperation.init(memoryStorage: self,
-                                                               jwtResponse: jwtResponse) { result in
-            completionHandler(result)
+    func createJWT(_ jwtResponse: JWTResponse,
+                   _ completionHandler: @escaping(MDOperationResultWithCompletion<JWTResponse>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            //
+            self.array.append(jwtResponse)
+            //
+            
+            //
+            completionHandler(.success(jwtResponse))
+            //
+            
+            //
+            return
+            //
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
+    
+}
+
+// MARK: - Read
+extension MDJWTMemoryStorage {
     
     func readFirstJWT(_ completionHandler: @escaping(MDOperationResultWithCompletion<JWTResponse>)) {
-        let operation = MDReadFirstJWTMemoryStorageOperation.init(memoryStorage: self) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            
+            guard let jwtResponse = self.array.first
+            else {
+                
+                //
+                completionHandler(.failure(MDEntityOperationError.cantFindEntity))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+            //
+            completionHandler(.success(jwtResponse))
+            //
+            
+            //
+            return
+            //
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
-    func readJWT(fromAccessToken accessToken: String, _ completionHandler: @escaping(MDOperationResultWithCompletion<JWTResponse>)) {
-        let operation = MDReadJWTMemoryStorageOperation.init(memoryStorage: self,
-                                                             accessToken: accessToken) { result in
-            completionHandler(result)
+    func readJWT(fromAccessToken accessToken: String,
+                 _ completionHandler: @escaping(MDOperationResultWithCompletion<JWTResponse>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            guard let jwtResponse = self.array.first(where: { $0.accessToken == accessToken })
+            else {
+                
+                //
+                completionHandler(.failure(MDEntityOperationError.cantFindEntity));
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+            //
+            completionHandler(.success(jwtResponse))
+            //
+            
+            //
+            return
+            //
+            
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
     func readAllJWT(_ completionHandler: @escaping(MDOperationsResultWithCompletion<JWTResponse>)) {
-        let operation = MDReadAllJWTMemoryStorageOperation.init(memoryStorage: self) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            
+            //
+            completionHandler(.success(self.array))
+            //
+            
+            //
+            return
+            //
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
+    
+}
+
+// MARK: - Update
+extension MDJWTMemoryStorage {
     
     func updateJWT(oldAccessToken accessToken: String,
                    newJWTResponse jwtResponse: JWTResponse,
                    _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
         
-        let operation = MDUpdateJWTMemoryStorageOperation.init(memoryStorage: self,
-                                                               oldAccessToken: accessToken,
-                                                               newJWTResponse: jwtResponse) { result in
-            completionHandler(result)
+        let operation: BlockOperation = .init {
+            
+            guard let index = self.array.firstIndex(where: { $0.accessToken == accessToken })
+            else {
+                
+                //
+                completionHandler(.failure(MDEntityOperationError.cantFindEntity));
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+            //
+            self.array[index] = jwtResponse
+            //
+            
+            //
+            completionHandler(.success(()))
+            //
+            
+            //
+            return
+            //
+            
         }
         
+        //
         operationQueue.addOperation(operation)
+        //
         
-    }    
+    }
     
-    func deleteJWT(_ byAccessToken: String, _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
-        let operation = MDDeleteJWTMemoryStorageOperation.init(memoryStorage: self,
-                                                               accessToken: byAccessToken) { result in
-            completionHandler(result)
+}
+
+// MARK: - Delete
+extension MDJWTMemoryStorage {
+    
+    func deleteJWT(_ byAccessToken: String,
+                   _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            guard let index = self.array.firstIndex(where: { $0.accessToken == byAccessToken })
+            else {
+                
+                //
+                completionHandler(.failure(MDEntityOperationError.cantFindEntity));
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+            //
+            self.array.remove(at: index)
+            //
+            
+            //
+            completionHandler(.success(()))
+            //
+            
+            //
+            return
+            //
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
     func deleteAllJWT(_ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
-        let operation: MDDeleteAllJWTMemoryStorageOperation = .init(memoryStorage: self) { result in
-            completionHandler(result)
+        
+        let operation: BlockOperation = .init {
+            
+            //
+            self.array.removeAll()
+            //
+            
+            //
+            completionHandler(.success(()))
+            //
+            
+            //
+            return
+            //
+            
         }
+        
+        //
         operationQueue.addOperation(operation)
+        //
+        
     }
     
 }
