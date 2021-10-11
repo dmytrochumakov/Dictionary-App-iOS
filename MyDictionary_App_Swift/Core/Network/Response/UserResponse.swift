@@ -29,10 +29,17 @@ struct UserResponse {
 extension UserResponse {
     
     func cdUserResponseEntity(password: String,
-                              insertIntoManagedObjectContext: NSManagedObjectContext) -> CDUserResponseEntity {
-        return .init(userResponse: self,
-                     password: password,
-                     insertIntoManagedObjectContext: insertIntoManagedObjectContext)
+                              context: NSManagedObjectContext) -> CDUserResponseEntity {
+        
+        let cdUserResponseEntity: CDUserResponseEntity = .init(context: context)
+        
+        cdUserResponseEntity.userId = self.userId
+        cdUserResponseEntity.nickname = self.nickname
+        cdUserResponseEntity.password = password
+        cdUserResponseEntity.createdAt = self.createdAt
+        
+        return cdUserResponseEntity
+        
     }
     
 }
