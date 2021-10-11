@@ -68,7 +68,7 @@ extension MDUserCoreDataStorage_Tests {
                 
             case .success(let createdUser):
                 
-                userCoreDataStorage.readFirstUser() { readResult in
+                userCoreDataStorage.readUser(fromUserID: createdUser.userId) { readResult in
                     
                     switch readResult {
                         

@@ -91,7 +91,7 @@ extension MDUserStorage_Tests {
                 
             case .success(let createdUser):
                 
-                userStorage.readFirstUser(storageType: storageType) { readResults in
+                userStorage.readUser(fromUserID: createdUser.userId, storageType: storageType) { readResults in
                     
                     readResults.forEach { readResult in
                         
