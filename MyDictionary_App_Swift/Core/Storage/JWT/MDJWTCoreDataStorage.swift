@@ -71,8 +71,7 @@ extension MDJWTCoreDataStorage {
         
         let operation: BlockOperation = .init {
             
-            let newJWTResponse = CDJWTResponseEntity.init(jwtResponse: jwtResponse,
-                                                          insertIntoManagedObjectContext: self.managedObjectContext)
+            let newJWTResponse = jwtResponse.cdJWTResponseEntity(context: self.managedObjectContext)
             
             self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
                 

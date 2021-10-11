@@ -18,9 +18,15 @@ struct LanguageResponse {
 // MARK: - Core Data
 extension LanguageResponse {
     
-    func cdLanguageResponseEntity(insertIntoManagedObjectContext: NSManagedObjectContext) -> CDLanguageResponseEntity {
-        return .init(languageResponse: self,
-                     insertIntoManagedObjectContext: insertIntoManagedObjectContext)
+    func cdLanguageResponseEntity(context: NSManagedObjectContext) -> CDLanguageResponseEntity {
+        
+        let cdLanguageResponseEntity: CDLanguageResponseEntity = .init(context: context)
+        
+        cdLanguageResponseEntity.languageId = self.languageId
+        cdLanguageResponseEntity.languageName = self.languageName
+        
+        return cdLanguageResponseEntity
+        
     }
     
 }

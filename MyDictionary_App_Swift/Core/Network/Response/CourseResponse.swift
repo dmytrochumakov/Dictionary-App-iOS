@@ -21,9 +21,18 @@ struct CourseResponse {
 // MARK: - Core Data
 extension CourseResponse {
     
-    func cdCourseResponseEntity(insertIntoManagedObjectContext: NSManagedObjectContext) -> CDCourseResponseEntity {
-        return .init(courseResponse: self,
-                     insertIntoManagedObjectContext: insertIntoManagedObjectContext)
+    func cdCourseResponseEntity(context: NSManagedObjectContext) -> CDCourseResponseEntity {
+        
+        let cdCourseResponseEntity: CDCourseResponseEntity = .init(context: context)
+        
+        cdCourseResponseEntity.userId = self.userId
+        cdCourseResponseEntity.courseId = self.courseId
+        cdCourseResponseEntity.languageId = self.languageId
+        cdCourseResponseEntity.languageName = self.languageName
+        cdCourseResponseEntity.createdAt = self.createdAt
+        
+        return cdCourseResponseEntity
+        
     }
     
 }

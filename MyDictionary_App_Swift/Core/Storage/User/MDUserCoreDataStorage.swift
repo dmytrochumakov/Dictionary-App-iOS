@@ -72,10 +72,8 @@ extension MDUserCoreDataStorage {
         
         let operation: BlockOperation = .init {
             
-            let newUser = CDUserResponseEntity.init(userResponse: userEntity,
-                                                    password: password,
-                                                    insertIntoManagedObjectContext: self.managedObjectContext)
-            
+            let newUser = userEntity.cdUserResponseEntity(password: password,
+                                                          context: self.managedObjectContext)
             
             self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
                 

@@ -70,8 +70,7 @@ extension MDCourseCoreDataStorage {
         
         let operation: BlockOperation = .init {
             
-            let newCourseEntity = CDCourseResponseEntity.init(courseResponse: courseEntity,
-                                                              insertIntoManagedObjectContext: self.managedObjectContext)
+            let newCourseEntity = courseEntity.cdCourseResponseEntity(context: self.managedObjectContext)
             
             self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
                 
@@ -130,9 +129,7 @@ extension MDCourseCoreDataStorage {
                 
                 courseEntities.forEach { courseEntity in
                     
-                    let _ = CDCourseResponseEntity.init(courseResponse: courseEntity,
-                                                        insertIntoManagedObjectContext: self.managedObjectContext)
-                    
+                    let _ = courseEntity.cdCourseResponseEntity(context: self.managedObjectContext)                    
                     
                     self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
                         
