@@ -71,8 +71,7 @@ extension MDWordCoreDataStorage {
         
         let operation: BlockOperation = .init {
             
-            let newWord = CDWordResponseEntity.init(wordResponse: wordModel,
-                                                    insertIntoManagedObjectContext: self.managedObjectContext)
+            let newWord = wordModel.cdWordEntity(context: self.managedObjectContext)
             
             self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
                 
@@ -130,8 +129,7 @@ extension MDWordCoreDataStorage {
                 
                 wordModels.forEach { word in
                     
-                    let _ = CDWordResponseEntity.init(wordResponse: word,
-                                                      insertIntoManagedObjectContext: self.managedObjectContext)
+                    let _ = word.cdWordEntity(context: self.managedObjectContext)
                     
                     self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
                         

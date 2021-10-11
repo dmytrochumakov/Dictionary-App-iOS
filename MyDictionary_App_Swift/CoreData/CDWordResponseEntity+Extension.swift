@@ -6,28 +6,6 @@
 //
 
 import Foundation
-import CoreData
-
-extension CDWordResponseEntity {
-    
-    convenience init(wordResponse: WordResponse,
-                     insertIntoManagedObjectContext context: NSManagedObjectContext!) {
-        
-        let entity = NSEntityDescription.entity(forEntityName: CoreDataEntityName.CDWordResponseEntity, in: context)!
-        self.init(entity: entity, insertInto: context)
-        
-        self.userId = wordResponse.userId
-        self.wordId = wordResponse.wordId
-        self.courseId = wordResponse.courseId
-        self.languageId = wordResponse.languageId
-        self.wordText = wordResponse.wordText
-        self.wordDescription = wordResponse.wordDescription
-        self.languageName = wordResponse.languageName
-        self.createdAt = wordResponse.createdAt
-        
-    }
-    
-}
 
 extension CDWordResponseEntity {
     

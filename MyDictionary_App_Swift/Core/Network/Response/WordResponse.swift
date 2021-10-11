@@ -24,9 +24,21 @@ struct WordResponse {
 // MARK: - Core Data
 extension WordResponse {
     
-    func cdWordEntity(insertIntoManagedObjectContext: NSManagedObjectContext) -> CDWordResponseEntity {
-        return .init(wordResponse: self,
-                     insertIntoManagedObjectContext: insertIntoManagedObjectContext)
+    func cdWordEntity(context: NSManagedObjectContext) -> CDWordResponseEntity {
+        
+        let cdWordResponseEntity: CDWordResponseEntity = .init(context: context)
+        
+        cdWordResponseEntity.userId = self.userId
+        cdWordResponseEntity.wordId = self.wordId
+        cdWordResponseEntity.courseId = self.courseId
+        cdWordResponseEntity.languageId = self.languageId
+        cdWordResponseEntity.wordText = self.wordText
+        cdWordResponseEntity.wordDescription = self.wordDescription
+        cdWordResponseEntity.languageName = self.languageName
+        cdWordResponseEntity.createdAt = self.createdAt
+        
+        return cdWordResponseEntity
+        
     }
     
 }
