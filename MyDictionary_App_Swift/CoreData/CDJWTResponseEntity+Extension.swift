@@ -5,22 +5,7 @@
 //  Created by Dmytro Chumakov on 14.08.2021.
 //
 
-import CoreData
-
-extension CDJWTResponseEntity {
-    
-    convenience init(jwtResponse: JWTResponse,
-                     insertIntoManagedObjectContext context: NSManagedObjectContext!) {
-        
-        let entity = NSEntityDescription.entity(forEntityName: CoreDataEntityName.CDJWTResponseEntity, in: context)!
-        self.init(entity: entity, insertInto: context)
-        
-        self.accessToken = jwtResponse.accessToken
-        self.expirationDate = jwtResponse.expirationDate
-        
-    }
-    
-}
+import Foundation
 
 extension CDJWTResponseEntity {
     

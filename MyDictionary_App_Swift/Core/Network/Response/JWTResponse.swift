@@ -27,9 +27,15 @@ struct JWTResponse {
 
 extension JWTResponse {
     
-    func cdJWTResponseEntity(insertIntoManagedObjectContext: NSManagedObjectContext) -> CDJWTResponseEntity {
-        return .init(jwtResponse: self,
-                     insertIntoManagedObjectContext: insertIntoManagedObjectContext)
+    func cdJWTResponseEntity(context: NSManagedObjectContext) -> CDJWTResponseEntity {
+        
+        let cdJWTResponseEntity: CDJWTResponseEntity = .init(context: context)
+        
+        cdJWTResponseEntity.accessToken = self.accessToken
+        cdJWTResponseEntity.expirationDate = self.expirationDate
+        
+        return cdJWTResponseEntity
+        
     }
     
 }
