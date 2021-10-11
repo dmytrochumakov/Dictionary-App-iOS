@@ -81,8 +81,7 @@ extension MDLanguageCoreDataStorage {
                 
                 languageEntities.forEach { languageEntity in
                     
-                    let _ = CDLanguageResponseEntity.init(languageResponse: languageEntity,
-                                                          insertIntoManagedObjectContext: self.managedObjectContext)
+                    let _ = languageEntity.cdLanguageResponseEntity(context: self.managedObjectContext)
                     
                     self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
                         
