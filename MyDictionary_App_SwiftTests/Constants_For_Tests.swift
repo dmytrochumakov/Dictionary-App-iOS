@@ -10,7 +10,7 @@ import XCTest
 
 struct Constants_For_Tests {
     
-    public static let testExpectationTimeout: TimeInterval = 20.0
+    public static let testExpectationTimeout: TimeInterval = 60.0
     
     public static let mockedWord0: WordResponse = .init(userId: .init(),
                                                         wordId: .init(),

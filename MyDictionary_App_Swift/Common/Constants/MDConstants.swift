@@ -50,8 +50,8 @@ struct MDConstants {
     struct URLSessionConfigurationConstants {
         /// Default is default
         fileprivate static let sessionConfiguration: URLSessionConfiguration = .default
-        /// Default is 30 seconds
-        fileprivate static let timeoutIntervalForResource: TimeInterval = 30
+        /// Default is 60 seconds
+        fileprivate static let timeoutIntervalForResource: TimeInterval = 60
         /// Default is 3
         fileprivate static let maxConcurrentOperationCount: Int = 3
         /// Default is QualityOfService.userInitiated

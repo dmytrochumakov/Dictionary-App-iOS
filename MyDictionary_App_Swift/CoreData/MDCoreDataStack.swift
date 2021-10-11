@@ -7,26 +7,43 @@
 
 import CoreData
 
-open class MDCoreDataStack {
+open class MDCoreDataStack: NSObject {
     
-    public static let model: NSManagedObjectModel = {
-        let modelURL = Bundle.main.url(forResource: MDConstants.StaticText.appName,
-                                       withExtension: MDConstants.StaticText.momdExtension)!
-        return NSManagedObjectModel(contentsOf: modelURL)!
-    }()
+    fileprivate var mainContext: NSManagedObjectContext
+    public var privateContext: NSManagedObjectContext
     
-    public init() {
+    public override init() {
+        
+        //
+        let mainContext: NSManagedObjectContext = .init(concurrencyType: .mainQueueConcurrencyType)
+        self.mainContext = mainContext
+        //
+        
+        //
+        let privateContext: NSManagedObjectContext = .init(concurrencyType: .privateQueueConcurrencyType)
+        self.privateContext = privateContext
+        
+        //
+        
+        super.init()
+        
+        //
+        self.mainContext.persistentStoreCoordinator = self.coordinator
+        //
+        
+        //
+        self.privateContext.persistentStoreCoordinator = self.coordinator
+        //
+        
     }
     
-    fileprivate lazy var mainContext: NSManagedObjectContext = {
-        return storeContainer.viewContext
-    }()
+    deinit {
+        debugPrint(#function, Self.self)
+    }
     
-    public lazy var privateContext: NSManagedObjectContext = {
-        let moc = NSManagedObjectContext.init(concurrencyType: .privateQueueConcurrencyType)
-        moc.parent = mainContext
-        return moc
-    }()
+    fileprivate var coordinator: NSPersistentStoreCoordinator {
+        return storeContainer.persistentStoreCoordinator
+    }
     
     public lazy var storeContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: MDConstants.StaticText.appName,
@@ -39,28 +56,45 @@ open class MDCoreDataStack {
         return container
     }()
     
+    public static let model: NSManagedObjectModel = {
+        let modelURL = Bundle.main.url(forResource: MDConstants.StaticText.appName,
+                                       withExtension: MDConstants.StaticText.momdExtension)!
+        return NSManagedObjectModel(contentsOf: modelURL)!
+    }()
+    
 }
 
 // MARK: - Save
 extension MDCoreDataStack {
     
-    public func save(managedObjectContext: NSManagedObjectContext, completionHandler: @escaping CDResultSaved) {
+    public func save(managedObjectContext: NSManagedObjectContext,
+                     completionHandler: @escaping CDResultSaved) {
         
         managedObjectContext.performAndWait {
             
-            mainContext.performAndWait {
+            do {
                 
-                do {
-                    if (managedObjectContext.hasChanges)  {
-                        try managedObjectContext.save()
-                    }
-                    if (self.mainContext.hasChanges) {
-                        try self.mainContext.save()
-                    }
-                    completionHandler(.success)
-                } catch {
-                    completionHandler(.failure(error))
-                }
+                //
+                try managedObjectContext.save()
+                //
+                
+                //
+                completionHandler(.success)
+                //
+                
+                //
+                return
+                //
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
                 
             }
             
