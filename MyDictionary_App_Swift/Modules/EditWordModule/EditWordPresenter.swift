@@ -10,10 +10,8 @@ protocol EditWordPresenterInputProtocol: MDViewDidLoadProtocol,
                                          MDTextFieldDelegatePropertyProtocol,
                                          MDTextViewDelegatePropertyProtocol {
     
-    var getWordText: String { get }
-    var editButtonIsSelected: Bool { get }
+    var getWordText: String { get }    
     
-    func editWordButtonClicked()
     func updateButtonClicked()
     func deleteButtonClicked()
     
@@ -25,18 +23,14 @@ protocol EditWordPresenterOutputProtocol: AnyObject,
                                           MDShowErrorProtocol,
                                           MDShowHideProgressHUD {
     
-    func updateVisibilityViews()
-    func updateWordDescriptionTextViewTopConstraint()
-    
     func fillWordTextField(_ text: String)
     func fillWordDescriptionTextView(_ text: String)
     
     func updateWordTextFieldCounter(_ count: Int)
     func updateWordDescriptionTextViewCounter(_ count: Int)
     
-    func updateIsEditableWordDescriptionTextView(_ isEditable: Bool)
-    
     func makeWordDescriptionTextViewActive()
+    
     func wordTextFieldShouldClearAction()
     
 }
@@ -68,14 +62,6 @@ final class EditWordPresenter: NSObject, EditWordPresenterProtocol {
 
 // MARK: - EditWordInteractorOutputProtocol
 extension EditWordPresenter: EditWordInteractorOutputProtocol {
-    
-    func updateVisibilityViews() {
-        presenterOutput?.updateVisibilityViews()
-    }
-    
-    func updateWordDescriptionTextViewTopConstraint() {
-        presenterOutput?.updateWordDescriptionTextViewTopConstraint()
-    }
     
     func showProgressHUD() {
         presenterOutput?.showProgressHUD()
@@ -109,10 +95,6 @@ extension EditWordPresenter: EditWordInteractorOutputProtocol {
         presenterOutput?.updateWordDescriptionTextViewCounter(count)
     }
     
-    func updateIsEditableWordDescriptionTextView(_ isEditable: Bool) {
-        presenterOutput?.updateIsEditableWordDescriptionTextView(isEditable)
-    }
-    
     func makeWordDescriptionTextViewActive() {
         presenterOutput?.makeWordDescriptionTextViewActive()
     }
@@ -130,20 +112,12 @@ extension EditWordPresenter: EditWordPresenterInputProtocol {
         return interactor.getWordText
     }
     
-    var editButtonIsSelected: Bool {
-        return interactor.editButtonIsSelected
-    }
-    
     var textFieldDelegate: UITextFieldDelegate {
         return interactor.textFieldDelegate
     }
     
     var textViewDelegate: UITextViewDelegate {
         return interactor.textViewDelegate
-    }
-    
-    func editWordButtonClicked() {
-        interactor.editWordButtonClicked()
     }
     
     func viewDidLoad() {

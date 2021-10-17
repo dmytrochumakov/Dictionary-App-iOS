@@ -9,22 +9,18 @@ import Foundation
 protocol EditWordDataProviderProtocol {
     var word: WordResponse { get set }
     var copiedWord: WordResponse { get }
-    var editButtonIsSelected: Bool { get set }
 }
 
 final class EditWordDataProvider: EditWordDataProviderProtocol {
     
     var word: WordResponse
     var copiedWord: WordResponse
-    var editButtonIsSelected: Bool
     
     init(word: WordResponse,
-         copiedWord: WordResponse,
-         editButtonIsSelected: Bool) {
+         copiedWord: WordResponse) {
         
         self.word = word
-        self.copiedWord = copiedWord
-        self.editButtonIsSelected = editButtonIsSelected
+        self.copiedWord = copiedWord        
         
     }
     
