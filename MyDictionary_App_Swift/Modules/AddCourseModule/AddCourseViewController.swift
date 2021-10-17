@@ -89,11 +89,11 @@ extension AddCourseViewController: AddCoursePresenterOutputProtocol {
     }
     
     func reloadData() {
-            self.collectionView.reloadData()        
+        self.collectionView.reloadData()        
     }
     
     func hideKeyboard() {
-            MDConstants.Keyboard.hideKeyboard(rootView: self.view)
+        MDConstants.Keyboard.hideKeyboard(rootView: self.view)
     }
     
     func selectAndDeselectRow(at results: [Bool : IndexPath]) {
