@@ -103,9 +103,21 @@ fileprivate extension MDBaseTitledNavigationBarViewController {
 fileprivate extension MDBaseTitledNavigationBarViewController {
     
     static func titleLabelWidth(fromText text: String) -> CGFloat {
-        return text.widthFromLabel(font: Self.titleLabelFont,
-                                   height: Self.titleLabelHeight,
-                                   numberOfLines: Self.titleLabelNumberOfLines)
+        
+        //
+        let newWidth: CGFloat = text.widthFromLabel(font: Self.titleLabelFont,
+                                                    height: Self.titleLabelHeight,
+                                                    numberOfLines: Self.titleLabelNumberOfLines)
+        //
+        
+        //
+        if (newWidth > (UIScreen.main.bounds.width / 1.5)) {
+            return UIScreen.main.bounds.width / 1.5
+        } else {
+            return newWidth
+        }
+        //
+        
     }
     
 }
