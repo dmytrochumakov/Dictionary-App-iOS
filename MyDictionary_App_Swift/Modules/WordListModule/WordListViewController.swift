@@ -26,11 +26,16 @@ final class WordListViewController: MDBaseLargeTitledBackNavigationBarViewContro
         return tableView
     }()
     
-    fileprivate static let addNewWordButtonSize: CGSize = .init(width: 40, height: 40)
-    fileprivate static let addNewWordButtonRightOffset: CGFloat = 8
+    fileprivate static let addNewWordButtonHeight: CGFloat = 48
+    fileprivate static let addNewWordButtonLeftOffset: CGFloat = 16
+    fileprivate static let addNewWordButtonRightOffset: CGFloat = 16
+    fileprivate static let addNewWordButtonBottomOffset: CGFloat = 24
     fileprivate let addNewWordButton: UIButton = {
         let button: UIButton = .init()
-        button.setImage(MDUIResources.Image.add.image, for: .normal)
+        button.backgroundColor = MDUIResources.Color.md_4400D4.color()
+        button.setTitle(MDLocalizedText.add.localized, for: .normal)
+        button.setTitleColor(MDUIResources.Color.md_FFFFFF.color(), for: .normal)
+        button.titleLabel?.font = MDUIResources.Font.MyriadProRegular.font()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -67,6 +72,8 @@ final class WordListViewController: MDBaseLargeTitledBackNavigationBarViewContro
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         addConstraints()
+        roundOffEdges()
+        dropShadow()
     }
     
 }
@@ -107,7 +114,7 @@ extension WordListViewController: WordListPresenterOutputProtocol {
     }
     
     func updateRow(atIndexPath indexPath: IndexPath) {
-        self.tableView.reloadRows(at: [indexPath], with: .fade)        
+        self.tableView.reloadRows(at: [indexPath], with: .fade)
     }
     
 }
@@ -183,27 +190,30 @@ fileprivate extension WordListViewController {
                                                    toItem: self.view,
                                                    constant: .zero)
         
-        NSLayoutConstraint.addEqualBottomConstraint(item: self.tableView,
-                                                    toItem: self.view,
-                                                    constant: .zero)
+        NSLayoutConstraint.addEqualConstraint(item: self.tableView,
+                                              attribute: .bottom,
+                                              toItem: self.addNewWordButton,
+                                              attribute: .top,
+                                              constant: .zero)
         
     }
     
     func addAddNewWordButtonConstraints() {
         
-        NSLayoutConstraint.addEqualCenterYConstraint(item: self.addNewWordButton,
-                                                     toItem: self.backButton,
-                                                     constant: .zero)
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.addNewWordButton,
+                                                  toItem: self.view,
+                                                  constant: Self.addNewWordButtonLeftOffset)
         
         NSLayoutConstraint.addEqualRightConstraint(item: self.addNewWordButton,
-                                                   toItem: self.navigationBarView,
+                                                   toItem: self.view,
                                                    constant: -Self.addNewWordButtonRightOffset)
         
         NSLayoutConstraint.addEqualHeightConstraint(item: self.addNewWordButton,
-                                                    constant: Self.addNewWordButtonSize.height)
+                                                    constant: Self.addNewWordButtonHeight)
         
-        NSLayoutConstraint.addEqualWidthConstraint(item: self.addNewWordButton,
-                                                   constant: Self.addNewWordButtonSize.width)
+        NSLayoutConstraint.addEqualBottomConstraint(item: self.addNewWordButton,
+                                                    toItem: self.view,
+                                                    constant: -Self.addNewWordButtonBottomOffset)
         
     }
     
@@ -220,6 +230,34 @@ fileprivate extension WordListViewController {
         self.tableView.delegate = self.presenter.tableViewDelegate
         self.tableView.dataSource = self.presenter.tableViewDataSource
         self.tableView.backgroundColor = .clear
+    }
+    
+}
+
+// MARK: - Drop Shadow
+fileprivate extension WordListViewController {
+    
+    func dropShadow() {
+        addNewWordButtonDropShadow()
+    }
+    
+    func addNewWordButtonDropShadow() {
+        addNewWordButton.dropShadow(color: MDUIResources.Color.md_4400D4.color(0.5),
+                                    offSet: .init(width: 0, height: 4),
+                                    radius: 10)
+    }
+    
+}
+
+// MARK: - Round Off Edges
+fileprivate extension WordListViewController {
+    
+    func roundOffEdges() {
+        roundOffEdgesAddNewWordButton()
+    }
+    
+    func roundOffEdgesAddNewWordButton() {
+        self.addNewWordButton.layer.cornerRadius = 10
     }
     
 }
