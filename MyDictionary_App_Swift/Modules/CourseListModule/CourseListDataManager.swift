@@ -206,11 +206,9 @@ extension CourseListDataManager {
     
     func addCourse(atNewCourse course: CourseResponse) -> IndexPath {
         //
-        self.dataProvider.filteredCourses.append(course)
-        //
-        let section = (dataProvider.numberOfSections - 1)
-        let row = (dataProvider.numberOfRowsInSection(section) - 1)
-        return .init(row: row, section: section)
+        self.dataProvider.filteredCourses.insert(course, at: .zero)
+        //        
+        return .init(row: .zero, section: .zero)
     }
     
 }
