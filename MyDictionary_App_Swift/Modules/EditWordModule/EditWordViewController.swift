@@ -25,13 +25,6 @@ final class EditWordViewController: MDBaseTitledBackNavigationBarViewController 
         return view
     }()
     
-    fileprivate let editWordButton: UIButton = {
-        let button: UIButton = .init()
-        button.setImage(MDEditWordViewControllerConfiguration.EditWordButton.image, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
     fileprivate let wordTextField: MDCounterTextFieldWithToolBar = {
         let textField: MDCounterTextFieldWithToolBar = MDCounterTextFieldWithToolBar.init(rectInset: MDConstants.Rect.defaultInset,
                                                                                           keyboardToolbar: MDKeyboardToolbar.init())
@@ -48,7 +41,6 @@ final class EditWordViewController: MDBaseTitledBackNavigationBarViewController 
         return textField
     }()
     
-    fileprivate var wordDescriptionTextViewTopConstraint: NSLayoutConstraint!
     fileprivate let wordDescriptionTextView: MDTextViewWithToolBar = {
         let textView: MDTextViewWithToolBar = .init(keyboardToolbar: .init())
         textView.placeholder = MDLocalizedText.wordDescription.localized
@@ -133,45 +125,6 @@ final class EditWordViewController: MDBaseTitledBackNavigationBarViewController 
 // MARK: - EditWordPresenterOutputProtocol
 extension EditWordViewController: EditWordPresenterOutputProtocol {
     
-    func updateVisibilityViews() {
-        
-        UIView.animate(withDuration: 0.25,
-                       delay: 0.0,
-                       options: [.curveEaseInOut],
-                       animations: {
-            
-            //
-            self.wordTextField.isHidden = MDEditWordViewControllerConfiguration.WordTextField.isHidden(editButtonIsSelected: self.presenter.editButtonIsSelected)
-            //
-            self.updateButton.isHidden = MDEditWordViewControllerConfiguration.UpdateButton.isHidden(editButtonIsSelected: self.presenter.editButtonIsSelected)
-            //
-            self.deleteButton.isHidden = MDEditWordViewControllerConfiguration.DeleteButton.isHidden(editButtonIsSelected: self.presenter.editButtonIsSelected)
-            //
-            self.editWordButton.isHidden = MDEditWordViewControllerConfiguration.EditWordButton.isHidden(editButtonIsSelected: self.presenter.editButtonIsSelected)
-            //
-            
-        }, completion: nil)
-        
-    }
-    
-    func updateWordDescriptionTextViewTopConstraint() {
-        
-        UIView.animate(withDuration: 0.05,
-                       delay: 0.0,
-                       options: [.curveEaseInOut],
-                       animations: {
-            
-            //
-            self.wordDescriptionTextViewTopConstraint.constant =  MDEditWordViewControllerConfiguration.WordDescriptionTextView.topOffset(editButtonIsSelected: self.presenter.editButtonIsSelected,
-                                                                                                                                          navigationController: self.navigationController)
-            //
-            self.view.layoutIfNeeded()
-            //
-            
-        }, completion: nil)
-        
-    }
-    
     func showProgressHUD() {
         self.hud.showProgressHUD(withConfiguration: .init(view: self.view))
     }
@@ -227,7 +180,6 @@ fileprivate extension EditWordViewController {
         addScrollView()
         addContentView()
         bringSubviewsToFront()
-        addEditWordButton()
         addWordTextField()
         addWordDescriptionTextView()
         addWordDescriptionCounterLabel()
@@ -248,11 +200,6 @@ fileprivate extension EditWordViewController {
     
     func addContentView() {
         scrollView.addSubview(contentView)
-    }
-    
-    func addEditWordButton() {
-        editWordButton.addTarget(self, action: #selector(editWordButtonAction), for: .touchUpInside)
-        view.addSubview(editWordButton)
     }
     
     func addWordTextField() {
@@ -289,7 +236,6 @@ fileprivate extension EditWordViewController {
     func addConstraints() {
         addScrollViewConstraints()
         addContentViewConstraints()
-        addEditWordButtonConstraints()
         addWordTextFieldConstraints()
         addWordDescriptionTextViewConstraints()
         addWordDescriptionCounterLabelConstraints()
@@ -319,24 +265,6 @@ fileprivate extension EditWordViewController {
         
     }
     
-    func addEditWordButtonConstraints() {
-        
-        NSLayoutConstraint.addEqualCenterYConstraint(item: self.editWordButton,
-                                                     toItem: self.backButton,
-                                                     constant: .zero)
-        
-        NSLayoutConstraint.addEqualRightConstraint(item: self.editWordButton,
-                                                   toItem: self.navigationBarView,
-                                                   constant: -MDEditWordViewControllerConfiguration.EditWordButton.rightOffset)
-        
-        NSLayoutConstraint.addEqualHeightConstraint(item: self.editWordButton,
-                                                    constant: MDEditWordViewControllerConfiguration.EditWordButton.size.height)
-        
-        NSLayoutConstraint.addEqualWidthConstraint(item: self.editWordButton,
-                                                   constant: MDEditWordViewControllerConfiguration.EditWordButton.size.width)
-        
-    }
-    
     func addWordTextFieldConstraints() {
         
         NSLayoutConstraint.addEqualConstraint(item: self.wordTextField,
@@ -360,12 +288,11 @@ fileprivate extension EditWordViewController {
     
     func addWordDescriptionTextViewConstraints() {
         
-        self.wordDescriptionTextViewTopConstraint = NSLayoutConstraint.addEqualConstraint(item: self.wordDescriptionTextView,
-                                                                                          attribute: .top,
-                                                                                          toItem: self.contentView,
-                                                                                          attribute: .top,
-                                                                                          constant: MDEditWordViewControllerConfiguration.WordDescriptionTextView.topOffset(editButtonIsSelected: presenter.editButtonIsSelected,
-                                                                                                                                                                            navigationController: navigationController))
+        NSLayoutConstraint.addEqualConstraint(item: self.wordDescriptionTextView,
+                                              attribute: .top,
+                                              toItem: self.wordTextField,
+                                              attribute: .bottom,
+                                              constant: MDEditWordViewControllerConfiguration.WordDescriptionTextView.topOffset)
         
         NSLayoutConstraint.addEqualLeftConstraint(item: self.wordDescriptionTextView,
                                                   toItem: self.contentView,
@@ -523,10 +450,6 @@ fileprivate extension EditWordViewController {
 
 // MARK: - Actions
 fileprivate extension EditWordViewController {
-    
-    @objc func editWordButtonAction() {
-        presenter.editWordButtonClicked()
-    }
     
     @objc func updateButtonAction() {
         presenter.updateButtonClicked()

@@ -9,11 +9,10 @@ import UIKit
 protocol EditWordInteractorInputProtocol: MDViewDidLoadProtocol {
     
     var getWordText: String { get }
-    var editButtonIsSelected: Bool { get }
+    
     var textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol { get }
     var textViewDelegate: MDWordTextViewDelegateImplementationProtocol { get }
     
-    func editWordButtonClicked()
     func updateButtonClicked()
     func deleteButtonClicked()
     
@@ -26,18 +25,14 @@ protocol EditWordInteractorOutputProtocol: AnyObject,
                                            MDShowErrorProtocol,
                                            MDCloseModuleProtocol {
     
-    func updateVisibilityViews()
-    func updateWordDescriptionTextViewTopConstraint()
-    
     func fillWordTextField(_ text: String)
     func fillWordDescriptionTextView(_ text: String)
     
     func updateWordTextFieldCounter(_ count: Int)
     func updateWordDescriptionTextViewCounter(_ count: Int)
     
-    func updateIsEditableWordDescriptionTextView(_ isEditable: Bool)
-    
     func makeWordDescriptionTextViewActive()
+    
     func wordTextFieldShouldClearAction()
     
 }
@@ -94,16 +89,7 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
         return dataManager.getWord.wordText
     }
     
-    var editButtonIsSelected: Bool {
-        return dataManager.getEditButtonIsSelected
-    }
-    
-    func editWordButtonClicked() {
-        
-        // Update editButtonIsSelected property
-        //
-        dataManager.setTrueSelectedEditButton()
-        //
+    func viewDidLoad() {
         
         // Fill Fields
         //
@@ -117,37 +103,6 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
         interactorOutput?.updateWordTextFieldCounter(dataManager.getWord.wordText.count)
         //
         interactorOutput?.updateWordDescriptionTextViewCounter(dataManager.getWord.wordDescription.count)
-        //
-        
-        // Update Is Editable Word Description Text View
-        interactorOutput?.updateIsEditableWordDescriptionTextView(MDEditWordViewControllerConfiguration.WordDescriptionTextView.isEditable(editButtonIsSelected: dataManager.getEditButtonIsSelected))
-        //
-        
-        // Update Top Constraint And isHidden in Views
-        //
-        interactorOutput?.updateWordDescriptionTextViewTopConstraint()
-        //
-        interactorOutput?.updateVisibilityViews()
-        //
-        
-    }
-    
-    func viewDidLoad() {
-        
-        // Fill Description
-        interactorOutput?.fillWordDescriptionTextView(dataManager.getWord.wordDescription)
-        //
-        
-        // Update Counter
-        interactorOutput?.updateWordDescriptionTextViewCounter(dataManager.getWord.wordDescription.count)
-        //
-        
-        // Update Is Editable Word Description Text View
-        interactorOutput?.updateIsEditableWordDescriptionTextView(MDEditWordViewControllerConfiguration.WordDescriptionTextView.isEditable(editButtonIsSelected: dataManager.getEditButtonIsSelected))
-        //
-        
-        // Update isHidden property in Views
-        interactorOutput?.updateVisibilityViews()
         //
         
     }
