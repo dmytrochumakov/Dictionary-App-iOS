@@ -27,7 +27,7 @@ extension String {
 
 extension String {
 
-    func widthFromLabel(font: UIFont, height: CGFloat, numberOfLines: Int = .zero) -> CGFloat {
+    func widthFromLabel(font: UIFont, height: CGFloat, numberOfLines: Int) -> CGFloat {
         let label: UILabel = UILabel(frame: CGRect(x: .zero, y: .zero, width: .greatestFiniteMagnitude, height: height))
         label.numberOfLines = numberOfLines
         label.lineBreakMode = .byWordWrapping
@@ -36,6 +36,21 @@ extension String {
         
         label.sizeToFit()
         return label.frame.width
+    }
+
+}
+
+extension String {
+
+    func heightFromLabel(font: UIFont, width: CGFloat, numberOfLines: Int) -> CGFloat {
+        let label: UILabel = UILabel(frame: CGRect(x: .zero, y: .zero, width: width, height: .greatestFiniteMagnitude))
+        label.numberOfLines = numberOfLines
+        label.lineBreakMode = .byWordWrapping
+        label.font = font
+        label.text = self
+        
+        label.sizeToFit()
+        return label.frame.height
     }
 
 }
