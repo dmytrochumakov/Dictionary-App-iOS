@@ -32,7 +32,7 @@ extension WordListModule {
         let wordListDataProvider: WordListDataProviderProcotol = WordListDataProvider.init(course: sender, words: .init())
         var wordListDataManager: WordListDataManagerProtocol = WordListDataManager.init(dataProvider: wordListDataProvider,
                                                                                         memoryStorage: MDConstants.AppDependencies.dependencies.wordStorage.memoryStorage,
-                                                                                        filterSearchTextService: MDFilterSearchTextService<WordResponse>.init(operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.filterSearchTextServiceOperationQueue)!))
+                                                                                        filterSearchTextService: MDWordFilterSearchTextService.init(operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.filterSearchTextServiceOperationQueue)!))
         
         let wordListTableViewDelegate: WordListTableViewDelegateProtocol = WordListTableViewDelegate.init(dataProvider: wordListDataProvider)
         let wordListTableViewDataSource: WordListTableViewDataSourceProtocol = WordListTableViewDataSource.init(dataProvider: wordListDataProvider)

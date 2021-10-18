@@ -32,14 +32,14 @@ protocol WordListDataManagerProtocol: WordListDataManagerInputProtocol {
 final class WordListDataManager: WordListDataManagerProtocol {
     
     fileprivate let memoryStorage: MDWordMemoryStorageProtocol
-    fileprivate let filterSearchTextService: MDFilterSearchTextService<WordResponse>
+    fileprivate let filterSearchTextService: MDWordFilterSearchTextServiceProtocol
     
     var dataProvider: WordListDataProviderProcotol
     internal weak var dataManagerOutput: WordListDataManagerOutputProtocol?
     
     init(dataProvider: WordListDataProviderProcotol,
          memoryStorage: MDWordMemoryStorageProtocol,
-         filterSearchTextService: MDFilterSearchTextService<WordResponse>) {
+         filterSearchTextService: MDWordFilterSearchTextServiceProtocol) {
         
         self.dataProvider = dataProvider
         self.memoryStorage = memoryStorage
