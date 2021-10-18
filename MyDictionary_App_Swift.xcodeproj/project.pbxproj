@@ -270,6 +270,7 @@
 		22CA08892651603A0052D169 /* WordListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA08882651603A0052D169 /* WordListDataProvider.swift */; };
 		22CA088C265165460052D169 /* MDUIResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088B265165460052D169 /* MDUIResources.swift */; };
 		22CA088E265167620052D169 /* MDReloadDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA088D265167620052D169 /* MDReloadDataProtocol.swift */; };
+		22CCE203271D68AF00E7F180 /* MDWordFilterSearchTextService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCE202271D68AF00E7F180 /* MDWordFilterSearchTextService.swift */; };
 		22CD45F026F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */; };
 		22CD45F226F090F20060978D /* MDCounterTextFieldWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */; };
 		22D54B6C270EE06100DEE843 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D54B6B270EE06100DEE843 /* Reachability.swift */; };
@@ -629,6 +630,7 @@
 		22CA08882651603A0052D169 /* WordListDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListDataProvider.swift; sourceTree = "<group>"; };
 		22CA088B265165460052D169 /* MDUIResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUIResources.swift; sourceTree = "<group>"; };
 		22CA088D265167620052D169 /* MDReloadDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReloadDataProtocol.swift; sourceTree = "<group>"; };
+		22CCE202271D68AF00E7F180 /* MDWordFilterSearchTextService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordFilterSearchTextService.swift; sourceTree = "<group>"; };
 		22CD45EF26F090DD0060978D /* MDCounterPasswordTextFieldWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCounterPasswordTextFieldWithToolBar.swift; sourceTree = "<group>"; };
 		22CD45F126F090F20060978D /* MDCounterTextFieldWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCounterTextFieldWithToolBar.swift; sourceTree = "<group>"; };
 		22D54B6B270EE06100DEE843 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -1880,6 +1882,7 @@
 			isa = PBXGroup;
 			children = (
 				22D54B6E270EF06600DEE843 /* MDFilterSearchTextService.swift */,
+				22CCE202271D68AF00E7F180 /* MDWordFilterSearchTextService.swift */,
 			);
 			path = MDFilterSearchTextService;
 			sourceTree = "<group>";
@@ -2331,6 +2334,7 @@
 				228C597327033D0800DE6175 /* EditWordDataProvider.swift in Sources */,
 				22561C9F26D4DEE200A6135B /* MDStorage.swift in Sources */,
 				2270F39626D2502B006B46F4 /* MDAPIJWT.swift in Sources */,
+				22CCE203271D68AF00E7F180 /* MDWordFilterSearchTextService.swift in Sources */,
 				2289CEF72678CC34007254C3 /* MDCreateWordProtocol.swift in Sources */,
 				22A2987726FC84F000E79843 /* AddCourseRouter.swift in Sources */,
 				22EF020A269DAE9800FE4435 /* MDAPIWord.swift in Sources */,
@@ -2812,7 +2816,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CXRA2S6SCR;
 				INFOPLIST_FILE = MyDictionary_App_Swift/Resources/InfoPlist/Info.plist;
@@ -2821,7 +2825,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dcteam.MyDictionary-App-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "com.dcteam.MyDictionary-App-Swift AppStore";
@@ -2840,7 +2844,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = CXRA2S6SCR;
 				INFOPLIST_FILE = MyDictionary_App_Swift/Resources/InfoPlist/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2848,7 +2852,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dcteam.MyDictionary-App-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "com.dcteam.MyDictionary-App-Swift AppStore";

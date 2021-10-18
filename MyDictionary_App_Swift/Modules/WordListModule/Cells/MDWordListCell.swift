@@ -10,13 +10,36 @@ import MGSwipeTableCell
 final class MDWordListCell: MGSwipeTableCell,
                             MDReuseIdentifierProtocol {
     
+    fileprivate static let titleLabelTopOffset: CGFloat = 16
     fileprivate static let titleLabelLeftOffset: CGFloat = 16
-    fileprivate static let titleLabelRightOffset: CGFloat = 16
+    fileprivate static var titleLabelRightOffset: CGFloat {
+        return arrowImageViewSize.width + arrowImageViewRightOffset + 16
+    }
+    fileprivate static let titleLabelFont: UIFont = MDUIResources.Font.MyriadProSemiBold.font()
+    fileprivate static let titleLabelNumberOfLines: Int = .zero
     fileprivate let titleLabel: UILabel = {
         let label: UILabel = .init()
-        label.font = MDUIResources.Font.MyriadProRegular.font()
+        label.font = titleLabelFont
         label.textAlignment = .left
         label.textColor = MDUIResources.Color.md_3C3C3C.color()
+        label.numberOfLines = titleLabelNumberOfLines
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    fileprivate static let descriptionLabelTopOffset: CGFloat = 8
+    fileprivate static let descriptionLabelLeftOffset: CGFloat = 16
+    fileprivate static var descriptionLabelRightOffset: CGFloat {
+        return arrowImageViewSize.width + arrowImageViewRightOffset + 16
+    }
+    fileprivate static let descriptionLabelFont: UIFont = MDUIResources.Font.MyriadProRegular.font(ofSize: 15)
+    fileprivate static let descriptionLabelNumberOfLines: Int = .zero
+    fileprivate let descriptionLabel: UILabel = {
+        let label: UILabel = .init()
+        label.font = descriptionLabelFont
+        label.textAlignment = .left
+        label.textColor = MDUIResources.Color.md_3C3C3C.color(0.7)
+        label.numberOfLines = descriptionLabelNumberOfLines
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -30,8 +53,6 @@ final class MDWordListCell: MGSwipeTableCell,
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
-    public static let height: CGFloat = 40
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -61,6 +82,39 @@ extension MDWordListCell: MDFillWithModelProtocol {
     
     func fillWithModel(_ model: MDWordListCellModel?) {
         self.titleLabel.text = model?.wordResponse.wordText
+        self.descriptionLabel.text = model?.wordResponse.wordDescription
+    }
+    
+}
+
+// MARK: - Public Methods
+extension MDWordListCell {
+    
+    public static func height(tableViewWidth tvWidth: CGFloat,
+                              model: MDWordListCellModel) -> CGFloat {
+        
+        //
+        let titleLabelWidth: CGFloat = (tvWidth - (titleLabelLeftOffset + titleLabelRightOffset))
+        //
+        
+        //
+        let descriptionLabelWidth: CGFloat = (tvWidth - (descriptionLabelLeftOffset + descriptionLabelRightOffset))
+        //
+        
+        //
+        let titleLabelHeight: CGFloat = model.wordResponse.wordText.heightFromLabel(font: titleLabelFont,
+                                                                                    width: titleLabelWidth,
+                                                                                    numberOfLines: titleLabelNumberOfLines)
+        //
+        
+        //
+        let descriptionLabelHeight: CGFloat = model.wordResponse.wordDescription.heightFromLabel(font: descriptionLabelFont,
+                                                                                                 width: descriptionLabelWidth,
+                                                                                                 numberOfLines: descriptionLabelNumberOfLines)
+        //
+        
+        return titleLabelHeight + titleLabelTopOffset + descriptionLabelHeight + descriptionLabelTopOffset + 16
+        
     }
     
 }
@@ -70,11 +124,16 @@ fileprivate extension MDWordListCell {
     
     func addViews() {
         addTitleLabel()
+        addDescriptionLabel()
         addArrowImageView()
     }
     
     func addTitleLabel() {
         addSubview(titleLabel)
+    }
+    
+    func addDescriptionLabel() {
+        addSubview(descriptionLabel)
     }
     
     func addArrowImageView() {
@@ -88,26 +147,41 @@ fileprivate extension MDWordListCell {
     
     func addConstraints() {
         addTitleLabelConstraints()
+        addDescriptionLabelConstraints()
         addArrowImageViewConstraints()
     }
     
     func addTitleLabelConstraints() {
         
+        NSLayoutConstraint.addEqualTopConstraint(item: self.titleLabel,
+                                                 toItem: self,
+                                                 constant: Self.titleLabelTopOffset)
+        
         NSLayoutConstraint.addEqualLeftConstraint(item: self.titleLabel,
                                                   toItem: self,
                                                   constant: Self.titleLabelLeftOffset)
         
-        NSLayoutConstraint.addEqualConstraint(item: self.titleLabel,
-                                              attribute: .centerY,
-                                              toItem: self.arrowImageView,
-                                              attribute: .centerY,
-                                              constant: .zero)
+        NSLayoutConstraint.addEqualRightConstraint(item: self.titleLabel,
+                                                   toItem: self,
+                                                   constant: -Self.titleLabelRightOffset)
         
-        NSLayoutConstraint.addEqualConstraint(item: self.titleLabel,
-                                              attribute: .right,
-                                              toItem: self.arrowImageView,
-                                              attribute: .left,
-                                              constant: -Self.titleLabelRightOffset)
+    }
+    
+    func addDescriptionLabelConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.descriptionLabel,
+                                              attribute: .top,
+                                              toItem: self.titleLabel,
+                                              attribute: .bottom,
+                                              constant: Self.descriptionLabelTopOffset)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.descriptionLabel,
+                                                  toItem: self,
+                                                  constant: Self.descriptionLabelLeftOffset)
+        
+        NSLayoutConstraint.addEqualRightConstraint(item: self.descriptionLabel,
+                                                   toItem: self,
+                                                   constant: -Self.descriptionLabelRightOffset)
         
     }
     

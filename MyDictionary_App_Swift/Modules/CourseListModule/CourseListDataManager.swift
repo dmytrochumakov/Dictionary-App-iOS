@@ -54,19 +54,26 @@ extension CourseListDataManager {
     
     func readAndAddCoursesToDataProvider() {
         
-        memoryStorage.readAllCourses { [weak self] readResult in
+        memoryStorage.readAllCourses { [unowned self] readResult in
             
             switch readResult {
                 
             case .success(let readCourses):
                 
+                // Sort
+                let sordedCourses = sortCourses(readCourses)
+                //
+                
                 DispatchQueue.main.async {
                     
                     // Set Read Courses
-                    self?.dataProvider.filteredCourses = readCourses
-                    // Pass Result
-                    self?.dataManagerOutput?.readAndAddCoursesToDataProviderResult(.success(()))
+                    self.dataProvider.filteredCourses = sordedCourses
                     //
+                    
+                    // Pass Result
+                    self.dataManagerOutput?.readAndAddCoursesToDataProviderResult(.success(()))
+                    //
+                    
                 }
                 
                 //
@@ -78,7 +85,7 @@ extension CourseListDataManager {
                 DispatchQueue.main.async {
                     
                     // Pass Result
-                    self?.dataManagerOutput?.readAndAddCoursesToDataProviderResult(.failure(error))
+                    self.dataManagerOutput?.readAndAddCoursesToDataProviderResult(.failure(error))
                     //
                     
                 }
@@ -95,22 +102,27 @@ extension CourseListDataManager {
     
     func filterCourses(_ searchText: String?) {
         
-        memoryStorage.readAllCourses { [weak self] readResult in
+        memoryStorage.readAllCourses { [unowned self] readResult in
             
             switch readResult {
                 
             case .success(let readCourses):
                 
-                self?.filterSearchTextService.filter(input: readCourses,
-                                                     searchText: searchText) { [weak self] (filteredResult) in
+                // Sort
+                let sordedCourses = sortCourses(readCourses)
+                //
+                
+                //
+                filterSearchTextService.filter(input: sordedCourses,
+                                               searchText: searchText) { [unowned self] (filteredResult) in
                     
                     DispatchQueue.main.async {
                         
                         // Set Filtered Result
-                        self?.dataProvider.filteredCourses = filteredResult
+                        self.dataProvider.filteredCourses = filteredResult
                         
                         // Pass Result
-                        self?.dataManagerOutput?.filteredCoursesResult(.success(()))
+                        self.dataManagerOutput?.filteredCoursesResult(.success(()))
                         //
                         
                     }
@@ -126,7 +138,7 @@ extension CourseListDataManager {
                 DispatchQueue.main.async {
                     
                     // Pass Result
-                    self?.dataManagerOutput?.filteredCoursesResult(.failure(error))
+                    self.dataManagerOutput?.filteredCoursesResult(.failure(error))
                     //
                     
                 }
@@ -142,18 +154,24 @@ extension CourseListDataManager {
     
     func clearCourseFilter() {
         
-        memoryStorage.readAllCourses { [weak self] readResult in
+        memoryStorage.readAllCourses { [unowned self] readResult in
             
             switch readResult {
                 
             case .success(let readCourses):
                 
+                // Sort
+                let sordedCourses = sortCourses(readCourses)
+                //
+                
                 DispatchQueue.main.async {
                     
                     // Set Read Courses
-                    self?.dataProvider.filteredCourses = readCourses
+                    self.dataProvider.filteredCourses = sordedCourses
+                    //
+                    
                     // Pass Result
-                    self?.dataManagerOutput?.clearCourseFilterResult(.success(()))
+                    self.dataManagerOutput?.clearCourseFilterResult(.success(()))
                     //
                     
                 }
@@ -167,7 +185,7 @@ extension CourseListDataManager {
                 DispatchQueue.main.async {
                     
                     // Pass Result
-                    self?.dataManagerOutput?.clearCourseFilterResult(.failure(error))
+                    self.dataManagerOutput?.clearCourseFilterResult(.failure(error))
                     //
                     
                 }
@@ -188,11 +206,18 @@ extension CourseListDataManager {
     
     func addCourse(atNewCourse course: CourseResponse) -> IndexPath {
         //
-        self.dataProvider.filteredCourses.append(course)
+        self.dataProvider.filteredCourses.insert(course, at: .zero)
         //
-        let section = (dataProvider.numberOfSections - 1)
-        let row = (dataProvider.numberOfRowsInSection(section) - 1)
-        return .init(row: row, section: section)
+        return .init(row: .zero, section: .zero)
+    }
+    
+}
+
+// MARK: - Private Methods
+fileprivate extension CourseListDataManager {
+    
+    func sortCourses(_ input: [CourseResponse]) -> [CourseResponse] {
+        return input.sorted(by: { $0.createdAtDate > $1.createdAtDate })
     }
     
 }

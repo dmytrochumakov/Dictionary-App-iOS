@@ -31,7 +31,8 @@ extension WordListTableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return MDWordListCell.height
+        return MDWordListCell.height(tableViewWidth: tableView.bounds.width,
+                                     model: dataProvider.wordListCellModel(atIndexPath: indexPath)!)
     }
     
 }

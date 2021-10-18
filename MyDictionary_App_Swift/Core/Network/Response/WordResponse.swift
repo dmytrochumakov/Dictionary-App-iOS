@@ -19,6 +19,14 @@ struct WordResponse {
     let languageName: String
     let createdAt: String
     
+    var createdAtDate: Date {
+        let format: String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let dateFormatter: DateFormatter = .init()
+        dateFormatter.timeZone = TimeZone.init(identifier: "UTC")!
+        dateFormatter.dateFormat = format
+        return dateFormatter.date(from: createdAt)!
+    }
+    
 }
 
 // MARK: - Core Data
@@ -76,15 +84,6 @@ extension WordResponse: Equatable {
     
     static func == (lhs: WordResponse, rhs: WordResponse) -> Bool {
         return lhs.userId == rhs.userId && lhs.wordId == rhs.wordId && lhs.courseId == rhs.courseId && lhs.languageId == rhs.languageId
-    }
-    
-}
-
-// MARK: - MDTextForSearchProtocol
-extension WordResponse: MDTextForSearchProtocol {
-    
-    var textForSearch: String {
-        return wordText
     }
     
 }

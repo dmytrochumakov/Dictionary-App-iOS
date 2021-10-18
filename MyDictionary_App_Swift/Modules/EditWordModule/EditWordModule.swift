@@ -25,8 +25,7 @@ extension EditWordModule {
     var module: UIViewController {
         
         let dataProvider: EditWordDataProviderProtocol = EditWordDataProvider.init(word: sender,
-                                                                                   copiedWord: sender,
-                                                                                   editButtonIsSelected: false)
+                                                                                   copiedWord: sender)
         
         var dataManager: EditWordDataManagerProtocol = EditWordDataManager.init(dataProvider: dataProvider)
         

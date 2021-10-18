@@ -32,14 +32,14 @@ protocol WordListDataManagerProtocol: WordListDataManagerInputProtocol {
 final class WordListDataManager: WordListDataManagerProtocol {
     
     fileprivate let memoryStorage: MDWordMemoryStorageProtocol
-    fileprivate let filterSearchTextService: MDFilterSearchTextService<WordResponse>
+    fileprivate let filterSearchTextService: MDWordFilterSearchTextServiceProtocol
     
     var dataProvider: WordListDataProviderProcotol
     internal weak var dataManagerOutput: WordListDataManagerOutputProtocol?
     
     init(dataProvider: WordListDataProviderProcotol,
          memoryStorage: MDWordMemoryStorageProtocol,
-         filterSearchTextService: MDFilterSearchTextService<WordResponse>) {
+         filterSearchTextService: MDWordFilterSearchTextServiceProtocol) {
         
         self.dataProvider = dataProvider
         self.memoryStorage = memoryStorage
@@ -62,12 +62,16 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
             
             switch result {
                 
-            case .success(let words):
+            case .success(let readWords):
+                
+                //
+                let sortedWords = sortWords(readWords)
+                //
                 
                 DispatchQueue.main.async {
                     
                     // Set Words
-                    self.dataProvider.filteredWords = words
+                    self.dataProvider.filteredWords = sortedWords
                     // Pass Result
                     self.dataManagerOutput?.readAndAddWordsToDataProviderResult(.success(()))
                     //
@@ -100,23 +104,27 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func filterWords(_ searchText: String?) {
         
-        memoryStorage.readAllWords(byCourseID: dataProvider.course.courseId) { [weak self] readResult in
+        memoryStorage.readAllWords(byCourseID: dataProvider.course.courseId) { [unowned self] readResult in
             
             switch readResult {
                 
             case .success(let readWords):
                 
+                //
+                let sortedWords = sortWords(readWords)
+                //
                 
-                self?.filterSearchTextService.filter(input: readWords,
-                                                     searchText: searchText) { [weak self] (filteredResult) in
+                //
+                filterSearchTextService.filter(input: sortedWords,
+                                               searchText: searchText) { [unowned self] (filteredResult) in
                     
                     DispatchQueue.main.async {
                         
                         // Set Filtered Result
-                        self?.dataProvider.filteredWords = filteredResult
+                        self.dataProvider.filteredWords = filteredResult
                         
                         // Pass Result
-                        self?.dataManagerOutput?.filteredWordsResult(.success(()))
+                        self.dataManagerOutput?.filteredWordsResult(.success(()))
                         //
                         
                     }
@@ -132,7 +140,7 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
                 DispatchQueue.main.async {
                     
                     // Pass Result
-                    self?.dataManagerOutput?.filteredWordsResult(.failure(error))
+                    self.dataManagerOutput?.filteredWordsResult(.failure(error))
                     //
                     
                 }
@@ -149,18 +157,22 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func clearWordFilter() {
         
-        memoryStorage.readAllWords(byCourseID: dataProvider.course.courseId) { [weak self] readResult in
+        memoryStorage.readAllWords(byCourseID: dataProvider.course.courseId) { [unowned self] readResult in
             
             switch readResult {
                 
             case .success(let readWords):
                 
+                //
+                let sortedWords = sortWords(readWords)
+                //
+                
                 DispatchQueue.main.async {
                     
                     // Set Read Results
-                    self?.dataProvider.filteredWords = readWords
+                    self.dataProvider.filteredWords = sortedWords
                     // Pass Result
-                    self?.dataManagerOutput?.clearWordFilterResult(.success(()))
+                    self.dataManagerOutput?.clearWordFilterResult(.success(()))
                     //
                     
                 }
@@ -174,7 +186,7 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
                 DispatchQueue.main.async {
                     
                     // Pass Result
-                    self?.dataManagerOutput?.clearWordFilterResult(.failure(error))
+                    self.dataManagerOutput?.clearWordFilterResult(.failure(error))
                     //
                     
                 }
@@ -195,11 +207,9 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func addWord(_ newValue: WordResponse) -> IndexPath {
         //
-        self.dataProvider.filteredWords.append(newValue)
+        self.dataProvider.filteredWords.insert(newValue, at: .zero)
         //
-        let row = (self.dataProvider.numberOfRowsInSection(section) - 1)
-        //
-        return .init(row: row, section: section)
+        return .init(row: .zero, section: section)
     }
     
     func deleteWord(atWordResponse word: WordResponse) -> IndexPath {
@@ -231,7 +241,11 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
 fileprivate extension WordListDataManager {
     
     var section: Int {
-        return (self.dataProvider.numberOfSections - 1)
+        return .zero
+    }
+    
+    func sortWords(_ input: [WordResponse]) -> [WordResponse] {
+        return input.sorted(by: { $0.createdAtDate > $1.createdAtDate })
     }
     
 }

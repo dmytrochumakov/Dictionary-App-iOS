@@ -9,11 +9,9 @@ import Foundation
 protocol EditWordDataManagerInputProtocol {
     
     var getWord: WordResponse { get }
-    var getEditButtonIsSelected: Bool { get }
     
     var updatedWordTextAndDescriptionIsEqualToInitialValue: Bool { get }
-    
-    func setTrueSelectedEditButton()
+        
     func setWordText(_ text: String?)
     func setWordDescription(_ text: String?)
     
@@ -45,20 +43,12 @@ final class EditWordDataManager: EditWordDataManagerProtocol {
 // MARK: - EditWordDataManagerInputProtocol
 extension EditWordDataManager: EditWordDataManagerInputProtocol {
     
-    var getEditButtonIsSelected: Bool {
-        return dataProvider.editButtonIsSelected
-    }
-    
     var getWord: WordResponse {
         return dataProvider.word
     }
     
     var updatedWordTextAndDescriptionIsEqualToInitialValue: Bool {
         return (updatedWordTextIsEqualToInitialValue && updatedWordDescriptionIsEqualToInitialValue)
-    }
-    
-    func setTrueSelectedEditButton() {
-        dataProvider.editButtonIsSelected = true
     }
     
     func setWordText(_ text: String?) {
