@@ -1,0 +1,78 @@
+/* 
+  Localizable.strings
+  MyDictionary_App_Swift
+
+  Created by Dmytro Chumakov on 16.05.2021.
+  
+*/
+
+"edit" = "Edit";
+"cancel" = "Cancel";
+"done" = "Done";
+"error" = "Error";
+"words" = "Words";
+"settings" = "Settings";
+"appearance" = "Appearance";
+"automatic" = "Automatic";
+"dark" = "Dark";
+"light" = "Light";
+"courses" = "Courses";
+"add" = "Add";
+"authorization" = "Authorization";
+"nickname" = "Nickname";
+"login" = "Login";
+"password" = "Password";
+"confirm_password" = "Confirm password";
+"nickname_Is_Empty" = "Nickname is empty";
+"password_Is_Empty" = "Password is empty";
+"confirm_password_Is_Empty" = "Confirm password is empty";
+"confirm_password_and_password_do_not_match" = "Confirm password and password do not match. \n\n Please check the entered data.";
+"ok" = "Ok";
+"please_wait_for_data_sync" = "Please wait for data sync";
+"search" = "Search";
+"about" = "About";
+"account" = "Account";
+"privacy_Policy" = "Privacy Policy";
+"terms_Of_Service" = "Terms Of Service";
+"delete" = "Delete";
+"log_out" = "Log out";
+"share_feedback" = "Share Feedback";
+"feature_request" = "Feature Request";
+"bug_report" = "Bug Report";
+"mail_services_are_not_available" = "Sorry, mail services is not available. \n\n Please set up your Apple ID in System Preferences. \n\n Also, please, install the original Mail app from the App Store, if you don't have one.";
+"add_course" = "Add Course";
+"please_select_a_course" = "Please select a course";
+"add_word" = "Add Word";
+"word_text" = "Word text";
+"word_description" = "Word description";
+"update" = "Update";
+"word_text_is_empty" = "Word text is empty";
+"word_description_is_empty" = "Word description is empty";
+
+// Api Errors //
+"no_data_api_error" = "No Data";
+"invalid_response_api_error" = "Invalid Response";
+"bad_request_api_error" = "Bad Request";
+"unauthorized_api_error" = "Unauthorized";
+"forbidden_api_error" = "Forbidden";
+"not_found_api_error" = "Not Found";
+"method_not_allowed_api_error" = "Method Not Allowed";
+"conflict_api_error" = "Conflict";
+"internal_server_error_api_error" = "Internal Server Error";
+"parse_error_api_error" = "Parse Error";
+"unknown_api_error" = "Unknown";
+// End Api Errors //
+
+// Api Auth Errors //
+"unauthorized_api_auth_error" = "User with this nickname or password does not exist. \n\n Please check the entered data or create a new account.";
+"conflict_api_auth_error" = "Nickname exists. \n\n Please try another nickname.";
+"conflict_api_course_error" = "Course exists. \n\n Please select another course.";
+"conflict_api_word_error" = "Word with such text exists.";
+// End Api Auth Errors //
+
+"registration" = "Registration";
+"register" = "Register";
+
+"you_are_offline" = "You are offline";
+"please_check_your_internet_connection" = "Please check your internet connection";
+"no_internet_connection" = "No internet connection";
