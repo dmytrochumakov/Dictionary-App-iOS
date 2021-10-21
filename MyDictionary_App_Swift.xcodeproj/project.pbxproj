@@ -52,7 +52,7 @@
 		2223F8AE26512DEB004F2FE9 /* MDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8AD26512DEB004F2FE9 /* MDConstants.swift */; };
 		2223F8B426512F01004F2FE9 /* MDLocalizedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8B326512F01004F2FE9 /* MDLocalizedText.swift */; };
 		2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8B626512F5B004F2FE9 /* AppLanguageType.swift */; };
-		2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */; };
+		2223F8BB26512F8C004F2FE9 /* MDAppLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8BA26512F8C004F2FE9 /* MDAppLanguageService.swift */; };
 		2223F8BC26512FFD004F2FE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2223F8BE26512FFD004F2FE9 /* Localizable.strings */; };
 		222F52702701AD080070F546 /* MDTextViewWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222F526F2701AD080070F546 /* MDTextViewWithToolBar.swift */; };
 		222F52772701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222F52762701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift */; };
@@ -408,7 +408,7 @@
 		2223F8AD26512DEB004F2FE9 /* MDConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDConstants.swift; sourceTree = "<group>"; };
 		2223F8B326512F01004F2FE9 /* MDLocalizedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLocalizedText.swift; sourceTree = "<group>"; };
 		2223F8B626512F5B004F2FE9 /* AppLanguageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageType.swift; sourceTree = "<group>"; };
-		2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageService.swift; sourceTree = "<group>"; };
+		2223F8BA26512F8C004F2FE9 /* MDAppLanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppLanguageService.swift; sourceTree = "<group>"; };
 		2223F8BD26512FFD004F2FE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		222F526F2701AD080070F546 /* MDTextViewWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDTextViewWithToolBar.swift; sourceTree = "<group>"; };
 		222F52762701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDTextFieldDelegatePropertyProtocol.swift; sourceTree = "<group>"; };
@@ -1061,7 +1061,7 @@
 		2223F8B926512F87004F2FE9 /* AppLanguageService */ = {
 			isa = PBXGroup;
 			children = (
-				2223F8BA26512F8C004F2FE9 /* AppLanguageService.swift */,
+				2223F8BA26512F8C004F2FE9 /* MDAppLanguageService.swift */,
 			);
 			path = AppLanguageService;
 			sourceTree = "<group>";
@@ -2415,7 +2415,7 @@
 				220793DA26C6BF58003D434B /* AuthResponse.swift in Sources */,
 				22493C3726972232000DA480 /* MDWordCoreDataStorage.swift in Sources */,
 				2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */,
-				2223F8BB26512F8C004F2FE9 /* AppLanguageService.swift in Sources */,
+				2223F8BB26512F8C004F2FE9 /* MDAppLanguageService.swift in Sources */,
 				22CD45F226F090F20060978D /* MDCounterTextFieldWithToolBar.swift in Sources */,
 				22BD99A0266A4AB10063FEFC /* WordListModule.swift in Sources */,
 				22EF01EC269DA70300FE4435 /* Endpoint.swift in Sources */,

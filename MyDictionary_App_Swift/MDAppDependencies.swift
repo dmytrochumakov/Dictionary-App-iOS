@@ -41,6 +41,9 @@ protocol MDAppDependenciesProtocol {
     var fillMemoryService: MDFillMemoryServiceProtocol! { get }
     
     var bridge: MDBridgeProtocol! { get }
+    
+    var appLanguageService: MDAppLanguageServiceProtocol! { get }
+    
 }
 
 final class MDAppDependencies: NSObject,
@@ -77,6 +80,8 @@ final class MDAppDependencies: NSObject,
     var fillMemoryService: MDFillMemoryServiceProtocol!
     
     var bridge: MDBridgeProtocol!
+    
+    var appLanguageService: MDAppLanguageServiceProtocol!
     
     override init() {
         super.init()
@@ -272,6 +277,15 @@ extension MDAppDependencies {
         fillMemoryService.fillMemoryFromCoreDataIfNeeded(completionHandler: nil)
         //
         self.fillMemoryService = fillMemoryService
+        //
+        //
+        
+        //
+        // App Language Service
+        let appLanguageService: MDAppLanguageServiceProtocol = MDAppLanguageService.init(locale: .current,
+                                                                                         defaultAppLanguage: .en)
+        //
+        self.appLanguageService = appLanguageService
         //
         //
         
