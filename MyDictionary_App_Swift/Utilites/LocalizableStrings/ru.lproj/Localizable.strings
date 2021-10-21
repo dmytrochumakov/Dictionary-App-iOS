@@ -44,6 +44,7 @@
 "update" = "Обновить";
 "word_text_is_empty" = "Текст слова пуст";
 "word_description_is_empty" = "Описание слова пусто";
+"app_language" = "Язык приложения";
 
 // Api Errors //
 "no_data_api_error" = "Нет данных";

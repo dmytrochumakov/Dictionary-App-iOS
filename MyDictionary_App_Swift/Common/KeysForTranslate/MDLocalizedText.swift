@@ -51,6 +51,7 @@ enum MDLocalizedText: String {
     case update
     case wordTextIsEmpty = "word_text_is_empty"
     case wordDescriptionIsEmpty = "word_description_is_empty"
+    case appLanguage = "app_language"
     
     // Api Errors //
     case noDataApiError = "no_data_api_error"

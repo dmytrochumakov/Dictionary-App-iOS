@@ -12,6 +12,7 @@ protocol SettingsRouterProtocol {
     func showTermsOfService()
     func showAbout()
     func showAccount()
+    func showAppSettings()
     func presentShareFeedback(withOption option: ShareFeedbackOption)
 }
 
@@ -41,6 +42,20 @@ extension SettingsRouter {
     
     func showAccount() {
         settingsViewController.show(AccountModule.init().module, sender: nil)
+    }
+    
+    func showAppSettings() {
+        
+        //
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+        //
+        
+        //
+        if UIApplication.shared.canOpenURL(settingsUrl) {
+            UIApplication.shared.open(settingsUrl)
+        }
+        //
+        
     }
     
     func presentShareFeedback(withOption option: ShareFeedbackOption) {

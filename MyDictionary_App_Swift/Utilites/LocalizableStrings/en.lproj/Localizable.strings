@@ -48,6 +48,7 @@
 "update" = "Update";
 "word_text_is_empty" = "Word text is empty";
 "word_description_is_empty" = "Word description is empty";
+"app_language" = "App Language";
 
 // Api Errors //
 "no_data_api_error" = "No Data";

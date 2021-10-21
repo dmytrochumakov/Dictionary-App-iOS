@@ -23,6 +23,7 @@ extension SettingsModule {
         let settingsRows: [SettingsRowModel] = [.init(rowType: .account),
                                                 .init(rowType: .privacyPolicy),
                                                 .init(rowType: .termsOfService),
+                                                .init(rowType: .appLanguage),
                                                 .init(rowType: .about),
                                                 .init(rowType: .shareFeedback)]
         

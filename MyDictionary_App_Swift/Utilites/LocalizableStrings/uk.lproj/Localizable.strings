@@ -44,6 +44,7 @@
 "update" = "Оновити";
 "word_text_is_empty" = "Текст слова порожній";
 "word_description_is_empty" = "Опис слова порожній";
+"app_language" = "Мова додатку";
 
 // Api Errors //
 "no_data_api_error" = "Немає даних";
