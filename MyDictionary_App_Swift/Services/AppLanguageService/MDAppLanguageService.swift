@@ -13,8 +13,6 @@ protocol MDAppLanguageServiceProtocol {
 
 final class MDAppLanguageService: MDAppLanguageServiceProtocol {
     
-    fileprivate static let appleLanguagesKey: String = "AppleLanguages"
-    
     fileprivate let defaultAppLanguage: AppLanguageType
     fileprivate let locale: Locale
     fileprivate var languageCode: String?
@@ -26,38 +24,12 @@ final class MDAppLanguageService: MDAppLanguageServiceProtocol {
         //
         
         //
-        let stringFromAppleKey = getLanguageStringFromAppleLanguagesKey()
+        guard let lang = AppLanguageType.init(rawValue: lanCode) else { return defaultAppLanguage }
         //
         
-        if (stringFromAppleKey == nil) {
-            
-            //
-            return defaultAppLanguage
-            //
-            
-        } else {
-            
-            //
-            let appLanguage = AppLanguageType.allCases.first(where: { $0.rawValue == stringFromAppleKey! })
-            //
-            
-            if (appLanguage == nil) {
-                
-                //
-                guard let lang = AppLanguageType.init(rawValue: lanCode) else { return defaultAppLanguage }
-                //
-                
-                //
-                return lang
-                //
-                
-            } else {
-                return appLanguage!
-            }
-            
-            //
-            
-        }
+        //
+        return lang
+        //
         
     }
     
@@ -68,15 +40,6 @@ final class MDAppLanguageService: MDAppLanguageServiceProtocol {
         self.defaultAppLanguage = defaultAppLanguage
         self.languageCode = locale.languageCode
         
-    }
-    
-}
-
-// MARK: - Get Language String From Apple Languages Key
-fileprivate extension MDAppLanguageService {
-    
-    func getLanguageStringFromAppleLanguagesKey() -> String? {
-        return (UserDefaults.standard.object(forKey: Self.appleLanguagesKey) as? [String])?.first
     }
     
 }
