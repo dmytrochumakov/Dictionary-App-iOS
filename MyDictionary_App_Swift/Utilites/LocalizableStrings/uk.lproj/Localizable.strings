@@ -26,7 +26,7 @@
 "ok" = "Добре";
 "please_wait_for_data_sync" = "Будь ласка, дочекайтеся синхронізації даних";
 "search" = "Пошук";
-"about" = "Про";
+"about" = "Про додаток";
 "account" = "Обліковий запис";
 "privacy_Policy" = "Політика конфіденційності";
 "terms_Of_Service" = "Умови використання";
@@ -41,7 +41,7 @@
 "add_word" = "Додати слово";
 "word_text" = "Текст слова";
 "word_description" = "Опис слова";
-"update" = "Оновлення";
+"update" = "Оновити";
 "word_text_is_empty" = "Текст слова порожній";
 "word_description_is_empty" = "Опис слова порожній";
 
@@ -71,4 +71,4 @@
 
 "you_are_offline" = "Ви в автономному режимі";
 "please_check_your_internet_connection" = "Перевірте підключення до Інтернету";
-"no_internet_connection" = "Немає підключення до Інтернету.";
+"no_internet_connection" = "Немає підключення до Інтернету";
