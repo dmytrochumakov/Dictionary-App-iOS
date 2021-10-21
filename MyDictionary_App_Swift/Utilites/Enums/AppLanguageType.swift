@@ -10,5 +10,7 @@ import Foundation
 enum AppLanguageType: String, CaseIterable {
     
     case en = "en"
+    case uk = "uk"
+    case ru = "ru"
 
 }
