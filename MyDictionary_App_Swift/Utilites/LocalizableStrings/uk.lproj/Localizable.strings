@@ -47,17 +47,17 @@
 "app_language" = "Мова додатку";
 
 // Api Errors //
-"no_data_api_error" = "Немає даних";
-"invalid_response_api_error" = "Недійсна відповідь";
-"bad_request_api_error" = "Поганий запит";
-"unauthorized_api_error" = "Несанкціонований";
-"forbidden_api_error" = "Заборонено";
-"not_found_api_error" = "Не знайдено";
-"method_not_allowed_api_error" = "Метод не дозволений";
-"conflict_api_error" = "Конфлікт";
-"internal_server_error_api_error" = "Внутрішня помилка сервера";
-"parse_error_api_error" = "Помилка аналізу";
-"unknown_api_error" = "Невідомо";
+"no_data_api_error" = "No Data";
+"invalid_response_api_error" = "Invalid Response";
+"bad_request_api_error" = "Bad Request";
+"unauthorized_api_error" = "Unauthorized";
+"forbidden_api_error" = "Forbidden";
+"not_found_api_error" = "Not Found";
+"method_not_allowed_api_error" = "Method Not Allowed";
+"conflict_api_error" = "Conflict";
+"internal_server_error_api_error" = "Internal Server Error";
+"parse_error_api_error" = "Parse Error";
+"unknown_api_error" = "Unknown";
 // End Api Errors //
 
 // Api Auth Errors //
