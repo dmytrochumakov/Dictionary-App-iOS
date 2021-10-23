@@ -18,6 +18,7 @@ protocol SettingsInteractorOutputProtocol: AnyObject,
     
     func showAbout()
     func showAccount()
+    func showAppSettings()
     func showPrivacyPolicy()
     func showTermsOfService()
     func showShareFeedbackActionsSheet()
@@ -105,6 +106,10 @@ fileprivate extension SettingsInteractor {
                 
             case .account:
                 self?.interactorOutput?.showAccount()
+                break
+                
+            case .appLanguage:
+                self?.interactorOutput?.showAppSettings()
                 break
                 
             case .privacyPolicy:

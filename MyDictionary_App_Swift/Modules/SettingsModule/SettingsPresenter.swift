@@ -69,6 +69,10 @@ extension SettingsPresenter {
         router.showAccount()
     }
     
+    func showAppSettings() {
+        router.showAppSettings()
+    }
+    
     func showPrivacyPolicy() {
         router.showPrivacyPolicy()
     }

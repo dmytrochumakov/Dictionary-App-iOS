@@ -13,15 +13,15 @@ protocol MDLocalizableProtocol {
 }
 
 extension MDLocalizableProtocol where Self: RawRepresentable, Self.RawValue == String {
-            
+    
     func localized(lang: AppLanguageType, tableName: String) -> String {
         return rawValue.localized(lang: lang.rawValue, tableName: tableName)
     }
     
-    /// - Parameter lang: MYAppLanguageService.shared.appLanguage.rawValue
-    /// - Parameter tableName: Constants.StaticText.defaultTableName
+    /// - Parameter lang: MDConstants.AppDependencies.dependencies.appLanguageService.appLanguage.rawValue
+    /// - Parameter tableName: MDConstants.StaticText.defaultTableName
     var localized: String {
-        return rawValue.localized(lang: MYAppLanguageService.shared.appLanguage.rawValue,
+        return rawValue.localized(lang: MDConstants.AppDependencies.dependencies.appLanguageService.appLanguage.rawValue,
                                   tableName: MDConstants.StaticText.defaultTableName)
     }
     
