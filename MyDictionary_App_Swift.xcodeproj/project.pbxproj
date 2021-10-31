@@ -65,7 +65,6 @@
 		22561C9D26D4DEA800A6135B /* MDStorageInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C9C26D4DEA800A6135B /* MDStorageInterface.swift */; };
 		22561C9F26D4DEE200A6135B /* MDStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C9E26D4DEE200A6135B /* MDStorage.swift */; };
 		22561CA126D4E78300A6135B /* MDCourseStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561CA026D4E78300A6135B /* MDCourseStorage_Tests.swift */; };
-		22561CA326D4F09100A6135B /* MDAPIUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561CA226D4F09100A6135B /* MDAPIUser.swift */; };
 		2258546426CA6A2F00368354 /* MDJWTStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2258546326CA6A2F00368354 /* MDJWTStorage_Tests.swift */; };
 		2258921F26CA393F00AD6F18 /* MDJWTCoreDataStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2258921E26CA393F00AD6F18 /* MDJWTCoreDataStorage_Tests.swift */; };
 		225C349526D6746800F3BC9A /* JWTApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225C349426D6746800F3BC9A /* JWTApiRequest.swift */; };
@@ -139,7 +138,6 @@
 		229901712668EE5300D8C74E /* MDAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229901702668EE5300D8C74E /* MDAppDelegate.swift */; };
 		2299587126F486FD003DF092 /* MDFillMemoryServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299587026F486FD003DF092 /* MDFillMemoryServiceError.swift */; };
 		2299587926F4A76F003DF092 /* MDFillMemoryService_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299587826F4A76F003DF092 /* MDFillMemoryService_Tests.swift */; };
-		2299E47F26F3841700C6E287 /* MDAPIUser_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299E47E26F3841700C6E287 /* MDAPIUser_Tests.swift */; };
 		2299E48126F384DE00C6E287 /* MDAPICourse_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299E48026F384DE00C6E287 /* MDAPICourse_Tests.swift */; };
 		2299E48426F3862700C6E287 /* MDAPIWord_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299E48226F3862000C6E287 /* MDAPIWord_Tests.swift */; };
 		229D2D4C26EB68420047B518 /* MDNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D4B26EB68420047B518 /* MDNavigationController.swift */; };
@@ -366,7 +364,6 @@
 		22561C9C26D4DEA800A6135B /* MDStorageInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorageInterface.swift; sourceTree = "<group>"; };
 		22561C9E26D4DEE200A6135B /* MDStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorage.swift; sourceTree = "<group>"; };
 		22561CA026D4E78300A6135B /* MDCourseStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseStorage_Tests.swift; sourceTree = "<group>"; };
-		22561CA226D4F09100A6135B /* MDAPIUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIUser.swift; sourceTree = "<group>"; };
 		2258546326CA6A2F00368354 /* MDJWTStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTStorage_Tests.swift; sourceTree = "<group>"; };
 		2258921E26CA393F00AD6F18 /* MDJWTCoreDataStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTCoreDataStorage_Tests.swift; sourceTree = "<group>"; };
 		225C349426D6746800F3BC9A /* JWTApiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTApiRequest.swift; sourceTree = "<group>"; };
@@ -446,7 +443,6 @@
 		229901702668EE5300D8C74E /* MDAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppDelegate.swift; sourceTree = "<group>"; };
 		2299587026F486FD003DF092 /* MDFillMemoryServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDFillMemoryServiceError.swift; sourceTree = "<group>"; };
 		2299587826F4A76F003DF092 /* MDFillMemoryService_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDFillMemoryService_Tests.swift; sourceTree = "<group>"; };
-		2299E47E26F3841700C6E287 /* MDAPIUser_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIUser_Tests.swift; sourceTree = "<group>"; };
 		2299E48026F384DE00C6E287 /* MDAPICourse_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPICourse_Tests.swift; sourceTree = "<group>"; };
 		2299E48226F3862000C6E287 /* MDAPIWord_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIWord_Tests.swift; sourceTree = "<group>"; };
 		229D2D4B26EB68420047B518 /* MDNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDNavigationController.swift; sourceTree = "<group>"; };
@@ -647,7 +643,6 @@
 		220793CC26C6805C003D434B /* API */ = {
 			isa = PBXGroup;
 			children = (
-				22561CA226D4F09100A6135B /* MDAPIUser.swift */,
 				2220FCAF26D50ABF00B22515 /* MDAPICourse.swift */,
 				22EF0209269DAE9800FE4435 /* MDAPIWord.swift */,
 				225C349626D6774500F3BC9A /* MDAPIAccount.swift */,
@@ -937,7 +932,6 @@
 		224375B326F3609E006B90EB /* Api */ = {
 			isa = PBXGroup;
 			children = (
-				2299E47E26F3841700C6E287 /* MDAPIUser_Tests.swift */,
 				2299E48026F384DE00C6E287 /* MDAPICourse_Tests.swift */,
 				2299E48226F3862000C6E287 /* MDAPIWord_Tests.swift */,
 			);
@@ -2201,7 +2195,6 @@
 				2289CEEC2678CC34007254C3 /* MDOperationResultWithCompletion.swift in Sources */,
 				2223F8AE26512DEB004F2FE9 /* MDConstants.swift in Sources */,
 				2291DAD427019DA900216B64 /* AddWordModule.swift in Sources */,
-				22561CA326D4F09100A6135B /* MDAPIUser.swift in Sources */,
 				228964AA26F8AA1200E23292 /* MDShowProgressHUDProtocol.swift in Sources */,
 				22EF0202269DA9E300FE4435 /* MDResponseOperationResult.swift in Sources */,
 				229FFF3A26F5EB1D0024B974 /* MDBaseLargeTitledNavigationBarViewController.swift in Sources */,
@@ -2300,7 +2293,6 @@
 				2299E48126F384DE00C6E287 /* MDAPICourse_Tests.swift in Sources */,
 				220FFEA826C9168700702CCE /* MDUserMemoryStorage_Tests.swift in Sources */,
 				22B8E6CA26D3A53E001CCCA8 /* MDLanguageStorage_Tests.swift in Sources */,
-				2299E47F26F3841700C6E287 /* MDAPIUser_Tests.swift in Sources */,
 				22557FCF26C95A5100A4FF31 /* MDJWTMemoryStorage_Tests.swift in Sources */,
 				2289CEFC2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift in Sources */,
 				2294D6C526A2F5DC0066BE77 /* Constants_For_Tests.swift in Sources */,
