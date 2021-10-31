@@ -35,7 +35,6 @@ final class AddWordInteractor: NSObject,
                                AddWordInteractorProtocol {
     
     fileprivate let dataManager: AddWordDataManagerInputProtocol
-    fileprivate let wordManager: MDWordManagerProtocol
     fileprivate let bridge: MDBridgeProtocol
     
     var textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol
@@ -46,13 +45,11 @@ final class AddWordInteractor: NSObject,
     init(dataManager: AddWordDataManagerInputProtocol,
          textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol,
          textViewDelegate: MDWordTextViewDelegateImplementationProtocol,
-         wordManager: MDWordManagerProtocol,
          bridge: MDBridgeProtocol) {
         
         self.dataManager = dataManager
         self.textFieldDelegate = textFieldDelegate
-        self.textViewDelegate = textViewDelegate
-        self.wordManager = wordManager
+        self.textViewDelegate = textViewDelegate        
         self.bridge = bridge
         
         super.init()
@@ -89,51 +86,7 @@ extension AddWordInteractor: AddWordInteractorInputProtocol {
         // Show Progress HUD
         interactorOutput?.showProgressHUD()
         //
-        wordManager.addWord(courseId: dataManager.getCourse.courseId,
-                            languageId: dataManager.getCourse.languageId,
-                            wordText: dataManager.getWordText!,
-                            wordDescription: dataManager.getWordDescription!,
-                            languageName: dataManager.getCourse.languageName) { [unowned self] (result) in
-            
-            switch result {
-                
-            case .success(let wordResponse):
-                
-                DispatchQueue.main.async {
-                    
-                    // Hide Progress HUD
-                    self.interactorOutput?.hideProgressHUD()
-                    //
-                    self.bridge.didAddWord?(wordResponse)
-                    //
-                    self.interactorOutput?.closeModule()
-                    //
-                    
-                }
-                
-                //
-                break
-                //
-                
-            case .failure(let error):
-                
-                DispatchQueue.main.async {
-                    
-                    // Hide Progress HUD
-                    self.interactorOutput?.hideProgressHUD()
-                    //
-                    self.interactorOutput?.showError(error)
-                    //
-                    
-                }
-                
-                //
-                break
-                //
-                
-            }
-            
-        }
+        
         
     }
     

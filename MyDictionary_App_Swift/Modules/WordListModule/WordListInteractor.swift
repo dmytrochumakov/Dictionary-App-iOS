@@ -37,7 +37,6 @@ final class WordListInteractor: NSObject,
                                 WordListInteractorProtocol {
     
     fileprivate let dataManager: WordListDataManagerInputProtocol
-    fileprivate let wordManager: MDWordManagerProtocol
     fileprivate var bridge: MDBridgeProtocol
     
     internal var tableViewDelegate: WordListTableViewDelegateProtocol
@@ -50,14 +49,12 @@ final class WordListInteractor: NSObject,
          tableViewDelegate: WordListTableViewDelegateProtocol,
          tableViewDataSource: WordListTableViewDataSourceProtocol,
          searchBarDelegate: MDSearchBarDelegateImplementationProtocol,
-         wordManager: MDWordManagerProtocol,
          bridge: MDBridgeProtocol) {
         
         self.dataManager = dataManager
         self.tableViewDelegate = tableViewDelegate
         self.tableViewDataSource = tableViewDataSource
         self.searchBarDelegate = searchBarDelegate
-        self.wordManager = wordManager
         self.bridge = bridge
         
         super.init()
@@ -167,49 +164,6 @@ fileprivate extension WordListInteractor {
             //
             let word = dataManager.dataProvider.wordListCellModel(atIndexPath: indexPath)!.wordResponse
             // Delete Word From API And Storage
-            wordManager.deleteWordFromApiAndAllStorage(byUserId: word.userId,
-                                                       byCourseId: word.courseId,
-                                                       byWordId: word.wordId) { [unowned self] deleteWordResult in
-                
-                switch deleteWordResult {
-                    
-                case .success:
-                    
-                    DispatchQueue.main.async {
-                        
-                        // Hide Progress HUD
-                        self.interactorOutput?.hideProgressHUD()
-                        //
-                        self.dataManager.deleteWord(atIndexPath: indexPath)
-                        //
-                        self.interactorOutput?.deleteRow(atIndexPath: indexPath)
-                        //
-                        
-                    }
-                    
-                    //
-                    break
-                    //
-                    
-                case .failure(let error):
-                    
-                    DispatchQueue.main.async {
-                        
-                        // Hide Progress HUD
-                        self.interactorOutput?.hideProgressHUD()
-                        //
-                        self.interactorOutput?.showError(error)
-                        //
-                        
-                    }
-                    
-                    //
-                    break
-                    //
-                    
-                }
-                
-            }
             
             
         }

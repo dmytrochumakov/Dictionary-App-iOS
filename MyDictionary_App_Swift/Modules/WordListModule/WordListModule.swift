@@ -41,11 +41,6 @@ extension WordListModule {
                                                                                      tableViewDelegate: wordListTableViewDelegate,
                                                                                      tableViewDataSource: wordListTableViewDataSource,
                                                                                      searchBarDelegate: MDSearchBarDelegateImplementation.init(),
-                                                                                     wordManager: MDWordManager.init(jwtManager: MDJWTManager.init(userMemoryStorage: MDConstants.AppDependencies.dependencies.userStorage.memoryStorage,
-                                                                                                                                                   jwtStorage: MDConstants.AppDependencies.dependencies.jwtStorage,
-                                                                                                                                                   apiJWT: MDConstants.AppDependencies.dependencies.apiJWT),
-                                                                                                                     apiWord: MDConstants.AppDependencies.dependencies.apiWord,
-                                                                                                                     wordStorage: MDConstants.AppDependencies.dependencies.wordStorage),
                                                                                      bridge: MDConstants.AppDependencies.dependencies.bridge)
         var wordListRouter: WordListRouterProtocol = WordListRouter.init()
         let wordListPresenter: WordListPresenterProtocol = WordListPresenter.init(interactor: wordListInteractor,

@@ -17,17 +17,7 @@ protocol MDAppDependenciesProtocol {
     // Manager
     var operationQueueManager: MDOperationQueueManagerProtocol! { get }
     //
-    
-    // API //
-    var apiJWT: MDAPIJWTProtocol! { get }
-    var apiUser: MDAPIUserProtocol! { get }
-    var apiLanguage: MDAPILanguageProtocol! { get }
-    var apiCourse: MDAPICourseProtocol! { get }
-    var apiWord: MDAPIWordProtocol! { get }
-    var apiAuth: MDAPIAuthProtocol! { get }
-    var apiAccount: MDAPIAccountProtocol! { get }
-    // End API //
-    
+        
     // Storage //
     var jwtStorage: MDJWTStorageProtocol! { get }
     var userStorage: MDUserStorageProtocol! { get }
@@ -56,17 +46,7 @@ final class MDAppDependencies: NSObject,
     // Manager
     var operationQueueManager: MDOperationQueueManagerProtocol!
     //
-    
-    // API //
-    var apiJWT: MDAPIJWTProtocol!
-    var apiUser: MDAPIUserProtocol!
-    var apiLanguage: MDAPILanguageProtocol!
-    var apiCourse: MDAPICourseProtocol!
-    var apiWord: MDAPIWordProtocol!
-    var apiAuth: MDAPIAuthProtocol!
-    var apiAccount: MDAPIAccountProtocol!
-    // End API //
-    
+        
     // Storage //
     var jwtStorage: MDJWTStorageProtocol!
     var userStorage: MDUserStorageProtocol!
@@ -103,8 +83,6 @@ extension MDAppDependencies {
         //
         let coreDataStack: MDCoreDataStack = .init()
         self.coreDataStack = coreDataStack
-        //
-        let requestDispatcher: MDRequestDispatcherProtocol = MDConstants.RequestDispatcher.defaultRequestDispatcher(reachability: reachability)
         //
         
         // Manager //
@@ -146,38 +124,6 @@ extension MDAppDependencies {
         self.operationQueueManager = operationQueueManager
         //
         // End manager //
-        
-        
-        // API //
-        let apiJWT: MDAPIJWTProtocol = MDAPIJWT.init(requestDispatcher: requestDispatcher,
-                                                     operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtAPIOperationQueue)!)
-        self.apiJWT = apiJWT
-        //
-        let apiUser: MDAPIUserProtocol = MDAPIUser.init(requestDispatcher: requestDispatcher,
-                                                        operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.userAPIOperationQueue)!)
-        self.apiUser = apiUser
-        //
-        let apiLanguage: MDAPILanguageProtocol = MDAPILanguage.init(requestDispatcher: requestDispatcher,
-                                                                    operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.languageAPIOperationQueue)!)
-        self.apiLanguage = apiLanguage
-        //
-        let apiCourse: MDAPICourseProtocol = MDAPICourse.init(requestDispatcher: requestDispatcher,
-                                                              operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseAPIOperationQueue)!)
-        self.apiCourse = apiCourse
-        //
-        let apiWord: MDAPIWordProtocol = MDAPIWord.init(requestDispatcher: requestDispatcher,
-                                                        operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordAPIOperationQueue)!)
-        self.apiWord = apiWord
-        //
-        let apiAuth: MDAPIAuthProtocol = MDAPIAuth.init(requestDispatcher: requestDispatcher,
-                                                        operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.authAPIOperationQueue)!)
-        self.apiAuth = apiAuth
-        //
-        let apiAccount: MDAPIAccountProtocol = MDAPIAccount.init(requestDispatcher: requestDispatcher,
-                                                                 operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.accountAPIOperationQueue)!)
-        self.apiAccount = apiAccount
-        //
-        // END API //
         
         
         // Storage //

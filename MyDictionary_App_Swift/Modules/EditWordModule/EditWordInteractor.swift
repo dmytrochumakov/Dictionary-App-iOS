@@ -46,7 +46,6 @@ final class EditWordInteractor: NSObject,
                                 EditWordInteractorProtocol {
     
     fileprivate let dataManager: EditWordDataManagerInputProtocol
-    fileprivate let wordManager: MDWordManagerProtocol
     fileprivate let bridge: MDBridgeProtocol
     
     var textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol
@@ -55,13 +54,11 @@ final class EditWordInteractor: NSObject,
     internal weak var interactorOutput: EditWordInteractorOutputProtocol?
     
     init(dataManager: EditWordDataManagerInputProtocol,
-         wordManager: MDWordManagerProtocol,
          bridge: MDBridgeProtocol,
          textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol,
          textViewDelegate: MDWordTextViewDelegateImplementationProtocol) {
         
-        self.dataManager = dataManager
-        self.wordManager = wordManager
+        self.dataManager = dataManager        
         self.bridge = bridge
         self.textFieldDelegate = textFieldDelegate
         self.textViewDelegate = textViewDelegate
@@ -139,56 +136,6 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
             
             // Update Word In Api And All Storage
             //
-            wordManager.updateWordInApiAndAllStorage(courseId: dataManager.getWord.courseId,
-                                                     wordId: dataManager.getWord.wordId,
-                                                     languageId: dataManager.getWord.languageId,
-                                                     newWordText: dataManager.getWord.wordText,
-                                                     newWordDescription: dataManager.getWord.wordDescription,
-                                                     languageName: dataManager.getWord.languageName) { [unowned self] result in
-                
-                switch result {
-                    
-                case .success:
-                    
-                    DispatchQueue.main.async {
-                        
-                        // Hide Progress HUD
-                        self.interactorOutput?.hideProgressHUD()
-                        // Pass Updated Word
-                        self.bridge.didUpdateWord?(dataManager.getWord)
-                        // Close Module
-                        self.interactorOutput?.closeModule()
-                        //
-                        
-                    }
-                    
-                    //
-                    break
-                    //
-                    
-                case .failure(let error):
-                    
-                    DispatchQueue.main.async {
-                        
-                        // Hide Progress HUD
-                        self.interactorOutput?.hideProgressHUD()
-                        // Display Error
-                        self.interactorOutput?.showError(error)
-                        //
-                        
-                    }
-                    
-                    //
-                    break
-                    //
-                    
-                }
-                
-            }
-            
-            
-            //
-            
         }
         
     }
@@ -198,48 +145,7 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
         // Show Progress HUD
         interactorOutput?.showProgressHUD()
         //
-        wordManager.deleteWordFromApiAndAllStorage(byUserId: dataManager.getWord.userId,
-                                                   byCourseId: dataManager.getWord.courseId,
-                                                   byWordId: dataManager.getWord.wordId) { [unowned self] result in
-            
-            switch result {
-                
-            case .success:
-                
-                DispatchQueue.main.async {
-                    
-                    // Hide Progress HUD
-                    self.interactorOutput?.hideProgressHUD()
-                    // Pass Deleted Word
-                    self.bridge.didDeleteWord?(dataManager.getWord)
-                    // Close Module
-                    self.interactorOutput?.closeModule()
-                    //
-                    
-                }
-                
-                //
-                break
-                //
-                
-            case .failure(let error):
-                
-                DispatchQueue.main.async {
-                    
-                    // Hide Progress HUD
-                    self.interactorOutput?.hideProgressHUD()
-                    // Display Error
-                    self.interactorOutput?.showError(error)
-                    //
-                }
-                
-                //
-                break
-                //
-                
-            }
-            
-        }
+        
         //
     }
     
