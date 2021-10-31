@@ -9,12 +9,8 @@ import UIKit
 
 struct RootViewController {
     
-    static func viewController(isLoggedIn: Bool) -> UIViewController {
-        if (isLoggedIn) {
-            return MDNavigationController.init(rootViewController: CourseListModule.init().module)
-        } else {
-            return MDNavigationController.init(rootViewController: ChoiceAuthenticationOrRegistrationModule.init().module)
-        }
+    static func viewController(isLoggedIn: Bool) -> UIViewController {        
+        return MDNavigationController.init(rootViewController: CourseListModule.init().module)
     }
     
 }
