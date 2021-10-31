@@ -20,8 +20,7 @@ extension SettingsModule {
     var module: UIViewController {
         // Settings Module Classes
         
-        let settingsRows: [SettingsRowModel] = [.init(rowType: .account),
-                                                .init(rowType: .privacyPolicy),
+        let settingsRows: [SettingsRowModel] = [.init(rowType: .privacyPolicy),
                                                 .init(rowType: .termsOfService),
                                                 .init(rowType: .appLanguage),
                                                 .init(rowType: .about),

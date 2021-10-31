@@ -16,8 +16,7 @@ protocol SettingsInteractorInputProtocol {
 protocol SettingsInteractorOutputProtocol: AnyObject,
                                            MDShowErrorProtocol {
     
-    func showAbout()
-    func showAccount()
+    func showAbout()    
     func showAppSettings()
     func showPrivacyPolicy()
     func showTermsOfService()
@@ -103,11 +102,7 @@ fileprivate extension SettingsInteractor {
             case .about:
                 self?.interactorOutput?.showAbout()
                 break
-                
-            case .account:
-                self?.interactorOutput?.showAccount()
-                break
-                
+            
             case .appLanguage:
                 self?.interactorOutput?.showAppSettings()
                 break
