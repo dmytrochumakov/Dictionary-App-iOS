@@ -9,8 +9,6 @@ import Foundation
 
 protocol MDCourseStorageProtocol: MDStorageProtocol {
     
-    var memoryStorage: MDCourseMemoryStorageProtocol { get }
-    
     func createCourse(storageType: MDStorageType,
                       courseEntity: CourseResponse,
                       _ completionHandler: @escaping(MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<CourseResponse>>))
@@ -36,17 +34,13 @@ protocol MDCourseStorageProtocol: MDStorageProtocol {
 
 final class MDCourseStorage: MDStorage, MDCourseStorageProtocol {
     
-    let memoryStorage: MDCourseMemoryStorageProtocol
     fileprivate let coreDataStorage: MDCourseCoreDataStorageProtocol
     
-    init(memoryStorage: MDCourseMemoryStorageProtocol,
-         coreDataStorage: MDCourseCoreDataStorageProtocol) {
-        
-        self.memoryStorage = memoryStorage
+    init(coreDataStorage: MDCourseCoreDataStorageProtocol) {
+                
         self.coreDataStorage = coreDataStorage
         
-        super.init(memoryStorage: memoryStorage,
-                   coreDataStorage: coreDataStorage)
+        super.init(coreDataStorage: coreDataStorage)
         
     }
     
@@ -64,19 +58,7 @@ extension MDCourseStorage {
                       _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<CourseResponse>>)) {
         
         switch storageType {
-            
-        case .memory:
-            
-            //
-            self.memoryStorage.createCourse(courseEntity) { result in
-                completionHandler([.init(storageType: storageType, result: result)])
-            }
-            //
-            
-            //
-            break
-            //
-            
+                   
         case .coreData:
             
             //
@@ -97,19 +79,6 @@ extension MDCourseStorage {
             
             // Initialize final result
             var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<CourseResponse>> = []
-            
-            // Create in Memory
-            self.memoryStorage.createCourse(courseEntity) { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                
-                // Pass Final Result If Needed
-                if (finalResult.count == countNeeded) {
-                    completionHandler(finalResult)
-                }
-                
-            }
             
             // Create in Core Data
             self.coreDataStorage.createCourse(courseEntity) { result in
@@ -136,29 +105,13 @@ extension MDCourseStorage {
     func createCourses(storageType: MDStorageType,
                        courseEntities: [CourseResponse],
                        _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<CourseResponse>>)) {
-        
-        debugPrint(#function, Self.self, "Start")
-        
+                
         switch storageType {
-            
-        case .memory:
-            
-            //
-            self.memoryStorage.createCourses(courseEntities) { result in
-                debugPrint(#function, Self.self, "memory -> with result:", result)
-                completionHandler([.init(storageType: storageType, result: result)])
-            }
-            //
-            
-            //
-            break
-            //
             
         case .coreData:
             
             //
             self.coreDataStorage.createCourses(courseEntities) { result in
-                debugPrint(#function, Self.self, "coredata -> with result:", result)
                 completionHandler([.init(storageType: storageType, result: result)])
             }
             //
@@ -175,22 +128,6 @@ extension MDCourseStorage {
             
             // Initialize final result
             var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<CourseResponse>> = []
-            
-            // Create in Memory
-            self.memoryStorage.createCourses(courseEntities) { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                
-                // Pass Final Result If Needed
-                if (finalResult.count == countNeeded) {
-                    debugPrint(#function, Self.self, "all -> memory -> with result:", result)
-                    completionHandler(finalResult)
-                }
-                //
-                
-                
-            }
             
             // Create in Core Data
             self.coreDataStorage.createCourses(courseEntities) { result in
@@ -222,18 +159,6 @@ extension MDCourseStorage {
         
         switch storageType {
             
-        case .memory:
-            
-            //
-            self.memoryStorage.readCourse(fromCourseId: courseId) { result in
-                completionHandler([.init(storageType: storageType, result: result)])
-                //
-            }
-            
-            //
-            break
-            //
-            
         case .coreData:
             
             //
@@ -254,20 +179,6 @@ extension MDCourseStorage {
             
             // Initialize final result
             var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<CourseResponse>> = []
-            
-            // Read From Memory
-            self.memoryStorage.readCourse(fromCourseId: courseId) { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                
-                // Pass Final Result If Needed
-                if (finalResult.count == countNeeded) {
-                    completionHandler(finalResult)
-                }
-                //
-                
-            }
             
             // Read From Core Data
             self.coreDataStorage.readCourse(fromCourseId: courseId) { result in
@@ -295,19 +206,7 @@ extension MDCourseStorage {
                         _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationsResultWithoutCompletion<CourseResponse>>)) {
         
         switch storageType {
-            
-        case .memory:
-            
-            //
-            self.memoryStorage.readAllCourses { result in
-                completionHandler([.init(storageType: storageType, result: result)])
-            }
-            //
-            
-            //
-            break
-            //
-            
+       
         case .coreData:
             
             //
@@ -328,20 +227,6 @@ extension MDCourseStorage {
             
             // Initialize final result
             var finalResult: MDStorageResultsWithoutCompletion<MDOperationsResultWithoutCompletion<CourseResponse>> = []
-            
-            // Read From Memory
-            self.memoryStorage.readAllCourses { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                
-                // Pass Final Result If Needed
-                if (finalResult.count == countNeeded) {
-                    completionHandler(finalResult)
-                }
-                //
-                
-            }
             
             // Read From Core Data
             self.coreDataStorage.readAllCourses { result in
@@ -371,18 +256,6 @@ extension MDCourseStorage {
         
         switch storageType {
             
-        case .memory:
-            
-            //
-            self.memoryStorage.deleteCourse(fromCourseId: courseId) { result in
-                completionHandler([.init(storageType: storageType, result: result)])
-            }
-            //
-            
-            //
-            break
-            //
-            
         case .coreData:
             
             //
@@ -403,21 +276,7 @@ extension MDCourseStorage {
             
             // Initialize final result
             var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
-            
-            // Delete From Memory
-            self.memoryStorage.deleteCourse(fromCourseId: courseId) { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                
-                // Pass Final Result If Needed
-                if (finalResult.count == countNeeded) {
-                    completionHandler(finalResult)
-                }
-                //
-                
-            }
-            
+                       
             // Delete From Core Data
             self.coreDataStorage.deleteCourse(fromCourseId: courseId) { result in
                 
@@ -444,19 +303,7 @@ extension MDCourseStorage {
                           _ completionHandler: @escaping (MDStorageResultsWithCompletion<MDOperationResultWithoutCompletion<Void>>)) {
         
         switch storageType {
-            
-        case .memory:
-            
-            //
-            self.memoryStorage.deleteAllCourses { result in
-                completionHandler([.init(storageType: storageType, result: result)])
-            }
-            //
-            
-            //
-            break
-            //
-            
+                    
         case .coreData:
             
             //
@@ -477,21 +324,7 @@ extension MDCourseStorage {
             
             // Initialize final result
             var finalResult: MDStorageResultsWithoutCompletion<MDOperationResultWithoutCompletion<Void>> = []
-            
-            // Delete From Memory
-            self.memoryStorage.deleteAllCourses { result in
-                
-                // Append Result
-                finalResult.append(.init(storageType: .memory, result: result))
-                
-                // Pass Final Result If Needed
-                if (finalResult.count == countNeeded) {
-                    completionHandler(finalResult)
-                }
-                //
-                
-            }
-            
+                        
             // Delete From Core Data
             self.coreDataStorage.deleteAllCourses { result in
                 
