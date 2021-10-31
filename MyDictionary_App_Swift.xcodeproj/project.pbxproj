@@ -230,13 +230,11 @@
 		22E2B4F32665085E00978E62 /* SettingsRowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4F22665085E00978E62 /* SettingsRowType.swift */; };
 		22E2B4F9266509CA00978E62 /* SettingsRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B4F8266509CA00978E62 /* SettingsRowModel.swift */; };
 		22E327C726FB207C00445917 /* MDShowErrorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E327C626FB207C00445917 /* MDShowErrorProtocol.swift */; };
-		22E327CA26FB2CEE00445917 /* MDStorageCleanupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E327C926FB2CEE00445917 /* MDStorageCleanupService.swift */; };
 		22E327CC26FB318A00445917 /* MDStorageServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E327CB26FB318A00445917 /* MDStorageServiceType.swift */; };
 		22E327CE26FB319D00445917 /* MDStorageServiceOperationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E327CD26FB319D00445917 /* MDStorageServiceOperationResult.swift */; };
 		22E327D026FB31A900445917 /* MDStorageServiceOperationResultWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E327CF26FB31A900445917 /* MDStorageServiceOperationResultWithCompletion.swift */; };
 		22E327DE26FB5EE200445917 /* ShareFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E327D726FB5EE200445917 /* ShareFeedbackViewController.swift */; };
 		22E327E426FB6C7C00445917 /* ShareFeedbackOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E327E326FB6C7C00445917 /* ShareFeedbackOption.swift */; };
-		22E691B626CE5E5200641DFA /* MDStorageResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E691B526CE5E5200641DFA /* MDStorageResult.swift */; };
 		22E861BD26F9FF7F00AB1755 /* AboutApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E861BC26F9FF7F00AB1755 /* AboutApplicationViewController.swift */; };
 		22EDF02626C7E6A100D19DA1 /* CDJWTResponseEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDF02526C7E6A000D19DA1 /* CDJWTResponseEntity+Extension.swift */; };
 		22EDF02826C7E8B900D19DA1 /* CDJWTResponseEntityAttributeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDF02726C7E8B900D19DA1 /* CDJWTResponseEntityAttributeName.swift */; };
@@ -500,13 +498,11 @@
 		22E2B4F22665085E00978E62 /* SettingsRowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowType.swift; sourceTree = "<group>"; };
 		22E2B4F8266509CA00978E62 /* SettingsRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowModel.swift; sourceTree = "<group>"; };
 		22E327C626FB207C00445917 /* MDShowErrorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDShowErrorProtocol.swift; sourceTree = "<group>"; };
-		22E327C926FB2CEE00445917 /* MDStorageCleanupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorageCleanupService.swift; sourceTree = "<group>"; };
 		22E327CB26FB318A00445917 /* MDStorageServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorageServiceType.swift; sourceTree = "<group>"; };
 		22E327CD26FB319D00445917 /* MDStorageServiceOperationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorageServiceOperationResult.swift; sourceTree = "<group>"; };
 		22E327CF26FB31A900445917 /* MDStorageServiceOperationResultWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorageServiceOperationResultWithCompletion.swift; sourceTree = "<group>"; };
 		22E327D726FB5EE200445917 /* ShareFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareFeedbackViewController.swift; sourceTree = "<group>"; };
 		22E327E326FB6C7C00445917 /* ShareFeedbackOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareFeedbackOption.swift; sourceTree = "<group>"; };
-		22E691B526CE5E5200641DFA /* MDStorageResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorageResult.swift; sourceTree = "<group>"; };
 		22E861BC26F9FF7F00AB1755 /* AboutApplicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutApplicationViewController.swift; sourceTree = "<group>"; };
 		22EDF02526C7E6A000D19DA1 /* CDJWTResponseEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDJWTResponseEntity+Extension.swift"; sourceTree = "<group>"; };
 		22EDF02726C7E8B900D19DA1 /* CDJWTResponseEntityAttributeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDJWTResponseEntityAttributeName.swift; sourceTree = "<group>"; };
@@ -969,7 +965,6 @@
 				22493C4626972877000DA480 /* MDOperationsResultWithCompletion.swift */,
 				2289CECC2678CC34007254C3 /* MDOperationResultWithCompletion.swift */,
 				22EF01E4269D9EBC00FE4435 /* MDEntitiesIsEmptyResultWithCompletion.swift */,
-				22E691B526CE5E5200641DFA /* MDStorageResult.swift */,
 				22A2521126CFE4F70013FCF5 /* MDEntitiesCountResultWithoutCompletion.swift */,
 				22A2521326CFE50B0013FCF5 /* MDEntitiesCountResultWithCompletion.swift */,
 				22E327CD26FB319D00445917 /* MDStorageServiceOperationResult.swift */,
@@ -1005,7 +1000,6 @@
 			isa = PBXGroup;
 			children = (
 				22D54B6D270EF05E00DEE843 /* MDFilterSearchTextService */,
-				22E327C826FB2BC600445917 /* MDStorageCleanupService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1518,14 +1512,6 @@
 			path = Typealias;
 			sourceTree = "<group>";
 		};
-		22E327C826FB2BC600445917 /* MDStorageCleanupService */ = {
-			isa = PBXGroup;
-			children = (
-				22E327C926FB2CEE00445917 /* MDStorageCleanupService.swift */,
-			);
-			path = MDStorageCleanupService;
-			sourceTree = "<group>";
-		};
 		22E327D326FB5ECB00445917 /* ShareFeedbackModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -1980,7 +1966,6 @@
 				220793BB26C65965003D434B /* MDEnvironment.swift in Sources */,
 				2291DADA27019DA900216B64 /* AddWordDataManager.swift in Sources */,
 				22D54B6C270EE06100DEE843 /* Reachability.swift in Sources */,
-				22E691B626CE5E5200641DFA /* MDStorageResult.swift in Sources */,
 				22EDF02826C7E8B900D19DA1 /* CDJWTResponseEntityAttributeName.swift in Sources */,
 				22B8E6AE26D38A57001CCCA8 /* MDReadLanguageProtocol.swift in Sources */,
 				22E2B4DF2664E43B00978E62 /* SettingsViewController.swift in Sources */,
@@ -2083,7 +2068,6 @@
 				22493C4726972877000DA480 /* MDOperationsResultWithCompletion.swift in Sources */,
 				22B8E6E226D3C782001CCCA8 /* MDCreateCourseProtocol.swift in Sources */,
 				22493C33269715A9000DA480 /* CDResultSavedEnum.swift in Sources */,
-				22E327CA26FB2CEE00445917 /* MDStorageCleanupService.swift in Sources */,
 				228C596F27033D0800DE6175 /* EditWordPresenter.swift in Sources */,
 				229FFF4026F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift in Sources */,
 				22EF020D269DAFC000FE4435 /* MDAPIEnvironment.swift in Sources */,

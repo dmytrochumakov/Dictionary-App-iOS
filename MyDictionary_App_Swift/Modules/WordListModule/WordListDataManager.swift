@@ -25,24 +25,23 @@ protocol WordListDataManagerOutputProtocol: AnyObject {
 }
 
 protocol WordListDataManagerProtocol: WordListDataManagerInputProtocol {
-    var dataProvider: WordListDataProviderProcotol { get }
     var dataManagerOutput: WordListDataManagerOutputProtocol? { get set }
 }
 
 final class WordListDataManager: WordListDataManagerProtocol {
     
-    fileprivate let memoryStorage: MDWordMemoryStorageProtocol
+    fileprivate let coreDataStorage: MDWordCoreDataStorageProtocol
     fileprivate let filterSearchTextService: MDWordFilterSearchTextServiceProtocol
     
     var dataProvider: WordListDataProviderProcotol
     internal weak var dataManagerOutput: WordListDataManagerOutputProtocol?
     
     init(dataProvider: WordListDataProviderProcotol,
-         memoryStorage: MDWordMemoryStorageProtocol,
+         coreDataStorage: MDWordCoreDataStorageProtocol,
          filterSearchTextService: MDWordFilterSearchTextServiceProtocol) {
         
         self.dataProvider = dataProvider
-        self.memoryStorage = memoryStorage
+        self.coreDataStorage = coreDataStorage
         self.filterSearchTextService = filterSearchTextService
         
     }
@@ -58,7 +57,7 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func readAndAddWordsToDataProvider() {
         
-        memoryStorage.readAllWords(byCourseID: dataProvider.course.courseId) { [unowned self] result in
+        coreDataStorage.readAllWords(byCourseID: dataProvider.course.courseId) { [unowned self] result in
             
             switch result {
                 
@@ -104,7 +103,7 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func filterWords(_ searchText: String?) {
         
-        memoryStorage.readAllWords(byCourseID: dataProvider.course.courseId) { [unowned self] readResult in
+        coreDataStorage.readAllWords(byCourseID: dataProvider.course.courseId) { [unowned self] readResult in
             
             switch readResult {
                 
@@ -157,7 +156,7 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func clearWordFilter() {
         
-        memoryStorage.readAllWords(byCourseID: dataProvider.course.courseId) { [unowned self] readResult in
+        coreDataStorage.readAllWords(byCourseID: dataProvider.course.courseId) { [unowned self] readResult in
             
             switch readResult {
                 

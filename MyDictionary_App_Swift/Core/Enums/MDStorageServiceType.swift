@@ -7,10 +7,7 @@
 
 import Foundation
 
-enum MDStorageServiceType: Int, CaseIterable {
-    case jwt
-    case user
-    case language
+enum MDStorageServiceType: Int, CaseIterable {    
     case course
     case word
 }

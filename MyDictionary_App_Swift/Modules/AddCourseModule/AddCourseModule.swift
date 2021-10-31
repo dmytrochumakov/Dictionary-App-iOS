@@ -20,8 +20,7 @@ extension AddCourseModule {
         
         let dataProvider: AddCourseDataProviderProtocol = AddCourseDataProvider.init(sections: .init())
         
-        var dataManager: AddCourseDataManagerProtocol = AddCourseDataManager.init(memoryStorage: MDConstants.AppDependencies.dependencies.languageStorage.memoryStorage,
-                                                                                  dataProvider: dataProvider,
+        var dataManager: AddCourseDataManagerProtocol = AddCourseDataManager.init(dataProvider: dataProvider,
                                                                                   filterSearchTextService: MDFilterSearchTextService<LanguageResponse>.init(operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.filterSearchTextServiceOperationQueue)!))
         
         let interactor: AddCourseInteractorProtocol = AddCourseInteractor.init(dataManager: dataManager,

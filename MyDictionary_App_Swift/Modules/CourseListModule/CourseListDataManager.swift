@@ -27,17 +27,17 @@ protocol CourseListDataManagerProtocol: CourseListDataManagerInputProtocol {
 
 final class CourseListDataManager: CourseListDataManagerProtocol {
     
-    fileprivate let memoryStorage: MDCourseMemoryStorageProtocol
+    fileprivate let coreDataStorage: MDCourseCoreDataStorageProtocol
     fileprivate let filterSearchTextService: MDFilterSearchTextService<CourseResponse>
     
     internal var dataProvider: CourseListDataProviderProtocol
     internal weak var dataManagerOutput: CourseListDataManagerOutputProtocol?
     
-    init(memoryStorage: MDCourseMemoryStorageProtocol,
+    init(coreDataStorage: MDCourseCoreDataStorageProtocol,
          dataProvider: CourseListDataProviderProtocol,
          filterSearchTextService: MDFilterSearchTextService<CourseResponse>) {
         
-        self.memoryStorage = memoryStorage
+        self.coreDataStorage = coreDataStorage
         self.dataProvider = dataProvider
         self.filterSearchTextService = filterSearchTextService
         
@@ -54,7 +54,7 @@ extension CourseListDataManager {
     
     func readAndAddCoursesToDataProvider() {
         
-        memoryStorage.readAllCourses { [unowned self] readResult in
+        coreDataStorage.readAllCourses { [unowned self] readResult in
             
             switch readResult {
                 
@@ -102,7 +102,7 @@ extension CourseListDataManager {
     
     func filterCourses(_ searchText: String?) {
         
-        memoryStorage.readAllCourses { [unowned self] readResult in
+        coreDataStorage.readAllCourses { [unowned self] readResult in
             
             switch readResult {
                 
@@ -154,7 +154,7 @@ extension CourseListDataManager {
     
     func clearCourseFilter() {
         
-        memoryStorage.readAllCourses { [unowned self] readResult in
+        coreDataStorage.readAllCourses { [unowned self] readResult in
             
             switch readResult {
                 

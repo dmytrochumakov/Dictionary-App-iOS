@@ -17,10 +17,10 @@ final class CourseListModule {
 extension CourseListModule {
     
     var module: UIViewController {
-                
-        let memoryStorage: MDCourseMemoryStorageProtocol = MDConstants.AppDependencies.dependencies.courseStorage.memoryStorage
+                        
         let dataProvider: CourseListDataProviderProtocol = CourseListDataProvider.init(filteredCourses: .init())
-        var dataManager: CourseListDataManagerProtocol = CourseListDataManager.init(memoryStorage: memoryStorage,
+        
+        var dataManager: CourseListDataManagerProtocol = CourseListDataManager.init(coreDataStorage: MDConstants.AppDependencies.dependencies.courseCoreDataStorage,
                                                                                     dataProvider: dataProvider,
                                                                                     filterSearchTextService: MDFilterSearchTextService<CourseResponse>.init(operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.filterSearchTextServiceOperationQueue)!))
         
