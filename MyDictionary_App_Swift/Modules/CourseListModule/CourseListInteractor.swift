@@ -35,8 +35,7 @@ protocol CourseListInteractorProtocol: CourseListInteractorInputProtocol,
 }    
 
 final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
-    
-    fileprivate let courseManager: MDCourseManagerProtocol
+        
     fileprivate let dataManager: CourseListDataManagerInputProtocol
     fileprivate var bridge: MDBridgeProtocol
     
@@ -46,14 +45,12 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
     
     internal weak var interactorOutput: CourseListInteractorOutputProtocol?
     
-    init(courseManager: MDCourseManagerProtocol,
-         dataManager: CourseListDataManagerInputProtocol,
+    init(dataManager: CourseListDataManagerInputProtocol,
          collectionViewDelegate: CourseListTableViewDelegateProtocol,
          collectionViewDataSource: CourseListTableViewDataSourceProtocol,
          searchBarDelegate: MDSearchBarDelegateImplementationProtocol,
          bridge: MDBridgeProtocol) {
-        
-        self.courseManager = courseManager
+                
         self.dataManager = dataManager
         self.tableViewDelegate = collectionViewDelegate
         self.tableViewDataSource = collectionViewDataSource
@@ -100,48 +97,7 @@ extension CourseListInteractor {
         // Show Progress HUD
         interactorOutput?.showProgressHUD()
         // Delete Course From API And Storage
-        courseManager.deleteCourseFromApiAndAllStorage(byCourseId: dataManager
-                                                        .dataProvider
-                                                        .course(atIndexPath: indexPath).courseId) { [unowned self] deleteCourseResult in
-            
-            switch deleteCourseResult {
-                
-            case .success:
-                
-                DispatchQueue.main.async {
-                    
-                    // Hide Progress HUD
-                    self.interactorOutput?.hideProgressHUD()
-                    //
-                    self.dataManager.deleteCourse(atIndexPath: indexPath)
-                    //
-                    self.interactorOutput?.deleteRow(atIndexPath: indexPath)
-                    //
-                    
-                }
-                
-                //
-                break
-                //
-                
-            case .failure(let error):
-                
-                DispatchQueue.main.async {
-                    
-                    // Hide Progress HUD
-                    self.interactorOutput?.hideProgressHUD()
-                    //
-                    self.interactorOutput?.showError(error)
-                    //
-                    
-                }
-                
-                //
-                break
-                //
-            }
-            
-        }
+        
         
     }
     

@@ -37,7 +37,6 @@ final class AddCourseInteractor: NSObject,
     
     fileprivate let dataManager: AddCourseDataManagerInputProtocol
     fileprivate let bridge: MDBridgeProtocol
-    fileprivate let courseManager: MDCourseManagerProtocol
     
     internal var collectionViewDelegate: MDAddCourseCollectionViewDelegateProtocol
     internal var collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol
@@ -49,15 +48,13 @@ final class AddCourseInteractor: NSObject,
          collectionViewDelegate: MDAddCourseCollectionViewDelegateProtocol,
          collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol,
          searchBarDelegate: MDSearchBarDelegateImplementationProtocol,
-         bridge: MDBridgeProtocol,
-         courseManager: MDCourseManagerProtocol) {
+         bridge: MDBridgeProtocol) {
         
         self.collectionViewDelegate = collectionViewDelegate
         self.collectionViewDataSource = collectionViewDataSource
         self.dataManager = dataManager
         self.searchBarDelegate = searchBarDelegate
-        self.bridge = bridge
-        self.courseManager = courseManager
+        self.bridge = bridge        
         
         super.init()
         subscribe()
@@ -102,47 +99,7 @@ extension AddCourseInteractor {
             //
             interactorOutput?.showProgressHUD()
             //
-            courseManager.addCourse(byLanguage: dataManager.selectedRow!.languageResponse) { [unowned self] addCourseResult in
-                
-                switch addCourseResult {
-                    
-                case .success(let courseResponse):
-                    
-                    DispatchQueue.main.async {
-                        
-                        //
-                        self.interactorOutput?.hideProgressHUD()
-                        //
-                        self.bridge.didAddCourse?(courseResponse)
-                        //
-                        self.interactorOutput?.closeModule()
-                        //
-                        
-                    }
-                    
-                    //
-                    break
-                    //
-                    
-                case .failure(let error):
-                    
-                    DispatchQueue.main.async {
-                        
-                        //
-                        self.interactorOutput?.hideProgressHUD()
-                        //
-                        self.interactorOutput?.showError(error)
-                        //
-                        
-                    }
-                    
-                    //
-                    break
-                    //
-                    
-                }
-                
-            }
+            
             
         }
     }

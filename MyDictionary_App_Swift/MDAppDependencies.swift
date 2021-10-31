@@ -19,7 +19,6 @@ protocol MDAppDependenciesProtocol {
     //
     
     // API //
-    var apiCourse: MDAPICourseProtocol! { get }
     var apiWord: MDAPIWordProtocol! { get }
     var apiAccount: MDAPIAccountProtocol! { get }
     // End API //
@@ -53,8 +52,7 @@ final class MDAppDependencies: NSObject,
     var operationQueueManager: MDOperationQueueManagerProtocol!
     //
     
-    // API //
-    var apiCourse: MDAPICourseProtocol!
+    // API //    
     var apiWord: MDAPIWordProtocol!    
     var apiAccount: MDAPIAccountProtocol!
     // End API //
@@ -141,10 +139,6 @@ extension MDAppDependencies {
         
         
         // API //
-        //        
-        let apiCourse: MDAPICourseProtocol = MDAPICourse.init(requestDispatcher: requestDispatcher,
-                                                              operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseAPIOperationQueue)!)
-        self.apiCourse = apiCourse
         //
         let apiWord: MDAPIWordProtocol = MDAPIWord.init(requestDispatcher: requestDispatcher,
                                                         operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordAPIOperationQueue)!)

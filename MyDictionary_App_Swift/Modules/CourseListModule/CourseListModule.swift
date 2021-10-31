@@ -24,10 +24,7 @@ extension CourseListModule {
                                                                                     dataProvider: dataProvider,
                                                                                     filterSearchTextService: MDFilterSearchTextService<CourseResponse>.init(operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.filterSearchTextServiceOperationQueue)!))
         
-        let interactor: CourseListInteractorProtocol = CourseListInteractor.init(courseManager: MDCourseManager.init(apiCourse: MDConstants.AppDependencies.dependencies.apiCourse,
-                                                                                                                     courseStorage: MDConstants.AppDependencies.dependencies.courseStorage,
-                                                                                                                     wordStorage: MDConstants.AppDependencies.dependencies.wordStorage),
-                                                                                 dataManager: dataManager,
+        let interactor: CourseListInteractorProtocol = CourseListInteractor.init(dataManager: dataManager,
                                                                                  collectionViewDelegate: CourseListTableViewDelegate.init(dataProvider: dataProvider),
                                                                                  collectionViewDataSource: CourseListTableViewDataSource.init(dataProvider: dataProvider),
                                                                                  searchBarDelegate: MDSearchBarDelegateImplementation.init(),
