@@ -19,7 +19,6 @@ protocol MDAppDependenciesProtocol {
     //
     
     // API //
-    var apiJWT: MDAPIJWTProtocol! { get }
     var apiUser: MDAPIUserProtocol! { get }
     var apiLanguage: MDAPILanguageProtocol! { get }
     var apiCourse: MDAPICourseProtocol! { get }
@@ -57,7 +56,6 @@ final class MDAppDependencies: NSObject,
     //
     
     // API //
-    var apiJWT: MDAPIJWTProtocol!
     var apiUser: MDAPIUserProtocol!
     var apiLanguage: MDAPILanguageProtocol!
     var apiCourse: MDAPICourseProtocol!
@@ -147,9 +145,6 @@ extension MDAppDependencies {
         
         
         // API //
-        let apiJWT: MDAPIJWTProtocol = MDAPIJWT.init(requestDispatcher: requestDispatcher,
-                                                     operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtAPIOperationQueue)!)
-        self.apiJWT = apiJWT
         //
         let apiUser: MDAPIUserProtocol = MDAPIUser.init(requestDispatcher: requestDispatcher,
                                                         operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.userAPIOperationQueue)!)

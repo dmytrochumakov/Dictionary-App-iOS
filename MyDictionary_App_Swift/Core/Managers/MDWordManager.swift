@@ -33,15 +33,12 @@ protocol MDWordManagerProtocol {
 
 final class MDWordManager: MDWordManagerProtocol {
     
-    fileprivate let jwtManager: MDJWTManagerProtocol
     fileprivate let apiWord: MDAPIWordProtocol
     fileprivate let wordStorage: MDWordStorageProtocol
     
-    init(jwtManager: MDJWTManagerProtocol,
-         apiWord: MDAPIWordProtocol,
+    init(apiWord: MDAPIWordProtocol,
          wordStorage: MDWordStorageProtocol) {
         
-        self.jwtManager = jwtManager
         self.apiWord = apiWord
         self.wordStorage = wordStorage
         
@@ -62,86 +59,6 @@ extension MDWordManager {
                  languageName: String,
                  _ completionHandler: @escaping (MDOperationResultWithCompletion<WordResponse>)) {
         
-        var resultCount: Int = .zero
-        
-        jwtManager.fetchUserAndJWT { [unowned self] fetchUserAndJWTResult in
-            
-            switch fetchUserAndJWTResult {
-                
-            case .success(let userAndJWT):
-                
-                apiWord.createWord(accessToken: userAndJWT.jwt.accessToken,
-                                   createWordRequest: .init(userId: userAndJWT.user.userId,
-                                                            courseId: courseId,
-                                                            languageId: languageId,
-                                                            wordText: wordText,
-                                                            wordDescription: wordDescription,
-                                                            languageName: languageName)) { [unowned self] createApiWordResult in
-                    
-                    switch createApiWordResult {
-                        
-                    case .success(let wordResponse):
-                        
-                        wordStorage.createWord(wordResponse,
-                                               storageType: .all) { createStorageWordResults in
-                            
-                            createStorageWordResults.forEach { createStorageWordResult in
-                                
-                                switch createStorageWordResult.result {
-                                    
-                                case .success:
-                                    
-                                    //
-                                    resultCount += 1
-                                    //
-                                    
-                                    if (resultCount == createStorageWordResults.count) {
-                                        //
-                                        completionHandler(.success(wordResponse))
-                                        //
-                                        break
-                                        //
-                                    }
-                                    
-                                case .failure(let error):
-                                    
-                                    //
-                                    completionHandler(.failure(error))
-                                    //
-                                    break
-                                    //
-                                }
-                                
-                            }
-                            
-                        }
-                        break
-                        
-                    case .failure(let error):
-                        
-                        //
-                        completionHandler(.failure(error))
-                        //
-                        break
-                        //
-                        
-                    }
-                    
-                }
-                
-                break
-                
-            case .failure(let error):
-                
-                //
-                completionHandler(.failure(error))
-                //
-                break
-                //
-                
-            }
-            
-        }
         
     }
     
@@ -157,89 +74,6 @@ extension MDWordManager {
                                       languageName: String,
                                       _ completionHandler: @escaping (MDOperationResultWithCompletion<WordResponse>)) {
         
-        var resultCount: Int = .zero
-        
-        jwtManager.fetchUserAndJWT { [unowned self] fetchUserAndJWTResult in
-            
-            switch fetchUserAndJWTResult {
-                
-            case .success(let userAndJWT):
-                
-                apiWord.updateWord(accessToken: userAndJWT.jwt.accessToken,
-                                   updateWordRequest: .init(userId: userAndJWT.user.userId,
-                                                            wordId: wordId,
-                                                            courseId: courseId,
-                                                            languageId: languageId,
-                                                            wordText: newWordText,
-                                                            wordDescription: newWordDescription,
-                                                            languageName: languageName)) { [unowned self] updateApiWordResult in
-                    
-                    switch updateApiWordResult {
-                        
-                    case .success(let updatedWordResponse):
-                        
-                        wordStorage.updateWord(byWordID: wordId,
-                                               newWordText: newWordText,
-                                               newWordDescription: newWordDescription,
-                                               storageType: .all) { updateStorageWordResults in
-                            
-                            updateStorageWordResults.forEach { updateStorageWordResult in
-                                
-                                switch updateStorageWordResult.result {
-                                    
-                                case .success:
-                                    
-                                    //
-                                    resultCount += 1
-                                    //
-                                    
-                                    if (resultCount == updateStorageWordResults.count) {
-                                        //
-                                        completionHandler(.success(updatedWordResponse))
-                                        //
-                                        break
-                                        //
-                                    }
-                                    
-                                case .failure(let error):
-                                    
-                                    //
-                                    completionHandler(.failure(error))
-                                    //
-                                    break
-                                    //
-                                }
-                                
-                            }
-                            
-                        }
-                        break
-                        
-                    case .failure(let error):
-                        
-                        //
-                        completionHandler(.failure(error))
-                        //
-                        break
-                        //
-                        
-                    }
-                    
-                }
-                
-                break
-                
-            case .failure(let error):
-                
-                //
-                completionHandler(.failure(error))
-                //
-                break
-                //
-                
-            }
-            
-        }
         
     }
     
@@ -252,73 +86,6 @@ extension MDWordManager {
                                         byWordId wordId: Int64,
                                         _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
-        var resultCount: Int = .zero
-        
-        jwtManager.fetchUserAndJWT { [unowned self] fetchUserAndJWTResult in
-            
-            switch fetchUserAndJWTResult {
-                
-            case .success(let userAndJWT):
-                
-                apiWord.deleteWord(accessToken: userAndJWT.jwt.accessToken,
-                                   userId: userId,
-                                   courseId: courseId,
-                                   wordId: wordId) { [unowned self] (apiDeleteWordResult) in
-                    
-                    switch apiDeleteWordResult {
-                        
-                    case .success:
-                        //
-                        wordStorage.deleteWord(byWordId: wordId, storageType: .all) { (storageDeleteWordResults) in
-                            
-                            storageDeleteWordResults.forEach { storageDeleteWordResult in
-                                
-                                switch storageDeleteWordResult.result {
-                                    
-                                case .success:
-                                    //
-                                    resultCount += 1
-                                    //
-                                    if (resultCount == storageDeleteWordResults.count) {
-                                        //
-                                        completionHandler(.success(()))
-                                        //
-                                        break
-                                        //
-                                    }
-                                    
-                                case .failure(let error):
-                                    //
-                                    completionHandler(.failure(error))
-                                    //
-                                    break
-                                    //
-                                }
-                                
-                            }
-                            
-                        }
-                        
-                        //
-                    case .failure(let error):
-                        //
-                        completionHandler(.failure(error))
-                        //
-                        break
-                        //
-                    }
-                    
-                }
-                
-            case .failure(let error):
-                //
-                completionHandler(.failure(error))
-                //
-                break
-                //
-            }
-            
-        }
         
     }
     
