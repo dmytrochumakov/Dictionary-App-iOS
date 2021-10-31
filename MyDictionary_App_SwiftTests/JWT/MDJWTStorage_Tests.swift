@@ -14,18 +14,14 @@ final class MDJWTStorage_Tests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        
-        let memoryStorage: MDJWTMemoryStorageProtocol = MDJWTMemoryStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtMemoryStorageOperationQueue)!,
-                                                                                array: .init())
-        
+                
         let coreDataStack: MDCoreDataStack = TestCoreDataStack.init()
         
         let coreDataStorage: MDJWTCoreDataStorageProtocol = MDJWTCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.jwtCoreDataStorageOperationQueue)!,
                                                                                       managedObjectContext: coreDataStack.privateContext,
                                                                                       coreDataStack: coreDataStack)
         
-        let jwtStorage: MDJWTStorageProtocol = MDJWTStorage.init(memoryStorage: memoryStorage,
-                                                                 coreDataStorage: coreDataStorage)
+        let jwtStorage: MDJWTStorageProtocol = MDJWTStorage.init(coreDataStorage: coreDataStorage)
         
         self.jwtStorage = jwtStorage
         

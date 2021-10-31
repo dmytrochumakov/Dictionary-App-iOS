@@ -19,13 +19,10 @@ protocol MDStorageProtocol {
 
 open class MDStorage: NSObject, MDStorageProtocol {
     
-    fileprivate let memoryStorage: MDStorageInterface
     fileprivate let coreDataStorage: MDStorageInterface
     
-    init(memoryStorage: MDStorageInterface,
-         coreDataStorage: MDStorageInterface) {
-        
-        self.memoryStorage = memoryStorage
+    init(coreDataStorage: MDStorageInterface) {
+                
         self.coreDataStorage = coreDataStorage
         
     }
