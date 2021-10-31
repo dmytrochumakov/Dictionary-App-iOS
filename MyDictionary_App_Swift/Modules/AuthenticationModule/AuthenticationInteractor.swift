@@ -122,52 +122,7 @@ fileprivate extension AuthenticationInteractor {
         
         if (authValidation.isValid) {
             
-            // Show Progress HUD
-            interactorOutput?.showProgressHUD()
-            //
-            authManager.login(authRequest: .init(nickname: dataManager.getNickname()!,
-                                                 password: dataManager.getPassword()!)) { [weak self] progress in
-                
-                DispatchQueue.main.async {
-                    self?.interactorOutput?.updateHUDProgress(progress)
-                }
-                
-            } completionHandler: { [weak self] (result) in
-                
-                switch result {
-                case .success:
-                    
-                    DispatchQueue.main.async {
-                        
-                        // Hide Progress HUD
-                        self?.interactorOutput?.hideProgressHUD()
-                        //
-                        self?.interactorOutput?.showCourseList()
-                        //
-                        
-                    }
-                    //
-                    break
-                    
-                case .failure(let error):
-                    
-                    DispatchQueue.main.async {
-                        
-                        // Hide Progress HUD
-                        self?.interactorOutput?.hideProgressHUD()
-                        //
-                        self?.interactorOutput?.showError(error)
-                        //
-                        
-                    }
-                    
-                    //
-                    break
-                    //
-                    
-                }
-                
-            }
+            
             
         } else {
             interactorOutput?.showError(authValidation.validationErrors.first!)

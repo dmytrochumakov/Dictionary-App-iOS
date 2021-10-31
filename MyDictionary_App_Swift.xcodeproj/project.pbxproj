@@ -56,11 +56,9 @@
 		2223F8BC26512FFD004F2FE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2223F8BE26512FFD004F2FE9 /* Localizable.strings */; };
 		222F52702701AD080070F546 /* MDTextViewWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222F526F2701AD080070F546 /* MDTextViewWithToolBar.swift */; };
 		222F52772701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222F52762701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift */; };
-		223648EA26DE38970071F271 /* MDSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223648E926DE38970071F271 /* MDSync.swift */; };
 		223EB28626F9FD030021D8E1 /* TermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223EB28526F9FD030021D8E1 /* TermsOfServiceViewController.swift */; };
 		224375AC26F33EA3006B90EB /* MDCourseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375AB26F33EA3006B90EB /* MDCourseListCell.swift */; };
 		224375AF26F3406B006B90EB /* MDCourseListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375AE26F3406B006B90EB /* MDCourseListCellModel.swift */; };
-		224375B226F3509D006B90EB /* MDSyncManager_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375B126F3509D006B90EB /* MDSyncManager_Tests.swift */; };
 		224375B526F360D2006B90EB /* MDAPIJWT_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375B426F360D2006B90EB /* MDAPIJWT_Tests.swift */; };
 		22493C2E26971413000DA480 /* MDCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C2D26971413000DA480 /* MDCoreDataStack.swift */; };
 		22493C312697159E000DA480 /* CDResultSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C302697159E000DA480 /* CDResultSaved.swift */; };
@@ -159,7 +157,6 @@
 		2291DAD827019DA900216B64 /* AddWordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291DAD127019DA900216B64 /* AddWordInteractor.swift */; };
 		2291DAD927019DA900216B64 /* AddWordDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291DAD227019DA900216B64 /* AddWordDataProvider.swift */; };
 		2291DADA27019DA900216B64 /* AddWordDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291DAD327019DA900216B64 /* AddWordDataManager.swift */; };
-		2294323026DF9A2A0073048C /* MDSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294322F26DF9A2A0073048C /* MDSyncManager.swift */; };
 		2294D6C326A2F1B60066BE77 /* CDUserResponseEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294D6C226A2F1B60066BE77 /* CDUserResponseEntity+Extension.swift */; };
 		2294D6C526A2F5DC0066BE77 /* Constants_For_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294D6C426A2F5DC0066BE77 /* Constants_For_Tests.swift */; };
 		229572B826FF1E900092817B /* MDAddCourseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229572B726FF1E900092817B /* MDAddCourseError.swift */; };
@@ -243,8 +240,6 @@
 		22BA7D6F270318CA00068F7E /* MDInsertRowProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA7D6E270318CA00068F7E /* MDInsertRowProtocol.swift */; };
 		22BA7D712703191400068F7E /* MDDeleteRowProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA7D702703191400068F7E /* MDDeleteRowProtocol.swift */; };
 		22BA7D732703192300068F7E /* MDUpdateRowProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA7D722703192300068F7E /* MDUpdateRowProtocol.swift */; };
-		22BBA15B26E0B366002955A6 /* MDSyncError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BBA15A26E0B366002955A6 /* MDSyncError.swift */; };
-		22BBA15D26E0C0F0002955A6 /* MDProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BBA15C26E0C0F0002955A6 /* MDProgress.swift */; };
 		22BBA15F26E0DFC9002955A6 /* MDFillMemoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BBA15E26E0DFC9002955A6 /* MDFillMemoryService.swift */; };
 		22BD999A266A480D0063FEFC /* SettingsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD9999266A480D0063FEFC /* SettingsModule.swift */; };
 		22BD99A0266A4AB10063FEFC /* WordListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD999F266A4AB10063FEFC /* WordListModule.swift */; };
@@ -412,11 +407,9 @@
 		2223F8BD26512FFD004F2FE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		222F526F2701AD080070F546 /* MDTextViewWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDTextViewWithToolBar.swift; sourceTree = "<group>"; };
 		222F52762701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDTextFieldDelegatePropertyProtocol.swift; sourceTree = "<group>"; };
-		223648E926DE38970071F271 /* MDSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSync.swift; sourceTree = "<group>"; };
 		223EB28526F9FD030021D8E1 /* TermsOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceViewController.swift; sourceTree = "<group>"; };
 		224375AB26F33EA3006B90EB /* MDCourseListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseListCell.swift; sourceTree = "<group>"; };
 		224375AE26F3406B006B90EB /* MDCourseListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseListCellModel.swift; sourceTree = "<group>"; };
-		224375B126F3509D006B90EB /* MDSyncManager_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncManager_Tests.swift; sourceTree = "<group>"; };
 		224375B426F360D2006B90EB /* MDAPIJWT_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAPIJWT_Tests.swift; sourceTree = "<group>"; };
 		22493C2D26971413000DA480 /* MDCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCoreDataStack.swift; sourceTree = "<group>"; };
 		22493C302697159E000DA480 /* CDResultSaved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDResultSaved.swift; sourceTree = "<group>"; };
@@ -521,7 +514,6 @@
 		2291DAD127019DA900216B64 /* AddWordInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordInteractor.swift; sourceTree = "<group>"; };
 		2291DAD227019DA900216B64 /* AddWordDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordDataProvider.swift; sourceTree = "<group>"; };
 		2291DAD327019DA900216B64 /* AddWordDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordDataManager.swift; sourceTree = "<group>"; };
-		2294322F26DF9A2A0073048C /* MDSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncManager.swift; sourceTree = "<group>"; };
 		2294D6C226A2F1B60066BE77 /* CDUserResponseEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDUserResponseEntity+Extension.swift"; sourceTree = "<group>"; };
 		2294D6C426A2F5DC0066BE77 /* Constants_For_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants_For_Tests.swift; sourceTree = "<group>"; };
 		229572B726FF1E900092817B /* MDAddCourseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAddCourseError.swift; sourceTree = "<group>"; };
@@ -605,8 +597,6 @@
 		22BA7D6E270318CA00068F7E /* MDInsertRowProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDInsertRowProtocol.swift; sourceTree = "<group>"; };
 		22BA7D702703191400068F7E /* MDDeleteRowProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDDeleteRowProtocol.swift; sourceTree = "<group>"; };
 		22BA7D722703192300068F7E /* MDUpdateRowProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDUpdateRowProtocol.swift; sourceTree = "<group>"; };
-		22BBA15A26E0B366002955A6 /* MDSyncError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDSyncError.swift; sourceTree = "<group>"; };
-		22BBA15C26E0C0F0002955A6 /* MDProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDProgress.swift; sourceTree = "<group>"; };
 		22BBA15E26E0DFC9002955A6 /* MDFillMemoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDFillMemoryService.swift; sourceTree = "<group>"; };
 		22BD9999266A480D0063FEFC /* SettingsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModule.swift; sourceTree = "<group>"; };
 		22BD999F266A4AB10063FEFC /* WordListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListModule.swift; sourceTree = "<group>"; };
@@ -1084,17 +1074,6 @@
 			path = TextViews;
 			sourceTree = "<group>";
 		};
-		223648E826DE38050071F271 /* Sync */ = {
-			isa = PBXGroup;
-			children = (
-				223648E926DE38970071F271 /* MDSync.swift */,
-				2294322F26DF9A2A0073048C /* MDSyncManager.swift */,
-				22BBA15A26E0B366002955A6 /* MDSyncError.swift */,
-				22BBA15C26E0C0F0002955A6 /* MDProgress.swift */,
-			);
-			path = Sync;
-			sourceTree = "<group>";
-		};
 		223EB28426F9FCB40021D8E1 /* TermsOfServiceModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -1117,14 +1096,6 @@
 				224375AE26F3406B006B90EB /* MDCourseListCellModel.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		224375B026F35055006B90EB /* Sync */ = {
-			isa = PBXGroup;
-			children = (
-				224375B126F3509D006B90EB /* MDSyncManager_Tests.swift */,
-			);
-			path = Sync;
 			sourceTree = "<group>";
 		};
 		224375B326F3609E006B90EB /* Api */ = {
@@ -1293,7 +1264,6 @@
 		2289CEB62678CC34007254C3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				223648E826DE38050071F271 /* Sync */,
 				228722CF26D0F16E00C9D1BC /* Managers */,
 				220FFE7826C9060100702CCE /* Storage */,
 				22EF01E6269DA6D400FE4435 /* Network */,
@@ -1434,7 +1404,6 @@
 			children = (
 				2299587726F4A751003DF092 /* FillMemoryService */,
 				224375B326F3609E006B90EB /* Api */,
-				224375B026F35055006B90EB /* Sync */,
 				22561C8426D4BB8300A6135B /* Course */,
 				22B8E6B526D39173001CCCA8 /* Language */,
 				22557FCD26C95A4200A4FF31 /* JWT */,
@@ -2407,7 +2376,6 @@
 				2291BAF326F7265E0012504D /* MDSearchTextField.swift in Sources */,
 				227B91D726EF5F250086B9AA /* RegisterValidation.swift in Sources */,
 				2291DAD927019DA900216B64 /* AddWordDataProvider.swift in Sources */,
-				22BBA15D26E0C0F0002955A6 /* MDProgress.swift in Sources */,
 				22DB2F7F26C3C3A900C1AADA /* UIColor+Extension.swift in Sources */,
 				22DE582C26C954A70032A94C /* MDReadJWTProtocol.swift in Sources */,
 				22DB2F8926C3D3F400C1AADA /* CourseListTableViewDelegate.swift in Sources */,
@@ -2474,7 +2442,6 @@
 				22A2987826FC84F000E79843 /* AddCourseViewController.swift in Sources */,
 				228AE05626EDDFC20088B4CF /* MDBaseLargeNavigationBarAndBackgroundImageViewController.swift in Sources */,
 				227D8F1526D7A4FA009CB94B /* MDAppSettings.swift in Sources */,
-				2294323026DF9A2A0073048C /* MDSyncManager.swift in Sources */,
 				22E2B4EC2664EE1400978E62 /* MDFillWithModelProtocol.swift in Sources */,
 				22014F892700A7D300D5250A /* MDWordManager.swift in Sources */,
 				220FFE7426C8F83A00702CCE /* MDKeyboardToolbar.swift in Sources */,
@@ -2533,7 +2500,6 @@
 				220793C726C66F76003D434B /* AuthValidationError.swift in Sources */,
 				22EF0202269DA9E300FE4435 /* MDResponseOperationResult.swift in Sources */,
 				229FFF3A26F5EB1D0024B974 /* MDBaseLargeTitledNavigationBarViewController.swift in Sources */,
-				22BBA15B26E0B366002955A6 /* MDSyncError.swift in Sources */,
 				22DEA00426FA05A900892D78 /* AccountRouter.swift in Sources */,
 				220793BF26C65BF4003D434B /* AuthValidation.swift in Sources */,
 				22EF0205269DACC300FE4435 /* MDAPIOperation.swift in Sources */,
@@ -2554,7 +2520,6 @@
 				228BC442264979FD0030FB30 /* MyDictionary_App_Swift.xcdatamodeld in Sources */,
 				22A2985C26FC635100E79843 /* MDSettingsError.swift in Sources */,
 				22DE582A26C9549B0032A94C /* MDCreateJWTProtocol.swift in Sources */,
-				223648EA26DE38970071F271 /* MDSync.swift in Sources */,
 				22A2987F26FCA26000E79843 /* MDAddCourseCell.swift in Sources */,
 				22EF01E5269D9EBC00FE4435 /* MDEntitiesIsEmptyResultWithCompletion.swift in Sources */,
 				22BBA15F26E0DFC9002955A6 /* MDFillMemoryService.swift in Sources */,
@@ -2646,7 +2611,6 @@
 				2299E48126F384DE00C6E287 /* MDAPICourse_Tests.swift in Sources */,
 				220FFEA826C9168700702CCE /* MDUserMemoryStorage_Tests.swift in Sources */,
 				22B8E6CA26D3A53E001CCCA8 /* MDLanguageStorage_Tests.swift in Sources */,
-				224375B226F3509D006B90EB /* MDSyncManager_Tests.swift in Sources */,
 				2299E47F26F3841700C6E287 /* MDAPIUser_Tests.swift in Sources */,
 				22557FCF26C95A5100A4FF31 /* MDJWTMemoryStorage_Tests.swift in Sources */,
 				2289CEFC2678CC57007254C3 /* MDWordMemoryStorage_Tests.swift in Sources */,

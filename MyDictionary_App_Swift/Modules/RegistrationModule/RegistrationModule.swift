@@ -27,28 +27,8 @@ extension RegistrationModule {
         let registerValidation: RegisterValidationProtocol = RegisterValidation.init(dataProvider: dataProvider,
                                                                                      validationTypes: validationTypes)
         
-        let sync: MDSyncProtocol = MDSync.init(apiJWT: MDConstants.AppDependencies.dependencies.apiJWT,
-                                               jwtStorage: MDConstants.AppDependencies.dependencies.jwtStorage,
-                                               apiUser: MDConstants.AppDependencies.dependencies.apiUser,
-                                               userStorage: MDConstants.AppDependencies.dependencies.userStorage,
-                                               apiLanguage: MDConstants.AppDependencies.dependencies.apiLanguage,
-                                               languageStorage: MDConstants.AppDependencies.dependencies.languageStorage,
-                                               apiCourse: MDConstants.AppDependencies.dependencies.apiCourse,
-                                               courseStorage: MDConstants.AppDependencies.dependencies.courseStorage,
-                                               apiWord: MDConstants.AppDependencies.dependencies.apiWord,
-                                               wordStorage: MDConstants.AppDependencies.dependencies.wordStorage,
-                                               storageCleanupService: MDStorageCleanupService.init(jwtStorage: MDConstants.AppDependencies.dependencies.jwtStorage,
-                                                                                                   userStorage: MDConstants.AppDependencies.dependencies.userStorage,
-                                                                                                   languageStorage: MDConstants.AppDependencies.dependencies.languageStorage,
-                                                                                                   courseStorage: MDConstants.AppDependencies.dependencies.courseStorage,
-                                                                                                   wordStorage: MDConstants.AppDependencies.dependencies.wordStorage,
-                                                                                                   operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.storageCleanupServiceOperationQueue)!))
-        
-        let syncManager: MDSyncManagerProtocol = MDSyncManager.init(sync: sync)
-        
         let authManager: MDAuthManagerProtocol = MDAuthManager.init(apiAuth: MDConstants.AppDependencies.dependencies.apiAuth,
-                                                                    appSettings: MDConstants.AppDependencies.dependencies.appSettings,
-                                                                    syncManager: syncManager)
+                                                                    appSettings: MDConstants.AppDependencies.dependencies.appSettings)
         
         let interactor: RegistrationInteractorProtocol = RegistrationInteractor.init(dataManager: dataManager,
                                                                                      registerValidation: registerValidation,

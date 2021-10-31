@@ -87,14 +87,7 @@ struct Constants_For_Tests {
     public static var authRequest: AuthRequest {
         return .init(nickname: "test", password: "test")
     }
-    
-    public static func syncItem(accessToken: String) -> MDSync.Item {
-        return .init(accessToken: accessToken,
-                     password: authRequest.password,
-                     userId:   jwtApiRequest.userId,
-                     nickname: authRequest.nickname)
-    }
-    
+        
     static var operationQueueManager: MDOperationQueueManagerProtocol {
         
         let operationQueues: [OperationQueue] = [MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.jwtMemoryStorageOperationQueue),
