@@ -52,8 +52,6 @@
 		22493C4926972A03000DA480 /* CDWordResponseEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C4826972A03000DA480 /* CDWordResponseEntity+Extension.swift */; };
 		22493C4C26972E27000DA480 /* MDEntityOperationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C4B26972E26000DA480 /* MDEntityOperationError.swift */; };
 		22493C5826974F4C000DA480 /* MDWordCoreDataStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C5726974F4C000DA480 /* MDWordCoreDataStorage_Tests.swift */; };
-		22557FC526C9587100A4FF31 /* MDJWTStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22557FC426C9587100A4FF31 /* MDJWTStorage.swift */; };
-		22557FC926C958A200A4FF31 /* MDJWTCoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22557FC826C958A200A4FF31 /* MDJWTCoreDataStorage.swift */; };
 		22561C9026D4D12D00A6135B /* MDCourseCoreDataStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C8F26D4D12D00A6135B /* MDCourseCoreDataStorage_Tests.swift */; };
 		22561C9D26D4DEA800A6135B /* MDStorageInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C9C26D4DEA800A6135B /* MDStorageInterface.swift */; };
 		22561CA126D4E78300A6135B /* MDCourseStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561CA026D4E78300A6135B /* MDCourseStorage_Tests.swift */; };
@@ -329,8 +327,6 @@
 		22493C4826972A03000DA480 /* CDWordResponseEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDWordResponseEntity+Extension.swift"; sourceTree = "<group>"; };
 		22493C4B26972E26000DA480 /* MDEntityOperationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEntityOperationError.swift; sourceTree = "<group>"; };
 		22493C5726974F4C000DA480 /* MDWordCoreDataStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordCoreDataStorage_Tests.swift; sourceTree = "<group>"; };
-		22557FC426C9587100A4FF31 /* MDJWTStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTStorage.swift; sourceTree = "<group>"; };
-		22557FC826C958A200A4FF31 /* MDJWTCoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDJWTCoreDataStorage.swift; sourceTree = "<group>"; };
 		22561C8F26D4D12D00A6135B /* MDCourseCoreDataStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseCoreDataStorage_Tests.swift; sourceTree = "<group>"; };
 		22561C9C26D4DEA800A6135B /* MDStorageInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorageInterface.swift; sourceTree = "<group>"; };
 		22561CA026D4E78300A6135B /* MDCourseStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseStorage_Tests.swift; sourceTree = "<group>"; };
@@ -641,7 +637,6 @@
 			isa = PBXGroup;
 			children = (
 				22B8E6D726D3C47B001CCCA8 /* Course */,
-				22DE582426C9536A0032A94C /* JWT */,
 				220FFE7A26C9062800702CCE /* User */,
 				220FFE7926C9060500702CCE /* Word */,
 			);
@@ -1542,15 +1537,6 @@
 			path = CourseListModule;
 			sourceTree = "<group>";
 		};
-		22DE582426C9536A0032A94C /* JWT */ = {
-			isa = PBXGroup;
-			children = (
-				22557FC426C9587100A4FF31 /* MDJWTStorage.swift */,
-				22557FC826C958A200A4FF31 /* MDJWTCoreDataStorage.swift */,
-			);
-			path = JWT;
-			sourceTree = "<group>";
-		};
 		22DE582626C953950032A94C /* JWT */ = {
 			isa = PBXGroup;
 			children = (
@@ -1972,7 +1958,6 @@
 				22E327E426FB6C7C00445917 /* ShareFeedbackOption.swift in Sources */,
 				22DB2F8326C3D28900C1AADA /* CourseListTableViewDataSource.swift in Sources */,
 				227D5E672652585C00B54524 /* MDCollectionViewDelegateFlowLayoutPropertyProtocol.swift in Sources */,
-				22557FC526C9587100A4FF31 /* MDJWTStorage.swift in Sources */,
 				2291BAF026F714DD0012504D /* MDSearchBar.swift in Sources */,
 				224375AC26F33EA3006B90EB /* MDCourseListCell.swift in Sources */,
 				22CA088726515F6A0052D169 /* WordListDataManager.swift in Sources */,
@@ -2100,7 +2085,6 @@
 				22BA7D5E2703125D00068F7E /* MDAddWordError.swift in Sources */,
 				22DB2F7826C3BE7900C1AADA /* CourseListPresenter.swift in Sources */,
 				22CA088126515EEB0052D169 /* WordListPresenter.swift in Sources */,
-				22557FC926C958A200A4FF31 /* MDJWTCoreDataStorage.swift in Sources */,
 				2223F8AB26512C5A004F2FE9 /* String+Extension.swift in Sources */,
 				22CA088E265167620052D169 /* MDReloadDataProtocol.swift in Sources */,
 				22BA7D712703191400068F7E /* MDDeleteRowProtocol.swift in Sources */,
