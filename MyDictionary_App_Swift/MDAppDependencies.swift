@@ -17,11 +17,7 @@ protocol MDAppDependenciesProtocol {
     // Manager
     var operationQueueManager: MDOperationQueueManagerProtocol! { get }
     //
-    
-    // API //
-    var apiWord: MDAPIWordProtocol! { get }
-    // End API //
-    
+        
     // Storage //
     var jwtStorage: MDJWTStorageProtocol! { get }
     var userStorage: MDUserStorageProtocol! { get }
@@ -50,11 +46,7 @@ final class MDAppDependencies: NSObject,
     // Manager
     var operationQueueManager: MDOperationQueueManagerProtocol!
     //
-    
-    // API //    
-    var apiWord: MDAPIWordProtocol!
-    // End API //
-    
+        
     // Storage //
     var jwtStorage: MDJWTStorageProtocol!
     var userStorage: MDUserStorageProtocol!
@@ -91,8 +83,6 @@ extension MDAppDependencies {
         //
         let coreDataStack: MDCoreDataStack = .init()
         self.coreDataStack = coreDataStack
-        //
-        let requestDispatcher: MDRequestDispatcherProtocol = MDConstants.RequestDispatcher.defaultRequestDispatcher(reachability: reachability)
         //
         
         // Manager //
@@ -134,15 +124,6 @@ extension MDAppDependencies {
         self.operationQueueManager = operationQueueManager
         //
         // End manager //
-        
-        
-        // API //
-        //
-        let apiWord: MDAPIWordProtocol = MDAPIWord.init(requestDispatcher: requestDispatcher,
-                                                        operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordAPIOperationQueue)!)
-        self.apiWord = apiWord        
-        //        
-        // END API //
         
         
         // Storage //

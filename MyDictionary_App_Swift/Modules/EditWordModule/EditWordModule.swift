@@ -30,8 +30,6 @@ extension EditWordModule {
         var dataManager: EditWordDataManagerProtocol = EditWordDataManager.init(dataProvider: dataProvider)
         
         let interactor: EditWordInteractorProtocol = EditWordInteractor.init(dataManager: dataManager,
-                                                                             wordManager: MDWordManager.init(apiWord: MDConstants.AppDependencies.dependencies.apiWord,
-                                                                                                             wordStorage: MDConstants.AppDependencies.dependencies.wordStorage),
                                                                              bridge: MDConstants.AppDependencies.dependencies.bridge,
                                                                              textFieldDelegate: MDWordTextFieldDelegateImplementation.init(),
                                                                              textViewDelegate: MDWordTextViewDelegateImplementation.init())
