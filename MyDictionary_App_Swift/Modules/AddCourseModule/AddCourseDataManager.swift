@@ -21,28 +21,24 @@ protocol AddCourseDataManagerOutputProtocol: AnyObject {
 }
 
 protocol AddCourseDataManagerProtocol: AddCourseDataManagerInputProtocol {
-    var dataProvider: AddCourseDataProviderProtocol { get }
     var dataManagerOutput: AddCourseDataManagerOutputProtocol? { get set }
 }
 
 final class AddCourseDataManager: AddCourseDataManagerProtocol {
     
-    fileprivate let memoryStorage: MDLanguageMemoryStorageProtocol
+    fileprivate var dataProvider: AddCourseDataProviderProtocol
     fileprivate let filterSearchTextService: MDFilterSearchTextService<LanguageResponse>
     
     var selectedRow: MDAddCourseRow? {
         guard let selectedIndexPath = self.firstSelectedIndexPath else { return nil }
         return dataProvider.sections[selectedIndexPath.section].rows[selectedIndexPath.row]
     }
-    
-    internal var dataProvider: AddCourseDataProviderProtocol
+        
     internal weak var dataManagerOutput: AddCourseDataManagerOutputProtocol?
     
-    init(memoryStorage: MDLanguageMemoryStorageProtocol,
-         dataProvider: AddCourseDataProviderProtocol,
+    init(dataProvider: AddCourseDataProviderProtocol,
          filterSearchTextService: MDFilterSearchTextService<LanguageResponse>) {
-        
-        self.memoryStorage = memoryStorage
+                
         self.dataProvider = dataProvider
         self.filterSearchTextService = filterSearchTextService
         
@@ -58,134 +54,19 @@ extension AddCourseDataManager {
     
     func loadAndPassLanguagesArrayToDataProvider() {
         
-        memoryStorage.readAllLanguages { [weak self] readResult in
-            
-            switch readResult {
-                
-            case .success(let languages):
-                
-                DispatchQueue.main.async {
-                    
-                    // Set Languages
-                    self?.dataProvider.sections = self?.configuredSections(byLanguages: languages) ?? []
-                    // Pass Result
-                    self?.dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.success(()))
-                    //
-                    
-                }
-                
-                //
-                break
-                //
-                
-            case .failure(let error):
-                
-                DispatchQueue.main.async {
-                    
-                    // Pass Result
-                    self?.dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.failure(error))
-                    //
-                    
-                }
-                
-                //
-                break
-                //
-                
-            }
-            
-        }
+       
         
     }
     
     func filterLanguages(_ searchText: String?) {
         
-        memoryStorage.readAllLanguages { [weak self] readResult in
-            
-            switch readResult {
-                
-            case .success(let readLanguages):
-                
-                self?.filterSearchTextService.filter(input: readLanguages,
-                                                     searchText: searchText) { [weak self] (filteredResult) in
-                    
-                    let configuredSections = self?.configuredSections(byLanguages: filteredResult) ?? []
-                    
-                    DispatchQueue.main.async {
-                        
-                        // Set Filtered Result
-                        self?.dataProvider.sections = configuredSections
-                        
-                        // Pass Result
-                        self?.dataManagerOutput?.filteredLanguagesResult(.success(()))
-                        //
-                        
-                    }
-                    
-                }
-                
-                //
-                break
-                //
-                
-            case .failure(let error):
-                
-                DispatchQueue.main.async {
-                    
-                    // Pass Result
-                    self?.dataManagerOutput?.filteredLanguagesResult(.failure(error))
-                    //
-                }
-                
-                //
-                break
-                //
-            }
-            
-        }
+      
         
     }
     
     func clearLanguageFilter() {
         
-        memoryStorage.readAllLanguages { [weak self] readResult in
-            
-            switch readResult {
-                
-            case .success(let languages):
-                
-                DispatchQueue.main.async {
-                    
-                    // Set Sections
-                    self?.dataProvider.sections = self?.configuredSections(byLanguages: languages) ?? []
-                    // Pass Result
-                    self?.dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.success(()))
-                    //
-                    
-                }
-                
-                //
-                break
-                //
-                
-            case .failure(let error):
-                
-                DispatchQueue.main.async {
-                    
-                    // Pass Result
-                    self?.dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.failure(error))
-                    //
-                    
-                }
-                
-                //
-                break
-                //
-                
-            }
-            
-        }
-        
+       
     }
     
     func selectAndDeselectRow(_ newValue: MDAddCourseRow) -> [Bool : IndexPath] {

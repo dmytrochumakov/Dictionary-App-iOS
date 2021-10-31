@@ -28,10 +28,11 @@ final class WordListModule {
 extension WordListModule {
     
     var module: UIViewController {
+        
         // Word List Module Classes
         let wordListDataProvider: WordListDataProviderProcotol = WordListDataProvider.init(course: sender, words: .init())
         var wordListDataManager: WordListDataManagerProtocol = WordListDataManager.init(dataProvider: wordListDataProvider,
-                                                                                        memoryStorage: MDConstants.AppDependencies.dependencies.wordStorage.memoryStorage,
+                                                                                        coreDataStorage: MDConstants.AppDependencies.dependencies.wordCoreDataStorage,
                                                                                         filterSearchTextService: MDWordFilterSearchTextService.init(operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.filterSearchTextServiceOperationQueue)!))
         
         let wordListTableViewDelegate: WordListTableViewDelegateProtocol = WordListTableViewDelegate.init(dataProvider: wordListDataProvider)
@@ -54,6 +55,7 @@ extension WordListModule {
         wordListRouter.wordListViewController = wordListVC
         //
         return wordListVC
+        
     }
     
 }

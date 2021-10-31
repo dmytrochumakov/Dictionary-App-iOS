@@ -38,25 +38,7 @@ struct Constants_For_Tests {
                                                                 wordDescription: "metal–oxide–semiconductor-field-c",
                                                                 languageName: "English",
                                                                 createdAt: .init())
-    
-    public static let mockedUser: UserResponse = .init(userId: 0,
-                                                       nickname: "Test nickname",
-                                                       createdAt: "2021-08-15T10:34:33.998Z")
-    
-    public static let mockedUserPassword: String = "mockedUserPassword"
-    
-    public static let mockedJWT: JWTResponse = .init(accessToken: "asdas;dka;sld;akdkasd;laskld;al",
-                                                     expirationDate: "2021-08-15T11:34:33.998Z")
-    
-    public static let mockedJWTForUpdate: JWTResponse = .init(accessToken: "updated asdas;dka;sld;akdkasd;laskld;al",
-                                                              expirationDate: "2021-08-15T13:34:33.998Z")
-    
-    public static let mockedLanguages: [LanguageResponse] = [.init(languageId: 0,
-                                                                   languageName: "English"),
-                                                             .init(languageId: 1,
-                                                                   languageName: "Spanish")
-    ]
-    
+        
     public static let mockedCourse: CourseResponse = .init(userId: 0,
                                                            courseId: 0,
                                                            languageId: 0,
@@ -69,34 +51,12 @@ struct Constants_For_Tests {
                                                                              languageName: "Spanish",
                                                                              createdAt: "2021-08-16T13:36:33.999Z")]
     
-    public static var jwtApiRequest: JWTApiRequest {
-        
-        switch MDConstants.APIEnvironment.current {
-        case .development:
-            return .init(nickname: authRequest.nickname,
-                         password: authRequest.password,
-                         userId: 6)
-        case .production:
-            return .init(nickname: authRequest.nickname,
-                         password: authRequest.password,
-                         userId: 1)
-        }
-        
-    }
-    
-    public static var authRequest: AuthRequest {
-        return .init(nickname: "test", password: "test")
-    }
-        
     static var operationQueueManager: MDOperationQueueManagerProtocol {
         
         let operationQueues: [OperationQueue] = [MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.courseCoreDataStorageOperationQueue),
                                                  
                                                  
-                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.wordCoreDataStorageOperationQueue),
-                                                 
-                                                                    
-                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.storageCleanupServiceOperationQueue)
+                                                 MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.wordCoreDataStorageOperationQueue)
                                                                                                   
         ]
         

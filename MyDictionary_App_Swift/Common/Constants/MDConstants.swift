@@ -282,38 +282,33 @@ struct MDConstants {
         // Async Operation
         //
         static let asyncOperation: String = bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: String(describing: MDAsyncOperation.self))
+        //
         // End Async Operation //
+        
         
         // Course
         //
         fileprivate static let courseShortQueueName: String = "Course"
         static let courseCoreDataStorageOperationQueue: String = mdCoreDataStorageOperationQueue(shortQueueName: courseShortQueueName)
+        //
         // End Course //
+        
         
         // Word
         //
         fileprivate static let wordShortQueueName: String = "Word"
         static let wordCoreDataStorageOperationQueue: String = mdCoreDataStorageOperationQueue(shortQueueName: wordShortQueueName)
+        //
         // End Word //
         
-        // Storage Cleanup
-        //
-        fileprivate static let storageCleanupServiceShortQueueName: String = "Storage_Cleanup_Service"
-        static let storageCleanupServiceOperationQueue: String = mdOperationQueue(shortQueueName: storageCleanupServiceShortQueueName)
-        // End Storage Cleanup //
         
         // Filter Search Text Service
         //
         fileprivate static let filterSearchTextServiceQueueName: String = "Filter_Search_Text_Service"
         static let filterSearchTextServiceOperationQueue: String = mdOperationQueue(shortQueueName: filterSearchTextServiceQueueName)
+        //
         // End Filter Search Text Service //
-        
-        // Core Data Stack
-        //
-        fileprivate static let coreDataStackQueueName: String = "Core_Data_Stack"
-        static let coreDataStackOperationQueue: String = mdOperationQueue(shortQueueName: coreDataStackQueueName)
-        //
-        
+                
         
         fileprivate static func mdCoreDataStorageOperationQueue(shortQueueName: String) -> String {
             return bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: "MD" + shortQueueName + "CoreDataStorageOperationQueue")
