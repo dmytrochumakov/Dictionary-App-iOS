@@ -164,8 +164,6 @@
 		22B5C63227059F2000185954 /* MDWordTextViewDelegateImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B5C63127059F2000185954 /* MDWordTextViewDelegateImplementation.swift */; };
 		22B5C6352705A84200185954 /* MDEditWordError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B5C6342705A84200185954 /* MDEditWordError.swift */; };
 		22B6B9E426958F4E0076B003 /* MDAppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6B9E326958F4D0076B003 /* MDAppDependencies.swift */; };
-		22B8E69F26D38059001CCCA8 /* MDLanguageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E69E26D38059001CCCA8 /* MDLanguageStorage.swift */; };
-		22B8E6A326D381EF001CCCA8 /* MDLanguageCoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6A226D381EF001CCCA8 /* MDLanguageCoreDataStorage.swift */; };
 		22B8E6AA26D3889E001CCCA8 /* MDCRUDLanguageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6A926D3889E001CCCA8 /* MDCRUDLanguageProtocol.swift */; };
 		22B8E6AC26D38A4D001CCCA8 /* MDCreateLanguageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6AB26D38A4D001CCCA8 /* MDCreateLanguageProtocol.swift */; };
 		22B8E6AE26D38A57001CCCA8 /* MDReadLanguageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E6AD26D38A57001CCCA8 /* MDReadLanguageProtocol.swift */; };
@@ -449,8 +447,6 @@
 		22B5C63127059F2000185954 /* MDWordTextViewDelegateImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordTextViewDelegateImplementation.swift; sourceTree = "<group>"; };
 		22B5C6342705A84200185954 /* MDEditWordError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDEditWordError.swift; sourceTree = "<group>"; };
 		22B6B9E326958F4D0076B003 /* MDAppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppDependencies.swift; sourceTree = "<group>"; };
-		22B8E69E26D38059001CCCA8 /* MDLanguageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLanguageStorage.swift; sourceTree = "<group>"; };
-		22B8E6A226D381EF001CCCA8 /* MDLanguageCoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLanguageCoreDataStorage.swift; sourceTree = "<group>"; };
 		22B8E6A926D3889E001CCCA8 /* MDCRUDLanguageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCRUDLanguageProtocol.swift; sourceTree = "<group>"; };
 		22B8E6AB26D38A4D001CCCA8 /* MDCreateLanguageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCreateLanguageProtocol.swift; sourceTree = "<group>"; };
 		22B8E6AD26D38A57001CCCA8 /* MDReadLanguageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReadLanguageProtocol.swift; sourceTree = "<group>"; };
@@ -645,7 +641,6 @@
 			isa = PBXGroup;
 			children = (
 				22B8E6D726D3C47B001CCCA8 /* Course */,
-				22B8E69D26D38031001CCCA8 /* Language */,
 				22DE582426C9536A0032A94C /* JWT */,
 				220FFE7A26C9062800702CCE /* User */,
 				220FFE7926C9060500702CCE /* Word */,
@@ -1390,15 +1385,6 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
-		22B8E69D26D38031001CCCA8 /* Language */ = {
-			isa = PBXGroup;
-			children = (
-				22B8E69E26D38059001CCCA8 /* MDLanguageStorage.swift */,
-				22B8E6A226D381EF001CCCA8 /* MDLanguageCoreDataStorage.swift */,
-			);
-			path = Language;
-			sourceTree = "<group>";
-		};
 		22B8E6A826D3887B001CCCA8 /* Language */ = {
 			isa = PBXGroup;
 			children = (
@@ -1975,7 +1961,6 @@
 				229E08C22652CA1D00DA56C4 /* MDNumberOfSectionsProtocol.swift in Sources */,
 				22B9080926EB7DD6003848D6 /* UIView+Extension.swift in Sources */,
 				22CA087D26515E810052D169 /* WordListViewController.swift in Sources */,
-				22B8E6A326D381EF001CCCA8 /* MDLanguageCoreDataStorage.swift in Sources */,
 				229901712668EE5300D8C74E /* MDAppDelegate.swift in Sources */,
 				229FFF3626F5E1650024B974 /* MDBaseLargeNavigationBarViewController.swift in Sources */,
 				22E327CE26FB319D00445917 /* MDStorageServiceOperationResult.swift in Sources */,
@@ -2161,7 +2146,6 @@
 				22EF01EE269DA73100FE4435 /* HTTPHeader.swift in Sources */,
 				22CA087F26515ED90052D169 /* WordListInteractor.swift in Sources */,
 				220FFE8A26C90B1300702CCE /* MDCreateUserProtocol.swift in Sources */,
-				22B8E69F26D38059001CCCA8 /* MDLanguageStorage.swift in Sources */,
 				2270F3A226D262F5006B46F4 /* CourseResponse.swift in Sources */,
 				2277FE1626F9DB7100001710 /* MDBaseTitledBackNavigationBarViewController.swift in Sources */,
 				222F52702701AD080070F546 /* MDTextViewWithToolBar.swift in Sources */,
