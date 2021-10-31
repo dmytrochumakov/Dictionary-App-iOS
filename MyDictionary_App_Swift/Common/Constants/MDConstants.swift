@@ -282,82 +282,38 @@ struct MDConstants {
         // Async Operation
         //
         static let asyncOperation: String = bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: String(describing: MDAsyncOperation.self))
-        
-        
-        // Language
-        //
-        fileprivate static let languageShortQueueName: String = "Language"
-        static let languageMemoryStorageOperationQueue: String = mdMemoryStorageOperationQueue(shortQueueName: languageShortQueueName)
-        static let languageCoreDataStorageOperationQueue: String = mdCoreDataStorageOperationQueue(shortQueueName: languageShortQueueName)
-        static let languageAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: languageShortQueueName)
+        // End Async Operation //
         
         // Course
         //
         fileprivate static let courseShortQueueName: String = "Course"
-        static let courseMemoryStorageOperationQueue: String = mdMemoryStorageOperationQueue(shortQueueName: courseShortQueueName)
         static let courseCoreDataStorageOperationQueue: String = mdCoreDataStorageOperationQueue(shortQueueName: courseShortQueueName)
-        static let courseAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: courseShortQueueName)
-        
-        // JWT
-        //
-        fileprivate static let jwtShortQueueName: String = "JWT"        
-        static let jwtMemoryStorageOperationQueue: String = mdMemoryStorageOperationQueue(shortQueueName: jwtShortQueueName)
-        static let jwtCoreDataStorageOperationQueue: String = mdCoreDataStorageOperationQueue(shortQueueName: jwtShortQueueName)
-        static let jwtAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: jwtShortQueueName)
-        
-        // User
-        //
-        fileprivate static let userShortQueueName: String = "User"
-        static let userMemoryStorageOperationQueue: String = mdMemoryStorageOperationQueue(shortQueueName: userShortQueueName)
-        static let userCoreDataStorageOperationQueue: String = mdCoreDataStorageOperationQueue(shortQueueName: userShortQueueName)
-        static let userAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: userShortQueueName)
+        // End Course //
         
         // Word
         //
-        fileprivate static let wordShortQueueName: String = "Word"        
-        static let wordMemoryStorageOperationQueue: String = mdMemoryStorageOperationQueue(shortQueueName: wordShortQueueName)
+        fileprivate static let wordShortQueueName: String = "Word"
         static let wordCoreDataStorageOperationQueue: String = mdCoreDataStorageOperationQueue(shortQueueName: wordShortQueueName)
-        static let wordAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: wordShortQueueName)
-        //
-        
-        // Auth
-        //
-        fileprivate static let authShortQueueName: String = "Auth"
-        static let authAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: authShortQueueName)
-        
-        // Account
-        //
-        fileprivate static let accountShortQueueName: String = "Account"
-        static let accountAPIOperationQueue: String = mdAPIOperationQueue(shortQueueName: accountShortQueueName)
+        // End Word //
         
         // Storage Cleanup
         //
         fileprivate static let storageCleanupServiceShortQueueName: String = "Storage_Cleanup_Service"
         static let storageCleanupServiceOperationQueue: String = mdOperationQueue(shortQueueName: storageCleanupServiceShortQueueName)
-        
-        // Fill Memory Service
-        //
-        fileprivate static let fillMemoryServiceQueueName: String = "Fill_Memory_Service"
-        static let fillMemoryServiceOperationQueue: String = mdOperationQueue(shortQueueName: fillMemoryServiceQueueName)
+        // End Storage Cleanup //
         
         // Filter Search Text Service
         //
         fileprivate static let filterSearchTextServiceQueueName: String = "Filter_Search_Text_Service"
         static let filterSearchTextServiceOperationQueue: String = mdOperationQueue(shortQueueName: filterSearchTextServiceQueueName)
+        // End Filter Search Text Service //
         
         // Core Data Stack
         //
         fileprivate static let coreDataStackQueueName: String = "Core_Data_Stack"
         static let coreDataStackOperationQueue: String = mdOperationQueue(shortQueueName: coreDataStackQueueName)
-        
         //
-        fileprivate static func mdAPIOperationQueue(shortQueueName: String) -> String {
-            return bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: "MD" + shortQueueName + "APIOperationQueue")
-        }
         
-        fileprivate static func mdMemoryStorageOperationQueue(shortQueueName: String) -> String {
-            return bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: "MD" + shortQueueName + "MemoryStorageOperationQueue")
-        }
         
         fileprivate static func mdCoreDataStorageOperationQueue(shortQueueName: String) -> String {
             return bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: "MD" + shortQueueName + "CoreDataStorageOperationQueue")
