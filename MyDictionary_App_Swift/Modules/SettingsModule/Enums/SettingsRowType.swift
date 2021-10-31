@@ -9,7 +9,6 @@ import Foundation
 
 enum SettingsRowType: Int {
     case about
-    case account
     case appLanguage
     case privacyPolicy
     case termsOfService
@@ -21,9 +20,7 @@ extension SettingsRowType: CustomStringConvertible {
     var description: String {
         switch self {
         case .about:
-            return MDLocalizedText.about.localized
-        case .account:
-            return MDLocalizedText.account.localized
+            return MDLocalizedText.about.localized        
         case .appLanguage:
             return MDLocalizedText.appLanguage.localized
         case .privacyPolicy:

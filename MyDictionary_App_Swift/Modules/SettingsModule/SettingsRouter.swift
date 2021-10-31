@@ -10,8 +10,7 @@ protocol SettingsRouterProtocol {
     var settingsViewController: UIViewController! { get set }
     func showPrivacyPolicy()
     func showTermsOfService()
-    func showAbout()
-    func showAccount()
+    func showAbout()    
     func showAppSettings()
     func presentShareFeedback(withOption option: ShareFeedbackOption)
 }
@@ -38,10 +37,6 @@ extension SettingsRouter {
     
     func showAbout() {
         settingsViewController.show(AboutApplicationViewController.init(), sender: nil)
-    }
-    
-    func showAccount() {
-        settingsViewController.show(AccountModule.init().module, sender: nil)
     }
     
     func showAppSettings() {

@@ -63,11 +63,7 @@ extension SettingsPresenter {
     
     func showAbout() {
         router.showAbout()
-    }
-    
-    func showAccount() {
-        router.showAccount()
-    }
+    }        
     
     func showAppSettings() {
         router.showAppSettings()
