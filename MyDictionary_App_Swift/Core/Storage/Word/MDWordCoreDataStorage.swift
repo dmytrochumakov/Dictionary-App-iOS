@@ -66,12 +66,20 @@ extension MDWordCoreDataStorage {
 // MARK: - Create
 extension MDWordCoreDataStorage {
     
-    func createWord(_ wordModel: CDWordEntity,
+    func createWord(wordText: String,
+                    wordDescription: String,
+                    course: CDCourseEntity,
                     _ completionHandler: @escaping (MDOperationResultWithCompletion<CDWordEntity>)) {
         
         let operation: BlockOperation = .init {
             
-            let newWord = wordModel.cdWordEntity(context: self.managedObjectContext)
+            let newWord = CDWordEntity.cdWordEntity(context: self.managedObjectContext,
+                                                    uuid: .init(),
+                                                    wordText: wordText,
+                                                    wordDescription: wordDescription,
+                                                    createdAt: .init(),
+                                                    updatedAt: .init(),
+                                                    course: course)
             
             self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
                 
@@ -80,7 +88,7 @@ extension MDWordCoreDataStorage {
                 case .success:
                     
                     //
-                    completionHandler(.success((newWord.wordResponse)))
+                    completionHandler(.success((newWord)))
                     
                     //
                     break
@@ -108,66 +116,56 @@ extension MDWordCoreDataStorage {
         
     }
     
-    func createWords(_ wordModels: [CDWordEntity],
-                     _ completionHandler: @escaping (MDOperationsResultWithCompletion<CDWordEntity>)) {
+}
+
+// MARK: - Read
+extension MDWordCoreDataStorage {
+    
+    func readWord(byWordUUID uuid: UUID,
+                  _ completionHandler: @escaping (MDOperationResultWithCompletion<CDWordEntity>)) {
         
         let operation: BlockOperation = .init {
             
-            if (wordModels.isEmpty) {
+            let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: MDCoreDataEntityName.CDWordEntity)
+            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %@", uuid.uuidString)
+            
+            let asyncFetchRequest = NSAsynchronousFetchRequest.init(fetchRequest: fetchRequest) { asynchronousFetchResult in
+                
+                guard let result = asynchronousFetchResult.finalResult?.first else {
+                    
+                    //
+                    completionHandler(.failure(MDEntityOperationError.cantFindEntity))
+                    //
+                    
+                    //
+                    return
+                    //
+                    
+                }
                 
                 //
-                completionHandler(.success(wordModels))
+                completionHandler(.success(result))
                 //
                 
                 //
                 return
                 //
                 
-            } else {
+            }
+            
+            do {
                 
-                var resultCount: Int = .zero
+                try self.managedObjectContext.execute(asyncFetchRequest)
                 
-                wordModels.forEach { word in
-                    
-                    let _ = word.cdWordEntity(context: self.managedObjectContext)
-                    
-                    self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
-                        
-                        switch result {
-                            
-                        case .success:
-                            
-                            //
-                            resultCount += 1
-                            //
-                            
-                            if (resultCount == wordModels.count) {
-                                
-                                //
-                                completionHandler(.success(wordModels))
-                                //
-                                
-                            }
-                            
-                            //
-                            break
-                            //
-                            
-                        case .failure(let error):
-                            
-                            //
-                            completionHandler(.failure(error))
-                            //
-                            
-                            //
-                            break
-                            //
-                            
-                        }
-                        
-                    }
-                    
-                }
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
                 
             }
             
@@ -179,31 +177,22 @@ extension MDWordCoreDataStorage {
         
     }
     
-}
-
-// MARK: - Read
-extension MDWordCoreDataStorage {
-    
-    func readWord(fromWordID wordId: Int64,
-                  _ completionHandler: @escaping (MDOperationResultWithCompletion<CDWordEntity>)) {
+    func readWords(byCourseUUID uuid: UUID,
+                   fetchLimit: Int,
+                   fetchOffset: Int,
+                   _ completionHandler: @escaping (MDOperationsResultWithCompletion<CDWordEntity>)) {
         
         let operation: BlockOperation = .init {
             
-            let fetchRequest = NSFetchRequest<CDWordResponseEntity>(entityName: CoreDataEntityName.CDWordResponseEntity)
-            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.wordId) == %i", wordId)
+            let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: MDCoreDataEntityName.CDWordEntity)
             
-            do {
-                if let result = try self.managedObjectContext.fetch(fetchRequest).map({ $0.wordResponse }).first {
-                    
-                    //
-                    completionHandler(.success(result))
-                    //
-                    
-                    //
-                    return
-                    //
-                    
-                } else {
+            fetchRequest.predicate = NSPredicate(format: "\(CDCourseEntityAttributeName.uuid) == %@", uuid.uuidString)
+            fetchRequest.fetchLimit = fetchLimit
+            fetchRequest.fetchOffset = fetchOffset
+            
+            let asyncFetchRequest = NSAsynchronousFetchRequest.init(fetchRequest: fetchRequest) { asynchronousFetchResult in
+                
+                guard let result = asynchronousFetchResult.finalResult else {
                     
                     //
                     completionHandler(.failure(MDEntityOperationError.cantFindEntity))
@@ -214,6 +203,23 @@ extension MDWordCoreDataStorage {
                     //
                     
                 }
+                
+                //
+                completionHandler(.success(result))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+            do {
+                
+                //
+                try self.managedObjectContext.execute(asyncFetchRequest)
+                //
+                
             } catch {
                 
                 //
@@ -240,19 +246,39 @@ extension MDWordCoreDataStorage {
         
         let operation: BlockOperation = .init {
             
-            let fetchRequest = NSFetchRequest<CDWordResponseEntity>(entityName: CoreDataEntityName.CDWordResponseEntity)
+            let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: MDCoreDataEntityName.CDWordEntity)
             
             fetchRequest.fetchLimit = fetchLimit
             fetchRequest.fetchOffset = fetchOffset
             
-            do {
+            let asyncFetchRequest = NSAsynchronousFetchRequest.init(fetchRequest: fetchRequest) { asynchronousFetchResult in
+                
+                guard let result = asynchronousFetchResult.finalResult else {
+                    
+                    //
+                    completionHandler(.failure(MDEntityOperationError.cantFindEntity))
+                    //
+                    
+                    //
+                    return
+                    //
+                    
+                }
                 
                 //
-                completionHandler(.success(try self.managedObjectContext.fetch(fetchRequest).map({ $0.wordResponse })))
+                completionHandler(.success(result))
                 //
                 
                 //
                 return
+                //
+                
+            }
+            
+            do {
+                
+                //
+                try self.managedObjectContext.execute(asyncFetchRequest)
                 //
                 
             } catch {
@@ -276,79 +302,13 @@ extension MDWordCoreDataStorage {
     }
     
     func readAllWords(_ completionHandler: @escaping (MDOperationsResultWithCompletion<CDWordEntity>)) {
-        
-        let operation: BlockOperation = .init {
-            
-            let fetchRequest = NSFetchRequest<CDWordResponseEntity>(entityName: CoreDataEntityName.CDWordResponseEntity)
-            
-            fetchRequest.fetchLimit = .zero
-            fetchRequest.fetchOffset = .zero
-            
-            do {
-                
-                //
-                completionHandler(.success(try self.managedObjectContext.fetch(fetchRequest).map({ $0.wordResponse })))
-                //
-                
-                //
-                return
-                //
-                
-            } catch {
-                
-                //
-                completionHandler(.failure(error))
-                //
-                
-                //
-                return
-                //
-                
-            }
-            
-        }
-        
-        //
-        operationQueue.addOperation(operation)
-        //
-        
+        readWords(fetchLimit: .zero, fetchOffset: .zero, completionHandler)
     }
     
-    func readAllWords(byCourseID courseID: Int64,
+    func readAllWords(byCourseUUID uuid: UUID,
                       _ completionHandler: @escaping (MDOperationsResultWithCompletion<CDWordEntity>)) {
         
-        let operation: BlockOperation = .init {
-            
-            let fetchRequest = NSFetchRequest<CDWordResponseEntity>(entityName: CoreDataEntityName.CDWordResponseEntity)
-            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseId) == %i", courseID)
-            
-            do {
-                
-                //
-                completionHandler(.success(try self.managedObjectContext.fetch(fetchRequest).map({ $0.wordResponse })))
-                //
-                
-                //
-                return
-                //
-                
-            } catch {
-                
-                //
-                completionHandler(.failure(error))
-                //
-                
-                //
-                return
-                //
-                
-            }
-            
-        }
-        
-        //
-        operationQueue.addOperation(operation)
-        //
+        readWords(byCourseUUID: uuid, fetchLimit: .zero, fetchOffset: .zero, completionHandler)
         
     }
     
@@ -357,20 +317,20 @@ extension MDWordCoreDataStorage {
 // MARK: - Update
 extension MDWordCoreDataStorage {
     
-    func updateWord(byWordID wordId: Int64,
+    func updateWord(byWordUUID uuid: UUID,
                     newWordText: String,
                     newWordDescription: String,
                     _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         let operation: BlockOperation = .init {
             
-            let batchUpdateRequest = NSBatchUpdateRequest(entityName: CoreDataEntityName.CDWordResponseEntity)
+            let batchUpdateRequest = NSBatchUpdateRequest(entityName: MDCoreDataEntityName.CDWordEntity)
             
             batchUpdateRequest.propertiesToUpdate = [CDWordEntityAttributeName.wordText : newWordText,
                                                      CDWordEntityAttributeName.wordDescription : newWordDescription
             ]
             
-            batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.wordId) == %i", wordId)
+            batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %i", uuid.uuidString)
             
             do {
                 
@@ -378,29 +338,13 @@ extension MDWordCoreDataStorage {
                 
                 self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
                     
-                    switch result {
-                        
-                    case .success:
-                        
-                        //
-                        completionHandler(.success(()))
-                        //
-                        
-                        //
-                        break
-                        //
-                        
-                    case .failure(let error):
-                        
-                        //
-                        completionHandler(.failure(error))
-                        //
-                        
-                        //
-                        break
-                        //
-                        
-                    }
+                    //
+                    completionHandler(result)
+                    //
+                    
+                    //
+                    return
+                    //
                     
                 }
                 
@@ -429,14 +373,14 @@ extension MDWordCoreDataStorage {
 // MARK: - Delete
 extension MDWordCoreDataStorage {
     
-    func deleteWord(byWordId wordId: Int64,
+    func deleteWord(byWordUUID uuid: UUID,
                     _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         let operation: BlockOperation = .init {
             
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDWordResponseEntity)
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MDCoreDataEntityName.CDWordEntity)
             
-            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.wordId) == %i", wordId)
+            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %i", uuid.uuidString)
             
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             
@@ -446,29 +390,13 @@ extension MDWordCoreDataStorage {
                 
                 self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
                     
-                    switch result {
-                        
-                    case .success:
-                        
-                        //
-                        completionHandler(.success(()))
-                        //
-                        
-                        //
-                        break
-                        //
-                        
-                    case .failure(let error):
-                        
-                        //
-                        completionHandler(.failure(error))
-                        //
-                        
-                        //
-                        break
-                        //
-                        
-                    }
+                    //
+                    completionHandler(result)
+                    //
+                    
+                    //
+                    return
+                    //
                     
                 }
                 
@@ -492,14 +420,14 @@ extension MDWordCoreDataStorage {
         
     }
     
-    func deleteAllWords(byCourseId courseId: Int64,
+    func deleteAllWords(byCourseUUID uuid: UUID,
                         _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         let operation: BlockOperation = .init {
             
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDWordResponseEntity)
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MDCoreDataEntityName.CDWordEntity)
             
-            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseId) == %i", courseId)
+            fetchRequest.predicate = NSPredicate(format: "\(CDCourseEntityAttributeName.uuid) == %i", uuid.uuidString)
             
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             
@@ -509,29 +437,13 @@ extension MDWordCoreDataStorage {
                 
                 self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
                     
-                    switch result {
-                        
-                    case .success:
-                        
-                        //
-                        completionHandler(.success(()))
-                        //
-                        
-                        //
-                        break
-                        //
-                        
-                    case .failure(let error):
-                        
-                        //
-                        completionHandler(.failure(error))
-                        //
-                        
-                        //
-                        break
-                        //
-                        
-                    }
+                    //
+                    completionHandler(result)
+                    //
+                    
+                    //
+                    return
+                    //
                     
                 }
                 
@@ -559,7 +471,7 @@ extension MDWordCoreDataStorage {
         
         let operation: BlockOperation = .init {
             
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDWordResponseEntity)
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MDCoreDataEntityName.CDWordEntity)
             
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             
@@ -569,28 +481,13 @@ extension MDWordCoreDataStorage {
                 
                 self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
                     
-                    switch result {
-                        
-                    case .success:
-                        
-                        //
-                        completionHandler(.success(()))
-                        
-                        //
-                        break
-                        //
-                        
-                    case .failure(let error):
-                        
-                        //
-                        completionHandler(.failure(error))
-                        //
-                        
-                        //
-                        break
-                        //
-                        
-                    }
+                    //
+                    completionHandler(result)
+                    //
+                    
+                    //
+                    return
+                    //
                     
                 }
                 

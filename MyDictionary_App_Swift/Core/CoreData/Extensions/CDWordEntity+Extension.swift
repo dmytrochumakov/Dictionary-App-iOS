@@ -15,7 +15,7 @@ extension CDWordEntity {
                              wordDescription: String,
                              createdAt: Date,
                              updatedAt: Date,
-                             courseUUID: CDCourseEntity?) -> CDWordEntity {
+                             course: CDCourseEntity?) -> CDWordEntity {
         
         let cdWordEntity: CDWordEntity = .init(context: context)
         
@@ -24,7 +24,7 @@ extension CDWordEntity {
         cdWordEntity.wordDescription = wordDescription
         cdWordEntity.createdAt = createdAt
         cdWordEntity.updatedAt = updatedAt
-        cdWordEntity.courseUUID = courseUUID
+        cdWordEntity.course = course
         
         return cdWordEntity
         

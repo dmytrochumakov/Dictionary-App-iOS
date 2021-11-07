@@ -9,10 +9,9 @@ import Foundation
 
 protocol MDCreateWordProtocol {
     
-    func createWord(_ wordModel: CDWordEntity,
+    func createWord(wordText: String,
+                    wordDescription: String,
+                    course: CDCourseEntity,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<CDWordEntity>))
-    
-    func createWords(_ wordModels: [CDWordEntity],
-                     _ completionHandler: @escaping(MDOperationsResultWithCompletion<CDWordEntity>))
     
 }

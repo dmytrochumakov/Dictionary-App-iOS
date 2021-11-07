@@ -9,16 +9,19 @@ import Foundation
 
 protocol MDReadWordProtocol {
     
-    func readWord(fromWordID wordId: Int64,
+    func readWord(byWordUUID uuid: UUID,
                   _ completionHandler: @escaping(MDOperationResultWithCompletion<CDWordEntity>))
+    
+    func readWords(byCourseUUID uuid: UUID,
+                   fetchLimit: Int,
+                   fetchOffset: Int,
+                   _ completionHandler: @escaping(MDOperationsResultWithCompletion<CDWordEntity>))
     
     func readWords(fetchLimit: Int,
                    fetchOffset: Int,
                    _ completionHandler: @escaping(MDOperationsResultWithCompletion<CDWordEntity>))
     
-    func readAllWords(_ completionHandler: @escaping(MDOperationsResultWithCompletion<CDWordEntity>))
-    
-    func readAllWords(byCourseID courseID: Int64,
+    func readAllWords(byCourseUUID uuid: UUID,
                       _ completionHandler: @escaping(MDOperationsResultWithCompletion<CDWordEntity>))
     
 }

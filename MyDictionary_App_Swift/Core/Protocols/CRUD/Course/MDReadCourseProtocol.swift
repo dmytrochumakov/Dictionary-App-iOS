@@ -16,4 +16,6 @@ protocol MDReadCourseProtocol {
                      fetchOffset: Int,
                      _ completionHandler: @escaping(MDOperationsResultWithCompletion<CDCourseEntity>))
     
+    func readAllCourses(_ completionHandler: @escaping(MDOperationsResultWithCompletion<CDCourseEntity>))
+    
 }

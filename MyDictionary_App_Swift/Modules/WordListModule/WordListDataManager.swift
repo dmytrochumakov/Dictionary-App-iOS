@@ -57,7 +57,7 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func readAndAddWordsToDataProvider() {
         
-        coreDataStorage.readAllWords(byCourseID: dataProvider.course.courseId) { [unowned self] result in
+        coreDataStorage.readAllWords(byCourseUUID: dataProvider.course.uuid!) { [unowned self] result in
             
             switch result {
                 
@@ -103,7 +103,7 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func filterWords(_ searchText: String?) {
         
-        coreDataStorage.readAllWords(byCourseID: dataProvider.course.courseId) { [unowned self] readResult in
+        coreDataStorage.readAllWords(byCourseUUID: dataProvider.course.uuid!) { [unowned self] readResult in
             
             switch readResult {
                 
@@ -156,7 +156,7 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func clearWordFilter() {
         
-        coreDataStorage.readAllWords(byCourseID: dataProvider.course.courseId) { [unowned self] readResult in
+        coreDataStorage.readAllWords(byCourseUUID: dataProvider.course.uuid!) { [unowned self] readResult in
             
             switch readResult {
                 
@@ -213,7 +213,7 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func deleteWord(atWordResponse word: CDWordEntity) -> IndexPath {
         //
-        let row = dataProvider.filteredWords.firstIndex(where: { $0.wordId == word.wordId })!
+        let row = dataProvider.filteredWords.firstIndex(where: { $0.uuid == word.uuid })!
         let indexPath: IndexPath = .init(row: row,
                                          section: section)
         // Delete Word
@@ -224,7 +224,7 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func updateWord(atWordResponse word: CDWordEntity) -> IndexPath {
         //
-        let row = dataProvider.filteredWords.firstIndex(where: { $0.wordId == word.wordId })!
+        let row = dataProvider.filteredWords.firstIndex(where: { $0.uuid == word.uuid })!
         let indexPath: IndexPath = .init(row: row,
                                          section: section)
         // Update Word
@@ -244,7 +244,7 @@ fileprivate extension WordListDataManager {
     }
     
     func sortWords(_ input: [CDWordEntity]) -> [CDWordEntity] {
-        return input.sorted(by: { $0.createdAtDate > $1.createdAtDate })
+        return input.sorted(by: { $0.createdAt! > $1.createdAt! })
     }
     
 }
