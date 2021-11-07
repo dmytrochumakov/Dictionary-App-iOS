@@ -8,21 +8,21 @@
 import CoreData
 
 protocol MDCoreDataMigratorProtocol {
-    func requiresMigration(at storeURL: URL, toVersion version: CoreDataMigrationVersion) -> Bool
-    func migrateStore(at storeURL: URL, toVersion version: CoreDataMigrationVersion)
+    func requiresMigration(at storeURL: URL, toVersion version: MDCoreDataMigrationVersion) -> Bool
+    func migrateStore(at storeURL: URL, toVersion version: MDCoreDataMigrationVersion)
 }
 
 final class MDCoreDataMigrator: MDCoreDataMigratorProtocol {
     
-    func requiresMigration(at storeURL: URL, toVersion version: CoreDataMigrationVersion) -> Bool {
+    func requiresMigration(at storeURL: URL, toVersion version: MDCoreDataMigrationVersion) -> Bool {
         guard let metadata = NSPersistentStoreCoordinator.metadata(at: storeURL) else {
             return false
         }
         
-        return (CoreDataMigrationVersion.compatibleVersionForStoreMetadata(metadata) != version)
+        return (MDCoreDataMigrationVersion.compatibleVersionForStoreMetadata(metadata) != version)
     }
     
-    func migrateStore(at storeURL: URL, toVersion version: CoreDataMigrationVersion) {
+    func migrateStore(at storeURL: URL, toVersion version: MDCoreDataMigrationVersion) {
         
         var currentURL = storeURL
         let migrationSteps = self.migrationStepsForStore(at: storeURL, toVersion: version)
@@ -56,20 +56,20 @@ final class MDCoreDataMigrator: MDCoreDataMigratorProtocol {
 
 fileprivate extension MDCoreDataMigrator {
     
-    func migrationStepsForStore(at storeURL: URL, toVersion destinationVersion: CoreDataMigrationVersion) -> [CoreDataMigrationStep] {
-        guard let metadata = NSPersistentStoreCoordinator.metadata(at: storeURL), let sourceVersion = CoreDataMigrationVersion.compatibleVersionForStoreMetadata(metadata) else {
+    func migrationStepsForStore(at storeURL: URL, toVersion destinationVersion: MDCoreDataMigrationVersion) -> [MDCoreDataMigrationStep] {
+        guard let metadata = NSPersistentStoreCoordinator.metadata(at: storeURL), let sourceVersion = MDCoreDataMigrationVersion.compatibleVersionForStoreMetadata(metadata) else {
             fatalError("unknown store version at URL \(storeURL)")
         }
         
         return migrationSteps(fromSourceVersion: sourceVersion, toDestinationVersion: destinationVersion)
     }
     
-    func migrationSteps(fromSourceVersion sourceVersion: CoreDataMigrationVersion, toDestinationVersion destinationVersion: CoreDataMigrationVersion) -> [CoreDataMigrationStep] {
+    func migrationSteps(fromSourceVersion sourceVersion: MDCoreDataMigrationVersion, toDestinationVersion destinationVersion: MDCoreDataMigrationVersion) -> [MDCoreDataMigrationStep] {
         var sourceVersion = sourceVersion
-        var migrationSteps = [CoreDataMigrationStep]()
+        var migrationSteps = [MDCoreDataMigrationStep]()
         
         while sourceVersion != destinationVersion, let nextVersion = sourceVersion.nextVersion() {
-            let migrationStep = CoreDataMigrationStep(sourceVersion: sourceVersion, destinationVersion: nextVersion)
+            let migrationStep = MDCoreDataMigrationStep(sourceVersion: sourceVersion, destinationVersion: nextVersion)
             migrationSteps.append(migrationStep)
             
             sourceVersion = nextVersion
@@ -80,10 +80,10 @@ fileprivate extension MDCoreDataMigrator {
     
 }
 
-fileprivate extension CoreDataMigrationVersion {
+fileprivate extension MDCoreDataMigrationVersion {
     
-    static func compatibleVersionForStoreMetadata(_ metadata: [String : Any]) -> CoreDataMigrationVersion? {
-        let compatibleVersion = CoreDataMigrationVersion.allCases.first {
+    static func compatibleVersionForStoreMetadata(_ metadata: [String : Any]) -> MDCoreDataMigrationVersion? {
+        let compatibleVersion = MDCoreDataMigrationVersion.allCases.first {
             let model = NSManagedObjectModel.managedObjectModel(forResource: $0.stringVersion)
             
             return model.isConfiguration(withName: nil, compatibleWithStoreMetadata: metadata)
