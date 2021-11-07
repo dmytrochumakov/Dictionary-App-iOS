@@ -120,6 +120,7 @@
 		2299C6502737E17900B7D556 /* NSManagedObjectContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299C64F2737E17900B7D556 /* NSManagedObjectContext+Extension.swift */; };
 		2299C6522737E1A100B7D556 /* NSManagedObjectModel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299C6512737E1A100B7D556 /* NSManagedObjectModel+Extension.swift */; };
 		2299C6542737E20A00B7D556 /* NSPersistentStoreCoordinator+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299C6532737E20A00B7D556 /* NSPersistentStoreCoordinator+Extension.swift */; };
+		2299C6572737E42100B7D556 /* MDCoreDataMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299C6562737E42100B7D556 /* MDCoreDataMigratorTests.swift */; };
 		229D2D4C26EB68420047B518 /* MDNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D4B26EB68420047B518 /* MDNavigationController.swift */; };
 		229D2D4E26EB706E0047B518 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D2D4D26EB706E0047B518 /* UINavigationController+Extension.swift */; };
 		229E08BC2652C41400DA56C4 /* MDReuseIdentifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E08BB2652C41400DA56C4 /* MDReuseIdentifierProtocol.swift */; };
@@ -392,6 +393,7 @@
 		2299C64F2737E17900B7D556 /* NSManagedObjectContext+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extension.swift"; sourceTree = "<group>"; };
 		2299C6512737E1A100B7D556 /* NSManagedObjectModel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+Extension.swift"; sourceTree = "<group>"; };
 		2299C6532737E20A00B7D556 /* NSPersistentStoreCoordinator+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPersistentStoreCoordinator+Extension.swift"; sourceTree = "<group>"; };
+		2299C6562737E42100B7D556 /* MDCoreDataMigratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCoreDataMigratorTests.swift; sourceTree = "<group>"; };
 		229D2D4B26EB68420047B518 /* MDNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDNavigationController.swift; sourceTree = "<group>"; };
 		229D2D4D26EB706E0047B518 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 		229E08BB2652C41400DA56C4 /* MDReuseIdentifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDReuseIdentifierProtocol.swift; sourceTree = "<group>"; };
@@ -1052,6 +1054,7 @@
 		228BC450264979FF0030FB30 /* MyDictionary_App_SwiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				2299C6552737E40D00B7D556 /* CoreData */,
 				22561C8426D4BB8300A6135B /* Course */,
 				220FFEA526C9165700702CCE /* Word */,
 				2294D6C426A2F5DC0066BE77 /* Constants_For_Tests.swift */,
@@ -1205,6 +1208,14 @@
 				2299C6532737E20A00B7D556 /* NSPersistentStoreCoordinator+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2299C6552737E40D00B7D556 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				2299C6562737E42100B7D556 /* MDCoreDataMigratorTests.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		229D2D4A26EB68340047B518 /* NavigationController */ = {
@@ -2082,6 +2093,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2299C6572737E42100B7D556 /* MDCoreDataMigratorTests.swift in Sources */,
 				22561C9026D4D12D00A6135B /* MDCourseCoreDataStorage_Tests.swift in Sources */,
 				2294D6C526A2F5DC0066BE77 /* Constants_For_Tests.swift in Sources */,
 				22493C5826974F4C000DA480 /* MDWordCoreDataStorage_Tests.swift in Sources */,
