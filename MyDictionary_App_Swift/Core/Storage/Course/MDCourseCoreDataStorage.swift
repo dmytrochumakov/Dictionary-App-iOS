@@ -189,7 +189,7 @@ extension MDCourseCoreDataStorage {
         let operation: BlockOperation = .init {
             
             let fetchRequest = NSFetchRequest<CDCourseResponseEntity>(entityName: CoreDataEntityName.CDCourseResponseEntity)
-            fetchRequest.predicate = NSPredicate(format: "\(CDCourseResponseEntityAttributeName.courseId) == %i", courseId)
+            fetchRequest.predicate = NSPredicate(format: "\(CDCourseEntityAttributeName.courseId) == %i", courseId)
             
             do {
                 if let courseEntity = try self.managedObjectContext.fetch(fetchRequest).map({ $0.courseResponse }).first {
@@ -280,7 +280,7 @@ extension MDCourseCoreDataStorage {
         let operation: BlockOperation = .init {
             
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDCourseResponseEntity)
-            fetchRequest.predicate = NSPredicate(format: "\(CDCourseResponseEntityAttributeName.courseId) == %i", courseId)
+            fetchRequest.predicate = NSPredicate(format: "\(CDCourseEntityAttributeName.courseId) == %i", courseId)
             
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             

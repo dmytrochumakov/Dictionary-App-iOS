@@ -190,7 +190,7 @@ extension MDWordCoreDataStorage {
         let operation: BlockOperation = .init {
             
             let fetchRequest = NSFetchRequest<CDWordResponseEntity>(entityName: CoreDataEntityName.CDWordResponseEntity)
-            fetchRequest.predicate = NSPredicate(format: "\(CDWordResponseEntityAttributeName.wordId) == %i", wordId)
+            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.wordId) == %i", wordId)
             
             do {
                 if let result = try self.managedObjectContext.fetch(fetchRequest).map({ $0.wordResponse }).first {
@@ -320,7 +320,7 @@ extension MDWordCoreDataStorage {
         let operation: BlockOperation = .init {
             
             let fetchRequest = NSFetchRequest<CDWordResponseEntity>(entityName: CoreDataEntityName.CDWordResponseEntity)
-            fetchRequest.predicate = NSPredicate(format: "\(CDWordResponseEntityAttributeName.courseId) == %i", courseID)
+            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseId) == %i", courseID)
             
             do {
                 
@@ -366,11 +366,11 @@ extension MDWordCoreDataStorage {
             
             let batchUpdateRequest = NSBatchUpdateRequest(entityName: CoreDataEntityName.CDWordResponseEntity)
             
-            batchUpdateRequest.propertiesToUpdate = [CDWordResponseEntityAttributeName.wordText : newWordText,
-                                                     CDWordResponseEntityAttributeName.wordDescription : newWordDescription
+            batchUpdateRequest.propertiesToUpdate = [CDWordEntityAttributeName.wordText : newWordText,
+                                                     CDWordEntityAttributeName.wordDescription : newWordDescription
             ]
             
-            batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordResponseEntityAttributeName.wordId) == %i", wordId)
+            batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.wordId) == %i", wordId)
             
             do {
                 
@@ -436,7 +436,7 @@ extension MDWordCoreDataStorage {
             
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDWordResponseEntity)
             
-            fetchRequest.predicate = NSPredicate(format: "\(CDWordResponseEntityAttributeName.wordId) == %i", wordId)
+            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.wordId) == %i", wordId)
             
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             
@@ -499,7 +499,7 @@ extension MDWordCoreDataStorage {
             
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDWordResponseEntity)
             
-            fetchRequest.predicate = NSPredicate(format: "\(CDWordResponseEntityAttributeName.courseId) == %i", courseId)
+            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseId) == %i", courseId)
             
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             
