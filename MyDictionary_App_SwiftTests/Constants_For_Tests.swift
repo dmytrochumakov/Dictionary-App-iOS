@@ -13,34 +13,14 @@ struct Constants_For_Tests {
     
     public static let testExpectationTimeout: TimeInterval = 60.0
     
-    public static func mockedCourse(context: NSManagedObjectContext) -> CDCourseEntity {
-        return CDCourseEntity.cdCourseEntity(context: context,
-                                             uuid: .init(),
-                                             name: "English",
-                                             translatedName: "English",
-                                             createdAt: .init(),
-                                             words: nil)
-    }
+    public static let mockedCourseName: String = "English"
+    public static let mockedCourseTranslatedName: String = "English"       
     
-    public static func mockedWord0(context: NSManagedObjectContext) -> CDWordEntity {
-        return CDWordEntity.cdWordEntity(context: context,
-                                         uuid: .init(),
-                                         wordText: "MOSF",
-                                         wordDescription: "metal–oxide–semiconductor-field",
-                                         createdAt: Date.init(),
-                                         updatedAt: Date.init(),
-                                         courseUUID: nil)
-    }
+    public static let mockedWordText: String = "MOSF"
+    public static let mockedWordDescription: String = "metal–oxide–semiconductor-field"
     
-    public static func mockedWordForUpdate(context: NSManagedObjectContext) -> CDWordEntity {
-        return CDWordEntity.cdWordEntity(context: context,
-                                         uuid: .init(),
-                                         wordText: "MOSFC",
-                                         wordDescription: "metal–oxide–semiconductor-field-c",
-                                         createdAt: Date.init(),
-                                         updatedAt: Date.init(),
-                                         courseUUID: nil)
-    }
+    public static let mockedWordForUpdateWordText: String = "MOSFC"
+    public static let mockedWordForUpdateWordDescription: String = "metal–oxide–semiconductor-field-c"        
     
     static var operationQueueManager: MDOperationQueueManagerProtocol {
         

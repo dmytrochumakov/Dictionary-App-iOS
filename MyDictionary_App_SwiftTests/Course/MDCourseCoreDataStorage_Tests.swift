@@ -33,17 +33,15 @@ extension MDCourseCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Create Course Expectation")
         
-        courseCoreDataStorage.createCourse(Constants_For_Tests.mockedCourse) { createResult in
+        courseCoreDataStorage.createCourse(name: Constants_For_Tests.mockedCourseName,
+                                           translatedName: Constants_For_Tests.mockedCourseTranslatedName) { createResult in
             
             switch createResult {
                 
             case .success(let courseEntity):
                 
-                XCTAssertTrue(courseEntity.userId == Constants_For_Tests.mockedCourse.userId)
-                XCTAssertTrue(courseEntity.courseId == Constants_For_Tests.mockedCourse.courseId)
-                XCTAssertTrue(courseEntity.languageId == Constants_For_Tests.mockedCourse.languageId)
-                XCTAssertTrue(courseEntity.languageName == Constants_For_Tests.mockedCourse.languageName)
-                XCTAssertTrue(courseEntity.createdAt == Constants_For_Tests.mockedCourse.createdAt)
+                XCTAssertTrue(courseEntity.name == Constants_For_Tests.mockedCourseName)
+                XCTAssertTrue(courseEntity.translatedName == Constants_For_Tests.mockedCourseTranslatedName)
                 
                 expectation.fulfill()
                 
@@ -57,52 +55,26 @@ extension MDCourseCoreDataStorage_Tests {
         wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
         
     }
-    
-    func test_Create_Courses_Functionality() {
-        
-        let expectation = XCTestExpectation(description: "Create Courses Expectation")
-        
-        courseCoreDataStorage.createCourses(Constants_For_Tests.mockedCourses) { createResult in
-            
-            switch createResult {
-                
-            case .success(let courseEntities):
-                
-                XCTAssertTrue(courseEntities.count == Constants_For_Tests.mockedCourses.count)
-                
-                expectation.fulfill()
-                
-            case .failure(let error):
-                XCTExpectFailure(error.localizedDescription)
-                expectation.fulfill()
-            }
-            
-        }
-        
-        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
-        
-    }
-    
     func test_Read_Course_Functionality() {
         
         let expectation = XCTestExpectation(description: "Read Course Expectation")
         
-        courseCoreDataStorage.createCourse(Constants_For_Tests.mockedCourse) { [unowned self] createResult in
+        courseCoreDataStorage.createCourse(name: Constants_For_Tests.mockedCourseName,
+                                           translatedName: Constants_For_Tests.mockedCourseTranslatedName) { [unowned self] createResult in
             
             switch createResult {
                 
             case .success(let createCourseEntity):
                 
-                courseCoreDataStorage.readCourse(fromCourseId: createCourseEntity.courseId) { readResult in
+                courseCoreDataStorage.readCourse(byCourseUUID: createCourseEntity.uuid!) { readResult in
                     
                     switch readResult {
                         
                     case .success(let readCourseEntity):
                         
-                        XCTAssertTrue(readCourseEntity.userId == createCourseEntity.userId)
-                        XCTAssertTrue(readCourseEntity.courseId == createCourseEntity.courseId)
-                        XCTAssertTrue(readCourseEntity.languageId == createCourseEntity.languageId)
-                        XCTAssertTrue(readCourseEntity.languageName == createCourseEntity.languageName)
+                        XCTAssertTrue(readCourseEntity.uuid == createCourseEntity.uuid)
+                        XCTAssertTrue(readCourseEntity.name == createCourseEntity.name)
+                        XCTAssertTrue(readCourseEntity.translatedName == createCourseEntity.translatedName)
                         XCTAssertTrue(readCourseEntity.createdAt == createCourseEntity.createdAt)
                         
                         expectation.fulfill()
@@ -128,13 +100,14 @@ extension MDCourseCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Delete Course Expectation")
         
-        courseCoreDataStorage.createCourse(Constants_For_Tests.mockedCourse) { [unowned self] createResult in
+        courseCoreDataStorage.createCourse(name: Constants_For_Tests.mockedCourseName,
+                                           translatedName: Constants_For_Tests.mockedCourseTranslatedName) { [unowned self] createResult in
             
             switch createResult {
                 
             case .success(let createCourseEntity):
                 
-                courseCoreDataStorage.deleteCourse(fromCourseId: createCourseEntity.courseId) { deleteResult in
+                courseCoreDataStorage.deleteCourse(byCourseUUID: createCourseEntity.uuid!) { deleteResult in
                     
                     switch deleteResult {
                         
@@ -163,7 +136,8 @@ extension MDCourseCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Delete All Courses Expectation")
         
-        courseCoreDataStorage.createCourse(Constants_For_Tests.mockedCourse) { [unowned self] createResult in
+        courseCoreDataStorage.createCourse(name: Constants_For_Tests.mockedCourseName,
+                                           translatedName: Constants_For_Tests.mockedCourseTranslatedName) { [unowned self] createResult in
             
             switch createResult {
                 

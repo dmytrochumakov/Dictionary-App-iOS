@@ -68,7 +68,7 @@ extension MDWordCoreDataStorage {
     
     func createWord(wordText: String,
                     wordDescription: String,
-                    course: CDCourseEntity,
+                    course: CDCourseEntity?,
                     _ completionHandler: @escaping (MDOperationResultWithCompletion<CDWordEntity>)) {
         
         let operation: BlockOperation = .init {
