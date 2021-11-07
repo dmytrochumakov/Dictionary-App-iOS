@@ -8,6 +8,9 @@
 import Foundation
 
 protocol MDCreateCourseProtocol {
-    func createCourse(_ courseEntity: CDCourseEntity, _ completionHandler: @escaping(MDOperationResultWithCompletion<CDCourseEntity>))
-    func createCourses(_ courseEntities: [CDCourseEntity], _ completionHandler: @escaping(MDOperationsResultWithCompletion<CDCourseEntity>))
+    
+    func createCourse(name: String,
+                      translatedName: String,
+                      _ completionHandler: @escaping(MDOperationResultWithCompletion<CDCourseEntity>))
+        
 }

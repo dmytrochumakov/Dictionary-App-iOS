@@ -67,8 +67,8 @@ open class MDCoreDataStack: NSObject {
 // MARK: - Save
 extension MDCoreDataStack {
     
-    public func save(managedObjectContext: NSManagedObjectContext,
-                     completionHandler: @escaping CDResultSaved) {
+    func save(managedObjectContext: NSManagedObjectContext,
+              completionHandler: @escaping MDOperationResultWithCompletion<Void>) {
         
         managedObjectContext.performAndWait {
             
@@ -79,7 +79,7 @@ extension MDCoreDataStack {
                 //
                 
                 //
-                completionHandler(.success)
+                completionHandler(.success(()))
                 //
                 
                 //

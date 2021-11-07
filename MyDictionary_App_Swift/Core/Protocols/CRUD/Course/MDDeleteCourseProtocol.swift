@@ -8,6 +8,10 @@
 import Foundation
 
 protocol MDDeleteCourseProtocol {
-    func deleteCourse(fromCourseId courseId: Int64, _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    
+    func deleteCourse(byCourseUUID uuid: UUID,
+                      _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    
     func deleteAllCourses(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    
 }

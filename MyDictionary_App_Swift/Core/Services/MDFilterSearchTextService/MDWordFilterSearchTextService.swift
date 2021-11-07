@@ -53,7 +53,7 @@ extension MDWordFilterSearchTextService {
             } else {
                 
                 //
-                completionHandler(input.filter({ $0.wordText.lowercased().contains(searchText!.lowercased()) || $0.wordDescription.lowercased().contains(searchText!.lowercased()) }))
+                completionHandler(input.filter({ $0.wordText!.lowercased().contains(searchText!.lowercased()) || $0.wordDescription!.lowercased().contains(searchText!.lowercased()) }))
                 //
                 
             }
