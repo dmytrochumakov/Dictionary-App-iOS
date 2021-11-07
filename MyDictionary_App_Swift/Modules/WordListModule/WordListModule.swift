@@ -13,9 +13,9 @@ struct WordListModuleSender {
 
 final class WordListModule {
     
-    fileprivate let sender: CourseResponse
+    fileprivate let sender: CDCourseEntity
     
-    init(sender: CourseResponse) {
+    init(sender: CDCourseEntity) {
         self.sender = sender
     }
     

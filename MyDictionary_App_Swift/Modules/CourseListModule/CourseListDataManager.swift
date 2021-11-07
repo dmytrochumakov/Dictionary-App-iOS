@@ -8,7 +8,7 @@ import Foundation
 
 protocol CourseListDataManagerInputProtocol {
     var dataProvider: CourseListDataProviderProtocol { get }
-    func addCourse(atNewCourse course: CourseResponse) -> IndexPath
+    func addCourse(atNewCourse course: CDCourseEntity) -> IndexPath
     func readAndAddCoursesToDataProvider()
     func filterCourses(_ searchText: String?)
     func clearCourseFilter()
@@ -28,14 +28,14 @@ protocol CourseListDataManagerProtocol: CourseListDataManagerInputProtocol {
 final class CourseListDataManager: CourseListDataManagerProtocol {
     
     fileprivate let coreDataStorage: MDCourseCoreDataStorageProtocol
-    fileprivate let filterSearchTextService: MDFilterSearchTextService<CourseResponse>
+    fileprivate let filterSearchTextService: MDFilterSearchTextService<CDCourseEntity>
     
     internal var dataProvider: CourseListDataProviderProtocol
     internal weak var dataManagerOutput: CourseListDataManagerOutputProtocol?
     
     init(coreDataStorage: MDCourseCoreDataStorageProtocol,
          dataProvider: CourseListDataProviderProtocol,
-         filterSearchTextService: MDFilterSearchTextService<CourseResponse>) {
+         filterSearchTextService: MDFilterSearchTextService<CDCourseEntity>) {
         
         self.coreDataStorage = coreDataStorage
         self.dataProvider = dataProvider
@@ -204,7 +204,7 @@ extension CourseListDataManager {
         dataProvider.deleteCourse(atIndexPath: indexPath)
     }
     
-    func addCourse(atNewCourse course: CourseResponse) -> IndexPath {
+    func addCourse(atNewCourse course: CDCourseEntity) -> IndexPath {
         //
         self.dataProvider.filteredCourses.insert(course, at: .zero)
         //
@@ -216,8 +216,8 @@ extension CourseListDataManager {
 // MARK: - Private Methods
 fileprivate extension CourseListDataManager {
     
-    func sortCourses(_ input: [CourseResponse]) -> [CourseResponse] {
-        return input.sorted(by: { $0.createdAtDate > $1.createdAtDate })
+    func sortCourses(_ input: [CDCourseEntity]) -> [CDCourseEntity] {
+        return input.sorted(by: { $0.createdAt! > $1.createdAt! })
     }
     
 }

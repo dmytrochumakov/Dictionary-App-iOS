@@ -10,22 +10,22 @@ import Foundation
 protocol WordListDataProviderProcotol: MDNumberOfSectionsProtocol,
                                        MDNumberOfRowsInSectionProtocol {
     
-    var course: CourseResponse { get }
-    var filteredWords: [MDWordModel] { get set }
+    var course: CDCourseEntity { get }
+    var filteredWords: [CDWordEntity] { get set }
     
     func wordListCellModel(atIndexPath indexPath: IndexPath) -> MDWordListCellModel?
     func deleteWord(atIndexPath indexPath: IndexPath)
-    func updateWord(atIndexPath indexPath: IndexPath, updatedWord: MDWordModel)
+    func updateWord(atIndexPath indexPath: IndexPath, updatedWord: CDWordEntity)
     
 }
 
 final class WordListDataProvider: WordListDataProviderProcotol {
     
-    var course: CourseResponse
-    var filteredWords: [MDWordModel]
+    var course: CDCourseEntity
+    var filteredWords: [CDWordEntity]
     
-    init(course: CourseResponse,
-         words: [MDWordModel]) {
+    init(course: CDCourseEntity,
+         words: [CDWordEntity]) {
         self.course = course
         self.filteredWords = words
     }
@@ -62,7 +62,7 @@ extension WordListDataProvider {
         filteredWords.remove(at: indexPath.row)
     }
     
-    func updateWord(atIndexPath indexPath: IndexPath, updatedWord: MDWordModel) {
+    func updateWord(atIndexPath indexPath: IndexPath, updatedWord: CDWordEntity) {
         filteredWords[indexPath.row] = updatedWord
     }
     

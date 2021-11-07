@@ -83,23 +83,23 @@ extension EditWordInteractor: EditWordDataManagerOutputProtocol {
 extension EditWordInteractor: EditWordInteractorInputProtocol {
     
     var getWordText: String {
-        return dataManager.getWord.wordText
+        return dataManager.getWord.wordText!
     }
     
     func viewDidLoad() {
         
         // Fill Fields
         //
-        interactorOutput?.fillWordTextField(dataManager.getWord.wordText)
+        interactorOutput?.fillWordTextField(dataManager.getWord.wordText!)
         //
-        interactorOutput?.fillWordDescriptionTextView(dataManager.getWord.wordDescription)
+        interactorOutput?.fillWordDescriptionTextView(dataManager.getWord.wordDescription!)
         //
         
         // Update Counters
         //
-        interactorOutput?.updateWordTextFieldCounter(dataManager.getWord.wordText.count)
+        interactorOutput?.updateWordTextFieldCounter(dataManager.getWord.wordText!.count)
         //
-        interactorOutput?.updateWordDescriptionTextViewCounter(dataManager.getWord.wordDescription.count)
+        interactorOutput?.updateWordDescriptionTextViewCounter(dataManager.getWord.wordDescription!.count)
         //
         
     }

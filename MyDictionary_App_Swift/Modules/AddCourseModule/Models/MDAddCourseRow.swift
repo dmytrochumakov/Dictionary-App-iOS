@@ -8,7 +8,7 @@
 import Foundation
 
 struct MDAddCourseRow {
-    let languageResponse: LanguageResponse
+    let languageResponse: MDLanguageModel
     var isSelected: Bool
 }
 
@@ -16,7 +16,7 @@ struct MDAddCourseRow {
 extension MDAddCourseRow: Equatable {
     
     static func == (lhs: MDAddCourseRow, rhs: MDAddCourseRow) -> Bool {
-        return lhs.languageResponse == rhs.languageResponse
+        return lhs.languageResponse.id == rhs.languageResponse.id
     }
     
 }

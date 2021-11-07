@@ -11,7 +11,6 @@ import Firebase
 protocol MDAppDependenciesProtocol {
     
     var rootWindow: UIWindow! { get set }
-    var reachability: Reachability! { get }
     var coreDataStack: MDCoreDataStack! { get }
     
     // Manager
@@ -35,7 +34,6 @@ final class MDAppDependencies: NSObject,
                                MDAppDependenciesProtocol {
     
     var rootWindow: UIWindow!
-    var reachability: Reachability!
     var coreDataStack: MDCoreDataStack!
     
     // Manager
@@ -68,8 +66,6 @@ extension MDAppDependencies {
     
     func configureDependencies() {
         
-        let reachability = Reachability.init()
-        self.reachability = reachability
         //
         let coreDataStack: MDCoreDataStack = .init()
         self.coreDataStack = coreDataStack

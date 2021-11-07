@@ -13,9 +13,9 @@ protocol WordListDataManagerInputProtocol {
     func filterWords(_ searchText: String?)
     func clearWordFilter()
     func deleteWord(atIndexPath indexPath: IndexPath)
-    func addWord(_ newValue: MDWordModel) -> IndexPath
-    func deleteWord(atWordResponse word: MDWordModel) -> IndexPath
-    func updateWord(atWordResponse word: MDWordModel) -> IndexPath
+    func addWord(_ newValue: CDWordEntity) -> IndexPath
+    func deleteWord(atWordResponse word: CDWordEntity) -> IndexPath
+    func updateWord(atWordResponse word: CDWordEntity) -> IndexPath
 }
 
 protocol WordListDataManagerOutputProtocol: AnyObject {
@@ -204,14 +204,14 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
         dataProvider.deleteWord(atIndexPath: indexPath)
     }
     
-    func addWord(_ newValue: MDWordModel) -> IndexPath {
+    func addWord(_ newValue: CDWordEntity) -> IndexPath {
         //
         self.dataProvider.filteredWords.insert(newValue, at: .zero)
         //
         return .init(row: .zero, section: section)
     }
     
-    func deleteWord(atWordResponse word: MDWordModel) -> IndexPath {
+    func deleteWord(atWordResponse word: CDWordEntity) -> IndexPath {
         //
         let row = dataProvider.filteredWords.firstIndex(where: { $0.wordId == word.wordId })!
         let indexPath: IndexPath = .init(row: row,
@@ -222,7 +222,7 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
         return indexPath
     }
     
-    func updateWord(atWordResponse word: MDWordModel) -> IndexPath {
+    func updateWord(atWordResponse word: CDWordEntity) -> IndexPath {
         //
         let row = dataProvider.filteredWords.firstIndex(where: { $0.wordId == word.wordId })!
         let indexPath: IndexPath = .init(row: row,
@@ -243,7 +243,7 @@ fileprivate extension WordListDataManager {
         return .zero
     }
     
-    func sortWords(_ input: [MDWordModel]) -> [MDWordModel] {
+    func sortWords(_ input: [CDWordEntity]) -> [CDWordEntity] {
         return input.sorted(by: { $0.createdAtDate > $1.createdAtDate })
     }
     

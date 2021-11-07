@@ -65,8 +65,8 @@ extension MDCourseCoreDataStorage {
 // MARK: - Create
 extension MDCourseCoreDataStorage {
     
-    func createCourse(_ courseEntity: CourseResponse,
-                      _ completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
+    func createCourse(_ courseEntity: CDCourseEntity,
+                      _ completionHandler: @escaping (MDOperationResultWithCompletion<CDCourseEntity>)) {
         
         let operation: BlockOperation = .init {
             
@@ -108,8 +108,8 @@ extension MDCourseCoreDataStorage {
         
     }
     
-    func createCourses(_ courseEntities: [CourseResponse],
-                       _ completionHandler: @escaping (MDOperationsResultWithCompletion<CourseResponse>)) {
+    func createCourses(_ courseEntities: [CDCourseEntity],
+                       _ completionHandler: @escaping (MDOperationsResultWithCompletion<CDCourseEntity>)) {
         
         let operation: BlockOperation = .init {
             
@@ -184,7 +184,7 @@ extension MDCourseCoreDataStorage {
 extension MDCourseCoreDataStorage {
     
     func readCourse(fromCourseId courseId: Int64,
-                    _ completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
+                    _ completionHandler: @escaping (MDOperationResultWithCompletion<CDCourseEntity>)) {
         
         let operation: BlockOperation = .init {
             
@@ -233,7 +233,7 @@ extension MDCourseCoreDataStorage {
         
     }
     
-    func readAllCourses(_ completionHandler: @escaping (MDOperationResultWithCompletion<[CourseResponse]>)) {
+    func readAllCourses(_ completionHandler: @escaping (MDOperationResultWithCompletion<[CDCourseEntity]>)) {
         
         let operation: BlockOperation = .init {
             

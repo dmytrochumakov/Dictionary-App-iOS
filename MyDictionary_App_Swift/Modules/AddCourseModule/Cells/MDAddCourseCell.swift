@@ -59,7 +59,7 @@ extension MDAddCourseCell: MDFillWithModelProtocol {
     typealias Model = MDAddCourseRow?
     
     func fillWithModel(_ model: MDAddCourseRow?) {
-        self.titleLabel.text = model?.languageResponse.languageName
+        self.titleLabel.text = model?.languageResponse.name
     }
     
 }
