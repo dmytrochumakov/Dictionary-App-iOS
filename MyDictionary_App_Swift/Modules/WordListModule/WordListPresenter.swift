@@ -91,7 +91,7 @@ extension WordListPresenter: WordListInteractorOutputProtocol {
         router.showAddWord(withCourse: course)
     }
     
-    func showEditWord(withWord word: WordResponse) {
+    func showEditWord(withWord word: MDWordModel) {
         router.showEditWord(withWord: word)
     }
     

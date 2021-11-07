@@ -24,7 +24,7 @@ protocol WordListInteractorOutputProtocol: AnyObject,
                                            MDUpdateRowProtocol  {
     
     func showAddWord(withCourse course: CourseResponse)
-    func showEditWord(withWord word: WordResponse)
+    func showEditWord(withWord word: MDWordModel)
     
 }
 

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol WordListTableViewDelegateProtocol: UITableViewDelegate {
-    var didSelectWord: ((WordResponse) -> Void)? { get set }
+    var didSelectWord: ((MDWordModel) -> Void)? { get set }
 }
 
 final class WordListTableViewDelegate: NSObject,
@@ -16,7 +16,7 @@ final class WordListTableViewDelegate: NSObject,
     
     fileprivate let dataProvider: WordListDataProviderProcotol
     
-    var didSelectWord: ((WordResponse) -> Void)?
+    var didSelectWord: ((MDWordModel) -> Void)?
     
     init(dataProvider: WordListDataProviderProcotol) {
         self.dataProvider = dataProvider

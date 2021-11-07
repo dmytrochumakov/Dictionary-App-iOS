@@ -66,8 +66,8 @@ extension MDWordCoreDataStorage {
 // MARK: - Create
 extension MDWordCoreDataStorage {
     
-    func createWord(_ wordModel: WordResponse,
-                    _ completionHandler: @escaping (MDOperationResultWithCompletion<WordResponse>)) {
+    func createWord(_ wordModel: MDWordModel,
+                    _ completionHandler: @escaping (MDOperationResultWithCompletion<MDWordModel>)) {
         
         let operation: BlockOperation = .init {
             
@@ -108,8 +108,8 @@ extension MDWordCoreDataStorage {
         
     }
     
-    func createWords(_ wordModels: [WordResponse],
-                     _ completionHandler: @escaping (MDOperationsResultWithCompletion<WordResponse>)) {
+    func createWords(_ wordModels: [MDWordModel],
+                     _ completionHandler: @escaping (MDOperationsResultWithCompletion<MDWordModel>)) {
         
         let operation: BlockOperation = .init {
             
@@ -185,7 +185,7 @@ extension MDWordCoreDataStorage {
 extension MDWordCoreDataStorage {
     
     func readWord(fromWordID wordId: Int64,
-                  _ completionHandler: @escaping (MDOperationResultWithCompletion<WordResponse>)) {
+                  _ completionHandler: @escaping (MDOperationResultWithCompletion<MDWordModel>)) {
         
         let operation: BlockOperation = .init {
             
@@ -236,7 +236,7 @@ extension MDWordCoreDataStorage {
     
     func readWords(fetchLimit: Int,
                    fetchOffset: Int,
-                   _ completionHandler: @escaping (MDOperationsResultWithCompletion<WordResponse>)) {
+                   _ completionHandler: @escaping (MDOperationsResultWithCompletion<MDWordModel>)) {
         
         let operation: BlockOperation = .init {
             
@@ -275,7 +275,7 @@ extension MDWordCoreDataStorage {
         
     }
     
-    func readAllWords(_ completionHandler: @escaping (MDOperationsResultWithCompletion<WordResponse>)) {
+    func readAllWords(_ completionHandler: @escaping (MDOperationsResultWithCompletion<MDWordModel>)) {
         
         let operation: BlockOperation = .init {
             
@@ -315,7 +315,7 @@ extension MDWordCoreDataStorage {
     }
     
     func readAllWords(byCourseID courseID: Int64,
-                      _ completionHandler: @escaping (MDOperationsResultWithCompletion<WordResponse>)) {
+                      _ completionHandler: @escaping (MDOperationsResultWithCompletion<MDWordModel>)) {
         
         let operation: BlockOperation = .init {
             

@@ -10,18 +10,18 @@ import Foundation
 protocol MDBridgeProtocol {
     var didAddCourse: ((CourseResponse) -> Void)? { get set }
     var didChangeMemoryIsFilledResult: (((MDOperationResultWithoutCompletion<Void>)) -> Void)? { get set }
-    var didAddWord: ((WordResponse) -> Void)? { get set }
-    var didDeleteWord: ((WordResponse) -> Void)? { get set }
-    var didUpdateWord: ((WordResponse) -> Void)? { get set }
+    var didAddWord: ((MDWordModel) -> Void)? { get set }
+    var didDeleteWord: ((MDWordModel) -> Void)? { get set }
+    var didUpdateWord: ((MDWordModel) -> Void)? { get set }
 }
 
 final class MDBridge: MDBridgeProtocol {
     
     public var didAddCourse: ((CourseResponse) -> Void)?
     public var didChangeMemoryIsFilledResult: (((MDOperationResultWithoutCompletion<Void>)) -> Void)? 
-    public var didAddWord: ((WordResponse) -> Void)?
-    public var didDeleteWord: ((WordResponse) -> Void)?
-    public var didUpdateWord: ((WordResponse) -> Void)?
+    public var didAddWord: ((MDWordModel) -> Void)?
+    public var didDeleteWord: ((MDWordModel) -> Void)?
+    public var didUpdateWord: ((MDWordModel) -> Void)?
     
     deinit {
         debugPrint(#function, Self.self)

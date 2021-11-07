@@ -9,10 +9,10 @@ import Foundation
 
 protocol MDCreateWordProtocol {
     
-    func createWord(_ wordModel: WordResponse,
-                    _ completionHandler: @escaping(MDOperationResultWithCompletion<WordResponse>))
+    func createWord(_ wordModel: MDWordModel,
+                    _ completionHandler: @escaping(MDOperationResultWithCompletion<MDWordModel>))
     
-    func createWords(_ wordModels: [WordResponse],
-                     _ completionHandler: @escaping(MDOperationsResultWithCompletion<WordResponse>))
+    func createWords(_ wordModels: [MDWordModel],
+                     _ completionHandler: @escaping(MDOperationsResultWithCompletion<MDWordModel>))
     
 }

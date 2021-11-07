@@ -10,7 +10,7 @@ import UIKit
 protocol WordListRouterProtocol {
     var wordListViewController: UIViewController! { get set }
     func showAddWord(withCourse course: CourseResponse)
-    func showEditWord(withWord word: WordResponse)
+    func showEditWord(withWord word: MDWordModel)
 }
 
 final class WordListRouter: WordListRouterProtocol {
@@ -29,7 +29,7 @@ extension WordListRouter {
         wordListViewController?.show(AddWordModule.init(sender: course).module, sender: nil)
     }
     
-    func showEditWord(withWord word: WordResponse) {
+    func showEditWord(withWord word: MDWordModel) {
         wordListViewController?.show(EditWordModule.init(sender: word).module, sender: nil)
     }
     

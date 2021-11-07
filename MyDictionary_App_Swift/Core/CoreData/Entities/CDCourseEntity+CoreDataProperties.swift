@@ -2,7 +2,7 @@
 //  CDCourseEntity+CoreDataProperties.swift
 //  
 //
-//  Created by Dmytro Chumakov on 22.08.2021.
+//  Created by Dmytro Chumakov on 07.11.2021.
 //
 //
 
@@ -16,11 +16,27 @@ extension CDCourseEntity {
         return NSFetchRequest<CDCourseEntity>(entityName: "CDCourseEntity")
     }
 
-    @NSManaged public var userId: Int64
-    @NSManaged public var courseId: Int64
-    @NSManaged public var languageId: Int64
-    @NSManaged public var languageName: String?
-    @NSManaged public var createdAt: String?
-    @NSManaged public var updatedAt: String?
+    @NSManaged public var uuid: UUID?
+    @NSManaged public var createdAt: Date?
+    @NSManaged public var name: String?
+    @NSManaged public var translatedName: String?
+    @NSManaged public var words: NSSet?
+
+}
+
+// MARK: Generated accessors for words
+extension CDCourseEntity {
+
+    @objc(addWordsObject:)
+    @NSManaged public func addToWords(_ value: CDWordEntity)
+
+    @objc(removeWordsObject:)
+    @NSManaged public func removeFromWords(_ value: CDWordEntity)
+
+    @objc(addWords:)
+    @NSManaged public func addToWords(_ values: NSSet)
+
+    @objc(removeWords:)
+    @NSManaged public func removeFromWords(_ values: NSSet)
 
 }

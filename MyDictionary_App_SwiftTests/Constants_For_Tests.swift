@@ -12,7 +12,7 @@ struct Constants_For_Tests {
     
     public static let testExpectationTimeout: TimeInterval = 60.0
     
-    public static let mockedWord0: WordResponse = .init(userId: .init(),
+    public static let mockedWord0: MDWordModel = .init(userId: .init(),
                                                         wordId: .init(),
                                                         courseId: .init(),
                                                         languageId: .init(),
@@ -21,7 +21,7 @@ struct Constants_For_Tests {
                                                         languageName: "English",
                                                         createdAt: .init())
     
-    public static let mockedWords: [WordResponse] = [mockedWord0, .init(userId: .init(),
+    public static let mockedWords: [MDWordModel] = [mockedWord0, .init(userId: .init(),
                                                                         wordId: .init(),
                                                                         courseId: .init(),
                                                                         languageId: .init(),
@@ -30,7 +30,7 @@ struct Constants_For_Tests {
                                                                         languageName: "Spanish",
                                                                         createdAt: .init())]
     
-    public static let mockedWordForUpdate: WordResponse = .init(userId: .init(),
+    public static let mockedWordForUpdate: MDWordModel = .init(userId: .init(),
                                                                 wordId: .init(),
                                                                 courseId: .init(),
                                                                 languageId: .init(),

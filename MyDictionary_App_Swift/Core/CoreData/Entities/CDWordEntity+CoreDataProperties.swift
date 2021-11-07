@@ -1,8 +1,8 @@
 //
 //  CDWordEntity+CoreDataProperties.swift
-//  MyDictionary_App_Swift
+//  
 //
-//  Created by Dmytro Chumakov on 06.07.2021.
+//  Created by Dmytro Chumakov on 07.11.2021.
 //
 //
 
@@ -16,11 +16,11 @@ extension CDWordEntity {
         return NSFetchRequest<CDWordEntity>(entityName: "CDWordEntity")
     }
 
-    @NSManaged public var id: Int
-    @NSManaged public var word: String
-    @NSManaged public var wordDescription: String
-    @NSManaged public var wordLanguage: String
-    @NSManaged public var createdDate: Date
-    @NSManaged public var updatedDate: Date
+    @NSManaged public var uuid: UUID?
+    @NSManaged public var createdAt: Date?
+    @NSManaged public var wordDescription: String?
+    @NSManaged public var wordText: String?
+    @NSManaged public var updatedAt: Date?
+    @NSManaged public var courseUUID: CDCourseEntity?
 
 }

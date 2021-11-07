@@ -8,7 +8,7 @@ import Foundation
 
 protocol EditWordDataManagerInputProtocol {
     
-    var getWord: WordResponse { get }
+    var getWord: MDWordModel { get }
     
     var updatedWordTextAndDescriptionIsEqualToInitialValue: Bool { get }
         
@@ -43,7 +43,7 @@ final class EditWordDataManager: EditWordDataManagerProtocol {
 // MARK: - EditWordDataManagerInputProtocol
 extension EditWordDataManager: EditWordDataManagerInputProtocol {
     
-    var getWord: WordResponse {
+    var getWord: MDWordModel {
         return dataProvider.word
     }
     

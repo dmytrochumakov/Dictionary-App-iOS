@@ -2,7 +2,7 @@
 //  CDCourseEntity+CoreDataClass.swift
 //  
 //
-//  Created by Dmytro Chumakov on 22.08.2021.
+//  Created by Dmytro Chumakov on 07.11.2021.
 //
 //
 
