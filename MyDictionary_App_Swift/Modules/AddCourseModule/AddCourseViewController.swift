@@ -41,10 +41,6 @@ final class AddCourseViewController: MDBaseLargeTitledBackNavigationBarViewContr
         return button
     }()
     
-    fileprivate let hud: MDProgressHUDHelperProtocol = {
-        return MDProgressHUDHelper.init()
-    }()
-    
     init(presenter: AddCoursePresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: MDLocalizedText.addCourse.localized,
@@ -109,11 +105,11 @@ extension AddCourseViewController: AddCoursePresenterOutputProtocol {
     }
     
     func showProgressHUD() {
-        self.hud.showProgressHUD(withConfiguration: .init(view: self.view))
+        MDConstants.MDNetworkActivityIndicator.show()
     }
     
     func hideProgressHUD() {
-        self.hud.hideProgressHUD(animated: true)
+        MDConstants.MDNetworkActivityIndicator.hide()
     }
     
 }

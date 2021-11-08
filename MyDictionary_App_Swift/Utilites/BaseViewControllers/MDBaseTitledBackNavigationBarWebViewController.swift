@@ -17,10 +17,6 @@ open class MDBaseTitledBackNavigationBarWebViewController: MDBaseTitledBackNavig
         return webView
     }()
     
-    fileprivate let hud: MDProgressHUDHelperProtocol = {
-        return MDProgressHUDHelper.init()
-    }()
-    
     init(url: URL,
          title: String,
          navigationBarBackgroundImage: UIImage) {
@@ -69,11 +65,11 @@ extension MDBaseTitledBackNavigationBarWebViewController: WKNavigationDelegate {
 extension MDBaseTitledBackNavigationBarWebViewController: MDShowHideProgressHUD {
     
     func showProgressHUD() {
-        self.hud.showProgressHUD(withConfiguration: .init(view: self.view))
+        MDConstants.MDNetworkActivityIndicator.show()
     }
     
     func hideProgressHUD() {
-        self.hud.hideProgressHUD(animated: true)        
+        MDConstants.MDNetworkActivityIndicator.hide()
     }
     
 }

@@ -78,10 +78,6 @@ final class AddWordViewController: MDBaseTitledBackNavigationBarViewController {
         return button
     }()
     
-    fileprivate let hud: MDProgressHUDHelperProtocol = {
-        return MDProgressHUDHelper.init()
-    }()
-    
     init(presenter: AddWordPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: MDLocalizedText.addWord.localized,
@@ -148,11 +144,11 @@ extension AddWordViewController: AddWordPresenterOutputProtocol {
     }
     
     func showProgressHUD() {
-        self.hud.showProgressHUD(withConfiguration: .init(view: self.view))
+        MDConstants.MDNetworkActivityIndicator.show()
     }
     
     func hideProgressHUD() {
-        self.hud.hideProgressHUD(animated: true)
+        MDConstants.MDNetworkActivityIndicator.hide()
     }
     
 }
