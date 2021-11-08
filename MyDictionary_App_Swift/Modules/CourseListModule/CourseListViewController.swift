@@ -43,11 +43,7 @@ final class CourseListViewController: MDBaseLargeTitledNavigationBarViewControll
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         return searchBar
     }()
-    
-    fileprivate let hud: MDProgressHUDHelperProtocol = {
-        return MDProgressHUDHelper.init()
-    }()
-    
+        
     init(presenter: CourseListPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: MDLocalizedText.courses.localized,
@@ -106,11 +102,11 @@ extension CourseListViewController: CourseListPresenterOutputProtocol {
     }
     
     func showProgressHUD() {
-        self.hud.showProgressHUD(withConfiguration: .init(view: self.view))
+        MDConstants.MDNetworkActivityIndicator.show()
     }
     
     func hideProgressHUD() {
-        self.hud.hideProgressHUD(animated: true)
+        MDConstants.MDNetworkActivityIndicator.hide()
     }
     
     func insertRow(atIndexPath indexPath: IndexPath) {

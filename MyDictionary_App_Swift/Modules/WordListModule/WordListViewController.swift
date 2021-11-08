@@ -40,10 +40,6 @@ final class WordListViewController: MDBaseLargeTitledBackNavigationBarViewContro
         return button
     }()
     
-    fileprivate let hud: MDProgressHUDHelperProtocol = {
-        return MDProgressHUDHelper.init()
-    }()
-    
     init(presenter: WordListPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: MDLocalizedText.words.localized,
@@ -106,11 +102,11 @@ extension WordListViewController: WordListPresenterOutputProtocol {
     }
     
     func showProgressHUD() {
-        self.hud.showProgressHUD(withConfiguration: .init(view: self.view))
+        MDConstants.MDNetworkActivityIndicator.show()
     }
     
     func hideProgressHUD() {
-        self.hud.hideProgressHUD(animated: true)
+        MDConstants.MDNetworkActivityIndicator.hide()
     }
     
     func updateRow(atIndexPath indexPath: IndexPath) {

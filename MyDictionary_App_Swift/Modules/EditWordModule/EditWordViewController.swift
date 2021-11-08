@@ -84,10 +84,6 @@ final class EditWordViewController: MDBaseTitledBackNavigationBarViewController 
         return button
     }()
     
-    fileprivate let hud: MDProgressHUDHelperProtocol = {
-        return MDProgressHUDHelper.init()
-    }()
-    
     init(presenter: EditWordPresenterInputProtocol) {
         self.presenter = presenter
         super.init(title: presenter.getWordText,
@@ -126,11 +122,11 @@ final class EditWordViewController: MDBaseTitledBackNavigationBarViewController 
 extension EditWordViewController: EditWordPresenterOutputProtocol {
     
     func showProgressHUD() {
-        self.hud.showProgressHUD(withConfiguration: .init(view: self.view))
+        MDConstants.MDNetworkActivityIndicator.show()
     }
     
     func hideProgressHUD() {
-        self.hud.hideProgressHUD(animated: true)
+        MDConstants.MDNetworkActivityIndicator.hide()
     }
     
     func showError(_ error: Error) {
