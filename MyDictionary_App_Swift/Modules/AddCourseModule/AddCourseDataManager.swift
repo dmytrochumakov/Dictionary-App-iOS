@@ -27,6 +27,7 @@ protocol AddCourseDataManagerProtocol: AddCourseDataManagerInputProtocol {
 final class AddCourseDataManager: AddCourseDataManagerProtocol {
     
     fileprivate var dataProvider: AddCourseDataProviderProtocol
+    fileprivate let languageMemoryStorage: MDLanguageMemoryStorageProtocol
     fileprivate let filterSearchTextService: MDFilterSearchTextService<MDLanguageModel>
     
     var selectedRow: MDAddCourseRow? {
@@ -37,9 +38,11 @@ final class AddCourseDataManager: AddCourseDataManagerProtocol {
     internal weak var dataManagerOutput: AddCourseDataManagerOutputProtocol?
     
     init(dataProvider: AddCourseDataProviderProtocol,
+         languageMemoryStorage: MDLanguageMemoryStorageProtocol,
          filterSearchTextService: MDFilterSearchTextService<MDLanguageModel>) {
         
         self.dataProvider = dataProvider
+        self.languageMemoryStorage = languageMemoryStorage
         self.filterSearchTextService = filterSearchTextService
         
     }
@@ -54,18 +57,46 @@ extension AddCourseDataManager {
     
     func loadAndPassLanguagesArrayToDataProvider() {
         
+        // Configure Sections
+        dataProvider.sections = configuredSections(byLanguages: languageMemoryStorage.readAllLanguages())
+        //
         
+        // Pass Result
+        dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.success(()))
+        //
         
     }
     
     func filterLanguages(_ searchText: String?) {
         
-        
+        filterSearchTextService.filter(input: languageMemoryStorage.readAllLanguages(),
+                                       searchText: searchText) { [unowned self] (filteredResult) in
+            
+            DispatchQueue.main.async {
+                
+                // Set Filtered Result
+                self.dataProvider.sections = configuredSections(byLanguages: filteredResult)
+                //
+                
+                // Pass Result
+                self.dataManagerOutput?.filteredLanguagesResult(.success(()))
+                //
+                
+            }
+            
+        }
         
     }
     
     func clearLanguageFilter() {
         
+        // Configure Sections
+        dataProvider.sections = configuredSections(byLanguages: languageMemoryStorage.readAllLanguages())
+        //
+        
+        // Pass Result
+        dataManagerOutput?.clearLanguageFilterResult(.success(()))
+        //
         
     }
     
