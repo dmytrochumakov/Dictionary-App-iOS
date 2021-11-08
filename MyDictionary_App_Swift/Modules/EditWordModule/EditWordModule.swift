@@ -8,9 +8,9 @@ import UIKit
 
 final class EditWordModule {
     
-    let sender: WordResponse
+    let sender: CDWordEntity
     
-    init(sender: WordResponse) {
+    init(sender: CDWordEntity) {
         self.sender = sender
     }
     

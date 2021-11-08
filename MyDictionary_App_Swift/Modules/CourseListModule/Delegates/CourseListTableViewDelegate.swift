@@ -8,14 +8,14 @@
 import UIKit
 
 protocol CourseListTableViewDelegateProtocol: UITableViewDelegate {
-    var didSelectCourse: ((CourseResponse) -> Void)? { get set }
+    var didSelectCourse: ((CDCourseEntity) -> Void)? { get set }
 }
 
 final class CourseListTableViewDelegate: NSObject, CourseListTableViewDelegateProtocol {
     
     fileprivate let dataProvider: CourseListDataProviderProtocol
     
-    public var didSelectCourse: ((CourseResponse) -> Void)?
+    public var didSelectCourse: ((CDCourseEntity) -> Void)?
     
     init(dataProvider: CourseListDataProviderProtocol) {
         self.dataProvider = dataProvider

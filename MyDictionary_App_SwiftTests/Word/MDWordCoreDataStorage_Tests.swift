@@ -6,16 +6,20 @@
 //
 
 import XCTest
+import CoreData
 @testable import MyDictionary_App_Swift
 
 final class MDWordCoreDataStorage_Tests: XCTestCase {
     
+    fileprivate var managedObjectContext: NSManagedObjectContext!
     fileprivate var wordCoreDataStorage: MDWordCoreDataStorageProtocol!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         
         let coreDataStack: MDCoreDataStack = TestCoreDataStack()
+        
+        self.managedObjectContext = coreDataStack.privateContext
         
         let wordCoreDataStorage: MDWordCoreDataStorageProtocol = MDWordCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordCoreDataStorageOperationQueue)!,
                                                                                             managedObjectContext: coreDataStack.privateContext,
@@ -33,50 +37,31 @@ extension MDWordCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Create One Word Expectation")
         
-        wordCoreDataStorage.createWord(Constants_For_Tests.mockedWord0) { [unowned self] result in
+        wordCoreDataStorage.createWord(Constants_For_Tests.mockedWord(context: managedObjectContext)) { [unowned self] result in
             
             switch result {
                 
             case .success(let createdWord):
                 
-                XCTAssertTrue(createdWord.wordId == Constants_For_Tests.mockedWord0.wordId)
+                XCTAssertTrue(createdWord.wordText == Constants_For_Tests.mockedWord(context: managedObjectContext).wordText!)
+                XCTAssertTrue(createdWord.wordDescription == Constants_For_Tests.mockedWord(context: managedObjectContext).wordDescription!)
                 
-                self.wordCoreDataStorage.entitiesIsEmpty() { entitiesIsEmptyResult in
+                self.wordCoreDataStorage.readWord(byWordUUID: createdWord.uuid!) { readResult in
                     
-                    switch entitiesIsEmptyResult {
+                    switch readResult {
                         
-                    case .success(let entitiesIsEmpty):
+                    case .success(let readEntity):
                         
-                        XCTAssertFalse(entitiesIsEmpty)
+                        XCTAssertTrue(createdWord.uuid == readEntity.uuid)
+                        
                         expectation.fulfill()
                         
                     case .failure(let error):
                         XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
+                    
                 }
-            case .failure(let error):
-                XCTExpectFailure(error.localizedDescription)
-                expectation.fulfill()
-            }
-        }
-        
-        wait(for: [expectation], timeout: Constants_For_Tests.testExpectationTimeout)
-        
-    }
-    
-    func test_Create_Words_Functionality() {
-        
-        let expectation = XCTestExpectation(description: "Create Words Expectation")
-        
-        wordCoreDataStorage.createWords(Constants_For_Tests.mockedWords) { result in
-            
-            switch result {
-                
-            case .success(let createdWords):
-                
-                XCTAssertTrue(createdWords.count == Constants_For_Tests.mockedWords.count)
-                expectation.fulfill()
                 
             case .failure(let error):
                 XCTExpectFailure(error.localizedDescription)
@@ -97,27 +82,30 @@ extension MDWordCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Read One Created Word Expectation")
         
-        wordCoreDataStorage.createWord(Constants_For_Tests.mockedWord0) { [unowned self] result in
+        wordCoreDataStorage.createWord(Constants_For_Tests.mockedWord(context: managedObjectContext)) { [unowned self] result in
             
             switch result {
                 
             case .success(let createdWord):
                 
-                XCTAssertTrue(createdWord.wordId == Constants_For_Tests.mockedWord0.wordId)
+                XCTAssertTrue(createdWord.wordText == Constants_For_Tests.mockedWord(context: managedObjectContext).wordText!)
+                XCTAssertTrue(createdWord.wordDescription == Constants_For_Tests.mockedWord(context: managedObjectContext).wordDescription!)
                 
-                self.wordCoreDataStorage.readWord(fromWordID: createdWord.wordId) { result in
+                self.wordCoreDataStorage.readWord(byWordUUID: createdWord.uuid!) { readResult in
                     
-                    switch result {
+                    switch readResult {
                         
-                    case .success(let fetchedWord):
+                    case .success(let readEntity):
                         
-                        XCTAssertTrue(fetchedWord.wordId == createdWord.wordId)
+                        XCTAssertTrue(readEntity.uuid == createdWord.uuid)
+                        
                         expectation.fulfill()
                         
                     case .failure(let error):
                         XCTExpectFailure(error.localizedDescription)
                         expectation.fulfill()
                     }
+                    
                 }
                 
             case .failure(let error):
@@ -139,20 +127,37 @@ extension MDWordCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Update One Created Word Expectation")
         
-        wordCoreDataStorage.createWord(Constants_For_Tests.mockedWord0) { [unowned self] createResult in
+        wordCoreDataStorage.createWord(Constants_For_Tests.mockedWord(context: managedObjectContext)) { [unowned self] createResult in
             
             switch createResult {
                 
             case .success(let createdWord):
                 
-                self.wordCoreDataStorage.updateWord(byWordID: createdWord.wordId,
-                                                    newWordText: Constants_For_Tests.mockedWordForUpdate.wordText,
-                                                    newWordDescription: Constants_For_Tests.mockedWordForUpdate.wordDescription) { updateResult in
+                self.wordCoreDataStorage.updateWord(byWordUUID: createdWord.uuid!,
+                                                    newWordText: Constants_For_Tests.mockedWordForUpdate(context: managedObjectContext).wordText!,
+                                                    newWordDescription: Constants_For_Tests.mockedWordForUpdate(context: managedObjectContext).wordDescription!) { [unowned self] updateResult in
                     
                     switch updateResult {
                         
                     case .success:
-                        expectation.fulfill()
+                        
+                        self.wordCoreDataStorage.readWord(byWordUUID: createdWord.uuid!) { readResult in
+                            
+                            switch readResult {
+                                
+                            case .success(let readEntity):
+                                
+                                XCTAssertTrue(readEntity.wordText == Constants_For_Tests.mockedWordForUpdate(context: managedObjectContext).wordText!)
+                                XCTAssertTrue(readEntity.wordDescription == Constants_For_Tests.mockedWordForUpdate(context: managedObjectContext).wordDescription!)
+                                
+                                expectation.fulfill()
+                                
+                            case .failure(let error):
+                                XCTExpectFailure(error.localizedDescription)
+                                expectation.fulfill()
+                            }
+                            
+                        }
                         
                     case .failure(let error):
                         XCTExpectFailure(error.localizedDescription)
@@ -178,13 +183,13 @@ extension MDWordCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Delete One Created Word Expectation")
         
-        wordCoreDataStorage.createWord(Constants_For_Tests.mockedWord0) { [unowned self] createResult in
+        wordCoreDataStorage.createWord(Constants_For_Tests.mockedWord(context: managedObjectContext)) { [unowned self] createResult in
             
             switch createResult {
                 
             case .success(let createdWord):
                 
-                self.wordCoreDataStorage.deleteWord(byWordId: createdWord.wordId) { deleteResult in
+                self.wordCoreDataStorage.deleteWord(byWordUUID: createdWord.uuid!) { deleteResult in
                     
                     switch deleteResult {
                         
@@ -211,7 +216,7 @@ extension MDWordCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Delete All Words From Core Data Expectation")
         
-        wordCoreDataStorage.createWord(Constants_For_Tests.mockedWord0) { [unowned self] createResult in
+        wordCoreDataStorage.createWord(Constants_For_Tests.mockedWord(context: managedObjectContext)) { [unowned self] createResult in
             
             switch createResult {
                 

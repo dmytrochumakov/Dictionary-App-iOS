@@ -9,7 +9,7 @@ import Foundation
 
 protocol MDUpdateWordProtocol {
     
-    func updateWord(byWordID wordId: Int64,
+    func updateWord(byWordUUID uuid: UUID,
                     newWordText: String,
                     newWordDescription: String,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))

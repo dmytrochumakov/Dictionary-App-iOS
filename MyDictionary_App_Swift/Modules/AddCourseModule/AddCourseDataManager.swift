@@ -27,18 +27,18 @@ protocol AddCourseDataManagerProtocol: AddCourseDataManagerInputProtocol {
 final class AddCourseDataManager: AddCourseDataManagerProtocol {
     
     fileprivate var dataProvider: AddCourseDataProviderProtocol
-    fileprivate let filterSearchTextService: MDFilterSearchTextService<LanguageResponse>
+    fileprivate let filterSearchTextService: MDFilterSearchTextService<MDLanguageModel>
     
     var selectedRow: MDAddCourseRow? {
         guard let selectedIndexPath = self.firstSelectedIndexPath else { return nil }
         return dataProvider.sections[selectedIndexPath.section].rows[selectedIndexPath.row]
     }
-        
+    
     internal weak var dataManagerOutput: AddCourseDataManagerOutputProtocol?
     
     init(dataProvider: AddCourseDataProviderProtocol,
-         filterSearchTextService: MDFilterSearchTextService<LanguageResponse>) {
-                
+         filterSearchTextService: MDFilterSearchTextService<MDLanguageModel>) {
+        
         self.dataProvider = dataProvider
         self.filterSearchTextService = filterSearchTextService
         
@@ -54,19 +54,19 @@ extension AddCourseDataManager {
     
     func loadAndPassLanguagesArrayToDataProvider() {
         
-       
+        
         
     }
     
     func filterLanguages(_ searchText: String?) {
         
-      
+        
         
     }
     
     func clearLanguageFilter() {
         
-       
+        
     }
     
     func selectAndDeselectRow(_ newValue: MDAddCourseRow) -> [Bool : IndexPath] {
@@ -112,11 +112,11 @@ extension AddCourseDataManager {
 // MARK: - Private Methods
 fileprivate extension AddCourseDataManager {
     
-    func sortAlphabeticallyLanguages(_ array: [LanguageResponse]) -> [LanguageResponse] {
-        return array.sorted(by: { $0.languageName.localizedCaseInsensitiveCompare($1.languageName) == ComparisonResult.orderedAscending })
+    func sortAlphabeticallyLanguages(_ array: [MDLanguageModel]) -> [MDLanguageModel] {
+        return array.sorted(by: { $0.name.localizedCaseInsensitiveCompare($1.name) == ComparisonResult.orderedAscending })
     }
     
-    func configuredSections(byLanguages languages: [LanguageResponse]) -> [MDAddCourseSection] {
+    func configuredSections(byLanguages languages: [MDLanguageModel]) -> [MDAddCourseSection] {
         
         if (languages.isEmpty) {
             return .init()
@@ -124,7 +124,7 @@ fileprivate extension AddCourseDataManager {
             
             var result: [MDAddCourseSection] = .init()
             
-            let sortedLanguages: [LanguageResponse] = sortAlphabeticallyLanguages(languages)
+            let sortedLanguages: [MDLanguageModel] = sortAlphabeticallyLanguages(languages)
             
             MDConstants.EnglishAlphabet.uppercasedCharacters.forEach { character in
                 
@@ -140,12 +140,12 @@ fileprivate extension AddCourseDataManager {
         
     }
     
-    func configuredRows(sortedLanguages: [LanguageResponse], character: String) -> [MDAddCourseRow] {
+    func configuredRows(sortedLanguages: [MDLanguageModel], character: String) -> [MDAddCourseRow] {
         
         var result: [MDAddCourseRow] = .init()
         
         sortedLanguages
-            .filter({ String($0.languageName.first!).contains(character)})
+            .filter({ String($0.name.first!).contains(character)})
             .forEach { languageResponse in
                 
                 result.append(.init(languageResponse: languageResponse,

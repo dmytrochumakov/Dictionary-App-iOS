@@ -9,9 +9,9 @@ import Foundation
 
 protocol MDWordFilterSearchTextServiceProtocol {
     
-    func filter(input: [WordResponse],
+    func filter(input: [CDWordEntity],
                 searchText: String?,
-                _ completionHandler: @escaping(([WordResponse]) -> Void))
+                _ completionHandler: @escaping(([CDWordEntity]) -> Void))
     
 }
 
@@ -37,9 +37,9 @@ final class MDWordFilterSearchTextService: NSObject,
 // MARK: - Filter Words
 extension MDWordFilterSearchTextService {
     
-    func filter(input: [WordResponse],
+    func filter(input: [CDWordEntity],
                 searchText: String?,
-                _ completionHandler: @escaping(([WordResponse]) -> Void)) {
+                _ completionHandler: @escaping(([CDWordEntity]) -> Void)) {
         
         let operation: BlockOperation = .init {
             
@@ -53,7 +53,7 @@ extension MDWordFilterSearchTextService {
             } else {
                 
                 //
-                completionHandler(input.filter({ $0.wordText.lowercased().contains(searchText!.lowercased()) || $0.wordDescription.lowercased().contains(searchText!.lowercased()) }))
+                completionHandler(input.filter({ $0.wordText!.lowercased().contains(searchText!.lowercased()) || $0.wordDescription!.lowercased().contains(searchText!.lowercased()) }))
                 //
                 
             }

@@ -25,7 +25,7 @@ protocol CourseListInteractorOutputProtocol: AnyObject,
                                              MDShowErrorProtocol {
     
     func deleteCourseButtonClicked(_ cell: MDCourseListCell)
-    func showWordList(withCourse course: CourseResponse)
+    func showWordList(withCourse course: CDCourseEntity)
     
 }
 

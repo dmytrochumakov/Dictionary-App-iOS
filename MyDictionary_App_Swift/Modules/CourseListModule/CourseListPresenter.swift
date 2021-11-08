@@ -93,7 +93,7 @@ extension CourseListPresenter {
         presenterOutput?.insertRow(atIndexPath: indexPath)
     }
     
-    func showWordList(withCourse course: CourseResponse) {
+    func showWordList(withCourse course: CDCourseEntity) {
         router.showWordList(withCourse: course)
     }
     

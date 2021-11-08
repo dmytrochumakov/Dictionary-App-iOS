@@ -23,96 +23,14 @@ struct MDConstants {
         static let colon: String = ":"
     }
     
-    struct HTTPHeaderConstants {
-        
-        static let contentType: String = "Content-Type"
-        static let authorization: String = "Authorization"
-        static let applicationJson: String = "application/json"
-        static let bearer: String = "Bearer "
-        
-        /// return
-        /// Content-Type : application/json
-        static func defaultHeaders() -> HTTPHeader {
-            return [contentType : applicationJson]
-        }
-        
-        /// return
-        /// Content-Type : application/json
-        /// Authorization : Bearer
-        static func authorizationHeaders(accessToken: String) -> HTTPHeader {
-            return [contentType   : applicationJson,
-                    authorization : bearer + accessToken
-            ]
-        }
-        
-    }
-    
-    struct URLSessionConfigurationConstants {
-        /// Default is default
-        fileprivate static let sessionConfiguration: URLSessionConfiguration = .default
-        /// Default is 60 seconds
-        fileprivate static let timeoutIntervalForResource: TimeInterval = 60
-        /// Default is 3
-        fileprivate static let maxConcurrentOperationCount: Int = 3
-        /// Default is QualityOfService.userInitiated
-        fileprivate static let qualityOfService: QualityOfService = .userInitiated
-        /// Default is .init()
-        static var sessionConfigurationOperationQueue: OperationQueue {
-            let operationQueue: OperationQueue = .init()
-            operationQueue.maxConcurrentOperationCount = self.maxConcurrentOperationCount
-            operationQueue.qualityOfService = self.qualityOfService
-            return operationQueue
-        }
-        /// Configure the default URLSessionConfiguration.
-        static var sessionWithConfiguration: URLSessionConfiguration {
-            let defaultSessionConfiguration: URLSessionConfiguration = self.sessionConfiguration
-            defaultSessionConfiguration.timeoutIntervalForResource = self.timeoutIntervalForResource
-            return defaultSessionConfiguration
-        }
-    }
-    
     struct Environment {
         static let current: MDEnvironment = .production
-    }
-    
-    struct APIEnvironment {
-        
-        /// Depends on the current MDEnvironment
-        static var current: MDAPIEnvironment {
-            switch Environment.current {
-            case .development:
-                return .development
-            case .production:
-                return .production
-            }
-        }
-        
     }
     
     struct AppDependencies {
         
         static var dependencies: MDAppDependenciesProtocol {
             return (UIApplication.shared.delegate as! MDAppDelegate).dependencies
-        }
-        
-    }
-    
-    struct NetworkSession {
-        
-        static var defaultNetworkSession: MDNetworkSessionProtocol {
-            return MDNetworkSession.init(configuration: URLSessionConfigurationConstants.sessionWithConfiguration,
-                                         delegateQueue: URLSessionConfigurationConstants.sessionConfigurationOperationQueue)
-        }
-        
-    }
-    
-    
-    struct RequestDispatcher {
-        
-        static func defaultRequestDispatcher(reachability: Reachability) -> MDRequestDispatcherProtocol {
-            return MDRequestDispatcher.init(reachability: reachability,
-                                            environment: APIEnvironment.current,
-                                            networkSession: NetworkSession.defaultNetworkSession)
         }
         
     }
@@ -308,7 +226,7 @@ struct MDConstants {
         static let filterSearchTextServiceOperationQueue: String = mdOperationQueue(shortQueueName: filterSearchTextServiceQueueName)
         //
         // End Filter Search Text Service //
-                
+        
         
         fileprivate static func mdCoreDataStorageOperationQueue(shortQueueName: String) -> String {
             return bundleIdentifier_Plus_Dot_Plus_QueueName(queueName: "MD" + shortQueueName + "CoreDataStorageOperationQueue")

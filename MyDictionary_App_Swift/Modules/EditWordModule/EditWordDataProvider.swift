@@ -7,17 +7,17 @@
 import Foundation
 
 protocol EditWordDataProviderProtocol {
-    var word: WordResponse { get set }
-    var copiedWord: WordResponse { get }
+    var word: CDWordEntity { get set }
+    var copiedWord: CDWordEntity { get }
 }
 
 final class EditWordDataProvider: EditWordDataProviderProtocol {
     
-    var word: WordResponse
-    var copiedWord: WordResponse
+    var word: CDWordEntity
+    var copiedWord: CDWordEntity
     
-    init(word: WordResponse,
-         copiedWord: WordResponse) {
+    init(word: CDWordEntity,
+         copiedWord: CDWordEntity) {
         
         self.word = word
         self.copiedWord = copiedWord        

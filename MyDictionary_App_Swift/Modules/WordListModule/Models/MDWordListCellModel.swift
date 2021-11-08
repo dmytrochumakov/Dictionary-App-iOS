@@ -8,5 +8,5 @@
 import Foundation
 
 struct MDWordListCellModel {
-    let wordResponse: WordResponse
+    let wordResponse: CDWordEntity
 }

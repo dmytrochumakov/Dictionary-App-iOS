@@ -65,12 +65,16 @@ extension MDCourseCoreDataStorage {
 // MARK: - Create
 extension MDCourseCoreDataStorage {
     
-    func createCourse(_ courseEntity: CourseResponse,
-                      _ completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
+    func createCourse(_ newCourse: CDCourseEntity,
+                      _ completionHandler: @escaping (MDOperationResultWithCompletion<CDCourseEntity>)) {
         
         let operation: BlockOperation = .init {
             
-            let newCourseEntity = courseEntity.cdCourseResponseEntity(context: self.managedObjectContext)
+            let newCourseEntity = CDCourseEntity.cdCourseEntity(context: self.managedObjectContext,
+                                                                uuid: newCourse.uuid!,
+                                                                name: newCourse.name!,
+                                                                translatedName: newCourse.translatedName!,
+                                                                createdAt: newCourse.createdAt!)
             
             self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
                 
@@ -79,7 +83,7 @@ extension MDCourseCoreDataStorage {
                 case .success:
                     
                     //
-                    completionHandler(.success((newCourseEntity.courseResponse)))
+                    completionHandler(.success((newCourseEntity)))
                     //
                     
                     //
@@ -108,101 +112,25 @@ extension MDCourseCoreDataStorage {
         
     }
     
-    func createCourses(_ courseEntities: [CourseResponse],
-                       _ completionHandler: @escaping (MDOperationsResultWithCompletion<CourseResponse>)) {
-        
-        let operation: BlockOperation = .init {
-            
-            if (courseEntities.isEmpty) {
-                
-                //
-                completionHandler(.success(courseEntities))
-                //
-                
-                //
-                return
-                //
-                
-            } else {
-                
-                var resultCount: Int = .zero
-                
-                courseEntities.forEach { courseEntity in
-                    
-                    let _ = courseEntity.cdCourseResponseEntity(context: self.managedObjectContext)                    
-                    
-                    self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
-                        
-                        switch result {
-                            
-                        case .success:
-                            
-                            //
-                            resultCount += 1
-                            //
-                            
-                            if (resultCount == courseEntities.count) {
-                                
-                                //
-                                completionHandler(.success(courseEntities))
-                                //
-                                
-                            }
-                            
-                            //
-                            break
-                            //
-                            
-                        case .failure(let error):
-                            
-                            //
-                            completionHandler(.failure(error))
-                            
-                            //
-                            break
-                            //
-                            
-                        }
-                        
-                    }
-                    
-                }
-                
-            }
-            
-        }
-        
-        //
-        operationQueue.addOperation(operation)
-        //
-        
-    }
-    
 }
 
 // MARK: - Read
 extension MDCourseCoreDataStorage {
     
-    func readCourse(fromCourseId courseId: Int64,
-                    _ completionHandler: @escaping (MDOperationResultWithCompletion<CourseResponse>)) {
+    func readCourse(byCourseUUID uuid: UUID,
+                    _ completionHandler: @escaping (MDOperationResultWithCompletion<CDCourseEntity>)) {
         
         let operation: BlockOperation = .init {
             
-            let fetchRequest = NSFetchRequest<CDCourseResponseEntity>(entityName: CoreDataEntityName.CDCourseResponseEntity)
-            fetchRequest.predicate = NSPredicate(format: "\(CDCourseResponseEntityAttributeName.courseId) == %i", courseId)
+            //
+            let fetchRequest = NSFetchRequest<CDCourseEntity>(entityName: MDCoreDataEntityName.CDCourseEntity)
+            fetchRequest.predicate = NSPredicate(format: "\(CDCourseEntityAttributeName.uuid) == %@", uuid.uuidString)
+            //
             
-            do {
-                if let courseEntity = try self.managedObjectContext.fetch(fetchRequest).map({ $0.courseResponse }).first {
-                    
-                    //
-                    completionHandler(.success(courseEntity))
-                    //
-                    
-                    //
-                    return
-                    //
-                    
-                } else {
+            //
+            let asyncFetchRequest = NSAsynchronousFetchRequest.init(fetchRequest: fetchRequest) { asynchronousFetchResult in
+                
+                guard let finalResult = asynchronousFetchResult.finalResult?.first else {
                     
                     //
                     completionHandler(.failure(MDEntityOperationError.cantFindEntity))
@@ -213,6 +141,22 @@ extension MDCourseCoreDataStorage {
                     //
                     
                 }
+                
+                //
+                completionHandler(.success(finalResult))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            //
+            
+            do {
+                
+                try self.managedObjectContext.execute(asyncFetchRequest)
+                
             } catch {
                 
                 //
@@ -233,21 +177,47 @@ extension MDCourseCoreDataStorage {
         
     }
     
-    func readAllCourses(_ completionHandler: @escaping (MDOperationResultWithCompletion<[CourseResponse]>)) {
+    func readCourses(fetchLimit: Int,
+                     fetchOffset: Int,
+                     _ completionHandler: @escaping (MDOperationsResultWithCompletion<CDCourseEntity>)) {
         
         let operation: BlockOperation = .init {
             
-            let fetchRequest = NSFetchRequest<CDCourseResponseEntity>(entityName: CoreDataEntityName.CDCourseResponseEntity)
+            //
+            let fetchRequest = NSFetchRequest<CDCourseEntity>(entityName: MDCoreDataEntityName.CDCourseEntity)
+            fetchRequest.fetchLimit = fetchLimit
+            fetchRequest.fetchOffset = fetchOffset
+            //
             
-            do {
+            //
+            let asyncFetchRequest = NSAsynchronousFetchRequest.init(fetchRequest: fetchRequest) { asynchronousFetchResult in
+                
+                guard let finalResult = asynchronousFetchResult.finalResult else {
+                    
+                    //
+                    completionHandler(.failure(MDEntityOperationError.cantFindEntity))
+                    //
+                    
+                    //
+                    return
+                    //
+                    
+                }
                 
                 //
-                completionHandler(.success(try self.managedObjectContext.fetch(fetchRequest).map({ $0.courseResponse })))
+                completionHandler(.success(finalResult))
                 //
                 
                 //
                 return
                 //
+                
+            }
+            //
+            
+            do {
+                
+                try self.managedObjectContext.execute(asyncFetchRequest)
                 
             } catch {
                 
@@ -267,6 +237,10 @@ extension MDCourseCoreDataStorage {
         operationQueue.addOperation(operation)
         //
         
+    }
+    
+    func readAllCourses(_ completionHandler: @escaping (MDOperationsResultWithCompletion<CDCourseEntity>)) {
+        readCourses(fetchLimit: .zero, fetchOffset: .zero, completionHandler)
     }
     
 }
@@ -274,13 +248,13 @@ extension MDCourseCoreDataStorage {
 // MARK: - Delete
 extension MDCourseCoreDataStorage {
     
-    func deleteCourse(fromCourseId courseId: Int64,
+    func deleteCourse(byCourseUUID uuid: UUID,
                       _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         let operation: BlockOperation = .init {
             
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDCourseResponseEntity)
-            fetchRequest.predicate = NSPredicate(format: "\(CDCourseResponseEntityAttributeName.courseId) == %i", courseId)
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MDCoreDataEntityName.CDCourseEntity)
+            fetchRequest.predicate = NSPredicate(format: "\(CDCourseEntityAttributeName.uuid) == %@", uuid.uuidString)
             
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             
@@ -289,30 +263,14 @@ extension MDCourseCoreDataStorage {
                 try self.managedObjectContext.execute(batchDeleteRequest)
                 
                 self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
+                                        
+                    //
+                    completionHandler(result)
+                    //
                     
-                    switch result {
-                        
-                    case .success:
-                        
-                        //
-                        completionHandler(.success(()))
-                        //
-                        
-                        //
-                        break
-                        //
-                        
-                    case .failure(let error):
-                        
-                        //
-                        completionHandler(.failure(error))
-                        //
-                        
-                        //
-                        break
-                        //
-                        
-                    }
+                    //
+                    return
+                    //
                     
                 }
                 
@@ -341,7 +299,7 @@ extension MDCourseCoreDataStorage {
         
         let operation: BlockOperation = .init {
             
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityName.CDCourseResponseEntity)
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MDCoreDataEntityName.CDCourseEntity)
             
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             
@@ -351,32 +309,15 @@ extension MDCourseCoreDataStorage {
                 
                 self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
                     
-                    switch result {
-                        
-                    case .success:
-                        
-                        //
-                        completionHandler(.success(()))
-                        //
-                        
-                        //
-                        break
-                        //
-                        
-                    case .failure(let error):
-                        
-                        //
-                        completionHandler(.failure(error))
-                        //
-                        
-                        //
-                        break
-                        //
-                        
-                    }
+                    //
+                    completionHandler(result)
+                    //
+                    
+                    //
+                    return
+                    //
                     
                 }
-                
                 
             } catch {
                 

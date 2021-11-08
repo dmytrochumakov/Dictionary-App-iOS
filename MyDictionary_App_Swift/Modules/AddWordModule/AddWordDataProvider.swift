@@ -9,7 +9,7 @@ import Foundation
 protocol AddWordDataProviderProtocol {
     var wordText: String? { get set }
     var wordDescription: String? { get set }
-    var course: CourseResponse { get }
+    var course: CDCourseEntity { get }
 }
 
 final class AddWordDataProvider: AddWordDataProviderProtocol {
@@ -17,9 +17,9 @@ final class AddWordDataProvider: AddWordDataProviderProtocol {
     var wordText: String?
     var wordDescription: String?
 
-    var course: CourseResponse
+    var course: CDCourseEntity
     
-    init(course: CourseResponse) {
+    init(course: CDCourseEntity) {
         self.course = course
     }
     

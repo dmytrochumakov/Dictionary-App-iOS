@@ -102,13 +102,13 @@ extension MDWordListCell {
         //
         
         //
-        let titleLabelHeight: CGFloat = model.wordResponse.wordText.heightFromLabel(font: titleLabelFont,
+        let titleLabelHeight: CGFloat = model.wordResponse.wordText!.heightFromLabel(font: titleLabelFont,
                                                                                     width: titleLabelWidth,
                                                                                     numberOfLines: titleLabelNumberOfLines)
         //
         
         //
-        let descriptionLabelHeight: CGFloat = model.wordResponse.wordDescription.heightFromLabel(font: descriptionLabelFont,
+        let descriptionLabelHeight: CGFloat = model.wordResponse.wordDescription!.heightFromLabel(font: descriptionLabelFont,
                                                                                                  width: descriptionLabelWidth,
                                                                                                  numberOfLines: descriptionLabelNumberOfLines)
         //
