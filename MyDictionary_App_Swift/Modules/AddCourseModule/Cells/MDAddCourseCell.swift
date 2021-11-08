@@ -10,11 +10,20 @@ import UIKit
 final class MDAddCourseCell: UICollectionViewCell,
                              MDReuseIdentifierProtocol {
     
-    public static let height: CGFloat = 40
+    public static let height: CGFloat = 56
     
-    fileprivate let titleLabel: UILabel = {
+    fileprivate let translatedLanguageNameLabel: UILabel = {
         let label: UILabel = .init()
         label.font = MDUIResources.Font.MyriadProRegular.font()
+        label.textColor = MDUIResources.Color.md_3C3C3C.color()
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    fileprivate let languageNameLabel: UILabel = {
+        let label: UILabel = .init()
+        label.font = MDUIResources.Font.MyriadProRegular.font(ofSize: 15)
         label.textColor = MDUIResources.Color.md_3C3C3C.color()
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +68,8 @@ extension MDAddCourseCell: MDFillWithModelProtocol {
     typealias Model = MDAddCourseRow?
     
     func fillWithModel(_ model: MDAddCourseRow?) {
-        self.titleLabel.text = model?.languageResponse.name
+        self.translatedLanguageNameLabel.text = model?.languageResponse.translatedName
+        self.languageNameLabel.text = model?.languageResponse.name
     }
     
 }
@@ -68,12 +78,17 @@ extension MDAddCourseCell: MDFillWithModelProtocol {
 fileprivate extension MDAddCourseCell {
     
     func addViews() {
-        addTitleLabel()
+        addTranslatedLanguageNameLabel()
+        addLanguageNameLabel()
         addCheckboxImageView()
     }
     
-    func addTitleLabel() {
-        addSubview(titleLabel)
+    func addTranslatedLanguageNameLabel() {
+        addSubview(translatedLanguageNameLabel)
+    }
+    
+    func addLanguageNameLabel() {
+        addSubview(languageNameLabel)
     }
     
     func addCheckboxImageView() {
@@ -86,27 +101,46 @@ fileprivate extension MDAddCourseCell {
 fileprivate extension MDAddCourseCell {
     
     func addConstraints() {
+        addTranslatedLanguageNameLabelConstraints()
         addTitleLabelConstraints()
         addCheckboxImageViewConstraints()
     }
     
-    func addTitleLabelConstraints() {
+    func addTranslatedLanguageNameLabelConstraints() {
         
-        NSLayoutConstraint.addEqualLeftConstraint(item: self.titleLabel,
+        NSLayoutConstraint.addEqualTopConstraint(item: self.translatedLanguageNameLabel,
+                                                 toItem: self,
+                                                 constant: 8)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.translatedLanguageNameLabel,
                                                   toItem: self,
                                                   constant: 16)
         
-        NSLayoutConstraint.addEqualConstraint(item: self.titleLabel,
+        NSLayoutConstraint.addEqualConstraint(item: self.translatedLanguageNameLabel,
                                               attribute: .right,
                                               toItem: self.checkboxImageView,
                                               attribute: .left,
                                               constant: -16)
         
-        NSLayoutConstraint.addEqualConstraint(item: self.titleLabel,
-                                              attribute: .centerY,
+    }
+    
+    func addTitleLabelConstraints() {
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.languageNameLabel,
+                                              attribute: .top,
+                                              toItem: self.translatedLanguageNameLabel,
+                                              attribute: .bottom,
+                                              constant: 8)
+        
+        NSLayoutConstraint.addEqualLeftConstraint(item: self.languageNameLabel,
+                                                  toItem: self,
+                                                  constant: 16)
+        
+        NSLayoutConstraint.addEqualConstraint(item: self.languageNameLabel,
+                                              attribute: .right,
                                               toItem: self.checkboxImageView,
-                                              attribute: .centerY,
-                                              constant: .zero)
+                                              attribute: .left,
+                                              constant: -16)
         
     }
     
