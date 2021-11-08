@@ -171,6 +171,8 @@
 		22D54B71270EF09400DEE843 /* MDTextForSearchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D54B70270EF09400DEE843 /* MDTextForSearchProtocol.swift */; };
 		22D6D01027082EBC002CA1B2 /* MDProgressHUDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D6D00F27082EBC002CA1B2 /* MDProgressHUDHelper.swift */; };
 		22D82A7827392D0A0062F818 /* ListOfLanguages.json in Resources */ = {isa = PBXBuildFile; fileRef = 22D82A7727392D0A0062F818 /* ListOfLanguages.json */; };
+		22D82A7C273945BC0062F818 /* MDLanguageMemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D82A7B273945BC0062F818 /* MDLanguageMemoryStorage.swift */; };
+		22D82A7F273946E90062F818 /* MDMemoryLanguageStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D82A7E273946E90062F818 /* MDMemoryLanguageStorageError.swift */; };
 		22DB2F7726C3BE7900C1AADA /* CourseListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7026C3BE7900C1AADA /* CourseListModule.swift */; };
 		22DB2F7826C3BE7900C1AADA /* CourseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7126C3BE7900C1AADA /* CourseListPresenter.swift */; };
 		22DB2F7926C3BE7900C1AADA /* CourseListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7226C3BE7900C1AADA /* CourseListRouter.swift */; };
@@ -398,6 +400,8 @@
 		22D54B70270EF09400DEE843 /* MDTextForSearchProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDTextForSearchProtocol.swift; sourceTree = "<group>"; };
 		22D6D00F27082EBC002CA1B2 /* MDProgressHUDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDProgressHUDHelper.swift; sourceTree = "<group>"; };
 		22D82A7727392D0A0062F818 /* ListOfLanguages.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListOfLanguages.json; sourceTree = "<group>"; };
+		22D82A7B273945BC0062F818 /* MDLanguageMemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLanguageMemoryStorage.swift; sourceTree = "<group>"; };
+		22D82A7E273946E90062F818 /* MDMemoryLanguageStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDMemoryLanguageStorageError.swift; sourceTree = "<group>"; };
 		22DB2F7026C3BE7900C1AADA /* CourseListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListModule.swift; sourceTree = "<group>"; };
 		22DB2F7126C3BE7900C1AADA /* CourseListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListPresenter.swift; sourceTree = "<group>"; };
 		22DB2F7226C3BE7900C1AADA /* CourseListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListRouter.swift; sourceTree = "<group>"; };
@@ -502,6 +506,7 @@
 		220FFE7826C9060100702CCE /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				22D82A7A2739459B0062F818 /* Language */,
 				22B8E6D726D3C47B001CCCA8 /* Course */,
 				220FFE7926C9060500702CCE /* Word */,
 			);
@@ -1311,6 +1316,23 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		22D82A7A2739459B0062F818 /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				22D82A7D273946DF0062F818 /* Enums */,
+				22D82A7B273945BC0062F818 /* MDLanguageMemoryStorage.swift */,
+			);
+			path = Language;
+			sourceTree = "<group>";
+		};
+		22D82A7D273946DF0062F818 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				22D82A7E273946E90062F818 /* MDMemoryLanguageStorageError.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		22DB2F6F26C3BE3C00C1AADA /* CourseListModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -1653,6 +1675,7 @@
 				22493C4C26972E27000DA480 /* MDEntityOperationError.swift in Sources */,
 				22BA7D6F270318CA00068F7E /* MDInsertRowProtocol.swift in Sources */,
 				228964AC26F8AA2100E23292 /* MDHideProgressHUDProtocol.swift in Sources */,
+				22D82A7F273946E90062F818 /* MDMemoryLanguageStorageError.swift in Sources */,
 				22BA7D5B2702FDBC00068F7E /* MDTextViewDelegatePropertyProtocol.swift in Sources */,
 				2291BAF326F7265E0012504D /* MDSearchTextField.swift in Sources */,
 				2299C65A2737EEA300B7D556 /* MDCoreDataEntityName.swift in Sources */,
@@ -1727,6 +1750,7 @@
 				22E17B1D26FDB565008CB714 /* MDAddCourseHeaderViewCellModel.swift in Sources */,
 				22014F872700980900D5250A /* MDWordListCellModel.swift in Sources */,
 				22E2B4EA2664EDA200978E62 /* SettingsCell.swift in Sources */,
+				22D82A7C273945BC0062F818 /* MDLanguageMemoryStorage.swift in Sources */,
 				22EF01FA269DA8E700FE4435 /* MDRequestType.swift in Sources */,
 				229E08C72652CB9000DA56C4 /* WordListTableViewDataSource.swift in Sources */,
 				22DB2F8D26C3D51500C1AADA /* MDTableViewDataSourcePropertyProtocol.swift in Sources */,

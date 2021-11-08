@@ -1,165 +1,162 @@
-{
-    [
-        {
-            "id": 1,
-            "name": "Hindi",
-            "translatedName": "हिन्दी"
-        },
-        {
-            "id": 2,
-            "name": "Malay",
-            "translatedName": "Bahasa Melayu"
-        },
-        {
-            "id": 3,
-            "name": "Croatian",
-            "translatedName": "Hrvatski"
-        },
-        {
-            "id": 4,
-            "name": "Slovak",
-            "translatedName": "Slovenčina"
-        },
-        {
-            "id": 5,
-            "name": "Catalan",
-            "translatedName": "Català"
-        },
-        {
-            "id": 6,
-            "name": "Czech",
-            "translatedName": "Čeština"
-        },
-        {
-            "id": 7,
-            "name": "Hungarian",
-            "translatedName": "Magyar"
-        },
-        {
-            "id": 8,
-            "name": "Romanian",
-            "translatedName": "Română"
-        },
-        {
-            "id": 9,
-            "name": "Greek",
-            "translatedName": "Eλληνικά"
-        },
-        {
-            "id": 10,
-            "name": "Hebrew",
-            "translatedName": "עברית"
-        },
-        {
-            "id": 11,
-            "name": "Indonesian",
-            "translatedName": "Bahasa Indonesia"
-        },
-        {
-            "id": 12,
-            "name": "Finnish",
-            "translatedName": "Suomi"
-        },
-        {
-            "id": 13,
-            "name": "Polish",
-            "translatedName": "Polski"
-        },
-        {
-            "id": 14,
-            "name": "Norwegian Bokmål",
-            "translatedName": "Norsk bokmål"
-        },
-        {
-            "id": 15,
-            "name": "Vietnamese",
-            "translatedName": "Tiếng Việt"
-        },
-        {
-            "id": 16,
-            "name": "Danish",
-            "translatedName": "Dansk"
-        },
-        {
-            "id": 17,
-            "name": "Swedish",
-            "translatedName": "Svenska"
-        },
-        {
-            "id": 18,
-            "name": "Thai",
-            "translatedName": "ภาษาไทย"
-        },
-        {
-            "id": 19,
-            "name": "Arabic",
-            "translatedName": "العَرَبِيَّة"
-        },
-        {
-            "id": 20,
-            "name": "Dutch",
-            "translatedName": "Nederlands"
-        },
-        {
-            "id": 21,
-            "name": "Turkish",
-            "translatedName": "Türkçe"
-        },
-        {
-            "id": 22,
-            "name": "Korean",
-            "translatedName": "한국어"
-        },
-        {
-            "id": 23,
-            "name": "Italian",
-            "translatedName": "Italiano"
-        },
-        {
-            "id": 24,
-            "name": "Portuguese",
-            "translatedName": "Português"
-        },
-        {
-            "id": 25,
-            "name": "German",
-            "translatedName": "Deutsch"
-        },
-        {
-            "id": 26,
-            "name": "French",
-            "translatedName": "Français"
-        },
-        {
-            "id": 27,
-            "name": "Spanish",
-            "translatedName": "Español"
-        },
-        {
-            "id": 28,
-            "name": "Japanese",
-            "translatedName": "日本語"
-        },
-        {
-            "id": 29,
-            "name": "English",
-            "translatedName": "English"
-        },
-        {
-            "id": 30,
-            "name": "Chinese, Traditional",
-            "translatedName": "漢語中文"
-        },
-        {
-            "id": 31,
-            "name": "Ukrainian",
-            "translatedName": "Українська"
-        },
-        {
-            "id": 32,
-            "name": "Russian",
-            "translatedName": "Русский"
-        }
-    ]
-    
-}
+[
+    {
+        "id": 1,
+        "name": "Hindi",
+        "translatedName": "हिन्दी"
+    },
+    {
+        "id": 2,
+        "name": "Malay",
+        "translatedName": "Bahasa Melayu"
+    },
+    {
+        "id": 3,
+        "name": "Croatian",
+        "translatedName": "Hrvatski"
+    },
+    {
+        "id": 4,
+        "name": "Slovak",
+        "translatedName": "Slovenčina"
+    },
+    {
+        "id": 5,
+        "name": "Catalan",
+        "translatedName": "Català"
+    },
+    {
+        "id": 6,
+        "name": "Czech",
+        "translatedName": "Čeština"
+    },
+    {
+        "id": 7,
+        "name": "Hungarian",
+        "translatedName": "Magyar"
+    },
+    {
+        "id": 8,
+        "name": "Romanian",
+        "translatedName": "Română"
+    },
+    {
+        "id": 9,
+        "name": "Greek",
+        "translatedName": "Eλληνικά"
+    },
+    {
+        "id": 10,
+        "name": "Hebrew",
+        "translatedName": "עברית"
+    },
+    {
+        "id": 11,
+        "name": "Indonesian",
+        "translatedName": "Bahasa Indonesia"
+    },
+    {
+        "id": 12,
+        "name": "Finnish",
+        "translatedName": "Suomi"
+    },
+    {
+        "id": 13,
+        "name": "Polish",
+        "translatedName": "Polski"
+    },
+    {
+        "id": 14,
+        "name": "Norwegian Bokmål",
+        "translatedName": "Norsk bokmål"
+    },
+    {
+        "id": 15,
+        "name": "Vietnamese",
+        "translatedName": "Tiếng Việt"
+    },
+    {
+        "id": 16,
+        "name": "Danish",
+        "translatedName": "Dansk"
+    },
+    {
+        "id": 17,
+        "name": "Swedish",
+        "translatedName": "Svenska"
+    },
+    {
+        "id": 18,
+        "name": "Thai",
+        "translatedName": "ภาษาไทย"
+    },
+    {
+        "id": 19,
+        "name": "Arabic",
+        "translatedName": "العَرَبِيَّة"
+    },
+    {
+        "id": 20,
+        "name": "Dutch",
+        "translatedName": "Nederlands"
+    },
+    {
+        "id": 21,
+        "name": "Turkish",
+        "translatedName": "Türkçe"
+    },
+    {
+        "id": 22,
+        "name": "Korean",
+        "translatedName": "한국어"
+    },
+    {
+        "id": 23,
+        "name": "Italian",
+        "translatedName": "Italiano"
+    },
+    {
+        "id": 24,
+        "name": "Portuguese",
+        "translatedName": "Português"
+    },
+    {
+        "id": 25,
+        "name": "German",
+        "translatedName": "Deutsch"
+    },
+    {
+        "id": 26,
+        "name": "French",
+        "translatedName": "Français"
+    },
+    {
+        "id": 27,
+        "name": "Spanish",
+        "translatedName": "Español"
+    },
+    {
+        "id": 28,
+        "name": "Japanese",
+        "translatedName": "日本語"
+    },
+    {
+        "id": 29,
+        "name": "English",
+        "translatedName": "English"
+    },
+    {
+        "id": 30,
+        "name": "Chinese, Traditional",
+        "translatedName": "漢語中文"
+    },
+    {
+        "id": 31,
+        "name": "Ukrainian",
+        "translatedName": "Українська"
+    },
+    {
+        "id": 32,
+        "name": "Russian",
+        "translatedName": "Русский"
+    }
+]
