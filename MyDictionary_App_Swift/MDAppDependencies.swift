@@ -22,6 +22,7 @@ protocol MDAppDependenciesProtocol {
     // Storage //
     var courseCoreDataStorage: MDCourseCoreDataStorageProtocol! { get }
     var wordCoreDataStorage: MDWordCoreDataStorageProtocol! { get }
+    var languageMemoryStorage: MDLanguageMemoryStorageProtocol! { get }
     // End Storage
     
     var appSettings: MDAppSettingsProtocol! { get }
@@ -46,6 +47,7 @@ final class MDAppDependencies: NSObject,
     // Storage //
     var courseCoreDataStorage: MDCourseCoreDataStorageProtocol!
     var wordCoreDataStorage: MDWordCoreDataStorageProtocol!
+    var languageMemoryStorage: MDLanguageMemoryStorageProtocol!
     // End Storage //
     
     var appSettings: MDAppSettingsProtocol!
@@ -117,6 +119,12 @@ extension MDAppDependencies {
         
         self.wordCoreDataStorage = wordCoreDataStorage
         // End Word //
+        
+        // Language Storage
+        let languageMemoryStorage: MDLanguageMemoryStorageProtocol = MDLanguageMemoryStorage.init(languages: MDLanguageMemoryStorage.readAllLanguagesFromJSON())
+        
+        self.languageMemoryStorage = languageMemoryStorage
+        // End Language //
         // End Storage //
         
         

@@ -16,8 +16,7 @@ struct Constants_For_Tests {
     public static func mockedCourse(context: NSManagedObjectContext) -> CDCourseEntity {
         return CDCourseEntity.cdCourseEntity(context: context,
                                              uuid: .init(),
-                                             name: "English",
-                                             translatedName: "English",
+                                             languageId: 1,                                             
                                              createdAt: .init())
     }
     

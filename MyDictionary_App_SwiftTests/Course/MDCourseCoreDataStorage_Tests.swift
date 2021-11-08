@@ -43,8 +43,7 @@ extension MDCourseCoreDataStorage_Tests {
                 
             case .success(let courseEntity):
                 
-                XCTAssertTrue(courseEntity.name == Constants_For_Tests.mockedCourse(context: managedObjectContext).name!)
-                XCTAssertTrue(courseEntity.translatedName == Constants_For_Tests.mockedCourse(context: managedObjectContext).translatedName!)
+                XCTAssertTrue(courseEntity.languageId == Constants_For_Tests.mockedCourse(context: managedObjectContext).languageId)
                 
                 expectation.fulfill()
                 
@@ -75,8 +74,7 @@ extension MDCourseCoreDataStorage_Tests {
                     case .success(let readCourseEntity):
                         
                         XCTAssertTrue(readCourseEntity.uuid == createCourseEntity.uuid)
-                        XCTAssertTrue(readCourseEntity.name == createCourseEntity.name)
-                        XCTAssertTrue(readCourseEntity.translatedName == createCourseEntity.translatedName)
+                        XCTAssertTrue(readCourseEntity.languageId == createCourseEntity.languageId)
                         XCTAssertTrue(readCourseEntity.createdAt == createCourseEntity.createdAt)
                         
                         expectation.fulfill()

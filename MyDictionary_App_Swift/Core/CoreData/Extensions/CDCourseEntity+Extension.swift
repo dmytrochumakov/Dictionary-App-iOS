@@ -11,15 +11,13 @@ extension CDCourseEntity {
     
     static func cdCourseEntity(context: NSManagedObjectContext,
                                uuid: UUID,
-                               name: String,
-                               translatedName: String,
+                               languageId: Int16,
                                createdAt: Date) -> CDCourseEntity {
         
         let cdCourseEntity: CDCourseEntity = .init(context: context)
         
         cdCourseEntity.uuid = uuid
-        cdCourseEntity.name = name
-        cdCourseEntity.translatedName = translatedName
+        cdCourseEntity.languageId = languageId
         cdCourseEntity.createdAt = createdAt        
         
         return cdCourseEntity
@@ -32,7 +30,7 @@ extension CDCourseEntity {
 extension CDCourseEntity: MDTextForSearchProtocol {
     
     var textForSearch: String {
-        return name!
+        return uuid!.uuidString
     }
     
 }
