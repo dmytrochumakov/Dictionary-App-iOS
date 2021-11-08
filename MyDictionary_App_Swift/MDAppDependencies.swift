@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 import Firebase
 
 protocol MDAppDependenciesProtocol {
@@ -15,6 +16,7 @@ protocol MDAppDependenciesProtocol {
     
     // Manager
     var operationQueueManager: MDOperationQueueManagerProtocol! { get }
+    var coreDataManager: MDCoreDataManager! { get }
     //
     
     // Storage //
@@ -38,6 +40,7 @@ final class MDAppDependencies: NSObject,
     
     // Manager
     var operationQueueManager: MDOperationQueueManagerProtocol!
+    var coreDataManager: MDCoreDataManager!
     //
     
     // Storage //
@@ -86,6 +89,14 @@ extension MDAppDependencies {
         //
         let operationQueueManager: MDOperationQueueManagerProtocol = MDOperationQueueManager.init(operationQueues: operationQueues)
         self.operationQueueManager = operationQueueManager
+        //
+        let coreDataMigrator: MDCoreDataMigratorProtocol = MDCoreDataMigrator.init()
+        let coreDataManager: MDCoreDataManager = MDCoreDataManager.init(storeType: NSSQLiteStoreType,
+                                                                        migrator: coreDataMigrator)
+        coreDataManager.setup {
+            debugPrint(#function, Self.self, "MDCoreDataManager configured successfully")
+        }
+        self.coreDataManager = coreDataManager
         //
         // End Managers //
         
