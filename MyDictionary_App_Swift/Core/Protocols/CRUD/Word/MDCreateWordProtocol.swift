@@ -8,10 +8,8 @@
 import Foundation
 
 protocol MDCreateWordProtocol {
-    
-    func createWord(wordText: String,
-                    wordDescription: String,
-                    course: CDCourseEntity?,
+
+    func createWord(_ newWord: CDWordEntity,                    
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<CDWordEntity>))
     
 }

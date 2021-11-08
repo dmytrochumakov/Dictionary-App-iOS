@@ -5,18 +5,17 @@
         <attribute name="name" attributeType="String"/>
         <attribute name="translatedName" attributeType="String"/>
         <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO"/>
-        <relationship name="words" toMany="YES" deletionRule="Nullify" destinationEntity="CDWordEntity" inverseName="course" inverseEntity="CDWordEntity"/>
     </entity>
     <entity name="CDWordEntity" representedClassName="CDWordEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="courseUUID" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="wordDescription" attributeType="String"/>
         <attribute name="wordText" attributeType="String"/>
-        <relationship name="course" maxCount="1" deletionRule="Nullify" destinationEntity="CDCourseEntity" inverseName="words" inverseEntity="CDCourseEntity"/>
     </entity>
     <elements>
-        <element name="CDCourseEntity" positionX="-336.9434814453125" positionY="-108.6610717773438" width="128" height="118"/>
+        <element name="CDCourseEntity" positionX="-336.9434814453125" positionY="-108.6610717773438" width="128" height="89"/>
         <element name="CDWordEntity" positionX="-44.475341796875" positionY="-27.32015991210938" width="128" height="119"/>
     </elements>
 </model>

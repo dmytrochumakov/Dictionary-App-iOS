@@ -66,20 +66,18 @@ extension MDWordCoreDataStorage {
 // MARK: - Create
 extension MDWordCoreDataStorage {
     
-    func createWord(wordText: String,
-                    wordDescription: String,
-                    course: CDCourseEntity?,
+    func createWord(_ newWord: CDWordEntity,
                     _ completionHandler: @escaping (MDOperationResultWithCompletion<CDWordEntity>)) {
         
         let operation: BlockOperation = .init {
             
             let newWord = CDWordEntity.cdWordEntity(context: self.managedObjectContext,
-                                                    uuid: .init(),
-                                                    wordText: wordText,
-                                                    wordDescription: wordDescription,
-                                                    createdAt: .init(),
-                                                    updatedAt: .init(),
-                                                    course: course)
+                                                    courseUUID: newWord.courseUUID!,
+                                                    uuid: newWord.uuid!,
+                                                    wordText: newWord.wordText!,
+                                                    wordDescription: newWord.wordDescription!,
+                                                    createdAt: newWord.createdAt!,
+                                                    updatedAt: newWord.updatedAt!)
             
             self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
                 
@@ -330,7 +328,7 @@ extension MDWordCoreDataStorage {
                                                      CDWordEntityAttributeName.wordDescription : newWordDescription
             ]
             
-            batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %i", uuid.uuidString)
+            batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %@", uuid.uuidString)
             
             do {
                 
@@ -380,7 +378,7 @@ extension MDWordCoreDataStorage {
             
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MDCoreDataEntityName.CDWordEntity)
             
-            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %i", uuid.uuidString)
+            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %@", uuid.uuidString)
             
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             
@@ -427,7 +425,7 @@ extension MDWordCoreDataStorage {
             
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MDCoreDataEntityName.CDWordEntity)
             
-            fetchRequest.predicate = NSPredicate(format: "\(CDCourseEntityAttributeName.uuid) == %i", uuid.uuidString)
+            fetchRequest.predicate = NSPredicate(format: "\(CDCourseEntityAttributeName.uuid) == %@", uuid.uuidString)
             
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             

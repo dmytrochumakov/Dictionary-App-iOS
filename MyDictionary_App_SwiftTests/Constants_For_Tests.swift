@@ -13,14 +13,33 @@ struct Constants_For_Tests {
     
     public static let testExpectationTimeout: TimeInterval = 60.0
     
-    public static let mockedCourseName: String = "English"
-    public static let mockedCourseTranslatedName: String = "English"       
+    public static func mockedCourse(context: NSManagedObjectContext) -> CDCourseEntity {
+        return CDCourseEntity.cdCourseEntity(context: context,
+                                             uuid: .init(),
+                                             name: "English",
+                                             translatedName: "English",
+                                             createdAt: .init())
+    }
     
-    public static let mockedWordText: String = "MOSF"
-    public static let mockedWordDescription: String = "metal–oxide–semiconductor-field"
+    public static func mockedWord(context: NSManagedObjectContext) -> CDWordEntity {
+        return CDWordEntity.cdWordEntity(context: context,
+                                         courseUUID: .init(),
+                                         uuid: .init(),
+                                         wordText: "MOSF",
+                                         wordDescription: "metal–oxide–semiconductor-field",
+                                         createdAt: .init(),
+                                         updatedAt: .init())
+    }
     
-    public static let mockedWordForUpdateWordText: String = "MOSFC"
-    public static let mockedWordForUpdateWordDescription: String = "metal–oxide–semiconductor-field-c"        
+    public static func mockedWordForUpdate(context: NSManagedObjectContext) -> CDWordEntity {
+        return CDWordEntity.cdWordEntity(context: context,
+                                         courseUUID: .init(),
+                                         uuid: .init(),
+                                         wordText: "MOSFC",
+                                         wordDescription: "metal–oxide–semiconductor-field-c",
+                                         createdAt: .init(),
+                                         updatedAt: .init())
+    }
     
     static var operationQueueManager: MDOperationQueueManagerProtocol {
         

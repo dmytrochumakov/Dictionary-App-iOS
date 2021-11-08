@@ -13,16 +13,14 @@ extension CDCourseEntity {
                                uuid: UUID,
                                name: String,
                                translatedName: String,
-                               createdAt: Date,
-                               words: NSSet?) -> CDCourseEntity {
+                               createdAt: Date) -> CDCourseEntity {
         
         let cdCourseEntity: CDCourseEntity = .init(context: context)
         
         cdCourseEntity.uuid = uuid
         cdCourseEntity.name = name
         cdCourseEntity.translatedName = translatedName
-        cdCourseEntity.createdAt = createdAt
-        cdCourseEntity.words = words
+        cdCourseEntity.createdAt = createdAt        
         
         return cdCourseEntity
         

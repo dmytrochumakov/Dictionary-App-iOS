@@ -6,16 +6,20 @@
 //
 
 import XCTest
+import CoreData
 @testable import MyDictionary_App_Swift
 
 final class MDCourseCoreDataStorage_Tests: XCTestCase {
     
+    fileprivate var managedObjectContext: NSManagedObjectContext!
     fileprivate var courseCoreDataStorage: MDCourseCoreDataStorageProtocol!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         
         let coreDataStack: MDCoreDataStack = TestCoreDataStack()
+        
+        self.managedObjectContext = coreDataStack.privateContext
         
         let courseCoreDataStorage: MDCourseCoreDataStorageProtocol = MDCourseCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseCoreDataStorageOperationQueue)!,
                                                                                                   managedObjectContext: coreDataStack.privateContext,
@@ -33,15 +37,14 @@ extension MDCourseCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Create Course Expectation")
         
-        courseCoreDataStorage.createCourse(name: Constants_For_Tests.mockedCourseName,
-                                           translatedName: Constants_For_Tests.mockedCourseTranslatedName) { createResult in
+        courseCoreDataStorage.createCourse(Constants_For_Tests.mockedCourse(context: managedObjectContext)) { [unowned self] createResult in
             
             switch createResult {
                 
             case .success(let courseEntity):
                 
-                XCTAssertTrue(courseEntity.name == Constants_For_Tests.mockedCourseName)
-                XCTAssertTrue(courseEntity.translatedName == Constants_For_Tests.mockedCourseTranslatedName)
+                XCTAssertTrue(courseEntity.name == Constants_For_Tests.mockedCourse(context: managedObjectContext).name!)
+                XCTAssertTrue(courseEntity.translatedName == Constants_For_Tests.mockedCourse(context: managedObjectContext).translatedName!)
                 
                 expectation.fulfill()
                 
@@ -59,8 +62,7 @@ extension MDCourseCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Read Course Expectation")
         
-        courseCoreDataStorage.createCourse(name: Constants_For_Tests.mockedCourseName,
-                                           translatedName: Constants_For_Tests.mockedCourseTranslatedName) { [unowned self] createResult in
+        courseCoreDataStorage.createCourse(Constants_For_Tests.mockedCourse(context: managedObjectContext)) { [unowned self] createResult in
             
             switch createResult {
                 
@@ -100,8 +102,7 @@ extension MDCourseCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Delete Course Expectation")
         
-        courseCoreDataStorage.createCourse(name: Constants_For_Tests.mockedCourseName,
-                                           translatedName: Constants_For_Tests.mockedCourseTranslatedName) { [unowned self] createResult in
+        courseCoreDataStorage.createCourse(Constants_For_Tests.mockedCourse(context: managedObjectContext)) { [unowned self] createResult in
             
             switch createResult {
                 
@@ -136,8 +137,7 @@ extension MDCourseCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Delete All Courses Expectation")
         
-        courseCoreDataStorage.createCourse(name: Constants_For_Tests.mockedCourseName,
-                                           translatedName: Constants_For_Tests.mockedCourseTranslatedName) { [unowned self] createResult in
+        courseCoreDataStorage.createCourse(Constants_For_Tests.mockedCourse(context: managedObjectContext)) { [unowned self] createResult in
             
             switch createResult {
                 
