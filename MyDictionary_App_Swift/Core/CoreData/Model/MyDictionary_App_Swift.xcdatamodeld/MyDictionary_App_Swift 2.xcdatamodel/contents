@@ -2,8 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CDCourseEntity" representedClassName="CDCourseEntity" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="name" attributeType="String"/>
-        <attribute name="translatedName" attributeType="String"/>
+        <attribute name="languageId" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO"/>
     </entity>
     <entity name="CDWordEntity" representedClassName="CDWordEntity" syncable="YES" codeGenerationType="class">
@@ -15,7 +14,7 @@
         <attribute name="wordText" attributeType="String"/>
     </entity>
     <elements>
-        <element name="CDCourseEntity" positionX="-336.9434814453125" positionY="-108.6610717773438" width="128" height="89"/>
+        <element name="CDCourseEntity" positionX="-336.9434814453125" positionY="-108.6610717773438" width="128" height="74"/>
         <element name="CDWordEntity" positionX="-44.475341796875" positionY="-27.32015991210938" width="128" height="119"/>
     </elements>
 </model>

@@ -72,8 +72,7 @@ extension MDCourseCoreDataStorage {
             
             let newCourseEntity = CDCourseEntity.cdCourseEntity(context: self.managedObjectContext,
                                                                 uuid: newCourse.uuid!,
-                                                                name: newCourse.name!,
-                                                                translatedName: newCourse.translatedName!,
+                                                                languageId: newCourse.languageId,
                                                                 createdAt: newCourse.createdAt!)
             
             self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in

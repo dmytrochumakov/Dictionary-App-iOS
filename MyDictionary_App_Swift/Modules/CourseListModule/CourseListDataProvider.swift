@@ -46,7 +46,7 @@ extension CourseListDataProvider {
         if (filteredCourses.isEmpty) {
             return nil
         } else {
-            return .init(languageName: filteredCourses[indexPath.row].name!)
+            return .init(languageName: filteredCourses[indexPath.row].uuid!.uuidString)
         }
         
     }
