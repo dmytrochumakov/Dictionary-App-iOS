@@ -170,6 +170,7 @@
 		22D54B6F270EF06600DEE843 /* MDFilterSearchTextService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D54B6E270EF06600DEE843 /* MDFilterSearchTextService.swift */; };
 		22D54B71270EF09400DEE843 /* MDTextForSearchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D54B70270EF09400DEE843 /* MDTextForSearchProtocol.swift */; };
 		22D6D01027082EBC002CA1B2 /* MDProgressHUDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D6D00F27082EBC002CA1B2 /* MDProgressHUDHelper.swift */; };
+		22D82A7827392D0A0062F818 /* ListOfLanguages.json in Resources */ = {isa = PBXBuildFile; fileRef = 22D82A7727392D0A0062F818 /* ListOfLanguages.json */; };
 		22DB2F7726C3BE7900C1AADA /* CourseListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7026C3BE7900C1AADA /* CourseListModule.swift */; };
 		22DB2F7826C3BE7900C1AADA /* CourseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7126C3BE7900C1AADA /* CourseListPresenter.swift */; };
 		22DB2F7926C3BE7900C1AADA /* CourseListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB2F7226C3BE7900C1AADA /* CourseListRouter.swift */; };
@@ -396,6 +397,7 @@
 		22D54B6E270EF06600DEE843 /* MDFilterSearchTextService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDFilterSearchTextService.swift; sourceTree = "<group>"; };
 		22D54B70270EF09400DEE843 /* MDTextForSearchProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDTextForSearchProtocol.swift; sourceTree = "<group>"; };
 		22D6D00F27082EBC002CA1B2 /* MDProgressHUDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDProgressHUDHelper.swift; sourceTree = "<group>"; };
+		22D82A7727392D0A0062F818 /* ListOfLanguages.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListOfLanguages.json; sourceTree = "<group>"; };
 		22DB2F7026C3BE7900C1AADA /* CourseListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListModule.swift; sourceTree = "<group>"; };
 		22DB2F7126C3BE7900C1AADA /* CourseListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListPresenter.swift; sourceTree = "<group>"; };
 		22DB2F7226C3BE7900C1AADA /* CourseListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListRouter.swift; sourceTree = "<group>"; };
@@ -791,6 +793,7 @@
 		2289CEB62678CC34007254C3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				22D82A79273934160062F818 /* Data */,
 				226E91C22737F561004FACCD /* Models */,
 				228BC46F26497B270030FB30 /* CoreData */,
 				228722CF26D0F16E00C9D1BC /* Managers */,
@@ -1300,6 +1303,14 @@
 			path = MDProgressHUDHelper;
 			sourceTree = "<group>";
 		};
+		22D82A79273934160062F818 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				22D82A7727392D0A0062F818 /* ListOfLanguages.json */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		22DB2F6F26C3BE3C00C1AADA /* CourseListModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -1486,6 +1497,7 @@
 			files = (
 				2223F8BC26512FFD004F2FE9 /* Localizable.strings in Resources */,
 				220793D626C6B514003D434B /* GoogleService-Info.plist in Resources */,
+				22D82A7827392D0A0062F818 /* ListOfLanguages.json in Resources */,
 				22A31B5B26ECBB1A00676E55 /* MyriadProRegular.ttf in Resources */,
 				228BC447264979FE0030FB30 /* LaunchScreen.storyboard in Resources */,
 				22A31B5926ECBB1A00676E55 /* MyriadProItalic.ttf in Resources */,
