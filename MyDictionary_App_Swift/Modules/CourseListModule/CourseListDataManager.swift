@@ -151,17 +151,17 @@ extension CourseListDataManager: CourseListDataManagerInputProtocol {
     
 }
 
-// MARK: - Public Methods
-extension CourseListDataManager {
-        
-    func configuredCourses(_ input: [CDCourseEntity]) -> [MDCourseListModel] {
+// MARK: - Private Methods
+fileprivate extension CourseListDataManager {
     
+    func configuredCourses(_ input: [CDCourseEntity]) -> [MDCourseListModel] {
+        
         var result: [MDCourseListModel] = .init()
         
         input.forEach { cdCourseEntity in
             
             switch languageMemoryStorage.readLanguage(byLanguageId: cdCourseEntity.languageId) {
-        
+                
             case .success(let language):
                 
                 //
