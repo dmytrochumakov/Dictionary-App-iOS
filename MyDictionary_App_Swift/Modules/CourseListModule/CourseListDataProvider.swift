@@ -9,7 +9,8 @@ import Foundation
 protocol CourseListDataProviderProtocol: MDNumberOfSectionsProtocol,
                                          MDNumberOfRowsInSectionProtocol {
     
-    var filteredCourses: [MDCourseListModel] { get set }
+    var availableCourses: [MDCourseListModel] { get set }
+    var coursesForUse: [MDCourseListModel] { get set }
     
     func courseListCellModel(atIndexPath indexPath: IndexPath) -> MDCourseListCellModel?
     func course(atIndexPath indexPath: IndexPath) -> MDCourseListModel
@@ -19,10 +20,19 @@ protocol CourseListDataProviderProtocol: MDNumberOfSectionsProtocol,
 
 final class CourseListDataProvider: CourseListDataProviderProtocol {
     
-    var filteredCourses: [MDCourseListModel]
+    var availableCourses: [MDCourseListModel]
+    var coursesForUse: [MDCourseListModel]
     
-    init(filteredCourses: [MDCourseListModel]) {
-        self.filteredCourses = filteredCourses
+    init(availableCourses: [MDCourseListModel],
+         coursesForUse: [MDCourseListModel]) {
+        
+        self.availableCourses = availableCourses
+        self.coursesForUse = coursesForUse
+        
+    }
+    
+    deinit {
+        debugPrint(#function, Self.self)
     }
     
 }
@@ -34,7 +44,7 @@ extension CourseListDataProvider {
     }
     
     func numberOfRowsInSection(_ section: Int) -> Int {
-        return filteredCourses.count
+        return coursesForUse.count
     }
     
 }
@@ -43,10 +53,10 @@ extension CourseListDataProvider {
     
     func courseListCellModel(atIndexPath indexPath: IndexPath) -> MDCourseListCellModel? {
         
-        if (filteredCourses.isEmpty) {
+        if (coursesForUse.isEmpty) {
             return nil
         } else {
-            let course = filteredCourses[indexPath.row]
+            let course = coursesForUse[indexPath.row]
             return .init(languageName: course.language.name,
                          translatedLanguageName: course.language.translatedName)
         }
@@ -54,11 +64,11 @@ extension CourseListDataProvider {
     }
     
     func deleteCourse(atIndexPath indexPath: IndexPath) {
-        filteredCourses.remove(at: indexPath.row)
+        coursesForUse.remove(at: indexPath.row)
     }
     
     func course(atIndexPath indexPath: IndexPath) -> MDCourseListModel {
-        return filteredCourses[indexPath.row]
+        return coursesForUse[indexPath.row]
     }
     
 }

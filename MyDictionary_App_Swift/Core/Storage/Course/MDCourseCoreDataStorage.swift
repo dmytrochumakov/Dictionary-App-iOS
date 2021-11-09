@@ -39,7 +39,7 @@ final class MDCourseCoreDataStorage: MDCourseCoreDataStorageProtocol {
 extension MDCourseCoreDataStorage {
     
     func entitiesCount(_ completionHandler: @escaping(MDEntitiesCountResultWithCompletion)) {
-        self.readAllCourses { result in
+        self.readAllCourses(ascending: false) { result in
             switch result {
             case .success(let entities):
                 completionHandler(.success(entities.count))
@@ -50,7 +50,7 @@ extension MDCourseCoreDataStorage {
     }
     
     func entitiesIsEmpty(_ completionHandler: @escaping(MDEntitiesIsEmptyResultWithCompletion)) {
-        self.readAllCourses { result in
+        self.readAllCourses(ascending: false) { result in
             switch result {
             case .success(let entities):
                 completionHandler(.success(entities.isEmpty))
@@ -184,6 +184,7 @@ extension MDCourseCoreDataStorage {
     
     func readCourses(fetchLimit: Int,
                      fetchOffset: Int,
+                     ascending: Bool,
                      _ completionHandler: @escaping (MDOperationsResultWithCompletion<CDCourseEntity>)) {
         
         let operation: BlockOperation = .init {
@@ -192,6 +193,8 @@ extension MDCourseCoreDataStorage {
             let fetchRequest = NSFetchRequest<CDCourseEntity>(entityName: MDCoreDataEntityName.CDCourseEntity)
             fetchRequest.fetchLimit = fetchLimit
             fetchRequest.fetchOffset = fetchOffset
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(CDCourseEntity.createdAt),
+                                                             ascending: ascending)]
             //
             
             //
@@ -244,8 +247,8 @@ extension MDCourseCoreDataStorage {
         
     }
     
-    func readAllCourses(_ completionHandler: @escaping (MDOperationsResultWithCompletion<CDCourseEntity>)) {
-        readCourses(fetchLimit: .zero, fetchOffset: .zero, completionHandler)
+    func readAllCourses(ascending: Bool, _ completionHandler: @escaping (MDOperationsResultWithCompletion<CDCourseEntity>)) {
+        readCourses(fetchLimit: .zero, fetchOffset: .zero, ascending: ascending, completionHandler)
     }
     
 }
@@ -268,7 +271,7 @@ extension MDCourseCoreDataStorage {
                 try self.managedObjectContext.execute(batchDeleteRequest)
                 
                 self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
-                                        
+                    
                     //
                     completionHandler(result)
                     //
