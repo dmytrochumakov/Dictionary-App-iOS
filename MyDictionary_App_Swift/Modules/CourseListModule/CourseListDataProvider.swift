@@ -14,6 +14,8 @@ protocol CourseListDataProviderProtocol: MDNumberOfSectionsProtocol,
     
     func courseListCellModel(atIndexPath indexPath: IndexPath) -> MDCourseListCellModel?
     func course(atIndexPath indexPath: IndexPath) -> MDCourseListModel
+    
+    func addCourse(_ newValue: MDCourseListModel)
     func deleteCourse(atIndexPath indexPath: IndexPath)
     
 }
@@ -63,12 +65,22 @@ extension CourseListDataProvider {
         
     }
     
-    func deleteCourse(atIndexPath indexPath: IndexPath) {
-        coursesForUse.remove(at: indexPath.row)
-    }
-    
     func course(atIndexPath indexPath: IndexPath) -> MDCourseListModel {
         return coursesForUse[indexPath.row]
+    }
+    
+}
+
+extension CourseListDataProvider {
+    
+    func addCourse(_ newValue: MDCourseListModel) {
+        availableCourses.insert(newValue, at: .zero)
+        coursesForUse.insert(newValue, at: .zero)
+    }
+    
+    func deleteCourse(atIndexPath indexPath: IndexPath) {
+        availableCourses.remove(at: indexPath.row)
+        coursesForUse.remove(at: indexPath.row)
     }
     
 }

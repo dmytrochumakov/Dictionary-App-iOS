@@ -144,7 +144,7 @@ extension CourseListDataManager: CourseListDataManagerInputProtocol {
     
     func addCourse(atNewCourse course: MDCourseListModel) -> IndexPath {
         //
-        self.dataProvider.coursesForUse.insert(course, at: .zero)
+        self.dataProvider.addCourse(course)
         //
         return .init(row: .zero, section: .zero)
     }
