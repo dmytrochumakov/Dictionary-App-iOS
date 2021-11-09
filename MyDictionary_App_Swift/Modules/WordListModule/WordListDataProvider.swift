@@ -10,7 +10,7 @@ import Foundation
 protocol WordListDataProviderProcotol: MDNumberOfSectionsProtocol,
                                        MDNumberOfRowsInSectionProtocol {
     
-    var course: CDCourseEntity { get }
+    var course: MDCourseListModel { get }
     var filteredWords: [CDWordEntity] { get set }
     
     func wordListCellModel(atIndexPath indexPath: IndexPath) -> MDWordListCellModel?
@@ -21,10 +21,10 @@ protocol WordListDataProviderProcotol: MDNumberOfSectionsProtocol,
 
 final class WordListDataProvider: WordListDataProviderProcotol {
     
-    var course: CDCourseEntity
+    var course: MDCourseListModel
     var filteredWords: [CDWordEntity]
     
-    init(course: CDCourseEntity,
+    init(course: MDCourseListModel,
          words: [CDWordEntity]) {
         self.course = course
         self.filteredWords = words

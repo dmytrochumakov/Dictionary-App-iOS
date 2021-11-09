@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MDBridgeProtocol {
-    var didAddCourse: ((CDCourseEntity) -> Void)? { get set }
+    var didAddCourse: ((MDCourseListModel) -> Void)? { get set }
     var didChangeMemoryIsFilledResult: (((MDOperationResultWithoutCompletion<Void>)) -> Void)? { get set }
     var didAddWord: ((CDWordEntity) -> Void)? { get set }
     var didDeleteWord: ((CDWordEntity) -> Void)? { get set }
@@ -17,8 +17,8 @@ protocol MDBridgeProtocol {
 
 final class MDBridge: MDBridgeProtocol {
     
-    public var didAddCourse: ((CDCourseEntity) -> Void)?
-    public var didChangeMemoryIsFilledResult: (((MDOperationResultWithoutCompletion<Void>)) -> Void)? 
+    public var didAddCourse: ((MDCourseListModel) -> Void)?
+    public var didChangeMemoryIsFilledResult: (((MDOperationResultWithoutCompletion<Void>)) -> Void)?
     public var didAddWord: ((CDWordEntity) -> Void)?
     public var didDeleteWord: ((CDWordEntity) -> Void)?
     public var didUpdateWord: ((CDWordEntity) -> Void)?

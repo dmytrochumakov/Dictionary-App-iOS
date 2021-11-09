@@ -11,7 +11,7 @@ protocol AddWordDataManagerInputProtocol {
     func setWordText(_ newValue: String?)
     var getWordDescription: String? { get }
     func setWordDescription(_ newValue: String?)
-    var getCourse: CDCourseEntity { get }
+    var getCourse: MDCourseListModel { get }
 }
 
 protocol AddWordDataManagerOutputProtocol: AnyObject {
@@ -56,7 +56,7 @@ extension AddWordDataManager: AddWordDataManagerInputProtocol {
         dataProvider.wordDescription = newValue
     }
     
-    var getCourse: CDCourseEntity {
+    var getCourse: MDCourseListModel {
         return dataProvider.course
     }
     

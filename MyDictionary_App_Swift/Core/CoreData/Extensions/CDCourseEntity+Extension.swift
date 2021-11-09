@@ -25,12 +25,3 @@ extension CDCourseEntity {
     }
     
 }
-
-// MARK: - MDTextForSearchProtocol
-extension CDCourseEntity: MDTextForSearchProtocol {
-    
-    var textForSearch: String {
-        return uuid!.uuidString
-    }
-    
-}

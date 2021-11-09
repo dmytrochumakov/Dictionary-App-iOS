@@ -31,11 +31,15 @@ extension MDLanguageModel: Decodable {
     
 }
 
-// MARK: - MDTextForSearchProtocol
-extension MDLanguageModel: MDTextForSearchProtocol {
+// MARK: - MDTextForSearchWithTwoPropertiesProtocol
+extension MDLanguageModel: MDTextForSearchWithTwoPropertiesProtocol {
     
-    var textForSearch: String {
+    var textForSearch0: String {
         return name
+    }
+    
+    var textForSearch1: String {
+        return translatedName
     }
     
 }

@@ -24,7 +24,7 @@ protocol CourseListPresenterOutputProtocol: AnyObject,
                                             MDInsertRowProtocol,
                                             MDDeleteRowProtocol,
                                             MDShowErrorProtocol {
-            
+    
     func deleteCourseButtonClicked(_ cell: MDCourseListCell)
     
 }
@@ -93,7 +93,7 @@ extension CourseListPresenter {
         presenterOutput?.insertRow(atIndexPath: indexPath)
     }
     
-    func showWordList(withCourse course: CDCourseEntity) {
+    func showWordList(withCourse course: MDCourseListModel) {
         router.showWordList(withCourse: course)
     }
     
@@ -114,7 +114,7 @@ extension CourseListPresenter {
         return interactor.tableViewDataSource
     }
     
-        
+    
     // Actions //
     func addNewCourseButtonClicked() {
         router.showAddCourse()

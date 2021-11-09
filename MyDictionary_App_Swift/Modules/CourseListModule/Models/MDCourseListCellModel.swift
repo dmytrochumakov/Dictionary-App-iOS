@@ -9,4 +9,5 @@ import Foundation
 
 struct MDCourseListCellModel {
     let languageName: String
+    let translatedLanguageName: String
 }

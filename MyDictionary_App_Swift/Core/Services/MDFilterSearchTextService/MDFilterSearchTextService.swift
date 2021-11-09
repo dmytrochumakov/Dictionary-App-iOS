@@ -7,19 +7,31 @@
 
 import Foundation
 
-protocol MDFilterSearchTextServiceProtocol {
-    associatedtype FilterInput: MDTextForSearchProtocol
-    func filter(input: [FilterInput],
-                searchText: String?,
-                _ completionHandler: @escaping(([FilterInput]) -> Void))
+protocol MDTextForSearchWithOnePropertyProtocol {
+    var textForSearch: String { get }
 }
 
-final class MDFilterSearchTextService<T : MDTextForSearchProtocol>: NSObject,
-                                                                    MDFilterSearchTextServiceProtocol {
+protocol MDTextForSearchWithTwoPropertiesProtocol {
+    var textForSearch0: String { get }
+    var textForSearch1: String { get }
+}
+
+protocol MDFilterSearchTextServiceProtocol {
+    
+    func filter(input: [MDTextForSearchWithOnePropertyProtocol],
+                searchText: String?,
+                _ completionHandler: @escaping(([MDTextForSearchWithOnePropertyProtocol]) -> Void))
+    
+    func filter(input: [MDTextForSearchWithTwoPropertiesProtocol],
+                searchText: String?,
+                _ completionHandler: @escaping(([MDTextForSearchWithTwoPropertiesProtocol]) -> Void))
+    
+}
+
+final class MDFilterSearchTextService: NSObject,
+                                       MDFilterSearchTextServiceProtocol {
     
     fileprivate let operationQueue: OperationQueue
-    
-    public typealias FilterInput = T
     
     init(operationQueue: OperationQueue) {
         
@@ -38,9 +50,9 @@ final class MDFilterSearchTextService<T : MDTextForSearchProtocol>: NSObject,
 // MARK: - Filter
 extension MDFilterSearchTextService {
     
-    func filter(input: [FilterInput],
+    func filter(input: [MDTextForSearchWithOnePropertyProtocol],
                 searchText: String?,
-                _ completionHandler: @escaping(([FilterInput]) -> Void)) {
+                _ completionHandler: @escaping(([MDTextForSearchWithOnePropertyProtocol]) -> Void)) {
         
         let operation: BlockOperation = .init {
             
@@ -55,6 +67,36 @@ extension MDFilterSearchTextService {
                 
                 //
                 completionHandler(input.filter({ $0.textForSearch.lowercased().contains(searchText!.lowercased()) }))
+                //
+                
+            }
+            //
+            
+        }
+        
+        // Add Operation
+        operationQueue.addOperation(operation)
+        //
+        
+    }
+    
+    func filter(input: [MDTextForSearchWithTwoPropertiesProtocol],
+                searchText: String?,
+                _ completionHandler: @escaping(([MDTextForSearchWithTwoPropertiesProtocol]) -> Void)) {
+        
+        let operation: BlockOperation = .init {
+            
+            //
+            if (MDConstants.Text.textIsEmpty(searchText)) {
+                
+                //
+                completionHandler(input)
+                //
+                
+            } else {
+                
+                //
+                completionHandler(input.filter({ $0.textForSearch0.lowercased().contains(searchText!.lowercased()) || $0.textForSearch1.lowercased().contains(searchText!.lowercased()) }))
                 //
                 
             }

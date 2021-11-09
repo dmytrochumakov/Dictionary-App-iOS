@@ -13,9 +13,9 @@ struct WordListModuleSender {
 
 final class WordListModule {
     
-    fileprivate let sender: CDCourseEntity
+    fileprivate let sender: MDCourseListModel
     
-    init(sender: CDCourseEntity) {
+    init(sender: MDCourseListModel) {
         self.sender = sender
     }
     
@@ -33,7 +33,7 @@ extension WordListModule {
         let wordListDataProvider: WordListDataProviderProcotol = WordListDataProvider.init(course: sender, words: .init())
         var wordListDataManager: WordListDataManagerProtocol = WordListDataManager.init(dataProvider: wordListDataProvider,
                                                                                         coreDataStorage: MDConstants.AppDependencies.dependencies.wordCoreDataStorage,
-                                                                                        filterSearchTextService: MDWordFilterSearchTextService.init(operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.filterSearchTextServiceOperationQueue)!))
+                                                                                        filterSearchTextService: MDFilterSearchTextService.init(operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.filterSearchTextServiceOperationQueue)!))
         
         let wordListTableViewDelegate: WordListTableViewDelegateProtocol = WordListTableViewDelegate.init(dataProvider: wordListDataProvider)
         let wordListTableViewDataSource: WordListTableViewDataSourceProtocol = WordListTableViewDataSource.init(dataProvider: wordListDataProvider)

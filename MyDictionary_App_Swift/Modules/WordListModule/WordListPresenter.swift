@@ -87,7 +87,7 @@ extension WordListPresenter: WordListInteractorOutputProtocol {
         presenterOutput?.hideProgressHUD()
     }
     
-    func showAddWord(withCourse course: CDCourseEntity) {
+    func showAddWord(withCourse course: MDCourseListModel) {
         router.showAddWord(withCourse: course)
     }
     

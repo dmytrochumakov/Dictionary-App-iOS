@@ -28,7 +28,7 @@ final class AddCourseDataManager: AddCourseDataManagerProtocol {
     
     fileprivate var dataProvider: AddCourseDataProviderProtocol
     fileprivate let languageMemoryStorage: MDLanguageMemoryStorageProtocol
-    fileprivate let filterSearchTextService: MDFilterSearchTextService<MDLanguageModel>
+    fileprivate let filterSearchTextService: MDFilterSearchTextServiceProtocol
     
     var selectedRow: MDAddCourseRow? {
         guard let selectedIndexPath = self.firstSelectedIndexPath else { return nil }
@@ -39,7 +39,7 @@ final class AddCourseDataManager: AddCourseDataManagerProtocol {
     
     init(dataProvider: AddCourseDataProviderProtocol,
          languageMemoryStorage: MDLanguageMemoryStorageProtocol,
-         filterSearchTextService: MDFilterSearchTextService<MDLanguageModel>) {
+         filterSearchTextService: MDFilterSearchTextServiceProtocol) {
         
         self.dataProvider = dataProvider
         self.languageMemoryStorage = languageMemoryStorage
@@ -75,7 +75,7 @@ extension AddCourseDataManager {
             DispatchQueue.main.async {
                 
                 // Set Filtered Result
-                self.dataProvider.sections = configuredSections(byLanguages: filteredResult)
+                self.dataProvider.sections = configuredSections(byLanguages: filteredResult as! [MDLanguageModel])
                 //
                 
                 // Pass Result

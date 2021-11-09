@@ -8,9 +8,9 @@ import UIKit
 
 final class AddWordModule {
     
-    let sender: CDCourseEntity
+    let sender: MDCourseListModel
     
-    init(sender: CDCourseEntity) {
+    init(sender: MDCourseListModel) {
         self.sender = sender
     }
     

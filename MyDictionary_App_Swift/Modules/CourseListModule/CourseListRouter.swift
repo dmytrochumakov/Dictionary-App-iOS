@@ -12,7 +12,7 @@ protocol CourseListRouterProtocol {
     
     func openSettings()
     func showAddCourse()
-    func showWordList(withCourse course: CDCourseEntity)
+    func showWordList(withCourse course: MDCourseListModel)
     
 }
 
@@ -36,7 +36,7 @@ extension CourseListRouter {
         presenter?.show(AddCourseModule.init().module, sender: nil)
     }
     
-    func showWordList(withCourse course: CDCourseEntity) {
+    func showWordList(withCourse course: MDCourseListModel) {
         presenter?.show(WordListModule.init(sender: course).module, sender: nil)
     }
     

@@ -25,7 +25,7 @@ protocol CourseListInteractorOutputProtocol: AnyObject,
                                              MDShowErrorProtocol {
     
     func deleteCourseButtonClicked(_ cell: MDCourseListCell)
-    func showWordList(withCourse course: CDCourseEntity)
+    func showWordList(withCourse course: MDCourseListModel)
     
 }
 
@@ -35,7 +35,7 @@ protocol CourseListInteractorProtocol: CourseListInteractorInputProtocol,
 }    
 
 final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
-        
+    
     fileprivate let dataManager: CourseListDataManagerInputProtocol
     fileprivate var bridge: MDBridgeProtocol
     
@@ -50,12 +50,12 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
          collectionViewDataSource: CourseListTableViewDataSourceProtocol,
          searchBarDelegate: MDSearchBarDelegateImplementationProtocol,
          bridge: MDBridgeProtocol) {
-                
+        
         self.dataManager = dataManager
         self.tableViewDelegate = collectionViewDelegate
         self.tableViewDataSource = collectionViewDataSource
         self.searchBarDelegate = searchBarDelegate
-        self.bridge = bridge        
+        self.bridge = bridge
         
         super.init()
         subscribe()

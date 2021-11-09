@@ -31,3 +31,16 @@ extension CDWordEntity {
     }
     
 }
+
+// MARK: - MDTextForSearchWithTwoPropertiesProtocol
+extension CDWordEntity: MDTextForSearchWithTwoPropertiesProtocol {
+    
+    var textForSearch0: String {
+        return wordText!
+    }
+    
+    var textForSearch1: String {
+        return wordDescription!
+    }
+    
+}

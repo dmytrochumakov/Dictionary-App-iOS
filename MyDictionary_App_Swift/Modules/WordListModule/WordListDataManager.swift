@@ -31,14 +31,14 @@ protocol WordListDataManagerProtocol: WordListDataManagerInputProtocol {
 final class WordListDataManager: WordListDataManagerProtocol {
     
     fileprivate let coreDataStorage: MDWordCoreDataStorageProtocol
-    fileprivate let filterSearchTextService: MDWordFilterSearchTextServiceProtocol
+    fileprivate let filterSearchTextService: MDFilterSearchTextServiceProtocol
     
     var dataProvider: WordListDataProviderProcotol
     internal weak var dataManagerOutput: WordListDataManagerOutputProtocol?
     
     init(dataProvider: WordListDataProviderProcotol,
          coreDataStorage: MDWordCoreDataStorageProtocol,
-         filterSearchTextService: MDWordFilterSearchTextServiceProtocol) {
+         filterSearchTextService: MDFilterSearchTextServiceProtocol) {
         
         self.dataProvider = dataProvider
         self.coreDataStorage = coreDataStorage
@@ -57,7 +57,7 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func readAndAddWordsToDataProvider() {
         
-        coreDataStorage.readAllWords(byCourseUUID: dataProvider.course.uuid!) { [unowned self] result in
+        coreDataStorage.readAllWords(byCourseUUID: dataProvider.course.course.uuid!) { [unowned self] result in
             
             switch result {
                 
@@ -103,7 +103,7 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func filterWords(_ searchText: String?) {
         
-        coreDataStorage.readAllWords(byCourseUUID: dataProvider.course.uuid!) { [unowned self] readResult in
+        coreDataStorage.readAllWords(byCourseUUID: dataProvider.course.course.uuid!) { [unowned self] readResult in
             
             switch readResult {
                 
@@ -120,7 +120,7 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
                     DispatchQueue.main.async {
                         
                         // Set Filtered Result
-                        self.dataProvider.filteredWords = filteredResult
+                        self.dataProvider.filteredWords = filteredResult as! [CDWordEntity]
                         
                         // Pass Result
                         self.dataManagerOutput?.filteredWordsResult(.success(()))
@@ -156,7 +156,7 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func clearWordFilter() {
         
-        coreDataStorage.readAllWords(byCourseUUID: dataProvider.course.uuid!) { [unowned self] readResult in
+        coreDataStorage.readAllWords(byCourseUUID: dataProvider.course.course.uuid!) { [unowned self] readResult in
             
             switch readResult {
                 

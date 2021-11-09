@@ -9,19 +9,19 @@ import Foundation
 protocol CourseListDataProviderProtocol: MDNumberOfSectionsProtocol,
                                          MDNumberOfRowsInSectionProtocol {
     
-    var filteredCourses: [CDCourseEntity] { get set }
+    var filteredCourses: [MDCourseListModel] { get set }
     
     func courseListCellModel(atIndexPath indexPath: IndexPath) -> MDCourseListCellModel?
-    func course(atIndexPath indexPath: IndexPath) -> CDCourseEntity
+    func course(atIndexPath indexPath: IndexPath) -> MDCourseListModel
     func deleteCourse(atIndexPath indexPath: IndexPath)
     
 }
 
 final class CourseListDataProvider: CourseListDataProviderProtocol {
     
-    var filteredCourses: [CDCourseEntity]
+    var filteredCourses: [MDCourseListModel]
     
-    init(filteredCourses: [CDCourseEntity]) {
+    init(filteredCourses: [MDCourseListModel]) {
         self.filteredCourses = filteredCourses
     }
     
@@ -36,7 +36,7 @@ extension CourseListDataProvider {
     func numberOfRowsInSection(_ section: Int) -> Int {
         return filteredCourses.count
     }
-        
+    
 }
 
 extension CourseListDataProvider {
@@ -46,7 +46,9 @@ extension CourseListDataProvider {
         if (filteredCourses.isEmpty) {
             return nil
         } else {
-            return .init(languageName: filteredCourses[indexPath.row].uuid!.uuidString)
+            let course = filteredCourses[indexPath.row]
+            return .init(languageName: course.language.name,
+                         translatedLanguageName: course.language.translatedName)
         }
         
     }
@@ -55,7 +57,7 @@ extension CourseListDataProvider {
         filteredCourses.remove(at: indexPath.row)
     }
     
-    func course(atIndexPath indexPath: IndexPath) -> CDCourseEntity {
+    func course(atIndexPath indexPath: IndexPath) -> MDCourseListModel {
         return filteredCourses[indexPath.row]
     }
     

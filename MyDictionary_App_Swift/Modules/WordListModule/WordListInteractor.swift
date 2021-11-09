@@ -23,7 +23,7 @@ protocol WordListInteractorOutputProtocol: AnyObject,
                                            MDInsertRowProtocol,
                                            MDUpdateRowProtocol  {
     
-    func showAddWord(withCourse course: CDCourseEntity)
+    func showAddWord(withCourse course: MDCourseListModel)
     func showEditWord(withWord word: CDWordEntity)
     
 }

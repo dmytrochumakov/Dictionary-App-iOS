@@ -8,7 +8,7 @@ import Foundation
 
 protocol CourseListDataManagerInputProtocol {
     var dataProvider: CourseListDataProviderProtocol { get }
-    func addCourse(atNewCourse course: CDCourseEntity) -> IndexPath
+    func addCourse(atNewCourse course: MDCourseListModel) -> IndexPath
     func readAndAddCoursesToDataProvider()
     func filterCourses(_ searchText: String?)
     func clearCourseFilter()
@@ -28,14 +28,14 @@ protocol CourseListDataManagerProtocol: CourseListDataManagerInputProtocol {
 final class CourseListDataManager: CourseListDataManagerProtocol {
     
     fileprivate let coreDataStorage: MDCourseCoreDataStorageProtocol
-    fileprivate let filterSearchTextService: MDFilterSearchTextService<CDCourseEntity>
+    fileprivate let filterSearchTextService: MDFilterSearchTextServiceProtocol
     
     internal var dataProvider: CourseListDataProviderProtocol
     internal weak var dataManagerOutput: CourseListDataManagerOutputProtocol?
     
     init(coreDataStorage: MDCourseCoreDataStorageProtocol,
          dataProvider: CourseListDataProviderProtocol,
-         filterSearchTextService: MDFilterSearchTextService<CDCourseEntity>) {
+         filterSearchTextService: MDFilterSearchTextServiceProtocol) {
         
         self.coreDataStorage = coreDataStorage
         self.dataProvider = dataProvider
@@ -67,7 +67,7 @@ extension CourseListDataManager {
                 DispatchQueue.main.async {
                     
                     // Set Read Courses
-                    self.dataProvider.filteredCourses = sordedCourses
+                    self.dataProvider.filteredCourses = sordedCourses as! [MDCourseListModel]
                     //
                     
                     // Pass Result
@@ -113,13 +113,13 @@ extension CourseListDataManager {
                 //
                 
                 //
-                filterSearchTextService.filter(input: sordedCourses,
+                filterSearchTextService.filter(input: sordedCourses as! [MDCourseListModel],
                                                searchText: searchText) { [unowned self] (filteredResult) in
                     
                     DispatchQueue.main.async {
                         
                         // Set Filtered Result
-                        self.dataProvider.filteredCourses = filteredResult
+                        self.dataProvider.filteredCourses = filteredResult as! [MDCourseListModel]
                         
                         // Pass Result
                         self.dataManagerOutput?.filteredCoursesResult(.success(()))
@@ -167,7 +167,7 @@ extension CourseListDataManager {
                 DispatchQueue.main.async {
                     
                     // Set Read Courses
-                    self.dataProvider.filteredCourses = sordedCourses
+                    self.dataProvider.filteredCourses = sordedCourses as! [MDCourseListModel]
                     //
                     
                     // Pass Result
@@ -204,7 +204,7 @@ extension CourseListDataManager {
         dataProvider.deleteCourse(atIndexPath: indexPath)
     }
     
-    func addCourse(atNewCourse course: CDCourseEntity) -> IndexPath {
+    func addCourse(atNewCourse course: MDCourseListModel) -> IndexPath {
         //
         self.dataProvider.filteredCourses.insert(course, at: .zero)
         //
