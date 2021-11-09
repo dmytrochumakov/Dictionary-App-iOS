@@ -152,13 +152,13 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
                         // Hide Progress HUD
                         self.interactorOutput?.hideProgressHUD()
                         //
-
+                        
                         // Update Word
-                        dataManager.updateWord()
+                        self.dataManager.updateWord()
                         //
                         
                         // Pass Result
-                        self.bridge.didUpdateWord?(dataManager.getWord)
+                        self.bridge.didUpdateWord?(self.dataManager.getWord)
                         //
                         
                         //
@@ -205,7 +205,56 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
         interactorOutput?.showProgressHUD()
         //
         
+        // Delete Word From Core Data Storage
+        wordCoreDataStorage.deleteWord(byWordUUID: dataManager.getWord.uuid!) { [unowned self] deleteResult in
+            
+            switch deleteResult {
+                
+            case .success:
+                
+                DispatchQueue.main.async {
+                    
+                    // Hide Progress HUD
+                    self.interactorOutput?.hideProgressHUD()
+                    //
+                    
+                    // Pass Result
+                    self.bridge.didDeleteWord?(self.dataManager.getWord)
+                    //
+                    
+                    //
+                    self.interactorOutput?.closeModule()
+                    //
+                    
+                }
+                
+                //
+                break
+                //
+                
+            case .failure(let error):
+                
+                DispatchQueue.main.async {
+                    
+                    // Hide Progress HUD
+                    self.interactorOutput?.hideProgressHUD()
+                    //
+                    
+                    //
+                    self.interactorOutput?.showError(error)
+                    //
+                    
+                }
+                
+                //
+                break
+                //
+                
+            }
+            
+        }
         //
+        
     }
     
     func wordTextFieldDidChange(_ text: String?) {
