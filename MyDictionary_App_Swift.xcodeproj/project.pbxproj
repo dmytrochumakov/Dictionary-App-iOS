@@ -39,7 +39,6 @@
 		22561C9026D4D12D00A6135B /* MDCourseCoreDataStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C8F26D4D12D00A6135B /* MDCourseCoreDataStorage_Tests.swift */; };
 		22561C9D26D4DEA800A6135B /* MDStorageInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22561C9C26D4DEA800A6135B /* MDStorageInterface.swift */; };
 		226E91C42737F56A004FACCD /* MDLanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226E91C32737F56A004FACCD /* MDLanguageModel.swift */; };
-		226E91C62737F742004FACCD /* CDCourseEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226E91C52737F742004FACCD /* CDCourseEntity+Extension.swift */; };
 		226E91C82737FDA5004FACCD /* CDWordEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226E91C72737FDA5004FACCD /* CDWordEntity+Extension.swift */; };
 		2270F3A626D2663F006B46F4 /* CDCourseEntityAttributeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270F3A526D2663F006B46F4 /* CDCourseEntityAttributeName.swift */; };
 		2277FE1226F9D7E900001710 /* MDBaseNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2277FE1126F9D7E900001710 /* MDBaseNavigationBarViewController.swift */; };
@@ -259,7 +258,6 @@
 		22561C8F26D4D12D00A6135B /* MDCourseCoreDataStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseCoreDataStorage_Tests.swift; sourceTree = "<group>"; };
 		22561C9C26D4DEA800A6135B /* MDStorageInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDStorageInterface.swift; sourceTree = "<group>"; };
 		226E91C32737F56A004FACCD /* MDLanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLanguageModel.swift; sourceTree = "<group>"; };
-		226E91C52737F742004FACCD /* CDCourseEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCourseEntity+Extension.swift"; sourceTree = "<group>"; };
 		226E91C72737FDA5004FACCD /* CDWordEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDWordEntity+Extension.swift"; sourceTree = "<group>"; };
 		2270F3A526D2663F006B46F4 /* CDCourseEntityAttributeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDCourseEntityAttributeName.swift; sourceTree = "<group>"; };
 		2277FE1126F9D7E900001710 /* MDBaseNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBaseNavigationBarViewController.swift; sourceTree = "<group>"; };
@@ -1071,7 +1069,6 @@
 				2299C64F2737E17900B7D556 /* NSManagedObjectContext+Extension.swift */,
 				2299C6512737E1A100B7D556 /* NSManagedObjectModel+Extension.swift */,
 				2299C6532737E20A00B7D556 /* NSPersistentStoreCoordinator+Extension.swift */,
-				226E91C52737F742004FACCD /* CDCourseEntity+Extension.swift */,
 				226E91C72737FDA5004FACCD /* CDWordEntity+Extension.swift */,
 			);
 			path = Extensions;
@@ -1665,7 +1662,6 @@
 				2299C65A2737EEA300B7D556 /* MDCoreDataEntityName.swift in Sources */,
 				2291DAD927019DA900216B64 /* AddWordDataProvider.swift in Sources */,
 				22DB2F7F26C3C3A900C1AADA /* UIColor+Extension.swift in Sources */,
-				226E91C62737F742004FACCD /* CDCourseEntity+Extension.swift in Sources */,
 				226E91C82737FDA5004FACCD /* CDWordEntity+Extension.swift in Sources */,
 				22DB2F8926C3D3F400C1AADA /* CourseListTableViewDelegate.swift in Sources */,
 				2299C6522737E1A100B7D556 /* NSManagedObjectModel+Extension.swift in Sources */,

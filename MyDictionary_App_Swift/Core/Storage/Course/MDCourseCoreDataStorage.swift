@@ -65,16 +65,22 @@ extension MDCourseCoreDataStorage {
 // MARK: - Create
 extension MDCourseCoreDataStorage {
     
-    func createCourse(_ newCourse: CDCourseEntity,
+    func createCourse(uuid: UUID,
+                      languageId: Int16,
+                      createdAt: Date,
                       _ completionHandler: @escaping (MDOperationResultWithCompletion<CDCourseEntity>)) {
         
         let operation: BlockOperation = .init {
             
-            let newCourseEntity = CDCourseEntity.cdCourseEntity(context: self.managedObjectContext,
-                                                                uuid: newCourse.uuid!,
-                                                                languageId: newCourse.languageId,
-                                                                createdAt: newCourse.createdAt!)
+            // Create New Entity
+            let newCourseEntity: CDCourseEntity = .init(context: self.managedObjectContext)
             
+            newCourseEntity.uuid = uuid
+            newCourseEntity.languageId = languageId
+            newCourseEntity.createdAt = createdAt
+            //
+            
+            // Save
             self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
                 
                 switch result {

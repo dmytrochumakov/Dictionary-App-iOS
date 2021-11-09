@@ -66,19 +66,28 @@ extension MDWordCoreDataStorage {
 // MARK: - Create
 extension MDWordCoreDataStorage {
     
-    func createWord(_ newWord: CDWordEntity,
+    func createWord(courseUUID: UUID,
+                    uuid: UUID,
+                    wordText: String,
+                    wordDescription: String,
+                    createdAt: Date,
+                    updatedAt: Date,
                     _ completionHandler: @escaping (MDOperationResultWithCompletion<CDWordEntity>)) {
         
         let operation: BlockOperation = .init {
             
-            let newWord = CDWordEntity.cdWordEntity(context: self.managedObjectContext,
-                                                    courseUUID: newWord.courseUUID!,
-                                                    uuid: newWord.uuid!,
-                                                    wordText: newWord.wordText!,
-                                                    wordDescription: newWord.wordDescription!,
-                                                    createdAt: newWord.createdAt!,
-                                                    updatedAt: newWord.updatedAt!)
+            // Create New Entity
+            let newWordEntity: CDWordEntity = .init(context: self.managedObjectContext)
             
+            newWordEntity.courseUUID = courseUUID
+            newWordEntity.uuid = uuid
+            newWordEntity.wordText = wordText
+            newWordEntity.wordDescription = wordDescription
+            newWordEntity.createdAt = createdAt
+            newWordEntity.updatedAt = updatedAt
+            //
+            
+            // Save
             self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
                 
                 switch result {
@@ -86,7 +95,7 @@ extension MDWordCoreDataStorage {
                 case .success:
                     
                     //
-                    completionHandler(.success((newWord)))
+                    completionHandler(.success((newWordEntity)))
                     
                     //
                     break

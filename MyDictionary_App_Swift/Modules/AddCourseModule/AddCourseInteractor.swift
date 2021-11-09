@@ -23,7 +23,7 @@ protocol AddCourseInteractorOutputProtocol: AnyObject,
                                             MDShowHideProgressHUD,
                                             MDCloseModuleProtocol {
     
-    func selectAndDeselectRow(at results: [Bool : IndexPath])    
+    func selectAndDeselectRow(at results: [Bool : IndexPath])
     
 }
 
@@ -37,6 +37,7 @@ final class AddCourseInteractor: NSObject,
     
     fileprivate let dataManager: AddCourseDataManagerInputProtocol
     fileprivate let bridge: MDBridgeProtocol
+    fileprivate let courseCoreDataStorage: MDCourseCoreDataStorageProtocol
     
     internal var collectionViewDelegate: MDAddCourseCollectionViewDelegateProtocol
     internal var collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol
@@ -48,13 +49,15 @@ final class AddCourseInteractor: NSObject,
          collectionViewDelegate: MDAddCourseCollectionViewDelegateProtocol,
          collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol,
          searchBarDelegate: MDSearchBarDelegateImplementationProtocol,
-         bridge: MDBridgeProtocol) {
+         bridge: MDBridgeProtocol,
+         courseCoreDataStorage: MDCourseCoreDataStorageProtocol) {
         
         self.collectionViewDelegate = collectionViewDelegate
         self.collectionViewDataSource = collectionViewDataSource
         self.dataManager = dataManager
         self.searchBarDelegate = searchBarDelegate
-        self.bridge = bridge        
+        self.bridge = bridge
+        self.courseCoreDataStorage = courseCoreDataStorage
         
         super.init()
         subscribe()
@@ -92,14 +95,75 @@ extension AddCourseInteractor {
     }
     
     func addButtonClicked() {
+        
         if (dataManager.selectedRow == nil) {
+            
+            //
             interactorOutput?.showError(MDAddCourseError.pleaseSelectACourse)
+            //
+            
+            //
+            return
+            //
+            
         } else {
             
             //
             interactorOutput?.showProgressHUD()
             //
             
+            //
+            courseCoreDataStorage.createCourse(uuid: .init(),
+                                               languageId: dataManager.selectedRow!.languageResponse.id,
+                                               createdAt: .init()) { [unowned self] createResult in
+                
+                switch createResult {
+                    
+                case .success(let cdCourseEntity):
+                    
+                    DispatchQueue.main.async {
+                        
+                        //
+                        self.interactorOutput?.hideProgressHUD()
+                        //
+                        
+                        //
+                        self.bridge.didAddCourse?(.init(course: cdCourseEntity,
+                                                        language: dataManager.selectedRow!.languageResponse))
+                        //
+                        
+                        //
+                        self.interactorOutput?.closeModule()
+                        //
+                        
+                    }
+                    
+                    //
+                    break
+                    //
+                    
+                case .failure(let error):
+                    
+                    DispatchQueue.main.async {
+                        
+                        //
+                        self.interactorOutput?.hideProgressHUD()
+                        //
+                        
+                        //
+                        self.interactorOutput?.showError(error)
+                        //
+                        
+                    }
+                    
+                    //
+                    break
+                    //
+                    
+                }
+                
+            }
+            //
             
         }
     }
