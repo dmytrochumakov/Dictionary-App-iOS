@@ -446,7 +446,7 @@ extension MDWordCoreDataStorage {
             
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MDCoreDataEntityName.CDWordEntity)
             
-            fetchRequest.predicate = NSPredicate(format: "\(CDCourseEntityAttributeName.uuid) == %@", uuid.uuidString)
+            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseUUID) == %@", uuid.uuidString)
             
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             
