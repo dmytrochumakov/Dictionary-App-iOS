@@ -16,6 +16,8 @@ protocol WordListDataProviderProcotol: MDNumberOfSectionsProtocol,
     var wordsForUse: [CDWordEntity] { get set }
     
     func wordListCellModel(atIndexPath indexPath: IndexPath) -> MDWordListCellModel?
+    
+    func addWord(newWord: CDWordEntity)
     func deleteWord(atIndexPath indexPath: IndexPath)
     func updateWord(atIndexPath indexPath: IndexPath, updatedWord: CDWordEntity)
     
@@ -66,11 +68,22 @@ extension WordListDataProvider {
         }
     }
     
+}
+
+extension WordListDataProvider {
+    
+    func addWord(newWord: CDWordEntity) {
+        availableWords.insert(newWord, at: .zero)
+        wordsForUse.insert(newWord, at: .zero)
+    }
+    
     func deleteWord(atIndexPath indexPath: IndexPath) {
+        availableWords.remove(at: indexPath.row)
         wordsForUse.remove(at: indexPath.row)
     }
     
     func updateWord(atIndexPath indexPath: IndexPath, updatedWord: CDWordEntity) {
+        availableWords[indexPath.row] = updatedWord
         wordsForUse[indexPath.row] = updatedWord
     }
     

@@ -143,8 +143,7 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func addWord(_ newValue: CDWordEntity) -> IndexPath {
         //
-        self.dataProvider.availableWords.insert(newValue, at: .zero)
-        self.dataProvider.wordsForUse.insert(newValue, at: .zero)
+        self.dataProvider.addWord(newWord: newValue)
         //
         return .init(row: .zero, section: section)
     }

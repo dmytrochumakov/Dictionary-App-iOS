@@ -38,6 +38,7 @@ final class WordListInteractor: NSObject,
     
     fileprivate let dataManager: WordListDataManagerInputProtocol
     fileprivate var bridge: MDBridgeProtocol
+    fileprivate var wordCoreDataStorage: MDWordCoreDataStorageProtocol
     
     internal var tableViewDelegate: WordListTableViewDelegateProtocol
     internal var tableViewDataSource: WordListTableViewDataSourceProtocol
@@ -49,13 +50,15 @@ final class WordListInteractor: NSObject,
          tableViewDelegate: WordListTableViewDelegateProtocol,
          tableViewDataSource: WordListTableViewDataSourceProtocol,
          searchBarDelegate: MDSearchBarDelegateImplementationProtocol,
-         bridge: MDBridgeProtocol) {
+         bridge: MDBridgeProtocol,
+         wordCoreDataStorage: MDWordCoreDataStorageProtocol) {
         
         self.dataManager = dataManager
         self.tableViewDelegate = tableViewDelegate
         self.tableViewDataSource = tableViewDataSource
         self.searchBarDelegate = searchBarDelegate
         self.bridge = bridge
+        self.wordCoreDataStorage = wordCoreDataStorage
         
         super.init()
         subscribe()
@@ -162,8 +165,59 @@ fileprivate extension WordListInteractor {
             // Show Progress HUD
             interactorOutput?.showProgressHUD()
             //
+            
+            //
             let word = dataManager.dataProvider.wordListCellModel(atIndexPath: indexPath)!.wordResponse
-            // Delete Word From API And Storage
+            //
+            
+            // Delete Word From Core Data Storage
+            wordCoreDataStorage.deleteWord(byWordUUID: word.uuid!) { [unowned self] deleteResult in
+                
+                switch deleteResult {
+                    
+                case .success:
+                    
+                    DispatchQueue.main.async {
+                        
+                        // Hide Progress HUD
+                        self.interactorOutput?.hideProgressHUD()
+                        //
+                        
+                        // Delete Word From Memory Storage
+                        self.dataManager.deleteWord(atIndexPath: indexPath)
+                        //
+                        
+                        //
+                        self.interactorOutput?.deleteRow(atIndexPath: indexPath)
+                        //
+                        
+                    }
+                    
+                    //
+                    break
+                    //
+                    
+                case .failure(let error):
+                    
+                    DispatchQueue.main.async {
+                        
+                        // Hide Progress HUD
+                        self.interactorOutput?.hideProgressHUD()
+                        //
+                       
+                        //
+                        self.interactorOutput?.showError(error)
+                        //
+                        
+                    }
+                    
+                    //
+                    break
+                    //
+                    
+                }
+                
+            }
             
             
         }
