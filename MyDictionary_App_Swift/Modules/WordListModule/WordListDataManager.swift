@@ -8,7 +8,9 @@
 import Foundation
 
 protocol WordListDataManagerInputProtocol {
+    
     var dataProvider: WordListDataProviderProcotol { get }
+    
     func readAndAddWordsToDataProvider()
     func filterWords(_ searchText: String?)
     func clearWordFilter()
@@ -16,6 +18,7 @@ protocol WordListDataManagerInputProtocol {
     func addWord(_ newValue: CDWordEntity) -> IndexPath
     func deleteWord(atWordResponse word: CDWordEntity) -> IndexPath
     func updateWord(atWordResponse word: CDWordEntity) -> IndexPath
+    
 }
 
 protocol WordListDataManagerOutputProtocol: AnyObject {
@@ -33,7 +36,7 @@ final class WordListDataManager: WordListDataManagerProtocol {
     fileprivate let coreDataStorage: MDWordCoreDataStorageProtocol
     fileprivate let filterSearchTextService: MDFilterSearchTextServiceProtocol
     
-    var dataProvider: WordListDataProviderProcotol
+    internal var dataProvider: WordListDataProviderProcotol
     internal weak var dataManagerOutput: WordListDataManagerOutputProtocol?
     
     init(dataProvider: WordListDataProviderProcotol,
@@ -64,14 +67,13 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
                 
             case .success(let readWords):
                 
-                //
-                let sortedWords = sortWords(readWords)
-                //
-                
                 DispatchQueue.main.async {
                     
                     // Set Words
-                    self.dataProvider.filteredWords = sortedWords
+                    self.dataProvider.availableWords = readWords
+                    self.dataProvider.wordsForUse = readWords
+                    //
+                    
                     // Pass Result
                     self.dataManagerOutput?.readAndAddWordsToDataProviderResult(.success(()))
                     //
@@ -104,50 +106,17 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func filterWords(_ searchText: String?) {
         
-        coreDataStorage.readAllWords(byCourseUUID: dataProvider.course.course.uuid!,
-                                     ascending: false) { [unowned self] readResult in
+        filterSearchTextService.filter(input: self.dataProvider.availableWords,
+                                       searchText: searchText) { [unowned self] (filteredResult) in
             
-            switch readResult {
+            DispatchQueue.main.async {
                 
-            case .success(let readWords):
-                
-                //
-                let sortedWords = sortWords(readWords)
+                // Set Filtered Result
+                self.dataProvider.wordsForUse = filteredResult as! [CDWordEntity]
                 //
                 
-                //
-                filterSearchTextService.filter(input: sortedWords,
-                                               searchText: searchText) { [unowned self] (filteredResult) in
-                    
-                    DispatchQueue.main.async {
-                        
-                        // Set Filtered Result
-                        self.dataProvider.filteredWords = filteredResult as! [CDWordEntity]
-                        
-                        // Pass Result
-                        self.dataManagerOutput?.filteredWordsResult(.success(()))
-                        //
-                        
-                    }
-                    
-                }
-                
-                //
-                break
-                //
-                
-            case .failure(let error):
-                
-                DispatchQueue.main.async {
-                    
-                    // Pass Result
-                    self.dataManagerOutput?.filteredWordsResult(.failure(error))
-                    //
-                    
-                }
-                
-                //
-                break
+                // Pass Result
+                self.dataManagerOutput?.filteredWordsResult(.success(()))
                 //
                 
             }
@@ -158,48 +127,13 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func clearWordFilter() {
         
-        coreDataStorage.readAllWords(byCourseUUID: dataProvider.course.course.uuid!,
-                                     ascending: false) { [unowned self] readResult in
-            
-            switch readResult {
-                
-            case .success(let readWords):
-                
-                //
-                let sortedWords = sortWords(readWords)
-                //
-                
-                DispatchQueue.main.async {
-                    
-                    // Set Read Results
-                    self.dataProvider.filteredWords = sortedWords
-                    // Pass Result
-                    self.dataManagerOutput?.clearWordFilterResult(.success(()))
-                    //
-                    
-                }
-                
-                //
-                break
-                //
-                
-            case .failure(let error):
-                
-                DispatchQueue.main.async {
-                    
-                    // Pass Result
-                    self.dataManagerOutput?.clearWordFilterResult(.failure(error))
-                    //
-                    
-                }
-                
-                //
-                break
-                //
-                
-            }
-            
-        }
+        //
+        self.dataProvider.wordsForUse = self.dataProvider.availableWords
+        //
+        
+        // Pass Result
+        self.dataManagerOutput?.clearWordFilterResult(.success(()))
+        //
         
     }
     
@@ -209,14 +143,15 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func addWord(_ newValue: CDWordEntity) -> IndexPath {
         //
-        self.dataProvider.filteredWords.insert(newValue, at: .zero)
+        self.dataProvider.availableWords.insert(newValue, at: .zero)
+        self.dataProvider.wordsForUse.insert(newValue, at: .zero)
         //
         return .init(row: .zero, section: section)
     }
     
     func deleteWord(atWordResponse word: CDWordEntity) -> IndexPath {
         //
-        let row = dataProvider.filteredWords.firstIndex(where: { $0.uuid == word.uuid })!
+        let row = dataProvider.wordsForUse.firstIndex(where: { $0.uuid == word.uuid })!
         let indexPath: IndexPath = .init(row: row,
                                          section: section)
         // Delete Word
@@ -227,7 +162,7 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func updateWord(atWordResponse word: CDWordEntity) -> IndexPath {
         //
-        let row = dataProvider.filteredWords.firstIndex(where: { $0.uuid == word.uuid })!
+        let row = dataProvider.wordsForUse.firstIndex(where: { $0.uuid == word.uuid })!
         let indexPath: IndexPath = .init(row: row,
                                          section: section)
         // Update Word
@@ -244,10 +179,6 @@ fileprivate extension WordListDataManager {
     
     var section: Int {
         return .zero
-    }
-    
-    func sortWords(_ input: [CDWordEntity]) -> [CDWordEntity] {
-        return input.sorted(by: { $0.createdAt! > $1.createdAt! })
     }
     
 }
