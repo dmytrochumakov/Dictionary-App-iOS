@@ -194,7 +194,7 @@ extension MDWordCoreDataStorage {
             
             let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: MDCoreDataEntityName.CDWordEntity)
             
-            fetchRequest.predicate = NSPredicate(format: "\(CDCourseEntityAttributeName.uuid) == %@", uuid.uuidString)
+            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseUUID) == %@", uuid.uuidString)
             fetchRequest.fetchLimit = fetchLimit
             fetchRequest.fetchOffset = fetchOffset
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(CDWordEntity.createdAt),

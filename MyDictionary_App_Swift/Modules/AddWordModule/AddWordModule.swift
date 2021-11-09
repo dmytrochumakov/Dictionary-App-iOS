@@ -30,7 +30,9 @@ extension AddWordModule {
         let interactor: AddWordInteractorProtocol = AddWordInteractor.init(dataManager: dataManager,
                                                                            textFieldDelegate: MDWordTextFieldDelegateImplementation.init(),
                                                                            textViewDelegate: MDWordTextViewDelegateImplementation.init(),
-                                                                           bridge: MDConstants.AppDependencies.dependencies.bridge)
+                                                                           bridge: MDConstants.AppDependencies.dependencies.bridge,
+                                                                           wordCoreDataStorage: MDConstants.AppDependencies.dependencies.wordCoreDataStorage)
+        
         var router: AddWordRouterProtocol = AddWordRouter.init()
         let presenter: AddWordPresenterProtocol = AddWordPresenter.init(interactor: interactor, router: router)
         let vc = AddWordViewController.init(presenter: presenter)
