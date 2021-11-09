@@ -57,7 +57,8 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func readAndAddWordsToDataProvider() {
         
-        coreDataStorage.readAllWords(byCourseUUID: dataProvider.course.course.uuid!) { [unowned self] result in
+        coreDataStorage.readAllWords(byCourseUUID: dataProvider.course.course.uuid!,
+                                     ascending: false) { [unowned self] result in
             
             switch result {
                 
@@ -103,7 +104,8 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func filterWords(_ searchText: String?) {
         
-        coreDataStorage.readAllWords(byCourseUUID: dataProvider.course.course.uuid!) { [unowned self] readResult in
+        coreDataStorage.readAllWords(byCourseUUID: dataProvider.course.course.uuid!,
+                                     ascending: false) { [unowned self] readResult in
             
             switch readResult {
                 
@@ -156,7 +158,8 @@ extension WordListDataManager: WordListDataManagerInputProtocol {
     
     func clearWordFilter() {
         
-        coreDataStorage.readAllWords(byCourseUUID: dataProvider.course.course.uuid!) { [unowned self] readResult in
+        coreDataStorage.readAllWords(byCourseUUID: dataProvider.course.course.uuid!,
+                                     ascending: false) { [unowned self] readResult in
             
             switch readResult {
                 

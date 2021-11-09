@@ -40,7 +40,7 @@ final class MDWordCoreDataStorage: NSObject,
 extension MDWordCoreDataStorage {
     
     func entitiesCount(_ completionHandler: @escaping (MDEntitiesCountResultWithCompletion)) {
-        self.readAllWords() { result in
+        self.readAllWords(ascending: false) { result in
             switch result {
             case .success(let words):
                 completionHandler(.success(words.count))
@@ -51,7 +51,7 @@ extension MDWordCoreDataStorage {
     }
     
     func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion)) {
-        self.readAllWords() { result in
+        self.readAllWords(ascending: false) { result in
             switch result {
             case .success(let words):
                 completionHandler(.success(words.isEmpty))
@@ -187,6 +187,7 @@ extension MDWordCoreDataStorage {
     func readWords(byCourseUUID uuid: UUID,
                    fetchLimit: Int,
                    fetchOffset: Int,
+                   ascending: Bool,
                    _ completionHandler: @escaping (MDOperationsResultWithCompletion<CDWordEntity>)) {
         
         let operation: BlockOperation = .init {
@@ -196,6 +197,8 @@ extension MDWordCoreDataStorage {
             fetchRequest.predicate = NSPredicate(format: "\(CDCourseEntityAttributeName.uuid) == %@", uuid.uuidString)
             fetchRequest.fetchLimit = fetchLimit
             fetchRequest.fetchOffset = fetchOffset
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(CDWordEntity.createdAt),
+                                                             ascending: ascending)]
             
             let asyncFetchRequest = NSAsynchronousFetchRequest.init(fetchRequest: fetchRequest) { asynchronousFetchResult in
                 
@@ -249,6 +252,7 @@ extension MDWordCoreDataStorage {
     
     func readWords(fetchLimit: Int,
                    fetchOffset: Int,
+                   ascending: Bool,
                    _ completionHandler: @escaping (MDOperationsResultWithCompletion<CDWordEntity>)) {
         
         let operation: BlockOperation = .init {
@@ -257,6 +261,8 @@ extension MDWordCoreDataStorage {
             
             fetchRequest.fetchLimit = fetchLimit
             fetchRequest.fetchOffset = fetchOffset
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(CDWordEntity.createdAt),
+                                                             ascending: ascending)]
             
             let asyncFetchRequest = NSAsynchronousFetchRequest.init(fetchRequest: fetchRequest) { asynchronousFetchResult in
                 
@@ -308,14 +314,18 @@ extension MDWordCoreDataStorage {
         
     }
     
-    func readAllWords(_ completionHandler: @escaping (MDOperationsResultWithCompletion<CDWordEntity>)) {
-        readWords(fetchLimit: .zero, fetchOffset: .zero, completionHandler)
+    func readAllWords(ascending: Bool,
+                      _ completionHandler: @escaping (MDOperationsResultWithCompletion<CDWordEntity>)) {
+        
+        readWords(fetchLimit: .zero, fetchOffset: .zero, ascending: ascending, completionHandler)
+        
     }
     
     func readAllWords(byCourseUUID uuid: UUID,
+                      ascending: Bool,
                       _ completionHandler: @escaping (MDOperationsResultWithCompletion<CDWordEntity>)) {
         
-        readWords(byCourseUUID: uuid, fetchLimit: .zero, fetchOffset: .zero, completionHandler)
+        readWords(byCourseUUID: uuid, fetchLimit: .zero, fetchOffset: .zero, ascending: ascending, completionHandler)
         
     }
     
