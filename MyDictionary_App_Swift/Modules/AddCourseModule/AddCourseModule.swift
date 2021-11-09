@@ -18,10 +18,15 @@ extension AddCourseModule {
     
     var module: UIViewController {
         
-        let dataProvider: AddCourseDataProviderProtocol = AddCourseDataProvider.init(sections: .init())
+        let languageMemoryStorage: MDLanguageMemoryStorageProtocol = MDConstants.AppDependencies.dependencies.languageMemoryStorage
+        
+        let configuredSections = AddCourseDataManager.configuredSections(byLanguages: languageMemoryStorage.readAllLanguages())
+        
+        let dataProvider: AddCourseDataProviderProtocol = AddCourseDataProvider.init(availableSections: configuredSections,
+                                                                                     sectionsForUse: configuredSections)
         
         var dataManager: AddCourseDataManagerProtocol = AddCourseDataManager.init(dataProvider: dataProvider,
-                                                                                  languageMemoryStorage: MDConstants.AppDependencies.dependencies.languageMemoryStorage,
+                                                                                  languageMemoryStorage: languageMemoryStorage,
                                                                                   filterSearchTextService: MDFilterSearchTextService.init(operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.filterSearchTextServiceOperationQueue)!))
         
         let interactor: AddCourseInteractorProtocol = AddCourseInteractor.init(dataManager: dataManager,
