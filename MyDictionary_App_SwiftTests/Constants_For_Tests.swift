@@ -31,7 +31,8 @@ struct Constants_For_Tests {
     
     // Word For Update
     public static let mockedWordForUpdateText: String = "MOSFC"
-    public static let mockedWordForUpdateDescription: String = "metal–oxide–semiconductor-field-c"    
+    public static let mockedWordForUpdateDescription: String = "metal–oxide–semiconductor-field-c"
+    public static let mockedWordForUpdateUpdatedAt: Date = .init()
     
     
     static var operationQueueManager: MDOperationQueueManagerProtocol {

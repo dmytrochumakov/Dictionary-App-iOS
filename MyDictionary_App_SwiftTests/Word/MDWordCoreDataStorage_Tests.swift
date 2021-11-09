@@ -150,7 +150,8 @@ extension MDWordCoreDataStorage_Tests {
                 
                 self.wordCoreDataStorage.updateWord(byWordUUID: createdWord.uuid!,
                                                     newWordText: Constants_For_Tests.mockedWordForUpdateText,
-                                                    newWordDescription: Constants_For_Tests.mockedWordForUpdateDescription) { [unowned self] updateResult in
+                                                    newWordDescription: Constants_For_Tests.mockedWordForUpdateDescription,
+                                                    updatedAt: Constants_For_Tests.mockedWordForUpdateUpdatedAt) { [unowned self] updateResult in
                     
                     switch updateResult {
                         
