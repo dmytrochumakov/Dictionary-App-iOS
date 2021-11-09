@@ -24,15 +24,17 @@ extension EditWordModule {
     
     var module: UIViewController {
         
-        let dataProvider: EditWordDataProviderProtocol = EditWordDataProvider.init(word: sender,
-                                                                                   copiedWord: sender)
+        let dataProvider: EditWordDataProviderProtocol = EditWordDataProvider.init(transmittedWord: sender,
+                                                                                   wordText: sender.wordText!,
+                                                                                   wordDescription: sender.wordDescription!)
         
         var dataManager: EditWordDataManagerProtocol = EditWordDataManager.init(dataProvider: dataProvider)
         
         let interactor: EditWordInteractorProtocol = EditWordInteractor.init(dataManager: dataManager,
                                                                              bridge: MDConstants.AppDependencies.dependencies.bridge,
                                                                              textFieldDelegate: MDWordTextFieldDelegateImplementation.init(),
-                                                                             textViewDelegate: MDWordTextViewDelegateImplementation.init())
+                                                                             textViewDelegate: MDWordTextViewDelegateImplementation.init(),
+                                                                             wordCoreDataStorage: MDConstants.AppDependencies.dependencies.wordCoreDataStorage)
         
         var router: EditWordRouterProtocol = EditWordRouter.init()
         let presenter: EditWordPresenterProtocol = EditWordPresenter.init(interactor: interactor, router: router)
