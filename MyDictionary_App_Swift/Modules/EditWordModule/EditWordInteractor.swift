@@ -60,7 +60,7 @@ final class EditWordInteractor: NSObject,
          textViewDelegate: MDWordTextViewDelegateImplementationProtocol,
          wordCoreDataStorage: MDWordCoreDataStorageProtocol) {
         
-        self.dataManager = dataManager        
+        self.dataManager = dataManager
         self.bridge = bridge
         self.textFieldDelegate = textFieldDelegate
         self.textViewDelegate = textViewDelegate
@@ -141,7 +141,7 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
             wordCoreDataStorage.updateWord(byWordUUID: dataManager.getWord.uuid!,
                                            newWordText: dataManager.getNewWordText,
                                            newWordDescription: dataManager.getNewWordDescription,
-                                           updatedAt: .init()) { [unowned self] updateResult in
+                                           newUpdatedAt: .init()) { [unowned self] updateResult in
                 
                 switch updateResult {
                     

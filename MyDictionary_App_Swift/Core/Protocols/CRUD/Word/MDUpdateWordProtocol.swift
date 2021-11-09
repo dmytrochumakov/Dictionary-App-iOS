@@ -12,7 +12,7 @@ protocol MDUpdateWordProtocol {
     func updateWord(byWordUUID uuid: UUID,
                     newWordText: String,
                     newWordDescription: String,
-                    updatedAt: Date,
+                    newUpdatedAt: Date,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
     
 }

@@ -337,7 +337,7 @@ extension MDWordCoreDataStorage {
     func updateWord(byWordUUID uuid: UUID,
                     newWordText: String,
                     newWordDescription: String,
-                    updatedAt: Date,
+                    newUpdatedAt: Date,
                     _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         let operation: BlockOperation = .init {
@@ -346,7 +346,7 @@ extension MDWordCoreDataStorage {
             
             batchUpdateRequest.propertiesToUpdate = [CDWordEntityAttributeName.wordText : newWordText,
                                                      CDWordEntityAttributeName.wordDescription : newWordDescription,
-                                                     CDWordEntityAttributeName.updatedAt : updatedAt
+                                                     CDWordEntityAttributeName.updatedAt : newUpdatedAt
             ]
             
             batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %@", uuid.uuidString)
