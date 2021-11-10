@@ -36,7 +36,7 @@ final class AddWordInteractor: NSObject,
     
     fileprivate let dataManager: AddWordDataManagerInputProtocol
     fileprivate let bridge: MDBridgeProtocol
-    fileprivate let wordCoreDataStorage: MDWordCoreDataStorageProtocol
+    fileprivate let wordManager: MDWordManagerProtocol
     
     var textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol
     var textViewDelegate: MDWordTextViewDelegateImplementationProtocol
@@ -47,13 +47,13 @@ final class AddWordInteractor: NSObject,
          textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol,
          textViewDelegate: MDWordTextViewDelegateImplementationProtocol,
          bridge: MDBridgeProtocol,
-         wordCoreDataStorage: MDWordCoreDataStorageProtocol) {
+         wordManager: MDWordManagerProtocol) {
         
         self.dataManager = dataManager
         self.textFieldDelegate = textFieldDelegate
         self.textViewDelegate = textViewDelegate
         self.bridge = bridge
-        self.wordCoreDataStorage = wordCoreDataStorage
+        self.wordManager = wordManager
         
         super.init()
         subscribe()
@@ -91,12 +91,12 @@ extension AddWordInteractor: AddWordInteractorInputProtocol {
         //
         
         // Save Word To Core Data
-        wordCoreDataStorage.createWord(courseUUID: dataManager.getCourse.course.uuid!,
-                                       uuid: .init(),
-                                       wordText: dataManager.getWordText!,
-                                       wordDescription: dataManager.getWordDescription!,
-                                       createdAt: .init(),
-                                       updatedAt: .init()) { [unowned self] createResult in
+        wordManager.createWord(courseUUID: dataManager.getCourse.course.uuid!,
+                               uuid: .init(),
+                               wordText: dataManager.getWordText!,
+                               wordDescription: dataManager.getWordDescription!,
+                               createdAt: .init(),
+                               updatedAt: .init()) { [unowned self] createResult in
             
             switch createResult {
                 
@@ -130,7 +130,7 @@ extension AddWordInteractor: AddWordInteractorInputProtocol {
                     interactorOutput?.hideProgressHUD()
                     //
                     
-                    // 
+                    //
                     interactorOutput?.showError(error)
                     //
                     
