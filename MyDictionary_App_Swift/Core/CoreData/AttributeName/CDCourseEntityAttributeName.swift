@@ -9,8 +9,6 @@ import Foundation
 
 struct CDCourseEntityAttributeName {
     static let uuid: String = "uuid"
-    static let name: String = "name"
-    static let translatedName: String = "translatedName"
+    static let languageId: String = "languageId"
     static let createdAt: String = "createdAt"
-    static let words: String = "words"
 }

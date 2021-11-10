@@ -8,8 +8,16 @@
 import Foundation
 import CoreData
 
+protocol MDExistsCourseProtocol {
+    
+    func exists(byLanguageId languageId: Int16,
+                _ completionHandler: @escaping (MDOperationResultWithCompletion<Bool>))
+    
+}
+
 protocol MDCourseCoreDataStorageProtocol: MDCRUDCourseProtocol,
-                                          MDStorageInterface {
+                                          MDStorageInterface,
+                                          MDExistsCourseProtocol {
     
 }
 
@@ -31,6 +39,51 @@ final class MDCourseCoreDataStorage: MDCourseCoreDataStorageProtocol {
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+// MARK: - Exists
+extension MDCourseCoreDataStorage {
+    
+    func exists(byLanguageId languageId: Int16,
+                _ completionHandler: @escaping (MDOperationResultWithCompletion<Bool>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            //
+            let fetchRequest = NSFetchRequest<CDCourseEntity>(entityName: MDCoreDataEntityName.CDCourseEntity)
+            fetchRequest.predicate = NSPredicate(format: "\(CDCourseEntityAttributeName.languageId) == %i", languageId)
+            //
+            
+            do {
+                
+                //
+                completionHandler(.success(try self.managedObjectContext.count(for: fetchRequest) > .zero))
+                //
+                
+                //
+                return
+                //
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+        }
+        
+        //
+        operationQueue.addOperation(operation)
+        //
+        
     }
     
 }
