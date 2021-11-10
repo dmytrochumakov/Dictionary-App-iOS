@@ -61,7 +61,7 @@ extension MDWordCoreDataStorage {
             //
             let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: MDCoreDataEntityName.CDWordEntity)
             fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseUUID) == %@ AND \(CDWordEntityAttributeName.wordText) == %@",
-                                                 argumentArray: [courseUUID.uuid, wordText])
+                                                 argumentArray: [courseUUID, wordText])
             //
             
             do {
@@ -103,7 +103,7 @@ extension MDWordCoreDataStorage {
             //
             let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: MDCoreDataEntityName.CDWordEntity)
             fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseUUID) == %@ AND \(CDWordEntityAttributeName.uuid) == %@",
-                                                 argumentArray: [courseUUID.uuid, wordUUID.uuid])
+                                                 argumentArray: [courseUUID, wordUUID])
             //
             
             do {
