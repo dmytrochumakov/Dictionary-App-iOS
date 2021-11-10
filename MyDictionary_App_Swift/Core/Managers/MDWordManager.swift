@@ -13,8 +13,10 @@ protocol MDWordManagerProtocol {
 
 final class MDWordManager: MDWordManagerProtocol {
     
-    init() {
-        
+    fileprivate let wordCoreDataStorage: MDWordCoreDataStorageProtocol
+    
+    init(wordCoreDataStorage: MDWordCoreDataStorageProtocol) {
+        self.wordCoreDataStorage = wordCoreDataStorage
     }
     
     deinit {

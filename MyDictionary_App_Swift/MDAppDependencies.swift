@@ -17,6 +17,8 @@ protocol MDAppDependenciesProtocol {
     // Manager
     var operationQueueManager: MDOperationQueueManagerProtocol! { get }
     var coreDataManager: MDCoreDataManager! { get }
+    var courseManager: MDCourseManagerProtocol! { get }
+    var wordManager: MDWordManagerProtocol! { get }
     //
     
     // Storage //
@@ -42,6 +44,8 @@ final class MDAppDependencies: NSObject,
     // Manager
     var operationQueueManager: MDOperationQueueManagerProtocol!
     var coreDataManager: MDCoreDataManager!
+    var courseManager: MDCourseManagerProtocol!
+    var wordManager: MDWordManagerProtocol!
     //
     
     // Storage //
@@ -71,14 +75,15 @@ extension MDAppDependencies {
     
     func configureDependencies() {
         
-        //
+        // Core Data Stack //
         let coreDataStack: MDCoreDataStack = .init()
         self.coreDataStack = coreDataStack
+        // End Core Data Stack //
         //
         
         
         // Managers //
-        //
+        // Operation Queue Manager //
         let operationQueues: [OperationQueue] = [MDConstants.MDOperationQueue.createOperationQueue(byName: MDConstants.QueueName.courseCoreDataStorageOperationQueue),
                                                  
                                                  
@@ -91,7 +96,11 @@ extension MDAppDependencies {
         //
         let operationQueueManager: MDOperationQueueManagerProtocol = MDOperationQueueManager.init(operationQueues: operationQueues)
         self.operationQueueManager = operationQueueManager
+        // End Operation Queue Manager //
         //
+        
+        
+        // Core Data Manager //
         let coreDataMigrator: MDCoreDataMigratorProtocol = MDCoreDataMigrator.init()
         let coreDataManager: MDCoreDataManager = MDCoreDataManager.init(storeType: NSSQLiteStoreType,
                                                                         migrator: coreDataMigrator)
@@ -99,24 +108,39 @@ extension MDAppDependencies {
             debugPrint(#function, Self.self, "MDCoreDataManager configured successfully")
         }
         self.coreDataManager = coreDataManager
+        // End Core Data Manager //
+        //
+        
+        
+        // Course Core Data Storage //
+        let courseCoreDataStorage: MDCourseCoreDataStorageProtocol = MDCourseCoreDataStorage.init(operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseCoreDataStorageOperationQueue)!,
+                                                                                                  managedObjectContext: coreDataStack.privateContext,
+                                                                                                  coreDataStack: coreDataStack)
+        // Course Manager //
+        let courseManager: MDCourseManagerProtocol = MDCourseManager.init(courseCoreDataStorage: courseCoreDataStorage)
+        self.courseManager = courseManager
+        // End Course Manager //
+        //
+        
+        
+        // Word Core Data Storage //
+        let wordCoreDataStorage: MDWordCoreDataStorageProtocol = MDWordCoreDataStorage.init(operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordCoreDataStorageOperationQueue)!,
+                                                                                            managedObjectContext: coreDataStack.privateContext,
+                                                                                            coreDataStack: coreDataStack)
+        // Word Manager //
+        let wordManager: MDWordManagerProtocol = MDWordManager.init(wordCoreDataStorage: wordCoreDataStorage)
+        self.wordManager = wordManager
+        // End Word Manager //
         //
         // End Managers //
         
         
         // Storage //
         // Course //
-        let courseCoreDataStorage: MDCourseCoreDataStorageProtocol = MDCourseCoreDataStorage.init(operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseCoreDataStorageOperationQueue)!,
-                                                                                                  managedObjectContext: coreDataStack.privateContext,
-                                                                                                  coreDataStack: coreDataStack)
-        
         self.courseCoreDataStorage = courseCoreDataStorage
         // End Course //
         
         // Word //
-        let wordCoreDataStorage: MDWordCoreDataStorageProtocol = MDWordCoreDataStorage.init(operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordCoreDataStorageOperationQueue)!,
-                                                                                            managedObjectContext: coreDataStack.privateContext,
-                                                                                            coreDataStack: coreDataStack)
-        
         self.wordCoreDataStorage = wordCoreDataStorage
         // End Word //
         
