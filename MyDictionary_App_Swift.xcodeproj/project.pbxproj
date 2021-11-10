@@ -23,6 +23,7 @@
 		2223F8B726512F5B004F2FE9 /* AppLanguageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8B626512F5B004F2FE9 /* AppLanguageType.swift */; };
 		2223F8BB26512F8C004F2FE9 /* MDAppLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F8BA26512F8C004F2FE9 /* MDAppLanguageService.swift */; };
 		2223F8BC26512FFD004F2FE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2223F8BE26512FFD004F2FE9 /* Localizable.strings */; };
+		222F03F0273BF0850025E027 /* MDWordOperationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222F03EF273BF0850025E027 /* MDWordOperationError.swift */; };
 		222F52702701AD080070F546 /* MDTextViewWithToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222F526F2701AD080070F546 /* MDTextViewWithToolBar.swift */; };
 		222F52772701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222F52762701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift */; };
 		223EB28626F9FD030021D8E1 /* TermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223EB28526F9FD030021D8E1 /* TermsOfServiceViewController.swift */; };
@@ -245,6 +246,7 @@
 		2223F8B626512F5B004F2FE9 /* AppLanguageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageType.swift; sourceTree = "<group>"; };
 		2223F8BA26512F8C004F2FE9 /* MDAppLanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDAppLanguageService.swift; sourceTree = "<group>"; };
 		2223F8BD26512FFD004F2FE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		222F03EF273BF0850025E027 /* MDWordOperationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordOperationError.swift; sourceTree = "<group>"; };
 		222F526F2701AD080070F546 /* MDTextViewWithToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDTextViewWithToolBar.swift; sourceTree = "<group>"; };
 		222F52762701E3900070F546 /* MDTextFieldDelegatePropertyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDTextFieldDelegatePropertyProtocol.swift; sourceTree = "<group>"; };
 		223EB28526F9FD030021D8E1 /* TermsOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceViewController.swift; sourceTree = "<group>"; };
@@ -715,6 +717,7 @@
 			children = (
 				22493C4B26972E26000DA480 /* MDEntityOperationError.swift */,
 				229CD7D4273BDA0A00B7BB25 /* MDCourseOperationError.swift */,
+				222F03EF273BF0850025E027 /* MDWordOperationError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -1621,6 +1624,7 @@
 				2291DAD627019DA900216B64 /* AddWordRouter.swift in Sources */,
 				2281AD93270AF34600EBE114 /* MDOperationQueueManager.swift in Sources */,
 				22A2987626FC84F000E79843 /* AddCoursePresenter.swift in Sources */,
+				222F03F0273BF0850025E027 /* MDWordOperationError.swift in Sources */,
 				22E861BD26F9FF7F00AB1755 /* AboutApplicationViewController.swift in Sources */,
 				2299C6542737E20A00B7D556 /* NSPersistentStoreCoordinator+Extension.swift in Sources */,
 				2291DAD727019DA900216B64 /* AddWordViewController.swift in Sources */,
