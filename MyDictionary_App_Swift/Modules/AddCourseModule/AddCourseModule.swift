@@ -34,7 +34,7 @@ extension AddCourseModule {
                                                                                collectionViewDataSource: MDAddCourseCollectionViewDataSource.init(dataProvider: dataProvider),
                                                                                searchBarDelegate: MDSearchBarDelegateImplementation.init(),
                                                                                bridge: MDConstants.AppDependencies.dependencies.bridge,
-                                                                               courseCoreDataStorage: MDConstants.AppDependencies.dependencies.courseCoreDataStorage)
+                                                                               courseManager: MDConstants.AppDependencies.dependencies.courseManager)
         
         var router: AddCourseRouterProtocol = AddCourseRouter.init()
         let presenter: AddCoursePresenterProtocol = AddCoursePresenter.init(interactor: interactor, router: router)

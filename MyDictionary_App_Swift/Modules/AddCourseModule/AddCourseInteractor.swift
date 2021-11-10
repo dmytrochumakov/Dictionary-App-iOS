@@ -37,7 +37,7 @@ final class AddCourseInteractor: NSObject,
     
     fileprivate let dataManager: AddCourseDataManagerInputProtocol
     fileprivate let bridge: MDBridgeProtocol
-    fileprivate let courseCoreDataStorage: MDCourseCoreDataStorageProtocol
+    fileprivate let courseManager: MDCourseManagerProtocol
     
     internal var collectionViewDelegate: MDAddCourseCollectionViewDelegateProtocol
     internal var collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol
@@ -50,14 +50,14 @@ final class AddCourseInteractor: NSObject,
          collectionViewDataSource: MDAddCourseCollectionViewDataSourceProtocol,
          searchBarDelegate: MDSearchBarDelegateImplementationProtocol,
          bridge: MDBridgeProtocol,
-         courseCoreDataStorage: MDCourseCoreDataStorageProtocol) {
+         courseManager: MDCourseManagerProtocol) {
         
         self.collectionViewDelegate = collectionViewDelegate
         self.collectionViewDataSource = collectionViewDataSource
         self.dataManager = dataManager
         self.searchBarDelegate = searchBarDelegate
         self.bridge = bridge
-        self.courseCoreDataStorage = courseCoreDataStorage
+        self.courseManager = courseManager
         
         super.init()
         subscribe()
@@ -113,9 +113,9 @@ extension AddCourseInteractor {
             //
             
             //
-            courseCoreDataStorage.createCourse(uuid: .init(),
-                                               languageId: dataManager.selectedRow!.languageResponse.id,
-                                               createdAt: .init()) { [unowned self] createResult in
+            courseManager.createCourse(uuid: .init(),
+                                       languageId: dataManager.selectedRow!.languageResponse.id,
+                                       createdAt: .init()) { [unowned self] createResult in
                 
                 switch createResult {
                     
