@@ -10,3 +10,18 @@ import Foundation
 enum MDCourseOperationError: Error {
     case courseExists
 }
+
+// MARK: - LocalizedError
+extension MDCourseOperationError: LocalizedError {
+    
+    var errorDescription: String? {
+        
+        switch self {
+            
+        case .courseExists:
+            return MDLocalizedText.conflictApiCourseError.localized
+        }
+        
+    }
+    
+}
