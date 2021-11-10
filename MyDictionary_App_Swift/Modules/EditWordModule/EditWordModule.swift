@@ -34,7 +34,8 @@ extension EditWordModule {
                                                                              bridge: MDConstants.AppDependencies.dependencies.bridge,
                                                                              textFieldDelegate: MDWordTextFieldDelegateImplementation.init(),
                                                                              textViewDelegate: MDWordTextViewDelegateImplementation.init(),
-                                                                             wordCoreDataStorage: MDConstants.AppDependencies.dependencies.wordCoreDataStorage)
+                                                                             wordCoreDataStorage: MDConstants.AppDependencies.dependencies.wordCoreDataStorage,
+                                                                             wordManager: MDConstants.AppDependencies.dependencies.wordManager)
         
         var router: EditWordRouterProtocol = EditWordRouter.init()
         let presenter: EditWordPresenterProtocol = EditWordPresenter.init(interactor: interactor, router: router)

@@ -48,6 +48,7 @@ final class EditWordInteractor: NSObject,
     fileprivate let dataManager: EditWordDataManagerInputProtocol
     fileprivate let bridge: MDBridgeProtocol
     fileprivate let wordCoreDataStorage: MDWordCoreDataStorageProtocol
+    fileprivate let wordManager: MDWordManagerProtocol
     
     var textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol
     var textViewDelegate: MDWordTextViewDelegateImplementationProtocol
@@ -58,13 +59,15 @@ final class EditWordInteractor: NSObject,
          bridge: MDBridgeProtocol,
          textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol,
          textViewDelegate: MDWordTextViewDelegateImplementationProtocol,
-         wordCoreDataStorage: MDWordCoreDataStorageProtocol) {
+         wordCoreDataStorage: MDWordCoreDataStorageProtocol,
+         wordManager: MDWordManagerProtocol) {
         
         self.dataManager = dataManager
         self.bridge = bridge
         self.textFieldDelegate = textFieldDelegate
         self.textViewDelegate = textViewDelegate
         self.wordCoreDataStorage = wordCoreDataStorage
+        self.wordManager = wordManager
         
         super.init()
         subscribe()
@@ -138,10 +141,11 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
             //
             
             // Update Word In Core Data Storage
-            wordCoreDataStorage.updateWord(byWordUUID: dataManager.getWord.uuid!,
-                                           newWordText: dataManager.getNewWordText,
-                                           newWordDescription: dataManager.getNewWordDescription,
-                                           newUpdatedAt: .init()) { [unowned self] updateResult in
+            wordManager.updateWord(byCourseUUID: dataManager.getWord.courseUUID!,
+                                   andWordUUID: dataManager.getWord.uuid!,
+                                   newWordText: dataManager.getNewWordText,
+                                   newWordDescription: dataManager.getNewWordDescription,
+                                   newUpdatedAt: .init()) { [unowned self] updateResult in
                 
                 switch updateResult {
                     

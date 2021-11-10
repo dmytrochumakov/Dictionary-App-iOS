@@ -14,10 +14,6 @@ protocol MDExistsWordProtocol {
                 andWordText wordText: String,
                 _ completionHandler: @escaping (MDOperationResultWithCompletion<Bool>))
     
-    func exists(byCourseUUID courseUUID: UUID,
-                andWordUUID wordUUID: UUID,
-                _ completionHandler: @escaping (MDOperationResultWithCompletion<Bool>))
-    
 }
 
 protocol MDWordCoreDataStorageProtocol: MDCRUDWordProtocol,
@@ -62,48 +58,6 @@ extension MDWordCoreDataStorage {
             let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: MDCoreDataEntityName.CDWordEntity)
             fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseUUID) == %@ AND \(CDWordEntityAttributeName.wordText) == %@",
                                                  argumentArray: [courseUUID, wordText])
-            //
-            
-            do {
-                
-                //
-                completionHandler(.success(try self.managedObjectContext.count(for: fetchRequest) > .zero))
-                //
-                
-                //
-                return
-                //
-                
-            } catch {
-                
-                //
-                completionHandler(.failure(error))
-                //
-                
-                //
-                return
-                //
-                
-            }
-            
-        }
-        
-        //
-        operationQueue.addOperation(operation)
-        //
-        
-    }
-    
-    func exists(byCourseUUID courseUUID: UUID,
-                andWordUUID wordUUID: UUID,
-                _ completionHandler: @escaping (MDOperationResultWithCompletion<Bool>)) {
-        
-        let operation: BlockOperation = .init {
-            
-            //
-            let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: MDCoreDataEntityName.CDWordEntity)
-            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseUUID) == %@ AND \(CDWordEntityAttributeName.uuid) == %@",
-                                                 argumentArray: [courseUUID, wordUUID])
             //
             
             do {
@@ -237,6 +191,66 @@ extension MDWordCoreDataStorage {
             
             let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: MDCoreDataEntityName.CDWordEntity)
             fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %@", uuid.uuidString)
+            
+            let asyncFetchRequest = NSAsynchronousFetchRequest.init(fetchRequest: fetchRequest) { asynchronousFetchResult in
+                
+                guard let result = asynchronousFetchResult.finalResult?.first else {
+                    
+                    //
+                    completionHandler(.failure(MDEntityOperationError.cantFindEntity))
+                    //
+                    
+                    //
+                    return
+                    //
+                    
+                }
+                
+                //
+                completionHandler(.success(result))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+            do {
+                
+                try self.managedObjectContext.execute(asyncFetchRequest)
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+        }
+        
+        //
+        operationQueue.addOperation(operation)
+        //
+        
+    }
+    
+    func readWord(byCourseUUID courseUUID: UUID,
+                  andWordText wordText: String,
+                  _ completionHandler: @escaping (MDOperationResultWithCompletion<CDWordEntity>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            //
+            let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: MDCoreDataEntityName.CDWordEntity)
+            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseUUID) == %@ AND \(CDWordEntityAttributeName.wordText) == %@",
+                                                 argumentArray: [courseUUID, wordText])
+            //
             
             let asyncFetchRequest = NSAsynchronousFetchRequest.init(fetchRequest: fetchRequest) { asynchronousFetchResult in
                 
@@ -474,7 +488,8 @@ extension MDWordCoreDataStorage {
 // MARK: - Update
 extension MDWordCoreDataStorage {
     
-    func updateWord(byWordUUID uuid: UUID,
+    func updateWord(byCourseUUID courseUUID: UUID,
+                    andWordUUID wordUUID: UUID,
                     newWordText: String,
                     newWordDescription: String,
                     newUpdatedAt: Date,
@@ -489,7 +504,63 @@ extension MDWordCoreDataStorage {
                                                      CDWordEntityAttributeName.updatedAt : newUpdatedAt
             ]
             
-            batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %@", uuid.uuidString)
+            batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseUUID) == %@ AND \(CDWordEntityAttributeName.uuid) == %@",
+                                                       argumentArray: [courseUUID, wordUUID])
+            //
+            
+            do {
+                
+                try self.managedObjectContext.execute(batchUpdateRequest)
+                
+                self.coreDataStack.save(managedObjectContext: self.managedObjectContext) { result in
+                    
+                    //
+                    completionHandler(result)
+                    //
+                    
+                    //
+                    return
+                    //
+                    
+                }
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+        }
+        
+        //
+        operationQueue.addOperation(operation)
+        //
+        
+    }
+    
+    func updateWord(byCourseUUID courseUUID: UUID,
+                    andWordUUID wordUUID: UUID,
+                    newWordDescription: String,
+                    newUpdatedAt: Date,
+                    _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            let batchUpdateRequest = NSBatchUpdateRequest(entityName: MDCoreDataEntityName.CDWordEntity)
+            
+            batchUpdateRequest.propertiesToUpdate = [CDWordEntityAttributeName.wordDescription : newWordDescription,
+                                                     CDWordEntityAttributeName.updatedAt : newUpdatedAt
+            ]
+            
+            batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseUUID) == %@ AND \(CDWordEntityAttributeName.uuid) == %@",
+                                                       argumentArray: [courseUUID, wordUUID])
+            //
             
             do {
                 

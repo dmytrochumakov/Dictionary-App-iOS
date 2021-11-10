@@ -12,6 +12,10 @@ protocol MDReadWordProtocol {
     func readWord(byWordUUID uuid: UUID,
                   _ completionHandler: @escaping(MDOperationResultWithCompletion<CDWordEntity>))
     
+    func readWord(byCourseUUID courseUUID: UUID,
+                  andWordText wordText: String,
+                  _ completionHandler: @escaping(MDOperationResultWithCompletion<CDWordEntity>))
+    
     func readWords(byCourseUUID uuid: UUID,
                    fetchLimit: Int,
                    fetchOffset: Int,
