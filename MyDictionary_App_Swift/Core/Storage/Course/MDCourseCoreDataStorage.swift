@@ -9,7 +9,8 @@ import Foundation
 import CoreData
 
 protocol MDCourseCoreDataStorageProtocol: MDCRUDCourseProtocol,
-                                          MDStorageInterface {
+                                          MDStorageInterface,
+                                          MDExistsCourseProtocol {
     
 }
 
@@ -39,10 +40,10 @@ final class MDCourseCoreDataStorage: MDCourseCoreDataStorageProtocol {
 extension MDCourseCoreDataStorage {
     
     func entitiesCount(_ completionHandler: @escaping(MDEntitiesCountResultWithCompletion)) {
-        self.readAllCourses(ascending: false) { result in
+        self.readEntitiesCount() { result in
             switch result {
-            case .success(let entities):
-                completionHandler(.success(entities.count))
+            case .success(let entitiesCount):
+                completionHandler(.success(entitiesCount))
             case .failure(let error):
                 completionHandler(.failure(error))
             }
@@ -50,10 +51,10 @@ extension MDCourseCoreDataStorage {
     }
     
     func entitiesIsEmpty(_ completionHandler: @escaping(MDEntitiesIsEmptyResultWithCompletion)) {
-        self.readAllCourses(ascending: false) { result in
+        self.readEntitiesCount() { result in
             switch result {
-            case .success(let entities):
-                completionHandler(.success(entities.isEmpty))
+            case .success(let entitiesCount):
+                completionHandler(.success(entitiesCount == .zero))
             case .failure(let error):
                 completionHandler(.failure(error))
             }
@@ -249,6 +250,38 @@ extension MDCourseCoreDataStorage {
     
     func readAllCourses(ascending: Bool, _ completionHandler: @escaping (MDOperationsResultWithCompletion<CDCourseEntity>)) {
         readCourses(fetchLimit: .zero, fetchOffset: .zero, ascending: ascending, completionHandler)
+    }
+    
+    func readEntitiesCount(_ completionHandler: @escaping(MDEntitiesCountResultWithCompletion)) {
+        
+        let operation: BlockOperation = .init {
+            
+            //
+            let fetchRequest = NSFetchRequest<CDCourseEntity>(entityName: MDCoreDataEntityName.CDCourseEntity)
+            //
+            
+            do {
+                
+                completionHandler(.success(try self.managedObjectContext.count(for: fetchRequest)))
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+        }
+        
+        //
+        operationQueue.addOperation(operation)
+        //
+        
     }
     
 }
