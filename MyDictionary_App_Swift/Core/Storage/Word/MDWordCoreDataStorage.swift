@@ -40,10 +40,10 @@ final class MDWordCoreDataStorage: NSObject,
 extension MDWordCoreDataStorage {
     
     func entitiesCount(_ completionHandler: @escaping (MDEntitiesCountResultWithCompletion)) {
-        self.readAllWords(ascending: false) { result in
+        self.readEntitiesCount() { result in
             switch result {
-            case .success(let words):
-                completionHandler(.success(words.count))
+            case .success(let entitiesCount):
+                completionHandler(.success(entitiesCount))
             case .failure(let error):
                 completionHandler(.failure(error))
             }
@@ -51,10 +51,10 @@ extension MDWordCoreDataStorage {
     }
     
     func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion)) {
-        self.readAllWords(ascending: false) { result in
+        self.readEntitiesCount() { result in
             switch result {
-            case .success(let words):
-                completionHandler(.success(words.isEmpty))
+            case .success(let entitiesCount):
+                completionHandler(.success(entitiesCount == .zero))
             case .failure(let error):
                 completionHandler(.failure(error))
             }
@@ -326,6 +326,44 @@ extension MDWordCoreDataStorage {
                       _ completionHandler: @escaping (MDOperationsResultWithCompletion<CDWordEntity>)) {
         
         readWords(byCourseUUID: uuid, fetchLimit: .zero, fetchOffset: .zero, ascending: ascending, completionHandler)
+        
+    }
+    
+    func readEntitiesCount(_ completionHandler: @escaping(MDEntitiesCountResultWithCompletion)) {
+        
+        let operation: BlockOperation = .init {
+            
+            //
+            let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: MDCoreDataEntityName.CDWordEntity)
+            //
+            
+            do {
+                
+                //
+                completionHandler(.success(try self.managedObjectContext.count(for: fetchRequest)))
+                //
+                
+                //
+                return
+                //
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+        }
+        
+        //
+        operationQueue.addOperation(operation)
+        //
         
     }
     

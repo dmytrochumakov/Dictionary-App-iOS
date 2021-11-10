@@ -9,8 +9,7 @@ import Foundation
 import CoreData
 
 protocol MDCourseCoreDataStorageProtocol: MDCRUDCourseProtocol,
-                                          MDStorageInterface,
-                                          MDExistsCourseProtocol {
+                                          MDStorageInterface {
     
 }
 
@@ -262,7 +261,13 @@ extension MDCourseCoreDataStorage {
             
             do {
                 
+                //
                 completionHandler(.success(try self.managedObjectContext.count(for: fetchRequest)))
+                //
+                
+                //
+                return
+                //
                 
             } catch {
                 
