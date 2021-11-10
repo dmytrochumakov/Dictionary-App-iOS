@@ -10,10 +10,14 @@ protocol EditWordDataManagerInputProtocol {
     
     var getWord: CDWordEntity { get }
     
+    var getNewWordText: String { get }
+    var getNewWordDescription: String { get }
+    
     var updatedWordTextAndDescriptionIsEqualToInitialValue: Bool { get }
-        
+    
     func setWordText(_ text: String?)
     func setWordDescription(_ text: String?)
+    func updateWord()
     
 }
 
@@ -44,7 +48,15 @@ final class EditWordDataManager: EditWordDataManagerProtocol {
 extension EditWordDataManager: EditWordDataManagerInputProtocol {
     
     var getWord: CDWordEntity {
-        return dataProvider.word
+        return dataProvider.transmittedWord
+    }
+    
+    var getNewWordText: String {
+        return dataProvider.wordText
+    }
+    
+    var getNewWordDescription: String {
+        return dataProvider.wordDescription
     }
     
     var updatedWordTextAndDescriptionIsEqualToInitialValue: Bool {
@@ -53,12 +65,16 @@ extension EditWordDataManager: EditWordDataManagerInputProtocol {
     
     func setWordText(_ text: String?) {
         guard let text = text else { return }
-        dataProvider.word.wordText = text
+        dataProvider.wordText = text
     }
     
     func setWordDescription(_ text: String?) {
         guard let text = text else { return }
-        dataProvider.word.wordDescription = text
+        dataProvider.wordDescription = text
+    }
+    
+    func updateWord() {
+        dataProvider.updateWord()
     }
     
 }
@@ -67,11 +83,11 @@ extension EditWordDataManager: EditWordDataManagerInputProtocol {
 fileprivate extension EditWordDataManager {
     
     var updatedWordTextIsEqualToInitialValue: Bool {
-        return (dataProvider.word.wordText == dataProvider.copiedWord.wordText)
+        return (dataProvider.wordText == dataProvider.transmittedWord.wordText)
     }
     
     var updatedWordDescriptionIsEqualToInitialValue: Bool {
-        return (dataProvider.word.wordDescription == dataProvider.copiedWord.wordDescription)
+        return (dataProvider.wordDescription == dataProvider.transmittedWord.wordDescription)
     }
     
 }

@@ -32,7 +32,7 @@ final class AddCourseDataManager: AddCourseDataManagerProtocol {
     
     var selectedRow: MDAddCourseRow? {
         guard let selectedIndexPath = self.firstSelectedIndexPath else { return nil }
-        return dataProvider.sections[selectedIndexPath.section].rows[selectedIndexPath.row]
+        return dataProvider.sectionsForUse[selectedIndexPath.section].rows[selectedIndexPath.row]
     }
     
     internal weak var dataManagerOutput: AddCourseDataManagerOutputProtocol?
@@ -53,13 +53,10 @@ final class AddCourseDataManager: AddCourseDataManagerProtocol {
     
 }
 
-extension AddCourseDataManager {
+// MARK: - AddCourseDataManagerInputProtocol
+extension AddCourseDataManager: AddCourseDataManagerInputProtocol {
     
     func loadAndPassLanguagesArrayToDataProvider() {
-        
-        // Configure Sections
-        dataProvider.sections = configuredSections(byLanguages: languageMemoryStorage.readAllLanguages())
-        //
         
         // Pass Result
         dataManagerOutput?.loadAndPassLanguagesArrayToDataProviderResult(.success(()))
@@ -75,7 +72,7 @@ extension AddCourseDataManager {
             DispatchQueue.main.async {
                 
                 // Set Filtered Result
-                self.dataProvider.sections = configuredSections(byLanguages: filteredResult as! [MDLanguageModel])
+                self.dataProvider.sectionsForUse = Self.configuredSections(byLanguages: filteredResult as! [MDLanguageModel])
                 //
                 
                 // Pass Result
@@ -90,8 +87,8 @@ extension AddCourseDataManager {
     
     func clearLanguageFilter() {
         
-        // Configure Sections
-        dataProvider.sections = configuredSections(byLanguages: languageMemoryStorage.readAllLanguages())
+        //
+        dataProvider.sectionsForUse = dataProvider.availableSections
         //
         
         // Pass Result
@@ -108,7 +105,7 @@ extension AddCourseDataManager {
             //
             let newSelectedIndexPath = newSelectedIndexPath(fromSelectedRow: newValue)
             //
-            self.dataProvider.sections[newSelectedIndexPath.section].rows[newSelectedIndexPath.row].isSelected = true
+            self.dataProvider.sectionsForUse[newSelectedIndexPath.section].rows[newSelectedIndexPath.row].isSelected = true
             //
             result.updateValue(newSelectedIndexPath, forKey: true)
             //
@@ -123,11 +120,11 @@ extension AddCourseDataManager {
                 return result
             } else {
                 //
-                self.dataProvider.sections[oldSelectedIndexPath.section].rows[oldSelectedIndexPath.row].isSelected = false
+                self.dataProvider.sectionsForUse[oldSelectedIndexPath.section].rows[oldSelectedIndexPath.row].isSelected = false
                 //
                 result.updateValue(oldSelectedIndexPath, forKey: false)
                 //
-                self.dataProvider.sections[newSelectedIndexPath.section].rows[newSelectedIndexPath.row].isSelected = true
+                self.dataProvider.sectionsForUse[newSelectedIndexPath.section].rows[newSelectedIndexPath.row].isSelected = true
                 //
                 result.updateValue(newSelectedIndexPath, forKey: true)
                 //
@@ -140,14 +137,10 @@ extension AddCourseDataManager {
     
 }
 
-// MARK: - Private Methods
-fileprivate extension AddCourseDataManager {
+// MARK: - Public Methods
+extension AddCourseDataManager {
     
-    func sortAlphabeticallyLanguages(_ array: [MDLanguageModel]) -> [MDLanguageModel] {
-        return array.sorted(by: { $0.name.localizedCaseInsensitiveCompare($1.name) == ComparisonResult.orderedAscending })
-    }
-    
-    func configuredSections(byLanguages languages: [MDLanguageModel]) -> [MDAddCourseSection] {
+    static func configuredSections(byLanguages languages: [MDLanguageModel]) -> [MDAddCourseSection] {
         
         if (languages.isEmpty) {
             return .init()
@@ -171,7 +164,16 @@ fileprivate extension AddCourseDataManager {
         
     }
     
-    func configuredRows(sortedLanguages: [MDLanguageModel], character: String) -> [MDAddCourseRow] {
+}
+
+// MARK: - Private Methods
+fileprivate extension AddCourseDataManager {
+    
+    static func sortAlphabeticallyLanguages(_ array: [MDLanguageModel]) -> [MDLanguageModel] {
+        return array.sorted(by: { $0.name.localizedCaseInsensitiveCompare($1.name) == ComparisonResult.orderedAscending })
+    }
+    
+    static func configuredRows(sortedLanguages: [MDLanguageModel], character: String) -> [MDAddCourseRow] {
         
         var result: [MDAddCourseRow] = .init()
         
@@ -187,16 +189,16 @@ fileprivate extension AddCourseDataManager {
         return result
         
     }
-    
+      
     var firstSelectedIndexPath: IndexPath? {
-        guard let sectionIndex = dataProvider.sections.firstIndex(where: { $0.rows.contains(where: { $0.isSelected }) }) else { return (nil) }
-        guard let rowIndex = dataProvider.sections[sectionIndex].rows.firstIndex(where: { $0.isSelected }) else { return (nil) }
+        guard let sectionIndex = dataProvider.sectionsForUse.firstIndex(where: { $0.rows.contains(where: { $0.isSelected }) }) else { return (nil) }
+        guard let rowIndex = dataProvider.sectionsForUse[sectionIndex].rows.firstIndex(where: { $0.isSelected }) else { return (nil) }
         return .init(row: rowIndex, section: sectionIndex)
     }
     
     func newSelectedIndexPath(fromSelectedRow row: MDAddCourseRow) -> IndexPath {
-        let sectionIndex = dataProvider.sections.firstIndex(where: { $0.rows.contains(where: { $0 == row }) })!
-        let rowIndex = dataProvider.sections[sectionIndex].rows.firstIndex(where: { $0 == row })!
+        let sectionIndex = dataProvider.sectionsForUse.firstIndex(where: { $0.rows.contains(where: { $0 == row }) })!
+        let rowIndex = dataProvider.sectionsForUse[sectionIndex].rows.firstIndex(where: { $0 == row })!
         return .init(row: rowIndex, section: sectionIndex)
     }
     

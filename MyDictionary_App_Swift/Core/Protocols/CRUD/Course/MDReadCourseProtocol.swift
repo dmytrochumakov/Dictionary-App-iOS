@@ -14,8 +14,9 @@ protocol MDReadCourseProtocol {
     
     func readCourses(fetchLimit: Int,
                      fetchOffset: Int,
+                     ascending: Bool,
                      _ completionHandler: @escaping(MDOperationsResultWithCompletion<CDCourseEntity>))
     
-    func readAllCourses(_ completionHandler: @escaping(MDOperationsResultWithCompletion<CDCourseEntity>))
+    func readAllCourses(ascending: Bool, _ completionHandler: @escaping(MDOperationsResultWithCompletion<CDCourseEntity>))
     
 }

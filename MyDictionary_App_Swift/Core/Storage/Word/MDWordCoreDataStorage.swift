@@ -40,10 +40,10 @@ final class MDWordCoreDataStorage: NSObject,
 extension MDWordCoreDataStorage {
     
     func entitiesCount(_ completionHandler: @escaping (MDEntitiesCountResultWithCompletion)) {
-        self.readAllWords() { result in
+        self.readEntitiesCount() { result in
             switch result {
-            case .success(let words):
-                completionHandler(.success(words.count))
+            case .success(let entitiesCount):
+                completionHandler(.success(entitiesCount))
             case .failure(let error):
                 completionHandler(.failure(error))
             }
@@ -51,10 +51,10 @@ extension MDWordCoreDataStorage {
     }
     
     func entitiesIsEmpty(_ completionHandler: @escaping (MDEntitiesIsEmptyResultWithCompletion)) {
-        self.readAllWords() { result in
+        self.readEntitiesCount() { result in
             switch result {
-            case .success(let words):
-                completionHandler(.success(words.isEmpty))
+            case .success(let entitiesCount):
+                completionHandler(.success(entitiesCount == .zero))
             case .failure(let error):
                 completionHandler(.failure(error))
             }
@@ -187,15 +187,18 @@ extension MDWordCoreDataStorage {
     func readWords(byCourseUUID uuid: UUID,
                    fetchLimit: Int,
                    fetchOffset: Int,
+                   ascending: Bool,
                    _ completionHandler: @escaping (MDOperationsResultWithCompletion<CDWordEntity>)) {
         
         let operation: BlockOperation = .init {
             
             let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: MDCoreDataEntityName.CDWordEntity)
             
-            fetchRequest.predicate = NSPredicate(format: "\(CDCourseEntityAttributeName.uuid) == %@", uuid.uuidString)
+            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseUUID) == %@", uuid.uuidString)
             fetchRequest.fetchLimit = fetchLimit
             fetchRequest.fetchOffset = fetchOffset
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(CDWordEntity.createdAt),
+                                                             ascending: ascending)]
             
             let asyncFetchRequest = NSAsynchronousFetchRequest.init(fetchRequest: fetchRequest) { asynchronousFetchResult in
                 
@@ -249,6 +252,7 @@ extension MDWordCoreDataStorage {
     
     func readWords(fetchLimit: Int,
                    fetchOffset: Int,
+                   ascending: Bool,
                    _ completionHandler: @escaping (MDOperationsResultWithCompletion<CDWordEntity>)) {
         
         let operation: BlockOperation = .init {
@@ -257,6 +261,8 @@ extension MDWordCoreDataStorage {
             
             fetchRequest.fetchLimit = fetchLimit
             fetchRequest.fetchOffset = fetchOffset
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(CDWordEntity.createdAt),
+                                                             ascending: ascending)]
             
             let asyncFetchRequest = NSAsynchronousFetchRequest.init(fetchRequest: fetchRequest) { asynchronousFetchResult in
                 
@@ -308,14 +314,56 @@ extension MDWordCoreDataStorage {
         
     }
     
-    func readAllWords(_ completionHandler: @escaping (MDOperationsResultWithCompletion<CDWordEntity>)) {
-        readWords(fetchLimit: .zero, fetchOffset: .zero, completionHandler)
+    func readAllWords(ascending: Bool,
+                      _ completionHandler: @escaping (MDOperationsResultWithCompletion<CDWordEntity>)) {
+        
+        readWords(fetchLimit: .zero, fetchOffset: .zero, ascending: ascending, completionHandler)
+        
     }
     
     func readAllWords(byCourseUUID uuid: UUID,
+                      ascending: Bool,
                       _ completionHandler: @escaping (MDOperationsResultWithCompletion<CDWordEntity>)) {
         
-        readWords(byCourseUUID: uuid, fetchLimit: .zero, fetchOffset: .zero, completionHandler)
+        readWords(byCourseUUID: uuid, fetchLimit: .zero, fetchOffset: .zero, ascending: ascending, completionHandler)
+        
+    }
+    
+    func readEntitiesCount(_ completionHandler: @escaping(MDEntitiesCountResultWithCompletion)) {
+        
+        let operation: BlockOperation = .init {
+            
+            //
+            let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: MDCoreDataEntityName.CDWordEntity)
+            //
+            
+            do {
+                
+                //
+                completionHandler(.success(try self.managedObjectContext.count(for: fetchRequest)))
+                //
+                
+                //
+                return
+                //
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+        }
+        
+        //
+        operationQueue.addOperation(operation)
+        //
         
     }
     
@@ -327,6 +375,7 @@ extension MDWordCoreDataStorage {
     func updateWord(byWordUUID uuid: UUID,
                     newWordText: String,
                     newWordDescription: String,
+                    newUpdatedAt: Date,
                     _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         let operation: BlockOperation = .init {
@@ -334,7 +383,8 @@ extension MDWordCoreDataStorage {
             let batchUpdateRequest = NSBatchUpdateRequest(entityName: MDCoreDataEntityName.CDWordEntity)
             
             batchUpdateRequest.propertiesToUpdate = [CDWordEntityAttributeName.wordText : newWordText,
-                                                     CDWordEntityAttributeName.wordDescription : newWordDescription
+                                                     CDWordEntityAttributeName.wordDescription : newWordDescription,
+                                                     CDWordEntityAttributeName.updatedAt : newUpdatedAt
             ]
             
             batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.uuid) == %@", uuid.uuidString)
@@ -434,7 +484,7 @@ extension MDWordCoreDataStorage {
             
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MDCoreDataEntityName.CDWordEntity)
             
-            fetchRequest.predicate = NSPredicate(format: "\(CDCourseEntityAttributeName.uuid) == %@", uuid.uuidString)
+            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseUUID) == %@", uuid.uuidString)
             
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             

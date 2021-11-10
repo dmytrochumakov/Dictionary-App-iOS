@@ -15,7 +15,7 @@ final class TestCoreDataStack: MDCoreDataStack {
         super.init()
                 
         let persistentStoreDescription = NSPersistentStoreDescription()
-        persistentStoreDescription.type = NSSQLiteStoreType
+        persistentStoreDescription.type = NSInMemoryStoreType
         
         let container = NSPersistentContainer(
             name: MDConstants.StaticText.appName,

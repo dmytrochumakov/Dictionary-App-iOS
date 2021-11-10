@@ -37,6 +37,7 @@ protocol CourseListInteractorProtocol: CourseListInteractorInputProtocol,
 final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
     
     fileprivate let dataManager: CourseListDataManagerInputProtocol
+    fileprivate let courseCoreDataStorage: MDCourseCoreDataStorageProtocol
     fileprivate var bridge: MDBridgeProtocol
     
     internal var tableViewDelegate: CourseListTableViewDelegateProtocol
@@ -49,13 +50,15 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
          collectionViewDelegate: CourseListTableViewDelegateProtocol,
          collectionViewDataSource: CourseListTableViewDataSourceProtocol,
          searchBarDelegate: MDSearchBarDelegateImplementationProtocol,
-         bridge: MDBridgeProtocol) {
+         bridge: MDBridgeProtocol,
+         courseCoreDataStorage: MDCourseCoreDataStorageProtocol) {
         
         self.dataManager = dataManager
         self.tableViewDelegate = collectionViewDelegate
         self.tableViewDataSource = collectionViewDataSource
         self.searchBarDelegate = searchBarDelegate
         self.bridge = bridge
+        self.courseCoreDataStorage = courseCoreDataStorage
         
         super.init()
         subscribe()
@@ -69,7 +72,7 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
 }
 
 // MARK: - CourseListDataManagerOutputProtocol
-extension CourseListInteractor {
+extension CourseListInteractor: CourseListDataManagerOutputProtocol {
     
     func readAndAddCoursesToDataProviderResult(_ result: MDOperationResultWithoutCompletion<Void>) {
         checkResultAndExecuteReloadDataOrShowError(result)
@@ -86,7 +89,7 @@ extension CourseListInteractor {
 }
 
 // MARK: - CourseListInteractorInputProtocol
-extension CourseListInteractor {
+extension CourseListInteractor: CourseListInteractorInputProtocol {
     
     func viewDidLoad() {
         dataManager.readAndAddCoursesToDataProvider()
@@ -96,8 +99,56 @@ extension CourseListInteractor {
         
         // Show Progress HUD
         interactorOutput?.showProgressHUD()
-        // Delete Course From API And Storage
+        //
         
+        // Delete Course From Core Data Storage
+        courseCoreDataStorage.deleteCourse(byCourseUUID: dataManager.dataProvider.course(atIndexPath: indexPath).course.uuid!) { [unowned self] (deleteResult) in
+            
+            switch deleteResult {
+                
+            case .success:
+                
+                DispatchQueue.main.async {
+                    
+                    // Hide Progress HUD
+                    self.interactorOutput?.hideProgressHUD()
+                    //
+                    
+                    // Delete Course From Memory Storage
+                    self.dataManager.deleteCourse(atIndexPath: indexPath)
+                    //
+                    
+                    // Delete Row
+                    self.interactorOutput?.deleteRow(atIndexPath: indexPath)
+                    //
+                    
+                }
+                
+                //
+                break
+                //
+                
+            case .failure(let error):
+                
+                DispatchQueue.main.async {
+                    
+                    // Hide Progress HUD
+                    self.interactorOutput?.hideProgressHUD()
+                    //
+                    
+                    //
+                    self.interactorOutput?.showError(error)
+                    //
+                    
+                }
+                
+                //
+                break
+                //
+                
+            }
+            
+        }
         
     }
     

@@ -7,12 +7,15 @@
 import Foundation
 
 protocol CourseListDataManagerInputProtocol {
+    
     var dataProvider: CourseListDataProviderProtocol { get }
+    
     func addCourse(atNewCourse course: MDCourseListModel) -> IndexPath
     func readAndAddCoursesToDataProvider()
     func filterCourses(_ searchText: String?)
     func clearCourseFilter()
     func deleteCourse(atIndexPath indexPath: IndexPath)
+    
 }
 
 protocol CourseListDataManagerOutputProtocol: AnyObject {
@@ -29,17 +32,20 @@ final class CourseListDataManager: CourseListDataManagerProtocol {
     
     fileprivate let coreDataStorage: MDCourseCoreDataStorageProtocol
     fileprivate let filterSearchTextService: MDFilterSearchTextServiceProtocol
+    fileprivate let languageMemoryStorage: MDLanguageMemoryStorageProtocol
     
     internal var dataProvider: CourseListDataProviderProtocol
     internal weak var dataManagerOutput: CourseListDataManagerOutputProtocol?
     
     init(coreDataStorage: MDCourseCoreDataStorageProtocol,
          dataProvider: CourseListDataProviderProtocol,
-         filterSearchTextService: MDFilterSearchTextServiceProtocol) {
+         filterSearchTextService: MDFilterSearchTextServiceProtocol,
+         languageMemoryStorage: MDLanguageMemoryStorageProtocol) {
         
         self.coreDataStorage = coreDataStorage
         self.dataProvider = dataProvider
         self.filterSearchTextService = filterSearchTextService
+        self.languageMemoryStorage = languageMemoryStorage
         
     }
     
@@ -50,24 +56,22 @@ final class CourseListDataManager: CourseListDataManagerProtocol {
 }
 
 // MARK: - CourseListDataManagerInputProtocol
-extension CourseListDataManager {
+extension CourseListDataManager: CourseListDataManagerInputProtocol {
     
     func readAndAddCoursesToDataProvider() {
         
-        coreDataStorage.readAllCourses { [unowned self] readResult in
+        coreDataStorage.readAllCourses(ascending: false) { [unowned self] readResult in
             
             switch readResult {
                 
             case .success(let readCourses):
                 
-                // Sort
-                let sordedCourses = sortCourses(readCourses)
-                //
-                
                 DispatchQueue.main.async {
                     
                     // Set Read Courses
-                    self.dataProvider.filteredCourses = sordedCourses as! [MDCourseListModel]
+                    let configuredCourses = self.configuredCourses(readCourses)
+                    self.dataProvider.availableCourses = configuredCourses
+                    self.dataProvider.coursesForUse = configuredCourses
                     //
                     
                     // Pass Result
@@ -102,50 +106,20 @@ extension CourseListDataManager {
     
     func filterCourses(_ searchText: String?) {
         
-        coreDataStorage.readAllCourses { [unowned self] readResult in
+        //
+        filterSearchTextService.filter(input: dataProvider.availableCourses,
+                                       searchText: searchText) { [unowned self] (filteredResult) in
             
-            switch readResult {
+            DispatchQueue.main.async {
                 
-            case .success(let readCourses):
-                
-                // Sort
-                let sordedCourses = sortCourses(readCourses)
+                // Set Filtered Result
+                self.dataProvider.coursesForUse = filteredResult as! [MDCourseListModel]
                 //
                 
-                //
-                filterSearchTextService.filter(input: sordedCourses as! [MDCourseListModel],
-                                               searchText: searchText) { [unowned self] (filteredResult) in
-                    
-                    DispatchQueue.main.async {
-                        
-                        // Set Filtered Result
-                        self.dataProvider.filteredCourses = filteredResult as! [MDCourseListModel]
-                        
-                        // Pass Result
-                        self.dataManagerOutput?.filteredCoursesResult(.success(()))
-                        //
-                        
-                    }
-                    
-                }
-                
-                //
-                break
+                // Pass Result
+                self.dataManagerOutput?.filteredCoursesResult(.success(()))
                 //
                 
-            case .failure(let error):
-                
-                DispatchQueue.main.async {
-                    
-                    // Pass Result
-                    self.dataManagerOutput?.filteredCoursesResult(.failure(error))
-                    //
-                    
-                }
-                
-                //
-                break
-                //
             }
             
         }
@@ -154,49 +128,13 @@ extension CourseListDataManager {
     
     func clearCourseFilter() {
         
-        coreDataStorage.readAllCourses { [unowned self] readResult in
-            
-            switch readResult {
-                
-            case .success(let readCourses):
-                
-                // Sort
-                let sordedCourses = sortCourses(readCourses)
-                //
-                
-                DispatchQueue.main.async {
-                    
-                    // Set Read Courses
-                    self.dataProvider.filteredCourses = sordedCourses as! [MDCourseListModel]
-                    //
-                    
-                    // Pass Result
-                    self.dataManagerOutput?.clearCourseFilterResult(.success(()))
-                    //
-                    
-                }
-                
-                //
-                break
-                //
-                
-            case .failure(let error):
-                
-                DispatchQueue.main.async {
-                    
-                    // Pass Result
-                    self.dataManagerOutput?.clearCourseFilterResult(.failure(error))
-                    //
-                    
-                }
-                
-                //
-                break
-                //
-                
-            }
-            
-        }
+        //
+        self.dataProvider.coursesForUse = self.dataProvider.availableCourses
+        //
+        
+        // Pass Result
+        self.dataManagerOutput?.clearCourseFilterResult(.success(()))
+        //
         
     }
     
@@ -206,7 +144,7 @@ extension CourseListDataManager {
     
     func addCourse(atNewCourse course: MDCourseListModel) -> IndexPath {
         //
-        self.dataProvider.filteredCourses.insert(course, at: .zero)
+        self.dataProvider.addCourse(course)
         //
         return .init(row: .zero, section: .zero)
     }
@@ -216,8 +154,37 @@ extension CourseListDataManager {
 // MARK: - Private Methods
 fileprivate extension CourseListDataManager {
     
-    func sortCourses(_ input: [CDCourseEntity]) -> [CDCourseEntity] {
-        return input.sorted(by: { $0.createdAt! > $1.createdAt! })
+    func configuredCourses(_ input: [CDCourseEntity]) -> [MDCourseListModel] {
+        
+        var result: [MDCourseListModel] = .init()
+        
+        input.forEach { cdCourseEntity in
+            
+            switch languageMemoryStorage.readLanguage(byLanguageId: cdCourseEntity.languageId) {
+                
+            case .success(let language):
+                
+                //
+                result.append(.init(course: cdCourseEntity,
+                                    language: language))
+                //
+                
+                //
+                break
+                //
+                
+            case .failure:
+                
+                //
+                break
+                //
+                
+            }
+            
+        }
+        
+        return result
+        
     }
     
 }

@@ -7,25 +7,42 @@
 import Foundation
 
 protocol EditWordDataProviderProtocol {
-    var word: CDWordEntity { get set }
-    var copiedWord: CDWordEntity { get }
+    
+    var transmittedWord: CDWordEntity { get }
+    var wordText: String { get set }
+    var wordDescription: String { get set }
+    
+    func updateWord()
+    
 }
 
 final class EditWordDataProvider: EditWordDataProviderProtocol {
     
-    var word: CDWordEntity
-    var copiedWord: CDWordEntity
+    var transmittedWord: CDWordEntity
+    var wordText: String
+    var wordDescription: String
     
-    init(word: CDWordEntity,
-         copiedWord: CDWordEntity) {
+    init(transmittedWord: CDWordEntity,
+         wordText: String,
+         wordDescription: String) {
         
-        self.word = word
-        self.copiedWord = copiedWord        
+        self.transmittedWord = transmittedWord
+        self.wordText = wordText
+        self.wordDescription = wordDescription
         
     }
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+extension EditWordDataProvider {
+    
+    func updateWord() {
+        self.transmittedWord.wordText = wordText
+        self.transmittedWord.wordDescription = wordDescription
     }
     
 }

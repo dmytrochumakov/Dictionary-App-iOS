@@ -18,17 +18,20 @@ extension CourseListModule {
     
     var module: UIViewController {
         
-        let dataProvider: CourseListDataProviderProtocol = CourseListDataProvider.init(filteredCourses: .init())
+        let dataProvider: CourseListDataProviderProtocol = CourseListDataProvider.init(availableCourses: .init(),
+                                                                                       coursesForUse: .init())
         
         var dataManager: CourseListDataManagerProtocol = CourseListDataManager.init(coreDataStorage: MDConstants.AppDependencies.dependencies.courseCoreDataStorage,
                                                                                     dataProvider: dataProvider,
-                                                                                    filterSearchTextService: MDFilterSearchTextService.init(operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.filterSearchTextServiceOperationQueue)!))
+                                                                                    filterSearchTextService: MDFilterSearchTextService.init(operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.filterSearchTextServiceOperationQueue)!),
+                                                                                    languageMemoryStorage: MDConstants.AppDependencies.dependencies.languageMemoryStorage)
         
         let interactor: CourseListInteractorProtocol = CourseListInteractor.init(dataManager: dataManager,
                                                                                  collectionViewDelegate: CourseListTableViewDelegate.init(dataProvider: dataProvider),
                                                                                  collectionViewDataSource: CourseListTableViewDataSource.init(dataProvider: dataProvider),
                                                                                  searchBarDelegate: MDSearchBarDelegateImplementation.init(),
-                                                                                 bridge: MDConstants.AppDependencies.dependencies.bridge)
+                                                                                 bridge: MDConstants.AppDependencies.dependencies.bridge,
+                                                                                 courseCoreDataStorage: MDConstants.AppDependencies.dependencies.courseCoreDataStorage)
         
         var router: CourseListRouterProtocol = CourseListRouter.init()
         let presenter: CourseListPresenterProtocol = CourseListPresenter.init(interactor: interactor, router: router)

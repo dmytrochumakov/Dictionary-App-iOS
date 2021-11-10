@@ -11,9 +11,13 @@ protocol WordListDataProviderProcotol: MDNumberOfSectionsProtocol,
                                        MDNumberOfRowsInSectionProtocol {
     
     var course: MDCourseListModel { get }
-    var filteredWords: [CDWordEntity] { get set }
+    
+    var availableWords: [CDWordEntity] { get set }
+    var wordsForUse: [CDWordEntity] { get set }
     
     func wordListCellModel(atIndexPath indexPath: IndexPath) -> MDWordListCellModel?
+    
+    func addWord(newWord: CDWordEntity)
     func deleteWord(atIndexPath indexPath: IndexPath)
     func updateWord(atIndexPath indexPath: IndexPath, updatedWord: CDWordEntity)
     
@@ -22,12 +26,18 @@ protocol WordListDataProviderProcotol: MDNumberOfSectionsProtocol,
 final class WordListDataProvider: WordListDataProviderProcotol {
     
     var course: MDCourseListModel
-    var filteredWords: [CDWordEntity]
+    
+    var availableWords: [CDWordEntity]
+    var wordsForUse: [CDWordEntity]
     
     init(course: MDCourseListModel,
-         words: [CDWordEntity]) {
+         availableWords: [CDWordEntity],
+         wordsForUse: [CDWordEntity]) {
+        
         self.course = course
-        self.filteredWords = words
+        self.availableWords = availableWords
+        self.wordsForUse = wordsForUse
+        
     }
     
     deinit {
@@ -43,7 +53,7 @@ extension WordListDataProvider {
     }
     
     func numberOfRowsInSection(_ section: Int) -> Int {
-        return filteredWords.count
+        return wordsForUse.count
     }
     
 }
@@ -51,19 +61,30 @@ extension WordListDataProvider {
 extension WordListDataProvider {
     
     func wordListCellModel(atIndexPath indexPath: IndexPath) -> MDWordListCellModel? {
-        if (filteredWords.isEmpty) {
+        if (wordsForUse.isEmpty) {
             return nil
         } else {
-            return .init(wordResponse: filteredWords[indexPath.row])
+            return .init(wordResponse: wordsForUse[indexPath.row])
         }
     }
     
+}
+
+extension WordListDataProvider {
+    
+    func addWord(newWord: CDWordEntity) {
+        availableWords.insert(newWord, at: .zero)
+        wordsForUse.insert(newWord, at: .zero)
+    }
+    
     func deleteWord(atIndexPath indexPath: IndexPath) {
-        filteredWords.remove(at: indexPath.row)
+        availableWords.remove(at: indexPath.row)
+        wordsForUse.remove(at: indexPath.row)
     }
     
     func updateWord(atIndexPath indexPath: IndexPath, updatedWord: CDWordEntity) {
-        filteredWords[indexPath.row] = updatedWord
+        availableWords[indexPath.row] = updatedWord
+        wordsForUse[indexPath.row] = updatedWord
     }
     
 }

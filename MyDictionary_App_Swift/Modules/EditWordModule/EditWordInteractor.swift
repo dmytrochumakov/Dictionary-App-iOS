@@ -47,6 +47,7 @@ final class EditWordInteractor: NSObject,
     
     fileprivate let dataManager: EditWordDataManagerInputProtocol
     fileprivate let bridge: MDBridgeProtocol
+    fileprivate let wordCoreDataStorage: MDWordCoreDataStorageProtocol
     
     var textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol
     var textViewDelegate: MDWordTextViewDelegateImplementationProtocol
@@ -56,12 +57,14 @@ final class EditWordInteractor: NSObject,
     init(dataManager: EditWordDataManagerInputProtocol,
          bridge: MDBridgeProtocol,
          textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol,
-         textViewDelegate: MDWordTextViewDelegateImplementationProtocol) {
+         textViewDelegate: MDWordTextViewDelegateImplementationProtocol,
+         wordCoreDataStorage: MDWordCoreDataStorageProtocol) {
         
-        self.dataManager = dataManager        
+        self.dataManager = dataManager
         self.bridge = bridge
         self.textFieldDelegate = textFieldDelegate
         self.textViewDelegate = textViewDelegate
+        self.wordCoreDataStorage = wordCoreDataStorage
         
         super.init()
         subscribe()
@@ -134,8 +137,64 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
             interactorOutput?.showProgressHUD()
             //
             
-            // Update Word In Api And All Storage
+            // Update Word In Core Data Storage
+            wordCoreDataStorage.updateWord(byWordUUID: dataManager.getWord.uuid!,
+                                           newWordText: dataManager.getNewWordText,
+                                           newWordDescription: dataManager.getNewWordDescription,
+                                           newUpdatedAt: .init()) { [unowned self] updateResult in
+                
+                switch updateResult {
+                    
+                case .success:
+                    
+                    DispatchQueue.main.async {
+                        
+                        // Hide Progress HUD
+                        self.interactorOutput?.hideProgressHUD()
+                        //
+                        
+                        // Update Word
+                        self.dataManager.updateWord()
+                        //
+                        
+                        // Pass Result
+                        self.bridge.didUpdateWord?(self.dataManager.getWord)
+                        //
+                        
+                        //
+                        self.interactorOutput?.closeModule()
+                        //
+                        
+                    }
+                    
+                    //
+                    break
+                    //
+                    
+                case .failure(let error):
+                    
+                    DispatchQueue.main.async {
+                        
+                        // Hide Progress HUD
+                        self.interactorOutput?.hideProgressHUD()
+                        //
+                        
+                        //
+                        self.interactorOutput?.showError(error)
+                        //
+                        
+                    }
+                    
+                    //
+                    break
+                    //
+                    
+                }
+                
+            }
             //
+            
+            
         }
         
     }
@@ -146,7 +205,56 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
         interactorOutput?.showProgressHUD()
         //
         
+        // Delete Word From Core Data Storage
+        wordCoreDataStorage.deleteWord(byWordUUID: dataManager.getWord.uuid!) { [unowned self] deleteResult in
+            
+            switch deleteResult {
+                
+            case .success:
+                
+                DispatchQueue.main.async {
+                    
+                    // Hide Progress HUD
+                    self.interactorOutput?.hideProgressHUD()
+                    //
+                    
+                    // Pass Result
+                    self.bridge.didDeleteWord?(self.dataManager.getWord)
+                    //
+                    
+                    //
+                    self.interactorOutput?.closeModule()
+                    //
+                    
+                }
+                
+                //
+                break
+                //
+                
+            case .failure(let error):
+                
+                DispatchQueue.main.async {
+                    
+                    // Hide Progress HUD
+                    self.interactorOutput?.hideProgressHUD()
+                    //
+                    
+                    //
+                    self.interactorOutput?.showError(error)
+                    //
+                    
+                }
+                
+                //
+                break
+                //
+                
+            }
+            
+        }
         //
+        
     }
     
     func wordTextFieldDidChange(_ text: String?) {

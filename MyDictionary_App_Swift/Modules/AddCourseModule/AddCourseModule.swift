@@ -18,10 +18,15 @@ extension AddCourseModule {
     
     var module: UIViewController {
         
-        let dataProvider: AddCourseDataProviderProtocol = AddCourseDataProvider.init(sections: .init())
+        let languageMemoryStorage: MDLanguageMemoryStorageProtocol = MDConstants.AppDependencies.dependencies.languageMemoryStorage
+        
+        let configuredSections = AddCourseDataManager.configuredSections(byLanguages: languageMemoryStorage.readAllLanguages())
+        
+        let dataProvider: AddCourseDataProviderProtocol = AddCourseDataProvider.init(availableSections: configuredSections,
+                                                                                     sectionsForUse: configuredSections)
         
         var dataManager: AddCourseDataManagerProtocol = AddCourseDataManager.init(dataProvider: dataProvider,
-                                                                                  languageMemoryStorage: MDConstants.AppDependencies.dependencies.languageMemoryStorage,
+                                                                                  languageMemoryStorage: languageMemoryStorage,
                                                                                   filterSearchTextService: MDFilterSearchTextService.init(operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.filterSearchTextServiceOperationQueue)!))
         
         let interactor: AddCourseInteractorProtocol = AddCourseInteractor.init(dataManager: dataManager,
@@ -29,9 +34,7 @@ extension AddCourseModule {
                                                                                collectionViewDataSource: MDAddCourseCollectionViewDataSource.init(dataProvider: dataProvider),
                                                                                searchBarDelegate: MDSearchBarDelegateImplementation.init(),
                                                                                bridge: MDConstants.AppDependencies.dependencies.bridge,
-                                                                               courseCoreDataStorage: MDCourseCoreDataStorage.init(operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseCoreDataStorageOperationQueue)!,
-                                                                                                                                   managedObjectContext: MDConstants.AppDependencies.dependencies.coreDataStack.privateContext,
-                                                                                                                                   coreDataStack: MDConstants.AppDependencies.dependencies.coreDataStack))
+                                                                               courseCoreDataStorage: MDConstants.AppDependencies.dependencies.courseCoreDataStorage)
         
         var router: AddCourseRouterProtocol = AddCourseRouter.init()
         let presenter: AddCoursePresenterProtocol = AddCoursePresenter.init(interactor: interactor, router: router)

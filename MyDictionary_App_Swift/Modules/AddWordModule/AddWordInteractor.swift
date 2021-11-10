@@ -22,7 +22,7 @@ protocol AddWordInteractorOutputProtocol: AnyObject,
     
     func updateWordTextFieldCounter(_ count: Int)
     func updateWordTextViewCounter(_ count: Int)
-    func wordTextFieldShouldClearAction()        
+    func wordTextFieldShouldClearAction()
     
 }
 
@@ -36,6 +36,7 @@ final class AddWordInteractor: NSObject,
     
     fileprivate let dataManager: AddWordDataManagerInputProtocol
     fileprivate let bridge: MDBridgeProtocol
+    fileprivate let wordCoreDataStorage: MDWordCoreDataStorageProtocol
     
     var textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol
     var textViewDelegate: MDWordTextViewDelegateImplementationProtocol
@@ -45,12 +46,14 @@ final class AddWordInteractor: NSObject,
     init(dataManager: AddWordDataManagerInputProtocol,
          textFieldDelegate: MDWordTextFieldDelegateImplementationProtocol,
          textViewDelegate: MDWordTextViewDelegateImplementationProtocol,
-         bridge: MDBridgeProtocol) {
+         bridge: MDBridgeProtocol,
+         wordCoreDataStorage: MDWordCoreDataStorageProtocol) {
         
         self.dataManager = dataManager
         self.textFieldDelegate = textFieldDelegate
-        self.textViewDelegate = textViewDelegate        
+        self.textViewDelegate = textViewDelegate
         self.bridge = bridge
+        self.wordCoreDataStorage = wordCoreDataStorage
         
         super.init()
         subscribe()
@@ -85,6 +88,61 @@ extension AddWordInteractor: AddWordInteractorInputProtocol {
         
         // Show Progress HUD
         interactorOutput?.showProgressHUD()
+        //
+        
+        // Save Word To Core Data
+        wordCoreDataStorage.createWord(courseUUID: dataManager.getCourse.course.uuid!,
+                                       uuid: .init(),
+                                       wordText: dataManager.getWordText!,
+                                       wordDescription: dataManager.getWordDescription!,
+                                       createdAt: .init(),
+                                       updatedAt: .init()) { [unowned self] createResult in
+            
+            switch createResult {
+                
+            case .success(let cdWordEntity):
+                
+                DispatchQueue.main.async {
+                    
+                    // Hide Progress HUD
+                    interactorOutput?.hideProgressHUD()
+                    //
+                    
+                    // Pass Result
+                    bridge.didAddWord?(cdWordEntity)
+                    //
+                    
+                    //
+                    interactorOutput?.closeModule()
+                    //
+                    
+                }
+                
+                //
+                break
+                //
+                
+            case .failure(let error):
+                
+                DispatchQueue.main.async {
+                    
+                    // Hide Progress HUD
+                    interactorOutput?.hideProgressHUD()
+                    //
+                    
+                    // 
+                    interactorOutput?.showError(error)
+                    //
+                    
+                }
+                
+                //
+                break
+                //
+                
+            }
+            
+        }
         //
         
         

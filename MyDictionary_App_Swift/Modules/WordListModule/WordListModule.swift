@@ -30,7 +30,10 @@ extension WordListModule {
     var module: UIViewController {
         
         // Word List Module Classes
-        let wordListDataProvider: WordListDataProviderProcotol = WordListDataProvider.init(course: sender, words: .init())
+        let wordListDataProvider: WordListDataProviderProcotol = WordListDataProvider.init(course: sender,
+                                                                                           availableWords: .init(),
+                                                                                           wordsForUse: .init())
+        
         var wordListDataManager: WordListDataManagerProtocol = WordListDataManager.init(dataProvider: wordListDataProvider,
                                                                                         coreDataStorage: MDConstants.AppDependencies.dependencies.wordCoreDataStorage,
                                                                                         filterSearchTextService: MDFilterSearchTextService.init(operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.filterSearchTextServiceOperationQueue)!))
@@ -42,7 +45,9 @@ extension WordListModule {
                                                                                      tableViewDelegate: wordListTableViewDelegate,
                                                                                      tableViewDataSource: wordListTableViewDataSource,
                                                                                      searchBarDelegate: MDSearchBarDelegateImplementation.init(),
-                                                                                     bridge: MDConstants.AppDependencies.dependencies.bridge)
+                                                                                     bridge: MDConstants.AppDependencies.dependencies.bridge,
+                                                                                     wordCoreDataStorage: MDConstants.AppDependencies.dependencies.wordCoreDataStorage)
+        
         var wordListRouter: WordListRouterProtocol = WordListRouter.init()
         let wordListPresenter: WordListPresenterProtocol = WordListPresenter.init(interactor: wordListInteractor,
                                                                                   router: wordListRouter)

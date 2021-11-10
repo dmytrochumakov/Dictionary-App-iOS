@@ -9,7 +9,8 @@ import Foundation
 protocol AddCourseDataProviderProtocol: MDNumberOfSectionsProtocol,
                                         MDNumberOfRowsInSectionProtocol {
     
-    var sections: [MDAddCourseSection] { get set }
+    var availableSections: [MDAddCourseSection] { get }
+    var sectionsForUse: [MDAddCourseSection] { get set }
     func addCourseHeaderViewCellModel(atSection section: Int) -> MDAddCourseHeaderViewCellModel?
     func addCourseRow(atIndexPath indexPath: IndexPath) -> MDAddCourseRow?
     func addCourseCellModels(atSection section: Int) -> [MDAddCourseRow]
@@ -18,10 +19,19 @@ protocol AddCourseDataProviderProtocol: MDNumberOfSectionsProtocol,
 
 final class AddCourseDataProvider: AddCourseDataProviderProtocol {
     
-    var sections: [MDAddCourseSection]
+    let availableSections: [MDAddCourseSection]
+    var sectionsForUse: [MDAddCourseSection]
     
-    init(sections: [MDAddCourseSection]) {
-        self.sections = sections
+    init(availableSections: [MDAddCourseSection],
+         sectionsForUse: [MDAddCourseSection]) {
+        
+        self.availableSections = availableSections
+        self.sectionsForUse = sectionsForUse
+        
+    }
+    
+    deinit {
+        debugPrint(#function, Self.self)
     }
     
 }
@@ -29,11 +39,11 @@ final class AddCourseDataProvider: AddCourseDataProviderProtocol {
 extension AddCourseDataProvider {
     
     var numberOfSections: Int {
-        return sections.count
+        return sectionsForUse.count
     }
     
     func numberOfRowsInSection(_ section: Int) -> Int {
-        return sections[section].rows.count
+        return sectionsForUse[section].rows.count
     }
     
 }
@@ -41,26 +51,26 @@ extension AddCourseDataProvider {
 extension AddCourseDataProvider {
     
     func addCourseHeaderViewCellModel(atSection section: Int) -> MDAddCourseHeaderViewCellModel? {
-        if (sections.isEmpty) {
+        if (sectionsForUse.isEmpty) {
             return nil
         } else {
-            return .init(character: sections[section].character)
+            return .init(character: sectionsForUse[section].character)
         }
     }
     
     func addCourseRow(atIndexPath indexPath: IndexPath) -> MDAddCourseRow? {
-        if (sections.isEmpty) {
+        if (sectionsForUse.isEmpty) {
             return nil
         } else {
-            return sections[indexPath.section].rows[indexPath.row]
+            return sectionsForUse[indexPath.section].rows[indexPath.row]
         }
     }
     
     func addCourseCellModels(atSection section: Int) -> [MDAddCourseRow] {
-        if (sections.isEmpty) {
+        if (sectionsForUse.isEmpty) {
             return .init()
         } else {
-            return sections[section].rows
+            return sectionsForUse[section].rows
         }
     }
     

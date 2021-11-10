@@ -37,13 +37,15 @@ extension MDCourseCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Create Course Expectation")
         
-        courseCoreDataStorage.createCourse(Constants_For_Tests.mockedCourse(context: managedObjectContext)) { [unowned self] createResult in
+        courseCoreDataStorage.createCourse(uuid: Constants_For_Tests.mockedCourseUUID,
+                                           languageId: Constants_For_Tests.mockedCourseLanguageId,
+                                           createdAt: Constants_For_Tests.mockedCourseCreatedAt) { createResult in
             
             switch createResult {
                 
             case .success(let courseEntity):
                 
-                XCTAssertTrue(courseEntity.languageId == Constants_For_Tests.mockedCourse(context: managedObjectContext).languageId)
+                XCTAssertTrue(courseEntity.languageId == Constants_For_Tests.mockedCourseLanguageId)
                 
                 expectation.fulfill()
                 
@@ -61,7 +63,9 @@ extension MDCourseCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Read Course Expectation")
         
-        courseCoreDataStorage.createCourse(Constants_For_Tests.mockedCourse(context: managedObjectContext)) { [unowned self] createResult in
+        courseCoreDataStorage.createCourse(uuid: Constants_For_Tests.mockedCourseUUID,
+                                           languageId: Constants_For_Tests.mockedCourseLanguageId,
+                                           createdAt: Constants_For_Tests.mockedCourseCreatedAt) { [unowned self] createResult in
             
             switch createResult {
                 
@@ -100,7 +104,9 @@ extension MDCourseCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Delete Course Expectation")
         
-        courseCoreDataStorage.createCourse(Constants_For_Tests.mockedCourse(context: managedObjectContext)) { [unowned self] createResult in
+        courseCoreDataStorage.createCourse(uuid: Constants_For_Tests.mockedCourseUUID,
+                                           languageId: Constants_For_Tests.mockedCourseLanguageId,
+                                           createdAt: Constants_For_Tests.mockedCourseCreatedAt) { [unowned self] createResult in
             
             switch createResult {
                 
@@ -135,7 +141,9 @@ extension MDCourseCoreDataStorage_Tests {
         
         let expectation = XCTestExpectation(description: "Delete All Courses Expectation")
         
-        courseCoreDataStorage.createCourse(Constants_For_Tests.mockedCourse(context: managedObjectContext)) { [unowned self] createResult in
+        courseCoreDataStorage.createCourse(uuid: Constants_For_Tests.mockedCourseUUID,
+                                           languageId: Constants_For_Tests.mockedCourseLanguageId,
+                                           createdAt: Constants_For_Tests.mockedCourseCreatedAt) { [unowned self] createResult in
             
             switch createResult {
                 
