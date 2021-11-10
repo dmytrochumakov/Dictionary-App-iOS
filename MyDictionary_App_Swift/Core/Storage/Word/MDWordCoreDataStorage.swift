@@ -8,8 +8,21 @@
 import Foundation
 import CoreData
 
+protocol MDExistsWordProtocol {
+    
+    func exists(byCourseUUID courseUUID: UUID,
+                andWordText wordText: String,
+                _ completionHandler: @escaping (MDOperationResultWithCompletion<Bool>))
+    
+    func exists(byCourseUUID courseUUID: UUID,
+                andWordUUID wordUUID: UUID,
+                _ completionHandler: @escaping (MDOperationResultWithCompletion<Bool>))
+    
+}
+
 protocol MDWordCoreDataStorageProtocol: MDCRUDWordProtocol,
-                                        MDStorageInterface {
+                                        MDStorageInterface,
+                                        MDExistsWordProtocol {
     
 }
 
@@ -32,6 +45,95 @@ final class MDWordCoreDataStorage: NSObject,
     
     deinit {
         debugPrint(#function, Self.self)
+    }
+    
+}
+
+// MARK: - Exists
+extension MDWordCoreDataStorage {
+    
+    func exists(byCourseUUID courseUUID: UUID,
+                andWordText wordText: String,
+                _ completionHandler: @escaping (MDOperationResultWithCompletion<Bool>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            //
+            let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: MDCoreDataEntityName.CDWordEntity)
+            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseUUID) == %@ AND \(CDWordEntityAttributeName.wordText) == %@",
+                                                 argumentArray: [courseUUID.uuid, wordText])
+            //
+            
+            do {
+                
+                //
+                completionHandler(.success(try self.managedObjectContext.count(for: fetchRequest) > .zero))
+                //
+                
+                //
+                return
+                //
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+        }
+        
+        //
+        operationQueue.addOperation(operation)
+        //
+        
+    }
+    
+    func exists(byCourseUUID courseUUID: UUID,
+                andWordUUID wordUUID: UUID,
+                _ completionHandler: @escaping (MDOperationResultWithCompletion<Bool>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            //
+            let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: MDCoreDataEntityName.CDWordEntity)
+            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseUUID) == %@ AND \(CDWordEntityAttributeName.uuid) == %@",
+                                                 argumentArray: [courseUUID.uuid, wordUUID.uuid])
+            //
+            
+            do {
+                
+                //
+                completionHandler(.success(try self.managedObjectContext.count(for: fetchRequest) > .zero))
+                //
+                
+                //
+                return
+                //
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+        }
+        
+        //
+        operationQueue.addOperation(operation)
+        //
+        
     }
     
 }
