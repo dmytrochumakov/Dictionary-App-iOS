@@ -41,8 +41,7 @@ extension MDWordCoreDataStorage_Tests {
                                        uuid: Constants_For_Tests.mockedWordUUID,
                                        wordText: Constants_For_Tests.mockedWordText,
                                        wordDescription: Constants_For_Tests.mockedWordDescription,
-                                       createdAt: Constants_For_Tests.mockedWordCreatedAt,
-                                       updatedAt: Constants_For_Tests.mockedWordUpdatedAt) { [unowned self] result in
+                                       createdAt: Constants_For_Tests.mockedWordCreatedAt) { [unowned self] result in
             
             switch result {
                 
@@ -91,8 +90,7 @@ extension MDWordCoreDataStorage_Tests {
                                        uuid: Constants_For_Tests.mockedWordUUID,
                                        wordText: Constants_For_Tests.mockedWordText,
                                        wordDescription: Constants_For_Tests.mockedWordDescription,
-                                       createdAt: Constants_For_Tests.mockedWordCreatedAt,
-                                       updatedAt: Constants_For_Tests.mockedWordUpdatedAt) { [unowned self] result in
+                                       createdAt: Constants_For_Tests.mockedWordCreatedAt) { [unowned self] result in
             
             switch result {
                 
@@ -141,8 +139,7 @@ extension MDWordCoreDataStorage_Tests {
                                        uuid: Constants_For_Tests.mockedWordUUID,
                                        wordText: Constants_For_Tests.mockedWordText,
                                        wordDescription: Constants_For_Tests.mockedWordDescription,
-                                       createdAt: Constants_For_Tests.mockedWordCreatedAt,
-                                       updatedAt: Constants_For_Tests.mockedWordUpdatedAt) { [unowned self] createResult in
+                                       createdAt: Constants_For_Tests.mockedWordCreatedAt) { [unowned self] createResult in
             
             switch createResult {
                 
@@ -151,8 +148,7 @@ extension MDWordCoreDataStorage_Tests {
                 self.wordCoreDataStorage.updateWord(byCourseUUID: Constants_For_Tests.mockedWordCourseUUID,
                                                     andWordUUID: createdWord.uuid!,
                                                     newWordText: Constants_For_Tests.mockedWordForUpdateText,
-                                                    newWordDescription: Constants_For_Tests.mockedWordForUpdateDescription,
-                                                    newUpdatedAt: Constants_For_Tests.mockedWordForUpdateUpdatedAt) { [unowned self] updateResult in
+                                                    newWordDescription: Constants_For_Tests.mockedWordForUpdateDescription) { [unowned self] updateResult in
                     
                     switch updateResult {
                         
@@ -204,8 +200,7 @@ extension MDWordCoreDataStorage_Tests {
                                        uuid: Constants_For_Tests.mockedWordUUID,
                                        wordText: Constants_For_Tests.mockedWordText,
                                        wordDescription: Constants_For_Tests.mockedWordDescription,
-                                       createdAt: Constants_For_Tests.mockedWordCreatedAt,
-                                       updatedAt: Constants_For_Tests.mockedWordUpdatedAt) { [unowned self] createResult in
+                                       createdAt: Constants_For_Tests.mockedWordCreatedAt) { [unowned self] createResult in
             
             switch createResult {
                 
@@ -242,8 +237,7 @@ extension MDWordCoreDataStorage_Tests {
                                        uuid: Constants_For_Tests.mockedWordUUID,
                                        wordText: Constants_For_Tests.mockedWordText,
                                        wordDescription: Constants_For_Tests.mockedWordDescription,
-                                       createdAt: Constants_For_Tests.mockedWordCreatedAt,
-                                       updatedAt: Constants_For_Tests.mockedWordUpdatedAt) { [unowned self] createResult in
+                                       createdAt: Constants_For_Tests.mockedWordCreatedAt) { [unowned self] createResult in
             
             switch createResult {
                 

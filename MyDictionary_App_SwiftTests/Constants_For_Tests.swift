@@ -25,14 +25,12 @@ struct Constants_For_Tests {
     public static let mockedWordUUID: UUID = .init()
     public static let mockedWordText: String = "MOSF"
     public static let mockedWordDescription: String = "metal–oxide–semiconductor-field"
-    public static let mockedWordCreatedAt: Date = .init()
-    public static let mockedWordUpdatedAt: Date = .init()
+    public static let mockedWordCreatedAt: Date = .init()    
     
     
     // Word For Update
     public static let mockedWordForUpdateText: String = "MOSFC"
-    public static let mockedWordForUpdateDescription: String = "metal–oxide–semiconductor-field-c"
-    public static let mockedWordForUpdateUpdatedAt: Date = .init()
+    public static let mockedWordForUpdateDescription: String = "metal–oxide–semiconductor-field-c"    
     
     
     static var operationQueueManager: MDOperationQueueManagerProtocol {

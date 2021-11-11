@@ -144,8 +144,7 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
             wordManager.updateWord(byCourseUUID: dataManager.getWord.courseUUID!,
                                    andWordUUID: dataManager.getWord.uuid!,
                                    newWordText: dataManager.getNewWordText,
-                                   newWordDescription: dataManager.getNewWordDescription,
-                                   newUpdatedAt: .init()) { [unowned self] updateResult in
+                                   newWordDescription: dataManager.getNewWordDescription) { [unowned self] updateResult in
                 
                 switch updateResult {
                     

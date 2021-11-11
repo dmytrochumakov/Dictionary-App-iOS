@@ -127,7 +127,6 @@ extension MDWordCoreDataStorage {
                     wordText: String,
                     wordDescription: String,
                     createdAt: Date,
-                    updatedAt: Date,
                     _ completionHandler: @escaping (MDOperationResultWithCompletion<CDWordEntity>)) {
         
         let operation: BlockOperation = .init {
@@ -140,7 +139,6 @@ extension MDWordCoreDataStorage {
             newWordEntity.wordText = wordText
             newWordEntity.wordDescription = wordDescription
             newWordEntity.createdAt = createdAt
-            newWordEntity.updatedAt = updatedAt
             //
             
             // Save
@@ -492,7 +490,6 @@ extension MDWordCoreDataStorage {
                     andWordUUID wordUUID: UUID,
                     newWordText: String,
                     newWordDescription: String,
-                    newUpdatedAt: Date,
                     _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         let operation: BlockOperation = .init {
@@ -500,8 +497,7 @@ extension MDWordCoreDataStorage {
             let batchUpdateRequest = NSBatchUpdateRequest(entityName: MDCoreDataEntityName.CDWordEntity)
             
             batchUpdateRequest.propertiesToUpdate = [CDWordEntityAttributeName.wordText : newWordText,
-                                                     CDWordEntityAttributeName.wordDescription : newWordDescription,
-                                                     CDWordEntityAttributeName.updatedAt : newUpdatedAt
+                                                     CDWordEntityAttributeName.wordDescription : newWordDescription
             ]
             
             batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseUUID) == %@ AND \(CDWordEntityAttributeName.uuid) == %@",
@@ -547,16 +543,13 @@ extension MDWordCoreDataStorage {
     func updateWord(byCourseUUID courseUUID: UUID,
                     andWordUUID wordUUID: UUID,
                     newWordDescription: String,
-                    newUpdatedAt: Date,
                     _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         let operation: BlockOperation = .init {
             
             let batchUpdateRequest = NSBatchUpdateRequest(entityName: MDCoreDataEntityName.CDWordEntity)
             
-            batchUpdateRequest.propertiesToUpdate = [CDWordEntityAttributeName.wordDescription : newWordDescription,
-                                                     CDWordEntityAttributeName.updatedAt : newUpdatedAt
-            ]
+            batchUpdateRequest.propertiesToUpdate = [CDWordEntityAttributeName.wordDescription : newWordDescription]
             
             batchUpdateRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseUUID) == %@ AND \(CDWordEntityAttributeName.uuid) == %@",
                                                        argumentArray: [courseUUID, wordUUID])

@@ -8,13 +8,12 @@
     <entity name="CDWordEntity" representedClassName="CDWordEntity" syncable="YES" codeGenerationType="class">
         <attribute name="courseUUID" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="wordDescription" attributeType="String"/>
         <attribute name="wordText" attributeType="String"/>
     </entity>
     <elements>
         <element name="CDCourseEntity" positionX="-336.9434814453125" positionY="-108.6610717773438" width="128" height="74"/>
-        <element name="CDWordEntity" positionX="-44.475341796875" positionY="-27.32015991210938" width="128" height="119"/>
+        <element name="CDWordEntity" positionX="-44.475341796875" positionY="-27.32015991210938" width="128" height="104"/>
     </elements>
 </model>

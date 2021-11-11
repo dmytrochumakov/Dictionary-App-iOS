@@ -13,13 +13,11 @@ protocol MDUpdateWordProtocol {
                     andWordUUID wordUUID: UUID,
                     newWordText: String,
                     newWordDescription: String,
-                    newUpdatedAt: Date,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
     
     func updateWord(byCourseUUID courseUUID: UUID,
                     andWordUUID wordUUID: UUID,
                     newWordDescription: String,
-                    newUpdatedAt: Date,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
     
 }

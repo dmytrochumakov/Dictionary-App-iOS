@@ -13,7 +13,6 @@ protocol MDWordManagerProtocol: MDCreateWordProtocol {
                     andWordUUID wordUUID: UUID,
                     newWordText: String,
                     newWordDescription: String,
-                    newUpdatedAt: Date,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
     
 }
@@ -40,7 +39,6 @@ extension MDWordManager {
                     wordText: String,
                     wordDescription: String,
                     createdAt: Date,
-                    updatedAt: Date,
                     _ completionHandler: @escaping (MDOperationResultWithCompletion<CDWordEntity>)) {
         
         wordCoreDataStorage.exists(byCourseUUID: courseUUID,
@@ -66,8 +64,7 @@ extension MDWordManager {
                                                    uuid: uuid,
                                                    wordText: wordText,
                                                    wordDescription: wordDescription,
-                                                   createdAt: createdAt,
-                                                   updatedAt: updatedAt) { createResult in
+                                                   createdAt: createdAt) { createResult in
                         
                         //
                         completionHandler(createResult)
@@ -110,7 +107,6 @@ extension MDWordManager {
                     andWordUUID wordUUID: UUID,
                     newWordText: String,
                     newWordDescription: String,
-                    newUpdatedAt: Date,
                     _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         wordCoreDataStorage.exists(byCourseUUID: courseUUID, andWordText: newWordText) { [unowned self] existsResult in
@@ -133,8 +129,7 @@ extension MDWordManager {
                                 
                                 wordCoreDataStorage.updateWord(byCourseUUID: courseUUID,
                                                                andWordUUID: wordUUID,
-                                                               newWordDescription: newWordDescription,
-                                                               newUpdatedAt: newUpdatedAt) { updateResult in
+                                                               newWordDescription: newWordDescription) { updateResult in
                                     
                                     //
                                     completionHandler(updateResult)
@@ -182,9 +177,8 @@ extension MDWordManager {
                     wordCoreDataStorage.updateWord(byCourseUUID: courseUUID,
                                                    andWordUUID: wordUUID,
                                                    newWordText: newWordText,
-                                                   newWordDescription: newWordDescription,
-                                                   newUpdatedAt: newUpdatedAt) { updateResult in
-                    
+                                                   newWordDescription: newWordDescription) { updateResult in
+                        
                         //
                         completionHandler(updateResult)
                         //
@@ -192,7 +186,7 @@ extension MDWordManager {
                         //
                         return
                         //
-                    
+                        
                     }
                     
                 }

@@ -95,8 +95,7 @@ extension AddWordInteractor: AddWordInteractorInputProtocol {
                                uuid: .init(),
                                wordText: dataManager.getWordText!,
                                wordDescription: dataManager.getWordDescription!,
-                               createdAt: .init(),
-                               updatedAt: .init()) { [unowned self] createResult in
+                               createdAt: .init()) { [unowned self] createResult in
             
             switch createResult {
                 
