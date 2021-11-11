@@ -271,6 +271,7 @@ GEM
 
 PLATFORMS
   universal-darwin-20
+  universal-darwin-21
 
 DEPENDENCIES
   cocoapods (~> 1.11.2)
@@ -278,4 +279,4 @@ DEPENDENCIES
   xcpretty (~> 0.3.0)
 
 BUNDLED WITH
-   2.2.27
+   2.2.31
