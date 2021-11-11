@@ -38,6 +38,7 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
     
     fileprivate let dataManager: CourseListDataManagerInputProtocol
     fileprivate let courseCoreDataStorage: MDCourseCoreDataStorageProtocol
+    fileprivate let courseManager: MDCourseManagerProtocol
     fileprivate var bridge: MDBridgeProtocol
     
     internal var tableViewDelegate: CourseListTableViewDelegateProtocol
@@ -51,7 +52,8 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
          collectionViewDataSource: CourseListTableViewDataSourceProtocol,
          searchBarDelegate: MDSearchBarDelegateImplementationProtocol,
          bridge: MDBridgeProtocol,
-         courseCoreDataStorage: MDCourseCoreDataStorageProtocol) {
+         courseCoreDataStorage: MDCourseCoreDataStorageProtocol,
+         courseManager: MDCourseManagerProtocol) {
         
         self.dataManager = dataManager
         self.tableViewDelegate = collectionViewDelegate
@@ -59,6 +61,7 @@ final class CourseListInteractor: NSObject, CourseListInteractorProtocol {
         self.searchBarDelegate = searchBarDelegate
         self.bridge = bridge
         self.courseCoreDataStorage = courseCoreDataStorage
+        self.courseManager = courseManager
         
         super.init()
         subscribe()
@@ -101,8 +104,8 @@ extension CourseListInteractor: CourseListInteractorInputProtocol {
         interactorOutput?.showProgressHUD()
         //
         
-        // Delete Course From Core Data Storage
-        courseCoreDataStorage.deleteCourse(byCourseUUID: dataManager.dataProvider.course(atIndexPath: indexPath).course.uuid!) { [unowned self] (deleteResult) in
+        // Delete Course And Related Words From Core Data Storage
+        courseManager.deleteCourse(byCourseUUID: dataManager.dataProvider.course(atIndexPath: indexPath).course.uuid!) { [unowned self] (deleteResult) in
             
             switch deleteResult {
                 

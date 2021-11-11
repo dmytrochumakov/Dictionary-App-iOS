@@ -7,13 +7,17 @@
 
 import Foundation
 
-protocol MDDeleteWordProtocol {
-    
-    func deleteWord(byWordUUID uuid: UUID,
-                    _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+protocol MDDeleteAllWordsByCourseUUIDProtocol {
     
     func deleteAllWords(byCourseUUID uuid: UUID,
                         _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+    
+}
+
+protocol MDDeleteWordProtocol: MDDeleteAllWordsByCourseUUIDProtocol {
+    
+    func deleteWord(byWordUUID uuid: UUID,
+                    _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
     
     func deleteAllWords(_ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
     

@@ -7,16 +7,22 @@
 
 import Foundation
 
-protocol MDCourseManagerProtocol: MDCreateCourseProtocol {
+protocol MDCourseManagerProtocol: MDCreateCourseProtocol,
+                                  MDDeleteCourseByCourseUUIDProtocol {
     
 }
 
 final class MDCourseManager: MDCourseManagerProtocol {
     
     fileprivate let courseCoreDataStorage: MDCourseCoreDataStorageProtocol
+    fileprivate let deleteAllWordsCourseUUIDService: MDDeleteAllWordsByCourseUUIDProtocol
     
-    init(courseCoreDataStorage: MDCourseCoreDataStorageProtocol) {
+    init(courseCoreDataStorage: MDCourseCoreDataStorageProtocol,
+         deleteAllWordsCourseUUIDService: MDDeleteAllWordsByCourseUUIDProtocol) {
+        
         self.courseCoreDataStorage = courseCoreDataStorage
+        self.deleteAllWordsCourseUUIDService = deleteAllWordsCourseUUIDService
+        
     }
     
     deinit {
@@ -65,6 +71,52 @@ extension MDCourseManager {
                         //
                         
                     }
+                    //
+                    
+                }
+                
+                //
+                break
+                //
+                
+            case .failure(let error):
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                break
+                //
+                
+            }
+            
+        }
+        
+    }
+    
+}
+
+// MARK: - Delete
+extension MDCourseManager {
+    
+    func deleteCourse(byCourseUUID uuid: UUID,
+                      _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+        
+        courseCoreDataStorage.deleteCourse(byCourseUUID: uuid) { [unowned self] deleteCourseResult in
+            
+            switch deleteCourseResult {
+                
+            case .success:
+                
+                deleteAllWordsCourseUUIDService.deleteAllWords(byCourseUUID: uuid) { deleteWordsResult in
+                    
+                    //
+                    completionHandler(deleteWordsResult)
+                    //
+                    
+                    //
+                    return
                     //
                     
                 }

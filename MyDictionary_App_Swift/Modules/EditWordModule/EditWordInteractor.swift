@@ -141,10 +141,10 @@ extension EditWordInteractor: EditWordInteractorInputProtocol {
             //
             
             // Update Word In Core Data Storage
-            wordManager.updateWord(byCourseUUID: dataManager.getWord.courseUUID!,
-                                   andWordUUID: dataManager.getWord.uuid!,
-                                   newWordText: dataManager.getNewWordText,
-                                   newWordDescription: dataManager.getNewWordDescription) { [unowned self] updateResult in
+            wordManager.updateWordTextAndWordDescription(byCourseUUID: dataManager.getWord.courseUUID!,
+                                                         andWordUUID: dataManager.getWord.uuid!,
+                                                         newWordText: dataManager.getNewWordText,
+                                                         newWordDescription: dataManager.getNewWordDescription) { [unowned self] updateResult in
                 
                 switch updateResult {
                     

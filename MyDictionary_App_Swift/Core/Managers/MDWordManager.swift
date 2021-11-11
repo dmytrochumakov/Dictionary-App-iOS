@@ -7,13 +7,8 @@
 
 import Foundation
 
-protocol MDWordManagerProtocol: MDCreateWordProtocol {
-    
-    func updateWord(byCourseUUID courseUUID: UUID,
-                    andWordUUID wordUUID: UUID,
-                    newWordText: String,
-                    newWordDescription: String,
-                    _ completionHandler: @escaping(MDOperationResultWithCompletion<Void>))
+protocol MDWordManagerProtocol: MDCreateWordProtocol,
+                                MDUpdateWordTextAndWordDescriptionProtocol {
     
 }
 
@@ -103,11 +98,11 @@ extension MDWordManager {
 // MARK: - Update
 extension MDWordManager {
     
-    func updateWord(byCourseUUID courseUUID: UUID,
-                    andWordUUID wordUUID: UUID,
-                    newWordText: String,
-                    newWordDescription: String,
-                    _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+    func updateWordTextAndWordDescription(byCourseUUID courseUUID: UUID,
+                                          andWordUUID wordUUID: UUID,
+                                          newWordText: String,
+                                          newWordDescription: String,
+                                          _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         wordCoreDataStorage.exists(byCourseUUID: courseUUID, andWordText: newWordText) { [unowned self] existsResult in
             
@@ -127,9 +122,9 @@ extension MDWordManager {
                             //
                             if (readEntity.uuid! == wordUUID) {
                                 
-                                wordCoreDataStorage.updateWord(byCourseUUID: courseUUID,
-                                                               andWordUUID: wordUUID,
-                                                               newWordDescription: newWordDescription) { updateResult in
+                                wordCoreDataStorage.updateWordDescription(byCourseUUID: courseUUID,
+                                                                          andWordUUID: wordUUID,
+                                                                          newWordDescription: newWordDescription) { updateResult in
                                     
                                     //
                                     completionHandler(updateResult)
@@ -174,10 +169,10 @@ extension MDWordManager {
                     
                 } else {
                     
-                    wordCoreDataStorage.updateWord(byCourseUUID: courseUUID,
-                                                   andWordUUID: wordUUID,
-                                                   newWordText: newWordText,
-                                                   newWordDescription: newWordDescription) { updateResult in
+                    wordCoreDataStorage.updateWordTextAndWordDescription(byCourseUUID: courseUUID,
+                                                                         andWordUUID: wordUUID,
+                                                                         newWordText: newWordText,
+                                                                         newWordDescription: newWordDescription) { updateResult in
                         
                         //
                         completionHandler(updateResult)

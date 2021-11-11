@@ -486,7 +486,7 @@ extension MDWordCoreDataStorage {
 // MARK: - Update
 extension MDWordCoreDataStorage {
     
-    func updateWord(byCourseUUID courseUUID: UUID,
+    func updateWordTextAndWordDescription(byCourseUUID courseUUID: UUID,
                     andWordUUID wordUUID: UUID,
                     newWordText: String,
                     newWordDescription: String,
@@ -540,7 +540,7 @@ extension MDWordCoreDataStorage {
         
     }
     
-    func updateWord(byCourseUUID courseUUID: UUID,
+    func updateWordDescription(byCourseUUID courseUUID: UUID,
                     andWordUUID wordUUID: UUID,
                     newWordDescription: String,
                     _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {

@@ -145,7 +145,7 @@ extension MDWordCoreDataStorage_Tests {
                 
             case .success(let createdWord):
                 
-                self.wordCoreDataStorage.updateWord(byCourseUUID: Constants_For_Tests.mockedWordCourseUUID,
+                self.wordCoreDataStorage.updateWordTextAndWordDescription(byCourseUUID: Constants_For_Tests.mockedWordCourseUUID,
                                                     andWordUUID: createdWord.uuid!,
                                                     newWordText: Constants_For_Tests.mockedWordForUpdateText,
                                                     newWordDescription: Constants_For_Tests.mockedWordForUpdateDescription) { [unowned self] updateResult in

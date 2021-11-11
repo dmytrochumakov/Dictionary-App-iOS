@@ -120,17 +120,18 @@ extension MDAppDependencies {
         let courseCoreDataStorage: MDCourseCoreDataStorageProtocol = MDCourseCoreDataStorage.init(operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.courseCoreDataStorageOperationQueue)!,
                                                                                                   managedObjectContext: coreDataStack.privateContext,
                                                                                                   coreDataStack: coreDataStack)
+        // Word Core Data Storage //
+        let wordCoreDataStorage: MDWordCoreDataStorageProtocol = MDWordCoreDataStorage.init(operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordCoreDataStorageOperationQueue)!,
+                                                                                            managedObjectContext: coreDataStack.privateContext,
+                                                                                            coreDataStack: coreDataStack)
         // Course Manager //
-        let courseManager: MDCourseManagerProtocol = MDCourseManager.init(courseCoreDataStorage: courseCoreDataStorage)
+        let courseManager: MDCourseManagerProtocol = MDCourseManager.init(courseCoreDataStorage: courseCoreDataStorage,
+                                                                          deleteAllWordsCourseUUIDService: wordCoreDataStorage)
         self.courseManager = courseManager
         // End Course Manager //
         //
         
         
-        // Word Core Data Storage //
-        let wordCoreDataStorage: MDWordCoreDataStorageProtocol = MDWordCoreDataStorage.init(operationQueue: operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordCoreDataStorageOperationQueue)!,
-                                                                                            managedObjectContext: coreDataStack.privateContext,
-                                                                                            coreDataStack: coreDataStack)
         // Word Manager //
         let wordManager: MDWordManagerProtocol = MDWordManager.init(wordCoreDataStorage: wordCoreDataStorage)
         self.wordManager = wordManager
