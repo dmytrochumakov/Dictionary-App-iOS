@@ -11,25 +11,8 @@ import CoreData
 
 final class TestCoreDataStack: MDCoreDataStack {
     
-    override init() {
-        super.init()
-                
-        let persistentStoreDescription = NSPersistentStoreDescription()
-        persistentStoreDescription.type = NSInMemoryStoreType
-        
-        let container = NSPersistentContainer(
-            name: MDConstants.StaticText.appName,
-            managedObjectModel: MDCoreDataStack.model)
-        container.persistentStoreDescriptions = [persistentStoreDescription]
-        
-        container.loadPersistentStores { _, error in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        }
-        
-        storeContainer = container
-        
+    init() {
+        super.init(coreDataManager: MDConstants.AppDependencies.dependencies.coreDataManager)          
     }
     
 }

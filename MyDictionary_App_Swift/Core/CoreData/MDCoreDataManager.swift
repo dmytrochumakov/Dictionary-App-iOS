@@ -12,7 +12,7 @@ final class MDCoreDataManager {
     fileprivate let storeType: String
     fileprivate let migrator: MDCoreDataMigratorProtocol
     
-    fileprivate lazy var persistentContainer: NSPersistentContainer = {
+    lazy var persistentContainer: NSPersistentContainer = {
         let persistentContainer = NSPersistentContainer(name: MDConstants.StaticText.appName)
         let description = persistentContainer.persistentStoreDescriptions.first
         description?.shouldInferMappingModelAutomatically = false
@@ -21,7 +21,7 @@ final class MDCoreDataManager {
         return persistentContainer
     }()
     
-    fileprivate lazy var backgroundContext: NSManagedObjectContext = {
+    lazy var backgroundContext: NSManagedObjectContext = {
         let context = self.persistentContainer.newBackgroundContext()
         context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return context

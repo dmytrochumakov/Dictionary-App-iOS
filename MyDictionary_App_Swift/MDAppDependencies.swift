@@ -75,9 +75,19 @@ extension MDAppDependencies {
     
     func configureDependencies() {
         
-        // Core Data Stack //
-        let coreDataStack: MDCoreDataStack = .init()
-        self.coreDataStack = coreDataStack
+        // Core Data Migrator //
+        let coreDataMigrator: MDCoreDataMigratorProtocol = MDCoreDataMigrator.init()
+        // Core Data anager //
+        let coreDataManager: MDCoreDataManager = MDCoreDataManager.init(storeType: NSSQLiteStoreType,
+                                                                        migrator: coreDataMigrator)
+        coreDataManager.setup { [weak self] in
+            //
+            debugPrint(#function, Self.self, "MDCoreDataManager configured successfully")
+            // Core Data Stack //
+            let coreDataStack: MDCoreDataStack = .init(coreDataManager: coreDataManager)
+            self?.coreDataStack = coreDataStack
+            //
+        }
         // End Core Data Stack //
         //
         
@@ -101,12 +111,6 @@ extension MDAppDependencies {
         
         
         // Core Data Manager //
-        let coreDataMigrator: MDCoreDataMigratorProtocol = MDCoreDataMigrator.init()
-        let coreDataManager: MDCoreDataManager = MDCoreDataManager.init(storeType: NSSQLiteStoreType,
-                                                                        migrator: coreDataMigrator)
-        coreDataManager.setup {
-            debugPrint(#function, Self.self, "MDCoreDataManager configured successfully")
-        }
         self.coreDataManager = coreDataManager
         // End Core Data Manager //
         //
