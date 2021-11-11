@@ -39,15 +39,32 @@ extension MDCourseCoreDataStorage_Tests {
         
         courseCoreDataStorage.createCourse(uuid: Constants_For_Tests.mockedCourseUUID,
                                            languageId: Constants_For_Tests.mockedCourseLanguageId,
-                                           createdAt: Constants_For_Tests.mockedCourseCreatedAt) { createResult in
+                                           createdAt: Constants_For_Tests.mockedCourseCreatedAt) { [unowned self] createResult in
             
             switch createResult {
                 
-            case .success(let courseEntity):
+            case .success(let createdEntity):
                 
-                XCTAssertTrue(courseEntity.languageId == Constants_For_Tests.mockedCourseLanguageId)
+                XCTAssertTrue(createdEntity.languageId == Constants_For_Tests.mockedCourseLanguageId)
                 
-                expectation.fulfill()
+                courseCoreDataStorage.readCourse(byCourseUUID: createdEntity.uuid!) { readResult in
+                    
+                    switch readResult {
+                        
+                    case .success(let readEntity):
+                        
+                        XCTAssertTrue(createdEntity.uuid == readEntity.uuid)
+                        XCTAssertTrue(createdEntity.languageId == readEntity.languageId)
+                        XCTAssertTrue(createdEntity.createdAt == readEntity.createdAt)
+                        
+                        expectation.fulfill()
+                        
+                    case .failure(let error):
+                        XCTExpectFailure(error.localizedDescription)
+                        expectation.fulfill()
+                    }
+                    
+                }
                 
             case .failure(let error):
                 XCTExpectFailure(error.localizedDescription)
@@ -110,15 +127,30 @@ extension MDCourseCoreDataStorage_Tests {
             
             switch createResult {
                 
-            case .success(let createCourseEntity):
+            case .success(let createdEntity):
                 
-                courseCoreDataStorage.deleteCourse(byCourseUUID: createCourseEntity.uuid!) { deleteResult in
+                courseCoreDataStorage.deleteCourse(byCourseUUID: createdEntity.uuid!) { [unowned self] deleteResult in
                     
                     switch deleteResult {
                         
                     case .success:
                         
-                        expectation.fulfill()
+                        courseCoreDataStorage.exists(byLanguageId: createdEntity.languageId) { existsResult in
+                            
+                            switch existsResult {
+                                
+                            case .success(let exists):
+                                
+                                XCTAssertFalse(exists)
+                                
+                                expectation.fulfill()
+                                
+                            case .failure(let error):
+                                XCTExpectFailure(error.localizedDescription)
+                                expectation.fulfill()
+                            }
+                            
+                        }
                         
                     case .failure(let error):
                         XCTExpectFailure(error.localizedDescription)
@@ -149,13 +181,28 @@ extension MDCourseCoreDataStorage_Tests {
                 
             case .success:
                 
-                courseCoreDataStorage.deleteAllCourses() { deleteResult in
+                courseCoreDataStorage.deleteAllCourses() { [unowned self] deleteResult in
                     
                     switch deleteResult {
                         
                     case .success:
                         
-                        expectation.fulfill()
+                        courseCoreDataStorage.entitiesIsEmpty { isEmptyResult in
+                            
+                            switch isEmptyResult {
+                                
+                            case .success(let isEmpty):
+                                
+                                XCTAssertTrue(isEmpty)
+                                
+                                expectation.fulfill()
+                                
+                            case .failure(let error):
+                                XCTExpectFailure(error.localizedDescription)
+                                expectation.fulfill()
+                            }
+                            
+                        }
                         
                     case .failure(let error):
                         XCTExpectFailure(error.localizedDescription)
