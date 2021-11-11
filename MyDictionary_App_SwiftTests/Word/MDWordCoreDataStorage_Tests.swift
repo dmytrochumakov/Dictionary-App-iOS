@@ -56,7 +56,11 @@ extension MDWordCoreDataStorage_Tests {
                         
                     case .success(let readEntity):
                         
+                        XCTAssertTrue(createdWord.courseUUID == readEntity.courseUUID)
                         XCTAssertTrue(createdWord.uuid == readEntity.uuid)
+                        XCTAssertTrue(createdWord.wordText == readEntity.wordText)
+                        XCTAssertTrue(createdWord.wordDescription == readEntity.wordDescription)
+                        XCTAssertTrue(createdWord.createdAt == readEntity.createdAt)
                         
                         expectation.fulfill()
                         
@@ -105,7 +109,11 @@ extension MDWordCoreDataStorage_Tests {
                         
                     case .success(let readEntity):
                         
-                        XCTAssertTrue(readEntity.uuid == createdWord.uuid)
+                        XCTAssertTrue(createdWord.courseUUID == readEntity.courseUUID)
+                        XCTAssertTrue(createdWord.uuid == readEntity.uuid)
+                        XCTAssertTrue(createdWord.wordText == readEntity.wordText)
+                        XCTAssertTrue(createdWord.wordDescription == readEntity.wordDescription)
+                        XCTAssertTrue(createdWord.createdAt == readEntity.createdAt)
                         
                         expectation.fulfill()
                         
@@ -146,9 +154,9 @@ extension MDWordCoreDataStorage_Tests {
             case .success(let createdWord):
                 
                 self.wordCoreDataStorage.updateWordTextAndWordDescription(byCourseUUID: Constants_For_Tests.mockedWordCourseUUID,
-                                                    andWordUUID: createdWord.uuid!,
-                                                    newWordText: Constants_For_Tests.mockedWordForUpdateText,
-                                                    newWordDescription: Constants_For_Tests.mockedWordForUpdateDescription) { [unowned self] updateResult in
+                                                                          andWordUUID: createdWord.uuid!,
+                                                                          newWordText: Constants_For_Tests.mockedWordForUpdateText,
+                                                                          newWordDescription: Constants_For_Tests.mockedWordForUpdateDescription) { [unowned self] updateResult in
                     
                     switch updateResult {
                         
@@ -206,13 +214,29 @@ extension MDWordCoreDataStorage_Tests {
                 
             case .success(let createdWord):
                 
-                self.wordCoreDataStorage.deleteWord(byWordUUID: createdWord.uuid!) { deleteResult in
+                wordCoreDataStorage.deleteWord(byWordUUID: createdWord.uuid!) { [unowned self] deleteResult in
                     
                     switch deleteResult {
                         
                     case .success:
                         
-                        expectation.fulfill()
+                        wordCoreDataStorage.exists(byCourseUUID: createdWord.courseUUID!,
+                                                   andWordText: createdWord.wordText!) { existsResult in
+                            
+                            switch existsResult {
+                                
+                            case .success(let exists):
+                                
+                                XCTAssertFalse(exists)
+                                
+                                expectation.fulfill()
+                                
+                            case .failure(let error):
+                                XCTExpectFailure(error.localizedDescription)
+                                expectation.fulfill()
+                            }
+                            
+                        }
                         
                     case .failure(let error):
                         XCTExpectFailure(error.localizedDescription)
@@ -243,13 +267,28 @@ extension MDWordCoreDataStorage_Tests {
                 
             case .success:
                 
-                self.wordCoreDataStorage.deleteAllWords() { deleteResult in
+                wordCoreDataStorage.deleteAllWords() { [unowned self] deleteResult in
                     
                     switch deleteResult {
                         
                     case .success:
                         
-                        expectation.fulfill()
+                        wordCoreDataStorage.entitiesIsEmpty { isEmptyResult in
+                            
+                            switch isEmptyResult {
+                                
+                            case .success(let isEmpty):
+                                
+                                XCTAssertTrue(isEmpty)
+                                
+                                expectation.fulfill()
+                                
+                            case .failure(let error):
+                                XCTExpectFailure(error.localizedDescription)
+                                expectation.fulfill()
+                            }
+                            
+                        }
                         
                     case .failure(let error):
                         XCTExpectFailure(error.localizedDescription)
