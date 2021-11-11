@@ -14,8 +14,8 @@ This application provides maximum convenience when adding, updating, deleting wo
 
 ## Features
 
+- Create, Delete courses
 - Create, Read, Update, Delete words
-- Synchronization of words with an individual account on the server
 
 ## Architecture 
 - Viper 
