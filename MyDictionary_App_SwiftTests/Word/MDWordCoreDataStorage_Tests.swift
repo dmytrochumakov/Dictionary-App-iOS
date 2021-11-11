@@ -21,7 +21,7 @@ final class MDWordCoreDataStorage_Tests: XCTestCase {
         
         self.managedObjectContext = coreDataStack.privateContext
         
-        let wordCoreDataStorage: MDWordCoreDataStorageProtocol = MDWordCoreDataStorage.init(operationQueue: Constants_For_Tests.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordCoreDataStorageOperationQueue)!,
+        let wordCoreDataStorage: MDWordCoreDataStorageProtocol = MDWordCoreDataStorage.init(operationQueue: MDConstants.AppDependencies.dependencies.operationQueueManager.operationQueue(byName: MDConstants.QueueName.wordCoreDataStorageOperationQueue)!,
                                                                                             managedObjectContext: coreDataStack.privateContext,
                                                                                             coreDataStack: coreDataStack)
         self.wordCoreDataStorage = wordCoreDataStorage

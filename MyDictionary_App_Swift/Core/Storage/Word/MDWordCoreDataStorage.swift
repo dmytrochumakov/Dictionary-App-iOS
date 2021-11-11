@@ -8,11 +8,25 @@
 import Foundation
 import CoreData
 
-protocol MDExistsWordProtocol {
+protocol MDExistsWordByCourseUUIDProtocol {
+    
+    func exists(byCourseUUID courseUUID: UUID,
+                _ completionHandler: @escaping (MDOperationResultWithCompletion<Bool>))
+    
+}
+
+protocol MDExistsWordByCourseUUIDAndWordTextProtocol {
     
     func exists(byCourseUUID courseUUID: UUID,
                 andWordText wordText: String,
                 _ completionHandler: @escaping (MDOperationResultWithCompletion<Bool>))
+    
+}
+
+protocol MDExistsWordProtocol: MDExistsWordByCourseUUIDProtocol,
+                               MDExistsWordByCourseUUIDAndWordTextProtocol {
+    
+    
     
 }
 
@@ -47,6 +61,46 @@ final class MDWordCoreDataStorage: NSObject,
 
 // MARK: - Exists
 extension MDWordCoreDataStorage {
+    
+    func exists(byCourseUUID courseUUID: UUID,
+                _ completionHandler: @escaping (MDOperationResultWithCompletion<Bool>)) {
+        
+        let operation: BlockOperation = .init {
+            
+            //
+            let fetchRequest = NSFetchRequest<CDWordEntity>(entityName: MDCoreDataEntityName.CDWordEntity)
+            fetchRequest.predicate = NSPredicate(format: "\(CDWordEntityAttributeName.courseUUID) == %@", courseUUID.uuidString)
+            //
+            
+            do {
+                
+                //
+                completionHandler(.success(try self.managedObjectContext.count(for: fetchRequest) > .zero))
+                //
+                
+                //
+                return
+                //
+                
+            } catch {
+                
+                //
+                completionHandler(.failure(error))
+                //
+                
+                //
+                return
+                //
+                
+            }
+            
+        }
+        
+        //
+        operationQueue.addOperation(operation)
+        //
+        
+    }
     
     func exists(byCourseUUID courseUUID: UUID,
                 andWordText wordText: String,
@@ -487,10 +541,10 @@ extension MDWordCoreDataStorage {
 extension MDWordCoreDataStorage {
     
     func updateWordTextAndWordDescription(byCourseUUID courseUUID: UUID,
-                    andWordUUID wordUUID: UUID,
-                    newWordText: String,
-                    newWordDescription: String,
-                    _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+                                          andWordUUID wordUUID: UUID,
+                                          newWordText: String,
+                                          newWordDescription: String,
+                                          _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         let operation: BlockOperation = .init {
             
@@ -541,9 +595,9 @@ extension MDWordCoreDataStorage {
     }
     
     func updateWordDescription(byCourseUUID courseUUID: UUID,
-                    andWordUUID wordUUID: UUID,
-                    newWordDescription: String,
-                    _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
+                               andWordUUID wordUUID: UUID,
+                               newWordDescription: String,
+                               _ completionHandler: @escaping (MDOperationResultWithCompletion<Void>)) {
         
         let operation: BlockOperation = .init {
             
