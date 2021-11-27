@@ -272,6 +272,9 @@ struct MDConstants {
     
     struct File {
         
+        /// Contains: My_Dictionary_App
+        static let subDirectory: String = "My_Dictionary_App"
+        
         /// Contains:  StaticText.appName
         static let name: String = StaticText.appName
         

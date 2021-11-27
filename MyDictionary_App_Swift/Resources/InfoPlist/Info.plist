@@ -36,7 +36,7 @@
         </array>
         <key>NSUbiquitousContainers</key>
         <dict>
-            <key>iCloud.MyDictionary_App_Swift</key>
+            <key>iCloud.com.dcteam.MyDictionary-App-Swift</key>
             <dict>
                 <key>NSUbiquitousContainerIsDocumentScopePublic</key>
                 <true/>

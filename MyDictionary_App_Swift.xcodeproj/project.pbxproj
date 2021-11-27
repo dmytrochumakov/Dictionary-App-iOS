@@ -30,6 +30,7 @@
 		224375AC26F33EA3006B90EB /* MDCourseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375AB26F33EA3006B90EB /* MDCourseListCell.swift */; };
 		224375AF26F3406B006B90EB /* MDCourseListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224375AE26F3406B006B90EB /* MDCourseListCellModel.swift */; };
 		22476F822752351800669E44 /* CDCourseEntity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22476F812752351800669E44 /* CDCourseEntity+Extension.swift */; };
+		22476F8527524A3D00669E44 /* MDiCloudDriveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22476F8427524A3D00669E44 /* MDiCloudDriveManager.swift */; };
 		22493C2E26971413000DA480 /* MDCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C2D26971413000DA480 /* MDCoreDataStack.swift */; };
 		22493C3526971726000DA480 /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C3426971726000DA480 /* TestCoreDataStack.swift */; };
 		22493C3726972232000DA480 /* MDWordCoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22493C3626972232000DA480 /* MDWordCoreDataStorage.swift */; };
@@ -256,6 +257,7 @@
 		224375AE26F3406B006B90EB /* MDCourseListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCourseListCellModel.swift; sourceTree = "<group>"; };
 		22476F812752351800669E44 /* CDCourseEntity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCourseEntity+Extension.swift"; sourceTree = "<group>"; };
 		22476F8327523EF000669E44 /* MyDictionary_App_Swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyDictionary_App_Swift.entitlements; sourceTree = "<group>"; };
+		22476F8427524A3D00669E44 /* MDiCloudDriveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDiCloudDriveManager.swift; sourceTree = "<group>"; };
 		22493C2D26971413000DA480 /* MDCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCoreDataStack.swift; sourceTree = "<group>"; };
 		22493C3426971726000DA480 /* TestCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
 		22493C3626972232000DA480 /* MDWordCoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDWordCoreDataStorage.swift; sourceTree = "<group>"; };
@@ -801,6 +803,7 @@
 				2281AD92270AF34600EBE114 /* MDOperationQueueManager.swift */,
 				229CD7D0273BCF7000B7BB25 /* MDCourseManager.swift */,
 				229CD7D2273BCFFA00B7BB25 /* MDWordManager.swift */,
+				22476F8427524A3D00669E44 /* MDiCloudDriveManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1832,6 +1835,7 @@
 				228C596F27033D0800DE6175 /* EditWordPresenter.swift in Sources */,
 				229FFF4026F60C300024B974 /* MDSearchBarDelegatePropertyProtocol.swift in Sources */,
 				2291DAD527019DA900216B64 /* AddWordPresenter.swift in Sources */,
+				22476F8527524A3D00669E44 /* MDiCloudDriveManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2038,7 +2042,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = CXRA2S6SCR;
 				INFOPLIST_FILE = MyDictionary_App_Swift/Resources/InfoPlist/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

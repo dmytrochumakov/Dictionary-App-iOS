@@ -19,6 +19,7 @@ protocol MDAppDependenciesProtocol {
     var coreDataManager: MDCoreDataManager! { get }
     var courseManager: MDCourseManagerProtocol! { get }
     var wordManager: MDWordManagerProtocol! { get }
+    var iCloudDriveManager: MDiCloudDriveManagerProtocol! { get }
     //
     
     // Storage //
@@ -46,6 +47,7 @@ final class MDAppDependencies: NSObject,
     var coreDataManager: MDCoreDataManager!
     var courseManager: MDCourseManagerProtocol!
     var wordManager: MDWordManagerProtocol!
+    var iCloudDriveManager: MDiCloudDriveManagerProtocol!
     //
     
     // Storage //
@@ -136,6 +138,12 @@ extension MDAppDependencies {
         let wordManager: MDWordManagerProtocol = MDWordManager.init(wordCoreDataStorage: wordCoreDataStorage)
         self.wordManager = wordManager
         // End Word Manager //
+        
+        
+        // iCloud Drive Manager //
+        let iCloudDriveManager: MDiCloudDriveManagerProtocol = MDiCloudDriveManager.init(fileManager: FileManager.default)
+        self.iCloudDriveManager = iCloudDriveManager
+        // End iCloud Drive Manager //
         //
         // End Managers //
         
