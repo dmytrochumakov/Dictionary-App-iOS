@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct ExportData {
+struct MDExportData {
     let courses: [CDCourseEntity]
     let words: [CDWordEntity]
 }
 
 // MARK: - Encodable
-extension ExportData: Encodable {
+extension MDExportData: Encodable {
     
     enum CodingKeys: CodingKey {
         case courses
@@ -38,7 +38,7 @@ enum MDiCloudDriveError: Error {
 
 protocol MDiCloudDriveManagerProtocol {
     
-    func exportFile(fromExportData exportData: ExportData) throws
+    func exportFile(fromExportData exportData: MDExportData) throws
     
 }
 
@@ -59,7 +59,7 @@ extension MDiCloudDriveManager {
         return fileManager.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents")
     }
     
-    func exportFile(fromExportData exportData: ExportData) throws {
+    func exportFile(fromExportData exportData: MDExportData) throws {
         
         if (iCloudDocumentsURL == nil) {
             throw MDiCloudDriveError.iCloudIsNotWorking
