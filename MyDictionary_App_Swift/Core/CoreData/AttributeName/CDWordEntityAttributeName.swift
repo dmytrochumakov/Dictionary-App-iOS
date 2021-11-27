@@ -11,7 +11,6 @@ struct CDWordEntityAttributeName {
     static let uuid: String = "uuid"
     static let wordText: String = "wordText"
     static let wordDescription: String = "wordDescription"
-    static let createdAt: String = "createdAt"
-    static let updatedAt: String = "updatedAt"
+    static let createdAt: String = "createdAt"    
     static let courseUUID: String = "courseUUID"
 }
