@@ -7,16 +7,33 @@
 
 import Foundation
 
-protocol MDReadCourseProtocol {
+protocol MDReadCourseByCourseUUIDProtocol {
     
     func readCourse(byCourseUUID uuid: UUID,
                     _ completionHandler: @escaping(MDOperationResultWithCompletion<CDCourseEntity>))
+    
+}
+
+protocol MDReadCoursesWithFetchLimitAndFetchOffsetProtocol {
     
     func readCourses(fetchLimit: Int,
                      fetchOffset: Int,
                      ascending: Bool,
                      _ completionHandler: @escaping(MDOperationsResultWithCompletion<CDCourseEntity>))
     
-    func readAllCourses(ascending: Bool, _ completionHandler: @escaping(MDOperationsResultWithCompletion<CDCourseEntity>))
+}
+
+protocol MDReadAllCoursesProtocol {
+    
+    func readAllCourses(ascending: Bool,
+                        _ completionHandler: @escaping(MDOperationsResultWithCompletion<CDCourseEntity>))
+    
+}
+
+protocol MDReadCourseProtocol: MDReadCourseByCourseUUIDProtocol,
+                               MDReadCoursesWithFetchLimitAndFetchOffsetProtocol,
+                               MDReadAllCoursesProtocol {
+    
+    
     
 }
