@@ -17,6 +17,7 @@ struct MDConstants {
         static let momdExtension: String = "momd"
         static let omoExtension: String = "omo"
         static let momExtension: String = "mom"
+        static let jsonExtension: String = "json"
         static let sqliteExtension: String = "sqlite"
         static let spaceString: String = " "
         static let forwardSlash: String = "/"
@@ -266,6 +267,19 @@ struct MDConstants {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
             }
         }
+        
+    }
+    
+    struct File {
+        
+        /// Contains:  StaticText.appName
+        static let name: String = StaticText.appName
+        
+        /// Contains: StaticText.jsonExtension
+        static let `extension`: String = StaticText.jsonExtension
+        
+        /// Contains: File.name + StaticText.dot + File.extension
+        static let fullName: String = File.name + StaticText.dot + File.extension
         
     }
     
