@@ -21,7 +21,7 @@ This application provides maximum convenience when adding, updating, deleting wo
 - Viper 
 
 ## Viper-Template
-- https://github.com/dchprojects/Viper-Template
+- https://github.com/dchproject/Viper-Template
 
 ## License
 Dictionary_App_iOS is licensed under the MIT License, please see the [LICENSE](LICENSE) file.
